@@ -10,6 +10,6 @@ public class DefaultController
 	public String testMapping()
 	{
 		// return "테스트시 DefaultController 사용 가능!!";
-		 return "/calculate/copUnrecovered";
+		 return "/userAdminPage/userLogin";
 	}
 }

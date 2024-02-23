@@ -7,13 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/resources/css/productManagementPage/productManagement.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <jsp:include page="../navBar.jsp"/>
 <body>
-<div class="product-top container-fluid" >
-	<p class="p_product container">상품관리</p>
-    <div class="product-top-back">
+<div class="container-fluid"  style="padding-top: 100px;">	
+    <h2 style="width: 1500px;">상품관리</h2>
+    <div class="" >
+   		 <!--background: #eaeaea;
+  	  	 border-spacing: 15px 30px;
+   		 border-collapse: separate;  -->
         <table style="background:#eaeaea;">
             <tr>
                 <td>
@@ -62,7 +64,7 @@
             <tr>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right:22px;">
+                    	<div class="flex-div" style="padding-right:70px;">
                         <label>키워드</label>
                         <div class="input-group mb-3" style="width: 320px;margin: 20px;">
                             <span class="input-group-text" id="test">🔍</span>
@@ -77,7 +79,7 @@
                 </td>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right: 208px;">
+                    	<div class="flex-div" style="padding-right: 255px;">
                         <label>상품 일괄 편집</label>
                         <div>
                        		<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
@@ -114,7 +116,10 @@
 			                <td>${ex.prdSdc }</td>
 			                <td>${ex.prdMajorCtg }</td>
 			                <td>${ex.prdSubCtg }</td>
-			                <td><img alt="" src="${ex.prdImg}"><br>${ex.prdName }</td>
+			                <td>
+			                		<img alt="" src="${ex.prdImg}" align="left">
+			                		<div id="tdTop">${ex.prdName }</div>
+			                </td>
 			                <td><fmt:formatNumber value="${ex.prdCstPri }" pattern="#,###"/></td>
               				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>
 			                <td>${ex.prdMargin * 100 }%</td>
@@ -122,13 +127,14 @@
 			        </c:forEach>
 			    </tbody>
 			</table>
-			<div class="container">
+			<!-- 나중에 스타일 안바꾸면디진다 -->
+			<div style="width: 1500px;">
 		        <button type="button" class="btn btn-primary">신규 등록</button>
 		    </div>
         </form>
     </div>
     <!-- page -->
-    <div class="page-wrap container">
+    <div class="page-wrap">
         <ul class="page-nation">
             <c:if test="${pageMaker.prev }">
                 <li class="previous">
@@ -150,7 +156,8 @@
 </div>
 
 </body>
-<script type="text/javascript" src="/resources/js/productPage/prdUpDownLoad.js"></script>
 <script type="text/javascript" src="/resources/js/productPage/prdPageFilter.js"></script>
+<script type="text/javascript" src="/resources/js/productPage/prdUpDownLoad.js"></script>
 <script type="text/javascript" src="/resources/js/productPage/prdPageSearch.js"></script>
+
 </html>

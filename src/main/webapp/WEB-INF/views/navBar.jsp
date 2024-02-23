@@ -163,8 +163,8 @@
                 <ul class="nav col-12 col-md-auto justify-content-center text-center" style="width: 80%; margin: auto;">
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">공급처 관리</a></li>
-                            <li class="category"><a class="category-link" href="">상품 관리</a></li>
+                            <li class="category"><a class="category-link" href="/moveSuppliers">공급처 관리</a></li>
+                            <li class="category"><a class="category-link" href="/moveProductPage">상품 관리</a></li>
                         </ul>
                     </li>
                     <li>

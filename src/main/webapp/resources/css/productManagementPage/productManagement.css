@@ -36,9 +36,12 @@
 		}
 		.p_product
 		{
-			padding-top: 50px;
+			padding-top: 100px;
 			font-size: 25px;
-			display: inline-block;
+		}
+		#tdTop
+		{
+			padding-top: 25px;
 		}
 		
 		#table-prd th, td
@@ -46,10 +49,9 @@
 		    text-align: center;
 			vertical-align: middle;
 		}
-		
 
 
-		img {height: 70px; width: 120px;}
+		td img {height: 80px; width: 120px;}
 		.page-nation li{
 			list-style: none;
 		}
@@ -57,6 +59,7 @@
 		.page-wrap{
 			text-align: center;
 			font-size: 0;
+			display: flex;
 		}
 		.page-nation {
 			display: flex;

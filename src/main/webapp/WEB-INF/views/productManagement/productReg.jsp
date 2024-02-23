@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/productManagementPage/prd.css">
 </head>
 <body>
 	<jsp:include page="../navBar.jsp"/>
-	<div>
-		<div>
-		<p>상품 신규등록</p>
+	<div class="container-fluid" align="center">
+		<h2 class="h2st">상품 신규등록</h2>
 		<div>
 			<form action="">
-				<table style="background-color: rgb(224, 224, 224)">
+				<table class="prdinputTable">
 					<tr>
 						<td>상품코드</td><td colspan="3"><input type="text" class="form-control" placeholder="자동할당"></td>
 					    <td></td>
@@ -76,14 +76,12 @@
 						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02"></td>
 					</tr>
 				</table>
-					<div>
-						<div>
-							<button type="button" class="btn btn-primary">등록</button>
-							<button type="button" class="btn btn-primary">취소</button>
-						</div>
+					<div class="prdRegBtn">
+						<button type="button" class="btn btn-primary">등록</button>
+						<button type="button" class="btn btn-secondary">삭제</button>
+						<button type="button" class="btn btn-primary">취소</button>
 					</div>
 			</form>	
-		</div>
 		</div>
 	</div>
 </body>

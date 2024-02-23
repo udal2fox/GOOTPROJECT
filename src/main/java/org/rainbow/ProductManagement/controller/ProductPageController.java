@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.rainbow.ProductManagement.domain.prdDownVO;
 import org.rainbow.ProductManagement.domain.prdInputVO;
 import org.rainbow.ProductManagement.domain.productListVO;
-import org.rainbow.ProductManagementPage.service.productPageServiceImpl;
+import org.rainbow.ProductManagement.service.productPageServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.ExcelListener;
@@ -37,8 +37,10 @@ public class ProductPageController
 	@Autowired
 	productPageServiceImpl pService;
 	
-	// 상품 조회 리스트 
-    @GetMapping(value = "/moveProductMangerPage")
+	// 상품관리 페이지 이동  모음 --------------------------------------------------------------------------------
+	
+	// 상품 조회 리스트 이동
+    @GetMapping(value = "/moveProductPage")
     public String moveProductMangerPage(Model model, Criteria cri) 
     {
     	log.info("list...");
@@ -57,6 +59,52 @@ public class ProductPageController
         
         return "/productManagement/productManagement";
     }
+    
+    
+    // 공급처 조회 리스트 이동
+    @GetMapping(value = "/moveSuppliers")
+    public String moveSuppliers(Model model, Criteria cri) 
+    {
+    	log.info("list...");
+    	if(cri.getPageNum() == 0 && cri.getAmount() == 0)
+    	{
+    		cri.setPageNum(1);
+    		cri.setAmount(10);
+    	}
+    	
+    	return "/productManagement/suppliersManagement";
+    }
+    // 일단 기능 상관말고 겟메핑으로이동
+    
+    // 공급처 등록 이동
+    @GetMapping(value = "/moveSuppliersRegist")
+    public String moveSuppliersRegist(Model model, Criteria cri) 
+    {
+    	return "/productManagement/suppliersRegist";
+    }
+    // 공급처 수정 이동
+    @GetMapping(value = "/moveSuppliersUpdate")
+    public String moveSuppliersUpdate(Model model, Criteria cri) 
+    {
+    	return "/productManagement/suppliersUpdate";
+    }
+    // 상품 개별 등록 이동
+    @GetMapping(value = "/moveProductReg")
+    public String moveProductReg(Model model, Criteria cri) 
+    {
+    	return "/productManagement/productReg";
+    }
+    // 상품 수정 이동
+    @GetMapping(value = "/moveProductUpdate")
+    public String moveProductUpdate(Model model, Criteria cri) 
+    {
+    	return "/productManagement/productUpdate";
+    }
+    
+    
+	// 상품관리 이동 매핑 끝 --------------------------------------------------------------------------------------
+	// 상품 조회 리스트  기능들 ------------------------------------------------------------------------------------
+	
     
     // 상품 조회리스트 검색 기능
     @ResponseBody
@@ -147,6 +195,8 @@ public class ProductPageController
         // 엑셀 데이터를 받아서 처리하는 로직을 작성
         ExcelDownloadUtil.downloadProductList(response, excelData);
     }
+    
+ // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
     
     
 }

@@ -2,7 +2,17 @@
    (fuction(){
    	
    })();
-*/
+*/	
+	
+/*filter();
+
+document.querySelectorAll("input[type='checkbox']").forEach(function(e){
+	e.addEventListener('change',()=>{
+		filter();
+	});
+});*/
+
+
 (function filter() {
     // allCheck 체크박스 이벤트 리스너 등록
     document.getElementById('product-typeAll').addEventListener('change', function() {
@@ -142,13 +152,12 @@ document.querySelectorAll(".page-nation li a").forEach(aEle => {
 		setStorageData(pageNum, amount);
 		
 		let sendData ='pageNum='+pageNum+'&amount='+amount;
-		location.href = "/moveProductMangerPage?"+sendData;
+		location.href = "/moveProductPage?"+sendData;
 	})
 });
 
 // 리셋 그냥 새로고침''
 document.querySelector('#reset').addEventListener('click', function() {
-	console.log("dd");
 	location.reload();
 });
 
@@ -170,16 +179,16 @@ document.querySelector('#reset').addEventListener('click', function() {
 //-------------------------------------------------------
 // 초기 정렬 방식은 오름차순으로 설정
 // 초기 정렬 방식을 저장하는 객체
-let sortDirection = {};
+let sortDir = {};
 
-// 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
+
 document.querySelectorAll('.sort-btn').forEach(button => {
     button.addEventListener('click', () => {
         const column = button.dataset.column;
-        sortDirection[column] = !sortDirection[column]; // 정렬 방향을 변경
+        sortDir[column] = !sortDir[column]; // 정렬 방향을 변경
 
         // 정렬 방향에 따라 버튼 모양 변경
-        button.innerText = sortDirection[column] ? '🔽' : '🔼';
+        button.innerText = sortDir[column] ? '🔽' : '🔼';
         sortTable(column);
     });
 });
@@ -206,7 +215,6 @@ document.querySelectorAll('.sort-btn').forEach(button => {
 //}
 
 
-// 테스트 코드에서 벨류만 뺸건데 값가져오기 힘들어서 gpt 한테 맡겼더니 괴상한 코드를가져옴.....
 function getCellValue(row, column) {
     const columnIndex = {
         "supsCo": 0,
@@ -228,11 +236,13 @@ function sortTable(column) {
     const tbody = document.querySelector('.table tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
 
-    // 정렬 방식에 따라 정렬
     rows.sort((a, b) => {
+    	console.log("a=" + a);
+    	// a = row
         const aValue = getCellValue(a, column);
+        // b = row
         const bValue = getCellValue(b, column);
-        if (sortDirection[column])
+        if (sortDir[column])
         {
             return aValue.localeCompare(bValue);
         } 
@@ -242,7 +252,6 @@ function sortTable(column) {
         }
     });
 
-    // 정렬된 행을 테이블에 적용
     tbody.innerHTML = '';
     rows.forEach(row => tbody.appendChild(row));
 }
@@ -250,6 +259,13 @@ function sortTable(column) {
 
 
 
+
+
+
+
+
+
+	
 
 
 

@@ -74,7 +74,7 @@ function download() {
             prdSdc: cells[2].textContent,
             prdMajorCtg: cells[3].textContent,
             prdSubCtg: cells[4].textContent,
-            prdName: cells[5].textContent,
+            prdName: cells[5].textContent.replace(/\s+/g, ''), // 스타일떄문에 여백들어가서 여백지우기;
             prdImg: imgs[0].src, // 이미지가 있는 경우 이미지 URL 가져오기
             prdCstPri: cells[6].textContent,
             prdSal: cells[7].textContent,

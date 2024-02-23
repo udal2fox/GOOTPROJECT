@@ -1,4 +1,4 @@
-package org.rainbow.ProductManagementPage.service;
+package org.rainbow.ProductManagement.service;
 
 import java.util.List;
 

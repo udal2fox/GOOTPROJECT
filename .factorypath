@@ -65,6 +65,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jvnet/staxex/stax-ex/1.8/stax-ex-1.8.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/sun/xml/fastinfoset/FastInfoset/1.2.15/FastInfoset-1.2.15.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="C:\dev\jar\ojdbc6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

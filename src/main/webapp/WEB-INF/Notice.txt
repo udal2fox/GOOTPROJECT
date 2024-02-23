@@ -1,0 +1,60 @@
+** 2024-02-13
+
+	기본설정 
+	
+	web.xml
+	Encoding 추가
+	
+	root-context.xml
+	HikariCP,
+	Autowired,
+	Tansaction 설정
+		
+	pom.xml
+	lombok 추가,
+	DB 추가,
+	AOP 추가
+	
+	JUnit test scott // tiger 테스트 완료
+	
+** 2024-02-14	
+	servlet-context.xml
+	multipartResolver 추가.
+
+** 2024-02-22
+   Servlet context 에
+   <!-- multipartResolver 사용하기위한 추가 경로에 없다고 에러나면 주석처리 .!!-->
+		<multipart-config>
+	         <location>C:\\upload</location>
+	         <max-file-size>20971520</max-file-size>
+	         <max-request-size>41943040</max-request-size>
+	         <file-size-threshold>20971520</file-size-threshold>
+        </multipart-config>	
+        
+       
+    poi-ooxml-schemas, easyexcel 추가
+    excel 활용하기 위한것들입니다.
+    
+    
+    ***
+    Servlet context 에 사용할 패키지 추가 이거안하면 컨트롤러 만들어도 아마  404 뜰껍니다
+    <context:component-scan base-package="ex) org.joonzis.controler "/>
+    
+    
+    ***
+    root-context 에 사용할 mapper service 알아서 등록!
+    ex)
+    <!-- 상품관리 mapper OR service  -->
+	<mybatis-spring:scan base-package="org.rainbow.ProductManagement.mapper"/>
+	<context:component-scan base-package="org.rainbow.ProductManagementPage.service"/>
+	
+	** 공용으로 사용할것들은 
+	org.rainbow.xxx 에 넣어놔씀다
+	
+	
+	
+	
+
+	
+	
+	

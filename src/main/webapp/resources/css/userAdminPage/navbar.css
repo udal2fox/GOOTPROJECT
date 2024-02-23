@@ -1,0 +1,188 @@
+/* GOOGLE FONTS */
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+}
+
+/* VARIABLES CSS */
+:root {
+  --nav--width: 60px;
+
+  /* Colores */
+  --bg-color: #fa0050;
+  --first-color: #ff5798;
+  --sub-color: #ff90da;
+  --white-color: #fff;
+
+  /* Fuente y tipografia */
+  --body-font: "S-CoreDream-3Light";
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* z index */
+  --z-fixed: 100;
+}
+
+/* BASE */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* l NAV */
+.navbar {
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--white-color);
+  padding: 1.5rem 1.5rem 2rem;
+  transition: 0.5s;
+  z-index: var(--z-fixed);
+  width: calc(var(--nav--width) + 9.25rem);
+}
+
+/* NAV */
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__brand {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.nav__logo {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  padding: 0.75rem;
+  color: var(--white-color);
+  font-size: 1.2em;
+  font-weight: var(--font-black);
+  border-radius: 0.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.nav__logo:hover {
+  background-color: var(--first-color);
+}
+
+.nav__link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.75rem;
+  color: var(--white-color);
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  transition: 0.3s;
+  cursor: pointer;
+  
+}
+
+.nav__link:hover {
+  background-color: var(--first-color);
+}
+
+.nav__icon {
+  font-size: 1.25rem;
+}
+
+.nav_name {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-bold);
+}
+
+/* 
+토글 방식으로 사이드바 생성하려고 하였으나, 펼쳐진 형태로 설계변경
+추후 변경 시 재사용 위해 코드 주석처리
+
+Contract menu
+.contract {
+    width: var(--nav--width);
+}
+
+remove padding body
+.body-pd {
+    padding: 2rem 0 0 16rem;
+}
+
+Active links menu
+.active {
+    background-color: var(--first-color);
+}
+
+
+
+사이드바 확장 고려
+사이드바 메뉴에서 하위 메뉴 드롭다운 스타일
+
+COLLAPSE
+.collapse {
+    grid-template-columns: 20px max-content 1fr;
+}
+
+.collapse__link {
+    justify-self: flex-end;
+    transition: .5;
+}
+
+.collapse__menu {
+    display: none;
+    padding: .75rem 2.25rem;
+}
+
+.collapse__sublink {
+    color: var(--sub-color);
+    font-size: var(--small-font-size);
+}
+
+.collapse__sublink:hover {
+    color: var(--white-color);
+}
+
+Show collapse
+.showCollapse {
+    display: block;
+} 
+
+Rotate icon
+.rotate {
+    transform: rotate(180deg);
+    transition: .5s;
+} 
+
+*/

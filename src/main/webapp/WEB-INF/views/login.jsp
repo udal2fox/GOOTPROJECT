@@ -5,7 +5,6 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
 	<div id="head-line">
@@ -21,6 +20,7 @@
   							<path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
 						</svg>
 					</div>
+					
 					<!-- 아이디 input -->
 					<input type="text" class="username" name="username" placeholder="Username">
 				</div>
@@ -30,10 +30,12 @@
   							<path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
 						</svg>
 					</div>
+					
 					<!-- 비밀번호 input -->
 					<input type="text" name="userpw" placeholder="●●●●">
 				</div>
 				<div>
+				
 					<!-- 로그인 버튼 -->
 					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인">
 				</div>

@@ -77,13 +77,29 @@ public class ProductPageController
     // 일단 기능 상관말고 겟메핑으로이동
     
     // 공급처 등록 이동
-    
+    @GetMapping(value = "/moveSuppliersRegist")
+    public String moveSuppliersRegist(Model model, Criteria cri) 
+    {
+    	return "/productManagement/suppliersRegist";
+    }
     // 공급처 수정 이동
-    
+    @GetMapping(value = "/moveSuppliersUpdate")
+    public String moveSuppliersUpdate(Model model, Criteria cri) 
+    {
+    	return "/productManagement/suppliersUpdate";
+    }
     // 상품 개별 등록 이동
-    
+    @GetMapping(value = "/moveProductReg")
+    public String moveProductReg(Model model, Criteria cri) 
+    {
+    	return "/productManagement/productReg";
+    }
     // 상품 수정 이동
-    
+    @GetMapping(value = "/moveProductUpdate")
+    public String moveProductUpdate(Model model, Criteria cri) 
+    {
+    	return "/productManagement/productUpdate";
+    }
     
     
 	// 상품관리 이동 매핑 끝 --------------------------------------------------------------------------------------

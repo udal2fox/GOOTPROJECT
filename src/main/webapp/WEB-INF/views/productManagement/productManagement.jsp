@@ -8,15 +8,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/resources/css/productManagementPage/productManagement.css">
 </head>
-<jsp:include page="../navBar.jsp"/>
 <body>
-<div class="container-fluid"  style="padding-top: 100px;">	
-    <h2 style="width: 1500px;">상품관리</h2>
+<jsp:include page="../navBar.jsp"/>
+<div class="container-fluid"  style="padding-top: 100px;" align="center">	
+    <h2 style="width: 1500px;" align="left">상품관리</h2>
     <div class="" >
    		 <!--background: #eaeaea;
   	  	 border-spacing: 15px 30px;
    		 border-collapse: separate;  -->
-        <table style="background:#eaeaea;">
+        <table class="prdTable" style="background:#eaeaea;">
             <tr>
                 <td>
                     <div class="section">
@@ -111,8 +111,8 @@
 			    <tbody>
 			        <c:forEach var="ex" items="${list}">
 			            <tr class="product" data-type="${ex.prdMajorCtg}" data-status="${ex.prdSt}">
-			                <td>${ex.supsCo}</td>
-			                <td>${ex.prdNo }</td>
+			                <td><a href="moveSuppliersUpdate">${ex.supsCo}</a></td>
+			                <td><a href="moveProductUpdate">${ex.prdNo }</a></td>
 			                <td>${ex.prdSdc }</td>
 			                <td>${ex.prdMajorCtg }</td>
 			                <td>${ex.prdSubCtg }</td>
@@ -120,7 +120,7 @@
 			                		<img alt="" src="${ex.prdImg}" align="left">
 			                		<div id="tdTop">${ex.prdName }</div>
 			                </td>
-			                <td><fmt:formatNumber value="${ex.prdCstPri }" pattern="#,###"/></td>
+			                <td><fmt:formatNumber value="${ex.prdCstPri }" type="currency"/></td>
               				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>
 			                <td>${ex.prdMargin * 100 }%</td>
 			            </tr>
@@ -128,13 +128,13 @@
 			    </tbody>
 			</table>
 			<!-- 나중에 스타일 안바꾸면디진다 -->
-			<div style="width: 1500px;">
-		        <button type="button" class="btn btn-primary">신규 등록</button>
+			<div style="width: 1500px;" align="left">
+		        <button type="button" class="btn btn-primary" onclick="location.href='moveProductReg'">신규 등록</button>
 		    </div>
         </form>
     </div>
     <!-- page -->
-    <div class="page-wrap">
+    <div class="page-wrap" align="center" style="width: 1500px;">
         <ul class="page-nation">
             <c:if test="${pageMaker.prev }">
                 <li class="previous">

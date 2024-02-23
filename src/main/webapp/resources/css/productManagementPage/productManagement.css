@@ -3,11 +3,11 @@
 		.notosanskr * { 
 		 font-family: 'Noto Sans KR', sans-serif;
 		}
-		*
+		/* *
 		{
 			font-family: 'Noto Sans KR', sans-serif;
 			margin: 0 auto;
-		}
+		} */
 		.product-top-back {
 		    display: flex;
 		}
@@ -26,18 +26,14 @@
 		.input-group {
 		    margin-bottom: 10px;
 		}
-		label
+		#table-prd button
 		{
-			padding-left: 10px;
+			background-color: #eaeaea;
+			border-color: white;
 		}
 		#table-prd
 		{
 			width: 1500px;
-		}
-		.p_product
-		{
-			padding-top: 100px;
-			font-size: 25px;
 		}
 		#tdTop
 		{
@@ -49,6 +45,11 @@
 		    text-align: center;
 			vertical-align: middle;
 		}
+		.prdTable
+		{
+		 	border-spacing: 0px 30px;
+   		 	border-collapse: separate; 
+		}
 
 
 		td img {height: 80px; width: 120px;}
@@ -57,9 +58,11 @@
 		}
 		
 		.page-wrap{
-			text-align: center;
-			font-size: 0;
-			display: flex;
+			    text-align: center;
+			    font-size: 0;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
 		}
 		.page-nation {
 			display: flex;

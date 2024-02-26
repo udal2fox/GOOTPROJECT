@@ -6,7 +6,7 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.rainbow.ProductManagement.domain.prdDownVO;
+import org.rainbow.company.ProductManagement.domain.prdDownVO;
 
 import java.io.IOException;
 import java.net.URLEncoder;

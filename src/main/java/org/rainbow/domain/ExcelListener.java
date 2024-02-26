@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.rainbow.ProductManagement.domain.prdInputVO;
+import org.rainbow.company.ProductManagement.domain.prdInputVO;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.context.AnalysisContext;

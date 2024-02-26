@@ -169,22 +169,22 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">신규영업</a></li>
-                            <li class="category"><a class="category-link" href="">기업관리</a></li>
-                            <li class="category"><a class="category-link" href="">지점관리</a></li>
+                            <li class="category"><a class="category-link" href="/test/salesList">신규영업</a></li>
+                            <li class="category"><a class="category-link" href="/test/enterpriseList">기업관리</a></li>
+                            <li class="category"><a class="category-link" href="/test/spotList">지점관리</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">거래명세</a></li>
-                            <li class="category"><a class="category-link" href="">미수관리</a></li>
-                            <li class="category"><a class="category-link" href="">계산서발행</a></li>
+                            <li class="category"><a class="category-link" href="/settlementManagePage">거래명세</a></li>
+                            <li class="category"><a class="category-link" href="/unrecoveredManagement">미수관리</a></li>
+                            <li class="category"><a class="category-link" href="/orderReceiptPage">계산서발행</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">기업별 통계</a></li>
-                            <li class="category"><a class="category-link" href="">상품별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/salesStatsViewCompanyname">기업별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/salesStatsView">상품별 통계</a></li>
                         </ul>
                     </li>
                     <li>
@@ -194,7 +194,6 @@
                             <li class="category"><a class="category-link" href="">전자결재</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>

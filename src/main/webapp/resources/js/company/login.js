@@ -1,6 +1,6 @@
 // ----- css 파일 추가
 // 1. 파일 경로 설정
-const CSS_FILE_PATH = '/resources/css/login.css';
+const CSS_FILE_PATH = '/resources/css/company/login.css';
 // 2. link 태그 생성
 let linkEle = document.createElement('link');
 linkEle.rel = 'stylesheet';

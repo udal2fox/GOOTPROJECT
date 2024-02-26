@@ -28,9 +28,9 @@
                 </a>
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">소개페이지</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">서비스신청</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">자주하는질문</a></li>
+                    <li class="nav-item"><a href="/landingPage/main" class="nav-link">소개페이지</a></li>
+                    <li class="nav-item"><a href="/landingPage/application" class="nav-link">서비스신청</a></li>
+                    <li class="nav-item"><a href="/landingPage/FAQ" class="nav-link">자주하는질문</a></li>
                 </ul>
             </div>
         </div>

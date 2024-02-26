@@ -32,7 +32,7 @@
 	<context:component-scan base-package="org.rainbow.landingPage.controller"/>
 	<context:component-scan base-package="org.rainbow.userAdminPage.controller"/>
 	
-	
+	<context:component-scan base-package="org.rainbow.company.custMgmt.controller"/>
 	
 	<!-- multipartResolver  -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">

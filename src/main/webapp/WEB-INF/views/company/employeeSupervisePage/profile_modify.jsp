@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../navBar.jsp" %> 
-<link rel="stylesheet" href="/resources/css/employeeSupervisePage/profile_modify.css">
+<link rel="stylesheet" href="/resources/css/company/employeeSupervisePage/profile_modify.css">
 
 <body>
 	
@@ -42,11 +42,11 @@
 									</tr>
 									<tr>
 										<th> 비밀번호 </th>
-										<td><input class="input1" type="text" name="ePw" readonly></td>
+										<td><input class="input1" type="text" name="ePw"></td>
 									</tr>	
 									<tr>
 										<th> 비밀번호 확인 </th>
-										<td><input class="input1" type="text" name="check-ePw" readonly></td>
+										<td><input class="input1" type="text" name="check-ePw"></td>
 									</tr>
 								</table>
 								

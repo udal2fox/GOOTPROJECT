@@ -149,7 +149,7 @@
                                 class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">프로필 수정</a></li>
+                            <li><a class="dropdown-item" href="/profile_modify">프로필 수정</a></li>
                             <li><a class="dropdown-item" href="#">로그아웃</a></li>
                         </ul>
                     </div>
@@ -190,7 +190,7 @@
                     <li>
                         <ul class="subMenu-category px-5">
                             <li class="category"><a class="category-link" href="/orgchart">조직도</a></li>
-                            <li class="category"><a class="category-link" href="">직원관리</a></li>
+                            <li class="category"><a class="category-link" href="/searchEmployee">직원관리</a></li>
                             <li class="category"><a class="category-link" href="">전자결재</a></li>
                         </ul>
                     </li>

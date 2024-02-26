@@ -176,9 +176,9 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/OrderStatement">거래명세</a></li>
-                            <li class="category"><a class="category-link" href="/unrecoveredMgtBranch">미수관리</a></li>
-                            <li class="category"><a class="category-link" href="/orderReceiptIssue">계산서발행</a></li>
+                            <li class="category"><a class="category-link" href="/settlementManagePage">거래명세</a></li>
+                            <li class="category"><a class="category-link" href="/unrecoveredManagement">미수관리</a></li>
+                            <li class="category"><a class="category-link" href="/orderReceiptPage">계산서발행</a></li>
                         </ul>
                     </li>
                     <li>
@@ -189,8 +189,13 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
+<<<<<<< HEAD
                             <li class="category"><a class="category-link" href="/orgchart">조직도</a></li>
                             <li class="category"><a class="category-link" href="/searchEmployee">직원관리</a></li>
+=======
+                            <li class="category"><a class="category-link" href="">조직도</a></li>
+                            <li class="category"><a class="category-link" href="">직원관리</a></li>
+>>>>>>> d37893fa8bbbb658d64eb281a5a6ddbc22535a6f
                             <li class="category"><a class="category-link" href="">전자결재</a></li>
                         </ul>
                     </li>

@@ -176,25 +176,24 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">거래명세</a></li>
-                            <li class="category"><a class="category-link" href="">미수관리</a></li>
-                            <li class="category"><a class="category-link" href="">계산서발행</a></li>
+                            <li class="category"><a class="category-link" href="/OrderStatement">거래명세</a></li>
+                            <li class="category"><a class="category-link" href="/unrecoveredMgtBranch">미수관리</a></li>
+                            <li class="category"><a class="category-link" href="/orderReceiptIssue">계산서발행</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">기업별 통계</a></li>
-                            <li class="category"><a class="category-link" href="">상품별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/salesStatsViewCompanyname">기업별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/salesStatsView">상품별 통계</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">조직도</a></li>
+                            <li class="category"><a class="category-link" href="/orgchart">조직도</a></li>
                             <li class="category"><a class="category-link" href="">직원관리</a></li>
                             <li class="category"><a class="category-link" href="">전자결재</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>

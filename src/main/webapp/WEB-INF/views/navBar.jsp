@@ -189,13 +189,8 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-<<<<<<< HEAD
                             <li class="category"><a class="category-link" href="/orgchart">조직도</a></li>
                             <li class="category"><a class="category-link" href="/searchEmployee">직원관리</a></li>
-=======
-                            <li class="category"><a class="category-link" href="">조직도</a></li>
-                            <li class="category"><a class="category-link" href="">직원관리</a></li>
->>>>>>> d37893fa8bbbb658d64eb281a5a6ddbc22535a6f
                             <li class="category"><a class="category-link" href="">전자결재</a></li>
                         </ul>
                     </li>

@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/css/productManagementPage/productManagement.css">
+    <link rel="stylesheet" href="/resources/css/company/productManagementPage/productManagement.css">
 </head>
 <body>
 <jsp:include page="../../navBar.jsp"/>

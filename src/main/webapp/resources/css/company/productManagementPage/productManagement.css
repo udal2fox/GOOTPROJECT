@@ -23,6 +23,7 @@
 		.flex-div {
 	        display: flex;
    			align-items: center;
+   			justify-content: flex-start;
 		}
 		
 		.input-group {
@@ -54,6 +55,12 @@
 		}
 
 
+
+
+
+
+
+		/*페이징 이미지사이즈  */
 		td img {height: 80px; width: 120px;}
 		.page-nation li{
 			list-style: none;

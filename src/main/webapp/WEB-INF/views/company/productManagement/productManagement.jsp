@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/css/productManagementPage/productManagement.css">
+    <link rel="stylesheet" href="/resources/css/company/productManagementPage/productManagement.css">
 </head>
 <body>
 <jsp:include page="../../navBar.jsp"/>
@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-top: 25px;padding-right: 215px;">
+                    	<div class="flex-div" style="">
                         <label>상품 분류</label>
                         <div class="form-check">
                             <input class="form-check-input" checked="checked" type="checkbox" data-filter="product-type" value="전체" id="product-typeAll">
@@ -39,7 +39,7 @@
                 </td>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-top:25px">
+                    	<div class="flex-div" style="">
                         <label>상품 상태</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="전체" id="product-statusAll" checked="checked">
@@ -64,7 +64,7 @@
             <tr>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right:70px;">
+                    	<div class="flex-div" style="">
                         <label>키워드</label>
                         <div class="input-group mb-3" style="width: 320px;margin: 20px;">
                             <span class="input-group-text" id="test">🔍</span>
@@ -79,7 +79,7 @@
                 </td>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right: 255px;">
+                    	<div class="flex-div" style="">
                         <label>상품 일괄 편집</label>
                         <div>
                        		<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">

@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 	body{
@@ -49,70 +49,70 @@
 		<jsp:include page="../navBar.jsp"/>
 	</div>
 		<div id="title">
-			<h1> Á¶Á÷µµ </h1>
+			<h1> ì¡°ì§ë„ </h1>
 		</div>
 		<div id="orgchart">
 			<div id="orgchart-form">
 				<div id="orgHeader">
 					<ul class="orgHeader">
 						<li id="header">
-							<strong> ´ëÇ¥ </strong>
-							<p>Áö¿ì»õ³¢</p>
+							<strong> ëŒ€í‘œ </strong>
+							<p>ì§€ìš°ìƒˆë¼</p>
 						</li>
 					</ul>
 				</div>
 				<div id="orgTeam">
 					<ul class="team">
 						<li id="reader-Name">
-							<p> °æ¿µ Áö¿øº»ºÐ </p>
-							<strong>¶óÀÌÃò</strong>
+							<p> ê²½ì˜ ì§€ì›ë³¸ë¶„ </p>
+							<strong>ë¼ì´ì¸„</strong>
 						</li>
 						<br>
 						<li>
-							<p> Àç¹«ÆÀ </p>
-							<strong> ÇÇÄ«Ãò </strong>
+							<p> ìž¬ë¬´íŒ€ </p>
+							<strong> í”¼ì¹´ì¸„ </strong>
 						</li>
 						<br>
 						<li>
-							<p> ÀÎ»çÆÀ </p>
-							<strong> ÇÇÃò </strong>
+							<p> ì¸ì‚¬íŒ€ </p>
+							<strong> í”¼ì¸„ </strong>
 						</li>
 					</ul>
 					<ul class="team">
 						<li id="reader-Name">
-							<p> ¿î¿µº»ºÐ </p>
-							<strong> °ÅºÏ¿Õ </strong>
+							<p> ìš´ì˜ë³¸ë¶„ </p>
+							<strong> ê±°ë¶ì™• </strong>
 						</li>
 						<br>
 						<li>
-							<p> ¿µ¾÷ÆÀ </p>
-							<strong> ¾î´ÏºÎ±â </strong>
+							<p> ì˜ì—…íŒ€ </p>
+							<strong> ì–´ë‹ˆë¶€ê¸° </strong>
 						</li>
 						<br>
 						<li>
-							<p> »óÇ°ÆÀ </p>
-							<strong> ²¿ºÎ±â </strong>
+							<p> ìƒí’ˆíŒ€ </p>
+							<strong> ê¼¬ë¶€ê¸° </strong>
 						</li>
 						<br>
 						<li>
-							<p> ¸¶ÄÉÆÃÆÀ </p>
-							<strong> ÀÌ»óÇØ¾¾ </strong>
+							<p> ë§ˆì¼€íŒ…íŒ€ </p>
+							<strong> ì´ìƒí•´ì”¨ </strong>
 						</li>
 					</ul>
 					<ul class="team">
 						<li id="reader-Name">
-							<p> °³¹ßº»ºÐ </p>
-							<strong> ¸®ÀÚ¸ù </strong>
+							<p> ê°œë°œë³¸ë¶„ </p>
+							<strong> ë¦¬ìžëª½ </strong>
 						</li>
 						<br>
 						<li>
-							<p>°³¹ßÆÀ</p>
-							<strong>¸®ÀÚµå</strong>
+							<p>ê°œë°œíŒ€</p>
+							<strong>ë¦¬ìžë“œ</strong>
 						</li>
 						<br>
 						<li>
-							<p>µðÀÚÀÎÆÀ</p>
-							<strong>ÆÄÀÌ¸®</strong>
+							<p>ë””ìžì¸íŒ€</p>
+							<strong>íŒŒì´ë¦¬</strong>
 						</li>
 					</ul>
 				</div>

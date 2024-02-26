@@ -11,6 +11,6 @@ public class DefaultController
 	{
 		// return "테스트시 DefaultController 사용 가능!!";
 
-		 return "/employeeSupervisePage/profile_modify";
+		 return "/employeeSupervisePage/searchEmployeePage";
 	}
 }

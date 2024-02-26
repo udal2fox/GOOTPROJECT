@@ -1,7 +1,9 @@
 package org.rainbow.company.ProductManagement.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
@@ -19,10 +21,14 @@ public class productPageServiceImpl implements productPageService
 	productPageMapper pMapper;
 
 	@Override
-	public List<productListVO> prdList(Criteria cri) {
-		log.info("prdList..."+cri);
-		return pMapper.prdList(cri);
+	public List<productListVO> prdList() {
+		return pMapper.prdList();
 	}
+//	@Override
+//	public List<productListVO> prdList(Criteria cri) {
+//		log.info("prdList..."+cri);
+//		return pMapper.prdList(cri);
+//	}
 
 	@Override
 	public int prdCount() {
@@ -44,5 +50,12 @@ public class productPageServiceImpl implements productPageService
 		log.info("vo...."+vo);
 		return pMapper.insertPrdExcel(vo);
 	}
+
+	@Override
+	public List<prdDownVO> downExcelList(Map<String, Object> checkValue) {
+		return pMapper.downExcelList(checkValue);
+	}
+
+	
 
 }

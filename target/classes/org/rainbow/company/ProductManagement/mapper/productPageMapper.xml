@@ -4,7 +4,15 @@
 
 <mapper namespace="org.rainbow.company.ProductManagement.mapper.productPageMapper">
 	<!-- productList   -->
-	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO" parameterType="org.rainbow.domain.Criteria">
+	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
+	
+	        SELECT *
+			    FROM RAIN_Suppliers_tbl s, RAIN_Products_tbl p
+			    where  p.SUPSNO = s.SUPSNO
+			    order by p.prdNo asc
+		
+	</select>
+<!-- 	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO" parameterType="org.rainbow.domain.Criteria">
 		<![CDATA[
 	        SELECT *
 			FROM (
@@ -22,7 +30,7 @@
 			)
 			WHERE rn > (#{pageNum} - 1) *  #{amount} 
 		 ]]>
-	</select>
+	</select> -->
 	
 	<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->
 	<select id="prdCount" resultType="int">
@@ -69,8 +77,30 @@
 			#{prdMargin}, #{prdSt}, #{prdImg}
 		)
 	</insert>
-	
-	
+	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
+	<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
+	    SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+	    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+	    WHERE s.supsNo = p.supsNo
+	    AND p.prdMajorCtg IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	    AND p.prdSt IN
+	    <foreach item="item" collection="checkValues">
+	        #{item}
+	    </foreach>
+	</select>
+	<!--  
+		foreach 마이바티스 반복
+		item 변수 이름
+		collection="ex)checkValues" 반복할 리스트 지정
+		open="(" separator="," close=")" 시작 , 구분자 , 끝 부분 지정
+		지금 쿼리 같은경우 
+		<foreach item="item" collection="checkValues"> 이런식으로
+		기본값을 넣어도 동작하는데 문제없는것 같다.
+	-->
+
 	
 	
 </mapper>

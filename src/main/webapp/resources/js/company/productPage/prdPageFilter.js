@@ -1,207 +1,166 @@
-/* 즉시 실행 함수 
-   (fuction(){
-   	
-   })();
-*/	
-	
-/*filter();
+(function () {
+    // 전역 변수 설정
+    const amount = 10; // 페이지당 보여줄 아이템 수
+    let pageNum = 1; // 현재 페이지 번호
+    let products = document.querySelectorAll('.product'); // 전체 상품 리스트
 
-document.querySelectorAll("input[type='checkbox']").forEach(function(e){
-	e.addEventListener('change',()=>{
-		filter();
-	});
-});*/
+    // 필터링 및 페이징 처리 함수
+    function filterAndPaginate() {
+        // 페이지네이션을 그리는 함수
+        function drawPagination(startPage, endPage) {
+            const paginationElement = document.getElementById('pagination');
+            paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
 
+            const ul = document.createElement('ul');
+            ul.classList.add('page-nation');
 
-(function filter() {
-    // allCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-typeAll').addEventListener('change', function() {
-        // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
-        let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function(checkbox) {
-            console.log(checkbox);
-        	checkbox.checked = isChecked;
-        });
+            for (let num = startPage; num <= endPage; num++) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#'; // 페이지 번호 클릭 시 페이지 이동 방지
+                a.innerText = num;
+                a.addEventListener('click', () => goToPage(num)); // 페이지 번호 클릭 시 goToPage 함수 호출
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
 
-        // 필터링 적용
-        filterProducts();
-    });
+            paginationElement.appendChild(ul);
+        }
 
-    // allListCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-statusAll').addEventListener('change', function() {
-        // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
-        let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function(checkbox) {
-            checkbox.checked = isChecked;
-        });
-        // 필터링 적용
-        filterProducts();
-    });
+        // 페이지 이동 함수
+        function goToPage(page) {
+            pageNum = page;
 
-    // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
-    document.querySelectorAll('.filter-checkbox').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-            // allCheck 체크박스 상태 업데이트
-            let isTypeAllChecked = isAllTypeCheckboxesChecked();
-            document.getElementById('product-typeAll').checked = isTypeAllChecked;
+            // 각 페이지당 보여줄 상품의 시작 인덱스와 끝 인덱스 계산
+            const startIndex = (pageNum - 1) * amount;
+            const endIndex = pageNum * amount;
 
-            // allListCheck 체크박스 상태 업데이트
-            let isStatusAllChecked = isAllStatusCheckboxesChecked();
-            document.getElementById('product-statusAll').checked = isStatusAllChecked;
+            // 필터링된 상품 리스트 가져오기
+            let filteredProducts = getFilteredProducts();
+
+            // 현재 페이지에 보여줄 상품만 보이도록 설정
+            filteredProducts.forEach((product, index) => {
+                if (index >= startIndex && index < endIndex) {
+                    product.style.display = 'table-row'; // startIndex부터 endIndex 이전까지만 표시
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        // 상품 필터링 함수
+        function filterProducts() {
+            // 선택된 상품 종류 필터 및 상태 필터 가져오기
+            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+                return checkbox.value;
+            });
+            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+                return checkbox.value;
+            });
+
+            // 각 상품을 순회하면서 필터링 적용
+            products.forEach(function (product) {
+                let type = product.getAttribute('data-type');
+                let status = product.getAttribute('data-status');
+
+                // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
+                if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
+                    product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
+            drawPagination(1, Math.ceil(getFilteredProducts().length / amount));
+        }
+
+        // allCheck 체크박스 이벤트 리스너 등록
+        document.getElementById('product-typeAll').addEventListener('change', function () {
+            // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
+            let isChecked = this.checked;
+            document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function (checkbox) {
+                checkbox.checked = isChecked;
+            });
 
             // 필터링 적용
             filterProducts();
         });
-    });
 
-    // 상품 필터링 함수
-    function filterProducts() {
-        // 선택된 상품 종류 필터 및 상태 필터 가져오기
-        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
-            return checkbox.value;
-        });
-        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
-            return checkbox.value;
-        });
-        
-        // 아래 방식을 .map() 써써 줄인것 forEach 써도 무방
-        
-//        // 상품 종류 필터링
-//        let typeFilters = [];
-//        let typeCheckboxes = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked');
-//
-//        for (let i = 0; i < typeCheckboxes.length; i++) {
-//            typeFilters.push(typeCheckboxes[i].value);
-//        }
-//
-//        // 상품 상태 필터링
-//        let statusFilters = [];
-//        let statusCheckboxes = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked');
-//
-//        for (let i = 0; i < statusCheckboxes.length; i++) {
-//            statusFilters.push(statusCheckboxes[i].value);
-//        }
-        
-        
-
-        // 전체 체크 상태 확인
-        let isAllTypeChecked = document.getElementById('product-typeAll').checked;
-        let isAllStatusChecked = document.getElementById('product-statusAll').checked;
-
-        // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
-        if (!isAllTypeChecked && typeFilters.length === 0) {
-            // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
-                product.style.display = 'none';
+        // allListCheck 체크박스 이벤트 리스너 등록
+        document.getElementById('product-statusAll').addEventListener('change', function () {
+            // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
+            let isChecked = this.checked;
+            document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function (checkbox) {
+                checkbox.checked = isChecked;
             });
-            
-            return;
+            // 필터링 적용
+            filterProducts();
+        });
+
+        // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
+        document.querySelectorAll('.filter-checkbox').forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                // allCheck 체크박스 상태 업데이트
+                let isTypeAllChecked = isAllTypeCheckboxesChecked();
+                document.getElementById('product-typeAll').checked = isTypeAllChecked;
+
+                // allListCheck 체크박스 상태 업데이트
+                let isStatusAllChecked = isAllStatusCheckboxesChecked();
+                document.getElementById('product-statusAll').checked = isStatusAllChecked;
+
+                // 필터링 적용
+                filterProducts();
+            });
+        });
+
+        // 상품 종류 체크박스 모두 선택 여부 확인 함수
+        function isAllTypeCheckboxesChecked() {
+            // 상품 종류 체크박스 중 선택된 개수 확인
+            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
+            // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
+            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
         }
 
-        // 모든 상품상태 체크박스가 해제되었을 때 조회되지 않도록 처리
-        if (!isAllStatusChecked && statusFilters.length === 0) {
-            // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
-                product.style.display = 'none';
-            });
-            
-            return;
+        // 상품 상태 체크박스 모두 선택 여부 확인 함수
+        function isAllStatusCheckboxesChecked() {
+            // 상품 상태 체크박스 중 선택된 개수 확인
+            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
+            // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
+            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
         }
 
-        // 각 상품을 순회하면서 필터링 적용
-        document.querySelectorAll('.product').forEach(function(product) {
-            let type = product.getAttribute('data-type');
-            let status = product.getAttribute('data-status');
+        // 필터링된 상품 리스트 가져오기
+        function getFilteredProducts() {
+            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+                return checkbox.value;
+            });
+            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+                return checkbox.value;
+            });
 
-            // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
-            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) 
-            {
-                product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
-            } 
-            else 
-            {
-                product.style.display = 'none';
-            }
-        });
+            return Array.from(products).filter(function (product) {
+                let type = product.getAttribute('data-type');
+                let status = product.getAttribute('data-status');
+                return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
+            });
+        }
+
+        // 초기 페이지 설정
+        drawPagination(1, Math.ceil(products.length / amount));
+        goToPage(1);
     }
 
-    // 상품 종류 체크박스 모두 선택 여부 확인 함수
-    function isAllTypeCheckboxesChecked() 
-    {
-        // 상품 종류 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
-        // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
-    }
-
-    // 상품 상태 체크박스 모두 선택 여부 확인 함수
-    function isAllStatusCheckboxesChecked() 
-    {
-        // 상품 상태 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
-        // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
-    }
+    // 필터링 및 페이징 처리 함수 호출
+    filterAndPaginate();
 })();
 
 
-//페이징
 
-// 이거는 나중에 공통영역으로 뺄예정
-function setStorageData(pageNum, amount)
-{
-	const pageData = {
-			pageNum : pageNum,
-			amount : amount
-	};
-	localStorage.setItem('page_data' , JSON.stringify(pageData));
-}
-function getStorageData()
-{
-	return JSON.parse(localStorage.getItem('page_data'));
-}
-
-
-document.querySelectorAll(".page-nation li a").forEach(aEle => {
-	aEle.addEventListener('click',function(e){
-		e.preventDefault();
-		let pageNum = this.getAttribute("href");
-		let amount = 10;
-		
-		// 웹 콘솔창 -> 어플리케이션 -> 로컬 스토리지에 제이슨데이터 저장된다.
-		setStorageData(pageNum, amount);
-		
-		let sendData ='pageNum='+pageNum+'&amount='+amount;
-		location.href = "/moveProductPage?"+sendData;
-	})
-});
-
-// 리셋 그냥 새로고침''
-document.querySelector('#reset').addEventListener('click', function() {
-	location.reload();
-});
-
-////테이블 뒤집기... 
-//document.querySelector('#upDown').addEventListener('click', function() {
-//	
-//	console.log("dd");
-//	const trArr = document.querySelectorAll(".table tbody tr");
-//	const tbody = document.querySelector(".table tbody")
-//	tbody.innerHTML = "";
-//	
-//	const reversedTrArr = Array.from(trArr).reverse(); // 
-//
-//	reversedTrArr.forEach((el) => {
-//	    tbody.appendChild(el); // 
-//	});
-//});
-
-//-------------------------------------------------------
 // 초기 정렬 방식은 오름차순으로 설정
-// 초기 정렬 방식을 저장하는 객체
 let sortDir = {};
 
-
+// 정렬 버튼 이벤트 리스너 등록
 document.querySelectorAll('.sort-btn').forEach(button => {
     button.addEventListener('click', () => {
         const column = button.dataset.column;
@@ -213,28 +172,26 @@ document.querySelectorAll('.sort-btn').forEach(button => {
     });
 });
 
-//// 테이블을 정렬하는 함수 테이블 내용이 value 가 있는경우
-//function sortTable(column) {
-//    const tbody = document.querySelector('.table tbody');
-//    const rows = Array.from(tbody.querySelectorAll('tr'));
-//
-//    // 정렬 방식에 따라 정렬
-//    rows.sort((a, b) => {
-//        const aValue = a.querySelector(`[name="${column}"]`).value;
-//        const bValue = b.querySelector(`[name="${column}"]`).value;
-//        if (sortDirection[column]) {
-//            return aValue.localeCompare(bValue);
-//        } else {
-//            return bValue.localeCompare(aValue);
-//        }
-//    });
-//
-//    // 정렬된 행을 테이블에 적용
-//    tbody.innerHTML = '';
-//    rows.forEach(row => tbody.appendChild(row));
-//}
+// 테이블을 정렬하는 함수
+function sortTable(column) {
+    const tbody = document.querySelector('.table tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
 
+    rows.sort((a, b) => {
+        const aValue = getCellValue(a, column);
+        const bValue = getCellValue(b, column);
+        if (sortDir[column]) {
+            return aValue.localeCompare(bValue);
+        } else {
+            return bValue.localeCompare(aValue);
+        }
+    });
 
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+}
+
+// 셀의 값을 가져오는 함수
 function getCellValue(row, column) {
     const columnIndex = {
         "supsCo": 0,
@@ -252,46 +209,7 @@ function getCellValue(row, column) {
     return cell ? cell.textContent.trim() : "";
 }
 
-function sortTable(column) {
-    const tbody = document.querySelector('.table tbody');
-    const rows = Array.from(tbody.querySelectorAll('tr'));
-
-    rows.sort((a, b) => {
-    	console.log("a=" + a);
-    	// a = row
-        const aValue = getCellValue(a, column);
-        // b = row
-        const bValue = getCellValue(b, column);
-        if (sortDir[column])
-        {
-            return aValue.localeCompare(bValue);
-        } 
-        else
-        {
-            return bValue.localeCompare(aValue);
-        }
-    });
-
-    tbody.innerHTML = '';
-    rows.forEach(row => tbody.appendChild(row));
-}
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
+// 리셋 버튼 이벤트 리스너 등록
+document.querySelector('#reset').addEventListener('click', function () {
+    location.reload();
+});

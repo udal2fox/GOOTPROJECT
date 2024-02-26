@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../../navBar.jsp"/>
-<div class="container-fluid"  style="padding-top: 100px;" align="center">	
+<div class="container-fluid"  style="padding-top: 30px;" align="center">	
     <h2 style="width: 1500px;" align="left">상품관리</h2>
     <div class="" >
    		 <!--background: #eaeaea;
@@ -133,30 +133,17 @@
 		    </div>
         </form>
     </div>
+    <!--페이지 부분제거후 js 로 그릴예정 -->
     <!-- page -->
-    <div class="page-wrap" align="center" style="width: 1500px;">
-        <ul class="page-nation">
-            <c:if test="${pageMaker.prev }">
-                <li class="previous">
-                    <a href="${pageMaker.startPage -1 }"> &lt; </a>
-                </li>
-            </c:if>
-            <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
-                <li>
-                    <a href="${num}" class="${pageMaker.cri.pageNum == num ? 'active' : '' }">${num }</a>
-                </li>
-            </c:forEach>
-            <c:if test="${pageMaker.next }">
-                <li>
-                    <a href="${pageMaker.endPage +1 }"> &gt; </a>
-                </li>
-            </c:if>
-        </ul>
-    </div>
+    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
+    <ul class="page-nation">
+        <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
+    </ul>
 </div>
 
-</body>
-<script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script>
+</div>
+
+<script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script> 
 <script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
 

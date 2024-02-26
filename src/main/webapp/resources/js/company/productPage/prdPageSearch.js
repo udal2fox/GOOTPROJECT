@@ -11,16 +11,17 @@ document.querySelector('#search').addEventListener('click', function() {
     fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청
 });
 
-//페이지네이션 버튼 클릭 이벤트 핸들러
-document.querySelector('.page-nation').addEventListener('click', function(event) {
-    if (event.target.tagName === 'A') {
-        event.preventDefault();
-        let pageNum = event.target.getAttribute('href');
-        currentPage = pageNum; // 현재 페이지 갱신
-        console.log(currentPage);
-        fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청
-    }
-});
+
+////페이지네이션 버튼 클릭 이벤트 핸들러
+//document.querySelector('.page-nation').addEventListener('click', function(event) {
+//    if (event.target.tagName === 'A') {
+//        event.preventDefault();
+//        let pageNum = event.target.getAttribute('href');
+//        currentPage = pageNum; // 현재 페이지 갱신
+//        console.log(currentPage);
+//        fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청
+//    }
+//});
 
 
 

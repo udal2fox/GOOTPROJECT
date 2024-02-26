@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
 						</svg>
 					</div>
 					
-					<!-- ¾ÆÀÌµð input -->
+					<!-- ì•„ì´ë”” input -->
 					<input type="text" class="username" name="username" placeholder="Username">
 				</div>
 				<div id="userpwBar">
@@ -31,13 +31,13 @@
 						</svg>
 					</div>
 					
-					<!-- ºñ¹Ð¹øÈ£ input -->
-					<input type="text" name="userpw" placeholder="¡Ü¡Ü¡Ü¡Ü">
+					<!-- ë¹„ë°€ë²ˆí˜¸ input -->
+					<input type="text" name="userpw" placeholder="â—â—â—â—">
 				</div>
 				<div>
 				
-					<!-- ·Î±×ÀÎ ¹öÆ° -->
-					<input type="button" id="loginBtn" class="loginBtn" name="login" value="·Î±×ÀÎ">
+					<!-- ë¡œê·¸ì¸ ë²„íŠ¼ -->
+					<input type="button" id="loginBtn" class="loginBtn" name="login" value="ë¡œê·¸ì¸">
 				</div>
 			</form>
 		</div>
@@ -45,7 +45,7 @@
 	
 	<div id="footer-line">
 		<p><strong>
-		º¸ÀÌ´Â ³¡±îÁö Ã£¾Æ´Ù³àµµ ¸ñ¼ûÀÌ ÀÖ´Â ¶§±îÁö ¹æÈ²ÇÏ¿©µµ º¸ÀÌ´Â °ÍÀº °ÅÄ£ ¸ð·¡»ÓÀÏ °ÍÀÌ´Ù ÀÌ»óÀÇ ²ÉÀÌ ¾øÀ¸¸é ¾µ¾µÇÑ ÀÎ°£¿¡ ³²´Â °ÍÀº ¿µ¶ô°ú ºÎÆÐ »ÓÀÌ´Ù ³«¿øÀ» Àå½ÄÇÏ´Â ÃµÀÚ¸¸È«ÀÌ ¾îµð ÀÖÀ¸¸ç ÀÎ»ýÀ» Ç³ºÎÇÏ°Ô ÇÏ´Â ¿Â°® °ú½ÇÀÌ
+		ë³´ì´ëŠ” ëê¹Œì§€ ì°¾ì•„ë‹¤ë…€ë„ ëª©ìˆ¨ì´ ìžˆëŠ” ë•Œê¹Œì§€ ë°©í™©í•˜ì—¬ë„ ë³´ì´ëŠ” ê²ƒì€ ê±°ì¹œ ëª¨ëž˜ë¿ì¼ ê²ƒì´ë‹¤ ì´ìƒì˜ ê½ƒì´ ì—†ìœ¼ë©´ ì“¸ì“¸í•œ ì¸ê°„ì— ë‚¨ëŠ” ê²ƒì€ ì˜ë½ê³¼ ë¶€íŒ¨ ë¿ì´ë‹¤ ë‚™ì›ì„ ìž¥ì‹í•˜ëŠ” ì²œìžë§Œí™ì´ ì–´ë”” ìžˆìœ¼ë©° ì¸ìƒì„ í’ë¶€í•˜ê²Œ í•˜ëŠ” ì˜¨ê°– ê³¼ì‹¤ì´
 		</strong></p>
 	</div>
 	

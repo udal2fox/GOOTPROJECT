@@ -1,0 +1,384 @@
+@charset "UTF-8";
+
+	body{
+		margin : 0;
+		padding : 0;
+		
+	}
+
+	.navBar{
+		position: fixed;
+		width : 100%;
+		top : 0;
+		
+	}
+
+/* 변수 생성 */
+:root {
+  
+  --bg-gray:#EEEEEE; 
+  --blue:rgb(75, 91, 225);
+  --basic-radius:3px;
+  
+}
+
+
+.entire{
+	width: 80%;
+
+}
+
+
+   
+/** 타이틀 */
+	.title h3{
+		font-weight : bolder;
+
+	}
+	
+	
+	
+/** ------------기업 관리 (리스트) 페이지 시작--*/
+
+/** 서치바 */
+.searchBar_div {
+		
+    	box-sizing: border-box;
+    	background-color:var(--bg-gray);
+    	
+    	padding-bottom:10px;
+	}
+
+/** 서치바 테이블*/
+.searchBar_tbl {
+	table-layout: auto;
+	table-layout: fixed;
+	border: 6px solid var(--bg-gray);
+	width: 100%;
+	
+}
+
+.searchBar_tbl tr th {
+	width:80px;
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	font-size: 15px;
+	text-align: center;
+	
+
+}
+
+.searchBar_tbl td{
+	border: 6px solid var(--bg-gray);
+	
+}
+
+.searchBar_tbl input[type="text"] {
+	
+	width:100%;
+	border: none;
+	
+}
+
+.searchBar_tbl input[type="date"] {
+	border: none;
+	width:130px;
+	text-align: center;
+
+}
+
+
+#searchBar_selectBizSt{
+	width:100%;
+	border: none;
+}
+
+/** 서치바 검색 버튼*/
+#searchBar_search_btn {
+	margin-left:1100px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	
+	}
+	
+/** 서치바 초기화 버튼*/
+#searchBar_reset_btn {
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	}
+	
+/** 엑셀로 내려받기 버튼 div*/	
+.download_to_excel_btn_div {
+	
+    box-sizing: border-box;
+	text-align: right;
+	padding: 50px 5px 10px 5px;
+}
+	
+/** 엑셀로 내려받기 버튼*/
+#download_to_excel_btn {
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width:140px;
+}
+
+/** 몇개씩 보기 div*/
+.viewAFew_div {
+	
+    box-sizing: border-box;
+    text-align:right;
+    padding: 0px 5px 10px 5px;
+	
+}
+
+
+/** 게시글 목록 div*/
+.list_div {
+	
+	box-sizing: border-box;
+	border : 5px solid var(--bg-gray);
+
+}
+
+.list_div_tbl {
+	 
+	border : 5px solid white;
+	table-layout: auto;
+	table-layout: fixed;
+	width:100%;
+}
+
+.list_div_tbl tr th {
+
+	font-size: 13px;
+	text-align: center;
+}
+
+.list_div_tbl td{
+	text-align: center;
+	
+}
+
+/** 게시글 목록 상단 바*/
+.top_bar_of_list {
+	border : 5px solid white;
+	
+	background-color:var(--bg-gray);
+	font-size: 13px;
+	font-weight : bolder;
+
+}
+
+.checkbox_div {
+	display: flex;
+	justify-content: space-around;
+   
+	
+}
+
+
+
+
+
+/** ------------지점 관리 (리스트) 페이지 끝--**/
+
+
+
+
+
+/** ------------지점 등록, 수정 페이지 시작 --*/
+
+.spot_update {
+	
+	
+	
+}
+
+.spot_update_title {
+	margin-top:30px;
+	background-color : var(--bg-gray);
+	height: 50px;
+	padding-top:12px;
+}
+
+
+.spot_update_tbl {
+	background-color: var(--bg-gray);
+	table-layout: auto;
+	width: 100%;
+	table-layout: fixed;
+	border: 7px solid var(--bg-gray);
+
+}
+.spot_update_tbl th {
+	width: 200px;
+	border: 10px solid var(--bg-gray);
+
+}
+.spot_update_tbl tr {
+	width: 100%;
+
+}
+
+.spot_update_tbl td {
+	width: 100%;
+	border: 10px solid var(--bg-gray);
+	
+	
+}
+
+.spot_update_tbl input[type="text"], 
+.spot_update_tbl input[type="date"],
+textarea
+ {
+	border: none;
+	width:100%;
+	
+}
+
+#detailedAddress{
+	height: 56px;
+}
+
+.spot_update_tbl input[type="text"] {
+	
+	width:100%;
+
+	border-radius: 3px;
+	
+}
+
+
+
+#img_button_searchComName {
+        background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+      }
+      
+#img_button_upload{
+	background: url( "/resources/images/mt-file_upload.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
+      
+#img_button_searchBizRegNum {
+	  background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+#img_button_searchAddr {
+	
+	background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+	
+#company_registration_save_button {
+
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+	
+}
+
+#company_registration_update_button {
+	
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+	
+}
+
+#company_registration_reset_button{
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 120px;
+	
+}
+
+.button_div {
+	
+    
+	text-align: right;
+	padding-top:50px;
+}
+
+
+/** ----------지점 등록, 수정 페이지 끝---------------*/
+
+#save_button {
+	
+    
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+}
+#insertBtn {
+	
+   
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+}
+.button_div {
+	width: var(--max-width);
+    
+	text-align: right;
+	padding-top:50px;
+}
+
+
+
+
+
+
+
+
+

@@ -169,9 +169,9 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="">신규영업</a></li>
-                            <li class="category"><a class="category-link" href="">기업관리</a></li>
-                            <li class="category"><a class="category-link" href="">지점관리</a></li>
+                            <li class="category"><a class="category-link" href="/test/salesList">신규영업</a></li>
+                            <li class="category"><a class="category-link" href="/test/enterpriseList">기업관리</a></li>
+                            <li class="category"><a class="category-link" href="/test/spotList">지점관리</a></li>
                         </ul>
                     </li>
                     <li>

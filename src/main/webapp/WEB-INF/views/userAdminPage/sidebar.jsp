@@ -78,3 +78,5 @@
 				</div>
 			</nav>
 		</div>
+		
+<script src="/resources/js/userAdminPage/sidebar.js"></script>

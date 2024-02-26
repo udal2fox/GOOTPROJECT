@@ -88,7 +88,8 @@ header{
 }
 
 main{
-  min-height: 620px;
+  min-height: calc(100vh - header - footer);
+
 }
 
 .login-form{

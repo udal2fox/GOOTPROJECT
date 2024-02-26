@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../navBar.jsp" %> 
-<link rel="stylesheet" href="/resources/css/employeeSupervisePage/employee_modify.css">
+<link rel="stylesheet" href="/resources/css/company/employeeSupervisePage/employee_modify.css">
 
 <body>
 	

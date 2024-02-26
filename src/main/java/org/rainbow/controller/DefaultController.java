@@ -10,7 +10,7 @@ public class DefaultController {
 	public String testMapping() {
 		// return "테스트시 DefaultController 사용 가능!!";
 
-		 return "/company/employeeSupervisePage/searchEmployeePage";
+		 return "index";
 
 	}
 

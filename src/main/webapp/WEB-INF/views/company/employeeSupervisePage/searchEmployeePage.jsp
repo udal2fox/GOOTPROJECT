@@ -46,7 +46,7 @@
 	#execelBtn{
 		width : 167px;
 		height: 40px;
-		margin-left: 750px;
+		margin-left: 730px;
 		border: none;
 		border-radius: 5px;
 		background-color: #787DFF;
@@ -83,8 +83,9 @@
 		border: none;
 		background-color: skyblue;
 		color: white;
-			margin-right: 65px;
+		margin-right: 65px;
 	}
+
 </style>
 </head>
 <body>
@@ -93,9 +94,12 @@
 	<div id="pull-wrap">
 	<h3> 직원조회 </h3>
 		<div id="searchBar-select">
-			<div id="searchBar">
+			<div id="searchBar" style="position: relative;">
 				<span>키워드</span>
 				<input class="searchBar" type="text" name="" placeholder="이름/팀명/이메일">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px;">
+            		<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        		</svg>
 			</div>
 			<div id="selectDept">
 				<span>조직별 구분</span>

@@ -1,11 +1,7 @@
 package org.rainbow.company.salesStatisticsPage.controller;
 
-import java.util.Locale;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.extern.log4j.Log4j;
 
@@ -13,10 +9,16 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class salesStatisticsPageController {
 
-	@RequestMapping(value = "/salesStatisticsPage", method = RequestMethod.GET)
-	public String test(Locale locale, Model model) {
+	@GetMapping("/salesStatsView")
+	public String salesStatisticsPage() {
+
+		return "/company/salesStatisticsPage/salesStatsView";
+	}
+	
+	@GetMapping("/salesStatsViewCompanyname")
+	public String salesStatsViewCompanyname() {
 		
-		/* return "/salesStatisticsPage/salesStatsView"; */
 		return "/company/salesStatisticsPage/salesStatsViewCompanyname";
 	}
+
 }

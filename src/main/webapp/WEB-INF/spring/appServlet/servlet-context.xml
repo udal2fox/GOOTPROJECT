@@ -23,7 +23,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	<!-- 컨트롤러 사용 시 꼭 추가해주세요!  -->
-	<context:component-scan base-package="org.rainbow.controller"/>
+	<context:component-scan base-package="org.rainbow.controller."/>
 	<context:component-scan base-package="org.rainbow.company.ProductManagement.controller"/>
 	<context:component-scan base-package="org.rainbow.company.orderReceiptPage.controller"/>
 	<context:component-scan base-package="org.rainbow.company.salesStatisticsPage.controller"/>

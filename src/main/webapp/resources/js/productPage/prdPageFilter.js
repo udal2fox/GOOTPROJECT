@@ -63,6 +63,26 @@ document.querySelectorAll("input[type='checkbox']").forEach(function(e){
         let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
+        
+        // 아래 방식을 .map() 써써 줄인것 forEach 써도 무방
+        
+//        // 상품 종류 필터링
+//        let typeFilters = [];
+//        let typeCheckboxes = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked');
+//
+//        for (let i = 0; i < typeCheckboxes.length; i++) {
+//            typeFilters.push(typeCheckboxes[i].value);
+//        }
+//
+//        // 상품 상태 필터링
+//        let statusFilters = [];
+//        let statusCheckboxes = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked');
+//
+//        for (let i = 0; i < statusCheckboxes.length; i++) {
+//            statusFilters.push(statusCheckboxes[i].value);
+//        }
+        
+        
 
         // 전체 체크 상태 확인
         let isAllTypeChecked = document.getElementById('product-typeAll').checked;

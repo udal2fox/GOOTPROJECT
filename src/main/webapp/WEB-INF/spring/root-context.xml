@@ -38,8 +38,8 @@
 	
 	
 	<!-- 상품관리 mapper OR service  -->
-	<mybatis-spring:scan base-package="org.rainbow.ProductManagement.mapper"/>
-	<context:component-scan base-package="org.rainbow.ProductManagement.service"/>
+	<mybatis-spring:scan base-package="org.rainbow.company.ProductManagement.mapper"/>
+	<context:component-scan base-package="org.rainbow.company.ProductManagement.service"/>
 	
 	
 	

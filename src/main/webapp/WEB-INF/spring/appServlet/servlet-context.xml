@@ -26,11 +26,11 @@
 	<context:component-scan base-package="org.rainbow.controller"/>
 	
 	
-	<context:component-scan base-package="org.rainbow.ProductManagement.controller"/>
-	<context:component-scan base-package="org.rainbow.orderReceiptPage.controller"/>
-	<context:component-scan base-package="org.rainbow.salesStatisticsPage.controller"/>
-	<context:component-scan base-package="org.rainbow.settlementManagePage.controller"/>
-	<context:component-scan base-package="org.rainbow.unrecoveredManagement.controller"/>
+	<context:component-scan base-package="org.rainbow.company.ProductManagement.controller"/>
+	<context:component-scan base-package="org.rainbow.company.orderReceiptPage.controller"/>
+	<context:component-scan base-package="org.rainbow.company.salesStatisticsPage.controller"/>
+	<context:component-scan base-package="org.rainbow.company.settlementManagePage.controller"/>
+	<context:component-scan base-package="org.rainbow.company.unrecoveredManagement.controller"/>
 	
 	<!-- multipartResolver  -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">

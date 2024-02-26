@@ -18,6 +18,6 @@ public class unrecoveredManagementController {
 		
 //		return "/unrecoveredManagement/unrecoveredMgtCompany";
 //		return "/unrecoveredManagement/unrecoveredMgtOrder";
-		return "/unrecoveredManagement/unrecoveredMgtBranch";
+		return "/company/unrecoveredManagement/unrecoveredMgtBranch";
 	}
 }

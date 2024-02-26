@@ -17,6 +17,6 @@ public class orderReceiptPageController {
 	public String test(Locale locale, Model model) {
 		
 		/* return "/salesStatisticsPage/salesStatsView"; */
-		return "/orderReceiptPage/orderReceiptIssue";
+		return "/company/orderReceiptPage/orderReceiptIssue";
 	}
 }

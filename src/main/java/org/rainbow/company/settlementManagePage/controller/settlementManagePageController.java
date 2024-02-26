@@ -17,7 +17,7 @@ public class settlementManagePageController {
 	public String test(Locale locale, Model model) {
 		
 //		return "/settlementManagePage/OrderStatement";
-		return "/settlementManagePage/OrderStatementEdit";
+		return "/company/settlementManagePage/OrderStatementEdit";
 		
 	}
 }

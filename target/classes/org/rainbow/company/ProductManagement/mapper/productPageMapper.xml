@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.rainbow.company.ProductManagement.mapper.productPageMapper">
+	<!-- productList   -->
+	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO" parameterType="org.rainbow.domain.Criteria">
+		<![CDATA[
+	        SELECT *
+			FROM (
+			    SELECT rownum rn, p.PRDNO, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
+			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
+			    FROM
+			    (
+			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
+			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
+			        FROM RAIN_Products_tbl
+			        ORDER BY PRDNO ASC
+			     ) p
+			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+			    WHERE rownum <= #{pageNum} *  #{amount}
+			)
+			WHERE rn > (#{pageNum} - 1) *  #{amount} 
+		 ]]>
+	</select>
+	
+	<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->
+	<select id="prdCount" resultType="int">
+	SELECT COUNT(*) FROM RAIN_Products_tbl
+	</select>
+	
+	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
+		<![CDATA[
+	        SELECT *
+			FROM (
+			    SELECT rownum rn, p.prdNo, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
+			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
+			    FROM
+			    (
+			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
+			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
+			        FROM RAIN_Products_tbl
+			        WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%' || #{keyword} || '%'
+			        ORDER BY PRDNO ASC
+			     ) p
+			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+			    WHERE rownum <= #{pageNum} *  #{amount}
+			)
+			WHERE rn > (#{pageNum} - 1) *  #{amount} 
+		 ]]>
+	</select>
+	
+	
+	<!-- 검색된 리스트 카운트    검색  like 좀더 써야할거같음.. 추후수정 -->
+	<select id="getKeywordCount" parameterType="org.rainbow.domain.Criteria" resultType="int">
+	    SELECT count(*) 
+	    FROM RAIN_Products_tbl 
+	    WHERE 
+	    <if test="keyword != null and keyword != ''">
+	        prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%'|| #{keyword} || '%'
+	    </if>
+	</select>
+	
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id= "insertPrdExcel" parameterType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+		insert into RAIN_Products_tbl values
+		(
+			#{prdNo}, #{supsNo}, #{prdSdc} ,#{prdTaxExSt},
+			#{prdMajorCtg} ,#{prdSubCtg} ,#{prdName} ,#{prdCstPri},	
+			#{prdCstSup}, #{prdCstTax}, #{prdSal}, #{prdSalSup} ,#{prdSalTax}, 
+			#{prdMargin}, #{prdSt}, #{prdImg}
+		)
+	</insert>
+	
+	
+	
+	
+</mapper>

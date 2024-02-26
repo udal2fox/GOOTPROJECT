@@ -17,6 +17,6 @@ public class salesStatisticsPageController {
 	public String test(Locale locale, Model model) {
 		
 		/* return "/salesStatisticsPage/salesStatsView"; */
-		return "/salesStatisticsPage/salesStatsViewCompanyname";
+		return "/company/salesStatisticsPage/salesStatsViewCompanyname";
 	}
 }

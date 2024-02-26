@@ -57,7 +57,7 @@ public class ProductPageController
 		
 		log.info("total..." +total);
         
-        return "/productManagement/productManagement";
+        return "/company/productManagement/productManagement";
     }
     
     
@@ -72,7 +72,7 @@ public class ProductPageController
     		cri.setAmount(10);
     	}
     	
-    	return "/productManagement/suppliersManagement";
+    	return "/company/productManagement/suppliersManagement";
     }
     // 일단 기능 상관말고 겟메핑으로이동
     
@@ -80,25 +80,25 @@ public class ProductPageController
     @GetMapping(value = "/moveSuppliersRegist")
     public String moveSuppliersRegist(Model model, Criteria cri) 
     {
-    	return "/productManagement/suppliersRegist";
+    	return "/company/productManagement/suppliersRegist";
     }
     // 공급처 수정 이동
     @GetMapping(value = "/moveSuppliersUpdate")
     public String moveSuppliersUpdate(Model model, Criteria cri) 
     {
-    	return "/productManagement/suppliersUpdate";
+    	return "/company/productManagement/suppliersUpdate";
     }
     // 상품 개별 등록 이동
     @GetMapping(value = "/moveProductReg")
     public String moveProductReg(Model model, Criteria cri) 
     {
-    	return "/productManagement/productReg";
+    	return "/company/productManagement/productReg";
     }
     // 상품 수정 이동
     @GetMapping(value = "/moveProductUpdate")
     public String moveProductUpdate(Model model, Criteria cri) 
     {
-    	return "/productManagement/productUpdate";
+    	return "/company/productManagement/productUpdate";
     }
     
     

@@ -85,6 +85,7 @@
 
             // 필터링 적용
             filterProducts();
+            
         });
 
         // allListCheck 체크박스 이벤트 리스너 등록

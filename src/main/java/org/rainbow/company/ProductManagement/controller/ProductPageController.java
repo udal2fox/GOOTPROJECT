@@ -3,7 +3,10 @@ package org.rainbow.company.ProductManagement.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,13 +52,13 @@ public class ProductPageController
 			cri.setPageNum(1);
 			cri.setAmount(10);
 		}
-	    List<productListVO> list = pService.prdList(cri);
+	    List<productListVO> list = pService.prdList();
 	   
-	    int total = pService.prdCount();
+//	    int total = pService.prdCount();
 	    model.addAttribute("list", list);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-		
-		log.info("total..." +total);
+//		model.addAttribute("pageMaker", new PageDTO(cri, total));
+//		
+//		log.info("total..." +total);
         
         return "/company/productManagement/productManagement";
     }
@@ -189,11 +192,22 @@ public class ProductPageController
     /** 엑셀 데이터 다운로드 처리*/
     @ResponseBody
     @PostMapping("/downloadExcel")
-    public void downloadExcelData(HttpServletResponse response, @RequestBody List<prdDownVO> excelData) throws IOException 
+    public void downloadExcelData(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
     {
-    	System.out.println(excelData);
-        // 엑셀 데이터를 받아서 처리하는 로직을 작성
-        ExcelDownloadUtil.downloadProductList(response, excelData);
+    	System.out.println(checkValues);
+
+    	Map<String, Object> checkValue = new HashMap<>();
+    	checkValue.put("checkValues", checkValues);
+    	
+    	System.out.println(checkValue);
+    	 
+    	List<prdDownVO> downlist = pService.downExcelList(checkValue);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.downloadProductList(response, downlist);
     }
     
  // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------

@@ -6,21 +6,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/resources/css/productManagementPage/productManagement.css">
+    <link rel="stylesheet" href="/resources/css/company/productManagementPage/productManagement.css">
 </head>
 <body>
 <jsp:include page="../../navBar.jsp"/>
 <div class="container-fluid"  style="padding-top: 100px;" align="center">	
-    <h2 style="width: 1500px;" align="left">공급처관리</h2>
+    <h2 style="width: 1500px;" align="left">공급처 관리</h2>
     <div class="" >
    		 <!--background: #eaeaea;
   	  	 border-spacing: 15px 30px;
    		 border-collapse: separate;  -->
-        <table style="background:#eaeaea;">
+        <table class="prdTable" style="background:#eaeaea;">
             <tr>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-top: 25px;padding-right: 215px;">
+                    	<div class="flex-div" style="">
                         <label>공급처 구분</label>
                         <div class="form-check">
                             <input class="form-check-input" checked="checked" type="checkbox" data-filter="product-type" value="전체" id="product-typeAll">
@@ -39,7 +39,7 @@
                 </td>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-top:25px">
+                    	<div class="flex-div" style="">
                         <label>거래 상태</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="전체" id="product-statusAll" checked="checked">
@@ -60,7 +60,7 @@
             <tr>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right:70px;">
+                    	<div class="flex-div" style="">
                         <label>키워드</label>
                         <div class="input-group mb-3" style="width: 320px;margin: 20px;">
                             <span class="input-group-text" id="test">🔍</span>
@@ -75,8 +75,8 @@
                 </td>
                 <td>
                     <div class="section">
-                    	<div class="flex-div" style="padding-right: 255px;">
-                        <label>거래처 일괄 편집</label>
+                    	<div class="flex-div" style="">
+                        <label>상품 일괄 편집</label>
                         <div>
                        		<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
                             <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
@@ -95,41 +95,35 @@
 			        <tr>
                         <th>입점업체코드<button type="button" class="sort-btn" data-column="supsCo">🔽</button></th>
 			            <th>공급처명<button type="button" class="sort-btn" data-column="prdNo">🔽</button></th>
-			            <th>공급처구분</th>
-			            <th>사업자등록번호</th>
-			            <th>공급처주소</th>
-			            <th>연락처</th>
-			            <th>메일주소</th>
+			            <th>공급처구분<button type="button" class="sort-btn" data-column="prdSdc">🔽</button></th>
+			            <th>사업자등록번호<button type="button" class="sort-btn" data-column="prdMajorCtg">🔽</button></th>
+			            <th>공급처주소<button type="button" class="sort-btn" data-column="prdSubCtg">🔽</button></th>
+			            <th>연락처<button type="button" class="sort-btn" data-column="prdName">🔽</button></th>
+			            <th>메일주소<button type="button" class="sort-btn" data-column="prdCstPri">🔽</button></th>
 			            <th>상태<button type="button" class="sort-btn" data-column="prdSal">🔽</button></th>
 			        </tr>
 			    </thead>
 			    <tbody>
-			        <%-- <c:forEach var="ex" items="${list}">
-			            <tr class="product" data-type="${ex.prdMajorCtg}" data-status="${ex.prdSt}">
-			                <td><a href="moveSuppliersUpdate">${ex.supsCo}</a></td>
-			                <td><a href="moveProductUpdate">${ex.prdNo }</a></td>
-			                <td>${ex.prdSdc }</td>
-			                <td>${ex.prdMajorCtg }</td>
-			                <td>${ex.prdSubCtg }</td>
-			                <td>
-			                		<img alt="" src="${ex.prdImg}" align="left">
-			                		<div id="tdTop">${ex.prdName }</div>
-			                </td>
-			                <td><fmt:formatNumber value="${ex.prdCstPri }" pattern="#,###"/></td>
-              				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>
-			                <td>${ex.prdMargin * 100 }%</td>
-			            </tr>
-			        </c:forEach> --%>
+			        <tr>
+			        	<td><a href="moveSuppliersUpdate">수정페이지(이동)</a></td>
+			        	<td>1</td>
+			        	<td>2</td>
+			        	<td>3</td>
+			        	<td>4</td>
+			        	<td>5</td>
+			        	<td>6</td>
+			        	<td>7</td>
+			        </tr>
 			    </tbody>
 			</table>
 			<!-- 나중에 스타일 안바꾸면디진다 -->
-			<div style="width: 1500px;">
+			<div style="width: 1500px;" align="left">
 		        <button type="button" class="btn btn-primary" onclick="location.href='moveProductReg'">신규 등록</button>
 		    </div>
         </form>
     </div>
     <!-- page -->
-    <div class="page-wrap">
+    <div class="page-wrap" align="center" style="width: 1500px;">
         <ul class="page-nation">
             <c:if test="${pageMaker.prev }">
                 <li class="previous">
@@ -151,8 +145,8 @@
 </div>
 
 </body>
-<script type="text/javascript" src="/resources/js/productPage/prdPageFilter.js"></script>
-<script type="text/javascript" src="/resources/js/productPage/prdUpDownLoad.js"></script>
-<script type="text/javascript" src="/resources/js/productPage/prdPageSearch.js"></script>
+<script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script>
+<script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>
+<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
 
 </html>

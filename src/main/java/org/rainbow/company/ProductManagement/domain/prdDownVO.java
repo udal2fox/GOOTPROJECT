@@ -1,5 +1,7 @@
 package org.rainbow.company.ProductManagement.domain;
 
+import java.util.List;
+
 import com.alibaba.excel.annotation.ExcelProperty;
 
 import lombok.AllArgsConstructor;
@@ -38,10 +40,13 @@ public class prdDownVO
 	private String prdSal; 
 	
 	@ExcelProperty("마진율")
-	private String prdMargin; 
+	private double prdMargin; 
 	
 	@ExcelProperty("이미지")
 	private String prdImg; 
+	
+	
+	
 	
 	/*
      * @ExcelProperty("컬럼명")

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/productManagementPage/prd.css">
+<link rel="stylesheet" href="/resources/css/company/productManagementPage/prd.css">
 </head>
 <body>
 	<jsp:include page="../../navBar.jsp"/>

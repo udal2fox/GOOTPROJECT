@@ -28,9 +28,9 @@
                 </a>
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">소개페이지</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">서비스신청</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">자주하는질문</a></li>
+                    <li class="nav-item"><a href="/landingPage/main" class="nav-link">소개페이지</a></li>
+                    <li class="nav-item"><a href="/landingPage/application" class="nav-link">서비스신청</a></li>
+                    <li class="nav-item"><a href="/landingPage/FAQ" class="nav-link">자주하는질문</a></li>
                 </ul>
             </div>
         </div>
@@ -56,7 +56,7 @@
                     <div class="sub-span"><span>간편한 임직원 생일 복지 서비스를 이용해 보세요.</span></div>
 
                     <div class="form-floating">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
                         <label for="floatingInput">
                             <ion-icon name="mail"></ion-icon>
                             &ensp; 이메일 주소

@@ -56,14 +56,14 @@
                     <div class="sub-span"><span>간편한 임직원 생일 복지 서비스를 이용해 보세요.</span></div>
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="name@example.com">
                         <label for="floatingInput">
                             <ion-icon name="mail"></ion-icon>
                             &ensp; 이메일 주소
                         </label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="floatingPassword" name="userPw" placeholder="Password">
                         <label for="floatingPassword">
                             <ion-icon name="key"></ion-icon>
                             &ensp; 비밀번호
@@ -76,7 +76,7 @@
                             아이디 기억하기
                         </label>
                     </div>
-                    <button class="btn w-100 py-2" type="submit">로그인</button>
+                    <button class="btn w-100 py-2" type="button" id="login_btn">로그인</button>
                 </form>
             </div>
         </section>
@@ -84,14 +84,15 @@
 
     <footer class="footer py-3 my-4 bg-body-tertiary border-top">
         <div class="container">
-            <span class="text-body-secondary">&copy; Rainbow. Inc</p>
+            <span class="text-body-secondary">&copy; Rainbow. Inc</span>
         </div>
     </footer>
 
     <!-- IONICONS -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
+    <!-- script -->
+    <script src="/resources/js/userAdminPage/userLogin.js"></script>
 </body>
 
 </html>

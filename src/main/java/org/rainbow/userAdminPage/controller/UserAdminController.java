@@ -1,18 +1,38 @@
 package org.rainbow.userAdminPage.controller;
 
+import org.springframework.http.MediaType;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.*;
 
 import lombok.extern.log4j.Log4j;
+
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("/userAdminPage/*")
 @Log4j
 public class UserAdminController {
 
+	@ResponseBody
+	@PostMapping(value = "/login",consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String login(){
+
+		return null;
+	}
+
+	@GetMapping("/userLogin")
+	public String userLogin(){
+		return "userAdminPage/userLogin";
+	}
+	@GetMapping("/sidebar")
+	public String sidebar(){
+		return "userAdminPage/sidebar";
+	}
+
 	@GetMapping("/dashboard")
-	public String sidebar() {
+	public String dashboard() {
 		return "/userAdminPage/dashboard";
 	}
 

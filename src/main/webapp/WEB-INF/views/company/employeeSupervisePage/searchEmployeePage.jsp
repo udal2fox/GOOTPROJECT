@@ -1,96 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-
-	div{
-		display: block;
-	}
-	pull-wrap{
-		width : 100%;
-		height: auto;
-	}
-	h3{	
-		margin-left: 30px;
-		text-align: left;
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-	#searchBar{
-		display : inline-block;
-		margin-left: 80px;
-	}
-	#selectDept{
-		display : inline-block;
-		margin-left: 100px;
-	}
-	span{
-		margin-right: 20px;
-	}
-	.searchBar{
-		width : 210px;
-		height: 40px;
-		border: 1px solid gray;
-		border-radius: 5px;
-	}
-	.dept-sb{
-		width: 150px;
-		height: 40px;
-		border: 1px solid gray;
-		border-radius: 5px;
-	}
-	#execelBtn{
-		width : 167px;
-		height: 40px;
-		margin-left: 730px;
-		border: none;
-		border-radius: 5px;
-		background-color: #787DFF;
-		color: white;
-	}
-	#searchResult_table{
-		width: 100%;
-		height: 500px;
-	}
-	#searchResult{
-		margin : 0 auto;
-		width: 90%;
-		height: auto;
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	#searchResult th, #searchResult td {
- 	 	border: 1px solid black;
-  		padding: 8px;
-  		text-align: center;
-  		width: 112px;
-  		height: 30px; 
-	}
-	.insertEmployeeBtn{
-		width: 100%;
-		height: 80px;
-		padding : 20px;
-		text-align: right;
-	
-	}
-	#insertBtn{
-		width:100px;
-		height: 40px;
-		border: none;
-		background-color: skyblue;
-		color: white;
-		margin-right: 65px;
-	}
-
-</style>
-</head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../../navBar.jsp" %> 
 <body>
 
-	<jsp:include page="../../navBar.jsp"></jsp:include>
 	<div id="pull-wrap">
 	<h3> 직원조회 </h3>
 		<div id="searchBar-select">
@@ -116,7 +29,7 @@
 		
 		<div id="searchResult_table">
 			<table id="searchResult">
-				<tr>
+				<tr id="table_header">
 					<td>사번</td>
 					<td>이름</td>
 					<td>이메일</td>
@@ -129,8 +42,7 @@
 					<td>계정상태</td>
 				</tr>
 				<tr>
-					<td>1</td>
-        			<td>001</td>
+					<td><a href="/employee_modify">001</a></td>
         			<td>홍길동</td>
        		 		<td>hong@example.com</td>
         			<td>010-1234-5678</td>
@@ -138,6 +50,7 @@
         			<td>대리</td>
         			<td>재직중</td>
         			<td>2023-01-01</td>
+        			<td> - </td>  <!-- null 일 시 기본값  -  -->
         			<td>활성</td>
 				</tr>
 				<tr>
@@ -156,10 +69,30 @@
 				<div class="insertEmployeeBtn">
 					<button id="insertBtn" name="insertEmployee">신규등록</button>
 				</div>
-			<div>
-				<!-- 나중 cri 버튼 영역 -->
-			</div>
+				
+				<!-- page -->
+				<div class="page-wrap">
+					<ul class="page-nation">
+						<c:if test="${pageMaker.prev }">
+							<li class="previous">
+								<a href="${pageMaker.startPage-1 }"> &lt; </a>
+							</li>
+						</c:if>
+							<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
+						<li>
+							<a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }"> ${num } </a>
+						</li>
+							</c:forEach>
+								<c:if test="${pageMaker.next }">
+						<li>
+							<a href="${pageMaker.endPage + 1 }"> &gt; </a>
+						</li>
+				</c:if>
+			</ul>
+		</div>
 		</div>
 	</div>	
+	
+	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage.js"></script>
 </body>
 </html>

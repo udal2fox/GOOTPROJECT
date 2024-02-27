@@ -33,7 +33,9 @@
 	
 	
 	
-	
+	<!-- 사원 테이블 mapper OR service -->
+	<mybatis-spring:scan base-package="org.rainbow.company.employeeSupervisePage.mapper"/>
+	<context:component-scan base-package="org.rainbow.company.employeeSupervisePage.service"/>
 	
 	
 	

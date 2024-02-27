@@ -14,9 +14,9 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 	      <!-- log4jdbc --> 
 	      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-	      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
-	      <property name="username" value="scott"></property>
-	      <property name="password" value="tiger"></property>
+	      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@172.16.1.5:1521:XE"></property>
+	      <property name="username" value="rainbow"></property>
+	      <property name="password" value="rainbow"></property>
 	</bean>
 	
 	<!-- HikariCP configuration -->
@@ -33,7 +33,9 @@
 	
 	
 	
-	
+	<!-- 사원 테이블 mapper OR service -->
+	<mybatis-spring:scan base-package="org.rainbow.company.employeeSupervisePage.mapper"/>
+	<context:component-scan base-package="org.rainbow.company.employeeSupervisePage.service"/>
 	
 	
 	

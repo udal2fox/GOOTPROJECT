@@ -14,14 +14,8 @@ public interface productPageService
 	/* public List<productListVO> prdList(Criteria cri); */
 	public List<productListVO> prdList();
 	
-	/** 상품 리스트 갯수 카운팅      version 2024-02-21 */
-	public int prdCount();
-	
 	/** 검색 상품 리스트 조회      version 2024-02-21 */
-	public List<productListVO> getSearch(Criteria cri);
-	
-	/** 검색된 상품 리스트 갯수 카운팅      version 2024-02-21 */
-	public int getKeywordCount(Criteria cri);
+	public List<productListVO> getSearch(String keyword);
 	
 	/** 엑셀 파일 업로드 version 2024-02-21 */
 	public int insertPrdExcel(prdInputVO vo);

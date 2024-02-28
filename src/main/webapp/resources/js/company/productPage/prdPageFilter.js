@@ -4,7 +4,10 @@ let pageNum = 1; // 현재 페이지 번호
 let products = document.querySelectorAll('.product'); // 전체 상품 리스트
 let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
 
-(function filter() {
+filter();
+
+function filter() 
+{
 	
 	console.log("필터시작");
 	// allCheck 체크박스 이벤트 리스너 등록
@@ -118,7 +121,10 @@ let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
     
     // 페이징 시작
     console.log("페이징 시작");
-    function drawPagination(startPage, endPage) {
+    function drawPagination(startPage, endPage)
+    {
+    	console.log("drawPagination 실행");
+    	
         const paginationElement = document.getElementById('pagination');
         paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
 
@@ -184,6 +190,7 @@ let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
     
     function goToPage(page) 
     {
+    	console.log("gotoPage 실행");
         pageNum = page;
         
         // 클릭한 버튼에만 'active' 클래스 추가
@@ -232,7 +239,56 @@ let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
     drawPagination(1, endPage);
     goToPage(1);
     
-})();
+  //서치 기능
+
+  //키워드와 현재 페이지를 저장하는 전역 변수
+  let currentKeyword = '';
+
+  //검색 버튼 클릭 이벤트 핸들러
+  document.querySelector('#search').addEventListener('click', function() {
+   currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
+   fetchSearchResults(currentKeyword); // 검색 결과 요청
+  });
+
+
+  //검색 결과 요청 함수
+  function fetchSearchResults(keyword) {
+   fetch('/searchProduct?keyword=' + keyword)
+       .then(response => response.json())
+       .then(data => {
+           console.log(data);
+           let list = data;
+           let msg = '';
+           list.forEach(list => {
+               msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+' style="display:table-row;">'+
+  					   '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
+  					   '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
+  					   '<td>'+list.prdSdc+'</td>'+
+  					   '<td>'+list.prdMajorCtg+'</td>'+
+  					   '<td>'+list.prdSubCtg+'</td>'+
+  					   '<td>'+
+  					   		'<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
+  					   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
+  				       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
+  					   '<td>'+(list.prdMargin * 100 )+'%</td>'+
+  		           '</tr>';
+               
+           })
+           document.querySelector('#table-prd tbody').innerHTML = msg;
+           filter();
+           drawPagination(1, endPage);
+           goToPage(1);
+           
+           
+       })
+       .catch(error => console.error('Error:', error));
+  }
+    
+};
+
+
+
+
 
 // 정렬 버튼 기능 초기 정렬 방식은 오름차순으로 설정
 let sortDir = {};
@@ -288,3 +344,5 @@ function getCellValue(row, column) {
 document.querySelector('#reset').addEventListener('click', function () {
     location.reload();
 });
+
+

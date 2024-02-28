@@ -24,25 +24,11 @@ public class productPageServiceImpl implements productPageService
 	public List<productListVO> prdList() {
 		return pMapper.prdList();
 	}
-//	@Override
-//	public List<productListVO> prdList(Criteria cri) {
-//		log.info("prdList..."+cri);
-//		return pMapper.prdList(cri);
-//	}
 
 	@Override
-	public int prdCount() {
-		return pMapper.prdCount();
-	}
-
-	@Override
-	public List<productListVO> getSearch(Criteria cri) {
-		return pMapper.getSearch(cri);
-	}
-
-	@Override
-	public int getKeywordCount(Criteria cri) {
-		return pMapper.getKeywordCount(cri);
+	public List<productListVO> getSearch(String keyword) 
+	{
+		return pMapper.getSearch(keyword);
 	}
 
 	@Override
@@ -55,6 +41,10 @@ public class productPageServiceImpl implements productPageService
 	public List<prdDownVO> downExcelList(Map<String, Object> checkValue) {
 		return pMapper.downExcelList(checkValue);
 	}
+
+
+
+	
 
 	
 

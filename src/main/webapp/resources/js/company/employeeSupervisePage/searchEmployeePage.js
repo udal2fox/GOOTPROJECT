@@ -23,14 +23,24 @@ document.querySelectorAll('button').forEach( btn => {
 })
 
 function insert(){
-	/*let eno = f.eno.value;*/
 	
 	location.href = '/employee_insert';
 }
+
 // 페이징	
 //페이지 버튼 클릭 이벤트
-/*
-document.querySelectorAll(".page-nation li a").forEach( aEle => {
+
+document.querySelectorAll('tbody a').forEach(a => {
+	a.addEventListener('click', function(e){
+		e.preventDefault();
+		
+		let eno = a.getAttribute('href');
+		
+		location.href = '/employee_modify?eno=' + eno;
+	});
+});
+
+/*document.querySelectorAll(".page-nation li a").forEach( aEle => {
 	aEle.addEventListener('click', function(e){
 		e.preventDefault();
 		
@@ -41,7 +51,6 @@ document.querySelectorAll(".page-nation li a").forEach( aEle => {
 		
 		
 		let sendData = 'pageNum=' + pageNum + '&amount=' + amount;
-		location.href = '/board/list?' + sendData;
+		location.href = '/searchEmployee?' + sendData;
 	});
-});
-*/
+});*/

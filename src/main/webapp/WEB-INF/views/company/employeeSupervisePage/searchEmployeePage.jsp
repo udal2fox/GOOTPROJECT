@@ -26,45 +26,39 @@
 			<button id="execelBtn"> 엑셀로 내려받기 </button>
 		</div>
 		<hr style="border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;">
-		
+
 		<div id="searchResult_table">
 			<table id="searchResult">
-				<tr id="table_header">
-					<td>사번</td>
-					<td>이름</td>
-					<td>이메일</td>
-					<td>연락처</td>
-					<td>부서</td>
-					<td>직급</td>
-					<td>재직상태</td>
-					<td>입사일</td>
-					<td>퇴사일</td>
-					<td>계정상태</td>
-				</tr>
-				<tr>
-					<td><a href="/employee_modify">001</a></td>
-        			<td>홍길동</td>
-       		 		<td>hong@example.com</td>
-        			<td>010-1234-5678</td>
-        			<td>인사팀</td>
-        			<td>대리</td>
-        			<td>재직중</td>
-        			<td>2023-01-01</td>
-        			<td> - </td>  <!-- null 일 시 기본값  -  -->
-        			<td>활성</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+				<thead>
+					<tr id="table_header">
+						<th>사번</th>
+						<th>이름</th>
+						<th>이메일</th>
+						<th>연락처</th>
+						<th>부서</th>
+						<th>직급</th>
+						<th>재직상태</th>
+						<th>입사일</th>
+						<th>퇴사일</th>
+						<th>계정상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td><a href="${vo.eno }">${vo.eno }</a></td>
+							<td>${vo.eName }</td>
+							<td>${vo.email }</td>
+							<td>${vo.ePhone }</td>
+							<td>${vo.dName }</td>
+							<td>${vo.job }</td>
+							<td>${empty vo.endDt ? '재직 중' : '퇴사' }</td>
+							<td>${vo.hireDt }</td>
+							<td>${empty vo.endDt ? '-' : vo.endDt }</td>
+							<td>${vo.idStatus }</td>	
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 				<div class="insertEmployeeBtn">
 					<button id="insertBtn" name="insertEmployee">신규등록</button>

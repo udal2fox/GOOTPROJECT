@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.rainbow.company.employeeSupervisePage.mapper.searchEmployeeMapper">
+
+	<!-- 전체 직원 리스트 -->
+	<select id="getList" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO">
+		<![CDATA[
+			SELECT eno, eName, email, ePhone, dName, job, hireDt, endDt, idStatus
+			FROM (
+    			SELECT rownum rn, e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.hireDt, e.endDt, e.idStatus
+    			FROM RAIN_EMP_TABLE e
+    			JOIN RAIN_DEPT_TABLE d ON e.deptNo = d.deptNo
+    		WHERE rownum <= #{pageNum} * #{amount}
+    			ORDER BY e.eno DESC) 
+			WHERE rn > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 전체 직원 수 카운트 -->
+	<select id="getTotal" resultType="int">
+		select count(*) from RAIN_EMP_TABLE
+	</select> 
+
+</mapper>

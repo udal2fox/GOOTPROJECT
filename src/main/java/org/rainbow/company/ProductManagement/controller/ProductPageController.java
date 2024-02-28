@@ -112,38 +112,19 @@ public class ProductPageController
     // 상품 조회리스트 검색 기능
     @ResponseBody
     @GetMapping(value = "/searchProduct", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<Object>> goSeach(@RequestParam("keyword") String keyword, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "amount", defaultValue = "10") int amount, Criteria cri)
+    public ResponseEntity<List<productListVO>> goSeach(@RequestParam("keyword") String keyword, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "amount", defaultValue = "10") int amount, Criteria cri)
     {
         log.info("keyword...");
-        // pageNum과 amount가 0일 때 기본값 설정
-        if (pageNum <= 0) {
-            pageNum = 1;
-        }
-        if (amount <= 0) {
-            amount = 10;
-        }
-
-        // 키워드 설정
-        cri.setKeyword(keyword);
-        cri.setAmount(amount);
-        cri.setPageNum(pageNum);
         
-        // 해야할것 키워드 바탕으로 행의 갯수 반환받기
-        int total = pService.getKeywordCount(cri);
-        log.info(total);
         
-        List<productListVO> list = pService.getSearch(cri);
+        List<productListVO> list = pService.getSearch(keyword);
         log.info(list);
         
-        PageDTO ptdo = new PageDTO(cri, total);
 
         // ResponseEntity에 list와 ptdo를 함께 담아 반환
-        List<Object> responseList = new ArrayList<>();
-        responseList.add(list);
-        responseList.add(ptdo);
 
         // 리스트 비동기로 뿌려주기
-        return new ResponseEntity<List<Object>>(responseList, HttpStatus.OK);
+        return new ResponseEntity<List<productListVO>>(list, HttpStatus.OK);
     }
     
     // 엑셀 파일 업로드 처리
@@ -197,11 +178,12 @@ public class ProductPageController
     	System.out.println(checkValues);
 
     	Map<String, Object> checkValue = new HashMap<>();
+    	
     	checkValue.put("checkValues", checkValues);
     	
     	System.out.println(checkValue);
     	 
-    	List<prdDownVO> downlist = pService.downExcelList(checkValue);
+    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함?
     	
     	System.out.println(downlist);
     	

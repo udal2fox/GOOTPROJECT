@@ -59,12 +59,8 @@ public class rain_EmpVO {
 	private String reviewRating;
 	
 	// 프로필 사진
-<<<<<<< HEAD
 	private String profilePicture;
-=======
-	//private CLOB profilePicture;
->>>>>>> 75d3555a9eb8b678fdbd9c9deca64713651b5f71
-	
+
 	// 재직 증명서
 	private String empCertificate;
 	

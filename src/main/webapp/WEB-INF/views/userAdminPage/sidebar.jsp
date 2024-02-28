@@ -22,6 +22,7 @@
 	src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script src="/resources/js/userAdminPage/sidebar.js"></script>
 <title>sidebar</title>
 </head>
 
@@ -61,7 +62,8 @@
 		<main>
 		<div class="mainContainer d-flex flex-column">
 			<header class="p-2 text-end">
-				<span class="px-2">{기업명} / {지점명}</span> <a href="javascript:void(0)" id="userEdit"><ion-icon name="person"></ion-icon> <span>{userName}님 반갑습니다.</span></a>
+				<!-- todo DB연결되면 정보 가져오기 -->
+				<span class="px-2" id="companyInfo"></span> <a href="javascript:void(0)" id="userEdit"><ion-icon name="person"></ion-icon> <span id="userName">${id}</span>님 반갑습니다.</a>
 			</header>
 
 			<nav class="p-2">
@@ -78,5 +80,4 @@
 				</div>
 			</nav>
 		</div>
-		
-<script src="/resources/js/userAdminPage/sidebar.js"></script>
+

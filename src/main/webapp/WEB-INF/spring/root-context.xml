@@ -9,51 +9,64 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+
 	      <!-- log4jdbc --> 
 	      <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+<<<<<<< HEAD
 	      <!-- <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@172.16.1.5:1521:XE"></property> -->
 	      <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
 	     <!--  <property name="username" value="rainbow"></property>
 	      <property name="password" value="rainbow"></property> -->
 	      <property name="username" value="SCOTT"></property>
+=======
+	      <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow" />
+	      <property name="username" value="root"></property>
+>>>>>>> 75d3555a9eb8b678fdbd9c9deca64713651b5f71
 	      <property name="password" value="tiger"></property>
 	</bean>
-	
+
 	<!-- HikariCP configuration -->
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
-	      <constructor-arg ref="hikariConfig"></constructor-arg>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	      <property name="dataSource" ref="dataSource"></property>
+
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
+
 	<!-- @Autowired 사용할 매퍼 서비스 꼭등록할것!! -->
-	
-	
-	
-	
+
+
+
+
 	<!-- 사원 테이블 mapper OR service -->
-	<mybatis-spring:scan base-package="org.rainbow.company.employeeSupervisePage.mapper"/>
-	<context:component-scan base-package="org.rainbow.company.employeeSupervisePage.service"/>
-	
-	
-	
-	<!-- 상품관리 mapper OR service  -->
-	<mybatis-spring:scan base-package="org.rainbow.company.ProductManagement.mapper"/>
-	<context:component-scan base-package="org.rainbow.company.ProductManagement.service"/>
-	
-	
-	
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.employeeSupervisePage.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.employeeSupervisePage.service" />
+
+
+
+	<!-- 상품관리 mapper OR service -->
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.ProductManagement.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.ProductManagement.service" />
+
+
+
 	<!-- 트랜젝션 및 aop 관련 항목들 -->
-    <bean id = "transactionManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
-       <property name="dataSource" ref = "dataSource"/>
-    </bean>
-    <tx:annotation-driven/>
-    
-    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven />
+
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 </beans>

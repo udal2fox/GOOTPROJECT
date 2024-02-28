@@ -38,24 +38,13 @@
 	</select>
 	
 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
-		<![CDATA[
+		
 	        SELECT *
-			FROM (
-			    SELECT rownum rn, p.prdNo, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
-			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
-			    FROM
-			    (
-			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
-			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
-			        FROM RAIN_Products_tbl
-			        WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%' || #{keyword} || '%'
-			        ORDER BY PRDNO ASC
-			     ) p
-			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
-			    WHERE rownum <= #{pageNum} *  #{amount}
-			)
-			WHERE rn > (#{pageNum} - 1) *  #{amount} 
-		 ]]>
+			FROM RAIN_Products_tbl
+		    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+		    WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE '%' || #{keyword} || '%' OR prdName LIKE '%' || #{keyword} || '%'
+		    ORDER BY PRDNO ASC
+		
 	</select>
 	
 	
@@ -79,15 +68,15 @@
 	</insert>
 	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
 	<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
-	    SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
-	    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
-	    WHERE s.supsNo = p.supsNo
-	    AND p.prdMajorCtg IN
+	        SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+		    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+		    WHERE s.supsNo = p.supsNo
+		    AND p.prdMajorCtg IN
 	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
 	        #{item}
 	    </foreach>
 	    AND p.prdSt IN
-	    <foreach item="item" collection="checkValues">
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
 	        #{item}
 	    </foreach>
 	</select>
@@ -99,6 +88,12 @@
 		지금 쿼리 같은경우 
 		<foreach item="item" collection="checkValues"> 이런식으로
 		기본값을 넣어도 동작하는데 문제없는것 같다.
+		
+		SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+		FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+		WHERE s.supsNo = p.supsNo
+		AND p.prdMajorCtg IN ('value1', 'value2', 'value3')
+		AND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 
 	-->
 
 	

@@ -38,24 +38,13 @@
 	</select>
 	
 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
-		<![CDATA[
+		
 	        SELECT *
-			FROM (
-			    SELECT rownum rn, p.prdNo, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
-			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
-			    FROM
-			    (
-			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
-			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
-			        FROM RAIN_Products_tbl
-			        WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%' || #{keyword} || '%'
-			        ORDER BY PRDNO ASC
-			     ) p
-			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
-			    WHERE rownum <= #{pageNum} *  #{amount}
-			)
-			WHERE rn > (#{pageNum} - 1) *  #{amount} 
-		 ]]>
+			FROM RAIN_Products_tbl
+		    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+		    WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE '%' || #{keyword} || '%' OR prdName LIKE '%' || #{keyword} || '%'
+		    ORDER BY PRDNO ASC
+		
 	</select>
 	
 	

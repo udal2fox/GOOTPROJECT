@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import oracle.sql.CLOB;
+//import oracle.sql.CLOB;
 
 @Data
 @AllArgsConstructor
@@ -55,7 +55,7 @@ public class rain_EmpVO {
 	private String reviewRating;
 	
 	// 프로필 사진
-	private CLOB profilePicture;
+	//private CLOB profilePicture;
 	
 	// 재직 증명서
 	private String empCertificate;

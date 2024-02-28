@@ -24,12 +24,5 @@ public class salesVO {
 	
 	private Date cnslReqDt, cnslRespDt;
 
-	
-	
-
-
-	
-	
-
 
 }

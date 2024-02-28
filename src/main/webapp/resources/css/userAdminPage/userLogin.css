@@ -88,7 +88,9 @@ header{
 }
 
 main{
-  min-height: calc(100vh - header - footer);
+  padding-top: 75px;
+  padding-bottom: 75px;
+  min-height: 600px;
 
 }
 

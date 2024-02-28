@@ -29,7 +29,7 @@ public class cnslHisMapperTest {
 		vo.setCnslHisCnt1("ㅎㅇ");
 		vo.setCnslNo(1);
 		vo.setCnslHisNo(11);
-		vo.setCnslHisSaleSt("왜");
+		
 		
 		int result = cnslHisMapper.insertCnslHis(vo);
 		log.info("영업 내용"+result); 

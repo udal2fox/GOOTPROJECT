@@ -8,3 +8,20 @@ linkEle.type = 'text/css';
 linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);*/
+
+document.querySelectorAll('input[type="button"]').forEach( btn => {
+	btn.addEventListener( 'click', (event) => {
+		event.preventDefault(); 
+		
+		let type = btn.id;
+		
+		if( type === 'closeBtn') close();
+		else if ( type === 'saveBtn'){
+			
+		}
+	})
+})
+
+function close(){
+	location.href = '/searchEmployee';
+}

@@ -14,7 +14,7 @@
 						<table id="top-table">
 							<tr>
 								<th> 이름 </th>
-								<td><input class="input1" type="text" name="eName"></td>
+								<td><input class="input1" type="text" name="eName" readonly></td>
 								<th> 부서 </th>
 								<td><input class="input2" type="text" name="dName"></td>
 								<th> 상세주소 </th>
@@ -54,7 +54,7 @@
 							</tr>
 							<tr>
 								<th> 생년월일 </th>
-								<td><input class="input1" type="text" name="email"></td>
+								<td><input class="input1" type="text" name="email" readonly></td>
 								<th> 연봉 </th>
 								<td><input class="input2" type="number" name="sal"></td>
 								<th></th>
@@ -67,7 +67,7 @@
 					<table id="bottom-table">
 						<tr>
 							<th>입사일</th>
-							<td><input class="input5" type="text" name="hireDt"></td>
+							<td><input class="input5" type="text" name="hireDt" readonly></td>
 							<th>퇴사일</th>
 							<td><input class="input5" type="text" name="endDt"></td>
 							<th>계정상태</th>
@@ -75,12 +75,12 @@
 						</tr>
 					</table>
 				</div>
-			<div class="button-container">
-				<input id="saveBtn" type="button" name="save" value="저장">
-				<input id="closeBtn" type="button" name="close" value="닫기">
+					<div class="button-container">
+						<input id="saveBtn" type="button" name="save" value="저장">
+						<input id="closeBtn" type="button" name="close" value="닫기">
+					</div>
+				</form>
 			</div>
-		</form>
-	</div>
 	
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_modify.js"></script>
 </body>

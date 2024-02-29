@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSales.jsp</title>
@@ -12,7 +13,7 @@
 </head>
 <body>
 	<div class="navBar">
-		<jsp:include page="../../../navBar.jsp"/>
+		<jsp:include page="./../../../navBar.jsp"/>
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire" >
@@ -21,6 +22,7 @@
 	</div>
 
 	<div class="searchBar_div">
+	<form method="get" >
 		<table class="searchBar_tbl">
 			<thead>
 				<tr>
@@ -32,6 +34,7 @@
 				<th>영업 상태</th>
 				<td>
 					<select name="businessStatus" id="searchBar_selectBizSt">
+								<option value="선택">==선택==</option>
 								<option value="최초 인입">최초 인입</option>
 								<option value="응대 완료">응대 완료</option>
 								<option value="견적 발송 완료">견적 발송 완료</option>
@@ -59,9 +62,12 @@
 				</tr>
 			</thead>
 		</table>
+		
 			<input type="button" id="searchBar_search_btn" value="검색">
 			<input type="button" id="searchBar_reset_btn" value="초기화">
+		</form>
 	</div>
+	
 	<div class="download_to_excel_btn_div">
 		<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
 	</div>
@@ -84,13 +90,48 @@
             </tr>
          </thead>
          <tbody>
-            
+            <c:forEach var="vo" items="${salesVO }">
+               <tr>
+                  <td><a href="${vo.cnslNo }">${vo.cnslNo }</a></td>
+                  <td>${vo.cnslReqDt }</td>
+                  <td>${vo.cnslCoName }</td>
+                  <td>${vo.cnslName }</td>
+                  <td>${vo.cnslCt }</td>
+                  <td>${vo.cnslEmail }</td>
+                  <td>${vo.cnslBdgt }</td>
+                  <td>${vo.cnslSaleSt }</td>
+				  <td>아직 구현 X</td>
+               </tr>
+            </c:forEach>
          </tbody>
       </table>
+</div>
+<!-- page -->
+		<div class="page-wrap">
+			<ul class="page-nation">
+				<c:if test="${pageMaker.prev }"> <!-- prev 라는 현재 페이지가 있으면 (이전 페이지로 이동하는 태그 생성)-->
+					<li class="previous">
+						<a href="${pageMaker.startPage-1 }">&lt;</a>
+					</li>
+				</c:if>
+				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
+					<li>
+						<a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }">${num }</a>
+						<!-- 여기서 href 라는 속성은 어디가기 위한 속성이 아니라 값을 가지고 오기위한 것임 -->
+					</li>
+				</c:forEach>
+				<c:if test="${pageMaker.next }"> <!-- next 라는 다음 페이지가 있으면 (다음 페이지로 이동하는 태그 생성)-->
+					<li>
+						<a href="${pageMaker.endPage + 1 }">&gt;</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
 
 
 </div>
 </div>
-</div>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
+
 </body>
 </html>

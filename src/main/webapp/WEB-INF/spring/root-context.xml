@@ -47,6 +47,11 @@
 		base-package="org.rainbow.company.ProductManagement.mapper" />
 	<context:component-scan
 		base-package="org.rainbow.company.ProductManagement.service" />
+		
+		
+	<!-- @Autowired 사용할 매퍼 서비스 신정우 -->
+	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>
+	<context:component-scan base-package="org.rainbow.company.custMgmt.service"/>
 
 
 

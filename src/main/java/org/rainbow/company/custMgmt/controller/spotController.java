@@ -10,7 +10,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 
-@RequestMapping("/test/*")
+
 public class spotController {
 	
 	

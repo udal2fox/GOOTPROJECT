@@ -84,7 +84,7 @@
                <th>직원 리스트</th>
             </tr>
             <tr>
-            	<td>test</td>
+            	 <td><a href="/spotUpdate">1</a></td>
             	<td>test</td>
             	<td>test</td>
             	<td>test</td>
@@ -259,5 +259,6 @@
 </div>
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/custMgmtModal.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>
 </html>

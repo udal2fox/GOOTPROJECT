@@ -116,6 +116,16 @@
                <th>연락처</th>
                <th>업태</th>
             </tr>
+                <tr>
+            	<td><a href="/enterpriseUpdate">test</a></td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            </tr>
          </thead>
          <tbody>
             
@@ -130,5 +140,7 @@
 	</div>
 </div>
 </div>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/enterpriseMgmt.js"></script>
+
 </body>
 </html>

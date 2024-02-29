@@ -9,33 +9,34 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class rain_employeeDTO {
-    
-	//사원 번호
-	private int eno;
+public class get_employeeDTO {
 	
-	// 사원 이름
+	
 	private String eName;
 	
-	// 사원 이메일
-	private String email; 
+	private String email;
 	
-	// 사원 연락처
-	private String ePhone; 
+	private String ePhone;
 	
-	// 부서명
-	private String dName;
+	private String identyNum;
 	
-	// 사원 직급
+	private String dName; 
+	
 	private String job;
 	
-	// 사원 입사일
+	private String workType;
+	
+	private int sal;
+	
+	private String eAddr;
+	
+	private String eBank;
+	
+	private String salAccount;
+	
 	private Date hireDt; 
 	
-	// 사원 퇴사일
 	private Date endDt;
 	
-	// 계정 상태
 	private String idStatus;
 }
-

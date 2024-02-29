@@ -112,7 +112,7 @@ public class ProductPageController
     // 상품 조회리스트 검색 기능
     @ResponseBody
     @GetMapping(value = "/searchProduct", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<productListVO>> goSeach(@RequestParam("keyword") String keyword, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "amount", defaultValue = "10") int amount, Criteria cri)
+    public ResponseEntity<List<productListVO>> goSeach(@RequestParam("keyword") String keyword)
     {
         log.info("keyword...");
         

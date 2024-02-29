@@ -25,17 +25,17 @@
 	<tr>
 						<td class="tbl_subtitle">기업명</td>
 						<td>
-							<input type="text" name="cnslCoName" value="${SalesVO.cnslCoName }" readonly>
+							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">상담 신청일</td>
 						<td>
-							<input type="text" name="cnslReqDt" value="${SalesVO.cnslReqDt }" readonly>
+							<input type="text" name="csDate" value="${consultVO.csDate }" readonly>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">지역</td>
 						<td>
-							<input type="text" name="cnslArea" value="${SalesVO.cnslArea }" readonly>
+							<input type="text" name="csArea" value="${consultVO.csArea }" readonly>
 						</td>
 						<td rowspan="3"></td>
 					</tr>
@@ -43,17 +43,17 @@
 	<tr>
 						<td class="tbl_subtitle">담당자</td>
 						<td>
-							<input type="text" name="cnslName" value="${SalesVO.cnslName }" readonly>
+							<input type="text" name="csName" value="${consultVO.csName }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">연락처</td>
 						<td>
-							<input type="text" name="cnslCt" value="${SalesVO.cnslCt }" readonly>
+							<input type="text" name="csContact" value="${consultVO.csContact }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">이메일</td>
 						<td>
-							<input type="email" name="cnslEmail" value="${SalesVO.cnslEmail }" readonly>
+							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly>
 						</td>
 						
 						
@@ -61,12 +61,12 @@
 					<tr>
 						<td class="tbl_subtitle">직원 수</td>
 						<td>
-							<input type="text" name="cnslEmpNum" value="${SalesVO.cnslEmpNum }" readonly>
+							<input type="text" name="csEmpNum" value="${consultVO.csEmpNum }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">예상 예산</td>
 						<td>
-							<input type="text" name="cnslBdgt" value="${SalesVO.cnslBdgt }" readonly>
+							<input type="text" name="csBdgt" value="${consultVO.csBdgt }" readonly>
 						</td>
 						
 						<td colspan="3"></td>
@@ -75,7 +75,7 @@
 					<tr>
 						<td class="tbl_subtitle">문의 내용</td>
 						<td colspan="8" id="inquiryDetails">
-						<textarea rows="10"  style="width: 90%; resize: none" readonly>${SalesVO.cnslInqCnt}</textarea>
+						<textarea rows="10"  style="width: 90%; resize: none" readonly>${consultVO.csContent}</textarea>
 						
 						</td>
 
@@ -179,8 +179,8 @@
 	</div>
 
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 
  
  <!-- salesView.jsp' 에서 영업 내용 insert --> 
- <insert id="insertCnslHis" parameterType="org.rainbow.company.custMgmt.domain.cnslHisVO">
+<!--  <insert id="insertCnslHis" parameterType="org.rainbow.company.custMgmt.domain.cnslHisVO">
  
  insert into RAIN_CnslHis_tbl values(
     #{cnslHisNo},
@@ -20,7 +20,7 @@
     sysdate, #{cnslHisCnt5},
     #{cnslHisFailRsn},
     #{cnslHisFailCmt})
- </insert>
+ </insert> -->
  
  
  </mapper>

@@ -187,6 +187,12 @@
 	
 }
 
+.radioBtn_div {
+	display: flex;
+	justify-content: space-around;
+	
+}
+
 /** ------------기업 관리 (리스트) 페이지 끝--*/
 
 

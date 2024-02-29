@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSales.jsp</title>
@@ -90,19 +90,21 @@
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="vo" items="${salesVO }">
+            <c:forEach var="vo" items="${consultVO }">
                <tr>
-                  <td><a href="${vo.cnslNo }">${vo.cnslNo }</a></td>
-                  <td>${vo.cnslReqDt }</td>
-                  <td>${vo.cnslCoName }</td>
-                  <td>${vo.cnslName }</td>
-                  <td>${vo.cnslCt }</td>
-                  <td>${vo.cnslEmail }</td>
-                  <td>${vo.cnslBdgt }</td>
-                  <td>${vo.cnslSaleSt }</td>
-				  <td>아직 구현 X</td>
+                  <td><a href="${vo.consultNo }">${vo.consultNo }</a></td>
+                  <td>${vo.csDate }</td>
+                  <td>${vo.csCompanyName }</td>
+                  <td>${vo.csName }</td>
+                  <td>${vo.csContact }</td>
+                  <td>${vo.csEmaill }</td>
+                  <td>${vo.csBdgt }</td>
+                  <td>${vo.csStatus }</td>
+				  <td>${vo.csEname }</td>
                </tr>
             </c:forEach>
+    
+            
          </tbody>
       </table>
 </div>

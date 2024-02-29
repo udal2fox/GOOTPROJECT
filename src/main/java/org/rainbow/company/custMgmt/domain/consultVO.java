@@ -9,22 +9,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
 @Getter
 @Setter
-public class spotVO {
+public class consultVO {
 	
 	
-	private int spotNo, companyNo, sAgreementTerm, sEmpNum, sBdgt;
-	private String sName, sAddr, sDetailAddr, sContact, sAgreementFile, sAutoExtension, sPayMethod, sDefaultGift,
-	sStatus, sCancelEname, sCancelReason, sCancelDetailReason;
+	private int consultNo, csBdgt, csEmpNum;
+	private String csCompanyName, csArea, csName, csContact, csEmail, csContent, 
+	csStatus, csEname, csFailReason, csFailDetailReason;
+	private Date  csDate, csResponseDate;
 	
 	
-	private Date sAgreementDate, sChangeDate;
+	
+	
+
+	
 	
 	
 

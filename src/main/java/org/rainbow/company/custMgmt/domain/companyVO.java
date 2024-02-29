@@ -1,5 +1,7 @@
 package org.rainbow.company.custMgmt.domain;
 
+
+
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -16,16 +18,14 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-public class spotVO {
+public class companyVO {
+	
+	private int companyNo, consultNo;
+	private String cName, cBizLicenseFile, cBizNum, cBizType, cArea, cAddr, cDetailAddr, cBizStatus, 
+	cBizCategory, cCEO, cContact, cEmail;
+	private Date cOpenningDate;
 	
 	
-	private int spotNo, companyNo, sAgreementTerm, sEmpNum, sBdgt;
-	private String sName, sAddr, sDetailAddr, sContact, sAgreementFile, sAutoExtension, sPayMethod, sDefaultGift,
-	sStatus, sCancelEname, sCancelReason, sCancelDetailReason;
-	
-	
-	private Date sAgreementDate, sChangeDate;
-	
-	
+
 
 }

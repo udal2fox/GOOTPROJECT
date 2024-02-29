@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,13 @@
 		<h3>기업 관리</h3>
 	</div>
 	<div class="searchBar_div">
+	<form method="post">
 		<table class="searchBar_tbl">
 			<thead>
 				<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
+						<input type="text" name="searchBarKeword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
 					</td>
 					<td></td>
 					<th>지역</th>
@@ -45,16 +47,17 @@
 				<tr>
 					<th>기업 구분</th>
 					<td>
-					<div class="checkbox_div">
-						<input type="checkbox" name="entityType" value="전체" checked="checked">전체
-						<input type="checkbox" name="entityType" value="법인" checked="checked">법인
-						<input type="checkbox" name="entityType" value="개인" checked="checked">개인
+					<div class="radioBtn_div">
+						<input type="radio" name="bizType" value="전체" checked="checked">전체
+						<input type="radio" name="bizType" value="법인">법인
+						<input type="radio" name="bizType" value="개인">개인
+					
 					</div>
 					</td>
 					<td></td>
 					<th>업태</th>
 					<td>
-						<select name="businessCondition" id="selectBusinessCondition" style="text-align: center;">
+						<select name="bizStatus" id="selectBizStatus" style="text-align: center;">
 							<option value="선택">==선택==</option>
 							<option value="농업 및 임업">농업 및 임업</option>
 							<option value="어업">어업</option>
@@ -81,11 +84,14 @@
 				</tr>
 			</thead>
 		</table>
-			<input type="button" id="searchBar_search_btn" value="검색">
-					<input type="button" id="searchBar_reset_btn" value="초기화">
+			<input type="button" class="enterpriseListBtns" id="searchBar_search_btn" value="검색">
+			<input type="reset"  id="searchBar_reset_btn" value="초기화">
+		</form>
 			</div>
+			
+		
 			<div class="download_to_excel_btn_div">
-				<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
+				<input type="button" class="enterpriseListBtns" id="download_to_excel_btn" value="엑셀로 내려받기">
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -116,18 +122,29 @@
                <th>연락처</th>
                <th>업태</th>
             </tr>
-                <tr>
-            	<td><a href="/enterpriseUpdate">test</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            </tr>
-         </thead>
-         <tbody>
+            </thead>
+  			<tbody>
+  			<c:choose>
+			<c:when test="${not empty companyVO }">
+            <c:forEach var="vo" items="${companyVO }">
+               <tr>
+                  <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
+                  <td>${vo.cName }</td>
+                  <td>${vo.cBizNum }</td>
+                  <td>${vo.cBizType }</td>
+                  <td>${vo.cArea }</td>
+                  <td>${vo.cAddr }</td>
+                  <td>${vo.cContact }</td>
+				  <td>${vo.cBizStatus }</td>
+               </tr>
+            </c:forEach>
+    	</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="8">게시물 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
             
          </tbody>
       </table>
@@ -136,7 +153,7 @@
 </div>
 </div>
 	<div class="button_div">
-		<input type="button" id="insertBtn" value="기업 등록">
+		<input type="button"  class="enterpriseListBtns" id="moveEnterpriseRegisterBtn" value="기업 등록">
 	</div>
 </div>
 </div>

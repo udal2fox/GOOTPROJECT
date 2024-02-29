@@ -23,11 +23,11 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 		
 		let cnslNo = this.getAttribute("href");
 		
-		console.log(cnslNo);
+		console.log(consultNo);
 
 		//controller에서 @RequestMapping("/board/*") //전체적인 경로 설정 
 		
-		location.href = '/getSalesView?cnslNo=' + cnslNo;
+		location.href = '/getSalesView?consultNo=' + consultNo;
 		
 	})
 })

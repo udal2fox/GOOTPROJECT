@@ -15,14 +15,12 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-public class salesVO {
+public class spotQnAVO {
+	
+	private int spotQnANo, spotNo;
+	private String  questionTitle, questionContent, answerContent;
+	private Date questionDate, answerDate;
 	
 	
-	private int cnslNo, cnslBdgt, cnslEmpNum;
-	private String  cnslCoName, cnslArea, cnslName, cnslCt, cnslEmail, 
-	cnslInqCnt, cnslSaleSt, cnslEname, cnslFailRsn, cnslFailCmt;
-	
-	private Date cnslReqDt, cnslRespDt;
-
 
 }

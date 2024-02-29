@@ -140,14 +140,13 @@
     <ul class="page-nation">
         <!-- 페이지네이션은 이곳에 동적으로 생성 -->
         
-        
     </ul>
 </div>
 
 </div>
 
-<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script> 
+<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>
 
 </html>

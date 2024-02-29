@@ -2,15 +2,12 @@
 const amount = 10; // 페이지당 보여줄 아이템 수
 let pageNum = 1; // 현재 페이지 번호
 let products = document.querySelectorAll('.product'); // 전체 상품 리스트
-let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
 
+// 필터링 및 페이지네이션 초기 설정
 filter();
 
-function filter() 
-{
-	
-	console.log("필터시작");
-	// allCheck 체크박스 이벤트 리스너 등록
+function filter() {
+    // allCheck 체크박스 이벤트 리스너 등록
     document.getElementById('product-typeAll').addEventListener('change', function() {
         // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
         let isChecked = this.checked;
@@ -20,7 +17,7 @@ function filter()
 
         // 필터링 적용
         filterProducts();
-        
+
     });
 
     // allListCheck 체크박스 이벤트 리스너 등록
@@ -88,12 +85,10 @@ function filter()
         products.forEach(function(product) {
             let type = product.getAttribute('data-type');
             let status = product.getAttribute('data-status');
-
             // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
-            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) 
+            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status)))
                 product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
-            else 
-                product.style.display = 'none';
+            else product.style.display = 'none';
         });
 
         // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
@@ -102,8 +97,7 @@ function filter()
     }
 
     // 상품 종류 체크박스 모두 선택 여부 확인 함수
-    function isAllTypeCheckboxesChecked() 
-    {
+    function isAllTypeCheckboxesChecked() {
         // 상품 종류 체크박스 중 선택된 개수 확인
         const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
         // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
@@ -111,20 +105,51 @@ function filter()
     }
 
     // 상품 상태 체크박스 모두 선택 여부 확인 함수
-    function isAllStatusCheckboxesChecked() 
-    {
+    function isAllStatusCheckboxesChecked() {
         // 상품 상태 체크박스 중 선택된 개수 확인
         const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
         return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
     }
+
+    // 페이징 처리 시작
     
-    // 페이징 시작
-    console.log("페이징 시작");
-    function drawPagination(startPage, endPage)
-    {
-    	console.log("drawPagination 실행");
-    	
+    // 페이지 이동 함수
+    function goToPage(page) {
+        pageNum = page;
+        const startIndex = (pageNum - 1) * amount;
+        const endIndex = pageNum * amount;
+
+        let filteredProducts = getFilteredProducts();
+
+        filteredProducts.forEach((product, index) => {
+            if (index >= startIndex && index < endIndex) {
+                product.style.display = 'table-row';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+
+        const paginationElement = document.getElementById('pagination');
+        const pageButtons = paginationElement.querySelectorAll('a');
+        pageButtons.forEach((button, index) => {
+            if (index === pageNum) {
+                button.classList.add('active');
+            } else {
+                button.classList.remove('active');
+            }
+        });
+
+        drawPagination();
+    }
+
+    // 페이징 버튼 바인딩 함수
+    function drawPagination() {
+        let totalPages = Math.ceil(getFilteredProducts().length / amount);
+        if (getFilteredProducts().length % amount === 0) {
+            totalPages--;
+        }
+
         const paginationElement = document.getElementById('pagination');
         paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
 
@@ -144,17 +169,28 @@ function filter()
         ul.appendChild(prevButton);
 
         // 페이지 번호 버튼 추가
-        for (let num = startPage; num <= endPage; num++) 
-        {
+        const maxPageButtons = Math.min(totalPages, 5); // 최대 5개의 페이지 버튼을 표시합니다.
+        let startPage = Math.max(1, pageNum - 2);
+        let endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
+
+        // 첫 페이지가 사라지지 않도록 수정
+        if (endPage - startPage < maxPageButtons - 1) {
+            startPage = Math.max(1, endPage - maxPageButtons + 1);
+        }
+
+        for (let num = startPage; num <= endPage; num++) {
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = '#'; // 페이지 번호 클릭 시 페이지 이동 방지
             a.innerText = num;
             a.addEventListener('click', () => goToPage(num)); // 페이지 번호 클릭 시 goToPage 함수 호출
+            if (num === pageNum) {
+                a.classList.add('active'); // 현재 페이지에 active 클래스 추가
+            }
             li.appendChild(a);
             ul.appendChild(li);
         }
-        
+
         // 다음 페이지 버튼 추가
         const nextButton = document.createElement('li');
         const nextLink = document.createElement('a');
@@ -162,14 +198,13 @@ function filter()
         nextLink.innerText = '▶';
         nextLink.addEventListener('click', (e) => {
             e.preventDefault();
-            if (pageNum < endPage) goToPage(pageNum + 1);
+            if (pageNum < totalPages) goToPage(pageNum + 1);
         });
         nextButton.appendChild(nextLink);
         ul.appendChild(nextButton);
 
         paginationElement.appendChild(ul);
     }
-
     
     // 필터링된 상품 리스트 가져오기
     function getFilteredProducts() {
@@ -187,108 +222,11 @@ function filter()
             return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
         });
     }
-    
-    function goToPage(page) 
-    {
-    	console.log("gotoPage 실행");
-        pageNum = page;
-        
-        // 클릭한 버튼에만 'active' 클래스 추가
-        if (page === 'prev') {
-            pageNum--;
-        } else if (page === 'next') {
-            pageNum++;
-        } else {
-            pageNum = page;
-        }
 
-        if (pageNum < 1) {
-            pageNum = 1;
-        } else if (pageNum > endPage) {
-            pageNum = endPage;
-        }
-        
-        // 각 페이지당 보여줄 상품의 시작 인덱스와 끝 인덱스 계산
-        const startIndex = (pageNum - 1) * amount;
-        const endIndex = pageNum * amount;
-       
-        // 필터링된 상품 리스트 가져오기
-        let filteredProducts = getFilteredProducts();
-        
-        // 현재 페이지에 보여줄 상품만 보이도록 설정
-        filteredProducts.forEach((product, index) => {
-            if (index >= startIndex && index < endIndex) {
-                product.style.display = 'table-row'; // startIndex부터 endIndex 이전까지만 표시
-            } else {
-                product.style.display = 'none';
-            }
-        });
-
-        // 페이지 번호 버튼의 활성화 처리
-        const paginationElement = document.getElementById('pagination');
-        const pageButtons = paginationElement.querySelectorAll('a');
-        pageButtons.forEach((button, index) => {
-            if (index === pageNum) {
-                button.classList.add('active');
-            } else {
-                button.classList.remove('active');
-            }
-        });
-    }
-    
-    drawPagination(1, endPage);
+    // 초기 페이지네이션 그리기
+    drawPagination();
     goToPage(1);
-    
-  //서치 기능
-
-  //키워드와 현재 페이지를 저장하는 전역 변수
-  let currentKeyword = '';
-
-  //검색 버튼 클릭 이벤트 핸들러
-  document.querySelector('#search').addEventListener('click', function() {
-   currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
-   fetchSearchResults(currentKeyword); // 검색 결과 요청
-  });
-
-
-  //검색 결과 요청 함수
-  function fetchSearchResults(keyword) {
-   fetch('/searchProduct?keyword=' + keyword)
-       .then(response => response.json())
-       .then(data => {
-           console.log(data);
-           let list = data;
-           let msg = '';
-           list.forEach(list => {
-               msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+' style="display:table-row;">'+
-  					   '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
-  					   '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
-  					   '<td>'+list.prdSdc+'</td>'+
-  					   '<td>'+list.prdMajorCtg+'</td>'+
-  					   '<td>'+list.prdSubCtg+'</td>'+
-  					   '<td>'+
-  					   		'<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
-  					   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-  				       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-  					   '<td>'+(list.prdMargin * 100 )+'%</td>'+
-  		           '</tr>';
-               
-           })
-           document.querySelector('#table-prd tbody').innerHTML = msg;
-           filter();
-           drawPagination(1, endPage);
-           goToPage(1);
-           
-           
-       })
-       .catch(error => console.error('Error:', error));
-  }
-    
-};
-
-
-
-
+}
 
 // 정렬 버튼 기능 초기 정렬 방식은 오름차순으로 설정
 let sortDir = {};
@@ -315,7 +253,7 @@ function sortTable(column) {
         const bValue = getCellValue(b, column);
         if (sortDir[column]) return aValue.localeCompare(bValue);
         else return bValue.localeCompare(aValue);
-       
+
     });
 
     tbody.innerHTML = '';
@@ -334,15 +272,13 @@ function getCellValue(row, column) {
         "prdCstPri": 6,
         "prdSal": 7,
         "prdMargin": 8
-    }[column];
+    } [column];
 
     const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
     return cell ? cell.textContent.trim() : "";
 }
 
 // 리셋 버튼 이벤트 리스너 등록
-document.querySelector('#reset').addEventListener('click', function () {
+document.querySelector('#reset').addEventListener('click', function() {
     location.reload();
 });
-
-

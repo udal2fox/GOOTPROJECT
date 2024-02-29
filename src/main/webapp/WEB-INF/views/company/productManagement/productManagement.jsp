@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/resources/css/company/productManagementPage/productManagement.css">
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 <jsp:include page="../../navBar.jsp"/>
 <div class="container-fluid"  style="padding-top: 30px;" align="center">	
@@ -122,7 +123,7 @@
 			                </td>
 			                <td><fmt:formatNumber value="${ex.prdCstPri }" type="currency"/></td>
               				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>
-			                <td>${ex.prdMargin * 100 }%</td>
+              				<td><fmt:formatNumber value="${ex.prdMargin * 100}"	pattern=".00"/>%</td>
 			            </tr>
 			        </c:forEach>
 			    </tbody>
@@ -137,7 +138,9 @@
     <!-- page -->
     <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
     <ul class="page-nation">
-        <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
+        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
+        
+        
     </ul>
 </div>
 

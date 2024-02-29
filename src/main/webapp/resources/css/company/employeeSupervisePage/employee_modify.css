@@ -44,6 +44,7 @@
 		margin-left: 60px;
 	}
 	input[class='input1']{
+		text-align : center;
 		width : 180px;
 		height : 32px;
 		margin-left: 30px;
@@ -54,6 +55,7 @@
 		border : none;
 	}
 	input[class='input2']{
+		text-align : center;
 		width : 180px;
 		height : 32px;
 		margin-left: 30px;
@@ -64,6 +66,7 @@
 		border : none;
 	}
 	input[class='input3']{
+		text-align : center;
 		margin-left: 30px;
 		margin-bottom : -10px;
 		height : 40px;
@@ -72,6 +75,7 @@
 		border : none;
 	}
 	input[class='input4']{
+		text-align : center;
 		margin-left: -90px;
 		margin-top : -10px;
 		height : 40px;
@@ -80,6 +84,7 @@
 		border : none;
 	}
 	input[class='input5']{
+		text-align : center;
 		width : 200px;
 		height : 32px;
 		border-radius: 5px;
@@ -88,6 +93,7 @@
 		margin-right: 70px;
 	}
 	input[class='input6']{
+		text-align : center;
 		width : 200px;
 		height : 32px;
 		border-radius: 5px;

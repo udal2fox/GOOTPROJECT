@@ -14,51 +14,39 @@
 						<table id="top-table">
 							<tr>
 								<th> 이름 </th>
-								<td><input class="input1" type="text" name="eName" readonly></td>
+								<td><input class="input1" type="text" name="eName" value="${vo.EName}" readonly></td>
 								<th> 부서 </th>
-								<td><input class="input2" type="text" name="dName"></td>
+								<td><input class="input2" type="text" name="dName" value="${vo.DName}"></td>
 								<th> 상세주소 </th>
 								<td>
 									<div style="position: relative;">
-										<input class="input3" type="text" name="eAddr">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="position: absolute; top: 60%; transform: translateY(-50%); right: 105px;">
-            								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        								</svg>
+										<input class="input3" type="text" name="eAddr" value="${vo.EAddr }" readonly>
         							</div>
 								</td>
 							</tr>
 							<tr>
 								<th> 이메일 주소 </th>
-								<td><input class="input1" type="text" name="email"></td>
+								<td><input class="input1" type="text" name="email" value="${vo.email }" readonly></td>
 								<th> 직급 </th>
-								<td><input class="input2" type="text" name="job"></td>
+								<td><input class="input2" type="text" name="job" value="${vo.job }"></td>
 								<th></th>
 								<td><input class="input4" type="text" name="eAddr"></td>
 							</tr>
 							<tr>
 								<th> 전화번호 </th>
-								<td><input class="input1" type="text" name="ePhone"></td>
+								<td><input class="input1" type="text" name="ePhone" value="${vo.EPhone }" readonly></td>
 								<th> 근무형태 </th>
-								<td><input class="input2" type="text" name="workType"></td>
+								<td><input class="input2" type="text" name="workType" value="${vo.workType }"></td>
 								<th> 급여계좌 </th>
-								<td>
-									<select id="bank-select" name="eBank">
-										<option value="하나"> 하나은행 </option>
-										<option value="우리"> 우리은행 </option>
-										<option value="국민"> 국민은행 </option>
-										<option value="기업"> 기업은행 </option>
-										<option value="농협"> 농협은행 </option>
-										<option value="카카오"> 카카오 뱅크 </option>
-									</select>
-								</td>
+								<td><input class="input3" type="text" name="ebank" value="${vo.EBank }" readonly></td>
 							</tr>
 							<tr>
 								<th> 생년월일 </th>
-								<td><input class="input1" type="text" name="email" readonly></td>
+								<td><input class="input1" type="text" name="identyNum" value="${vo.identyNum }" readonly></td>
 								<th> 연봉 </th>
-								<td><input class="input2" type="number" name="sal"></td>
+								<td><input class="input2" type="number" name="sal" value="${vo.sal }"></td>
 								<th></th>
-								<td><input class="input4" type="text" name="salAccount"></td>
+								<td><input class="input4" type="text" name="salAccount" value="${vo.salAccount }" readonly></td>
 							</tr>
 						</table>
 					</div>
@@ -67,11 +55,11 @@
 					<table id="bottom-table">
 						<tr>
 							<th>입사일</th>
-							<td><input class="input5" type="text" name="hireDt" readonly></td>
+							<td><input class="input5" type="text" name="hireDt" value="${vo.hireDt}" readonly></td>
 							<th>퇴사일</th>
-							<td><input class="input5" type="text" name="endDt"></td>
+							<td><input class="input5" type="text" name="endDt" value="${empty vo.endDt ? '-' : vo.endDt }"></td>
 							<th>계정상태</th>
-							<td><input class="input6" type="text" name="idStatus"></td>
+							<td><input class="input6" type="text" name="idStatus" value="${vo.idStatus}"></td>
 						</tr>
 					</table>
 				</div>

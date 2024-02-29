@@ -1,14 +1,11 @@
 package org.rainbow.company.employeeSupervisePage.controller;
 
-import java.util.List;
-
-import org.rainbow.company.employeeSupervisePage.service.searchEmployeeService;
-import org.rainbow.domain.Criteria;
-import org.rainbow.domain.PageDTO;
+import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j;
 
@@ -17,7 +14,7 @@ import lombok.extern.log4j.Log4j;
 public class employeeSupervisePageController {
 
 	@Autowired
-	private searchEmployeeService service;
+	searchEmployeeServiceImpl service;
 
 	// 직원 정보 등록 페이지
 	@GetMapping("/employee_insert")
@@ -27,10 +24,16 @@ public class employeeSupervisePageController {
 
 	// 직원 정보 편집 페이지
 	@GetMapping("/employee_modify")
-	public String employee_modify() {
-		return "/company/employeeSupervisePage/employee_modify";
+	public String employee_modify(@RequestParam("eno") int eno, Model model) {
+		
+			log.info("get..." + service.get(eno));
+			System.out.println(service.get(eno));
+			
+			model.addAttribute("vo", service.get(eno));
+			
+			return "/company/employeeSupervisePage/employee_modify";
 	}
-
+		
 	// 프로필 편집 페이지
 	@GetMapping("/profile_modify")
 	public String profile_modify() {
@@ -39,24 +42,16 @@ public class employeeSupervisePageController {
 
 	// 직원 조회 페이지
 	@GetMapping("/searchEmployee")
-	public String searchEmployee(Model model, Criteria cri) {
-		log.info("list...");
+	public String searchEmployee(Model model) {
 
-		if (cri.getPageNum() == 0 && cri.getAmount() == 0) {
-			cri.setPageNum(1);
-			cri.setAmount(10);
-		}
-
-		model.addAttribute("list", service.getList(cri));
-
+		 log.info("getList..." + service.getList());
+		 System.out.println(service.getList());
+		  
+		 model.addAttribute("list", service.getList());
+		 //전체 직원 수 
+		 int total = service.getTotal(); 
+		 log.info("total...." + total);
 		
-		// 전체 직원 수 
-		int total = service.getTotal(); 
-		log.info("total...." + total);
-		 
-		 // PageDTO 객체 list 화면으로 전달 
-		 model.addAttribute("pageMaker", new PageDTO(cri,total));
-		 
 		return "/company/employeeSupervisePage/searchEmployeePage";
 	}
 }

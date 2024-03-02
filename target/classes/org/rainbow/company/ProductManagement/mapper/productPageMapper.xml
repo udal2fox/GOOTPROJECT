@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.rainbow.company.ProductManagement.mapper.productPageMapper">
+	
 	<!-- productList   -->
 	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
 	
@@ -70,6 +71,13 @@
 		AND p.prdMajorCtg IN ('value1', 'value2', 'value3')
 		AND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 
 	-->
+	
+	<!-- 공급처 시작 -->
+	<select id="supsList" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+				SELECT *
+			    FROM RAIN_Suppliers_tbl
+			    order by supsNo asc
+	</select>
 
 	
 	

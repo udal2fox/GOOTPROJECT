@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
+import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.service.productPageServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.ExcelDownloadUtil;
@@ -66,15 +67,11 @@ public class ProductPageController
     
     // 공급처 조회 리스트 이동
     @GetMapping(value = "/moveSuppliers")
-    public String moveSuppliers(Model model, Criteria cri) 
+    public String moveSuppliers(Model model) 
     {
-    	log.info("list...");
-    	if(cri.getPageNum() == 0 && cri.getAmount() == 0)
-    	{
-    		cri.setPageNum(1);
-    		cri.setAmount(10);
-    	}
+    	List<suppliersVO> list = pService.supsList();
     	
+    	model.addAttribute("list", list);
     	return "/company/productManagement/suppliersManagement";
     }
     // 일단 기능 상관말고 겟메핑으로이동

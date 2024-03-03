@@ -12,11 +12,11 @@ document.querySelectorAll('.salesViewBtns').forEach( btn => {
 		let type = btn.id;
 		//console.log(type);
 		
-		if(type === 'imgButtonSearchEname') {
+		if(type === 'imgBtnSearchEname') {
 			searchEname();
-		}else if(type === 'imgButtonPlus') {
+		}else if(type === 'imgBtnPlus') {
 			addcnslHis();
-		}else if(type === 'imgButtonMinus') {
+		}else if(type === 'imgBtnMinus') {
 			
 		}else if(type === 'saveBtn') {
 			saveSales();
@@ -28,13 +28,13 @@ document.querySelectorAll('.salesViewBtns').forEach( btn => {
 
 /**영업 상태 값이 '최초 인입' 에서 다른 값으로 변화된 해당 날짜를 응대일에 자동으로 입력 */
 //응대일 요소 가져오기
-const cnslRespDt = f.querySelector('input[name="cnslRespDt"]');
+const csResponseDate = f.querySelector('input[name="csResponseDate"]');
 //영업 상태 요소 가져오기
-const cnslSaleSt = f.querySelector('select[name="cnslSaleSt"]');
+const selectSalesStatus = f.querySelector('select[name="selectSalesStatus"]');
 
-cnslSaleSt.addEventListener('change', function() {
+selectSalesStatus.addEventListener('change', function() {
 	// 선택된 옵션의 값을 가져오기
-	const selectedValue = cnslSaleSt.value;
+	const selectedValue = selectSalesStatus.value;
 	
 	// 현재 날짜 가져오기
 	const currentDate = new Date();
@@ -44,7 +44,7 @@ cnslSaleSt.addEventListener('change', function() {
 	
 	// 최초 인입이 아닌 경우에만 응대일 값 변경
 	if (selectedValue !== '최초 인입') {
-		cnslRespDt.value = formattedDate;
+		csResponseDate.value = formattedDate;
 	}
 });
 

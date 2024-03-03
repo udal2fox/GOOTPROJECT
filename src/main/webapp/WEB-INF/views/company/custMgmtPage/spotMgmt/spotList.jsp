@@ -25,7 +25,7 @@
 					<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" placeholder="기업명/담당자/메일주소/영업담당">
+						<input type="text" name="searchBarKeword" placeholder="기업명/담당자/메일주소/영업담당">
 					</td>
 					<td rowspan="2"></td>
 					<th rowspan="2"></th>
@@ -46,11 +46,11 @@
 				</tr>
 			</thead>
 		</table>
-			<input type="button" id="searchBar_search_btn" value="검색">
-					<input type="button" id="searchBar_reset_btn" value="초기화">
+			<input type="button" id="searchBarSearchBtn" value="검색">
+			<input type="reset"  id="searchBarResetBtn" value="초기화">
 			</div>
 			<div class="download_to_excel_btn_div">
-				<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
+				<input type="button"  id="downloadExcelBtn" value="엑셀로 내려받기">
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -104,10 +104,13 @@
 
 </div>
 </div>
-	<div class="button_div">
-		<input type="button" id="insertBtn" value="지점 등록">
+	<div class="btn_div">
+		<input type="button" id="moveSpotRegisterBtn" value="지점 등록">
 	</div>
 	
+
+
+
 	
 
 <!-------------------------------- 직원 리스트 모달-->
@@ -243,8 +246,8 @@
       </table>
 	</div>
 		<div class="modal-footer">	
-			<button type="button"  id="reset_managerInpo_modal">취소</button>
             <button type="button" id="close_managerInpo_modal">저장</button>
+			<button type="button"  id="reset_managerInpo_modal">취소</button>
          </div>
      
       </div>
@@ -258,7 +261,7 @@
 
 </div>
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/custMgmtModal.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmtModal.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>
 </html>

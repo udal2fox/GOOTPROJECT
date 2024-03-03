@@ -16,11 +16,6 @@ function cssBinding(cssFiles) {
 }
 
 
-
-
-
-
-
 /** --------------------직원 리스트 모달창 시작------ */
 
 var empListModal = document.getElementById('empList_modal');

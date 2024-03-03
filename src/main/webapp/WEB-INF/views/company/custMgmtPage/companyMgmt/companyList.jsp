@@ -6,14 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/resources/css/company/custMgmtPage/enterpriseMgmt.css">
+<link rel="stylesheet" href="/resources/css/company/custMgmtPage/companyMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSales.jsp</title>
 
 </head>
 <body>
 	<div class="navBar">
-		<jsp:include page="../../../navBar.jsp"/>
+		<jsp:include page="./../../../navBar.jsp"/>
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire">
@@ -57,7 +57,7 @@
 					<td></td>
 					<th>업태</th>
 					<td>
-						<select name="bizStatus" id="selectBizStatus" style="text-align: center;">
+						<select name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
 							<option value="선택">==선택==</option>
 							<option value="농업 및 임업">농업 및 임업</option>
 							<option value="어업">어업</option>
@@ -84,14 +84,14 @@
 				</tr>
 			</thead>
 		</table>
-			<input type="button" class="enterpriseListBtns" id="searchBar_search_btn" value="검색">
-			<input type="reset"  id="searchBar_reset_btn" value="초기화">
+			<input type="button" class="companyListBtns" id="searchBarSearchBtn" value="검색">
+			<input type="reset"  id="searchBarResetBtn" value="초기화">
 		</form>
 			</div>
 			
 		
 			<div class="download_to_excel_btn_div">
-				<input type="button" class="enterpriseListBtns" id="download_to_excel_btn" value="엑셀로 내려받기">
+				<input type="button" class="companyListBtns" id="downloadExcelBtn" value="엑셀로 내려받기">
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -152,12 +152,12 @@
 
 </div>
 </div>
-	<div class="button_div">
-		<input type="button"  class="enterpriseListBtns" id="moveEnterpriseRegisterBtn" value="기업 등록">
+	<div class="btn_div">
+		<input type="button"  class="companyListBtns" id="moveCompanyRegisterBtn" value="기업 등록">
 	</div>
 </div>
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/enterpriseMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
 
 </body>
 </html>

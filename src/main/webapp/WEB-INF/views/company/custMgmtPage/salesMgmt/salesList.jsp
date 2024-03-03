@@ -28,12 +28,12 @@
 				<tr>
 				<th>키워드</th>
 				<td>
-					<input type="text" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
+					<input type="text" name="searchBarKeword" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
 				</td>
 				<td></td>
 				<th>영업 상태</th>
 				<td>
-					<select name="businessStatus" id="searchBar_selectBizSt">
+					<select name="salesStatus" id="searchBarSalesStatus">
 								<option value="선택">==선택==</option>
 								<option value="최초 인입">최초 인입</option>
 								<option value="응대 완료">응대 완료</option>
@@ -63,14 +63,14 @@
 			</thead>
 		</table>
 		
-			<input type="button" id="searchBar_search_btn" value="검색">
-			<input type="button" id="searchBar_reset_btn" value="초기화">
+			<input type="button" id="searchBarSearchBtn" value="검색">
+			<input type="reset"  id="searchBarResetBtn" value="초기화">
 		</form>
 	</div>
 	
-	<div class="download_to_excel_btn_div">
-		<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
-	</div>
+			<div class="download_to_excel_btn_div">
+				<input type="button" id="downloadExcelBtn" value="엑셀로 내려받기">
+			</div>
 		
 	
 	<div class="list_div">

@@ -41,16 +41,15 @@
 	
 /** ------------신규 영업 (리스트) 페이지 시작--*/
 
-/** 서치바 */
+
 .searchBar_div {
 		
     	box-sizing: border-box;
     	background-color:var(--bg-gray);
-    	
     	padding-bottom:10px;
 	}
 
-/** 서치바 테이블*/
+
 .searchBar_tbl {
 	table-layout: auto;
 	table-layout: fixed;
@@ -77,7 +76,7 @@
 	
 }
 
-.searchBar_tbl input[type="text"] {
+.searchBar_tbl input[type="text"], #searchBarSalesStatus {
 	
 	width:100%;
 	border: none;
@@ -92,24 +91,8 @@
 }
 
 
-#searchBar_selectBizSt{
-	width:100%;
-	border: none;
-}
-
-/** */
-.searchBar_button_div {
-	
-	width:100%;
-	text-align: right;
-	box-sizing: border-box;
-}
-
-
-
-/** 서치바 검색 버튼*/
-#searchBar_search_btn {
-	
+#searchBarSearchBtn {
+	margin-left:1100px;
 	background-color: var(--blue);
 	color: rgb(255, 255, 255);
 	border-color:var(--blue);
@@ -119,8 +102,7 @@
 	
 	}
 	
-/** 서치바 초기화 버튼*/
-#searchBar_reset_btn {
+#searchBarResetBtn {
 	background-color:rgb(255, 255, 255);
 	color:var(--blue);
 	border-color:rgb(255, 255, 255);
@@ -129,7 +111,6 @@
 	width: 80px;
 	}
 	
-/** 엑셀로 내려받기 버튼 div*/	
 .download_to_excel_btn_div {
 	
     box-sizing: border-box;
@@ -137,8 +118,8 @@
 	padding: 50px 5px 10px 5px;
 }
 	
-/** 엑셀로 내려받기 버튼*/
-#download_to_excel_btn {
+
+#downloadExcelBtn {
 	background-color: var(--blue);
 	color: rgb(255, 255, 255);
 	border-color:var(--blue);
@@ -147,18 +128,9 @@
 	width:140px;
 }
 
-/** 몇개씩 보기 div*/
-.viewAFew_div {
-	
-    box-sizing: border-box;
-    text-align:right;
-    padding: 0px 5px 10px 5px;
-	
-}
 
 
 
-/** 게시글 목록 div*/
 .list_div {
 	
 	box-sizing: border-box;
@@ -167,8 +139,6 @@
 }
 
 .list_div_tbl {
-	
-	box-sizing: border-box;
 	 
 	border : 5px solid white;
 	table-layout: auto;
@@ -176,13 +146,10 @@
 	width:100%;
 }
 
-.top_bar_of_list {
+.list_div_tbl tr th {
 
-	box-sizing: border-box;
+	font-size: 15px;
 	text-align: center;
-	background-color:var(--bg-gray);
-	font-weight : bolder;
-	margin:0px;
 }
 
 .list_div_tbl td{
@@ -190,9 +157,14 @@
 	
 }
 
-.list_div_tbl tr th{
-	text-align: center;
+
+.top_bar_of_list {
+	border : 5px solid white;
 	
+	background-color:var(--bg-gray);
+	font-size: 15px;
+	font-weight : bolder;
+
 }
 
 
@@ -206,30 +178,6 @@
 
 /** ------------신규 영업 (상세보기) 페이지 시작-- */
 
-.subject_content {
-	box-sizing: border-box;
-}
-
-
-
-.tbl_subtitle {
-	
-	width:120px;
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
-	text-align: center;
-	
-	font-weight: bolder;
-}
-
-
-
-
-
-#inquiryDetails {
-	text-align:left;
-}
-
 .subject_title {
 	
 	margin-top:30px;
@@ -239,26 +187,9 @@
 	
 }
 
-
-#selectBusinessCondition, #search_keword, #history, #searchEname, #FailureReasonsCmt, #selectFailureReasons{
-
-	border: none;
-	
-	
-	
-	
-}
-#FailureReasonsCmt {
-	width:100%;
-}
-
-input[type="date"] {
-	border: none;
-	
-}
-
 .subject_content_tbl {
 	
+	box-sizing: border-box;
 	width: 100%;
 	table-layout: fixed;
 	border: 6px solid var(--bg-gray);
@@ -278,15 +209,51 @@ input[type="date"] {
 	border: 6px solid var(--bg-gray);
 	
 }
-#imgBtnMinus {
-	box-sizing: border-box;
-        background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
+
+
+.tbl_subtitle {
+	
+	width:120px;
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	text-align: center;
+	
+	font-weight: bolder;
+}
+
+#inquiryDetails {
+	text-align:left;
+}
+
+
+#imgBtnSearchEname {
+        background: url( "/resources/images/ul-search.svg" ) no-repeat;
         border: none;
-      	  width: 30px;
-        height: 30px;
+      	  width: 25px;
+        height: 25px;
         cursor: pointer;
         background-size: contain;
       }
+
+
+
+input[type="text"],input[type="email"], textarea, select {
+	border:none;
+	text-align: center;
+}
+
+
+
+
+.space_img_btns {
+	box-sizing: border-box;
+	background-color: var(--bg-gray);
+	padding-left: 1000px;
+
+}
+
+
+
  #imgBtnPlus {
  box-sizing: border-box;
         background: url( "/resources/images/ul-plus-circle.svg" ) no-repeat;
@@ -300,24 +267,30 @@ input[type="date"] {
         
         
       }
-#imgBtnSearchEname {
-        background: url( "/resources/images/ul-search.svg" ) no-repeat;
+
+#imgBtnMinus {
+	box-sizing: border-box;
+        background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
         border: none;
-      	  width: 25px;
-        height: 25px;
+      	  width: 30px;
+        height: 30px;
         cursor: pointer;
         background-size: contain;
-        margin-left:20px;
-        
       }
-.space_img_buttons {
-	box-sizing: border-box;
-	background-color: var(--bg-gray);
-	padding-left: 1000px;
-	
-	
-	
+
+
+
+
+
+.btn_div {
+	width: var(--max-width);
+    box-sizing: border-box;
+	text-align: right;
+	padding-top:50px;
 }
+
+
+
 #saveBtn {
 	
     box-sizing: border-box;
@@ -329,28 +302,17 @@ input[type="date"] {
 	border: 5px 10px 5px 10px;
 	
 }
-#insertBtn {
-	
-    box-sizing: border-box;
-	width:120px;
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	
-}
-.button_div {
-	width: var(--max-width);
-    box-sizing: border-box;
-	text-align: right;
-	padding-top:50px;
-}
 
 
-input[type="text"],input[type="email"], textarea, select {
-	border:none;
-	text-align: center;
-}
+
+/** ------------신규 영업 (상세보기) 페이지 끝-- */
+
+
+
+
+
+
+
+
 
 

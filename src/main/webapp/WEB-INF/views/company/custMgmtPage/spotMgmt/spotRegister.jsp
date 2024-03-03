@@ -20,16 +20,16 @@
 		</div>
 		
 		
-		<div class="spot_update">
-			<h5 class="spot_update_title" align="left">●지점 정보</h5>
+		<div class="spot_subject_div">
+			<h5 class="spot_subject_title" align="left">●지점 정보</h5>
 
-			<table class="spot_update_tbl">
+			<table class="spot_subject_tbl">
 				<thead>
 					<tr>
 						<th>기업 연결</th>
 						<td><input type="text"></td>
 						<td>
-							<input type="button" id="img_button_searchComName">
+							<input type="button" id="imgBtnSearchComName">
 						</td>
 
 						<th>지점명</th>
@@ -45,14 +45,14 @@
 							<input type="text" placeholder="주소">
 						</td>
 						<td>
-							<input type="button" id="img_button_searchAddr">
+							<input type="button" id="imgBtnSearchAddr ">
 						</td>
 						<th></th>
 						<td></td>
 				
 						<tr>
 							<td colspan="2" rowspan="2">
-							<input type="text" placeholder="상세 주소" id="detailedAddress"></td>
+							<input type="text" placeholder="상세 주소" id="detailedAddr"></td>
 						
 						<th>연락처</th>
 						<td>
@@ -66,11 +66,11 @@
 						
 						<tr>
 						<th rowspan="2">계약서</th>
-						<td><input type="text"></td>
-						<td><input type="button" id="img_button_upload"></td>
+						<td><input type="text" readonly></td>
+						<td><input type="button" id="imgBtnAgreementFileUpload"></td>
 
 						<th rowspan="2">계약 일자</th>
-						<td rowspan="2"><input type="text"></td>
+						<td rowspan="2"><input type="date"></td>
 					</tr>
 				
 
@@ -82,7 +82,7 @@
 					<tr>
 						<th>약정 기간</th>
 						<td>
-							<select name="AgreementDuration">
+							<select name="agreementTerm">
 								<option value="6">6개월</option>
 								<option value="12">12개월</option>
 								<option value="24">24개월</option>
@@ -97,7 +97,7 @@
 						<th>자동 연장 여부</th>
 						<td>
 						
-						<select name="autoRenewal">
+						<select name="autoExtension">
 								<option value="Y">Y</option>
 								<option value="N">N</option>
 							
@@ -108,7 +108,7 @@
 					</tr>
 					<tr>
 						<th>인당 예산</th>
-						<td><input type="text"></td>
+						<td><input type="number"></td>
 						<td></td>
 						<th>계약 인원</th>
 						<td><input type="text"></td>
@@ -121,7 +121,7 @@
 						<td>
 						
 						
-							<select name="paymentMethod">
+							<select name="payMethod">
 								<option value="계산서">계산서</option>
 								<option value="카드">카드</option>
 							
@@ -138,12 +138,12 @@
 			</table>
 			
 				
-				<h5 class="spot_update_title" align="left">●담당자 정보</h5>
+				<h5 class="spot_subject_title" align="left">●담당자 정보</h5>
 
-			<table class="spot_update_tbl">
+			<table class="spot_subject_tbl">
 				<thead>
 					<tr>
-					<th>담당자</th>
+					<th>담당자명</th>
 					<td>
 						<input type="text">
 					</td>
@@ -156,7 +156,7 @@
 					<tr>
 					<th>이메일</th>
 					<td>
-						<input type="text">
+						<input type="email">
 					</td>
 					<td></td>
 					<th>비밀번호</th>
@@ -176,9 +176,9 @@
 	
 		</div>
 	
-	<div class="button_div">
-				<input type="button" id="company_registration_update_button" value="등록">
-				<input type="button" id="company_registration_reset_button" value="취소">
+	<div class="btn_div">
+				<input type="button" id="spotRegisterInsertBtn" value="지점 등록">
+				<input type="button" id="spotRegisterResetBtn" value="취소">
 			</div>
 	
 	</div>

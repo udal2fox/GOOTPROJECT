@@ -2,12 +2,9 @@
 const f = document.forms[0];
 
 
-
-
-
 /**각 버튼들 클릭 이벤트 (버튼 분기 태우기) */
 //console.log(document.querySelectorAll('.enterpriseListBtns'));
-document.querySelectorAll('.enterpriseListBtns').forEach( btn => {
+document.querySelectorAll('.companyListBtns').forEach( btn => {
 
 	btn.addEventListener('click', () => {
 	
@@ -15,12 +12,12 @@ document.querySelectorAll('.enterpriseListBtns').forEach( btn => {
 		let type = btn.id;
 		//console.log(type);
 		
-		if(type === 'searchBar_search_btn') {
+		if(type === 'searchBarSearchBtn') {
 			searchBarSearchResult();
-		}else if(type === 'download_to_excel_btn') {
+		}else if(type === 'downloadExcelBtn') {
 			
-		}else if(type === 'moveEnterpriseRegisterBtn') {
-			moveEnterpriseRegister();
+		}else if(type === 'moveCompanyRegisterBtn') {
+			moveCompanyRegister();
 		}
 		
 	});
@@ -46,13 +43,13 @@ function searchBarSearchResult(){
 	const bizType = f.querySelector('input[name="bizType"]').value;
 	
 	//업태 요소 가져오기
-	const bizStatus = f.querySelector('select[name="bizStatus"]').value;
+	const searchBarBizStatus = f.querySelector('select[name="searchBarBizStatus"]').value;
 	
 	
 	console.log(searchBarKeword);
 	console.log(area);
 	console.log(bizType);
-	console.log(bizStatus);
+	console.log(searchBarBizStatus);
 	
 	
 	
@@ -69,26 +66,19 @@ function searchBarSearchResult(){
 
 
 
-/** 기업 등록 버튼 누르면 'enterpriseRegistration.jsp'로 이동*/
-function moveEnterpriseRegister(){
-	location.href = '/moveEnterpriseRegister';
+/** 기업 등록 버튼 누르면 'companyRegister.jsp'로 이동*/
+function moveCompanyRegister(){
+	location.href = '/moveCompanyRegister';
 }
 
 
 
-function searchBarResetBtn(){
-	
-	
-	
-}
+
+/** 'companyList.jsp' 에서 상담 요청 리스트 가져오기  */
 
 
 
-/** 'enterpriseList.jsp' 에서 상담 요청 리스트 가져오기  */
-
-
-
-/** 'enterpriseList.jsp' 에서 상담번호 클릭 시 'salesView.jsp'로 값 보내기  */
+/** 'companyList.jsp' 에서 상담번호 클릭 시 'companyView.jsp'로 값 보내기  */
 document.querySelectorAll("tbody a").forEach(aEle => {
 	aEle.addEventListener('click', function(e){
 		e.preventDefault();
@@ -99,10 +89,8 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 
 		//controller에서 @RequestMapping("/board/*") //전체적인 경로 설정 
 		
-		location.href = '/getEnterpriseView?companyNo=' + companyNo;
+		location.href = '/getCompanyView?companyNo=' + companyNo;
 		
 	})
 })
 
-
-/** 기업 등록 버튼 누르면 'enterpriseRegistration.jsp'로 이동*/

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
+import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
 import org.rainbow.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class productPageServiceImpl implements productPageService
 	@Override
 	public List<prdDownVO> downExcelList(Map<String, Object> checkValue) {
 		return pMapper.downExcelList(checkValue);
+	}
+
+	@Override
+	public List<suppliersVO> supsList() {
+		return pMapper.supsList();
 	}
 
 

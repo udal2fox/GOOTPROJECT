@@ -32,7 +32,11 @@ document.getElementById("excelUpload").addEventListener("change", function() {
     		.then(data => 
     		{
     		  console.log('서버 응답:', data);
-    		  if(data === 'success') alert("인풋 성공");
+    		  if(data === 'success')
+			  {
+    			  alert("인풋 성공");
+    			  location.reload();
+			  }
     		  else alert("인풋 실패");
     		  
     		})

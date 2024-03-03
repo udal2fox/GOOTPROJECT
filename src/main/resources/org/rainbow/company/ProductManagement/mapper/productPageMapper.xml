@@ -63,7 +63,7 @@
 		open="(" separator="," close=")" 시작 , 구분자 , 끝 부분 지정
 		지금 쿼리 같은경우 
 		<foreach item="item" collection="checkValues"> 이런식으로
-		기본값을 넣어도 동작하는데 문제없는것 같다.
+		기본값을 넣어도 동작하는데 문제없는것 같다. // x 다써줘야 된다.
 		
 		SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
 		FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
@@ -73,6 +73,7 @@
 	-->
 	
 	<!-- 공급처 시작 -->
+	<!--공급처 리스트   -->
 	<select id="supsList" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
 				SELECT *
 			    FROM RAIN_Suppliers_tbl

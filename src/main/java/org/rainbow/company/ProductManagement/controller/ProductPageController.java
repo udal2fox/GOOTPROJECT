@@ -189,7 +189,28 @@ public class ProductPageController
         ExcelDownloadUtil.downloadProductList(response, downlist);
     }
     
- // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
+    // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
+    
+    // 공급처 리스트 기능  ---------------------------------------------------------------------------------------
+    // 공급처 조회리스트 검색 기능
+    @ResponseBody
+    @GetMapping(value = "/searchSups", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<productListVO>> supsSech(@RequestParam("keyword") String keyword)
+    {
+        log.info("keyword...");
+        
+        
+        List<productListVO> list = pService.getSearch(keyword);
+        log.info(list);
+        
+
+        // ResponseEntity에 list와 ptdo를 함께 담아 반환
+
+        // 리스트 비동기로 뿌려주기
+        return new ResponseEntity<List<productListVO>>(list, HttpStatus.OK);
+    }
+    
+    
     
     
 }

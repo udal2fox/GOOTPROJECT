@@ -126,3 +126,18 @@
 	font-weight : bolder;
 
 }
+
+
+
+
+input[type="text"], 
+input[type="date"],
+input[type="number"],
+input[type="email"],
+select,
+textarea
+ {
+	border: none;
+	width:100%;
+	
+}

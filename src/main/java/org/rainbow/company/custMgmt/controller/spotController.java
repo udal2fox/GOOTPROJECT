@@ -14,25 +14,25 @@ import lombok.extern.log4j.Log4j;
 public class spotController {
 	
 	
-	@GetMapping("/spotList")
-	public String spotList( ) {
+	@GetMapping("/getSpotList")
+	public String getSpotList( ) {
 		
 		return "/company/custMgmtPage/spotMgmt/spotList";	
 		 
 	}
 	
-	@GetMapping("/spotUpdate")
-	public String spotUpdate( ) {
+	@GetMapping("/spotView")
+	public String spotView( ) {
 		
-		return "/company/custMgmtPage/spotMgmt/spotUpdate";	
+		return "/company/custMgmtPage/spotMgmt/spotView";	
 		 
 	}
 	
 	
-	@GetMapping("/spotRegistration")
-	public String spotRegistration( ) {
+	@GetMapping("/spotRegister")
+	public String spotRegister( ) {
 		
-		return "/company/custMgmtPage/spotMgmt/spotRegistration";	
+		return "/company/custMgmtPage/spotMgmt/spotRegister";	
 		 
 	}
 	

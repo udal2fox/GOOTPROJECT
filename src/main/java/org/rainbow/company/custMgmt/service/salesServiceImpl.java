@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.mapper.salesMapper;
-import org.rainbow.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +22,9 @@ public class salesServiceImpl implements salesService {
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기  */
 	@Override
-	public List<consultVO> getSalesList(Criteria cri) {
-		log.info("getSalesList...." + cri);
-		return salesMapper.getSalesList(cri);
+	public List<consultVO> salesList() {
+		log.info("getSalesList....");
+		return salesMapper.salesList();
 	}
 	
 	

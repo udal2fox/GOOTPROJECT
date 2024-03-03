@@ -4,23 +4,7 @@
  <mapper namespace="org.rainbow.company.custMgmt.mapper.cnslHisMapper">
 
  
- <!-- salesView.jsp' 에서 영업 내용 insert --> 
-<!--  <insert id="insertCnslHis" parameterType="org.rainbow.company.custMgmt.domain.cnslHisVO">
- 
- insert into RAIN_CnslHis_tbl values(
-    #{cnslHisNo},
-    #{cnslNo},
-    #{cnslHisEname},
-    #{cnslHisSaleSt},
-    sysdate,
-    sysdate, #{cnslHisCnt1},  
-    sysdate, #{cnslHisCnt2},
-    sysdate, #{cnslHisCnt3},
-    sysdate, #{cnslHisCnt4},
-    sysdate, #{cnslHisCnt5},
-    #{cnslHisFailRsn},
-    #{cnslHisFailCmt})
- </insert> -->
+
  
  
  </mapper>

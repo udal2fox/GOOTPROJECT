@@ -83,18 +83,7 @@
                <th>담당자</th>
                <th>직원 리스트</th>
             </tr>
-            <tr>
-            	 <td><a href="/spotUpdate">1</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td><a href="#" id="open_managerInpo_modal">담당자</a></td>
-            	<td><a href="#" id="open_empList_modal">test</a></td>
-            </tr>
+
          </thead>
          <tbody>
             
@@ -137,17 +126,7 @@
                <th>주문일자</th>
                <th>상품</th>  
             </tr>
-            <tr>
-            	<td><a href="#" id="open_empInpo_modal">1</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            </tr>    
+ 
          </thead>
 
       </table>
@@ -183,18 +162,7 @@
                <th>주문일자</th>
                <th>상품</th>  
             </tr>
-            <tr>
-            	<td>1</td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	
-            </tr>    
+
          </thead>
 
       </table>

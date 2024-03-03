@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/companyMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
@@ -28,7 +27,7 @@
 				<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" name="searchBarKeword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
+						<input type="text" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
 					</td>
 					<td></td>
 					<th>지역</th>
@@ -124,8 +123,6 @@
             </tr>
             </thead>
   			<tbody>
-  			<c:choose>
-			<c:when test="${not empty companyVO }">
             <c:forEach var="vo" items="${companyVO }">
                <tr>
                   <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
@@ -138,13 +135,6 @@
 				  <td>${vo.cBizStatus }</td>
                </tr>
             </c:forEach>
-    	</c:when>
-					<c:otherwise>
-						<tr>
-							<td colspan="8">게시물 없습니다.</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
             
          </tbody>
       </table>

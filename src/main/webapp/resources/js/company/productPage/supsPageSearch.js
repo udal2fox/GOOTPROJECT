@@ -11,22 +11,21 @@ document.querySelector('#search').addEventListener('click', function() {
 });
 
 function fetchSearchResults(keyword) {
-    fetch('/searchProduct?keyword=' + keyword)
+    fetch('/searchSups?keyword=' + keyword)
         .then(response => response.json())
         .then(list => {
             let msg = '';
+            console.log(list);
             list.forEach(list => {
-                msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+'">'+
-                            '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
-                            '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
-                            '<td>'+list.prdSdc+'</td>'+
-                            '<td>'+list.prdMajorCtg+'</td>'+
-                            '<td>'+list.prdSubCtg+'</td>'+
-                            '<td>'+
-                                '<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
-                            '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-                            '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-                            '<td>'+Math.ceil(list.prdMargin * 100 ).toFixed(2)+'%</td>'+
+                msg += '<tr class="product" data-type="'+list.supsBnt+'" data-status="'+list.supsSt+'">'+
+                            '<td><a href="moveSuppliersUpdate">'+list.supsNo+'</a></td>'+
+                            '<td><a href="moveProductUpdate">'+list.supsCo+'</a></td>'+
+                            '<td>'+list.supsBnt+'</td>'+
+                            '<td>'+list.supsBizRegNum+'</td>'+
+                            '<td>'+list.supsAddr+'</td>'+
+                            '<td>'+list.supsCt+'</td>'+
+                            '<td>'+list.supsCoEmail+'</td>'+
+                            '<td>'+list.supsSt+'</td>'+
                         '</tr>';
             });
             resetCheckboxes();

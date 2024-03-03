@@ -14,20 +14,14 @@
 		
 	</select>
 	
-	<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->
-	<select id="prdCount" resultType="int">
-	SELECT COUNT(*) FROM RAIN_Products_tbl
-	</select>
-	
 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
-		
+	      
 	        SELECT *
 			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
 			WHERE p.supsNo = s.supsNo
 			AND (prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR prdName LIKE CONCAT('%', #{keyword}, '%'))
 			ORDER BY prdNo ASC;
-
-		
+			
 	</select>
 	
 	
@@ -79,7 +73,35 @@
 			    FROM RAIN_Suppliers_tbl
 			    order by supsNo asc
 	</select>
-
-	
+	<!-- 공급처 리스트 검색  -->
+	<select id="supsSearch"  resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+	      
+	        SELECT *
+			FROM RAIN_Suppliers_tbl
+			WHERE
+			supsNo = #{keyword} OR supsCo = #{keyword} OR supsCt = #{keyword}
+			ORDER BY supsNo ASC;
+			
+	</select>
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id="insertSupsExcel" parameterType="java.util.Map">
+	    insert into RAIN_Suppliers_tbl
+	    (supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsBizLic, supsCoEmail, supsCt, supsSt, supsName, supsPhone, supsEmail, supsSubName, supsSubPhone, supsSubEmail)
+	    values
+	    (
+	        #{supsNo}, #{supsCo}, #{supsBnt}, #{supsBizRegNum},
+	        #{supsAddr}, #{supsBizLic}, #{supsCoEmail}, #{supsCt},
+	        #{supsSt}, #{supsName}, #{supsPhone}, #{supsEmail},
+	        <if test="supsSubName != null">
+	            #{supsSubName},
+	            #{supsSubPhone},
+	            #{supsSubEmail}
+	        </if>
+	        <if test="supsSubName == null">
+	            '', '', ''
+	        </if>
+	    )
+	</insert>
+		
 	
 </mapper>

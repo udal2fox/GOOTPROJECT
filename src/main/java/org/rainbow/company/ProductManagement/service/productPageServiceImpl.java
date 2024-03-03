@@ -48,6 +48,20 @@ public class productPageServiceImpl implements productPageService
 		return pMapper.supsList();
 	}
 
+	@Override
+	public List<suppliersVO> supsSearch(String keyword)
+	{
+		return pMapper.supsSearch(keyword);
+	}
+
+	@Override
+	public int insertSupsExcel(suppliersVO vo) {
+		
+		return pMapper.insertSupsExcel(vo);
+	}
+
+	
+
 
 
 	

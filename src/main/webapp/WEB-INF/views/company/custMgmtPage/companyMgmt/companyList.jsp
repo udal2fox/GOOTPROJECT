@@ -8,12 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/companyMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<title>newSales.jsp</title>
+<title></title>
 
 </head>
 <body>
 	<div class="navBar">
-		<jsp:include page="./../../../navBar.jsp"/>
+		<jsp:include page="../../../navBar.jsp"/>
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire">
@@ -158,6 +158,5 @@
 </div>
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
-
 </body>
 </html>

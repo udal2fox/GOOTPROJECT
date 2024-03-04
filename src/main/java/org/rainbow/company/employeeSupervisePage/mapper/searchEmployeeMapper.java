@@ -6,7 +6,6 @@ import org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 
 
-
 public interface searchEmployeeMapper {
 	
 	// 전체 직원 리스트
@@ -17,5 +16,7 @@ public interface searchEmployeeMapper {
 	
 	// 직원 정보 조회 
 	public get_employeeDTO get(int eno);
-	 
+	
+	// 직원 정보 등록
+	public void insert(get_employeeDTO dto); 
 }

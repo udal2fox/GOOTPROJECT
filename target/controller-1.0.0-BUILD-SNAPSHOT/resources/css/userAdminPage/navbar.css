@@ -1,0 +1,164 @@
+/* GOOGLE FONTS */
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+}
+
+/* VARIABLES CSS */
+:root {
+  --nav--width: 60px;
+
+  /* Colores */
+  --bg-color: #fa0050;
+  --first-color: #ff5798;
+  --sub-color: #ff90da;
+  --white-color: #fff;
+
+  /* Fuente y tipografia */
+  --body-font: "S-CoreDream-3Light";
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* z index */
+  --z-fixed: 100;
+}
+
+/* BASE */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  font-family: var(--body-font);
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* l SIDEBAR */
+.sidebar {
+  height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--white-color);
+  padding: 1.5rem 1.5rem 2rem;
+  transition: 0.5s;
+  z-index: var(--z-fixed);
+  width: calc(var(--nav--width) + 9.25rem);
+}
+
+/* SIDEBAR */
+.side {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.sidebar_customLogo {
+  padding: 0.2rem 0 0 0.8rem;
+}
+.sidebar_brand {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.sidebar_logo {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  padding: 0.75rem;
+  color: var(--white-color);
+  font-size: 1.2em;
+  font-weight: var(--font-black);
+  border-radius: 0.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebar_logo:hover {
+  background-color: var(--first-color);
+}
+
+.sidebar_link {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  column-gap: 0.75rem;
+  padding: 0.75rem;
+  color: var(--white-color);
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidebar_link:hover {
+  background-color: var(--first-color);
+}
+
+.sidebar_icon {
+  font-size: 1.25rem;
+}
+
+.sidebarname {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-bold);
+}
+
+.advertisement:hover {
+  cursor: pointer;
+}
+
+main {
+  width: 100%;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 1) 60%,
+    rgba(255, 144, 218, 0.2) 100%
+  );
+}
+
+.mainContainer{
+  width: 1290px;
+  margin: auto;
+}
+
+header a{
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background-color: var(--first-color);
+}
+
+.nav-item a {
+  color: black;
+  font-size: 1rem;
+  font-weight: var(--font-bold);
+}
+.nav-item a:hover {
+  color: var(--white-color);
+  transition: 0.3s;
+}

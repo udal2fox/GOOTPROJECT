@@ -124,4 +124,42 @@
 		SELECT count(*) from RAIN_Suppliers_tbl;
 	</select>
 	
+	<!-- 공급처 등록 reg  -->
+	<insert id="insertSups" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+	    insert into RAIN_Suppliers_tbl
+	    (supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsBizLic, supsCoEmail, supsCt, supsSt, supsName, supsPhone, supsEmail, supsSubName, supsSubPhone, supsSubEmail)
+	    values
+	    (
+	        #{supsNo}, #{supsCo}, #{supsBnt}, #{supsBizRegNum},
+	        #{supsAddr}, #{supsBizLic}, #{supsCoEmail}, #{supsCt},
+	        #{supsSt}, #{supsName}, #{supsPhone}, #{supsEmail},
+	        <if test="supsSubName != null">
+	            #{supsSubName},
+	            #{supsSubPhone},
+	            #{supsSubEmail}
+	        </if>
+	        <if test="supsSubName == null">
+	            '', '', ''
+	        </if>
+	    )
+	</insert>
+	
+	<!-- 공급처 수정 기존정보 가져오기 -->
+	<select id="getSupsVO" parameterType="String" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+		select * from RAIN_Suppliers_tbl where supsNo = #{supsNo}  
+	</select>	
+	
+	<!--공급처 수정 -->
+<!-- 	<update id="supsUpdate" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+		update from RAIN_Suppliers_tbl set
+		supsCo = #{supsCo}, supsCo = #{supsCo}, supsCo = #{supsCo}, supsCo = #{supsCo}, supsCo = #{supsCo}
+	</update> -->
+	
+	
+	<!--공급처 삭제 -->
+	<delete id="supsDelete" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+		delete from RAIN_Suppliers_tbl where supsNo = #{supsNo}
+	</delete>
+	
+	
 </mapper>

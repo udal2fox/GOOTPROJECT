@@ -12,16 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode
-@Getter
-@Setter
 public class userVO {
-	
+
 	private int userNo, spotNo, companyNo;
 	private String uName, uEmail, uContact, uPw;
 	private Date  uPwUpdate, uConnectDate;
-	
-	
-
-
 }

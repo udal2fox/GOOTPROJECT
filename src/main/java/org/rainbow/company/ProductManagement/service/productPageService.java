@@ -42,5 +42,12 @@ public interface productPageService
 	/** 공급처 등록 자동 할당값에 쓸 카운팅 */
 	public int supsNoCount();
 	
+	/** 공급처 등록 reg */
+	public int insertSups(suppliersVO vo);
+	
+	/** 공급처 수정 기존정보 가져오기ㅏ */
+	public suppliersVO getSupsVO(String supsNo);
+	
+	
 	
 }

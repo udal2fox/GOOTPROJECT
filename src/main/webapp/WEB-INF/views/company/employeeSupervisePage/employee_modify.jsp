@@ -30,7 +30,7 @@
 								<th> 직급 </th>
 								<td><input class="input2" type="text" name="job" value="${vo.job }"></td>
 								<th></th>
-								<td><input class="input4" type="text" name="eAddr"></td>
+								<td><input class="input4" type="text" name="eAddr2" value="${vo.EAddr2 }"></td>
 							</tr>
 							<tr>
 								<th> 전화번호 </th>

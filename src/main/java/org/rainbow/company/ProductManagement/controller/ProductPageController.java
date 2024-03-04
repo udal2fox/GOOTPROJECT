@@ -86,8 +86,12 @@ public class ProductPageController
     }
     // 공급처 수정 이동
     @GetMapping(value = "/moveSuppliersUpdate")
-    public String moveSuppliersUpdate(Model model, Criteria cri) 
+    public String moveSuppliersUpdate(@RequestParam("supsNo") String supsNo, Model model) 
     {
+    	suppliersVO svo = pService.getSupsVO(supsNo);
+    	log.info(svo);
+    	model.addAttribute("GSV", svo);
+    	
     	return "/company/productManagement/suppliersUpdate";
     }
     // 상품 개별 등록 이동
@@ -105,8 +109,8 @@ public class ProductPageController
     
     
 	// 상품관리 이동 매핑 끝 --------------------------------------------------------------------------------------
-	// 상품 조회 리스트  기능들 ------------------------------------------------------------------------------------
 	
+    // 상품 조회 리스트  기능들 ------------------------------------------------------------------------------------
     
     // 상품 조회리스트 검색 기능
     @ResponseBody
@@ -212,7 +216,6 @@ public class ProductPageController
     }
     
     // 공급처 엑셀 업로드 기능
-    // 엑셀 파일 업로드 처리
     @ResponseBody
     @PostMapping(value = "/supsExcelInput", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> supsExcelUpload(@RequestParam("EXCEL") MultipartFile file) 
@@ -270,4 +273,41 @@ public class ProductPageController
     	ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
+    // 공급처 등록 일단 파일 어떻게 넣을지 판단 안되서.. 파일 넣는기능 제외하고 그냥 인서트
+    @PostMapping("/insertSupsReg")
+    public String insertSupsReg(suppliersVO svo)
+    {
+    	log.info(svo);
+
+    	pService.insertSups(svo);
+    	
+    	return "redirect:/moveSuppliers";
+
+    }
+    
+    // 공급처 수정
+    @PostMapping("/supsUpdate")
+    public String supsUpdate(suppliersVO svo)
+    {
+    	log.info(svo);
+
+    	pService.insertSups(svo);
+    	
+    	return "redirect:/moveSuppliers";
+
+    }
+    
+    // 공급처 삭제
+    @PostMapping("/supsDelete")
+    public String supsDelete(suppliersVO svo)
+    {
+    	log.info(svo);
+
+    	pService.insertSups(svo);
+    	
+    	return "redirect:/moveSuppliers";
+
+    }
+    
+    // 공급처 리스트 기능 끝 ------------------------------------------------------------------------------------------------------
 }

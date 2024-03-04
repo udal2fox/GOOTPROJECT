@@ -104,7 +104,7 @@
 			    <tbody>
 			        <c:forEach var="ex" items="${list}">
 			            <tr class="sups" data-type="${ex.supsBnt}" data-status="${ex.supsSt}">
-				        	<td><a href="moveSuppliersUpdate">${ex.supsNo}</a></td>
+				        	<td><a href="moveSuppliersUpdate?supsNo=${ex.supsNo }">${ex.supsNo}</a></td>
 				        	<td>${ex.supsCo}</td>
 				        	<td>${ex.supsBnt}</td>
 				        	<td>${ex.supsBizRegNum}</td>

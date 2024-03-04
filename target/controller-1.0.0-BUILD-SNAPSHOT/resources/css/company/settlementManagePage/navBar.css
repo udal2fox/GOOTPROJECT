@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+/* 노토 산스 서체 불러오기 */
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 스타일 제거  시작 */
+body, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li a {
+  color: inherit;		/* 부모 엘리먼트의 값을 물려받는다 */
+  text-decoration-line: none;	/* 밑줄 제거 */
+}
+/* 스타일 제거 끝 */
+
+/* 세부 메뉴 숨기기 */
+.top-bar__menu-box-1 > ul ul {
+  display: none;
+}
+
+/* 네비바 가운데 정렬 */
+.con {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  position: fixed;
+  display: inline-flex;
+  justify-content: center;
+}
+
+/* 변수 생성 */
+:root {
+  --site-width: 1800px;
+}
+
+/* 사이트 최소 너비 설정 */
+.con-min-width {
+  min-width: var(--site-width);
+}
+
+/* 실제 메뉴 너비 설정 */
+.top-bar > .con {
+  width: var(--site-width);
+}
+
+/* 실제 메뉴에 사용할 너비 설정 */
+.top-bar__menu-box-1 > ul > li {
+  display: inline-block;
+}
+
+/* 문자 가운데 정렬 */
+.top-bar__menu-box-1 {
+  text-align: center;
+}
+
+/* 검정바탕에 흰 서체 스타일 */
+.top-bar__menu-box-1 ul {
+  background-color: #4B5BE1;
+  color: white;
+}
+
+/* 모든 메뉴 크기 조절 */
+.top-bar__menu-box-1 ul > li > a {
+  display: block;
+  font-size: 1.5rem;
+  padding: 10px 50px;
+}
+
+/* 메뉴에 마우스 호버 시 배경색을 변경  */
+.top-bar__menu-box-1 ul > li:hover:not(#logo_hover_del)> a { /* 로고 부분은 호버 제거 */
+  background-color: #CDC6FF;
+  text-decoration-line: none;
+}
+
+#logo_hover_del{
+	text-decoration-line: none;
+}
+
+/* 세부 메뉴 표시  */
+.top-bar__menu-box-1 > ul > li:hover:not(#logo_hover_del) > ul {
+  display: block;
+  text-decoration-line: none;
+}
+
+/* 상위 메뉴의 위치 제한 */
+.top-bar__menu-box-1 > ul > li {
+  position: relative;
+}
+
+/* 세부 메뉴에 absolute 값을 주기 */
+.top-bar__menu-box-1 > ul > li > ul {
+  position: absolute;
+  top: 100%;		/* 2차 메뉴를 1차 메뉴의 아래에 위치시킨다 */
+  left: 0;		/* 2차 메뉴를 1차 메뉴의 왼쪽 벽에 붙인다 */
+  width: 100%;		/* 부모의 너비를 그대로 받아온다 */
+}
+
+/* 네비바 세부 메뉴 스타일 */
+.navBar_subMenu{
+  font-size: 1.3rem;
+  padding: 7px;
+}
+
+.navBar_padding_right{
+	padding-left: 50px;
+}
+
+.navBar_padding_left{
+	padding-right: 50px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
+.bi-1-circle-fill{
+	color: #FF588C;
+	
+}
+
+.logo_img{
+	width: 100px;
+}
+
+#profile_size{
+	
+	font-size: 20px;
+}
+
+#profile_padding{
+	
+	padding-top: 20px;
+}
+

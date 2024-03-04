@@ -53,6 +53,12 @@
 	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>
 	<context:component-scan base-package="org.rainbow.company.custMgmt.service"/>
 
+	<!-- userAdmin 관련 mapper OR service -->
+	<mybatis-spring:scan
+			base-package="org.rainbow.userAdminPage.mapper"/>
+	<context:component-scan
+			base-package="org.rainbow.userAdminPage.service"/>
+
 
 
 	<!-- 트랜젝션 및 aop 관련 항목들 -->

@@ -1,29 +1,29 @@
-/**form 객체 가져오기 */
+/**form 객체 가져오기 *//*
 const f = document.forms[0];
 
 
-/**각 버튼들 클릭 이벤트 (버튼 분기 태우기) */
-console.log(document.querySelectorAll('.companyListBtns'));
+*//**각 버튼들 클릭 이벤트 (버튼 분기 태우기) *//*
+//console.log(document.querySelectorAll('.companyListBtns'));
 document.querySelectorAll('.companyListBtns').forEach( btn => {
 
 	btn.addEventListener('click', () => {
 	
 		//눌려진 버튼의 id 가져와서 저장
 		let type = btn.id;
-		console.log(type);
+		//console.log(type);
 		
 		if(type === 'searchBarSearchBtn') {
 			searchBarSearchResult();
 		}else if(type === 'downloadExcelBtn') {
 			
 		}else if(type === 'moveCompanyRegisterBtn') {
-			moveCompanyRegister();
+			
 		}
 		
 	});
 
 });
-
+*/
 
 
 
@@ -59,28 +59,23 @@ function searchBarSearchResult(){
 
 
 
-/** 'companyList.jsp' 에서 상담번호 클릭 시 'companyView.jsp'로 값 보내기  */
+/** 'companyList.jsp' 에서 기업 번호 클릭 시 'companyView.jsp'로 값 보내기  */
 document.querySelectorAll("tbody a").forEach(aEle => {
 	aEle.addEventListener('click', function(e){
 		e.preventDefault();
 		
-		let companyNo = this.getAttribute("href");
+	/*	let companyNo = this.getAttribute("href");
 		
-		console.log(companyNo);
+		console.log(companyNo);*/
 
 
 		
-		location.href = '/companyView?companyNo=' + companyNo;
+		location.href = '/companyView';
 		
 	})
 })
 
-
-/** 기업 등록 버튼 누르면 'companyRegister.jsp'로 이동*/
-function moveCompanyRegister(){
-	location.href = '/moveCompanyRegister';
-}
-
-
-
-
+document.getElementById("moveCompanyRegisterBtn").addEventListener('click', ()=>{
+	
+	location.href = '/companyRegister';
+})

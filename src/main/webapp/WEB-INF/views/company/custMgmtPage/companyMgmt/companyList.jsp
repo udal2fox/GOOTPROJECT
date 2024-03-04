@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,18 +123,17 @@
             </tr>
             </thead>
   			<tbody>
-            <c:forEach var="vo" items="${companyVO }">
-               <tr>
-                  <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
-                  <td>${vo.cName }</td>
-                  <td>${vo.cBizNum }</td>
-                  <td>${vo.cBizType }</td>
-                  <td>${vo.cArea }</td>
-                  <td>${vo.cAddr }</td>
-                  <td>${vo.cContact }</td>
-				  <td>${vo.cBizStatus }</td>
-               </tr>
-            </c:forEach>
+      			<tr>
+				<td><a href="/companyView">1</a></td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				
+				</tr>
             
          </tbody>
       </table>
@@ -148,5 +147,6 @@
 </div>
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>
 </html>

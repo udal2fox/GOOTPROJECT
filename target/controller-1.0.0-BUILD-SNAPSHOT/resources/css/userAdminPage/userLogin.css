@@ -1,0 +1,126 @@
+/* GOOGLE FONTS */
+@font-face {
+  font-family: "S-CoreDream-3Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
+}
+
+/* VARIABLES CSS */
+:root {
+  --nav--width: 60px;
+
+  /* Colores */
+  --bg-color: #fa0050;
+  --first-color: #ff5798;
+  --sub-color: #ff90da;
+  --white-color: #fff;
+
+  /* Fuente y tipografia */
+  --body-font: "S-CoreDream-3Light";
+  --normal-font-size: 1rem;
+  --small-font-size: 0.875rem;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* z index */
+  --z-fixed: 100;
+}
+
+/* BASE */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 1536px;
+  height: 100vh;
+  position: relative;
+  padding: 0;
+  margin: 0 auto;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  transition: 0.5s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+header{
+  background-color: var(--bg-color);
+}
+.nav-logo{
+  color: var(--white-color);
+  font-weight: var(--font-black);
+  font-size: var(--normal-font-size);
+}
+
+.nav-item{
+  display: grid;
+  grid-template-columns: max-content max-content;
+  align-items: center;
+  color: var(--white-color);
+  border-radius: 0.5rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.nav-item :hover{
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+.nav-link{
+  color: var(--white-color);
+  font-weight: var(--font-semibold);
+  font-size: var(--small-font-size);
+}
+
+main{
+  padding-top: 75px;
+  padding-bottom: 75px;
+  min-height: 600px;
+
+}
+
+.login-form{
+  padding-top: 200px;
+}
+
+.fir-span{
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: var(--font-bold);
+}
+
+.sub-span{
+  margin-bottom: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: var(--font-semibold);
+}
+
+label{
+  font-size: 0.8rem;
+  font-weight: var(--font-semibold);
+}
+
+.btn{
+  background-color: var(--bg-color);
+  color: var(--white-color);
+}
+
+
+
+
+

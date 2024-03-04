@@ -242,7 +242,9 @@ input[type="text"],input[type="email"],  select {
 	text-align: center;
 }
 
-
+textarea{
+	border:none;
+}
 
 
 .space_img_btns {

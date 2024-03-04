@@ -7,7 +7,7 @@
  
 
 <!-- 상담 요청 리스트 가져오기-->
-<select id="getSalesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
    
     SELECT *
     FROM RAIN_consult_tbl ORDER by consultNo asc
@@ -15,7 +15,7 @@
 </select>
 
  <!-- 상담 요청 내용 가져오기-->
-  <select id="getSalesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
+  <select id="salesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
   	select * from RAIN_consult_tbl where consultNo=#{consultNo}
   </select>
  

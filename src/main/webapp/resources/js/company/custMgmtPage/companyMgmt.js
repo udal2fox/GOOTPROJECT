@@ -3,14 +3,14 @@ const f = document.forms[0];
 
 
 /**각 버튼들 클릭 이벤트 (버튼 분기 태우기) */
-//console.log(document.querySelectorAll('.enterpriseListBtns'));
+console.log(document.querySelectorAll('.companyListBtns'));
 document.querySelectorAll('.companyListBtns').forEach( btn => {
 
 	btn.addEventListener('click', () => {
 	
 		//눌려진 버튼의 id 가져와서 저장
 		let type = btn.id;
-		//console.log(type);
+		console.log(type);
 		
 		if(type === 'searchBarSearchBtn') {
 			searchBarSearchResult();
@@ -59,25 +59,6 @@ function searchBarSearchResult(){
 
 
 
-
-
-
-
-
-
-
-/** 기업 등록 버튼 누르면 'companyRegister.jsp'로 이동*/
-function moveCompanyRegister(){
-	location.href = '/moveCompanyRegister';
-}
-
-
-
-
-/** 'companyList.jsp' 에서 상담 요청 리스트 가져오기  */
-
-
-
 /** 'companyList.jsp' 에서 상담번호 클릭 시 'companyView.jsp'로 값 보내기  */
 document.querySelectorAll("tbody a").forEach(aEle => {
 	aEle.addEventListener('click', function(e){
@@ -87,10 +68,19 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 		
 		console.log(companyNo);
 
-		//controller에서 @RequestMapping("/board/*") //전체적인 경로 설정 
+
 		
-		location.href = '/getCompanyView?companyNo=' + companyNo;
+		location.href = '/companyView?companyNo=' + companyNo;
 		
 	})
 })
+
+
+/** 기업 등록 버튼 누르면 'companyRegister.jsp'로 이동*/
+function moveCompanyRegister(){
+	location.href = '/moveCompanyRegister';
+}
+
+
+
 

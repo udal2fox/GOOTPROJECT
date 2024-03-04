@@ -6,8 +6,12 @@
   
   <!-- 기업 리스트 가져오기-->
   <select id="companyList"  resultType="org.rainbow.company.custMgmt.domain.companyVO">
+<<<<<<< HEAD
   	SELECT * 
   		FROM RAIN_cCompany_tbl ORDER by companyNo asc
+=======
+  	SELECT * FROM RAIN_cCompany_tbl ORDER by companyNo asc
+>>>>>>> d9cfd03e570329eec1ce4efa850f36f91ac695be
   
   
   </select>

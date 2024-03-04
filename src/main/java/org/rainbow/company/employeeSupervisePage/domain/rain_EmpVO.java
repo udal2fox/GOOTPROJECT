@@ -41,6 +41,9 @@ public class rain_EmpVO {
 	// 사원 주소
 	private String eAddr;
 	
+	// 상세주소
+	private String eAddr2;
+	
 	// 주민등록번호
 	private String identyNum;
 	

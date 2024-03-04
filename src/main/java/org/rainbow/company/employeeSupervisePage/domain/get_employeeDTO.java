@@ -30,6 +30,8 @@ public class get_employeeDTO {
 	
 	private String eAddr;
 	
+	private String eAddr2;
+	
 	private String eBank;
 	
 	private String salAccount;

@@ -16,4 +16,7 @@ public interface searchEmployeeService {
 	 
 	// 직원 정보 조회 & 편집
 	public get_employeeDTO get(int eno);
+	
+	// 직원 정보 등록
+	public void insert(get_employeeDTO dto);
 }

@@ -9,6 +9,6 @@ public interface companyService {
 	
 	
 	/** 'companyList.jsp' 에서 상담 요청 리스트 가져오기  */
-	public List<companyVO> getCompanyList();
+	public List<companyVO> companyList();
 
 }

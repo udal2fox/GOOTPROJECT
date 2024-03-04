@@ -14,8 +14,8 @@ import lombok.extern.log4j.Log4j;
 public class spotController {
 	
 	
-	@GetMapping("/getSpotList")
-	public String getSpotList( ) {
+	@GetMapping("/spotList")
+	public String spotList( ) {
 		
 		return "/company/custMgmtPage/spotMgmt/spotList";	
 		 

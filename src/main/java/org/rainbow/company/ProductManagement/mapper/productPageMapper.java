@@ -31,5 +31,11 @@ public interface productPageMapper
 	/** 공급처 리스트 조회 */ 
 	public List<suppliersVO> supsList();
 	
+	/** 공급처 검색  */
+	public List<suppliersVO> supsSearch(String keyword);
+	
+	/** sups 엑셀 파일 업로드 */
+	public int insertSupsExcel(suppliersVO vo);
+	
 	
 }

@@ -133,7 +133,7 @@
 </div>
 
 <script type="text/javascript" src="/resources/js/company/productPage/supsPageFilter.js"></script> 
-<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
-<script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>
+<script type="text/javascript" src="/resources/js/company/productPage/supsPageSearch.js"></script>
+<script type="text/javascript" src="/resources/js/company/productPage/supsUpDownLoad.js"></script>
 
 </html>

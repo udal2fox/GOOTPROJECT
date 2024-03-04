@@ -20,11 +20,12 @@ document.getElementById("excelUpload").addEventListener("change", function() {
         return;
     }
     let formData = new FormData();
+    console.log(formData);
 	formData.append("EXCEL", files[0]);
     
     if(confirm("파일 을 업로드 하시 것슴까!?"))
 	{
-    	fetch('/prdExcelInput', {
+    	fetch('/supsExcelInput', {
     		  method: 'POST',
     		  body: formData
     		})

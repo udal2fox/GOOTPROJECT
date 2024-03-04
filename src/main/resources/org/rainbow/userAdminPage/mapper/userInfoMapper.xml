@@ -4,8 +4,8 @@
 
 <mapper namespace="org.rainbow.userAdminPage.mapper.userInfoMapper">
 	
-	<select id="userAdminLogin" parameterType="String" resultType="hashmap">
-		select * from RAIN_cUser_tbl
+	<select id="userAdminLogin" parameterType="String" resultType="HashMap">
+		select uName,spotNo from RAIN_cUser_tbl
 		where uEmail = #{uEmail} and uPw = #{uPw}
 	</select>
 

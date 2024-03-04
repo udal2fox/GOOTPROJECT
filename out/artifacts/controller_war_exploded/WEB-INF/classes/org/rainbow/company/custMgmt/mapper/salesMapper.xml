@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="org.rainbow.company.custMgmt.mapper.salesMapper">
+ 
+ 
+ 
+
+<!-- 상담 요청 리스트 가져오기-->
+<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+   
+    SELECT *
+    FROM RAIN_consult_tbl ORDER by consultNo asc
+   
+</select>
+
+ <!-- 상담 요청 내용 가져오기-->
+  <select id="salesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
+  	select * from RAIN_consult_tbl where consultNo=#{consultNo}
+  </select>
+ 
+ 
+ <!-- 영업 내용 저장(수정)하기 -->
+ <update id="saveSales" parameterType="org.rainbow.company.custMgmt.domain.consultVO">
+  		update RAIN_consult_tbl
+set csStatus=#{csStatus}, csEname=#{csEname}, csResponseDate=#{csResponseDate},
+    csFailReason=#{csFailReason}, csFailDetailReason=#{csFailDetailReason}
+where consultNo=#{consultNo}
+
+  
+  </update>
+  
+  
+   <!-- 영업 히스토리1 내용 저장 하기 -->
+	<insert id="saveFirstConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
+	
+	insert into RAIN_consultHistory_tbl (consultNo, cshDate1, cshContent1)
+values (#{consultNo}, #{cshDate1}, #{cshContent1})
+	
+	</insert>
+ 
+ 
+ <!-- 영업 히스토리 1,2,3,4,5 내용 저장(수정) 하기 -->
+	<update id="saveConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
+	
+	update RAIN_consultHistory_tbl
+set cshDate1=#{cshDate1}, cshContent1=#{cshContent1},
+    cshDate2=#{cshDate2}, cshContent2=#{cshContent2},
+    cshDate3=#{cshDate3}, cshContent3=#{cshContent3},
+    cshDate4=#{cshDate4}, cshContent4=#{cshContent4},
+    cshDate5=#{cshDate5}, cshContent5=#{cshContent5}
+where consultNo=#{consultNo}
+	
+	</update>
+ 
+ 
+ 
+ </mapper>

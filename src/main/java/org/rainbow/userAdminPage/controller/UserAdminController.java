@@ -1,7 +1,6 @@
 package org.rainbow.userAdminPage.controller;
 
-
-import org.rainbow.userAdminPage.service.userInfoService;
+import org.rainbow.userAdminPage.service.userInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import java.util.Map;
 public class UserAdminController {
 
 	@Autowired
-	private userInfoService uService;
+	private userInfoServiceImpl uService;
 
 	// 최초 접근 시
 	@GetMapping("/userLogin")
@@ -28,64 +27,17 @@ public class UserAdminController {
 
 	// 로그인
 	@ResponseBody
-	@PostMapping(value = "/userAdminLogin")
+	@PostMapping(value = "/login")
 	public String login(@RequestBody Map<String, Object> param) {
 		String uEmail = (String) param.get("uEmail");
 		String uPw = (String) param.get("uPw");
-		HashMap<String, Object> userInfo = uService.userAdminLogin(uEmail,uPw);
-		System.out.println(userInfo);
+		System.out.println(uEmail);
+		System.out.println(uPw);
+		HashMap<String, Object> map = uService.userAdminLogin(uEmail,uPw);
+		System.out.println(map);
 
-		return null;
+		return "userAdminPage/userLogin";
 	}
 
-	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "/userAdminPage/dashboard";
-	}
-
-	@GetMapping("/manage_member")
-	public String member() {
-		return "/userAdminPage/manage_member";
-	}
-
-	@GetMapping("/manage_card")
-	public String card() {
-		return "/userAdminPage/manage_card";
-	}
-
-	@GetMapping("/manage_gift")
-	public String gift() {
-		return "/userAdminPage/manage_gift";
-	}
-
-	@GetMapping("/manage_gift_Edit")
-	public String gift_Edit() {
-		return "/userAdminPage/manage_gift_Edit";
-	}
-
-	@GetMapping("/manage_recipients")
-	public String recipients() {
-		return "/userAdminPage/manage_recipients";
-	}
-
-	@GetMapping("/usageHistory_details")
-	public String usageHistory_details() {
-		return "/userAdminPage/usageHistory_details";
-	}
-
-	@GetMapping("/usageHistory_list")
-	public String usageHistory_list() {
-		return "/userAdminPage/usageHistory_list";
-	}
-
-	@GetMapping("/userEdit")
-	public String userEdit() {
-		return "/userAdminPage/userEdit";
-	}
-
-	@GetMapping("/inquiryBoard")
-	public String inquiryBoard() {
-		return "/userAdminPage/inquiryBoard";
-	}
 
 }

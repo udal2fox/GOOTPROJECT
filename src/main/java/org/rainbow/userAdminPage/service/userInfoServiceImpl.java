@@ -16,6 +16,7 @@ public class userInfoServiceImpl implements userInfoService{
 
     @Override
     public HashMap<String,Object> userAdminLogin(String uEmail, String uPw) {
+        System.out.println("service: " + uEmail + "/" + uPw);
         return uMapper.userAdminLogin(uEmail,uPw);
 
     }

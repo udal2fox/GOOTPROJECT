@@ -1,0 +1,120 @@
+	div{
+		display: block;
+	}
+	pull-wrap{
+		width : 100%;
+		height: auto;
+	}
+	h3{	
+		margin-left: 30px;
+		text-align: left;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	#searchBar{
+		display : inline-block;
+		margin-left: 80px;
+	}
+	#selectDept{
+		display : inline-block;
+		margin-left: 100px;
+	}
+	span{
+		margin-right: 20px;
+	}
+	.searchBar{
+		width : 210px;
+		height: 40px;
+		border: 1px solid gray;
+		border-radius: 5px;
+	}
+	.dept-sb{
+		width: 150px;
+		height: 40px;
+		border: 1px solid gray;
+		border-radius: 5px;
+	}
+	#execelBtn{
+		width : 167px;
+		height: 40px;
+		margin-left: 715px;
+		border: none;
+		border-radius: 5px;
+		background-color: #787DFF;
+		color: white;
+	}
+	#searchResult_table{
+		width: 100%;
+		height: 500px;
+		margin-top: 20px;
+	}
+	#searchResult{
+		margin : 0 auto;
+		width: 90%;
+		height: auto;
+		border: 2px solid gray;
+		border-collapse: collapse;
+	}
+	#searchResult th, #searchResult td {
+ 	 	border: 1px solid #ccc;
+  		padding: 8px;
+  		text-align: center;
+  		width: 112px;
+  		height: 30px; 
+	}
+	.insertEmployeeBtn{
+		width: 100%;
+		height: 80px;
+		padding : 20px;
+		text-align: right;
+	}
+	#insertBtn{
+		width:100px;
+		height: 40px;
+		border: none;
+		border-radius: 5px;
+		background-color: skyblue;
+		color: white;
+		margin-right: 65px;
+	}
+	#table_header{
+		background-color: #eaeaea;
+	}
+	.page-nation li{
+		list-style: none;
+	}
+
+	.page-wrap{
+		text-align: center;
+		font-size: 0;
+	}
+	.page-nation {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+
+	.page-nation a{
+		display: block;
+		margin: 0 3px;
+		flex: left;
+		border : none;
+		border-radius : 5px;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		background-color: #F4F4F4;
+		font-size: 13px;
+		color: black;
+		text-decoration: none;
+	}
+	.page-nation a.active{
+		background-color: #0078ff;
+		color: #fff;
+	}
+	.page-nation a:hover{
+		background-color: #0078ff;
+		color: #fff;
+	}

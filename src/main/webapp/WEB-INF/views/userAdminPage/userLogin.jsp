@@ -56,14 +56,14 @@
                     <div class="sub-span"><span>간편한 임직원 생일 복지 서비스를 이용해 보세요.</span></div>
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="userId" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="uEmail" placeholder="name@example.com">
                         <label for="floatingInput">
                             <ion-icon name="mail"></ion-icon>
                             &ensp; 이메일 주소
                         </label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="userPw" placeholder="Password">
+                        <input type="password" class="form-control" id="floatingPassword" name="uPw" placeholder="Password">
                         <label for="floatingPassword">
                             <ion-icon name="key"></ion-icon>
                             &ensp; 비밀번호

@@ -1,8 +1,9 @@
 package org.rainbow.userAdminPage.service;
 
-import org.springframework.stereotype.Service;
+import org.rainbow.userAdminPage.domain.userInfoVO;
 
-@Service
-public class UserAdminService {
+public interface UserAdminService {
+
+    public userInfoVO userAdminLogin(userInfoVO vo);
 
 }

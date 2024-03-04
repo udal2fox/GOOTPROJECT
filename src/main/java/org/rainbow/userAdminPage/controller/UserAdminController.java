@@ -1,33 +1,42 @@
 package org.rainbow.userAdminPage.controller;
 
-import org.springframework.http.MediaType;
+import org.rainbow.userAdminPage.domain.userInfoVO;
 
+import org.rainbow.userAdminPage.service.UserAdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.*;
-
 import lombok.extern.log4j.Log4j;
-
-import java.util.HashMap;
 
 @Controller
 @RequestMapping("/userAdminPage/*")
 @Log4j
 public class UserAdminController {
 
-	@ResponseBody
-	@PostMapping(value = "/login",consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String login(){
+	@Autowired
+	private UserAdminService service;
 
-		return null;
-	}
-
+	// 최초 접근 시
 	@GetMapping("/userLogin")
-	public String userLogin(){
+	public String userLogin() {
 		return "userAdminPage/userLogin";
 	}
+
+
+	// 로그인
+	@PostMapping(value = "/login")
+	public userInfoVO login(@RequestParam("uEmail") String uEmail, @RequestParam("uPw") String uPw) {
+		userInfoVO vo = new userInfoVO();
+		vo.setUEmail(uEmail);
+		vo.setUPw(uPw);
+		System.out.println(vo);
+		service.userAdminLogin(vo);
+		System.out.println(vo);
+		return vo;
+	}
+
 	@GetMapping("/sidebar")
-	public String sidebar(){
+	public String sidebar() {
 		return "userAdminPage/sidebar";
 	}
 

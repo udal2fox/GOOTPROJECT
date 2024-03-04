@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+.saleStatsTableSearch{
+	
+	margin-top: 10px;
+	width: 1200px;
+	background-color: rgb(224, 224, 224);
+	padding-top: 10px;
+	
+}
+
+.saleStatsTableCal{
+	
+	width: 1200px;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.saleStatsTableInfo{
+	
+	width: 1200px;
+	text-align: center;
+	margin-top: 20px;
+	border: 3px solid #ccc;
+}
+
+.paintLightgray{
+	
+	background-color: #ccc;
+	font-weight: bold;
+}
+
+#paintLightblue{
+	
+	background-color: rgb(52, 152, 219);
+	color: #fff;;
+}
+
+.termBtn{
+	
+	width: 80px;
+	height: 30px;
+	border: none;
+	font-weight: bold;
+}
+
+.termBtnDown{
+	
+	width: 160px;
+	height: 40px;
+	border: none;
+	color: white;
+	font-weight: bold;
+}
+
+.termInput{
+	
+	width: 99px;
+	
+}
+
+.pageNum{
+
+	padding-top: 50px;
+	display: flex;
+	justify-content: center;
+	border: none;
+	
+}
+
+.rowWhite{
+	
+	background-color: white;
+	font-weight: bold;
+}

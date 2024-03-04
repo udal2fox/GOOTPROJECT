@@ -1,0 +1,2076 @@
+Index: src/main/webapp/web/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/web/WEB-INF/web.xml b/src/main/webapp/web/WEB-INF/web.xml
+new file mode 100644
+--- /dev/null	(date 1709113572801)
++++ b/src/main/webapp/web/WEB-INF/web.xml	(date 1709113572801)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
++         version="4.0">
++</web-app>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageSearch.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// 서치 기능 \r\n\r\n//키워드와 현재 페이지를 저장하는 전역 변수\r\nlet currentKeyword = '';\r\nlet currentPage = 1;\r\n\r\n// 검색 버튼 클릭 이벤트 핸들러\r\ndocument.querySelector('#search').addEventListener('click', function() {\r\n    currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신\r\n    currentPage = 1; // 페이지 초기화\r\n    fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청\r\n});\r\n\r\n\r\n////페이지네이션 버튼 클릭 이벤트 핸들러\r\n//document.querySelector('.page-nation').addEventListener('click', function(event) {\r\n//    if (event.target.tagName === 'A') {\r\n//        event.preventDefault();\r\n//        let pageNum = event.target.getAttribute('href');\r\n//        currentPage = pageNum; // 현재 페이지 갱신\r\n//        console.log(currentPage);\r\n//        fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청\r\n//    }\r\n//});\r\n\r\n\r\n\r\n// 검색 결과 요청 함수\r\nfunction fetchSearchResults(keyword, page) {\r\n    fetch('/searchProduct?keyword=' + keyword + '&pageNum=' + page)\r\n        .then(response => response.json())\r\n        .then(data => {\r\n        \tconst list = data[0]; // 리스트\r\n    \t    const ptdo = data[1]; // ptdo 객체\r\n    \t    console.log(list);\r\n    \t    console.log(ptdo);\r\n    \t    // 리스트와 ptdo 객체를 사용하여 작업 수행\r\n    \t    let msg = '';\r\n    \t    let pageMsg = '';\r\n    \t    list.forEach(list =>\r\n    \t    {\r\n\t    \tmsg += '<tr class=\"product\" data-type=\"'+list.prdMajorCtg+'\" data-status=\"'+list.prdSt+'\">'+\r\n\t\t\t\t\t   '<td>'+list.supsCo+'</td>'+\r\n\t\t\t\t\t   '<td>'+list.prdNo +'</td>'+\r\n\t\t\t\t\t   '<td>'+list.prdSdc+'</td>'+\r\n\t\t\t\t\t   '<td>'+list.prdMajorCtg+'</td>'+\r\n\t\t\t\t\t   '<td>'+list.prdSubCtg+'</td>'+\r\n\t\t\t\t\t   '<td>'+\r\n\t\t\t\t\t   \t\t'<img alt=\"\" src=\"'+list.prdImg+'\"align=\"left\" ><div id=\"tdTop\">'+list.prdName+'</div></td>'+\r\n\t\t\t\t\t   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+\r\n\t\t\t\t       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+\r\n\t\t\t\t\t   '<td>'+(list.prdMargin * 100 )+'%</td>'+\r\n\t\t           '</tr>';\r\n    \t    })\r\n    \t    let pageMaker = ptdo;\r\n\t\t\t\r\n\t\t\t// 이전 페이지 링크\r\n\t\t\tif (pageMaker.prev) {\r\n\t\t\t\tpageMsg += '<li class=\"previous\">' +\r\n\t\t\t            '<a href=\"' + (pageMaker.startPage - 1) + '\"> &lt; </a>' +\r\n\t\t\t            '</li>';\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\t// 페이지 번호 목록\r\n\t\t\tfor (let num = pageMaker.startPage; num <= pageMaker.endPage; num++) {\r\n\t\t\t\tpageMsg += '<li>' +\r\n\t\t\t            '<a href=\"' + num + '\" class=\"' + (pageMaker.cri.pageNum == num ? 'active' : '') + '\">' + num + '</a>' +\r\n\t\t\t            '</li>';\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\tif (pageMaker.next) {\t\r\n\t\t\t    pageMsg += '<li>' +\r\n\t\t\t                '<a href=\"' + (pageMaker.endPage + 1) + '\"> &gt; </a>' +\r\n\t\t\t                '</li>';\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\t// HTML 마무리\r\n\t\t\tpageMsg += '</ul>' +\r\n\t\t\t        '</div>';\r\n    \t    \r\n    \t    document.querySelector('#table-prd tbody').innerHTML = msg;\r\n    \t    document.querySelector('.page-nation').innerHTML = pageMsg;\r\n    \t    \r\n    \t    filter();\r\n    \t    \r\n        })\r\n        .catch(error => console.error('Error:', error));\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageSearch.js b/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageSearch.js
+--- a/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageSearch.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageSearch.js	(date 1709108309960)
+@@ -1,88 +1,42 @@
+-// 서치 기능 
+-
+-//키워드와 현재 페이지를 저장하는 전역 변수
+-let currentKeyword = '';
+-let currentPage = 1;
+-
+-// 검색 버튼 클릭 이벤트 핸들러
+-document.querySelector('#search').addEventListener('click', function() {
+-    currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
+-    currentPage = 1; // 페이지 초기화
+-    fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청
+-});
+-
+-
+-////페이지네이션 버튼 클릭 이벤트 핸들러
+-//document.querySelector('.page-nation').addEventListener('click', function(event) {
+-//    if (event.target.tagName === 'A') {
+-//        event.preventDefault();
+-//        let pageNum = event.target.getAttribute('href');
+-//        currentPage = pageNum; // 현재 페이지 갱신
+-//        console.log(currentPage);
+-//        fetchSearchResults(currentKeyword, currentPage); // 검색 결과 요청
+-//    }
++//// 서치 기능
++//
++//// 키워드와 현재 페이지를 저장하는 전역 변수
++//let currentKeyword = '';
++//
++//// 검색 버튼 클릭 이벤트 핸들러
++//document.querySelector('#search').addEventListener('click', function() {
++//    currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
++//    fetchSearchResults(currentKeyword); // 검색 결과 요청
+ //});
+-
+-
+-
+-// 검색 결과 요청 함수
+-function fetchSearchResults(keyword, page) {
+-    fetch('/searchProduct?keyword=' + keyword + '&pageNum=' + page)
+-        .then(response => response.json())
+-        .then(data => {
+-        	const list = data[0]; // 리스트
+-    	    const ptdo = data[1]; // ptdo 객체
+-    	    console.log(list);
+-    	    console.log(ptdo);
+-    	    // 리스트와 ptdo 객체를 사용하여 작업 수행
+-    	    let msg = '';
+-    	    let pageMsg = '';
+-    	    list.forEach(list =>
+-    	    {
+-	    	msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+'">'+
+-					   '<td>'+list.supsCo+'</td>'+
+-					   '<td>'+list.prdNo +'</td>'+
+-					   '<td>'+list.prdSdc+'</td>'+
+-					   '<td>'+list.prdMajorCtg+'</td>'+
+-					   '<td>'+list.prdSubCtg+'</td>'+
+-					   '<td>'+
+-					   		'<img alt="" src="'+list.prdImg+'"align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
+-					   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
+-				       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
+-					   '<td>'+(list.prdMargin * 100 )+'%</td>'+
+-		           '</tr>';
+-    	    })
+-    	    let pageMaker = ptdo;
+-			
+-			// 이전 페이지 링크
+-			if (pageMaker.prev) {
+-				pageMsg += '<li class="previous">' +
+-			            '<a href="' + (pageMaker.startPage - 1) + '"> &lt; </a>' +
+-			            '</li>';
+-			}
+-			
+-			// 페이지 번호 목록
+-			for (let num = pageMaker.startPage; num <= pageMaker.endPage; num++) {
+-				pageMsg += '<li>' +
+-			            '<a href="' + num + '" class="' + (pageMaker.cri.pageNum == num ? 'active' : '') + '">' + num + '</a>' +
+-			            '</li>';
+-			}
+-			
+-			if (pageMaker.next) {	
+-			    pageMsg += '<li>' +
+-			                '<a href="' + (pageMaker.endPage + 1) + '"> &gt; </a>' +
+-			                '</li>';
+-			}
+-			
+-			// HTML 마무리
+-			pageMsg += '</ul>' +
+-			        '</div>';
+-    	    
+-    	    document.querySelector('#table-prd tbody').innerHTML = msg;
+-    	    document.querySelector('.page-nation').innerHTML = pageMsg;
+-    	    
+-    	    filter();
+-    	    
+-        })
+-        .catch(error => console.error('Error:', error));
+-}
++//
++//
++//// 검색 결과 요청 함수
++//function fetchSearchResults(keyword) {
++//    fetch('/searchProduct?keyword=' + keyword)
++//        .then(response => response.json())
++//        .then(data => {
++//            console.log(data);
++//            let list = data;
++//            let msg = '';
++//            list.forEach(list => {
++//                msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+' style="display:table-row;">'+
++//					   '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
++//					   '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
++//					   '<td>'+list.prdSdc+'</td>'+
++//					   '<td>'+list.prdMajorCtg+'</td>'+
++//					   '<td>'+list.prdSubCtg+'</td>'+
++//					   '<td>'+
++//					   		'<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
++//					   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
++//				       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
++//					   '<td>'+(list.prdMargin * 100 )+'%</td>'+
++//		           '</tr>';
++//                
++//            })
++//            document.querySelector('#table-prd tbody').innerHTML = msg;
++//            filter();
++//            
++//            
++//        })
++//        .catch(error => console.error('Error:', error));
++//}
+Index: out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageFilter.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>(function () {\r\n    // 전역 변수 설정\r\n    const amount = 10; // 페이지당 보여줄 아이템 수\r\n    let pageNum = 1; // 현재 페이지 번호\r\n    let products = document.querySelectorAll('.product'); // 전체 상품 리스트\r\n\r\n    // 필터링 및 페이징 처리 함수\r\n    function filterAndPaginate() {\r\n        // 페이지네이션을 그리는 함수\r\n        function drawPagination(startPage, endPage) {\r\n            const paginationElement = document.getElementById('pagination');\r\n            paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.\r\n\r\n            const ul = document.createElement('ul');\r\n            ul.classList.add('page-nation');\r\n\r\n            for (let num = startPage; num <= endPage; num++) {\r\n                const li = document.createElement('li');\r\n                const a = document.createElement('a');\r\n                a.href = '#'; // 페이지 번호 클릭 시 페이지 이동 방지\r\n                a.innerText = num;\r\n                a.addEventListener('click', () => goToPage(num)); // 페이지 번호 클릭 시 goToPage 함수 호출\r\n                li.appendChild(a);\r\n                ul.appendChild(li);\r\n            }\r\n\r\n            paginationElement.appendChild(ul);\r\n        }\r\n\r\n        // 페이지 이동 함수\r\n        function goToPage(page) {\r\n            pageNum = page;\r\n\r\n            // 각 페이지당 보여줄 상품의 시작 인덱스와 끝 인덱스 계산\r\n            const startIndex = (pageNum - 1) * amount;\r\n            const endIndex = pageNum * amount;\r\n\r\n            // 필터링된 상품 리스트 가져오기\r\n            let filteredProducts = getFilteredProducts();\r\n\r\n            // 현재 페이지에 보여줄 상품만 보이도록 설정\r\n            filteredProducts.forEach((product, index) => {\r\n                if (index >= startIndex && index < endIndex) {\r\n                    product.style.display = 'table-row'; // startIndex부터 endIndex 이전까지만 표시\r\n                } else {\r\n                    product.style.display = 'none';\r\n                }\r\n            });\r\n        }\r\n\r\n        // 상품 필터링 함수\r\n        function filterProducts() {\r\n            // 선택된 상품 종류 필터 및 상태 필터 가져오기\r\n            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter=\"product-type\"]:checked')).map(function (checkbox) {\r\n                return checkbox.value;\r\n            });\r\n            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter=\"product-status\"]:checked')).map(function (checkbox) {\r\n                return checkbox.value;\r\n            });\r\n\r\n            // 각 상품을 순회하면서 필터링 적용\r\n            products.forEach(function (product) {\r\n                let type = product.getAttribute('data-type');\r\n                let status = product.getAttribute('data-status');\r\n\r\n                // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기\r\n                if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {\r\n                    product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정\r\n                } else {\r\n                    product.style.display = 'none';\r\n                }\r\n            });\r\n\r\n            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기\r\n            drawPagination(1, Math.ceil(getFilteredProducts().length / amount));\r\n        }\r\n\r\n        // allCheck 체크박스 이벤트 리스너 등록\r\n        document.getElementById('product-typeAll').addEventListener('change', function () {\r\n            // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경\r\n            let isChecked = this.checked;\r\n            document.querySelectorAll('.filter-checkbox[data-filter=\"product-type\"]').forEach(function (checkbox) {\r\n                checkbox.checked = isChecked;\r\n            });\r\n\r\n            // 필터링 적용\r\n            filterProducts();\r\n            \r\n        });\r\n\r\n        // allListCheck 체크박스 이벤트 리스너 등록\r\n        document.getElementById('product-statusAll').addEventListener('change', function () {\r\n            // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경\r\n            let isChecked = this.checked;\r\n            document.querySelectorAll('.filter-checkbox[data-filter=\"product-status\"]').forEach(function (checkbox) {\r\n                checkbox.checked = isChecked;\r\n            });\r\n            // 필터링 적용\r\n            filterProducts();\r\n        });\r\n\r\n        // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록\r\n        document.querySelectorAll('.filter-checkbox').forEach(function (checkbox) {\r\n            checkbox.addEventListener('change', function () {\r\n                // allCheck 체크박스 상태 업데이트\r\n                let isTypeAllChecked = isAllTypeCheckboxesChecked();\r\n                document.getElementById('product-typeAll').checked = isTypeAllChecked;\r\n\r\n                // allListCheck 체크박스 상태 업데이트\r\n                let isStatusAllChecked = isAllStatusCheckboxesChecked();\r\n                document.getElementById('product-statusAll').checked = isStatusAllChecked;\r\n\r\n                // 필터링 적용\r\n                filterProducts();\r\n            });\r\n        });\r\n\r\n        // 상품 종류 체크박스 모두 선택 여부 확인 함수\r\n        function isAllTypeCheckboxesChecked() {\r\n            // 상품 종류 체크박스 중 선택된 개수 확인\r\n            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter=\"product-type\"]:checked').length;\r\n            // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환\r\n            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter=\"product-type\"]').length;\r\n        }\r\n\r\n        // 상품 상태 체크박스 모두 선택 여부 확인 함수\r\n        function isAllStatusCheckboxesChecked() {\r\n            // 상품 상태 체크박스 중 선택된 개수 확인\r\n            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter=\"product-status\"]:checked').length;\r\n            // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환\r\n            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter=\"product-status\"]').length;\r\n        }\r\n\r\n        // 필터링된 상품 리스트 가져오기\r\n        function getFilteredProducts() {\r\n            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter=\"product-type\"]:checked')).map(function (checkbox) {\r\n                return checkbox.value;\r\n            });\r\n            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter=\"product-status\"]:checked')).map(function (checkbox) {\r\n                return checkbox.value;\r\n            });\r\n\r\n            return Array.from(products).filter(function (product) {\r\n                let type = product.getAttribute('data-type');\r\n                let status = product.getAttribute('data-status');\r\n                return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));\r\n            });\r\n        }\r\n\r\n        // 초기 페이지 설정\r\n        drawPagination(1, Math.ceil(products.length / amount));\r\n        goToPage(1);\r\n    }\r\n\r\n    // 필터링 및 페이징 처리 함수 호출\r\n    filterAndPaginate();\r\n})();\r\n\r\n\r\n\r\n// 초기 정렬 방식은 오름차순으로 설정\r\nlet sortDir = {};\r\n\r\n// 정렬 버튼 이벤트 리스너 등록\r\ndocument.querySelectorAll('.sort-btn').forEach(button => {\r\n    button.addEventListener('click', () => {\r\n        const column = button.dataset.column;\r\n        sortDir[column] = !sortDir[column]; // 정렬 방향을 변경\r\n\r\n        // 정렬 방향에 따라 버튼 모양 변경\r\n        button.innerText = sortDir[column] ? '\uD83D\uDD3D' : '\uD83D\uDD3C';\r\n        sortTable(column);\r\n    });\r\n});\r\n\r\n// 테이블을 정렬하는 함수\r\nfunction sortTable(column) {\r\n    const tbody = document.querySelector('.table tbody');\r\n    const rows = Array.from(tbody.querySelectorAll('tr'));\r\n\r\n    rows.sort((a, b) => {\r\n        const aValue = getCellValue(a, column);\r\n        const bValue = getCellValue(b, column);\r\n        if (sortDir[column]) {\r\n            return aValue.localeCompare(bValue);\r\n        } else {\r\n            return bValue.localeCompare(aValue);\r\n        }\r\n    });\r\n\r\n    tbody.innerHTML = '';\r\n    rows.forEach(row => tbody.appendChild(row));\r\n}\r\n\r\n// 셀의 값을 가져오는 함수\r\nfunction getCellValue(row, column) {\r\n    const columnIndex = {\r\n        \"supsCo\": 0,\r\n        \"prdNo\": 1,\r\n        \"prdSdc\": 2,\r\n        \"prdMajorCtg\": 3,\r\n        \"prdSubCtg\": 4,\r\n        \"prdName\": 5,\r\n        \"prdCstPri\": 6,\r\n        \"prdSal\": 7,\r\n        \"prdMargin\": 8\r\n    }[column];\r\n\r\n    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);\r\n    return cell ? cell.textContent.trim() : \"\";\r\n}\r\n\r\n// 리셋 버튼 이벤트 리스너 등록\r\ndocument.querySelector('#reset').addEventListener('click', function () {\r\n    location.reload();\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageFilter.js b/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageFilter.js
+--- a/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageFilter.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdPageFilter.js	(date 1709108309959)
+@@ -1,164 +1,296 @@
+-(function () {
+-    // 전역 변수 설정
+-    const amount = 10; // 페이지당 보여줄 아이템 수
+-    let pageNum = 1; // 현재 페이지 번호
+-    let products = document.querySelectorAll('.product'); // 전체 상품 리스트
+-
+-    // 필터링 및 페이징 처리 함수
+-    function filterAndPaginate() {
+-        // 페이지네이션을 그리는 함수
+-        function drawPagination(startPage, endPage) {
+-            const paginationElement = document.getElementById('pagination');
+-            paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
+-
+-            const ul = document.createElement('ul');
+-            ul.classList.add('page-nation');
+-
+-            for (let num = startPage; num <= endPage; num++) {
+-                const li = document.createElement('li');
+-                const a = document.createElement('a');
+-                a.href = '#'; // 페이지 번호 클릭 시 페이지 이동 방지
+-                a.innerText = num;
+-                a.addEventListener('click', () => goToPage(num)); // 페이지 번호 클릭 시 goToPage 함수 호출
+-                li.appendChild(a);
+-                ul.appendChild(li);
+-            }
+-
+-            paginationElement.appendChild(ul);
+-        }
+-
+-        // 페이지 이동 함수
+-        function goToPage(page) {
+-            pageNum = page;
+-
+-            // 각 페이지당 보여줄 상품의 시작 인덱스와 끝 인덱스 계산
+-            const startIndex = (pageNum - 1) * amount;
+-            const endIndex = pageNum * amount;
++// 전역 변수 설정
++const amount = 10; // 페이지당 보여줄 아이템 수
++let pageNum = 1; // 현재 페이지 번호
++let products = document.querySelectorAll('.product'); // 전체 상품 리스트
++let endPage = Math.ceil(products.length / amount); // 전체 페이지 수
+ 
+-            // 필터링된 상품 리스트 가져오기
+-            let filteredProducts = getFilteredProducts();
++filter();
+ 
+-            // 현재 페이지에 보여줄 상품만 보이도록 설정
+-            filteredProducts.forEach((product, index) => {
+-                if (index >= startIndex && index < endIndex) {
+-                    product.style.display = 'table-row'; // startIndex부터 endIndex 이전까지만 표시
+-                } else {
+-                    product.style.display = 'none';
+-                }
+-            });
+-        }
+-
+-        // 상품 필터링 함수
+-        function filterProducts() {
+-            // 선택된 상품 종류 필터 및 상태 필터 가져오기
+-            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+-                return checkbox.value;
+-            });
+-            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+-                return checkbox.value;
+-            });
+-
+-            // 각 상품을 순회하면서 필터링 적용
+-            products.forEach(function (product) {
+-                let type = product.getAttribute('data-type');
+-                let status = product.getAttribute('data-status');
+-
+-                // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
+-                if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
+-                    product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
+-                } else {
+-                    product.style.display = 'none';
+-                }
+-            });
+-
+-            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
+-            drawPagination(1, Math.ceil(getFilteredProducts().length / amount));
+-        }
+-
+-        // allCheck 체크박스 이벤트 리스너 등록
+-        document.getElementById('product-typeAll').addEventListener('change', function () {
+-            // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
+-            let isChecked = this.checked;
+-            document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function (checkbox) {
+-                checkbox.checked = isChecked;
+-            });
++function filter() 
++{
++	
++	console.log("필터시작");
++	// allCheck 체크박스 이벤트 리스너 등록
++    document.getElementById('product-typeAll').addEventListener('change', function() {
++        // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
++        let isChecked = this.checked;
++        document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function(checkbox) {
++            checkbox.checked = isChecked;
++        });
+ 
+-            // 필터링 적용
+-            filterProducts();
+-            
+-        });
++        // 필터링 적용
++        filterProducts();
++        
++    });
+ 
+-        // allListCheck 체크박스 이벤트 리스너 등록
+-        document.getElementById('product-statusAll').addEventListener('change', function () {
+-            // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
+-            let isChecked = this.checked;
+-            document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function (checkbox) {
+-                checkbox.checked = isChecked;
+-            });
+-            // 필터링 적용
+-            filterProducts();
+-        });
++    // allListCheck 체크박스 이벤트 리스너 등록
++    document.getElementById('product-statusAll').addEventListener('change', function() {
++        // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
++        let isChecked = this.checked;
++        document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function(checkbox) {
++            checkbox.checked = isChecked;
++        });
++        // 필터링 적용
++        filterProducts();
++    });
+ 
+-        // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
+-        document.querySelectorAll('.filter-checkbox').forEach(function (checkbox) {
+-            checkbox.addEventListener('change', function () {
+-                // allCheck 체크박스 상태 업데이트
+-                let isTypeAllChecked = isAllTypeCheckboxesChecked();
+-                document.getElementById('product-typeAll').checked = isTypeAllChecked;
++    // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
++    document.querySelectorAll('.filter-checkbox').forEach(function(checkbox) {
++        checkbox.addEventListener('change', function() {
++            // allCheck 체크박스 상태 업데이트
++            let isTypeAllChecked = isAllTypeCheckboxesChecked();
++            document.getElementById('product-typeAll').checked = isTypeAllChecked;
+ 
+-                // allListCheck 체크박스 상태 업데이트
+-                let isStatusAllChecked = isAllStatusCheckboxesChecked();
+-                document.getElementById('product-statusAll').checked = isStatusAllChecked;
++            // allListCheck 체크박스 상태 업데이트
++            let isStatusAllChecked = isAllStatusCheckboxesChecked();
++            document.getElementById('product-statusAll').checked = isStatusAllChecked;
+ 
+-                // 필터링 적용
+-                filterProducts();
+-            });
+-        });
++            // 필터링 적용
++            filterProducts();
++        });
++    });
+ 
+-        // 상품 종류 체크박스 모두 선택 여부 확인 함수
+-        function isAllTypeCheckboxesChecked() {
+-            // 상품 종류 체크박스 중 선택된 개수 확인
+-            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
+-            // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
+-            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
+-        }
++    // 상품 필터링 함수
++    function filterProducts() {
++        // 선택된 상품 종류 필터 및 상태 필터 가져오기
++        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
++            return checkbox.value;
++        });
++        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
++            return checkbox.value;
++        });
++
++        // 전체 체크 상태 확인
++        let isAllTypeChecked = document.getElementById('product-typeAll').checked;
++        let isAllStatusChecked = document.getElementById('product-statusAll').checked;
++
++        // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
++        if (!isAllTypeChecked && typeFilters.length === 0) {
++            // 모든 상품 숨기기
++            products.forEach(function(product) {
++                product.style.display = 'none';
++            });
++            drawPagination(0, 0); // 체크박스가 해제 되면 페이징을 1로 고정
++            return;
++        }
++
++        // 모든 상품상태 체크박스가 해제되었을 때 조회되지 않도록 처리
++        if (!isAllStatusChecked && statusFilters.length === 0) {
++            // 모든 상품 숨기기
++            products.forEach(function(product) {
++                product.style.display = 'none';
++            });
++            drawPagination(0, 0);
++            return;
++        }
++
++        // 각 상품을 순회하면서 필터링 적용
++        products.forEach(function(product) {
++            let type = product.getAttribute('data-type');
++            let status = product.getAttribute('data-status');
++
++            // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
++            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) 
++                product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
++            else 
++                product.style.display = 'none';
++        });
++
++        // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
++        drawPagination(1, Math.ceil(getFilteredProducts().length / amount));
++        goToPage(1);
++    }
++
++    // 상품 종류 체크박스 모두 선택 여부 확인 함수
++    function isAllTypeCheckboxesChecked() 
++    {
++        // 상품 종류 체크박스 중 선택된 개수 확인
++        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
++        // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
++        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
++    }
+ 
+-        // 상품 상태 체크박스 모두 선택 여부 확인 함수
+-        function isAllStatusCheckboxesChecked() {
+-            // 상품 상태 체크박스 중 선택된 개수 확인
+-            const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
+-            // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
+-            return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
+-        }
++    // 상품 상태 체크박스 모두 선택 여부 확인 함수
++    function isAllStatusCheckboxesChecked() 
++    {
++        // 상품 상태 체크박스 중 선택된 개수 확인
++        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
++        // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
++        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
++    }
++    
++    // 페이징 시작
++    console.log("페이징 시작");
++    function drawPagination(startPage, endPage)
++    {
++    	console.log("drawPagination 실행");
++    	
++        const paginationElement = document.getElementById('pagination');
++        paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
+ 
+-        // 필터링된 상품 리스트 가져오기
+-        function getFilteredProducts() {
+-            let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+-                return checkbox.value;
+-            });
+-            let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+-                return checkbox.value;
+-            });
++        const ul = document.createElement('ul');
++        ul.classList.add('page-nation');
++
++        // 이전 페이지 버튼 추가
++        const prevButton = document.createElement('li');
++        const prevLink = document.createElement('a');
++        prevLink.href = '#';
++        prevLink.innerText = '◀';
++        prevLink.addEventListener('click', (e) => {
++            e.preventDefault();
++            if (pageNum > 1) goToPage(pageNum - 1);
++        });
++        prevButton.appendChild(prevLink);
++        ul.appendChild(prevButton);
++
++        // 페이지 번호 버튼 추가
++        for (let num = startPage; num <= endPage; num++) 
++        {
++            const li = document.createElement('li');
++            const a = document.createElement('a');
++            a.href = '#'; // 페이지 번호 클릭 시 페이지 이동 방지
++            a.innerText = num;
++            a.addEventListener('click', () => goToPage(num)); // 페이지 번호 클릭 시 goToPage 함수 호출
++            li.appendChild(a);
++            ul.appendChild(li);
++        }
++        
++        // 다음 페이지 버튼 추가
++        const nextButton = document.createElement('li');
++        const nextLink = document.createElement('a');
++        nextLink.href = '#';
++        nextLink.innerText = '▶';
++        nextLink.addEventListener('click', (e) => {
++            e.preventDefault();
++            if (pageNum < endPage) goToPage(pageNum + 1);
++        });
++        nextButton.appendChild(nextLink);
++        ul.appendChild(nextButton);
++
++        paginationElement.appendChild(ul);
++    }
++
++    
++    // 필터링된 상품 리스트 가져오기
++    function getFilteredProducts() {
++        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
++            return checkbox.value;
++        });
++        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
++            return checkbox.value;
++        });
+ 
+-            return Array.from(products).filter(function (product) {
+-                let type = product.getAttribute('data-type');
+-                let status = product.getAttribute('data-status');
+-                return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
+-            });
++        return Array.from(products).filter(function (product) 
++		{
++            let type = product.getAttribute('data-type');
++            let status = product.getAttribute('data-status');
++            return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
++        });
++    }
++    
++    function goToPage(page) 
++    {
++    	console.log("gotoPage 실행");
++        pageNum = page;
++        
++        // 클릭한 버튼에만 'active' 클래스 추가
++        if (page === 'prev') {
++            pageNum--;
++        } else if (page === 'next') {
++            pageNum++;
++        } else {
++            pageNum = page;
+         }
+ 
+-        // 초기 페이지 설정
+-        drawPagination(1, Math.ceil(products.length / amount));
+-        goToPage(1);
+-    }
++        if (pageNum < 1) {
++            pageNum = 1;
++        } else if (pageNum > endPage) {
++            pageNum = endPage;
++        }
++        
++        // 각 페이지당 보여줄 상품의 시작 인덱스와 끝 인덱스 계산
++        const startIndex = (pageNum - 1) * amount;
++        const endIndex = pageNum * amount;
++       
++        // 필터링된 상품 리스트 가져오기
++        let filteredProducts = getFilteredProducts();
++        
++        // 현재 페이지에 보여줄 상품만 보이도록 설정
++        filteredProducts.forEach((product, index) => {
++            if (index >= startIndex && index < endIndex) {
++                product.style.display = 'table-row'; // startIndex부터 endIndex 이전까지만 표시
++            } else {
++                product.style.display = 'none';
++            }
++        });
++
++        // 페이지 번호 버튼의 활성화 처리
++        const paginationElement = document.getElementById('pagination');
++        const pageButtons = paginationElement.querySelectorAll('a');
++        pageButtons.forEach((button, index) => {
++            if (index === pageNum) {
++                button.classList.add('active');
++            } else {
++                button.classList.remove('active');
++            }
++        });
++    }
++    
++    drawPagination(1, endPage);
++    goToPage(1);
++    
++  //서치 기능
++
++  //키워드와 현재 페이지를 저장하는 전역 변수
++  let currentKeyword = '';
++
++  //검색 버튼 클릭 이벤트 핸들러
++  document.querySelector('#search').addEventListener('click', function() {
++   currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
++   fetchSearchResults(currentKeyword); // 검색 결과 요청
++  });
++
++
++  //검색 결과 요청 함수
++  function fetchSearchResults(keyword) {
++   fetch('/searchProduct?keyword=' + keyword)
++       .then(response => response.json())
++       .then(data => {
++           console.log(data);
++           let list = data;
++           let msg = '';
++           list.forEach(list => {
++               msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+' style="display:table-row;">'+
++  					   '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
++  					   '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
++  					   '<td>'+list.prdSdc+'</td>'+
++  					   '<td>'+list.prdMajorCtg+'</td>'+
++  					   '<td>'+list.prdSubCtg+'</td>'+
++  					   '<td>'+
++  					   		'<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
++  					   '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
++  				       '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
++  					   '<td>'+(list.prdMargin * 100 )+'%</td>'+
++  		           '</tr>';
++               
++           })
++           document.querySelector('#table-prd tbody').innerHTML = msg;
++           filter();
++           drawPagination(1, endPage);
++           goToPage(1);
++           
++           
++       })
++       .catch(error => console.error('Error:', error));
++  }
++    
++};
+ 
+-    // 필터링 및 페이징 처리 함수 호출
+-    filterAndPaginate();
+-})();
+ 
+ 
+ 
+-// 초기 정렬 방식은 오름차순으로 설정
++
++// 정렬 버튼 기능 초기 정렬 방식은 오름차순으로 설정
+ let sortDir = {};
+ 
+ // 정렬 버튼 이벤트 리스너 등록
+@@ -181,11 +313,9 @@
+     rows.sort((a, b) => {
+         const aValue = getCellValue(a, column);
+         const bValue = getCellValue(b, column);
+-        if (sortDir[column]) {
+-            return aValue.localeCompare(bValue);
+-        } else {
+-            return bValue.localeCompare(aValue);
+-        }
++        if (sortDir[column]) return aValue.localeCompare(bValue);
++        else return bValue.localeCompare(aValue);
++       
+     });
+ 
+     tbody.innerHTML = '';
+@@ -214,3 +344,5 @@
+ document.querySelector('#reset').addEventListener('click', function () {
+     location.reload();
+ });
++
++
+Index: out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/custMgmt/mapper/cnslHisMapper.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/custMgmt/mapper/cnslHisMapper.xml b/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/custMgmt/mapper/cnslHisMapper.xml
+new file mode 100644
+--- /dev/null	(date 1709111877780)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/custMgmt/mapper/cnslHisMapper.xml	(date 1709111877780)
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
++  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
++ <mapper namespace="org.rainbow.company.custMgmt.mapper.cnslHisMapper">
++
++ 
++ <!-- salesView.jsp' 에서 영업 내용 insert --> 
++ <insert id="insertCnslHis" parameterType="org.rainbow.company.custMgmt.domain.cnslHisVO">
++ 
++ insert into RAIN_CnslHis_tbl values(
++    #{cnslHisNo},
++    #{cnslNo},
++    #{cnslHisEname},
++    #{cnslHisSaleSt},
++    sysdate,
++    sysdate, #{cnslHisCnt1},  
++    sysdate, #{cnslHisCnt2},
++    sysdate, #{cnslHisCnt3},
++    sysdate, #{cnslHisCnt4},
++    sysdate, #{cnslHisCnt5},
++    #{cnslHisFailRsn},
++    #{cnslHisFailCmt})
++ </insert>
++ 
++ 
++ </mapper>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/employee_modify.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<%@ include file=\"../../navBar.jsp\" %> \r\n<link rel=\"stylesheet\" href=\"/resources/css/company/employeeSupervisePage/employee_modify.css\">\r\n\r\n<body>\r\n\t\r\n\t\t<div>\r\n\t\t\t<h4>임직원 편집</h4>\r\n\t\t</div>\r\n\t\t\t<div id=\"insert-form-box\">\r\n\t\t\t\t<form action=\"\" method=\"POST\">\r\n\t\t\t\t\t<div id=\"table1\">\r\n\t\t\t\t\t\t<table id=\"top-table\">\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<th> 이름 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input1\" type=\"text\" name=\"eName\"></td>\r\n\t\t\t\t\t\t\t\t<th> 부서 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input2\" type=\"text\" name=\"dName\"></td>\r\n\t\t\t\t\t\t\t\t<th> 상세주소 </th>\r\n\t\t\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\t\t<div style=\"position: relative;\">\r\n\t\t\t\t\t\t\t\t\t\t<input class=\"input3\" type=\"text\" name=\"eAddr\">\r\n\t\t\t\t\t\t\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-search\" viewBox=\"0 0 16 16\" style=\"position: absolute; top: 60%; transform: translateY(-50%); right: 105px;\">\r\n            \t\t\t\t\t\t\t\t<path d=\"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0\"/>\r\n        \t\t\t\t\t\t\t\t</svg>\r\n        \t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<th> 이메일 주소 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input1\" type=\"text\" name=\"email\"></td>\r\n\t\t\t\t\t\t\t\t<th> 직급 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input2\" type=\"text\" name=\"job\"></td>\r\n\t\t\t\t\t\t\t\t<th></th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input4\" type=\"text\" name=\"eAddr\"></td>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<th> 전화번호 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input1\" type=\"text\" name=\"ePhone\"></td>\r\n\t\t\t\t\t\t\t\t<th> 근무형태 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input2\" type=\"text\" name=\"workType\"></td>\r\n\t\t\t\t\t\t\t\t<th> 급여계좌 </th>\r\n\t\t\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\t\t<select id=\"bank-select\" name=\"eBank\">\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"하나\"> 하나은행 </option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"우리\"> 우리은행 </option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"국민\"> 국민은행 </option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"기업\"> 기업은행 </option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"농협\"> 농협은행 </option>\r\n\t\t\t\t\t\t\t\t\t\t<option value=\"카카오\"> 카카오 뱅크 </option>\r\n\t\t\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t\t<th> 생년월일 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input1\" type=\"text\" name=\"email\"></td>\r\n\t\t\t\t\t\t\t\t<th> 연봉 </th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input2\" type=\"number\" name=\"sal\"></td>\r\n\t\t\t\t\t\t\t\t<th></th>\r\n\t\t\t\t\t\t\t\t<td><input class=\"input4\" type=\"text\" name=\"salAccount\"></td>\r\n\t\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t\t</table>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t<hr style=\"border : 0.5px solid gray; width: 95%; margin: 0 auto;\">\r\n\t\t\t\t<div id=\"table2\">\r\n\t\t\t\t\t<table id=\"bottom-table\">\r\n\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t<th>입사일</th>\r\n\t\t\t\t\t\t\t<td><input class=\"input5\" type=\"text\" name=\"hireDt\"></td>\r\n\t\t\t\t\t\t\t<th>퇴사일</th>\r\n\t\t\t\t\t\t\t<td><input class=\"input5\" type=\"text\" name=\"endDt\"></td>\r\n\t\t\t\t\t\t\t<th>계정상태</th>\r\n\t\t\t\t\t\t\t<td><input class=\"input6\" type=\"text\" name=\"idStatus\"></td>\r\n\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t</table>\r\n\t\t\t\t</div>\r\n\t\t\t<div class=\"button-container\">\r\n\t\t\t\t<input id=\"saveBtn\" type=\"button\" name=\"save\" value=\"저장\">\r\n\t\t\t\t<input id=\"closeBtn\" type=\"button\" name=\"close\" value=\"닫기\">\r\n\t\t\t</div>\r\n\t\t</form>\r\n\t</div>\r\n\t\r\n\t<script type=\"text/javascript\" src=\"/resources/js/company/employeeSupervisePage/employee_modify.js\"></script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/employee_modify.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/employee_modify.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/employee_modify.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/employee_modify.jsp	(date 1709108309913)
+@@ -14,7 +14,7 @@
+ 						<table id="top-table">
+ 							<tr>
+ 								<th> 이름 </th>
+-								<td><input class="input1" type="text" name="eName"></td>
++								<td><input class="input1" type="text" name="eName" readonly></td>
+ 								<th> 부서 </th>
+ 								<td><input class="input2" type="text" name="dName"></td>
+ 								<th> 상세주소 </th>
+@@ -54,7 +54,7 @@
+ 							</tr>
+ 							<tr>
+ 								<th> 생년월일 </th>
+-								<td><input class="input1" type="text" name="email"></td>
++								<td><input class="input1" type="text" name="email" readonly></td>
+ 								<th> 연봉 </th>
+ 								<td><input class="input2" type="number" name="sal"></td>
+ 								<th></th>
+@@ -67,7 +67,7 @@
+ 					<table id="bottom-table">
+ 						<tr>
+ 							<th>입사일</th>
+-							<td><input class="input5" type="text" name="hireDt"></td>
++							<td><input class="input5" type="text" name="hireDt" readonly></td>
+ 							<th>퇴사일</th>
+ 							<td><input class="input5" type="text" name="endDt"></td>
+ 							<th>계정상태</th>
+@@ -75,12 +75,12 @@
+ 						</tr>
+ 					</table>
+ 				</div>
+-			<div class="button-container">
+-				<input id="saveBtn" type="button" name="save" value="저장">
+-				<input id="closeBtn" type="button" name="close" value="닫기">
+-			</div>
+-		</form>
+-	</div>
++					<div class="button-container">
++						<input id="saveBtn" type="button" name="save" value="저장">
++						<input id="closeBtn" type="button" name="close" value="닫기">
++					</div>
++				</form>
++			</div>
+ 	
+ 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_modify.js"></script>
+ </body>
+Index: out/artifacts/controller_war_exploded/web/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/web/WEB-INF/web.xml b/out/artifacts/controller_war_exploded/web/WEB-INF/web.xml
+new file mode 100644
+--- /dev/null	(date 1709113572801)
++++ b/out/artifacts/controller_war_exploded/web/WEB-INF/web.xml	(date 1709113572801)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
++         version="4.0">
++</web-app>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesView.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesView.js b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesView.js
+new file mode 100644
+--- /dev/null	(date 1709111877785)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesView.js	(date 1709111877785)
+@@ -0,0 +1,125 @@
++
++/**form 객체 가져오기 */
++const f = document.forms[0];
++
++/**각 버튼들 클릭 이벤트 (버튼 분기 태우기) */
++//console.log(document.querySelectorAll('.salesViewBtns'));
++document.querySelectorAll('.salesViewBtns').forEach( btn => {
++
++	btn.addEventListener('click', () => {
++	
++		//눌려진 버튼의 id 가져와서 저장
++		let type = btn.id;
++		//console.log(type);
++		
++		if(type === 'imgButtonSearchEname') {
++			searchEname();
++		}else if(type === 'imgButtonPlus') {
++			addcnslHis();
++		}else if(type === 'imgButtonMinus') {
++			
++		}else if(type === 'saveBtn') {
++			saveSales();
++		}
++		
++	});
++
++});
++
++/**영업 상태 값이 '최초 인입' 에서 다른 값으로 변화된 해당 날짜를 응대일에 자동으로 입력 */
++//응대일 요소 가져오기
++const cnslRespDt = f.querySelector('input[name="cnslRespDt"]');
++//영업 상태 요소 가져오기
++const cnslSaleSt = f.querySelector('select[name="cnslSaleSt"]');
++
++cnslSaleSt.addEventListener('change', function() {
++	// 선택된 옵션의 값을 가져오기
++	const selectedValue = cnslSaleSt.value;
++	
++	// 현재 날짜 가져오기
++	const currentDate = new Date();
++	
++	// 날짜를 yyyy-MM-dd 형식으로 변환
++	const formattedDate = currentDate.toISOString().split('T')[0];
++	
++	// 최초 인입이 아닌 경우에만 응대일 값 변경
++	if (selectedValue !== '최초 인입') {
++		cnslRespDt.value = formattedDate;
++	}
++});
++
++/** 영업 히스토리에서 + 버튼 누르면 영업 히스토리 날짜 와 영업 히스토리 내용 작성란 새로 추가 (최대 5개 까지) */
++
++
++function addcnslHis() {
++	
++	let msg = '';
++
++	msg += '<tr>'
++		msg +='<td class="tbl_subtitle">날짜 </td>'
++			msg +='<td colspan="8"><input type="date" name="cnslHisCnt1Dt"></td>'
++				msg +='</tr>'
++					msg +='<tr>'
++						msg +='<td class="tbl_subtitle">내용</td>'
++							msg +='<td colspan="8">'
++								msg +='<textarea rows="10"  style="width: 90%; resize: none" name="cnslHisCnt1"></textarea>'
++									msg +='</td>'
++										msg +='</tr>'
++	fileList.innerHTML = msg;
++	
++	
++	
++	
++	
++}
++
++
++
++
++
++
++
++
++
++
++
++
++/**영업 내용 저장  */
++function saveSales() {
++	
++	//alert(1);
++	//console.log(f.cnslNo.value);
++
++	
++	if(f.cnslEname.value=='') {
++		alert("영업 담당자를 선택하세요.");
++		return;	
++	}
++	if(f.cnslRespDt.value==''){
++		alert("응대일을 선택하새요.");
++		return;
++	}
++	if(f.cnslHisCnt1Dt.value==''){
++		alert("영업 히스토리 날짜를 선택하세요.");
++		return;
++	}
++	if(f.cnslHisCnt1.value==''){
++		alert("영업 히스토리 내용을 작성하세요.");
++		return;
++	}
++	
++	
++	
++	
++	f.action='/saveSales';
++	f.submit();
++	
++	
++	
++}
++
++
++
++
++
++
+Index: out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_insert.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*// ----- css 파일 추가\r\n// 1. 파일 경로 설정\r\nconst CSS_FILE_PATH = '/resources/css/employeeSupervisePage/employee_insert.css';\r\n// 2. link 태그 생성\r\nlet linkEle = document.createElement('link');\r\nlinkEle.rel = 'stylesheet';\r\nlinkEle.type = 'text/css';\r\nlinkEle.href = CSS_FILE_PATH;\r\n// 3. head 태그에 link 엘리먼트 추가\r\ndocument.head.appendChild(linkEle);*/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_insert.js b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_insert.js
+--- a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_insert.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_insert.js	(date 1709108309957)
+@@ -7,4 +7,21 @@
+ linkEle.type = 'text/css';
+ linkEle.href = CSS_FILE_PATH;
+ // 3. head 태그에 link 엘리먼트 추가
+-document.head.appendChild(linkEle);*/
+\ No newline at end of file
++document.head.appendChild(linkEle);*/
++
++document.querySelectorAll('input[type="button"]').forEach( btn => {
++	btn.addEventListener( 'click', (event) => {
++		event.preventDefault(); 
++		
++		let type = btn.id;
++		
++		if( type === 'closeBtn') close();
++		else if ( type === 'saveBtn'){
++			
++		}
++	})
++})
++
++function close(){
++	location.href = '/searchEmployee';
++}
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const f = document.querySelector(\".login-form\");\r\nconst btn = document.querySelector(\"#login_btn\");\r\n\r\nconst regMail = /^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$/i;\r\nconst regPw = /^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,20}$/;\r\n\r\nbtn.addEventListener('click', () => {\r\n\r\n    if (!f.userId.value || !regMail.test(f.userId.value)) {\r\n        alert(\"올바른 형식의 이메일이 아닙니다.\");\r\n        f.userId.focus();\r\n        return false;\r\n    }\r\n    if (!f.userPw.value || !regPw.test(f.userPw.value)) {\r\n        alert(\"정확한 비밀번호를 입력하세요. (8자리 이상, 영문, 숫자, 특수문자 포함)\")\r\n        f.userPw.focus();\r\n        return false;\r\n    }\r\n    fetch('/userAdminPage/login',{\r\n        method : 'post',\r\n        body: JSON.stringify({\r\n            userId : f.userId.value,\r\n            userPw : f.userPw.value\r\n        }),\r\n        headers:{\r\n    'content-type':'application/json; charset=utf-8'\r\n}})\r\n.then(Response => Response.json())\r\n    .then(json=>{\r\n        console.log(json())\r\n        sessionStorage.setItem('userInfo',json())\r\n        location.href = \"/userAdminPage/sidebar\"\r\n    }).catch(err => {\r\n        console.log(err)\r\n    });\r\n});
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js b/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js
+--- a/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js	(date 1709108309961)
+@@ -26,10 +26,13 @@
+     'content-type':'application/json; charset=utf-8'
+ }})
+ .then(Response => Response.json())
+-    .then(json=>{
+-        console.log(json())
+-        sessionStorage.setItem('userInfo',json())
+-        location.href = "/userAdminPage/sidebar"
++    .then(json => {
++        if(json.userInfo == null){
++            alert("가입되지 않은 로그인 정보입니다. 아이디와 비밀번호를 확인하세요")
++        }else {
++            location.href = "/userAdminPage/dashboard"
++            sessionStorage.setItem('userinfo',json.userInfo)
++        }
+     }).catch(err => {
+         console.log(err)
+     });
+Index: out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/spotMgmt.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/spotMgmt.js b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/spotMgmt.js
+new file mode 100644
+--- /dev/null	(date 1709111877785)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/spotMgmt.js	(date 1709111877785)
+@@ -0,0 +1,9 @@
++/**
++ * 
++ */
++
++document.getElementById("insertBtn").addEventListener('click', ()=>{
++	
++	
++	location.href = '/spotRegistration';
++})
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/enterpriseMgmt.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/enterpriseMgmt.js b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/enterpriseMgmt.js
+new file mode 100644
+--- /dev/null	(date 1709111877784)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/enterpriseMgmt.js	(date 1709111877784)
+@@ -0,0 +1,10 @@
++/**
++ * 
++ */
++
++
++document.getElementById("insertBtn").addEventListener('click', ()=>{
++	
++	
++	location.href = '/enterpriseRegistration';
++})
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN\"\r\n  \"http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\r\n\r\n<mapper namespace=\"org.rainbow.company.ProductManagement.mapper.productPageMapper\">\r\n\t<!-- productList   -->\r\n\t<select id=\"prdList\" resultType=\"org.rainbow.company.ProductManagement.domain.productListVO\">\r\n\t\r\n\t        SELECT *\r\n\t\t\t    FROM RAIN_Suppliers_tbl s, RAIN_Products_tbl p\r\n\t\t\t    where  p.SUPSNO = s.SUPSNO\r\n\t\t\t    order by p.prdNo asc\r\n\t\t\r\n\t</select>\r\n<!-- \t<select id=\"prdList\" resultType=\"org.rainbow.company.ProductManagement.domain.productListVO\" parameterType=\"org.rainbow.domain.Criteria\">\r\n\t\t<![CDATA[\r\n\t        SELECT *\r\n\t\t\tFROM (\r\n\t\t\t    SELECT rownum rn, p.PRDNO, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,\r\n\t\t\t           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG\r\n\t\t\t    FROM\r\n\t\t\t    (\r\n\t\t\t        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,\r\n\t\t\t               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG\r\n\t\t\t        FROM RAIN_Products_tbl\r\n\t\t\t        ORDER BY PRDNO ASC\r\n\t\t\t     ) p\r\n\t\t\t    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO\r\n\t\t\t    WHERE rownum <= #{pageNum} *  #{amount}\r\n\t\t\t)\r\n\t\t\tWHERE rn > (#{pageNum} - 1) *  #{amount} \r\n\t\t ]]>\r\n\t</select> -->\r\n\t\r\n\t<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->\r\n\t<select id=\"prdCount\" resultType=\"int\">\r\n\tSELECT COUNT(*) FROM RAIN_Products_tbl\r\n\t</select>\r\n\t\r\n\t<select id=\"getSearch\" parameterType=\"org.rainbow.domain.Criteria\" resultType=\"org.rainbow.company.ProductManagement.domain.productListVO\">\r\n\t\t<![CDATA[\r\n\t        SELECT *\r\n\t\t\tFROM (\r\n\t\t\t    SELECT rownum rn, p.prdNo, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,\r\n\t\t\t           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG\r\n\t\t\t    FROM\r\n\t\t\t    (\r\n\t\t\t        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,\r\n\t\t\t               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG\r\n\t\t\t        FROM RAIN_Products_tbl\r\n\t\t\t        WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%' || #{keyword} || '%'\r\n\t\t\t        ORDER BY PRDNO ASC\r\n\t\t\t     ) p\r\n\t\t\t    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO\r\n\t\t\t    WHERE rownum <= #{pageNum} *  #{amount}\r\n\t\t\t)\r\n\t\t\tWHERE rn > (#{pageNum} - 1) *  #{amount} \r\n\t\t ]]>\r\n\t</select>\r\n\t\r\n\t\r\n\t<!-- 검색된 리스트 카운트    검색  like 좀더 써야할거같음.. 추후수정 -->\r\n\t<select id=\"getKeywordCount\" parameterType=\"org.rainbow.domain.Criteria\" resultType=\"int\">\r\n\t    SELECT count(*) \r\n\t    FROM RAIN_Products_tbl \r\n\t    WHERE \r\n\t        prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%'|| #{keyword} || '%'\r\n\t</select>\r\n\t\r\n\t<!-- 엑셀 파일 리스트로 받아서 인서트  -->\r\n\t<insert id= \"insertPrdExcel\" parameterType=\"org.rainbow.company.ProductManagement.domain.prdInputVO\">\r\n\t\tinsert into RAIN_Products_tbl values\r\n\t\t(\r\n\t\t\t#{prdNo}, #{supsNo}, #{prdSdc} ,#{prdTaxExSt},\r\n\t\t\t#{prdMajorCtg} ,#{prdSubCtg} ,#{prdName} ,#{prdCstPri},\t\r\n\t\t\t#{prdCstSup}, #{prdCstTax}, #{prdSal}, #{prdSalSup} ,#{prdSalTax}, \r\n\t\t\t#{prdMargin}, #{prdSt}, #{prdImg}\r\n\t\t)\r\n\t</insert>\r\n\t<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->\r\n\t<select id=\"downExcelList\" resultType=\"org.rainbow.company.ProductManagement.domain.prdDownVO\">\r\n\t        SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg\r\n\t\t    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s\r\n\t\t    WHERE s.supsNo = p.supsNo\r\n\t\t    AND p.prdMajorCtg IN\r\n\t    <foreach item=\"item\" collection=\"checkValues\" open=\"(\" separator=\",\" close=\")\">\r\n\t        #{item}\r\n\t    </foreach>\r\n\t    AND p.prdSt IN\r\n\t    <foreach item=\"item\" collection=\"checkValues\" open=\"(\" separator=\",\" close=\")\">\r\n\t        #{item}\r\n\t    </foreach>\r\n\t</select>\r\n\t<!--  \r\n\t\tforeach 마이바티스 반복\r\n\t\titem 변수 이름\r\n\t\tcollection=\"ex)checkValues\" 반복할 리스트 지정\r\n\t\topen=\"(\" separator=\",\" close=\")\" 시작 , 구분자 , 끝 부분 지정\r\n\t\t지금 쿼리 같은경우 \r\n\t\t<foreach item=\"item\" collection=\"checkValues\"> 이런식으로\r\n\t\t기본값을 넣어도 동작하는데 문제없는것 같다.\r\n\t\t\r\n\t\tSELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg\r\n\t\tFROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s\r\n\t\tWHERE s.supsNo = p.supsNo\r\n\t\tAND p.prdMajorCtg IN ('value1', 'value2', 'value3')\r\n\t\tAND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 \r\n\t-->\r\n\r\n\t\r\n\t\r\n</mapper>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.xml b/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.xml
+--- a/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.xml	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.xml	(date 1709108309906)
+@@ -8,29 +8,10 @@
+ 	
+ 	        SELECT *
+ 			    FROM RAIN_Suppliers_tbl s, RAIN_Products_tbl p
+-			    where  p.SUPSNO = s.SUPSNO
++			    where  p.supsNo = s.supsNo
+ 			    order by p.prdNo asc
+ 		
+ 	</select>
+-<!-- 	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO" parameterType="org.rainbow.domain.Criteria">
+-		<![CDATA[
+-	        SELECT *
+-			FROM (
+-			    SELECT rownum rn, p.PRDNO, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
+-			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
+-			    FROM
+-			    (
+-			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
+-			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
+-			        FROM RAIN_Products_tbl
+-			        ORDER BY PRDNO ASC
+-			     ) p
+-			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+-			    WHERE rownum <= #{pageNum} *  #{amount}
+-			)
+-			WHERE rn > (#{pageNum} - 1) *  #{amount} 
+-		 ]]>
+-	</select> -->
+ 	
+ 	<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->
+ 	<select id="prdCount" resultType="int">
+@@ -38,35 +19,17 @@
+ 	</select>
+ 	
+ 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
+-		<![CDATA[
++		
+ 	        SELECT *
+-			FROM (
+-			    SELECT rownum rn, p.prdNo, p.SUPSNO, s.SUPSCO, p.PRDSDC, p.PRDTAXEXST, p.PRDMAJORCTG, p.PRDSUBCTG, p.PRDNAME, p.PRDCSTPRI, p.PRDCSTSUP, p.PRDCSTTAX, p.PRDSAL,
+-			           p.PRDSALSUP, p.PRDSALTAX, p.PRDMARGIN, p.PRDST, p.PRDIMG
+-			    FROM
+-			    (
+-			        SELECT PRDNO, SUPSNO, PRDSDC, PRDTAXEXST, PRDMAJORCTG, PRDSUBCTG, PRDNAME, PRDCSTPRI, PRDCSTSUP, PRDCSTTAX, PRDSAL,
+-			               PRDSALSUP, PRDSALTAX, PRDMARGIN, PRDST, PRDIMG
+-			        FROM RAIN_Products_tbl
+-			        WHERE prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%' || #{keyword} || '%'
+-			        ORDER BY PRDNO ASC
+-			     ) p
+-			    JOIN RAIN_Suppliers_tbl s ON p.SUPSNO = s.SUPSNO
+-			    WHERE rownum <= #{pageNum} *  #{amount}
+-			)
+-			WHERE rn > (#{pageNum} - 1) *  #{amount} 
+-		 ]]>
+-	</select>
+-	
+-	
+-	<!-- 검색된 리스트 카운트    검색  like 좀더 써야할거같음.. 추후수정 -->
+-	<select id="getKeywordCount" parameterType="org.rainbow.domain.Criteria" resultType="int">
+-	    SELECT count(*) 
+-	    FROM RAIN_Products_tbl 
+-	    WHERE 
+-	        prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg = #{keyword} OR prdName LIKE '%'|| #{keyword} || '%'
++			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
++			WHERE p.supsNo = s.supsNo
++			AND (prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR prdName LIKE CONCAT('%', #{keyword}, '%'))
++			ORDER BY prdNo ASC;
++
++		
+ 	</select>
+ 	
++	
+ 	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+ 	<insert id= "insertPrdExcel" parameterType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+ 		insert into RAIN_Products_tbl values
+@@ -77,6 +40,7 @@
+ 			#{prdMargin}, #{prdSt}, #{prdImg}
+ 		)
+ 	</insert>
++	
+ 	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
+ 	<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
+ 	        SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+Index: out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/searchEmployeePage.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// ----- css 파일 추가\r\n// 1. 파일 경로 설정\r\nconst CSS_FILE_PATH = '/resources/css/company/employeeSupervisePage/searchEmployeePage.css';\r\n// 2. link 태그 생성\r\nlet linkEle = document.createElement('link');\r\nlinkEle.rel = 'stylesheet';\r\nlinkEle.type = 'text/css';\r\nlinkEle.href = CSS_FILE_PATH;\r\n// 3. head 태그에 link 엘리먼트 추가\r\ndocument.head.appendChild(linkEle);\r\n\r\ndocument.querySelectorAll('button').forEach( btn => {\r\n\tbtn.addEventListener( 'click', (event) => {\r\n\t\tevent.preventDefault(); \r\n\t\t\r\n\t\tlet type = btn.id;\r\n\t\t\r\n\t\tif( type === 'insertBtn') insert();\r\n\t\telse if ( type === 'execelBtn'){\r\n\t\t\t\r\n\t\t}\r\n\t})\r\n})\r\n\r\nfunction insert(){\r\n\t/*let eno = f.eno.value;*/\r\n\t\r\n\tlocation.href = '/employee_insert';\r\n}\r\n// 페이징\t\r\n//페이지 버튼 클릭 이벤트\r\n/*\r\ndocument.querySelectorAll(\".page-nation li a\").forEach( aEle => {\r\n\taEle.addEventListener('click', function(e){\r\n\t\te.preventDefault();\r\n\t\t\r\n\t\tlet pageNum = this.getAttribute(\"href\");\r\n\t\tlet amount = 10;\r\n\t\t\r\n\t\tsetStorageData(pageNum, amount);\r\n\t\t\r\n\t\t\r\n\t\tlet sendData = 'pageNum=' + pageNum + '&amount=' + amount;\r\n\t\tlocation.href = '/board/list?' + sendData;\r\n\t});\r\n});\r\n*/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/searchEmployeePage.js b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/searchEmployeePage.js
+--- a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/searchEmployeePage.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/searchEmployeePage.js	(date 1709108309958)
+@@ -23,14 +23,24 @@
+ })
+ 
+ function insert(){
+-	/*let eno = f.eno.value;*/
+ 	
+ 	location.href = '/employee_insert';
+ }
++
+ // 페이징	
+ //페이지 버튼 클릭 이벤트
+-/*
+-document.querySelectorAll(".page-nation li a").forEach( aEle => {
++
++document.querySelectorAll('tbody a').forEach(a => {
++	a.addEventListener('click', function(e){
++		e.preventDefault();
++		
++		let eno = a.getAttribute('href');
++		
++		location.href = '/employee_modify?eno=' + eno;
++	});
++});
++
++/*document.querySelectorAll(".page-nation li a").forEach( aEle => {
+ 	aEle.addEventListener('click', function(e){
+ 		e.preventDefault();
+ 		
+@@ -41,7 +51,6 @@
+ 		
+ 		
+ 		let sendData = 'pageNum=' + pageNum + '&amount=' + amount;
+-		location.href = '/board/list?' + sendData;
++		location.href = '/searchEmployee?' + sendData;
+ 	});
+-});
+-*/
+\ No newline at end of file
++});*/
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/searchEmployeePage.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>\r\n<%@ include file=\"../../navBar.jsp\" %> \r\n<body>\r\n\r\n\t<div id=\"pull-wrap\">\r\n\t<h3> 직원조회 </h3>\r\n\t\t<div id=\"searchBar-select\">\r\n\t\t\t<div id=\"searchBar\" style=\"position: relative;\">\r\n\t\t\t\t<span>키워드</span>\r\n\t\t\t\t<input class=\"searchBar\" type=\"text\" name=\"\" placeholder=\"이름/팀명/이메일\">\r\n\t\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-search\" viewBox=\"0 0 16 16\" style=\"position: absolute; top: 50%; transform: translateY(-50%); right: 10px;\">\r\n            \t\t<path d=\"M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0\"/>\r\n        \t\t</svg>\r\n\t\t\t</div>\r\n\t\t\t<div id=\"selectDept\">\r\n\t\t\t\t<span>조직별 구분</span>\r\n\t\t\t\t<select class=\"dept-sb\">\r\n\t\t\t\t\t<option value=\"인사\"> 인사 </option>\r\n\t\t\t\t\t<option value=\"재무\"> 재무 </option>\r\n\t\t\t\t\t<option value=\"영업\"> 영업 </option>\r\n\t\t\t\t\t<option value=\"상품\"> 상품 </option>\r\n\t\t\t\t</select>\r\n\t\t\t</div>\r\n\t\t\t<button id=\"execelBtn\"> 엑셀로 내려받기 </button>\r\n\t\t</div>\r\n\t\t<hr style=\"border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;\">\r\n\t\t\r\n\t\t<div id=\"searchResult_table\">\r\n\t\t\t<table id=\"searchResult\">\r\n\t\t\t\t<tr id=\"table_header\">\r\n\t\t\t\t\t<td>사번</td>\r\n\t\t\t\t\t<td>이름</td>\r\n\t\t\t\t\t<td>이메일</td>\r\n\t\t\t\t\t<td>연락처</td>\r\n\t\t\t\t\t<td>부서</td>\r\n\t\t\t\t\t<td>직급</td>\r\n\t\t\t\t\t<td>재직상태</td>\r\n\t\t\t\t\t<td>입사일</td>\r\n\t\t\t\t\t<td>퇴사일</td>\r\n\t\t\t\t\t<td>계정상태</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td><a href=\"/employee_modify\">001</a></td>\r\n        \t\t\t<td>홍길동</td>\r\n       \t\t \t\t<td>hong@example.com</td>\r\n        \t\t\t<td>010-1234-5678</td>\r\n        \t\t\t<td>인사팀</td>\r\n        \t\t\t<td>대리</td>\r\n        \t\t\t<td>재직중</td>\r\n        \t\t\t<td>2023-01-01</td>\r\n        \t\t\t<td> - </td>  <!-- null 일 시 기본값  -  -->\r\n        \t\t\t<td>활성</td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t</tr>\r\n\t\t\t</table>\r\n\t\t\t\t<div class=\"insertEmployeeBtn\">\r\n\t\t\t\t\t<button id=\"insertBtn\" name=\"insertEmployee\">신규등록</button>\r\n\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t\t<!-- page -->\r\n\t\t\t\t<div class=\"page-wrap\">\r\n\t\t\t\t\t<ul class=\"page-nation\">\r\n\t\t\t\t\t\t<c:if test=\"${pageMaker.prev }\">\r\n\t\t\t\t\t\t\t<li class=\"previous\">\r\n\t\t\t\t\t\t\t\t<a href=\"${pageMaker.startPage-1 }\"> &lt; </a>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t</c:if>\r\n\t\t\t\t\t\t\t<c:forEach var=\"num\" begin=\"${pageMaker.startPage }\" end=\"${pageMaker.endPage }\" step=\"1\">\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a href=\"${num }\" class=\"${pageMaker.cri.pageNum == num ? 'active' : '' }\"> ${num } </a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t\t</c:forEach>\r\n\t\t\t\t\t\t\t\t<c:if test=\"${pageMaker.next }\">\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a href=\"${pageMaker.endPage + 1 }\"> &gt; </a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t</c:if>\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t\t</div>\r\n\t</div>\t\r\n\t\r\n\t<script type=\"text/javascript\" src=\"/resources/js/company/employeeSupervisePage/searchEmployeePage.js\"></script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/searchEmployeePage.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/searchEmployeePage.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/searchEmployeePage.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/employeeSupervisePage/searchEmployeePage.jsp	(date 1709108309914)
+@@ -26,45 +26,39 @@
+ 			<button id="execelBtn"> 엑셀로 내려받기 </button>
+ 		</div>
+ 		<hr style="border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;">
+-		
++
+ 		<div id="searchResult_table">
+ 			<table id="searchResult">
+-				<tr id="table_header">
+-					<td>사번</td>
+-					<td>이름</td>
+-					<td>이메일</td>
+-					<td>연락처</td>
+-					<td>부서</td>
+-					<td>직급</td>
+-					<td>재직상태</td>
+-					<td>입사일</td>
+-					<td>퇴사일</td>
+-					<td>계정상태</td>
+-				</tr>
+-				<tr>
+-					<td><a href="/employee_modify">001</a></td>
+-        			<td>홍길동</td>
+-       		 		<td>hong@example.com</td>
+-        			<td>010-1234-5678</td>
+-        			<td>인사팀</td>
+-        			<td>대리</td>
+-        			<td>재직중</td>
+-        			<td>2023-01-01</td>
+-        			<td> - </td>  <!-- null 일 시 기본값  -  -->
+-        			<td>활성</td>
+-				</tr>
+-				<tr>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-					<td></td>
+-				</tr>
++				<thead>
++					<tr id="table_header">
++						<th>사번</th>
++						<th>이름</th>
++						<th>이메일</th>
++						<th>연락처</th>
++						<th>부서</th>
++						<th>직급</th>
++						<th>재직상태</th>
++						<th>입사일</th>
++						<th>퇴사일</th>
++						<th>계정상태</th>
++					</tr>
++				</thead>
++				<tbody>
++					<c:forEach var="vo" items="${list }">
++						<tr>
++							<td><a href="${vo.eno }">${vo.eno }</a></td>
++							<td>${vo.eName }</td>
++							<td>${vo.email }</td>
++							<td>${vo.ePhone }</td>
++							<td>${vo.dName }</td>
++							<td>${vo.job }</td>
++							<td>${empty vo.endDt ? '재직 중' : '퇴사' }</td>
++							<td>${vo.hireDt }</td>
++							<td>${empty vo.endDt ? '-' : vo.endDt }</td>
++							<td>${vo.idStatus }</td>	
++						</tr>
++					</c:forEach>
++				</tbody>
+ 			</table>
+ 				<div class="insertEmployeeBtn">
+ 					<button id="insertBtn" name="insertEmployee">신규등록</button>
+Index: out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_modify.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*// ----- css 파일 추가\r\n// 1. 파일 경로 설정\r\nconst CSS_FILE_PATH = '/resources/css/employeeSupervisePage/employee_modify.css';\r\n// 2. link 태그 생성\r\nlet linkEle = document.createElement('link');\r\nlinkEle.rel = 'stylesheet';\r\nlinkEle.type = 'text/css';\r\nlinkEle.href = CSS_FILE_PATH;\r\n// 3. head 태그에 link 엘리먼트 추가\r\ndocument.head.appendChild(linkEle);*/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_modify.js b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_modify.js
+--- a/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_modify.js	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/employeeSupervisePage/employee_modify.js	(date 1709108309958)
+@@ -7,4 +7,21 @@
+ linkEle.type = 'text/css';
+ linkEle.href = CSS_FILE_PATH;
+ // 3. head 태그에 link 엘리먼트 추가
+-document.head.appendChild(linkEle);*/
+\ No newline at end of file
++document.head.appendChild(linkEle);*/
++
++document.querySelectorAll('input[type="button"]').forEach( btn => {
++	btn.addEventListener( 'click', (event) => {
++		event.preventDefault(); 
++		
++		let type = btn.id;
++		
++		if( type === 'closeBtn') close();
++		else if ( type === 'saveBtn'){
++			
++		}
++	})
++})
++
++function close(){
++	location.href = '/searchEmployee';
++}
+Index: out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesMgmt.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesMgmt.js b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesMgmt.js
+new file mode 100644
+--- /dev/null	(date 1709111877784)
++++ b/out/artifacts/controller_war_exploded/resources/js/company/custMgmtPage/salesMgmt.js	(date 1709111877784)
+@@ -0,0 +1,33 @@
++
++
++
++/** '영업 상태' 값에 따라 골라 보기*/
++
++function searchBarSelectBizSt() {
++	
++	
++	
++}
++
++
++
++/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기  */
++
++
++
++
++/** 'salesView.jsp' 에서 상담번호 클릭 시 'salesView.jsp'로 값 보내기  */
++document.querySelectorAll("tbody a").forEach(aEle => {
++	aEle.addEventListener('click', function(e){
++		e.preventDefault();
++		
++		let cnslNo = this.getAttribute("href");
++		
++		console.log(cnslNo);
++
++		//controller에서 @RequestMapping("/board/*") //전체적인 경로 설정 
++		
++		location.href = '/getSalesView?cnslNo=' + cnslNo;
++		
++	})
++})
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesList.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"UTF-8\">\r\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n<link rel=\"stylesheet\" href=\"/resources/css/company/custMgmtPage/salesMgmt.css\">\r\n<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\">\r\n<title>newSales.jsp</title>\r\n\r\n</head>\r\n<body>\r\n\t<div class=\"navBar\">\r\n\t\t<jsp:include page=\"../../../navBar.jsp\"/>\r\n\t</div>\r\n\t<div class=\"container-fluid\" align=\"center\" style=\"padding: 100px;\">\r\n\t<div class=\"entire\" >\r\n\t<div class=\"title\" align=\"left\">\r\n\t\t<h3>신규 영업</h3>\r\n\t</div>\r\n\r\n\t<div class=\"searchBar_div\">\r\n\t\t<table class=\"searchBar_tbl\">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t<th>키워드</th>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<input type=\"text\" placeholder=\"기업명/담당자/메일주소/영업담당\" style=\"text-align: center;\">\r\n\t\t\t\t</td>\r\n\t\t\t\t<td></td>\r\n\t\t\t\t<th>영업 상태</th>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<select name=\"businessStatus\" id=\"searchBar_selectBizSt\">\r\n\t\t\t\t\t\t\t\t<option value=\"최초 인입\">최초 인입</option>\r\n\t\t\t\t\t\t\t\t<option value=\"응대 완료\">응대 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"견적 발송 완료\">견적 발송 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"미팅 완료\">미팅 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"계약 완료\">계약 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"계약 실패\">계약 실패</option>\r\n\t\t\t\t\t</select>\r\n\t\t\t\t</td>\r\n\t\t\t\t<td></td>\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t<th>기간</th>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<input type=\"date\" > ~ <input type=\"date\">\r\n\t\t\t\t</td>\r\n\t\t\t\t<td colspan=\"4\">\r\n\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\">오늘</button>\r\n\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\">일주일</button>\r\n\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\">이번 달</button>\r\n\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\">지난 달</button>\r\n\t\t\t\t<button type=\"button\" class=\"btn btn-secondary btn-sm\">지난 분기</button>\r\n\r\n\t\t\t\t\r\n\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t</table>\r\n\t\t\t<input type=\"button\" id=\"searchBar_search_btn\" value=\"검색\">\r\n\t\t\t<input type=\"button\" id=\"searchBar_reset_btn\" value=\"초기화\">\r\n\t</div>\r\n\t<div class=\"download_to_excel_btn_div\">\r\n\t\t<input type=\"button\" id=\"download_to_excel_btn\" value=\"엑셀로 내려받기\">\r\n\t</div>\r\n\t\t\r\n\t\r\n\t<div class=\"list_div\">\r\n\r\n      <table class=\"list_div_tbl\">\r\n         <thead>\r\n            <tr class=\"top_bar_of_list\">\r\n               <th>번호</th>\r\n               <th>신청일</th>\r\n               <th>기업명</th>\r\n               <th>신청인</th>\r\n               <th>연락처</th>\r\n               <th>이메일</th>\r\n               <th>예산</th>\r\n               <th>상태</th>\r\n               <th>담당자</th>\r\n            </tr>\r\n         </thead>\r\n         <tbody>\r\n            \r\n         </tbody>\r\n      </table>\r\n\r\n\r\n</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesList.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesList.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesList.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesList.jsp	(date 1709113447445)
+@@ -1,10 +1,11 @@
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
++<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <!DOCTYPE html>
+ <html>
+ <head>
+ <meta charset="UTF-8">
+-<meta name="viewport" content="width=device-width, initial-scale=1">
++
+ <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+ <title>newSales.jsp</title>
+@@ -12,7 +13,7 @@
+ </head>
+ <body>
+ 	<div class="navBar">
+-		<jsp:include page="../../../navBar.jsp"/>
++		<jsp:include page="./../../../navBar.jsp"/>
+ 	</div>
+ 	<div class="container-fluid" align="center" style="padding: 100px;">
+ 	<div class="entire" >
+@@ -21,6 +22,7 @@
+ 	</div>
+ 
+ 	<div class="searchBar_div">
++	<form method="get" >
+ 		<table class="searchBar_tbl">
+ 			<thead>
+ 				<tr>
+@@ -32,6 +34,7 @@
+ 				<th>영업 상태</th>
+ 				<td>
+ 					<select name="businessStatus" id="searchBar_selectBizSt">
++								<option value="선택">==선택==</option>
+ 								<option value="최초 인입">최초 인입</option>
+ 								<option value="응대 완료">응대 완료</option>
+ 								<option value="견적 발송 완료">견적 발송 완료</option>
+@@ -59,9 +62,12 @@
+ 				</tr>
+ 			</thead>
+ 		</table>
++		
+ 			<input type="button" id="searchBar_search_btn" value="검색">
+ 			<input type="button" id="searchBar_reset_btn" value="초기화">
++		</form>
+ 	</div>
++	
+ 	<div class="download_to_excel_btn_div">
+ 		<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
+ 	</div>
+@@ -84,13 +90,48 @@
+             </tr>
+          </thead>
+          <tbody>
+-            
++            <c:forEach var="vo" items="${salesVO }">
++               <tr>
++                  <td><a href="${vo.cnslNo }">${vo.cnslNo }</a></td>
++                  <td>${vo.cnslReqDt }</td>
++                  <td>${vo.cnslCoName }</td>
++                  <td>${vo.cnslName }</td>
++                  <td>${vo.cnslCt }</td>
++                  <td>${vo.cnslEmail }</td>
++                  <td>${vo.cnslBdgt }</td>
++                  <td>${vo.cnslSaleSt }</td>
++				  <td>아직 구현 X</td>
++               </tr>
++            </c:forEach>
+          </tbody>
+       </table>
+-
+-
+ </div>
++<!-- page -->
++		<div class="page-wrap">
++			<ul class="page-nation">
++				<c:if test="${pageMaker.prev }"> <!-- prev 라는 현재 페이지가 있으면 (이전 페이지로 이동하는 태그 생성)-->
++					<li class="previous">
++						<a href="${pageMaker.startPage-1 }">&lt;</a>
++					</li>
++				</c:if>
++				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
++					<li>
++						<a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }">${num }</a>
++						<!-- 여기서 href 라는 속성은 어디가기 위한 속성이 아니라 값을 가지고 오기위한 것임 -->
++					</li>
++				</c:forEach>
++				<c:if test="${pageMaker.next }"> <!-- next 라는 다음 페이지가 있으면 (다음 페이지로 이동하는 태그 생성)-->
++					<li>
++						<a href="${pageMaker.endPage + 1 }">&gt;</a>
++					</li>
++				</c:if>
++			</ul>
++		</div>
++
++
+ </div>
+ </div>
++<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
++
+ </body>
+ </html>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/enterpriseMgmt/enterpriseList.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"UTF-8\">\r\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n<link rel=\"stylesheet\" href=\"/resources/css/company/custMgmtPage/enterpriseMgmt.css\">\r\n<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\">\r\n<title>newSales.jsp</title>\r\n\r\n</head>\r\n<body>\r\n\t<div class=\"navBar\">\r\n\t\t<jsp:include page=\"../../../navBar.jsp\"/>\r\n\t</div>\r\n\t<div class=\"container-fluid\" align=\"center\" style=\"padding: 100px;\">\r\n\t<div class=\"entire\">\r\n\r\n\t<div class=\"title\" align=\"left\">\r\n\t\t<h3>기업 관리</h3>\r\n\t</div>\r\n\t<div class=\"searchBar_div\">\r\n\t\t<table class=\"searchBar_tbl\">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>키워드</th>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<input type=\"text\" placeholder=\"기업명/담당자/메일주소/영업담당\" style=\"text-align: center;\">\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<th>지역</th>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t<div class=\"checkbox_div\">\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"area\" value=\"전체\" checked=\"checked\">전체\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"area\" value=\"서울\" checked=\"checked\">서울\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"area\" value=\"경기\" checked=\"checked\">경기\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"area\" value=\"부산\" checked=\"checked\">부산\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"area\" value=\"그 외\" checked=\"checked\">그 외\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>기업 구분</th>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t<div class=\"checkbox_div\">\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"entityType\" value=\"전체\" checked=\"checked\">전체\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"entityType\" value=\"법인\" checked=\"checked\">법인\r\n\t\t\t\t\t\t<input type=\"checkbox\" name=\"entityType\" value=\"개인\" checked=\"checked\">개인\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t\t<th>업태</th>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<select name=\"businessCondition\" id=\"selectBusinessCondition\" style=\"text-align: center;\">\r\n\t\t\t\t\t\t\t<option value=\"선택\">==선택==</option>\r\n\t\t\t\t\t\t\t<option value=\"농업 및 임업\">농업 및 임업</option>\r\n\t\t\t\t\t\t\t<option value=\"어업\">어업</option>\r\n\t\t\t\t\t\t\t<option value=\"광업\">광업</option>\r\n\t\t\t\t\t\t\t<option value=\"제조업\">제조업</option>\r\n\t\t\t\t\t\t\t<option value=\"전기,가스 및 수도사업\">전기,가스 및 수도사업</option>\r\n\t\t\t\t\t\t\t<option value=\"건설업\">건설업</option>\r\n\t\t\t\t\t\t\t<option value=\"도매 및 소매업\">도매 및 소매업</option>\r\n\t\t\t\t\t\t\t<option value=\"숙박 및 음식점업\">숙박 및 음식점업</option>\r\n\t\t\t\t\t\t\t<option value=\"운수업\">운수업</option>\r\n\t\t\t\t\t\t\t<option value=\"통신업\">통신업</option>\r\n\t\t\t\t\t\t\t<option value=\"금융 및 보험업\">금융 및 보험업</option>\r\n\t\t\t\t\t\t\t<option value=\"부동산업 및 임대업\">부동산업 및 임대업</option>\r\n\t\t\t\t\t\t\t<option value=\"사업서비스업\">사업서비스업</option>\r\n\t\t\t\t\t\t\t<option value=\"공공행정,국방 및 사회보장행정\">공공행정,국방 및 사회보장행정</option>\r\n\t\t\t\t\t\t\t<option value=\"교육 서비스업\">교육 서비스업</option>\r\n\t\t\t\t\t\t\t<option value=\"보건 및 사회복지사업\">보건 및 사회복지사업</option>\r\n\t\t\t\t\t\t\t<option value=\"오락,문화 및 운동관련산업\">오락,문화 및 운동관련산업</option>\r\n\t\t\t\t\t\t\t<option value=\"기타 공공,수리 및 개인서비스 업\">기타 공공,수리 및 개인서비스 업</option>\r\n\t\t\t\t\t\t\t<option value=\"기타\">기타</option>\r\n\t\t\t\t\t\t</select>\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td></td>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t</table>\r\n\t\t\t<input type=\"button\" id=\"searchBar_search_btn\" value=\"검색\">\r\n\t\t\t\t\t<input type=\"button\" id=\"searchBar_reset_btn\" value=\"초기화\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"download_to_excel_btn_div\">\r\n\t\t\t\t<input type=\"button\" id=\"download_to_excel_btn\" value=\"엑셀로 내려받기\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"viewAFew_div\">\r\n\t\t\t\t<select name=\"viewAFew\" id=\"selectViewAFew\">\r\n\t\t\t\t\t\t\t\t<option value=\"10\">10</option>\r\n\t\t\t\t\t\t\t\t<option value=\"25\">25</option>\r\n\t\t\t\t\t\t\t\t<option value=\"50\">50</option>\r\n\t\t\t\t\t\t\t\t<option value=\"75\">75</option>\r\n\t\t\t\t\t\t\t\t<option value=\"100\">100</option>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t</select>\r\n\t\t\t\t개씩 보기\r\n\t\t\t</div>\r\n\t\r\n\r\n\t\r\n\t<div class=\"list_div\">\r\n\t\t\r\n\t <div>\r\n      <table class=\"list_div_tbl\">\r\n         <thead>\r\n            <tr class=\"top_bar_of_list\">\r\n               <th>번호</th>\r\n               <th>기업명</th>\r\n               <th>사업자 번호</th>\r\n               <th>사업자 구분</th>\r\n               <th>지역</th>\r\n               <th>주소</th>\r\n               <th>연락처</th>\r\n               <th>업태</th>\r\n            </tr>\r\n         </thead>\r\n         <tbody>\r\n            \r\n         </tbody>\r\n      </table>\r\n\r\n\r\n</div>\r\n</div>\r\n\t<div class=\"button_div\">\r\n\t\t<input type=\"button\" id=\"insertBtn\" value=\"기업 등록\">\r\n\t</div>\r\n</div>\r\n</div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/enterpriseMgmt/enterpriseList.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/enterpriseMgmt/enterpriseList.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/enterpriseMgmt/enterpriseList.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/enterpriseMgmt/enterpriseList.jsp	(date 1709111877782)
+@@ -116,6 +116,16 @@
+                <th>연락처</th>
+                <th>업태</th>
+             </tr>
++                <tr>
++            	<td><a href="/enterpriseUpdate">test</a></td>
++            	<td>test</td>
++            	<td>test</td>
++            	<td>test</td>
++            	<td>test</td>
++            	<td>test</td>
++            	<td>test</td>
++            	<td>test</td>
++            </tr>
+          </thead>
+          <tbody>
+             
+@@ -130,5 +140,7 @@
+ 	</div>
+ </div>
+ </div>
++<script type="text/javascript" src="/resources/js/company/custMgmtPage/enterpriseMgmt.js"></script>
++
+ </body>
+ </html>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/resources/css/company/custMgmtPage/salesMgmt.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@charset \"UTF-8\";\r\n\r\n\tbody{\r\n\t\tmargin : 0;\r\n\t\tpadding : 0;\r\n\t\t\r\n\t}\r\n\r\n\t.navBar{\r\n\t\tposition: fixed;\r\n\t\twidth : 100%;\r\n\t\ttop : 0;\r\n\t\t\r\n\t}\r\n\r\n/* 변수 생성 */\r\n:root {\r\n  \r\n  --bg-gray:#EEEEEE; \r\n  --blue:rgb(75, 91, 225);\r\n  --basic-radius:3px;\r\n  \r\n}\r\n\r\n\r\n.entire{\r\n\twidth: 80%;\r\n\r\n}\r\n\r\n\r\n   \r\n/** 타이틀 */\r\n\r\n\t.title h3{\r\n\t\tfont-weight : bolder;\r\n\t\t\r\n\t}\r\n\t\r\n\t\r\n\t\r\n/** ------------신규 영업 (리스트) 페이지 시작--*/\r\n\r\n/** 서치바 */\r\n.searchBar_div {\r\n\t\t\r\n    \tbox-sizing: border-box;\r\n    \tbackground-color:var(--bg-gray);\r\n    \t\r\n    \tpadding-bottom:10px;\r\n\t}\r\n\r\n/** 서치바 테이블*/\r\n.searchBar_tbl {\r\n\ttable-layout: auto;\r\n\ttable-layout: fixed;\r\n\tborder: 6px solid var(--bg-gray);\r\n\twidth: 100%;\r\n\t\r\n}\r\n\r\n.searchBar_tbl tr th {\r\n\twidth:80px;\r\n\tbackground-color: var(--bg-gray);\r\n\tborder: 6px solid var(--bg-gray);\r\n\tfont-size: 15px;\r\n\ttext-align: center;\r\n\t\r\n\r\n}\r\n\r\n.searchBar_tbl td{\r\n\tborder: 6px solid var(--bg-gray);\r\n\t\r\n}\r\n\r\n.searchBar_tbl input[type=\"text\"] {\r\n\t\r\n\twidth:100%;\r\n\tborder: none;\r\n\t\r\n}\r\n\r\n.searchBar_tbl input[type=\"date\"] {\r\n\tborder: none;\r\n\twidth:130px;\r\n\ttext-align: center;\r\n\r\n}\r\n\r\n\r\n#searchBar_selectBizSt{\r\n\twidth:100%;\r\n\tborder: none;\r\n}\r\n\r\n/** */\r\n.searchBar_button_div {\r\n\t\r\n\twidth:100%;\r\n\ttext-align: right;\r\n\tbox-sizing: border-box;\r\n}\r\n\r\n\r\n\r\n/** 서치바 검색 버튼*/\r\n#searchBar_search_btn {\r\n\t\r\n\tbackground-color: var(--blue);\r\n\tcolor: rgb(255, 255, 255);\r\n\tborder-color:var(--blue);\r\n\tborder-radius: var(--basic-radius);\r\n\tborder: 5px 10px 5px 10px;\r\n\twidth: 80px;\r\n\t\r\n\t}\r\n\t\r\n/** 서치바 초기화 버튼*/\r\n#searchBar_reset_btn {\r\n\tbackground-color:rgb(255, 255, 255);\r\n\tcolor:var(--blue);\r\n\tborder-color:rgb(255, 255, 255);\r\n\tborder-radius: var(--basic-radius);\r\n\tborder: 5px 10px 5px 10px;\r\n\twidth: 80px;\r\n\t}\r\n\t\r\n/** 엑셀로 내려받기 버튼 div*/\t\r\n.download_to_excel_btn_div {\r\n\t\r\n    box-sizing: border-box;\r\n\ttext-align: right;\r\n\tpadding: 50px 5px 10px 5px;\r\n}\r\n\t\r\n/** 엑셀로 내려받기 버튼*/\r\n#download_to_excel_btn {\r\n\tbackground-color: var(--blue);\r\n\tcolor: rgb(255, 255, 255);\r\n\tborder-color:var(--blue);\r\n\tborder-radius: var(--basic-radius);\r\n\tborder: 5px 10px 5px 10px;\r\n\twidth:140px;\r\n}\r\n\r\n/** 몇개씩 보기 div*/\r\n.viewAFew_div {\r\n\t\r\n    box-sizing: border-box;\r\n    text-align:right;\r\n    padding: 0px 5px 10px 5px;\r\n\t\r\n}\r\n\r\n\r\n\r\n/** 게시글 목록 div*/\r\n.list_div {\r\n\t\r\n\tbox-sizing: border-box;\r\n\tborder : 5px solid var(--bg-gray);\r\n\r\n}\r\n\r\n.list_div_tbl {\r\n\t\r\n\tbox-sizing: border-box;\r\n\t \r\n\tborder : 5px solid white;\r\n\ttable-layout: auto;\r\n\ttable-layout: fixed;\r\n\twidth:100%;\r\n}\r\n\r\n.top_bar_of_list {\r\n\r\n\tbox-sizing: border-box;\r\n\ttext-align: center;\r\n\tbackground-color:var(--bg-gray);\r\n\tfont-weight : bolder;\r\n\tmargin:0px;\r\n}\r\n\r\n.list_div_tbl td{\r\n\ttext-align: center;\r\n\t\r\n}\r\n\r\n\r\n\r\n/** ------------신규 영업 (리스트) 페이지 끝--*/\r\n\r\n\r\n\r\n\r\n\r\n\r\n/** ------------신규 영업 (상세보기) 페이지 시작-- */\r\n\r\n.subject_content {\r\n\tbox-sizing: border-box;\r\n}\r\n\r\n.subject_content_tbl td {\r\n\t\r\n\tborder: 6px solid var(--bg-gray);\r\n\t\r\n}\r\n\r\n.subject_content_tbl tr th {\r\n\twidth:120px;\r\n\tbackground-color: var(--bg-gray);\r\n\ttext-align: center;\r\n\tborder: 6px solid var(--bg-gray);\r\n\tfont-size: 15px;\r\n}\r\n\r\n.subject_content_tbl tr td{\r\n\ttext-align: center;\r\n}\r\n\r\n.subject_content_tbl {\r\n\r\n\twidth: 100%;\r\n\ttable-layout: auto;\r\n\ttable-layout: fixed;\r\n\tborder: 6px solid var(--bg-gray);\r\n}\r\n\r\n#inquiryDetails {\r\n\ttext-align:left;\r\n}\r\n\r\n.subject_title {\r\n\t\r\n\tmargin-top:30px;\r\n\tbackground-color : var(--bg-gray);\r\n\theight: 50px;\r\n\tpadding-top:12px;\r\n\t\r\n}\r\n\r\n\r\n#selectBusinessCondition, #search_keword, #history, #searchEname, #selectBusinessStatus, #FailureReasonsCmt, #selectFailureReasons{\r\n\r\n\tborder: none;\r\n\twidth:100%;\r\n\t\r\n\t\r\n\t\r\n}\r\n#FailureReasonsCmt {\r\n\twidth:100%;\r\n}\r\n\r\ninput[type=\"date\"] {\r\n\tborder: none;\r\n\t\r\n}\r\n\r\n.subject_content_tbl_2 {\r\n\t\r\n\twidth: 100%;\r\n\ttable-layout: fixed;\r\n\tborder: 6px solid var(--bg-gray);\r\n\t\r\n\r\n}\r\n.subject_content_tbl_2 tr th {\r\n\twidth:120px;\r\n\tbackground-color: var(--bg-gray);\r\n\tborder: 6px solid var(--bg-gray);\r\n\ttext-align: center;\r\n\tfont-size: 15px;\r\n}\r\n.subject_content_tbl_2 td {\r\n\t\r\n\tbackground-color: var(--bg-gray);\r\n\tborder: 6px solid var(--bg-gray);\r\n\t\r\n}\r\n#img_button_minus {\r\n        background: url( \"/resources/images/ul-minus-circle.svg\" ) no-repeat;\r\n        border: none;\r\n      \t  width: 30px;\r\n        height: 30px;\r\n        cursor: pointer;\r\n        background-size: contain;\r\n      }\r\n #img_button_plus {\r\n        background: url( \"/resources/images/ul-plus-circle.svg\" ) no-repeat;\r\n        border: none;\r\n      \twidth: 30px;\r\n        height: 30px;\r\n        cursor: pointer;\r\n        background-size: contain;\r\n        margin-left:1200px;\r\n        margin-right:20px;\r\n        \r\n      }\r\n.space_img_buttons {\r\n\tbackground-color: var(--bg-gray);\r\n\t\r\n\t\r\n}\r\n#save_button {\r\n\t\r\n    box-sizing: border-box;\r\n\twidth:120px;\r\n\tbackground-color: var(--blue);\r\n\tcolor: rgb(255, 255, 255);\r\n\tborder-color:var(--blue);\r\n\tborder-radius: var(--basic-radius);\r\n\tborder: 5px 10px 5px 10px;\r\n\t\r\n}\r\n#insertBtn {\r\n\t\r\n    box-sizing: border-box;\r\n\twidth:120px;\r\n\tbackground-color: var(--blue);\r\n\tcolor: rgb(255, 255, 255);\r\n\tborder-color:var(--blue);\r\n\tborder-radius: var(--basic-radius);\r\n\tborder: 5px 10px 5px 10px;\r\n\t\r\n}\r\n.button_div {\r\n\twidth: var(--max-width);\r\n    box-sizing: border-box;\r\n\ttext-align: right;\r\n\tpadding-top:50px;\r\n}\r\n\r\n.searchBar_tbl {\r\n\ttable-layout: auto;\r\n\twidth: 100%;\r\n\ttable-layout: fixed;\r\n\tborder: 6px solid var(--bg-gray);\r\n\t\r\n}\r\n.searchBar_tbl tr th {\r\n\twidth:80px;\r\n\tbackground-color: var(--bg-gray);\r\n\tborder: 6px solid var(--bg-gray);\r\n\ttext-align: center;\r\n\tfont-size: 15px;\r\n}\r\n\r\n.list_div_tbl tr th{\r\n\ttext-align: center;\r\n\t\r\n}\r\n\r\n\r\n.subject_content_tbl input[type=\"text\"] {\r\n\tborder: none;\r\n\twidth:100%;\r\n\t\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/resources/css/company/custMgmtPage/salesMgmt.css b/out/artifacts/controller_war_exploded/resources/css/company/custMgmtPage/salesMgmt.css
+--- a/out/artifacts/controller_war_exploded/resources/css/company/custMgmtPage/salesMgmt.css	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/resources/css/company/custMgmtPage/salesMgmt.css	(date 1709111877784)
+@@ -59,6 +59,7 @@
+ 	
+ }
+ 
++
+ .searchBar_tbl tr th {
+ 	width:80px;
+ 	background-color: var(--bg-gray);
+@@ -69,6 +70,8 @@
+ 
+ }
+ 
++
++
+ .searchBar_tbl td{
+ 	border: 6px solid var(--bg-gray);
+ 	
+@@ -187,6 +190,11 @@
+ 	
+ }
+ 
++.list_div_tbl tr th{
++	text-align: center;
++	
++}
++
+ 
+ 
+ /** ------------신규 영업 (리스트) 페이지 끝--*/
+@@ -202,31 +210,21 @@
+ 	box-sizing: border-box;
+ }
+ 
+-.subject_content_tbl td {
+-	
+-	border: 6px solid var(--bg-gray);
+-	
+-}
+-
+-.subject_content_tbl tr th {
++
++
++.tbl_subtitle {
++	
+ 	width:120px;
+ 	background-color: var(--bg-gray);
+-	text-align: center;
+ 	border: 6px solid var(--bg-gray);
+-	font-size: 15px;
+-}
+-
+-.subject_content_tbl tr td{
+ 	text-align: center;
++	
++	font-weight: bolder;
+ }
+ 
+-.subject_content_tbl {
+ 
+-	width: 100%;
+-	table-layout: auto;
+-	table-layout: fixed;
+-	border: 6px solid var(--bg-gray);
+-}
++
++
+ 
+ #inquiryDetails {
+ 	text-align:left;
+@@ -242,10 +240,10 @@
+ }
+ 
+ 
+-#selectBusinessCondition, #search_keword, #history, #searchEname, #selectBusinessStatus, #FailureReasonsCmt, #selectFailureReasons{
++#selectBusinessCondition, #search_keword, #history, #searchEname, #FailureReasonsCmt, #selectFailureReasons{
+ 
+ 	border: none;
+-	width:100%;
++	
+ 	
+ 	
+ 	
+@@ -259,7 +257,7 @@
+ 	
+ }
+ 
+-.subject_content_tbl_2 {
++.subject_content_tbl {
+ 	
+ 	width: 100%;
+ 	table-layout: fixed;
+@@ -267,20 +265,21 @@
+ 	
+ 
+ }
+-.subject_content_tbl_2 tr th {
++.subject_content_tbl tr th {
+ 	width:120px;
+ 	background-color: var(--bg-gray);
+ 	border: 6px solid var(--bg-gray);
+ 	text-align: center;
+ 	font-size: 15px;
+ }
+-.subject_content_tbl_2 td {
++.subject_content_tbl td {
+ 	
+ 	background-color: var(--bg-gray);
+ 	border: 6px solid var(--bg-gray);
+ 	
+ }
+-#img_button_minus {
++#imgBtnMinus {
++	box-sizing: border-box;
+         background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
+         border: none;
+       	  width: 30px;
+@@ -288,23 +287,38 @@
+         cursor: pointer;
+         background-size: contain;
+       }
+- #img_button_plus {
++ #imgBtnPlus {
++ box-sizing: border-box;
+         background: url( "/resources/images/ul-plus-circle.svg" ) no-repeat;
+         border: none;
+       	width: 30px;
+         height: 30px;
+         cursor: pointer;
+         background-size: contain;
+-        margin-left:1200px;
+         margin-right:20px;
+         
++        
++        
++      }
++#imgBtnSearchEname {
++        background: url( "/resources/images/ul-search.svg" ) no-repeat;
++        border: none;
++      	  width: 25px;
++        height: 25px;
++        cursor: pointer;
++        background-size: contain;
++        margin-left:20px;
++        
+       }
+ .space_img_buttons {
++	box-sizing: border-box;
+ 	background-color: var(--bg-gray);
++	padding-left: 1000px;
++	
+ 	
+ 	
+ }
+-#save_button {
++#saveBtn {
+ 	
+     box-sizing: border-box;
+ 	width:120px;
+@@ -333,30 +347,10 @@
+ 	padding-top:50px;
+ }
+ 
+-.searchBar_tbl {
+-	table-layout: auto;
+-	width: 100%;
+-	table-layout: fixed;
+-	border: 6px solid var(--bg-gray);
+-	
+-}
+-.searchBar_tbl tr th {
+-	width:80px;
+-	background-color: var(--bg-gray);
+-	border: 6px solid var(--bg-gray);
+-	text-align: center;
+-	font-size: 15px;
+-}
+-
+-.list_div_tbl tr th{
+-	text-align: center;
+-	
+-}
+ 
+-
+-.subject_content_tbl input[type="text"] {
+-	border: none;
+-	width:100%;
+-	
++input[type="text"],input[type="email"], textarea, select {
++	border:none;
++	text-align: center;
+ }
+ 
++
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/spotMgmt/spotList.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"UTF-8\">\r\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\">\r\n<title>newSales.jsp</title>\r\n</head>\r\n<body>\r\n\t<div class=\"navBar\">\r\n\t\t<jsp:include page=\"../../../navBar.jsp\"/>\r\n\t</div>\r\n\t<div class=\"container-fluid\" align=\"center\" style=\"padding: 100px;\">\r\n\t<div class=\"entire\">\r\n\r\n\t<div class=\"title\" align=\"left\">\r\n\t\t<h3>지점 관리</h3>\r\n\t</div>\r\n\t<div class=\"searchBar_div\">\r\n\t\t<table class=\"searchBar_tbl\">\r\n\t\t\t<thead>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t<th>키워드</th>\r\n\t\t\t\t\t<td>\r\n\t\t\t\t\t\t<input type=\"text\" placeholder=\"기업명/담당자/메일주소/영업담당\">\r\n\t\t\t\t\t</td>\r\n\t\t\t\t\t<td rowspan=\"2\"></td>\r\n\t\t\t\t\t<th rowspan=\"2\"></th>\r\n\t\t\t\t\t<td rowspan=\"2\"></td>\r\n\t\t\t\t\t<td rowspan=\"2\"></td>\r\n\t\t\t\r\n\t\t\t\t</tr>\r\n\t\t\t\t<tr>\r\n\t\t\t\t\t<th>이용 상태</th>\r\n\t\t\t\t<td>\r\n\t\t\t\t\t<div class=\"checkbox_div\">\r\n\t\t\t\t<input type=\"checkbox\" name=\"serviceStatus\" value=\"전체\" checked=\"checked\" >전체\r\n\t\t\t\t<input type=\"checkbox\" name=\"serviceStatus\" value=\"활동\" checked=\"checked\" >활동\r\n\t\t\t\t<input type=\"checkbox\" name=\"serviceStatus\" value=\"중단\" checked=\"checked\" >중단\r\n\t\t\t\t<input type=\"checkbox\" name=\"serviceStatus\" value=\"해지\" checked=\"checked\" >해지\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</td>\r\n\t\t\t\t</tr>\r\n\t\t\t</thead>\r\n\t\t</table>\r\n\t\t\t<input type=\"button\" id=\"searchBar_search_btn\" value=\"검색\">\r\n\t\t\t\t\t<input type=\"button\" id=\"searchBar_reset_btn\" value=\"초기화\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"download_to_excel_btn_div\">\r\n\t\t\t\t<input type=\"button\" id=\"download_to_excel_btn\" value=\"엑셀로 내려받기\">\r\n\t\t\t</div>\r\n\t\t\t<div class=\"viewAFew_div\">\r\n\t\t\t\t<select name=\"viewAFew\" id=\"selectViewAFew\">\r\n\t\t\t\t\t\t\t\t<option value=\"10\">10</option>\r\n\t\t\t\t\t\t\t\t<option value=\"25\">25</option>\r\n\t\t\t\t\t\t\t\t<option value=\"50\">50</option>\r\n\t\t\t\t\t\t\t\t<option value=\"75\">75</option>\r\n\t\t\t\t\t\t\t\t<option value=\"100\">100</option>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t</select>\r\n\t\t\t\t개씩 보기\r\n\t\t\t</div>\r\n\t\r\n\r\n\t\r\n\t<div class=\"list_div\">\r\n\t\t\r\n\t <div>\r\n      <table class=\"list_div_tbl\">\r\n         <thead>\r\n            <tr class=\"top_bar_of_list\">\r\n               <th>기업 번호</th>\r\n               <th>지점 번호</th>\r\n               <th>기업명</th>\r\n               <th>지점명</th>\r\n               <th>주소</th>\r\n               <th>계약일자</th>\r\n               <th>상태</th>\r\n               <th>상태 변경 일자</th>\r\n               <th>담당자</th>\r\n               <th>직원 리스트</th>\r\n            </tr>\r\n            <tr>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td><a href=\"#\" id=\"open_managerInpo_modal\">담당자</a></td>\r\n            \t<td><a href=\"#\" id=\"open_empList_modal\">test</a></td>\r\n            </tr>\r\n         </thead>\r\n         <tbody>\r\n            \r\n         </tbody>\r\n      </table>\r\n\r\n\r\n</div>\r\n</div>\r\n\t<div class=\"button_div\">\r\n\t\t<input type=\"button\" id=\"insertBtn\" value=\"지점 등록\">\r\n\t</div>\r\n\t\r\n\t\r\n\r\n<!-------------------------------- 직원 리스트 모달-->\r\n<div class=\"modal\" id=\"empList_modal\">\r\n    \t\r\n      <div class=\"modal-content\">\r\n      \t<div class=\"modal-top\">\r\n    \t\t<span class=\"modal-title\">지점명</span>\r\n    \t\t<input type=\"text\" size=\"20\" readonly>\r\n    \t\t<input type=\"text\" size=\"20\" >\r\n    \t\t<input type=\"button\" id=\"searchBtn\" value=\"검색\">\r\n \t\t</div>\r\n \t\t<div class=\"list_div_modal\">\r\n      <table class=\"list_div_tbl_modal\">\r\n         <thead>\r\n            <tr class=\"top_bar_of_list_modal\">\r\n               <th>임직원 등록 번호</th>\r\n               <th>이름</th>\r\n               <th>연락처</th>\r\n               <th>이메일</th>\r\n               <th>직급</th>\r\n               <th>1인 예산</th>\r\n               <th>생년월일</th>\r\n               <th>주문일자</th>\r\n               <th>상품</th>  \r\n            </tr>\r\n            <tr>\r\n            \t<td><a href=\"#\" id=\"open_empInpo_modal\">1</a></td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            \t<td>test</td>\r\n            </tr>    \r\n         </thead>\r\n\r\n      </table>\r\n\t</div>\r\n\t\t<div class=\"modal-footer\">\t\r\n            <button type=\"button\" id=\"close_empList_modal\">닫기</button>\r\n         </div>\r\n     \r\n      </div>\r\n   </div>\t\r\n\t\r\n\t\r\n\t\r\n<!--------------------------------------- 지점 ,직원 정보 수정-->\r\n<div class=\"modal\" id=\"empInpo_modal\">\r\n    \t\r\n      <div class=\"modal-content\">\r\n      \t<div class=\"modal-top\">\r\n    \t\t<span class=\"modal-title\">지점 직원 정보 수정</span>\r\n \t\t</div>\r\n\r\n\t<div class=\"list_div_modal\">\r\n      <table class=\"list_div_tbl_modal\">\r\n         <thead>\r\n            <tr class=\"top_bar_of_list_modal\">\r\n               <th>임직원 등록 번호</th>\r\n               <th>이름</th>\r\n               <th>연락처</th>\r\n               <th>이메일</th>\r\n               <th>직급</th>\r\n               <th>1인 예산</th>\r\n               <th>생년월일</th>\r\n               <th>주문일자</th>\r\n               <th>상품</th>  \r\n            </tr>\r\n            <tr>\r\n            \t<td>1</td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t<td><input type=\"text\"></td>\r\n            \t\r\n            </tr>    \r\n         </thead>\r\n\r\n      </table>\r\n\t</div>\r\n\t\t<div class=\"modal-footer\">\t\r\n\t\t\t<button type=\"button\"  id=\"updateModalBtn\">수정</button>\r\n            <button type=\"button\" id=\"close_empInpo_modal\">닫기</button>\r\n         </div>\r\n     \r\n      </div>\r\n   </div>\t\r\n\t\r\n\t<!--------------------------------------- 담당자 정보 수정-->\r\n<div class=\"modal\" id=\"managerInpo_modal\">\r\n    \t\r\n      <div class=\"modal-content\">\r\n     \r\n\r\n\t<div class=\"list_div_modal\">\r\n      <table class=\"list_div_tbl_modal\">\r\n         <thead>\r\n            <tr>\r\n               <th>담당자 이름</th>\r\n            </tr>\r\n            <tr>\r\n               <td><input type=\"text\"></td>\r\n            </tr>\r\n            <tr>\r\n               <th>연락처</th>\r\n            </tr>\r\n            <tr>\r\n               <td><input type=\"text\"></td>\r\n            </tr>\r\n            <tr>\r\n               <th>이메일</th>\r\n            </tr>\r\n            <tr>\r\n               <td><input type=\"text\"></td>\r\n            </tr>\r\n            <tr>\r\n               <th>비밀번호</th>\r\n            </tr>\r\n            <tr>\r\n               <td><input type=\"text\"></td>\r\n            </tr>\r\n        \r\n         </thead>\r\n\r\n      </table>\r\n\t</div>\r\n\t\t<div class=\"modal-footer\">\t\r\n\t\t\t<button type=\"button\"  id=\"reset_managerInpo_modal\">취소</button>\r\n            <button type=\"button\" id=\"close_managerInpo_modal\">저장</button>\r\n         </div>\r\n     \r\n      </div>\r\n   </div>\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n\r\n</div>\r\n</div>\r\n<script type=\"text/javascript\" src=\"/resources/js/company/custMgmtPage/custMgmtModal.js\"></script>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/spotMgmt/spotList.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/spotMgmt/spotList.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/spotMgmt/spotList.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/spotMgmt/spotList.jsp	(date 1709111877783)
+@@ -84,7 +84,7 @@
+                <th>직원 리스트</th>
+             </tr>
+             <tr>
+-            	<td>test</td>
++            	 <td><a href="/spotUpdate">1</a></td>
+             	<td>test</td>
+             	<td>test</td>
+             	<td>test</td>
+@@ -259,5 +259,6 @@
+ </div>
+ </div>
+ <script type="text/javascript" src="/resources/js/company/custMgmtPage/custMgmtModal.js"></script>
++<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
+ </body>
+ </html>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesView.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n<meta charset=\"UTF-8\">\r\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n<link rel=\"stylesheet\" href=\"/resources/css/company/custMgmtPage/salesMgmt.css\">\r\n<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\">\r\n<title>newSalesViewDetails.jsp</title>\r\n</head>\r\n<body>\r\n\t<div class=\"navBar\">\r\n\t\t<jsp:include page=\"../../../navBar.jsp\"/>\r\n\t</div>\r\n\t\r\n\t<div class=\"container-fluid\" align=\"center\" style=\"padding: 100px;\">\r\n\t\r\n\t<div class=\"entire\">\r\n\t\r\n\t<div class=\"title\" align=\"left\">\r\n\t\t<h3>신규 영업</h3>\r\n\t</div>\r\n\t\r\n\t\t<div class=\"subject_content\">\r\n\t\t\t<h5 class=\"subject_title\" align=\"left\">●상담 신청 내용</h5>\r\n\r\n\t\t\t<table class=\"subject_content_tbl\">\r\n\t\t\t\t<thead>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>신청일</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>응대일</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>지역</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>기업명</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>직원수</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>예산</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>신청인</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>연락처</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<th>이메일</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>문의 내용</th>\r\n\t\t\t\t\t\t<td colspan=\"5\" id=\"inquiryDetails\">\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\r\n\t\t\t\t</thead>\r\n\t\t\t\r\n\t\t\t</table>\r\n\t\t\t\r\n\t\t\t\r\n\t\t<h5 class=\"subject_title\" align=\"left\">●영업 내용</h5>\r\n\r\n\t\t\t<table class=\"subject_content_tbl_2\">\r\n\t\t\t\t<thead>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>영업 담당자</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<input type=\"text\" id=\"searchEname\" placeholder=\"영업 담당자\" >\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t<th>영업 상태</th>\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<select name=\"businessStatus\" id=\"selectBusinessStatus\">\r\n\t\t\t\t\t\t\t\t<option value=\"최초 인입\">최초 인입</option>\r\n\t\t\t\t\t\t\t\t<option value=\"응대 완료\">응대 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"견적 발송 완료\">견적 발송 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"미팅 완료\">미팅 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"계약 완료\">계약 완료</option>\r\n\t\t\t\t\t\t\t\t<option value=\"계약 실패\">계약 실패</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>영업 히스토리</th>\t\r\n\t\t\t\t\t\t<td colspan=\"3\" style=\"background-color: #EEEEEE;\"></td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>날짜 </th>\r\n\t\t\t\t\t\t<td colspan=\"3\"><input type=\"date\" ></td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>내용</th>\r\n\t\t\t\t\t\t<td colspan=\"3\"><textarea rows=\"10\"  style=\"resize: none\" id=\"history\" placeholder=\"영업 히스토리\"></textarea></td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\t\t\t</table>\r\n\t\t\t\t<div class=\"space_img_buttons\">\r\n\t\t\t\t <input type=\"button\" class=\"img_button\" id=\"img_button_plus\">\r\n\t\t\t\t <input type=\"button\" class=\"img_button\" id=\"img_button_minus\">\r\n\t\t\t\t</div>\r\n\r\n\t\t\t<table class=\"subject_content_tbl_2\">\r\n\t\t\t\t<thead>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>계약 실패 사유</th>\t\r\n\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t<select name=\"failureReasons\" id=\"selectFailureReasons\">\r\n\t\t\t\t\t\t\t\t<option value=\"단가 불만족\">단가 불만족</option>\r\n\t\t\t\t\t\t\t\t<option value=\"상품 불만족\">상품 불만족</option>\r\n\t\t\t\t\t\t\t\t<option value=\"서비스 불만족\">서비스 불만족</option>\r\n\t\t\t\t\t\t\t\t<option value=\"경쟁사 이용\">경쟁사 이용</option>\r\n\t\t\t\t\t\t\t\t<option value=\"중복인입\">중복인입</option>\r\n\t\t\t\t\t\t\t\t<option value=\"허위인입\">허위인입</option>\r\n\t\t\t\t\t\t\t\t<option value=\"기타\">기타</option>\r\n\t\t\t\t\t\t\t</select>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td colspan=\"2\" style=\"background-color: #EEEEEE;\"></td>\r\n\t\t\t\t\t</tr>\r\n\t\t\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th>내용</th>\r\n\t\t\t\t\t\t<td colspan=\"3\">\r\n\t\t\t\t\t\t<textarea rows=\"10\" style=\"resize: none\" id=\"FailureReasonsCmt\" placeholder=\"계약 실패 사유 상세 기재\"></textarea>\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t\t\r\n\t\t\t\t</thead>\r\n\t\t\t\r\n\t\t\t</table>\r\n\t\t\r\n\t\t</div>\r\n\t\t<div class=\"button_div\">\r\n\t\t<input type=\"button\" id=\"save_button\" value=\"저장\">\r\n\t\t</div>\r\n\r\n\t</div>\r\n\r\n</div>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesView.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesView.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesView.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/custMgmtPage/salesMgmt/salesView.jsp	(date 1709111877783)
+@@ -4,7 +4,6 @@
+ <html>
+ <head>
+ <meta charset="UTF-8">
+-<meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+ <title>newSalesViewDetails.jsp</title>
+@@ -17,81 +16,93 @@
+ 	<div class="container-fluid" align="center" style="padding: 100px;">
+ 	
+ 	<div class="entire">
+-	
+ 	<div class="title" align="left">
+ 		<h3>신규 영업</h3>
+ 	</div>
+-	
+-		<div class="subject_content">
+-			<h5 class="subject_title" align="left">●상담 신청 내용</h5>
+-
+-			<table class="subject_content_tbl">
+-				<thead>
+-					<tr>
+-						<th>신청일</th>
++	<h5 class="subject_title" align="left">●상담 신청 내용</h5>
++	<table class="subject_content_tbl">
++	<thead>
++	<tr>
++						<td class="tbl_subtitle">기업명</td>
+ 						<td>
+-							
++							<input type="text" name="cnslCoName" value="${SalesVO.cnslCoName }" readonly>
+ 						</td>
+-						<th>응대일</th>
++						<td rowspan="3"></td>
++						<td class="tbl_subtitle">상담 신청일</td>
+ 						<td>
+-						
++							<input type="text" name="cnslReqDt" value="${SalesVO.cnslReqDt }" readonly>
+ 						</td>
+-						<th>지역</th>
++						<td rowspan="3"></td>
++						<td class="tbl_subtitle">지역</td>
+ 						<td>
+-							
++							<input type="text" name="cnslArea" value="${SalesVO.cnslArea }" readonly>
+ 						</td>
++						<td rowspan="3"></td>
+ 					</tr>
+-					<tr>
+-						<th>기업명</th>
++	
++	<tr>
++						<td class="tbl_subtitle">담당자</td>
+ 						<td>
+-							
++							<input type="text" name="cnslName" value="${SalesVO.cnslName }" readonly>
+ 						</td>
+-						<th>직원수</th>
++						
++						<td class="tbl_subtitle">연락처</td>
+ 						<td>
+-							
++							<input type="text" name="cnslCt" value="${SalesVO.cnslCt }" readonly>
+ 						</td>
+-						<th>예산</th>
++						
++						<td class="tbl_subtitle">이메일</td>
+ 						<td>
+-							
++							<input type="email" name="cnslEmail" value="${SalesVO.cnslEmail }" readonly>
+ 						</td>
+-					</tr>
++						
++						
++					</tr>	
+ 					<tr>
+-						<th>신청인</th>
+-						<td>
+-							
+-						</td>
+-						<th>연락처</th>
++						<td class="tbl_subtitle">직원 수</td>
+ 						<td>
+-							
++							<input type="text" name="cnslEmpNum" value="${SalesVO.cnslEmpNum }" readonly>
+ 						</td>
+-						<th>이메일</th>
++						
++						<td class="tbl_subtitle">예상 예산</td>
+ 						<td>
+-							
++							<input type="text" name="cnslBdgt" value="${SalesVO.cnslBdgt }" readonly>
+ 						</td>
++						
++						<td colspan="3"></td>
++
+ 					</tr>
+ 					<tr>
+-						<th>문의 내용</th>
+-						<td colspan="5" id="inquiryDetails">
++						<td class="tbl_subtitle">문의 내용</td>
++						<td colspan="8" id="inquiryDetails">
++						<textarea rows="10"  style="width: 90%; resize: none" readonly>${SalesVO.cnslInqCnt}</textarea>
++						
+ 						</td>
++
+ 					</tr>
+-				
+-				</thead>
+-			
+-			</table>
+-			
+-			
+-		<h5 class="subject_title" align="left">●영업 내용</h5>
+-
+-			<table class="subject_content_tbl_2">
+-				<thead>
+-					<tr>
+-						<th>영업 담당자</th>
++
++	</thead>
++	</table>
++	
++	
++	<h5 class="subject_title" align="left">●영업 내용</h5>
++	
++	<form method="post">
++	<table class="subject_content_tbl">
++	<thead>
++	
++	<tr>
++						<td class="tbl_subtitle">영업 담당자</td>
++						<td>
++							<input type="text" name="cnslEname" readonly>
++							
++						</td>
+ 						<td>
+-							<input type="text" id="searchEname" placeholder="영업 담당자" >
++							<input type="button" class="salesViewBtns" id="imgBtnSearchEname">
+ 						</td>
+-							<th>영업 상태</th>
++						<td class="tbl_subtitle">영업 상태</td>
+ 						<td>
+-							<select name="businessStatus" id="selectBusinessStatus">
++							<select name="cnslSaleSt">
+ 								<option value="최초 인입">최초 인입</option>
+ 								<option value="응대 완료">응대 완료</option>
+ 								<option value="견적 발송 완료">견적 발송 완료</option>
+@@ -100,32 +111,40 @@
+ 								<option value="계약 실패">계약 실패</option>
+ 							</select>
+ 						</td>
++						<td></td>
++						<td class="tbl_subtitle">응대일</td>
++						<td>
++							<input type="date" name="cnslRespDt" >
++						</td>
++						<td></td>
+ 					</tr>
+ 					<tr>
+-						<th>영업 히스토리</th>	
+-						<td colspan="3" style="background-color: #EEEEEE;"></td>
++						<td class="tbl_subtitle">영업 히스토리</td>	
++						<td colspan="8" style="background-color: #EEEEEE;"></td>
+ 					</tr>
+ 					<tr>
+-						<th>날짜 </th>
+-						<td colspan="3"><input type="date" ></td>
++						<td class="tbl_subtitle">날짜 </td>
++						<td colspan="8"><input type="date" name="cnslHisCnt1Dt"></td>
+ 					</tr>
+ 					<tr>
+-						<th>내용</th>
+-						<td colspan="3"><textarea rows="10"  style="resize: none" id="history" placeholder="영업 히스토리"></textarea></td>
++						<td class="tbl_subtitle">내용</td>
++						<td colspan="8">
++						<textarea rows="10"  style="width: 90%; resize: none" name="cnslHisCnt1"></textarea>
++						</td>
+ 					</tr>
+-				</thead>
+-			</table>
+-				<div class="space_img_buttons">
+-				 <input type="button" class="img_button" id="img_button_plus">
+-				 <input type="button" class="img_button" id="img_button_minus">
++	</thead>
++	</table>
++	
++	<div class="space_img_buttons">
++				 <input type="button" class="salesViewBtns" id="imgBtnPlus">
++				 <input type="button" class="salesViewBtns" id="imgBtnMinus">
+ 				</div>
+-
+-			<table class="subject_content_tbl_2">
++			<table class="subject_content_tbl">
+ 				<thead>
+-					<tr>
+-						<th>계약 실패 사유</th>	
++				<tr>
++						<td class="tbl_subtitle">계약 실패 사유</td>	
+ 						<td>
+-							<select name="failureReasons" id="selectFailureReasons">
++							<select name="cnslFailRsn" id="selectFailureReasons">
+ 								<option value="단가 불만족">단가 불만족</option>
+ 								<option value="상품 불만족">상품 불만족</option>
+ 								<option value="서비스 불만족">서비스 불만족</option>
+@@ -135,30 +154,33 @@
+ 								<option value="기타">기타</option>
+ 							</select>
+ 						</td>
+-						<td colspan="2" style="background-color: #EEEEEE;"></td>
++						<td colspan="7"></td>
++						
+ 					</tr>
+-		
+-					<tr>
+-						<th>내용</th>
+-						<td colspan="3">
+-						<textarea rows="10" style="resize: none" id="FailureReasonsCmt" placeholder="계약 실패 사유 상세 기재"></textarea>
++				
++				<tr>
++						<td class="tbl_subtitle">내용</td>
++						<td colspan="8">
++						<textarea rows="10" style="width: 90%; resize: none" id="FailureReasonsCmt" placeholder="계약 실패 사유 상세 기재" name="cnslFailCmt"></textarea>
+ 						</td>
+ 					
+ 					
+ 					</tr>
+-					
++				
++				
+ 				</thead>
+-			
+-			</table>
+-		
+-		</div>
++				</table>
++	
+ 		<div class="button_div">
+-		<input type="button" id="save_button" value="저장">
++		<input type="button" class="salesViewBtns" id="saveBtn" value="저장">
++		<input type="hidden" name="cnslNo" value="${SalesVO.cnslNo }">
+ 		</div>
+-
++</form>
+ 	</div>
+ 
+ </div>
++<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
++<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
+ 
+ </body>
+ </html>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/spring/root-context.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><beans xmlns=\"http://www.springframework.org/schema/beans\"\r\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txmlns:aop=\"http://www.springframework.org/schema/aop\"\r\n\txmlns:context=\"http://www.springframework.org/schema/context\"\r\n\txmlns:mybatis-spring=\"http://mybatis.org/schema/mybatis-spring\"\r\n\txmlns:tx=\"http://www.springframework.org/schema/tx\"\r\n\txsi:schemaLocation=\"http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd\r\n\t\thttp://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd\r\n\t\thttp://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd\r\n\t\thttp://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd\r\n\t\thttp://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd\">\r\n\r\n\t<!-- Root Context: defines shared resources visible to all other web components -->\r\n\t<bean id=\"hikariConfig\" class=\"com.zaxxer.hikari.HikariConfig\">\r\n\t\t<!-- log4jdbc -->\r\n\r\n\t\t<property name=\"driverClassName\"\r\n\t\t\tvalue=\"oracle.jdbc.driver.OracleDriver\" />\r\n\t\t<property name=\"jdbcUrl\"\r\n\t\t\tvalue=\"jdbc:oracle:thin:@localhost:1521:xe\" />\r\n\t\t<property name=\"username\" value=\"scott\" />\r\n\t\t<property name=\"password\" value=\"tiger\" />\r\n\r\n\t</bean>\r\n\r\n\t<!-- HikariCP configuration -->\r\n\t<bean id=\"dataSource\" class=\"com.zaxxer.hikari.HikariDataSource\"\r\n\t\tdestroy-method=\"close\">\r\n\t\t<constructor-arg ref=\"hikariConfig\"></constructor-arg>\r\n\t</bean>\r\n\r\n\t<bean id=\"sqlSessionFactory\"\r\n\t\tclass=\"org.mybatis.spring.SqlSessionFactoryBean\">\r\n\t\t<property name=\"dataSource\" ref=\"dataSource\"></property>\r\n\t</bean>\r\n\r\n\t<!-- @Autowired 사용할 매퍼 서비스 꼭등록할것!! -->\r\n\r\n\r\n\r\n\r\n\t<!-- 사원 테이블 mapper OR service -->\r\n\t<mybatis-spring:scan\r\n\t\tbase-package=\"org.rainbow.company.employeeSupervisePage.mapper\" />\r\n\t<context:component-scan\r\n\t\tbase-package=\"org.rainbow.company.employeeSupervisePage.service\" />\r\n\r\n\r\n\r\n\t<!-- 상품관리 mapper OR service -->\r\n\t<mybatis-spring:scan\r\n\t\tbase-package=\"org.rainbow.company.ProductManagement.mapper\" />\r\n\t<context:component-scan\r\n\t\tbase-package=\"org.rainbow.company.ProductManagement.service\" />\r\n\r\n\r\n\r\n\t<!-- 트랜젝션 및 aop 관련 항목들 -->\r\n\t<bean id=\"transactionManager\"\r\n\t\tclass=\"org.springframework.jdbc.datasource.DataSourceTransactionManager\">\r\n\t\t<property name=\"dataSource\" ref=\"dataSource\" />\r\n\t</bean>\r\n\t<tx:annotation-driven />\r\n\r\n\t<aop:aspectj-autoproxy></aop:aspectj-autoproxy>\r\n\r\n</beans>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/spring/root-context.xml b/out/artifacts/controller_war_exploded/WEB-INF/spring/root-context.xml
+--- a/out/artifacts/controller_war_exploded/WEB-INF/spring/root-context.xml	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/spring/root-context.xml	(date 1709113447444)
+@@ -10,18 +10,13 @@
+ 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+ 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+ 
+-	<!-- Root Context: defines shared resources visible to all other web components -->
+ 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+-		<!-- log4jdbc -->
+-
+-		<property name="driverClassName"
+-			value="oracle.jdbc.driver.OracleDriver" />
+-		<property name="jdbcUrl"
+-			value="jdbc:oracle:thin:@localhost:1521:xe" />
+-		<property name="username" value="scott" />
+-		<property name="password" value="tiger" />
+-
+-	</bean>
++         <!-- log4jdbc --> 
++         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
++         <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow" />
++         <property name="username" value="root"></property>
++         <property name="password" value="tiger"></property>
++   </bean> 
+ 
+ 	<!-- HikariCP configuration -->
+ 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+@@ -52,6 +47,11 @@
+ 		base-package="org.rainbow.company.ProductManagement.mapper" />
+ 	<context:component-scan
+ 		base-package="org.rainbow.company.ProductManagement.service" />
++		
++		
++	<!-- @Autowired 사용할 매퍼 서비스 신정우 -->
++	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>
++	<context:component-scan base-package="org.rainbow.company.custMgmt.service"/>
+ 
+ 
+ 
+Index: .idea/artifacts/controller_war_exploded.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/artifacts/controller_war_exploded.xml b/.idea/artifacts/controller_war_exploded.xml
+new file mode 100644
+--- /dev/null	(date 1709113536387)
++++ b/.idea/artifacts/controller_war_exploded.xml	(date 1709113536387)
+@@ -0,0 +1,69 @@
++<component name="ArtifactManager">
++  <artifact type="exploded-war" name="controller:war exploded">
++    <output-path>$PROJECT_DIR$/out/artifacts/controller_war_exploded</output-path>
++    <root id="root">
++      <element id="directory" name="WEB-INF">
++        <element id="directory" name="classes">
++          <element id="module-output" name="controller" />
++        </element>
++        <element id="directory" name="lib">
++          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.9.5" />
++          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.6" />
++          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.6" />
++          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.6" />
++          <element id="library" level="project" name="Maven: log4j:log4j:1.2.15" />
++          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
++          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
++          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.49" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.7.RELEASE" />
++          <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:2.7.8" />
++          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.6" />
++          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.3.2" />
++          <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16" />
++          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.2" />
++          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.2" />
++          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.2" />
++          <element id="library" level="project" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.2" />
++          <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.12.2" />
++          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" />
++          <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" />
++          <element id="library" level="project" name="Maven: org.codehaus.woodstox:stax2-api:4.2.1" />
++          <element id="library" level="project" name="Maven: com.fasterxml.woodstox:woodstox-core:6.2.4" />
++          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.5" />
++          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:4.1.2" />
++          <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:3.1.0" />
++          <element id="library" level="project" name="Maven: com.alibaba:easyexcel:3.0.5" />
++          <element id="library" level="project" name="Maven: org.apache.poi:poi:4.1.2" />
++          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.13" />
++          <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.4" />
++          <element id="library" level="project" name="Maven: org.apache.commons:commons-math3:3.6.1" />
++          <element id="library" level="project" name="Maven: com.zaxxer:SparseBitSet:1.2" />
++          <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:4.1.2" />
++          <element id="library" level="project" name="Maven: org.apache.commons:commons-compress:1.19" />
++          <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.06" />
++          <element id="library" level="project" name="Maven: org.apache.commons:commons-csv:1.8" />
++          <element id="library" level="project" name="Maven: cglib:cglib:3.3.0" />
++          <element id="library" level="project" name="Maven: org.ow2.asm:asm:7.1" />
++          <element id="library" level="project" name="Maven: org.ehcache:ehcache:3.8.1" />
++          <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.1" />
++          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.1" />
++          <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:2.3.1" />
++          <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" />
++          <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8" />
++          <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" />
++          <element id="library" level="project" name="Maven: javax.activation:javax.activation-api:1.2.0" />
++        </element>
++      </element>
++      <element id="javaee-facet-resources" facet="controller/web/Web" />
++    </root>
++  </artifact>
++</component>
+\ No newline at end of file
+Index: out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productManagement.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\"\r\n    pageEncoding=\"UTF-8\"%>\r\n<%@ taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\" %>   \r\n<%@ taglib prefix=\"fmt\" uri=\"http://java.sun.com/jsp/jstl/fmt\" %>  \r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <link rel=\"stylesheet\" href=\"/resources/css/company/productManagementPage/productManagement.css\">\r\n</head>\r\n<body>\r\n<jsp:include page=\"../../navBar.jsp\"/>\r\n<div class=\"container-fluid\"  style=\"padding-top: 30px;\" align=\"center\">\t\r\n    <h2 style=\"width: 1500px;\" align=\"left\">상품관리</h2>\r\n    <div class=\"\" >\r\n   \t\t <!--background: #eaeaea;\r\n  \t  \t border-spacing: 15px 30px;\r\n   \t\t border-collapse: separate;  -->\r\n        <table class=\"prdTable\" style=\"background:#eaeaea;\">\r\n            <tr>\r\n                <td>\r\n                    <div class=\"section\">\r\n                    \t<div class=\"flex-div\" style=\"\">\r\n                        <label>상품 분류</label>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input\" checked=\"checked\" type=\"checkbox\" data-filter=\"product-type\" value=\"전체\" id=\"product-typeAll\">\r\n                            <label class=\"form-check-label\" for=\"product-typeAll\">전체</label>\r\n                        </div>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input filter-checkbox\" checked=\"checked\" type=\"checkbox\" data-filter=\"product-type\" value=\"상품권\" id=\"voucher\">\r\n                            <label class=\"form-check-label\" for=\"voucher\">상품권</label>\r\n                        </div>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input filter-checkbox\" checked=\"checked\" type=\"checkbox\" data-filter=\"product-type\" value=\"현물\" id=\"actualThing\">\r\n                            <label class=\"form-check-label\" for=\"actualThing\">현물</label>\r\n                        </div>\r\n                        </div>\r\n                    </div>\r\n                </td>\r\n                <td>\r\n                    <div class=\"section\">\r\n                    \t<div class=\"flex-div\" style=\"\">\r\n                        <label>상품 상태</label>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input\" type=\"checkbox\" value=\"전체\" id=\"product-statusAll\" checked=\"checked\">\r\n                            <label class=\"form-check-label\" for=\"product-statusAll\">전체</label>\r\n                        </div>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input filter-checkbox\" data-filter=\"product-status\" type=\"checkbox\" value=\"판매중\" id=\"onSale\" checked=\"checked\">\r\n                            <label class=\"form-check-label\" for=\"onSale\">판매중</label>\r\n                        </div>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input filter-checkbox\" data-filter=\"product-status\" type=\"checkbox\" value=\"일시품절\" id=\"outOfStock\" checked=\"checked\">\r\n                            <label class=\"form-check-label\" for=\"outOfStock\">일시품절</label>\r\n                        </div>\r\n                        <div class=\"form-check\">\r\n                            <input class=\"form-check-input filter-checkbox\" data-filter=\"product-status\" type=\"checkbox\" value=\"단종\" id=\"soldOut\" checked=\"checked\">\r\n                            <label class=\"form-check-label\" for=\"soldOut\">단종</label>\r\n                        </div>\r\n                        </div>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n                    <div class=\"section\">\r\n                    \t<div class=\"flex-div\" style=\"\">\r\n                        <label>키워드</label>\r\n                        <div class=\"input-group mb-3\" style=\"width: 320px;margin: 20px;\">\r\n                            <span class=\"input-group-text\" id=\"test\">\uD83D\uDD0D</span>\r\n                            <input type=\"text\" class=\"form-control\" placeholder=\"공급처명/상품코드/대분류/소분류/상품명\" aria-label=\"키워드 입력\" aria-describedby=\"test\" id=\"keyword\">\r\n                        </div>\r\n                        <div>\r\n                            <button type=\"button\" class=\"btn btn-primary\" id=\"search\">검색</button>\r\n                            <button type=\"button\" class=\"btn btn-primary\" id=\"reset\">초기화</button>\r\n                        </div>\r\n                        </div>\r\n                    </div>\r\n                </td>\r\n                <td>\r\n                    <div class=\"section\">\r\n                    \t<div class=\"flex-div\" style=\"\">\r\n                        <label>상품 일괄 편집</label>\r\n                        <div>\r\n                       \t\t<input type=\"file\" class=\"custom-file-input\" id=\"excelUpload\" name=\"EXCEL\" multiple=\"multiple\" style=\"display: none;\">\r\n                            <button type=\"button\" class=\"btn btn-primary\" id=\"uploadBtn\">엑셀 업로드</button>\r\n                            <button type=\"button\" class=\"btn btn-primary\" id=\"downloadButton\">엑셀 다운로드</button>\r\n                        </div>\r\n                        </div>\r\n                    </div>\r\n                </td>\r\n            </tr>\r\n        </table>\r\n    </div>\r\n    <div style=\"padding-top: 40px\">\r\n        <form>\r\n            <table border=\"1\" class=\"table\" id=\"table-prd\">\r\n\t\t\t    <thead class=\"table-light\">\r\n\t\t\t        <tr>\r\n                        <th>공급처명<button type=\"button\" class=\"sort-btn\" data-column=\"supsCo\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>상품코드<button type=\"button\" class=\"sort-btn\" data-column=\"prdNo\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>표준유통코드<button type=\"button\" class=\"sort-btn\" data-column=\"prdSdc\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>대분류<button type=\"button\" class=\"sort-btn\" data-column=\"prdMajorCtg\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>소분류<button type=\"button\" class=\"sort-btn\" data-column=\"prdSubCtg\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>상품명<button type=\"button\" class=\"sort-btn\" data-column=\"prdName\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>원가<button type=\"button\" class=\"sort-btn\" data-column=\"prdCstPri\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>판매가<button type=\"button\" class=\"sort-btn\" data-column=\"prdSal\">\uD83D\uDD3D</button></th>\r\n\t\t\t            <th>마진율<button type=\"button\" class=\"sort-btn\" data-column=\"prdMargin\">\uD83D\uDD3D</button></th>\r\n\t\t\t        </tr>\r\n\t\t\t    </thead>\r\n\t\t\t    <tbody>\r\n\t\t\t        <c:forEach var=\"ex\" items=\"${list}\">\r\n\t\t\t            <tr class=\"product\" data-type=\"${ex.prdMajorCtg}\" data-status=\"${ex.prdSt}\">\r\n\t\t\t                <td><a href=\"moveSuppliersUpdate\">${ex.supsCo}</a></td>\r\n\t\t\t                <td><a href=\"moveProductUpdate\">${ex.prdNo }</a></td>\r\n\t\t\t                <td>${ex.prdSdc }</td>\r\n\t\t\t                <td>${ex.prdMajorCtg }</td>\r\n\t\t\t                <td>${ex.prdSubCtg }</td>\r\n\t\t\t                <td>\r\n\t\t\t                \t\t<img alt=\"\" src=\"${ex.prdImg}\" align=\"left\">\r\n\t\t\t                \t\t<div id=\"tdTop\">${ex.prdName }</div>\r\n\t\t\t                </td>\r\n\t\t\t                <td><fmt:formatNumber value=\"${ex.prdCstPri }\" type=\"currency\"/></td>\r\n              \t\t\t\t<td><fmt:formatNumber value=\"${ex.prdSal }\"\t   pattern=\"#,###\"/></td>\r\n\t\t\t                <td>${ex.prdMargin * 100 }%</td>\r\n\t\t\t            </tr>\r\n\t\t\t        </c:forEach>\r\n\t\t\t    </tbody>\r\n\t\t\t</table>\r\n\t\t\t<!-- 나중에 스타일 안바꾸면디진다 -->\r\n\t\t\t<div style=\"width: 1500px;\" align=\"left\">\r\n\t\t        <button type=\"button\" class=\"btn btn-primary\" onclick=\"location.href='moveProductReg'\">신규 등록</button>\r\n\t\t    </div>\r\n        </form>\r\n    </div>\r\n    <!--페이지 부분제거후 js 로 그릴예정 -->\r\n    <!-- page -->\r\n    <div id=\"pagination\" class=\"page-wrap\" align=\"center\" style=\"width: 1500px;\">\r\n    <ul class=\"page-nation\">\r\n        <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->\r\n    </ul>\r\n</div>\r\n\r\n</div>\r\n\r\n<script type=\"text/javascript\" src=\"/resources/js/company/productPage/prdPageFilter.js\"></script> \r\n<script type=\"text/javascript\" src=\"/resources/js/company/productPage/prdUpDownLoad.js\"></script>\r\n<script type=\"text/javascript\" src=\"/resources/js/company/productPage/prdPageSearch.js\"></script>\r\n\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productManagement.jsp b/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productManagement.jsp
+--- a/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productManagement.jsp	(revision 73508302ce0da98529799f6d11f856ece705d3be)
++++ b/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productManagement.jsp	(date 1709108309915)
+@@ -143,8 +143,8 @@
+ 
+ </div>
+ 
++<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
+ <script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script> 
+ <script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>
+-<script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
+ 
+ </html>
+\ No newline at end of file

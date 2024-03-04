@@ -35,22 +35,18 @@ public class companyController {
 	
 	}
 	
-	
-
-	
-	/** 기업 관리 페이지에서 기업 등록 페이지로 이동 */
-	@GetMapping("/moveCompanyRegister")
-	public String moveCompanyRegister() {
-		return "/company/custMgmtPage/companyMgmt/companyRegister";
+	@GetMapping("/companyView")
+	public String companyView( ) {
+		
+		return "/company/custMgmtPage/companyMgmt/companyView";	
+		 
 	}
-
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	@GetMapping("/companyRegister")
+	public String companyRegister( ) {
+		
+		return "/company/custMgmtPage/companyMgmt/companyRegister";	
+		 
+	}
 }

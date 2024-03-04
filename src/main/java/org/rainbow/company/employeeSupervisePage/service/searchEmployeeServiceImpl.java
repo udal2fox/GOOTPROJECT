@@ -37,4 +37,9 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 		return mapper.get(eno);
 	}
 	
+	@Override
+	public void insert(get_employeeDTO dto) {
+		log.info("insert..." + dto);
+		mapper.insert(dto);    
+	}
 }

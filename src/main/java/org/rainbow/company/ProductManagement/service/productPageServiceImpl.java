@@ -72,6 +72,16 @@ public class productPageServiceImpl implements productPageService
 		return pMapper.supsNoCount();
 	}
 
+	@Override
+	public int insertSups(suppliersVO vo) {
+		return pMapper.insertSups(vo);
+	}
+
+	@Override
+	public suppliersVO getSupsVO(String supsNo) {
+		return pMapper.getSupsVO(supsNo);
+	}
+
 		
 	
 

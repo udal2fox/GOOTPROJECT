@@ -1,11 +1,15 @@
 package org.rainbow.company.employeeSupervisePage.controller;
 
+import org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 
@@ -16,12 +20,26 @@ public class employeeSupervisePageController {
 	@Autowired
 	searchEmployeeServiceImpl service;
 
-	// 직원 정보 등록 페이지
+	// 직원 정보 등록 페이지 이동
 	@GetMapping("/employee_insert")
 	public String employee_insert() {
 		return "/company/employeeSupervisePage/employee_insert";
 	}
+	
+	// 직원 정보 등록
+	@PostMapping(value = "/employee_insert")
+	public String insert(get_employeeDTO dto, RedirectAttributes rttr) {
+		log.info("insert..." + dto);
 
+		service.insert(dto);
+		
+		rttr.addFlashAttribute("result" , "success");
+		//RedirectAttributes rttr 
+		//redirect:
+		return "redirect:/searchEmployee";
+		
+	}
+	
 	// 직원 정보 편집 페이지
 	@GetMapping("/employee_modify")
 	public String employee_modify(@RequestParam("eno") int eno, Model model) {

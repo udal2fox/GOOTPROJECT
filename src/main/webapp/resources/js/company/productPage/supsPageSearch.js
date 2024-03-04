@@ -17,7 +17,7 @@ function fetchSearchResults(keyword) {
             let msg = '';
             console.log(list);
             list.forEach(list => {
-                msg += '<tr class="product" data-type="'+list.supsBnt+'" data-status="'+list.supsSt+'">'+
+                msg += '<tr class="sups" data-type="'+list.supsBnt+'" data-status="'+list.supsSt+'">'+
                             '<td><a href="moveSuppliersUpdate">'+list.supsNo+'</a></td>'+
                             '<td><a href="moveProductUpdate">'+list.supsCo+'</a></td>'+
                             '<td>'+list.supsBnt+'</td>'+
@@ -48,22 +48,22 @@ function resetCheckboxes() {
     });
 
     // "전체 선택" 체크박스도 초기화
-    document.getElementById('product-typeAll').checked = true;
-    document.getElementById('product-statusAll').checked = true;
+    document.getElementById('sups-typeAll').checked = true;
+    document.getElementById('sups-statusAll').checked = true;
 }
 
 
 // 필터링된 상품 리스트 가져오기
 function getFilteredProducts() {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
 
     // 여기서 새로운 상품 리스트를 가져오도록 수정
-    let products = document.querySelectorAll('.product'); // 전체 상품 리스트
+    let products = document.querySelectorAll('.sups'); // 전체 상품 리스트
     let filteredProducts = Array.from(products).filter(function (product) {
         let type = product.getAttribute('data-type');
         let status = product.getAttribute('data-status');

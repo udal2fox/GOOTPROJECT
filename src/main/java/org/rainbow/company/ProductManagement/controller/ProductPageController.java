@@ -2,8 +2,6 @@ package org.rainbow.company.ProductManagement.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +12,11 @@ import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
+import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.service.productPageServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.ExcelListener;
-import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -78,8 +76,12 @@ public class ProductPageController
     
     // 공급처 등록 이동
     @GetMapping(value = "/moveSuppliersRegist")
-    public String moveSuppliersRegist(Model model, Criteria cri) 
+    public String moveSuppliersRegist(Model model) 
     {
+    	int supsCount = pService.supsNoCount();
+    	String newSupsNo = "a" + (supsCount+1);
+    	
+    	model.addAttribute("NSN", newSupsNo);
     	return "/company/productManagement/suppliersRegist";
     }
     // 공급처 수정 이동
@@ -180,13 +182,13 @@ public class ProductPageController
     	
     	System.out.println(checkValue);
     	 
-    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함?
+    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함? // 리스트로 보낼려면 구조를 바꿔야한다.
     	
     	System.out.println(downlist);
     	
     	
         // 리스트를 넣으면 엑셀화됨.
-        ExcelDownloadUtil.downloadProductList(response, downlist);
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
     // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
@@ -249,6 +251,23 @@ public class ProductPageController
         	return  new ResponseEntity<String>("no file",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+    /** 엑셀 데이터 다운로드 처리*/
+    @ResponseBody
+    @PostMapping("/supsExcelDown")
+    public void supsExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    {
+    	System.out.println(checkValues);
+
+    	Map<String, Object> checkValue = new HashMap<>();
+    	
+    	checkValue.put("checkValues", checkValues);
+    	 
+    	List<supsDownVO> downlist = pService.supsExcelDown(checkValue);
+    	
+    	System.out.println(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
     
 }

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<title>newSales.jsp</title>
+<title></title>
 </head>
 <body>
 	<div class="navBar">
@@ -19,6 +20,7 @@
 		<h3>지점 관리</h3>
 	</div>
 	<div class="searchBar_div">
+	<form method="post">
 		<table class="searchBar_tbl">
 			<thead>
 				<tr>
@@ -48,9 +50,11 @@
 		</table>
 			<input type="button" id="searchBarSearchBtn" value="검색">
 			<input type="reset"  id="searchBarResetBtn" value="초기화">
+		</form>
 			</div>
-			<div class="download_to_excel_btn_div">
-				<input type="button"  id="downloadExcelBtn" value="엑셀로 내려받기">
+			
+					<div class="download_to_excel_btn_div">
+				<input type="button" class="companyListBtns" id="downloadExcelBtn" value="엑셀로 내려받기">
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -83,21 +87,22 @@
                <th>담당자</th>
                <th>직원 리스트</th>
             </tr>
-            <tr>
-            	 <td><a href="/spotUpdate">1</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td><a href="#" id="open_managerInpo_modal">담당자</a></td>
-            	<td><a href="#" id="open_empList_modal">test</a></td>
-            </tr>
+
          </thead>
          <tbody>
-            
+			<tr>
+				<td><a href="/companyView">1</a></td>
+				<td><a href="/spotView">1</a></td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td>test</td>
+				<td><a href="#" id="open_managerInpo_modal">담당자</a></td>
+				<td><a href="#" id="open_empList_modal">test</a></td>
+				</tr>
+
          </tbody>
       </table>
 
@@ -137,17 +142,18 @@
                <th>주문일자</th>
                <th>상품</th>  
             </tr>
-            <tr>
-            	<td><a href="#" id="open_empInpo_modal">1</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            </tr>    
+ 			        <tr>
+        	<td><a href="#" id="open_empInfo_modal">1</a></td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+
+        </tr>
          </thead>
 
       </table>
@@ -183,18 +189,17 @@
                <th>주문일자</th>
                <th>상품</th>  
             </tr>
-            <tr>
-            	<td>1</td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	<td><input type="text"></td>
-            	
-            </tr>    
+			     <tr>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        	<td>test</td>
+        </tr>
          </thead>
 
       </table>

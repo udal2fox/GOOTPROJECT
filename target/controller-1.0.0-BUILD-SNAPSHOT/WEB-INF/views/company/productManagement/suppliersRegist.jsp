@@ -15,7 +15,7 @@
 			<form action="">
 				<table class="prdinputTable">
 					<tr>
-						<td>입점업체코드</td><td colspan="3"><input type="text" class="form-control" placeholder="자동할당"></td>
+						<td>입점업체코드</td><td colspan="3"><input type="text" class="form-control" readonly="readonly" value="${NSN}"></td>
 					    <td></td>
 					    <td>담당자 이름</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값"></td>
 					</tr>
@@ -35,14 +35,15 @@
 					    <td>담당자메일주소</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값"></td>
 					</tr>
 					<tr>
+						<!--공급처 구분 아이디 묶어줄것  -->
 						<td>공급처구분</td>
-						<td>
-  							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-						  	<label class="form-check-label" for="exampleRadios1"> 법인</label>
+						<td> 
+  							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="법인" checked>
+						  	<label class="form-check-label" for="exampleRadios1">법인</label>
 						</td> 	
 						<td>
-  							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-						  	<label class="form-check-label" for="exampleRadios1"> 개인</label>
+  							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="개인">
+						  	<label class="form-check-label" for="exampleRadios1">개인</label>
 						</td> 	
 					</tr>
 					<tr>
@@ -66,8 +67,8 @@
 				</table>
 				<!--테이블 크기에 잘마추고 패딩줘  -->
 					<div class="prdRegBtn">
-							<button type="button" class="btn btn-primary">등록</button>
-							<button type="button" class="btn btn-primary">취소</button>
+						<button type="button" class="btn btn-primary">등록</button>
+						<button type="button" class="btn btn-primary">취소</button>
 					</div>
 			</form>	
 		</div>

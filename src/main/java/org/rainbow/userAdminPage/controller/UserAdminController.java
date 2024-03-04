@@ -1,12 +1,19 @@
 package org.rainbow.userAdminPage.controller;
 
-import org.rainbow.userAdminPage.domain.userInfoVO;
+import com.fasterxml.jackson.core.JsonFactoryBuilder;
 
+
+import org.rainbow.userAdminPage.domain.userInfoVO;
 import org.rainbow.userAdminPage.service.UserAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.log4j.Log4j;
+
+import java.util.Map;
+
 
 @Controller
 @RequestMapping("/userAdminPage/*")
@@ -24,20 +31,14 @@ public class UserAdminController {
 
 
 	// 로그인
-	@PostMapping(value = "/login")
-	public userInfoVO login(@RequestParam("uEmail") String uEmail, @RequestParam("uPw") String uPw) {
-		userInfoVO vo = new userInfoVO();
-		vo.setUEmail(uEmail);
-		vo.setUPw(uPw);
-		System.out.println(vo);
-		service.userAdminLogin(vo);
-		System.out.println(vo);
-		return vo;
-	}
+	@ResponseBody
+	@PostMapping(value = "/userAdminLogin", consumes = "application/json")
+	public String login(@RequestBody Map<String, Object> param) {
+		String uEmail = (String) param.get("uEmail");
+		String uPw = (String) param.get("uPw");
 
-	@GetMapping("/sidebar")
-	public String sidebar() {
-		return "userAdminPage/sidebar";
+
+		return null;
 	}
 
 	@GetMapping("/dashboard")

@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class userInfoVO {
     private int userNo, spotNo, companyNo;
     private String uName, uEmail, uContact, uPw;

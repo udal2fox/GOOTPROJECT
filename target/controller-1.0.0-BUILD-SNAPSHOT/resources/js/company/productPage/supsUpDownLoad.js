@@ -20,11 +20,12 @@ document.getElementById("excelUpload").addEventListener("change", function() {
         return;
     }
     let formData = new FormData();
+    console.log(formData);
 	formData.append("EXCEL", files[0]);
     
     if(confirm("파일 을 업로드 하시 것슴까!?"))
 	{
-    	fetch('/prdExcelInput', {
+    	fetch('/supsExcelInput', {
     		  method: 'POST',
     		  body: formData
     		})
@@ -32,7 +33,11 @@ document.getElementById("excelUpload").addEventListener("change", function() {
     		.then(data => 
     		{
     		  console.log('서버 응답:', data);
-    		  if(data === 'success') alert("인풋 성공");
+    		  if(data === 'success')
+			  {
+    			  alert("인풋 성공");
+    			  location.reload();
+			  }
     		  else alert("인풋 실패");
     		  
     		})
@@ -63,7 +68,7 @@ function download()
     // 상품 분류 체크박스들의 값을 가져옵니다.
     let checkedValues = [];
     
-    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="sups-type"]:checked').forEach(function(checkbox) {
         if(checkbox.value != '전체')
 		{
         	checkedValues.push(checkbox.value);
@@ -71,7 +76,7 @@ function download()
     });
 
     // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="sups-status"]:checked').forEach(function(checkbox) {
     	 if(checkbox.value != '전체')
  		{
          	checkedValues.push(checkbox.value);
@@ -82,7 +87,7 @@ function download()
 	
 	
     // 서버로 데이터 전송
-    fetch('/downloadExcel', {
+    fetch('/supsExcelDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkedValues)

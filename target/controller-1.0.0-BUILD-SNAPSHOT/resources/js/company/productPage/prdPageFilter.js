@@ -168,10 +168,10 @@ function goToPage(page) {
 function drawPagination() 
 {
     let totalPages = Math.ceil(getFilteredProducts().length / amount);
-    if (getFilteredProducts().length % amount === 0) 
-    {
-        totalPages--;
-    }
+//    if (getFilteredProducts().length % amount === 0) 
+//    {
+//        totalPages--;
+//    }
 
     const paginationElement = document.getElementById('pagination');
     paginationElement.innerHTML = ''; // 전에 있던 페이지네이션 내용을 초기화

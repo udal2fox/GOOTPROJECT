@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
@@ -13,7 +12,7 @@
 </head>
 <body>
 	<div class="navBar">
-		<jsp:include page="./../../../navBar.jsp"/>
+		<jsp:include page="../../../navBar.jsp"/>
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire" >
@@ -28,7 +27,7 @@
 				<tr>
 				<th>키워드</th>
 				<td>
-					<input type="text" name="searchBarKeword" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
+					<input type="text" name="searchBarKeyword" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
 				</td>
 				<td></td>
 				<th>영업 상태</th>
@@ -97,7 +96,7 @@
                   <td>${vo.csCompanyName }</td>
                   <td>${vo.csName }</td>
                   <td>${vo.csContact }</td>
-                  <td>${vo.csEmaill }</td>
+                  <td>${vo.csEmail }</td>
                   <td>${vo.csBdgt }</td>
                   <td>${vo.csStatus }</td>
 				  <td>${vo.csEname }</td>

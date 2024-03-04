@@ -9,7 +9,7 @@
 			<h4>임직원 등록</h4>
 		</div>
 			<div id="insert-form-box">
-				<form action="" method="POST">
+				<form method="POST">
 					<div id="table1">
 						<table id="top-table">
 							<tr>
@@ -33,11 +33,11 @@
 								<th> 직급 </th>
 								<td><input class="input2" type="text" name="job"></td>
 								<th></th>
-								<td><input class="input4" type="text" name="eAddr"></td>
+								<td><input class="input4" type="text" name="eAddr2"></td>
 							</tr>
 							<tr>
 								<th> 전화번호 </th>
-								<td><input class="input1" type="text" name="ePhone"></td>
+								<td><input class="input1" type="text" name="ePhone" placeholder="- 을 포함해서 입력하세요"></td>
 								<th> 근무형태 </th>
 								<td><input class="input2" type="text" name="workType"></td>
 								<th> 급여계좌 </th>
@@ -54,7 +54,7 @@
 							</tr>
 							<tr>
 								<th> 생년월일 </th>
-								<td><input class="input1" type="text" name="email"></td>
+								<td><input class="input1" type="text" name="identyNum" placeholder="- 을 포함해서 입력하세요"></td>
 								<th> 연봉 </th>
 								<td><input class="input2" type="number" name="sal"></td>
 								<th></th>
@@ -75,11 +75,11 @@
 						</tr>
 					</table>
 				</div>
+		</form>
 			<div class="button-container">
 				<input id="saveBtn" type="button" name="save" value="저장">
 				<input id="closeBtn" type="button" name="close" value="닫기">
 			</div>
-		</form>
 	</div>
 	
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_insert.js"></script>

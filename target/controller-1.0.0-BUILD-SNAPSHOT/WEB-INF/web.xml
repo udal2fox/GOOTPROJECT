@@ -24,13 +24,13 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	
-<!--	&lt;!&ndash; multipartResolver 사용하기위한 추가  경로에 없다고 에러나면 주석이나 삭제해도 됩니다.!!&ndash;&gt;-->
-<!--		<multipart-config>-->
-<!--	         <location>C:\\upload</location>-->
-<!--	         <max-file-size>20971520</max-file-size>-->
-<!--	         <max-request-size>41943040</max-request-size>-->
-<!--	         <file-size-threshold>20971520</file-size-threshold>-->
-<!--        </multipart-config>	-->
+        <!-- multipartResolver 사용하기위한 추가  경로에 없다고 에러나면 주석이나 삭제해도 됩니다.!! -->
+		<multipart-config>
+	         <location>C:\\upload</location>
+	         <max-file-size>20971520</max-file-size>
+	         <max-request-size>41943040</max-request-size>
+	         <file-size-threshold>20971520</file-size-threshold>
+        </multipart-config>	
 		
 	</servlet>
 		

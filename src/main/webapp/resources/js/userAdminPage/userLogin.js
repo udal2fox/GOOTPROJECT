@@ -19,8 +19,18 @@ btn.addEventListener('click', () => {
         return false;
     }
 
-    f.method = "post"
-    f.action = "/userAdminPage/login";
-    f.submit();
+    fetch('/userAdminPage/userAdminLogin',{
+        method : 'post',
+        body: JSON.stringify({
+            uEmail: f.uEmail.value,
+            uPw: f.uPw.value
+        }),
+        headers: { "Content-type": "application/json; charset=utf-8" }
+    })
+        .then((Response)=> Response.json())
+        .then((json)=> {
+            console.log(json);
+        })
+        .catch((err) => console.log(err));
 
 });

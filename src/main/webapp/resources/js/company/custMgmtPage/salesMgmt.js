@@ -14,3 +14,7 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 		
 	})
 })
+
+
+
+

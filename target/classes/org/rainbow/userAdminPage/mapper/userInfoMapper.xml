@@ -4,7 +4,7 @@
 
 <mapper namespace="org.rainbow.userAdminPage.mapper.userInfoMapper">
 	
-	<select id="userAdminLogin" resultType="org.rainbow.userAdminPage.domain.userInfoVO">
+	<select id="userAdminLogin" parameterType="String" resultType="org.rainbow.userAdminPage.domain.userInfoVO">
 		select * from RAIN_cUser_tbl
 		where uEmail = #{uEmail} and uPw = #{uPw}
 	</select>

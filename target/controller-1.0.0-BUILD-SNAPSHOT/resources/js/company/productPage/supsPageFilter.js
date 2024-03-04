@@ -1,14 +1,7 @@
-/* 즉시 실행 함수 
-   (fuction(){
-   	
-   })();
-*/
-
-
 // 전역 변수 공간
 const amount = 10; // 페이지당 보여줄 아이템 수
 let pageNum = 1; // 현재 페이지 번호
-let products = document.querySelectorAll('.product'); // 전체 상품 리스트
+let sups = document.querySelectorAll('.sups'); // 전체 상품 리스트
 let sortDirection = {}; // 정렬
 //------------
 
@@ -18,10 +11,10 @@ filter();
 function filter() {
 	
     // allCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-typeAll').addEventListener('change', function() {
+    document.getElementById('sups-typeAll').addEventListener('change', function() {
         // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
         let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function(checkbox) {
+        document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]').forEach(function(checkbox) {
             console.log(checkbox);
             checkbox.checked = isChecked;
         });
@@ -31,10 +24,10 @@ function filter() {
     });
 
     // allListCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-statusAll').addEventListener('change', function() {
+    document.getElementById('sups-statusAll').addEventListener('change', function() {
         // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
         let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function(checkbox) {
+        document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]').forEach(function(checkbox) {
             checkbox.checked = isChecked;
         });
         // 필터링 적용
@@ -47,11 +40,11 @@ function filter() {
         checkbox.addEventListener('change', function() {
             // allCheck 체크박스 상태 업데이트
             let isTypeAllChecked = isAllTypeCheckboxesChecked();
-            document.getElementById('product-typeAll').checked = isTypeAllChecked;
+            document.getElementById('sups-typeAll').checked = isTypeAllChecked;
 
             // allListCheck 체크박스 상태 업데이트
             let isStatusAllChecked = isAllStatusCheckboxesChecked();
-            document.getElementById('product-statusAll').checked = isStatusAllChecked;
+            document.getElementById('sups-statusAll').checked = isStatusAllChecked;
 
             // 필터링 적용
             filterProducts();
@@ -61,22 +54,22 @@ function filter() {
     // 상품 필터링 함수
     function filterProducts() {
         // 선택된 상품 종류 필터 및 상태 필터 가져오기
-        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
+        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
-        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
+        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
 
         // 전체 체크 상태 확인
-        let isAllTypeChecked = document.getElementById('product-typeAll').checked;
-        let isAllStatusChecked = document.getElementById('product-statusAll').checked;
+        let isAllTypeChecked = document.getElementById('sups-typeAll').checked;
+        let isAllStatusChecked = document.getElementById('sups-statusAll').checked;
 
         // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
         if (!isAllTypeChecked && typeFilters.length === 0) {
             // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
-                product.style.display = 'none';
+            document.querySelectorAll('.sups').forEach(function(sups) {
+            	sups.style.display = 'none';
             });
             // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
             removePagination();
@@ -86,8 +79,8 @@ function filter() {
         // 모든 상품상태 체크박스가 해제되었을 때 조회되지 않도록 처리
         if (!isAllStatusChecked && statusFilters.length === 0) {
             // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
-                product.style.display = 'none';
+            document.querySelectorAll('.sups').forEach(function(sups) {
+            	sups.style.display = 'none';
             });
             // 여기서 필터값 가져오고 페이징 다시그리기ㅈ
             removePagination();
@@ -95,15 +88,15 @@ function filter() {
         }
 
         // 각 상품을 순회하면서 필터링 적용
-        document.querySelectorAll('.product').forEach(function(product) {
-            let type = product.getAttribute('data-type');
-            let status = product.getAttribute('data-status');
+        document.querySelectorAll('.sups').forEach(function(sups) {
+            let type = sups.getAttribute('data-type');
+            let status = sups.getAttribute('data-status');
 
             // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
             if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
-                product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
+            	sups.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
             } else {
-                product.style.display = 'none';
+            	sups.style.display = 'none';
             }
             // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
             drawPagination(1, Math.ceil(getFilteredProducts().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
@@ -116,18 +109,18 @@ function filter() {
     function isAllTypeCheckboxesChecked() 
     {
         // 상품 종류 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]:checked').length;
         // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]').length;
     }
 
     // 상품 상태 체크박스 모두 선택 여부 확인 함수
     function isAllStatusCheckboxesChecked() 
     {
         // 상품 상태 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]:checked').length;
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]').length;
     }
 };
 
@@ -143,11 +136,11 @@ function goToPage(page) {
 
     let filteredProducts = getFilteredProducts();
 
-    filteredProducts.forEach((product, index) => {
+    filteredProducts.forEach((sups, index) => {
         if (index >= startIndex && index < endIndex) {
-            product.style.display = 'table-row';
+        	sups.style.display = 'table-row';
         } else {
-            product.style.display = 'none';
+        	sups.style.display = 'none';
         }
     });
 
@@ -168,10 +161,10 @@ function goToPage(page) {
 function drawPagination() 
 {
     let totalPages = Math.ceil(getFilteredProducts().length / amount);
-    if (getFilteredProducts().length % amount === 0) 
-    {
-        totalPages--;
-    }
+//    if (getFilteredProducts().length % amount === 0) 
+//    {
+//        totalPages--;
+//    }
 
     const paginationElement = document.getElementById('pagination');
     paginationElement.innerHTML = ''; // 전에 있던 페이지네이션 내용을 초기화
@@ -233,16 +226,16 @@ function drawPagination()
 //필터링된 상품 리스트 가져오기
 function getFilteredProducts() 
 {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
+    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
 
-    return Array.from(products).filter(function(product) {
-        let type = product.getAttribute('data-type');
-        let status = product.getAttribute('data-status');
+    return Array.from(sups).filter(function(sups) {
+        let type = sups.getAttribute('data-type');
+        let status = sups.getAttribute('data-status');
         return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
     });
 }
@@ -283,15 +276,10 @@ document.querySelectorAll('.sort-btn').forEach(button => {
 
 function getCellValue(row, column) {
     const columnIndex = {
-        "supsCo": 0,
-        "prdNo": 1,
-        "prdSdc": 2,
-        "prdMajorCtg": 3,
-        "prdSubCtg": 4,
-        "prdName": 5,
-        "prdCstPri": 6,
-        "prdSal": 7,
-        "prdMargin": 8
+        "supsNo": 0,
+        "supsCo": 1,
+        "supsBnt": 2,
+        "supsSt": 7
     } [column];
 
     const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);

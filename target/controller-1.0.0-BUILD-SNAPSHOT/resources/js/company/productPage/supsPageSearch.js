@@ -11,22 +11,21 @@ document.querySelector('#search').addEventListener('click', function() {
 });
 
 function fetchSearchResults(keyword) {
-    fetch('/searchProduct?keyword=' + keyword)
+    fetch('/searchSups?keyword=' + keyword)
         .then(response => response.json())
         .then(list => {
             let msg = '';
+            console.log(list);
             list.forEach(list => {
-                msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+'">'+
-                            '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
-                            '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
-                            '<td>'+list.prdSdc+'</td>'+
-                            '<td>'+list.prdMajorCtg+'</td>'+
-                            '<td>'+list.prdSubCtg+'</td>'+
-                            '<td>'+
-                                '<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
-                            '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-                            '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-                            '<td>'+Math.ceil(list.prdMargin * 100 ).toFixed(2)+'%</td>'+
+                msg += '<tr class="sups" data-type="'+list.supsBnt+'" data-status="'+list.supsSt+'">'+
+                            '<td><a href="moveSuppliersUpdate?supNo='+list.supsNo+'">'+list.supsNo+'</a></td>'+
+                            '<td>'+list.supsCo+'</td>'+
+                            '<td>'+list.supsBnt+'</td>'+
+                            '<td>'+list.supsBizRegNum+'</td>'+
+                            '<td>'+list.supsAddr+'</td>'+
+                            '<td>'+list.supsCt+'</td>'+
+                            '<td>'+list.supsCoEmail+'</td>'+
+                            '<td>'+list.supsSt+'</td>'+
                         '</tr>';
             });
             resetCheckboxes();
@@ -49,22 +48,22 @@ function resetCheckboxes() {
     });
 
     // "전체 선택" 체크박스도 초기화
-    document.getElementById('product-typeAll').checked = true;
-    document.getElementById('product-statusAll').checked = true;
+    document.getElementById('sups-typeAll').checked = true;
+    document.getElementById('sups-statusAll').checked = true;
 }
 
 
 // 필터링된 상품 리스트 가져오기
 function getFilteredProducts() {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-type"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="sups-status"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
 
     // 여기서 새로운 상품 리스트를 가져오도록 수정
-    let products = document.querySelectorAll('.product'); // 전체 상품 리스트
+    let products = document.querySelectorAll('.sups'); // 전체 상품 리스트
     let filteredProducts = Array.from(products).filter(function (product) {
         let type = product.getAttribute('data-type');
         let status = product.getAttribute('data-status');

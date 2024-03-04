@@ -33,4 +33,29 @@
 			e.eno = #{e.eno}
 	</select>
 	
+	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO">
+		  INSERT INTO RAIN_EMP_tbl (eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt)
+   		  VALUES (
+       			#{eName}, 
+       			#{ePhone}, 
+       			#{job}, 
+       			#{sal}, 
+       			#{email}, 
+       			#{eAddr}, 
+       			#{eAddr2}, 
+       			#{identyNum}, 
+       			#{salAccount}, 
+       			#{workType}, 
+       			#{idStatus}, 
+       			#{eBank}, 
+       			sysdate, 
+       			NULL
+    			)
+
+    		INSERT INTO RAIN_DEPT_tbl dName
+    		VALUES (
+        		#{dName}
+    			)	
+	</insert>
+	
 </mapper>

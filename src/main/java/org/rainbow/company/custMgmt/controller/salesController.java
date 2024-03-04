@@ -1,12 +1,15 @@
 package org.rainbow.company.custMgmt.controller;
 
 
+import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.service.salesServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
 
@@ -16,12 +19,14 @@ public class salesController {
 
 	@Autowired
 	private salesServiceImpl salesService;
+	
+	
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
 
 	  @GetMapping("/salesList") 
 	  public String salesList(Model model) { 
-		  log.info("getSalesList_success"); 
+		  log.info("salesList_success"); 
 		  
 		  model.addAttribute("consultVO", salesService.salesList());
 	  
@@ -30,8 +35,31 @@ public class salesController {
 	  } 
 	  
 	  
-	  
+	  /** 'salesView.jsp' 에서 상담 신청 내용 가져오기 */
+		  @GetMapping("/salesView") 
+		  public String salesView(int consultNo,Model model) { 
+			  log.info("salesView_success" + consultNo);
+		  model.addAttribute("consultVO", salesService.salesView(consultNo));
+		 
+		 
+		  return "/company/custMgmtPage/salesMgmt/salesView";
+		 
+		  }
+		  
+		 /** 'salesView.jsp' 에서 영업 내용 저장하기 */
+		  @PostMapping("/saveSales")
+		  public String saveSales(consultVO vo, RedirectAttributes rttr) { 
+			  log.info("saveSales...." + vo); 
+			  
+			  salesService.saveSales(vo);
+		
+				rttr.addFlashAttribute("result","success");
+			  
+			  
+			  return "redirect:/salesList";
+			  
+		  }
+		
+		
 	  
 }
-
-

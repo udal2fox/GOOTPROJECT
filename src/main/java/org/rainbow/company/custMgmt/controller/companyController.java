@@ -1,9 +1,9 @@
 package org.rainbow.company.custMgmt.controller;
 
 
-import java.util.List;
 
-import org.rainbow.company.custMgmt.domain.companyVO;
+
+
 import org.rainbow.company.custMgmt.service.companyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +26,10 @@ public class companyController {
 	@GetMapping("/companyList") 
 	public String companyList(Model model) {
 		
-		log.info("list...");
-
-		model.addAttribute("companyVO", companyService.companyList());
+		log.info("companyList_success");
+		
+		model.addAttribute("companyVO",companyService.companyList() );
+		
 											 
 	return "/company/custMgmtPage/companyMgmt/companyList"; 
 	
@@ -42,10 +43,7 @@ public class companyController {
 	public String moveCompanyRegister() {
 		return "/company/custMgmtPage/companyMgmt/companyRegister";
 	}
-	
-	/** ---------------------기업 관리 페이지 끝-------------------------------------------------------------*/
-	
-	/** ---------------------기업 등록 페이지 시작-------------------------------------------------------------*/
+
 	
 	
 	
@@ -55,14 +53,4 @@ public class companyController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** ---------------------기업 등록 페이지 끝-------------------------------------------------------------*/
 }

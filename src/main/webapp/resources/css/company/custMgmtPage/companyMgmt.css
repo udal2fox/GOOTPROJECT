@@ -91,19 +91,20 @@
 
 
 #searchBarSearchBtn {
-
+	box-sizing: border-box;
 	background-color: var(--blue);
 	color: rgb(255, 255, 255);
 	border-color:var(--blue);
 	border-radius: var(--basic-radius);
 	border: 5px 10px 5px 10px;
 	width: 80px;
-	margin-left : 1000px;
+	
 	
 	}
 	
 
 #searchBarResetBtn {
+	box-sizing: border-box;
 	background-color:rgb(255, 255, 255);
 	color:var(--blue);
 	border-color:rgb(255, 255, 255);

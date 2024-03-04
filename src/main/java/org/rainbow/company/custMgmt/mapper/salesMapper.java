@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.rainbow.company.custMgmt.domain.consultVO;
 
-import org.rainbow.domain.Criteria;
 
 
 public interface salesMapper {

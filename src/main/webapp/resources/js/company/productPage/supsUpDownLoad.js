@@ -68,7 +68,7 @@ function download()
     // 상품 분류 체크박스들의 값을 가져옵니다.
     let checkedValues = [];
     
-    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="sups-type"]:checked').forEach(function(checkbox) {
         if(checkbox.value != '전체')
 		{
         	checkedValues.push(checkbox.value);
@@ -76,7 +76,7 @@ function download()
     });
 
     // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="sups-status"]:checked').forEach(function(checkbox) {
     	 if(checkbox.value != '전체')
  		{
          	checkedValues.push(checkbox.value);
@@ -87,7 +87,7 @@ function download()
 	
 	
     // 서버로 데이터 전송
-    fetch('/downloadExcel', {
+    fetch('/supsExcelDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkedValues)

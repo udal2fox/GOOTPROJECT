@@ -7,6 +7,7 @@ import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
+import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.domain.Criteria;
 
 public interface productPageMapper 
@@ -36,6 +37,13 @@ public interface productPageMapper
 	
 	/** sups 엑셀 파일 업로드 */
 	public int insertSupsExcel(suppliersVO vo);
+	
+	/** 체크박스 벨류를 받아서 필터링된 전체 데이터를 리스트로 가져온다. */
+	public List<supsDownVO> supsExcelDown(Map<String, Object> checkValue); // 파라미터 이름 수정
+	
+	/** 공급처 등록 자동 할당값에 쓸 카운팅 */
+	public int supsNoCount();
+	
 	
 	
 }

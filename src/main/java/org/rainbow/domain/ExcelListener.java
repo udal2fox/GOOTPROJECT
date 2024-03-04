@@ -15,6 +15,31 @@ import com.alibaba.excel.event.AnalysisEventListener;
 /** 엑셀 파일 읽어서 리스트로 리턴해주는 클래스 VO만 갈아끼면 재사용 용이함. */
 public class ExcelListener
 {
+	// 동적으로 받으면 더귀찮아져서 나중에 손볼생각. 일단 매서드를 늘려가는 방향으로 진행
+//	public List<Object> handleExcel(InputStream inputStream, Class<?> clazz) throws IOException 
+//    {
+//        final List<Object> dataList = new ArrayList<>();
+//
+//        EasyExcel.read(inputStream, clazz, new AnalysisEventListener<Object>()
+//        {
+//            @Override
+//            public void invoke(Object data, AnalysisContext context) 
+//            {
+//                dataList.add(data);
+//            }
+//
+//            @Override
+//            public void doAfterAllAnalysed(AnalysisContext context)
+//            {
+//                // Excel 파일의 모든 데이터를 읽고 처리한 후에 호출되는 메소드
+//                // 여기서 후속 작업을 수행할 수 있음
+//            }
+//
+//        }).sheet().doRead();
+//
+//        return dataList;
+//    }
+	
     public List<prdInputVO> handleExcel(InputStream inputStream) throws IOException 
     {
         final List<prdInputVO> dataList = new ArrayList<>();
@@ -40,6 +65,8 @@ public class ExcelListener
 
         return dataList;
     }
+    
+    
     /** 공급처 엑셀로 인풋 메서드*/
     public List<suppliersVO> supsExcelListner(InputStream inputStream) throws IOException 
     {
@@ -68,6 +95,7 @@ public class ExcelListener
     }// supsExcelListner 끝
     
     
+
     
     
  

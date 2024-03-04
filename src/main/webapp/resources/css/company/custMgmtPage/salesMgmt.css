@@ -237,12 +237,14 @@
 
 
 
-input[type="text"],input[type="email"], textarea, select {
+input[type="text"],input[type="email"],  select {
 	border:none;
 	text-align: center;
 }
 
-
+textarea{
+	border:none;
+}
 
 
 .space_img_btns {

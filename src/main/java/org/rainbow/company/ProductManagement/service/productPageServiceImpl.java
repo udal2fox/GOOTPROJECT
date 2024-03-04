@@ -7,6 +7,7 @@ import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
+import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
 import org.rainbow.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,32 @@ public class productPageServiceImpl implements productPageService
 	public List<suppliersVO> supsList() {
 		return pMapper.supsList();
 	}
+
+	@Override
+	public List<suppliersVO> supsSearch(String keyword)
+	{
+		return pMapper.supsSearch(keyword);
+	}
+
+	@Override
+	public int insertSupsExcel(suppliersVO vo) {
+		
+		return pMapper.insertSupsExcel(vo);
+	}
+
+	@Override
+	public List<supsDownVO> supsExcelDown(Map<String, Object> checkValue) {
+		return pMapper.supsExcelDown(checkValue);
+	}
+
+	@Override
+	public int supsNoCount() 
+	{
+		return pMapper.supsNoCount();
+	}
+
+		
+	
 
 
 

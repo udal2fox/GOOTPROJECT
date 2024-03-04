@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/companyMgmt.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<title>enterpriseRegistration.jsp</title>
+<title></title>
 </head>
 <body>
 	<div class="navBar">

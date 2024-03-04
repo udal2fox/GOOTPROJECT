@@ -25,6 +25,7 @@
 
 .entire{
 	width: 80%;
+	
 
 }
 
@@ -90,7 +91,7 @@
 
 
 #searchBarSearchBtn {
-	margin-left:1100px;
+	box-sizing: border-box;
 	background-color: var(--blue);
 	color: rgb(255, 255, 255);
 	border-color:var(--blue);
@@ -98,10 +99,12 @@
 	border: 5px 10px 5px 10px;
 	width: 80px;
 	
+	
 	}
 	
 
 #searchBarResetBtn {
+	box-sizing: border-box;
 	background-color:rgb(255, 255, 255);
 	color:var(--blue);
 	border-color:rgb(255, 255, 255);
@@ -177,7 +180,7 @@
 
 
 
-#moveEnterpriseRegisterBtn {
+#moveCompanyRegisterBtn {
 	box-sizing: border-box;
 	width:120px;
 	background-color: var(--blue);

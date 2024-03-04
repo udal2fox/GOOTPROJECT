@@ -14,20 +14,14 @@
 		
 	</select>
 	
-	<!-- productList 카운트 셀렉트 페이징 처리시 사용 -->
-	<select id="prdCount" resultType="int">
-	SELECT COUNT(*) FROM RAIN_Products_tbl
-	</select>
-	
 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
-		
+	      
 	        SELECT *
 			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
 			WHERE p.supsNo = s.supsNo
 			AND (prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR prdName LIKE CONCAT('%', #{keyword}, '%'))
 			ORDER BY prdNo ASC;
-
-		
+			
 	</select>
 	
 	
@@ -63,7 +57,7 @@
 		open="(" separator="," close=")" 시작 , 구분자 , 끝 부분 지정
 		지금 쿼리 같은경우 
 		<foreach item="item" collection="checkValues"> 이런식으로
-		기본값을 넣어도 동작하는데 문제없는것 같다.
+		기본값을 넣어도 동작하는데 문제없는것 같다. // x 다써줘야 된다.
 		
 		SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
 		FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
@@ -73,12 +67,61 @@
 	-->
 	
 	<!-- 공급처 시작 -->
+	<!--공급처 리스트   -->
 	<select id="supsList" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
 				SELECT *
 			    FROM RAIN_Suppliers_tbl
 			    order by supsNo asc
 	</select>
-
+	<!-- 공급처 리스트 검색  -->
+	<select id="supsSearch"  resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+	      
+	        SELECT *
+			FROM RAIN_Suppliers_tbl
+			WHERE
+			supsNo = #{keyword} OR supsCo = #{keyword} OR supsCt = #{keyword}
+			ORDER BY supsNo ASC;
+			
+	</select>
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id="insertSupsExcel" parameterType="java.util.Map">
+	    insert into RAIN_Suppliers_tbl
+	    (supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsBizLic, supsCoEmail, supsCt, supsSt, supsName, supsPhone, supsEmail, supsSubName, supsSubPhone, supsSubEmail)
+	    values
+	    (
+	        #{supsNo}, #{supsCo}, #{supsBnt}, #{supsBizRegNum},
+	        #{supsAddr}, #{supsBizLic}, #{supsCoEmail}, #{supsCt},
+	        #{supsSt}, #{supsName}, #{supsPhone}, #{supsEmail},
+	        <if test="supsSubName != null">
+	            #{supsSubName},
+	            #{supsSubPhone},
+	            #{supsSubEmail}
+	        </if>
+	        <if test="supsSubName == null">
+	            '', '', ''
+	        </if>
+	    )
+	</insert>
 	
+	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
+	<select id="supsExcelDown" resultType="org.rainbow.company.ProductManagement.domain.supsDownVO">
+	        SELECT supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsCt, supsCoEmail, supsSt
+		    FROM  RAIN_Suppliers_tbl
+		    WHERE 
+		    supsBnt IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	   		AND supsSt IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</select>
+
+
+	<!-- 공급처 등록수 카운팅  -->	
+	<select id="supsNoCount" resultType="int">
+		SELECT count(*) from RAIN_Suppliers_tbl;
+	</select>
 	
 </mapper>

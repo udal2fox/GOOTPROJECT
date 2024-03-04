@@ -2,8 +2,6 @@ package org.rainbow.company.ProductManagement.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +12,11 @@ import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
+import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.service.productPageServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.ExcelListener;
-import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -78,8 +76,12 @@ public class ProductPageController
     
     // 공급처 등록 이동
     @GetMapping(value = "/moveSuppliersRegist")
-    public String moveSuppliersRegist(Model model, Criteria cri) 
+    public String moveSuppliersRegist(Model model) 
     {
+    	int supsCount = pService.supsNoCount();
+    	String newSupsNo = "a" + (supsCount+1);
+    	
+    	model.addAttribute("NSN", newSupsNo);
     	return "/company/productManagement/suppliersRegist";
     }
     // 공급처 수정 이동
@@ -109,7 +111,7 @@ public class ProductPageController
     // 상품 조회리스트 검색 기능
     @ResponseBody
     @GetMapping(value = "/searchProduct", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<productListVO>> goSeach(@RequestParam("keyword") String keyword)
+    public ResponseEntity<List<productListVO>> prdSeach(@RequestParam("keyword") String keyword)
     {
         log.info("keyword...");
         
@@ -180,16 +182,92 @@ public class ProductPageController
     	
     	System.out.println(checkValue);
     	 
-    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함?
+    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함? // 리스트로 보낼려면 구조를 바꿔야한다.
     	
     	System.out.println(downlist);
     	
     	
         // 리스트를 넣으면 엑셀화됨.
-        ExcelDownloadUtil.downloadProductList(response, downlist);
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
- // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
+    // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
     
+    // 공급처 리스트 기능  ---------------------------------------------------------------------------------------
+    
+    // 공급처 조회리스트 검색 기능
+    @ResponseBody
+    @GetMapping(value = "/searchSups", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<suppliersVO>> supsSeach(@RequestParam("keyword") String keyword)
+    {
+        log.info("keyword..."+keyword);
+        System.out.println(keyword);
+        List<suppliersVO> list = pService.supsSearch(keyword);
+        log.info(list);
+
+        // ResponseEntity에 list와 ptdo를 함께 담아 반환
+
+        // 리스트 비동기로 뿌려주기
+        return new ResponseEntity<List<suppliersVO>>(list, HttpStatus.OK);
+    }
+    
+    // 공급처 엑셀 업로드 기능
+    // 엑셀 파일 업로드 처리
+    @ResponseBody
+    @PostMapping(value = "/supsExcelInput", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> supsExcelUpload(@RequestParam("EXCEL") MultipartFile file) 
+    {	
+    	log.info(file);
+    	int result = 0;
+        ExcelListener listener = new ExcelListener();
+        if (!file.isEmpty()) 
+        {
+            try 
+            {
+                // 엑셀 파일 처리를 위한 리스너로 데이터 추출
+                List<suppliersVO> dataList = listener.supsExcelListner(file.getInputStream());
+                log.info(dataList);
+                System.out.println(dataList);
+                // 데이터베이스에 엑셀 데이터 저장
+                for(suppliersVO vo : dataList) 
+                {
+                	 result = pService.insertSupsExcel(vo);
+                }
+                
+                System.out.println("result = " + result);
+                return result >= 1 ? new ResponseEntity<String>("success",HttpStatus.OK) :
+                new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+                
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+                return  new ResponseEntity<String>("error",HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        } 
+        else 
+        {
+        	System.out.println("파일 정보가 안들어옴");
+        	return  new ResponseEntity<String>("no file",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    /** 엑셀 데이터 다운로드 처리*/
+    @ResponseBody
+    @PostMapping("/supsExcelDown")
+    public void supsExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    {
+    	System.out.println(checkValues);
+
+    	Map<String, Object> checkValue = new HashMap<>();
+    	
+    	checkValue.put("checkValues", checkValues);
+    	 
+    	List<supsDownVO> downlist = pService.supsExcelDown(checkValue);
+    	
+    	System.out.println(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
     
 }

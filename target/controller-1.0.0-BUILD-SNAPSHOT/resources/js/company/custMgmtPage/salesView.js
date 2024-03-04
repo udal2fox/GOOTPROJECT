@@ -32,6 +32,7 @@ const csResponseDate = f.querySelector('input[name="csResponseDate"]');
 //영업 상태 요소 가져오기
 const selectSalesStatus = f.querySelector('select[name="selectSalesStatus"]');
 
+
 selectSalesStatus.addEventListener('change', function() {
 	// 선택된 옵션의 값을 가져오기
 	const selectedValue = selectSalesStatus.value;
@@ -88,35 +89,48 @@ function addcnslHis() {
 function saveSales() {
 	
 	//alert(1);
-	//console.log(f.cnslNo.value);
+	//console.log(f.consultNo.value);
 
 	
-	if(f.cnslEname.value=='') {
+	if(f.csEname.value=='') {
 		alert("영업 담당자를 선택하세요.");
 		return;	
 	}
-	if(f.cnslRespDt.value==''){
-		alert("응대일을 선택하새요.");
-		return;
-	}
-	if(f.cnslHisCnt1Dt.value==''){
-		alert("영업 히스토리 날짜를 선택하세요.");
-		return;
-	}
-	if(f.cnslHisCnt1.value==''){
-		alert("영업 히스토리 내용을 작성하세요.");
-		return;
-	}
 	
-	
-	
-	
+
 	f.action='/saveSales';
 	f.submit();
 	
 	
 	
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 페이지 로드 후 실행될 코드
+
+    // 영업 상태 선택 시 이벤트 처리
+    const selectSalesStatus = document.getElementById("selectSalesStatus");
+    const failReasonDiv = document.getElementById("failReasonDiv");
+
+    // 초기 상태 설정
+    if (selectSalesStatus.value === "계약 실패") {
+        failReasonDiv.style.display = "table"; // 계약 실패일 경우 보이게 설정
+    } else {
+        failReasonDiv.style.display = "none"; // 다른 상태일 경우 감추기
+    }
+
+    // 영업 상태 변경 이벤트 리스너 등록
+    selectSalesStatus.addEventListener("change", function () {
+        if (selectSalesStatus.value === "계약 실패") {
+            failReasonDiv.style.display = "table"; // 계약 실패일 경우 보이게 설정
+        } else {
+            failReasonDiv.style.display = "none"; // 다른 상태일 경우 감추기
+        }
+    });
+});
+
+
+
 
 
 

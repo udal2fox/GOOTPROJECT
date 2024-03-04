@@ -94,7 +94,7 @@
 	<tr>
 						<td class="tbl_subtitle">영업 담당자</td>
 						<td>
-							<input type="text" name="csEname" readonly>
+							<input type="text" name="csEname" value="${consultVO.csEname }" readonly>
 							
 						</td>
 						<td>
@@ -114,7 +114,7 @@
 						<td></td>
 						<td class="tbl_subtitle">응대일</td>
 						<td>
-							<input type="date" name="csResponseDate" >
+							<input type="date" name="csResponseDate" value="${consultVO.csResponseDate }">
 						</td>
 						<td></td>
 					</tr>
@@ -124,12 +124,12 @@
 					</tr>
 					<tr>
 						<td class="tbl_subtitle">날짜 </td>
-						<td colspan="8"><input type="date" name="cshDate1"></td>
+						<td colspan="8"><input type="date" name="cshDate1" value="${cshVO.cshDate1 }"></td>
 					</tr>
 					<tr>
 						<td class="tbl_subtitle">내용</td>
 						<td colspan="8">
-						<textarea rows="10"  style="width: 90%; resize: none" name="cshContent1"></textarea>
+						<textarea rows="10"  style="width: 90%; resize: none" name="cshContent1" >${cshVO.cshContent1 }</textarea>
 						</td>
 					</tr>
 	</thead>
@@ -139,7 +139,7 @@
 				 <input type="button" class="salesViewBtns" id="imgBtnPlus">
 				 <input type="button" class="salesViewBtns" id="imgBtnMinus">
 				</div>
-			<table class="subject_content_tbl">
+			<table class="subject_content_tbl" id="failReasonDiv" style="display:none">
 				<thead>
 				<tr>
 						<td class="tbl_subtitle">계약 실패 사유</td>	
@@ -174,13 +174,14 @@
 		<div class="btn_div">
 		<input type="button" class="salesViewBtns" id="saveBtn" value="저장">
 		<input type="hidden" name="consultNo" value="${consultVO.consultNo }">
+		
 		</div>
 </form>
 	</div>
 
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 
 </body>
 </html>

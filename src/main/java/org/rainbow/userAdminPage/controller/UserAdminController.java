@@ -1,13 +1,7 @@
 package org.rainbow.userAdminPage.controller;
 
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
 
-
-import org.rainbow.userAdminPage.domain.userInfoVO;
-import org.rainbow.userAdminPage.service.UserAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.log4j.Log4j;
@@ -20,8 +14,6 @@ import java.util.Map;
 @Log4j
 public class UserAdminController {
 
-	@Autowired
-	private UserAdminService service;
 
 	// 최초 접근 시
 	@GetMapping("/userLogin")

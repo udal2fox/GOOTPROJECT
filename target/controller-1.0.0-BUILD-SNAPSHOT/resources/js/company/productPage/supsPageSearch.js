@@ -18,8 +18,8 @@ function fetchSearchResults(keyword) {
             console.log(list);
             list.forEach(list => {
                 msg += '<tr class="sups" data-type="'+list.supsBnt+'" data-status="'+list.supsSt+'">'+
-                            '<td><a href="moveSuppliersUpdate">'+list.supsNo+'</a></td>'+
-                            '<td><a href="moveProductUpdate">'+list.supsCo+'</a></td>'+
+                            '<td><a href="moveSuppliersUpdate?supNo='+list.supsNo+'">'+list.supsNo+'</a></td>'+
+                            '<td>'+list.supsCo+'</td>'+
                             '<td>'+list.supsBnt+'</td>'+
                             '<td>'+list.supsBizRegNum+'</td>'+
                             '<td>'+list.supsAddr+'</td>'+

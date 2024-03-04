@@ -96,8 +96,15 @@ public class ProductPageController
     }
     // 상품 개별 등록 이동
     @GetMapping(value = "/moveProductReg")
-    public String moveProductReg(Model model, Criteria cri) 
+    public String moveProductReg(Model model) 
     {
+    	List<prdInputVO> codes = pService.getsupsNumber();
+    	List<prdInputVO> items = pService.getSubCtg();
+    	
+    	model.addAttribute("codes", codes);
+    	model.addAttribute("items", items);
+    	
+    	
     	return "/company/productManagement/productReg";
     }
     // 상품 수정 이동
@@ -290,8 +297,9 @@ public class ProductPageController
     public String supsUpdate(suppliersVO svo)
     {
     	log.info(svo);
-
-    	pService.insertSups(svo);
+    	System.out.println(svo.getSupsSt());
+    	System.out.println(svo.getSupsBnt());
+    	pService.supsUpdate(svo);
     	
     	return "redirect:/moveSuppliers";
 
@@ -303,7 +311,7 @@ public class ProductPageController
     {
     	log.info(svo);
 
-    	pService.insertSups(svo);
+    	pService.supsDelete(svo);
     	
     	return "redirect:/moveSuppliers";
 

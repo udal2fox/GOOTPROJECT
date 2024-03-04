@@ -27,6 +27,12 @@ public interface productPageMapper
 	/** 체크박스 벨류를 받아서 필터링된 전체 데이터를 리스트로 가져온다. */
 	public List<prdDownVO> downExcelList(Map<String, Object> checkValue); // 파라미터 이름 수정
 	
+	/** 입점업체코드 가져오기 */
+	public List<prdInputVO> getsupsNumber();
+	
+	/** 소분류 가져오기 */
+	public List<prdInputVO> getSubCtg();
+	
 	//------------------ 공급처 ------------------------
 	
 	/** 공급처 리스트 조회 */ 
@@ -50,7 +56,11 @@ public interface productPageMapper
 	/** 공급처 수정 기존정보 가져오기ㅏ */
 	public suppliersVO getSupsVO(String supsNo);
 	
+	/** 공급처 수정 */
+	public void supsUpdate(suppliersVO vo);
 	
+	/** 공급처 삭제*/
+	public void supsDelete(suppliersVO vo);
 	
 	
 }

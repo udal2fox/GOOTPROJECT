@@ -109,7 +109,7 @@
 			    <tbody>
 			        <c:forEach var="ex" items="${list}">
 			            <tr class="product" data-type="${ex.prdMajorCtg}" data-status="${ex.prdSt}">
-			                <td><a href="moveSuppliersUpdate">${ex.supsCo}</a></td>
+			                <td><a href="moveSuppliersUpdate?supsNo=${ex.supsNo }">${ex.supsCo}</a></td>
 			                <td><a href="moveProductUpdate">${ex.prdNo }</a></td>
 			                <td>${ex.prdSdc }</td>
 			                <td>${ex.prdMajorCtg }</td>

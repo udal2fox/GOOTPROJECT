@@ -1,7 +1,7 @@
 
 	// 공급처 업데이트
 	function supsUpdate(f) 
-	{
+	{	
 		if(f.supsName.value == '' || f.supsCo.value == '' || f.supsPhone.value == '' || f.supsAddr.value == '' || f.supsEmail.value == '' 
 		&& f.supsBizRegNum.value == '' || f.supsCo.value == '' || f.supsPhone.value == '' || f.supsCoEmail.value == '')
 		{

@@ -63,7 +63,7 @@
 					<div class="prdRegBtn">
 						<input type="hidden" value="거래중" name="supsSt"> 
 						<button type="button" class="btn btn-primary" onclick="supsReg(this.form);">등록</button>
-						<button type="button" class="btn btn-primary">취소</button>
+						<button type="button" class="btn btn-primary" onclick="backPage();">취소</button>
 					</div>
 			</form>	
 		</div>

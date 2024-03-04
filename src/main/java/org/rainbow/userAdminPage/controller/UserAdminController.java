@@ -1,11 +1,13 @@
 package org.rainbow.userAdminPage.controller;
 
 
+import org.rainbow.userAdminPage.service.userInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.log4j.Log4j;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -14,6 +16,8 @@ import java.util.Map;
 @Log4j
 public class UserAdminController {
 
+	@Autowired
+	private userInfoService uService;
 
 	// 최초 접근 시
 	@GetMapping("/userLogin")
@@ -24,11 +28,12 @@ public class UserAdminController {
 
 	// 로그인
 	@ResponseBody
-	@PostMapping(value = "/userAdminLogin", consumes = "application/json")
+	@PostMapping(value = "/userAdminLogin")
 	public String login(@RequestBody Map<String, Object> param) {
 		String uEmail = (String) param.get("uEmail");
 		String uPw = (String) param.get("uPw");
-
+		HashMap<String, Object> userInfo = uService.userAdminLogin(uEmail,uPw);
+		System.out.println(userInfo);
 
 		return null;
 	}

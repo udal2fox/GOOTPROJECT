@@ -25,17 +25,17 @@
 	<tr>
 						<td class="tbl_subtitle">기업명</td>
 						<td>
-							<input type="text" name="cnslCoName" value="${SalesVO.cnslCoName }" readonly>
+							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">상담 신청일</td>
 						<td>
-							<input type="text" name="cnslReqDt" value="${SalesVO.cnslReqDt }" readonly>
+							<input type="text" name="csDate" value="${consultVO.csDate }" readonly>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">지역</td>
 						<td>
-							<input type="text" name="cnslArea" value="${SalesVO.cnslArea }" readonly>
+							<input type="text" name="csArea" value="${consultVO.csArea }" readonly>
 						</td>
 						<td rowspan="3"></td>
 					</tr>
@@ -43,17 +43,17 @@
 	<tr>
 						<td class="tbl_subtitle">담당자</td>
 						<td>
-							<input type="text" name="cnslName" value="${SalesVO.cnslName }" readonly>
+							<input type="text" name="csName" value="${consultVO.csName }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">연락처</td>
 						<td>
-							<input type="text" name="cnslCt" value="${SalesVO.cnslCt }" readonly>
+							<input type="text" name="csContact" value="${consultVO.csContact }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">이메일</td>
 						<td>
-							<input type="email" name="cnslEmail" value="${SalesVO.cnslEmail }" readonly>
+							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly>
 						</td>
 						
 						
@@ -61,12 +61,12 @@
 					<tr>
 						<td class="tbl_subtitle">직원 수</td>
 						<td>
-							<input type="text" name="cnslEmpNum" value="${SalesVO.cnslEmpNum }" readonly>
+							<input type="text" name="csEmpNum" value="${consultVO.csEmpNum }" readonly>
 						</td>
 						
 						<td class="tbl_subtitle">예상 예산</td>
 						<td>
-							<input type="text" name="cnslBdgt" value="${SalesVO.cnslBdgt }" readonly>
+							<input type="text" name="csBdgt" value="${consultVO.csBdgt }" readonly>
 						</td>
 						
 						<td colspan="3"></td>
@@ -75,7 +75,7 @@
 					<tr>
 						<td class="tbl_subtitle">문의 내용</td>
 						<td colspan="8" id="inquiryDetails">
-						<textarea rows="10"  style="width: 90%; resize: none" readonly>${SalesVO.cnslInqCnt}</textarea>
+						<textarea rows="10"  style="width: 90%; resize: none" readonly>${consultVO.csContent}</textarea>
 						
 						</td>
 
@@ -94,7 +94,7 @@
 	<tr>
 						<td class="tbl_subtitle">영업 담당자</td>
 						<td>
-							<input type="text" name="cnslEname" readonly>
+							<input type="text" name="csEname" readonly>
 							
 						</td>
 						<td>
@@ -102,7 +102,7 @@
 						</td>
 						<td class="tbl_subtitle">영업 상태</td>
 						<td>
-							<select name="cnslSaleSt">
+							<select name="selectSalesStatus" id="selectSalesStatus">
 								<option value="최초 인입">최초 인입</option>
 								<option value="응대 완료">응대 완료</option>
 								<option value="견적 발송 완료">견적 발송 완료</option>
@@ -114,7 +114,7 @@
 						<td></td>
 						<td class="tbl_subtitle">응대일</td>
 						<td>
-							<input type="date" name="cnslRespDt" >
+							<input type="date" name="csResponseDate" >
 						</td>
 						<td></td>
 					</tr>
@@ -124,18 +124,18 @@
 					</tr>
 					<tr>
 						<td class="tbl_subtitle">날짜 </td>
-						<td colspan="8"><input type="date" name="cnslHisCnt1Dt"></td>
+						<td colspan="8"><input type="date" name="cshDate1"></td>
 					</tr>
 					<tr>
 						<td class="tbl_subtitle">내용</td>
 						<td colspan="8">
-						<textarea rows="10"  style="width: 90%; resize: none" name="cnslHisCnt1"></textarea>
+						<textarea rows="10"  style="width: 90%; resize: none" name="cshContent1"></textarea>
 						</td>
 					</tr>
 	</thead>
 	</table>
 	
-	<div class="space_img_buttons">
+	<div class="space_img_btns">
 				 <input type="button" class="salesViewBtns" id="imgBtnPlus">
 				 <input type="button" class="salesViewBtns" id="imgBtnMinus">
 				</div>
@@ -144,7 +144,7 @@
 				<tr>
 						<td class="tbl_subtitle">계약 실패 사유</td>	
 						<td>
-							<select name="cnslFailRsn" id="selectFailureReasons">
+							<select name="csFailReason" id="selectCsFailReason">
 								<option value="단가 불만족">단가 불만족</option>
 								<option value="상품 불만족">상품 불만족</option>
 								<option value="서비스 불만족">서비스 불만족</option>
@@ -157,11 +157,11 @@
 						<td colspan="7"></td>
 						
 					</tr>
-				
+
 				<tr>
 						<td class="tbl_subtitle">내용</td>
 						<td colspan="8">
-						<textarea rows="10" style="width: 90%; resize: none" id="FailureReasonsCmt" placeholder="계약 실패 사유 상세 기재" name="cnslFailCmt"></textarea>
+						<textarea rows="10" style="width: 90%; resize: none" id="csFailDetailReason" placeholder="계약 실패 사유 상세 기재" name="csFailDetailReason"></textarea>
 						</td>
 					
 					
@@ -171,16 +171,16 @@
 				</thead>
 				</table>
 	
-		<div class="button_div">
+		<div class="btn_div">
 		<input type="button" class="salesViewBtns" id="saveBtn" value="저장">
-		<input type="hidden" name="cnslNo" value="${SalesVO.cnslNo }">
+		<input type="hidden" name="consultNo" value="${consultVO.consultNo }">
 		</div>
 </form>
 	</div>
 
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
 
 </body>
 </html>

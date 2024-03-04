@@ -3,23 +3,27 @@
    	
    })();
 */
+
+
 // 전역 변수 공간
 const amount = 10; // 페이지당 보여줄 아이템 수
 let pageNum = 1; // 현재 페이지 번호
 let products = document.querySelectorAll('.product'); // 전체 상품 리스트
-let sortDirection = {}; 
+let sortDirection = {}; // 정렬
 //------------
 
 
 filter();
+
 function filter() {
+	
     // allCheck 체크박스 이벤트 리스너 등록
     document.getElementById('product-typeAll').addEventListener('change', function() {
         // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
         let isChecked = this.checked;
         document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function(checkbox) {
             console.log(checkbox);
-        	checkbox.checked = isChecked;
+            checkbox.checked = isChecked;
         });
 
         // 필터링 적용
@@ -37,7 +41,7 @@ function filter() {
         filterProducts();
     });
 
-    
+
     // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
     document.querySelectorAll('.filter-checkbox').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
@@ -74,8 +78,8 @@ function filter() {
             document.querySelectorAll('.product').forEach(function(product) {
                 product.style.display = 'none';
             });
-            // 페이징 한다면 여기다가 페이징 0으로 초기화하는 거 넣기
-            drawPagination(1);
+            // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
+            removePagination();
             return;
         }
 
@@ -85,8 +89,8 @@ function filter() {
             document.querySelectorAll('.product').forEach(function(product) {
                 product.style.display = 'none';
             });
-            // 페이징 한다면 여기다가 페이징 0으로 초기화하는 거 넣기
-            drawPagination(1);
+            // 여기서 필터값 가져오고 페이징 다시그리기ㅈ
+            removePagination();
             return;
         }
 
@@ -96,18 +100,15 @@ function filter() {
             let status = product.getAttribute('data-status');
 
             // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
-            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) 
-            {
+            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
                 product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
-            } 
-            else 
-            {
+            } else {
                 product.style.display = 'none';
             }
-//            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
-              drawPagination(1, Math.ceil(getFilteredProducts().length / amount));
-//            goToPage(1); 이런식으로 넣었던거같다.
-            
+            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
+            drawPagination(1, Math.ceil(getFilteredProducts().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
+            goToPage(1); 																		   
+
         });
     }
 
@@ -129,8 +130,12 @@ function filter() {
         return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
     }
 };
+
 // 필터 끝
-//페이지 이동 함수
+
+
+// 페이징 시작
+// 페이지 이동 함수
 function goToPage(page) {
     pageNum = page;
     const startIndex = (pageNum - 1) * amount;
@@ -160,14 +165,16 @@ function goToPage(page) {
 }
 
 // 페이징 버튼 바인딩 함수
-function drawPagination() {
+function drawPagination() 
+{
     let totalPages = Math.ceil(getFilteredProducts().length / amount);
-    if (getFilteredProducts().length % amount === 0) {
-        totalPages--;
-    }
+//    if (getFilteredProducts().length % amount === 0) 
+//    {
+//        totalPages--;
+//    }
 
     const paginationElement = document.getElementById('pagination');
-    paginationElement.innerHTML = ''; // 이전에 있던 페이지네이션 내용을 초기화합니다.
+    paginationElement.innerHTML = ''; // 전에 있던 페이지네이션 내용을 초기화
 
     const ul = document.createElement('ul');
     ul.classList.add('page-nation');
@@ -189,8 +196,9 @@ function drawPagination() {
     let startPage = Math.max(1, pageNum - 2);
     let endPage = Math.min(startPage + maxPageButtons - 1, totalPages);
 
-    // 첫 페이지가 사라지지 않도록 수정
-    if (endPage - startPage < maxPageButtons - 1) {
+    // 페이지수 조정
+    if (endPage - startPage < maxPageButtons - 1) 
+    {
         startPage = Math.max(1, endPage - maxPageButtons + 1);
     }
 
@@ -223,35 +231,42 @@ function drawPagination() {
 }
 
 //필터링된 상품 리스트 가져오기
-function getFilteredProducts() {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function (checkbox) {
+function getFilteredProducts() 
+{
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function (checkbox) {
+    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
 
-    return Array.from(products).filter(function (product) 
-	{
+    return Array.from(products).filter(function(product) {
         let type = product.getAttribute('data-type');
         let status = product.getAttribute('data-status');
         return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
     });
 }
 
+function removePagination() {
+    const paginationElement = document.getElementById('pagination');
+    paginationElement.innerHTML = ''; // 페이지네이션 요소의 내용을 청소
+}
+
+
 // 초기 페이지네이션 그리기
 drawPagination();
 goToPage(1);
+
+// 페이징 끝
 
 
 
 
 // 리셋 그냥 새로고침''
 document.querySelector('#reset').addEventListener('click', function() {
-	console.log("dd");
-	location.reload();
+    console.log("dd");
+    location.reload();
 });
-
 
 
 // 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
@@ -277,7 +292,7 @@ function getCellValue(row, column) {
         "prdCstPri": 6,
         "prdSal": 7,
         "prdMargin": 8
-    }[column];
+    } [column];
 
     const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
     return cell ? cell.textContent.trim() : "";
@@ -291,12 +306,9 @@ function sortTable(column) {
     rows.sort((a, b) => {
         const aValue = getCellValue(a, column);
         const bValue = getCellValue(b, column);
-        if (sortDirection[column])
-        {
+        if (sortDirection[column]) {
             return aValue.localeCompare(bValue);
-        } 
-        else
-        {
+        } else {
             return bValue.localeCompare(aValue);
         }
     });
@@ -305,16 +317,3 @@ function sortTable(column) {
     tbody.innerHTML = '';
     rows.forEach(row => tbody.appendChild(row));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

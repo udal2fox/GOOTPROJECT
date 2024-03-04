@@ -14,9 +14,6 @@
 <div class="container-fluid"  style="padding-top: 30px;" align="center">	
     <h2 style="width: 1500px;" align="left">상품관리</h2>
     <div class="" >
-   		 <!--background: #eaeaea;
-  	  	 border-spacing: 15px 30px;
-   		 border-collapse: separate;  -->
         <table class="prdTable" style="background:#eaeaea;">
             <tr>
                 <td>
@@ -24,7 +21,7 @@
                     	<div class="flex-div" style="">
                         <label>상품 분류</label>
                         <div class="form-check">
-                            <input class="form-check-input" checked="checked" type="checkbox" data-filter="product-type" value="전체" id="product-typeAll">
+                            <input class="form-check-input" checked="checked" type="checkbox" value="전체" id="product-typeAll">
                             <label class="form-check-label" for="product-typeAll">전체</label>
                         </div>
                         <div class="form-check">
@@ -67,7 +64,7 @@
                     <div class="section">
                     	<div class="flex-div" style="">
                         <label>키워드</label>
-                        <div class="input-group mb-3" style="width: 320px;margin: 20px;">
+                        <div class="input-group mb-3" style="width: 320px;margin: 15px;">
                             <span class="input-group-text" id="test">🔍</span>
                             <input type="text" class="form-control" placeholder="공급처명/상품코드/대분류/소분류/상품명" aria-label="키워드 입력" aria-describedby="test" id="keyword">
                         </div>
@@ -103,7 +100,7 @@
 			            <th>표준유통코드<button type="button" class="sort-btn" data-column="prdSdc">🔽</button></th>
 			            <th>대분류<button type="button" class="sort-btn" data-column="prdMajorCtg">🔽</button></th>
 			            <th>소분류<button type="button" class="sort-btn" data-column="prdSubCtg">🔽</button></th>
-			            <th>상품명<button type="button" class="sort-btn" data-column="prdName">🔽</button></th>
+			            <th width="490px;">상품명<button type="button" class="sort-btn" data-column="prdName">🔽</button></th>
 			            <th>원가<button type="button" class="sort-btn" data-column="prdCstPri">🔽</button></th>
 			            <th>판매가<button type="button" class="sort-btn" data-column="prdSal">🔽</button></th>
 			            <th>마진율<button type="button" class="sort-btn" data-column="prdMargin">🔽</button></th>
@@ -128,7 +125,6 @@
 			        </c:forEach>
 			    </tbody>
 			</table>
-			<!-- 나중에 스타일 안바꾸면디진다 -->
 			<div style="width: 1500px;" align="left">
 		        <button type="button" class="btn btn-primary" onclick="location.href='moveProductReg'">신규 등록</button>
 		    </div>

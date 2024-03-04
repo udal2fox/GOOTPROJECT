@@ -1,19 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<title>newSales.jsp</title>
+<title></title>
 
 </head>
 <body>
 	<div class="navBar">
-		<jsp:include page="./../../../navBar.jsp"/>
+		<jsp:include page="../../../navBar.jsp"/>
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire" >
@@ -28,12 +27,12 @@
 				<tr>
 				<th>키워드</th>
 				<td>
-					<input type="text" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
+					<input type="text" name="searchBarKeyword" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
 				</td>
 				<td></td>
 				<th>영업 상태</th>
 				<td>
-					<select name="businessStatus" id="searchBar_selectBizSt">
+					<select name="salesStatus" id="searchBarSalesStatus">
 								<option value="선택">==선택==</option>
 								<option value="최초 인입">최초 인입</option>
 								<option value="응대 완료">응대 완료</option>
@@ -63,14 +62,14 @@
 			</thead>
 		</table>
 		
-			<input type="button" id="searchBar_search_btn" value="검색">
-			<input type="button" id="searchBar_reset_btn" value="초기화">
+			<input type="button" id="searchBarSearchBtn" value="검색">
+			<input type="reset"  id="searchBarResetBtn" value="초기화">
 		</form>
 	</div>
 	
-	<div class="download_to_excel_btn_div">
-		<input type="button" id="download_to_excel_btn" value="엑셀로 내려받기">
-	</div>
+			<div class="download_to_excel_btn_div">
+				<input type="button" id="downloadExcelBtn" value="엑셀로 내려받기">
+			</div>
 		
 	
 	<div class="list_div">
@@ -90,19 +89,21 @@
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="vo" items="${salesVO }">
+            <c:forEach var="vo" items="${consultVO }">
                <tr>
-                  <td><a href="${vo.cnslNo }">${vo.cnslNo }</a></td>
-                  <td>${vo.cnslReqDt }</td>
-                  <td>${vo.cnslCoName }</td>
-                  <td>${vo.cnslName }</td>
-                  <td>${vo.cnslCt }</td>
-                  <td>${vo.cnslEmail }</td>
-                  <td>${vo.cnslBdgt }</td>
-                  <td>${vo.cnslSaleSt }</td>
-				  <td>아직 구현 X</td>
+                  <td><a href="${vo.consultNo }">${vo.consultNo }</a></td>
+                  <td>${vo.csDate }</td>
+                  <td>${vo.csCompanyName }</td>
+                  <td>${vo.csName }</td>
+                  <td>${vo.csContact }</td>
+                  <td>${vo.csEmail }</td>
+                  <td>${vo.csBdgt }</td>
+                  <td>${vo.csStatus }</td>
+				  <td>${vo.csEname }</td>
                </tr>
             </c:forEach>
+    
+            
          </tbody>
       </table>
 </div>

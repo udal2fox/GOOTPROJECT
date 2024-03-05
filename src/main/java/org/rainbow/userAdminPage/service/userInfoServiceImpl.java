@@ -14,11 +14,10 @@ public class userInfoServiceImpl implements userInfoService{
     @Autowired
     private userInfoMapper uMapper;
 
+    // 사용자페이지 로그인
     @Override
-    public HashMap<String,Object> userAdminLogin(String uEmail, String uPw) {
-        System.out.println("service: " + uEmail + "/" + uPw);
-        return uMapper.userAdminLogin(uEmail,uPw);
-
+    public HashMap<String, String> userAdminLogin(HashMap<String, String> map) {
+        return uMapper.userAdminLogin(map);
     }
 
 }

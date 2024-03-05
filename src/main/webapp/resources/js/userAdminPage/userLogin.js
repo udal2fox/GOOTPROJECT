@@ -27,9 +27,13 @@ btn.addEventListener('click', () => {
         }),
         headers: { "Content-type": "application/json; charset=utf-8" }
     })
-        .then((Response)=> Response.json())
-        .then((json)=> {
-            console.log(json);
+        .then((Response)=> Response.text())
+        .then((result)=> {
+            if(result === 'fail'){
+                alert('아이디와 비밀번호가 다릅니다.\n 로그인 관련 문의는 고객센터로 문의주세요. \n TEL) 1588-0000')
+            }else{
+                location.href = '/userAdminPage/dashboard';
+            }
         })
         .catch((err) => console.log(err));
 

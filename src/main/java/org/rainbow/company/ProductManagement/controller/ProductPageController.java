@@ -68,7 +68,7 @@ public class ProductPageController
     public String moveSuppliers(Model model) 
     {
     	List<suppliersVO> list = pService.supsList();
-    	
+    	log.info(list);
     	model.addAttribute("list", list);
     	return "/company/productManagement/suppliersManagement";
     }
@@ -124,7 +124,7 @@ public class ProductPageController
     @GetMapping(value = "/searchProduct", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<List<productListVO>> prdSeach(@RequestParam("keyword") String keyword)
     {
-        log.info("keyword...");
+        log.info("keyword..."+keyword);
         
         
         List<productListVO> list = pService.getSearch(keyword);
@@ -193,8 +193,7 @@ public class ProductPageController
     	
     	System.out.println(checkValue);
     	 
-    	List<prdDownVO> downlist = pService.downExcelList(checkValue); //값이 여러개 들어올떄 떄 맵으로 던졌는데 지금은 수정해서 아마 리스트도 될듯함? // 리스트로 보낼려면 구조를 바꿔야한다.
-    	
+    	List<prdDownVO> downlist = pService.downExcelList(checkValue);
     	System.out.println(downlist);
     	
     	

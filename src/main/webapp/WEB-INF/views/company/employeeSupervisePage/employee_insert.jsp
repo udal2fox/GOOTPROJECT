@@ -14,9 +14,9 @@
 						<table id="top-table">
 							<tr>
 								<th> 이름 </th>
-								<td><input class="input1" type="text" name="eName"></td>
+								<td><input class="input1" type="text" name="eName" placeholder="이름은 최소 2글자부터 10글자까지 입력하세요"></td>
 								<th> 부서 </th>
-								<td><input class="input2" type="text" name="dName"></td>
+								<td><input class="input2" type="text" name="dName" placeholder="상품, 재무, 인사, 상품 중 하나를 입력하세요"></td>
 								<th> 상세주소 </th>
 								<td>
 									<div style="position: relative;">
@@ -29,7 +29,7 @@
 							</tr>
 							<tr>
 								<th> 이메일 주소 </th>
-								<td><input class="input1" type="text" name="email"></td>
+								<td><input class="input1" type="text" name="email" placeholder="@ 포함한 이메일 주소를 입력하세요"></td>
 								<th> 직급 </th>
 								<td><input class="input2" type="text" name="job"></td>
 								<th></th>
@@ -43,12 +43,12 @@
 								<th> 급여계좌 </th>
 								<td>
 									<select id="bank-select" name="eBank">
-										<option value="하나"> 하나은행 </option>
-										<option value="우리"> 우리은행 </option>
-										<option value="국민"> 국민은행 </option>
-										<option value="기업"> 기업은행 </option>
-										<option value="농협"> 농협은행 </option>
-										<option value="카카오"> 카카오 뱅크 </option>
+										<option value="하나은행"> 하나은행 </option>
+										<option value="우리은행"> 우리은행 </option>
+										<option value="국민은행"> 국민은행 </option>
+										<option value="기업은행"> 기업은행 </option>
+										<option value="농협은행"> 농협은행 </option>
+										<option value="카카오 뱅크"> 카카오 뱅크 </option>
 									</select>
 								</td>
 							</tr>

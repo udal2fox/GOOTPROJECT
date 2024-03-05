@@ -16,14 +16,14 @@
 				<form action="">
 					<table class="prdinputTable">
 						<tr>
-							<td>상품코드</td><td colspan="3"><input type="text" class="form-control randomPrdNo" readonly></td>
+							<td>상품코드</td><td colspan="3"><input type="text" class="form-control randomPrdNo" readonly name="prdNo"></td>
 						    <td></td>
-						    <td>원가</td><td colspan="3"><input type="text" class="form-control cost prdCri" placeholder="필수값" value="0"></td>
+						    <td>원가</td><td colspan="3"><input type="text" class="form-control cost prdCri" placeholder="필수값" value="0" name="prdCstPri"></td>
 						</tr>
 						<tr>
-							<td>표준유통코드</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값"></td>
+							<td>표준유통코드</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값" name="prdSdc"></td>
 						    <td></td>
-						    <td>원가-공급액</td><td colspan="3"><input type="text" class="form-control criSub" readonly></td>
+						    <td>원가-공급액</td><td colspan="3"><input type="text" class="form-control criSub" readonly name="prdCstSup"></td>
 						</tr>
 						<tr>
 							<td>입점업체코드</td>
@@ -34,12 +34,12 @@
 								    </c:forEach>
 							    </select></td>
 						    <td></td>
-						    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly disabled="disabled"></td>
+						    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly disabled="disabled" name="prdCstTax"></td>
 						</tr>
 						<tr>
-							<td>상품명</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값"></td>
+							<td>상품명</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값" name="prdName"></td>
 						    <td></td>
-						    <td>판매가</td><td colspan="3"><input type="text" class="form-control cost prdSal" placeholder="필수값" value="0"></td>
+						    <td>판매가</td><td colspan="3"><input type="text" class="form-control cost prdSal" placeholder="필수값" value="0" name="prdSal"></td>
 						</tr>
 						<tr>	
 							<td>비과세여부</td>
@@ -53,7 +53,7 @@
 							</td>
 							<td></td>
 							<td></td>
-							<td>판매가 공급액</td><td colspan="3"><input type="text" class="form-control salSub" readonly></td> 
+							<td>판매가 공급액</td><td colspan="3"><input type="text" class="form-control salSub" readonly name="prdSalSup"></td> 
 						</tr>
 						<tr>
 							<td>대분류</td>
@@ -64,7 +64,7 @@
 							    </select>
 							</td>
 						    <td></td>
-						    <td>판매가-세액</td><td colspan="3"><input type="text" class="form-control tax saltax" readonly disabled="disabled"></td>
+						    <td>판매가-세액</td><td colspan="3"><input type="text" class="form-control tax saltax" readonly disabled="disabled" name="prdSalTax"></td>
 						</tr>
 						<tr>
 							<td>소분류</td>
@@ -76,15 +76,15 @@
 							    </select>
 							</td>
 						    <td></td>
-						    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="0"></td>
+						    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="0" name="prdMargin"></td>
 						</tr>
 						<tr>
-							<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02"></td>
+							<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="prdImg"></td>
 						</tr>
 					</table>
 						<div class="prdRegBtn">
+							<input type="hidden" value="판매중"> 
 							<button type="button" class="btn btn-primary">등록</button>
-							<button type="button" class="btn btn-secondary">삭제</button>
 							<button type="button" class="btn btn-primary">취소</button>
 						</div>
 				</form>	

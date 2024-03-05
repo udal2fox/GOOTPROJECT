@@ -51,17 +51,9 @@ function insert(f) {
     }
 	
     console.log(f);
-	//f.action = '/employee_insert';
-	//f.submit();
-	console.log(f.sal.value)
-	console.log(f.eAddr.value)
-	console.log(f.eAddr2.value)
-	console.log(f.ebank.value)
-	console.log(f.salAccount.value)
-	console.log(f.email.value)
-	console.log(f.ePhone.value)
-	console.log(f.endDt.value)
-	console.log(f.hireDt.value)
+	f.action = '/employee_insert';
+	f.submit();
+
 	return true;
 }
 

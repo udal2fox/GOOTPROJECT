@@ -21,50 +21,95 @@
 	</div>
 
 	<div class="searchBar_div">
-	<form method="get" >
+
 		<table class="searchBar_tbl">
-			<thead>
-				<tr>
-				<th>키워드</th>
+			<tr>
 				<td>
-					<input type="text" name="searchBarKeyword" placeholder="기업명/담당자/메일주소/영업담당" style="text-align: center;">
+
+				<div class="searchBar_section">
+
+				<div class="searchBar_section_layout" style="">
+
+				<label>키워드</label>
+                        <div class="input-group mb-3" style="width: 320px;margin: 15px;">
+                            
+                            <input type="text" class="form-control" placeholder="기업명/담당자명/이메일/영업 담당자" aria-label="키워드 입력" aria-describedby="test" id="searchBarKeyword">
+                        </div>
+
+
+
+
+
+				<label>영업 상태</label>
+				<div class="checkbox_div"> <!-- form-check -->
+				<input type="checkbox" name="serviceStatus" value="전체" checked="checked" id="csStatus_all">
+				<label for="csStatus_all">전체</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="최초 인입" checked="checked" id="csStatus_firstIncoming" >
+				<label for="csStatus_firstIncoming">최초 인입</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="응대 완료" checked="checked" id="csStatus_response">
+				<label for="csStatus_response">응대 완료</label>
+				</div>
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="견적 발송 완료" checked="checked" id="csStatus_quotationSent">
+				<label for="csStatus_quotationSent">견적 발송 완료</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="미팅 완료" checked="checked" id="csStatus_meeting">
+				<label for="csStatus_meeting">미팅 완료</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="계약 완료" checked="checked" id="csStatus_contractCompleted">
+				<label for="csStatus_contractCompleted">계약 완료</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" name="serviceStatus" value="계약 실패" checked="checked" id="csStatus_contractFailure">
+				<label for="csStatus_contractFailure">계약 실패</label>
+				</div>
+				</div>
+				</div>
 				</td>
-				<td></td>
-				<th>영업 상태</th>
-				<td>
-					<select name="salesStatus" id="searchBarSalesStatus">
-								<option value="선택">==선택==</option>
-								<option value="최초 인입">최초 인입</option>
-								<option value="응대 완료">응대 완료</option>
-								<option value="견적 발송 완료">견적 발송 완료</option>
-								<option value="미팅 완료">미팅 완료</option>
-								<option value="계약 완료">계약 완료</option>
-								<option value="계약 실패">계약 실패</option>
-					</select>
-				</td>
-				<td></td>
 				</tr>
+				
+				
 				<tr>
-				<th>기간</th>
 				<td>
-					<input type="date" > ~ <input type="date">
-				</td>
-				<td colspan="4">
+
+
+				<div class="searchBar_section">
+				<div class="searchBar_section_layout" style="">
+
+
+				<label>기간</label>
+				<div>
+				<input type="date" id="searchBar_startDate"> ~ <input type="date"  id="searchBar_endDate">
+				</div>
+				
+				
 				<button type="button" class="btn btn-secondary btn-sm">오늘</button>
 				<button type="button" class="btn btn-secondary btn-sm">일주일</button>
 				<button type="button" class="btn btn-secondary btn-sm">이번 달</button>
 				<button type="button" class="btn btn-secondary btn-sm">지난 달</button>
 				<button type="button" class="btn btn-secondary btn-sm">지난 분기</button>
-
+				</div>
+				</div>
 				
 				</td>
 				</tr>
-			</thead>
+
 		</table>
 		
 			<input type="button" id="searchBarSearchBtn" value="검색">
 			<input type="reset"  id="searchBarResetBtn" value="초기화">
-		</form>
+
 	</div>
 	
 			<div class="download_to_excel_btn_div">
@@ -74,7 +119,7 @@
 	
 	<div class="list_div">
 
-      <table class="list_div_tbl">
+      <table class="list_div_tbl" id="sales_tbl">
          <thead>
             <tr class="top_bar_of_list">
                <th>번호</th>
@@ -90,7 +135,7 @@
          </thead>
          <tbody>
             <c:forEach var="vo" items="${consultVO }">
-               <tr>
+               <tr class="salesList">
                   <td><a href="${vo.consultNo }">${vo.consultNo }</a></td>
                   <td>${vo.csDate }</td>
                   <td>${vo.csCompanyName }</td>
@@ -132,6 +177,7 @@
 
 </div>
 </div>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 
 </body>

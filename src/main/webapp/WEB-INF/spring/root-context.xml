@@ -48,6 +48,11 @@
 	<context:component-scan
 		base-package="org.rainbow.company.ProductManagement.service" />
 		
+		<!-- 계산서발행 -->
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.orderStatementPage.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.orderStatementPage.service" />	
 		
 	<!-- @Autowired 사용할 매퍼 서비스 신정우 -->
 	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>

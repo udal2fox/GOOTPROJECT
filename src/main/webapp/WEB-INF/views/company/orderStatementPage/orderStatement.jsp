@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ include file="../../navBar.jsp" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="/resources/css/company/salesStatisticsPage/salesStatsView.css">
 <script type="text/javascript" src="/resources/js/navBar.js"></script>
@@ -9,7 +9,7 @@
 <body>
 	<div class="container-fluid" align="center">
 	
-		<table class="saleStatsTableSearch">
+	<table class="saleStatsTableSearch">
 				<tr class="rowWhite">
 					<td colspan="10">거래명세 </td>
 				</tr>
@@ -52,7 +52,7 @@
 				<td>기간</td>
 				<td><input type="text" class="termInput" placeholder="내용을 입력하세요"> ~ <input type="text" class="termInput" placeholder="내용을 입력하세요"></td>
 				<td><input type="button" class="termBtn" value="오늘"></td>
-				<td><input type="button" class="termBtn" value="최근일주"></td>
+				<td><input type="button" class="termBtn" value="최근 1주"></td>
 				<td><input type="button" class="termBtn" value="이번달"></td>
 				<td><input type="button" class="termBtn" value="지난달"></td>
 				<td><input type="button" class="termBtn" value="지난분기"></td>
@@ -65,64 +65,38 @@
 			</tr>
 		</table>
 		
-		<table border="1" class="saleStatsTableCal">
-			<tr>
-				<td class="paintLightgray"></td>
-				<td class="paintLightgray">기업수</td>
-				<td class="paintLightgray">매출합계</td>
-				<td class="paintLightgray">매입합계</td>
-				<td class="paintLightgray">조정금액합계</td>
-				<td class="paintLightgray">마진율</td>
-			</tr>
-			<tr>
-				<td class="paintLightgray">VAT 별도</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-			</tr>		
-			<tr>
-				<td class="paintLightgray">VAT 포함</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-				<td>자동 계산 구문</td>
-			</tr>	
-		</table>
-		
 		<table border="1" class="saleStatsTableInfo">
 			<tr>
-				<td class="paintLightgray"> 기업관리번호 </td>
-				<td class="paintLightgray"> 기업명 </td>
-				<td class="paintLightgray"> 매출액 </td>
-				<td class="paintLightgray"> 매출액·공급액 </td>
-				<td class="paintLightgray"> 매출액·세액 </td>
-				<td class="paintLightgray"> 매입액 </td>
-				<td class="paintLightgray"> 매출액·공급액 </td>
-				<td class="paintLightgray"> 매출액·세액 </td>
-				<td class="paintLightgray"> 조정금액 </td>
-				<td class="paintLightgray"> 조정금액·공급액 </td>
-				<td class="paintLightgray"> 조정금액·세액</td>
-				<td class="paintLightgray"> 마진율</td>
-			</tr>
-		
-			<tr>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
-				<td> 불러오기 </td>
+				<td class="paintLightgray"><input type="checkbox" name="categoryAll" value="전체"></td>
+				<td class="paintLightgray"> 날짜 </td>
+				<td class="paintLightgray"> 지점관리번호 </td>
+<!-- 			<td class="paintLightgray"> 기업명 </td>
+				<td class="paintLightgray"> 기업구분 </td>
+				<td class="paintLightgray"> 지점명 </td> -->
+				<td class="paintLightgray"> 합계 </td>
+				<td class="paintLightgray"> 공급액 </td>
+				<td class="paintLightgray"> 세액 </td>
+				<td class="paintLightgray"> 결제수단 </td>
+				<td class="paintLightgray"> 정산여부 </td>
+				<td class="paintLightgray"> 대상 거래명세서 </td>
 			</tr>
 			
+			<c:forEach var="ordStat" items="${ordStatlist}">
+				<tr>
+					<td> <input type="checkbox" name="categoryAll" value="전체"> </td>
+					<td> ${ordStat.recDate} </td>
+					<td> ${ordStat.spotNo} </td>
+<%-- 				<td> ${ordStat.cName} </td>
+					<td> ${ordStat.cBizType} </td>
+					<td> ${ordStat.sName} </td> --%>
+					<td> ${ordStat.recSum} </td>
+					<td> ${ordStat.recSup} </td>
+					<td> ${ordStat.recTax} </td>
+					<td> ${ordStat.recPayMth} </td>
+					<td> ${ordStat.recPayStat} </td>
+					<td> ${ordStat.recNo} </td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 

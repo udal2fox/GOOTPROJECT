@@ -27,7 +27,7 @@
 	<context:component-scan base-package="org.rainbow.company.ProductManagement.controller"/>
 	<context:component-scan base-package="org.rainbow.company.orderReceiptPage.controller"/>
 	<context:component-scan base-package="org.rainbow.company.salesStatisticsPage.controller"/>
-	<context:component-scan base-package="org.rainbow.company.settlementManagePage.controller"/>
+	<context:component-scan base-package="org.rainbow.company.orderStatementPage.controller"/>
 	<context:component-scan base-package="org.rainbow.company.unrecoveredManagement.controller"/>
 	<context:component-scan base-package="org.rainbow.landingPage.controller"/>
 	<context:component-scan base-package="org.rainbow.userAdminPage.controller"/>

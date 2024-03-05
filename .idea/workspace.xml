@@ -11,26 +11,25 @@
   <component name="ChangeListManager">
     <list default="true" id="c2a57afe-8fff-4436-b899-96eb4ce77eb8" name="Changes" comment="update from banana">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/controller/ProductPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/controller/ProductPageController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/mapper/productPageMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/service/productPageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/service/productPageService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/service/productPageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/company/ProductManagement/service/productPageServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/controller/UserAdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/controller/UserAdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/domain/userInfoVO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/service/userInfoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/service/userInfoService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/service/userInfoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/classes/org/rainbow/userAdminPage/service/userInfoServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productReg.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/company/productManagement/productReg.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/company/productPage/prdInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/sidebar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/sidebar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/userLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/WEB-INF/views/userAdminPage/userLogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/userAdminPage/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/userAdminPage/sidebar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/controller_war_exploded/resources/js/userAdminPage/userLogin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/controller/UserAdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/controller/UserAdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/mapper/userInfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/mapper/userInfoMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/service/userInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/service/userInfoService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/service/userInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/rainbow/userAdminPage/service/userInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/sidebar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/sidebar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/userLogin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/userAdminPage/userLogin.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/userAdminPage/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/userAdminPage/sidebar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/userAdminPage/userLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/userAdminPage/userLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/mapper/userInfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/controller/UserAdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/controller/UserAdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/service/userInfoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/service/userInfoService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/service/userInfoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/rainbow/userAdminPage/service/userInfoServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +39,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="spring-beans.schema" />
         <option value="Class" />
+        <option value="JavaScript File" />
         <option value="Interface" />
+        <option value="spring-beans.schema" />
       </list>
     </option>
   </component>
@@ -237,6 +237,11 @@
       <workItem from="1709552452088" duration="2622000" />
       <workItem from="1709555385266" duration="511000" />
       <workItem from="1709598895712" duration="1177000" />
+      <workItem from="1709600301916" duration="221000" />
+      <workItem from="1709600749924" duration="11669000" />
+      <workItem from="1709617035251" duration="20596000" />
+      <workItem from="1709638164018" duration="51000" />
+      <workItem from="1709638303338" duration="42000" />
     </task>
     <task id="LOCAL-00001" summary="update from banana">
       <option name="closed" value="true" />

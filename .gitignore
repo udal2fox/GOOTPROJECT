@@ -1,1 +1,6 @@
 /.metadata/
+# Ignore IntelliJ IDEA files
+.idea/
+# Ignore compiled output
+out/
+target/

@@ -26,7 +26,7 @@
 						<tbody>
 							<tr>
 								<th class="align-middle text-center">서비스 시작일자</th>
-								<td class="align-middle text-center">${regdate}</td>
+								<td class="align-middle text-center">${test}</td>
 								<th class="align-middle text-center">전월 이용금액</th>
 								<td class="align-middle text-center">${price}<span>원</span></td>
 								<td class="text-center"><button type="button"
@@ -34,7 +34,7 @@
 							</tr>
 							<tr>
 								<th class="align-middle text-center">1인당 예산</th>
-								<td class="align-middle text-center">${budget}<span>원</span></td>
+								<td class="align-middle text-center">${sVO.sBdgt}<span>원</span></td>
 								<th class="align-middle text-center">당월 이용금액</th>
 								<td class="align-middle text-center">${price}<span>원</span></td>
 								<td class="text-center"><button type="button"
@@ -42,7 +42,7 @@
 							</tr>
 							<tr>
 								<th class="align-middle text-center">지점 임직원 수</th>
-								<td class="align-middle text-center">{count} <span>명</span></td>
+								<td class="align-middle text-center">${sVO.sEmpNum} <span>명</span></td>
 								<th class="align-middle text-center">전년 이용금액</th>
 								<td class="align-middle text-center">${price}<span>원</span></td>
 								<td class="text-center text-center"><button type="button"
@@ -50,7 +50,7 @@
 							</tr>
 							<tr>
 								<th class="align-middle text-center">임직원 업데이트 일자</th>
-								<td class="align-middle text-center">${updateDate}</td>
+								<td class="align-middle text-center">${sVO.updateDate}</td>
 								<th class="align-middle text-center">금년 이용금액</th>
 								<td class="align-middle text-center">${price}<span>원</span></td>
 								<td class="text-center"><button type="button"
@@ -80,5 +80,5 @@
 	</div>
 
 </body>
-
+<script src="/resources/js/userAdminPage/dashboard.js"></script>
 </html>

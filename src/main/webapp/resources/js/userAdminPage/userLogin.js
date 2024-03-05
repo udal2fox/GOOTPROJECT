@@ -6,8 +6,6 @@ const regPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}
 
 btn.addEventListener('click', () => {
 
-    console.log(f.uEmail.value);
-    console.log(f.uPw.value);
     if (!f.uEmail.value || !regMail.test(f.uEmail.value)) {
         alert("올바른 형식의 이메일이 아닙니다.");
         f.uEmail.focus();
@@ -19,22 +17,23 @@ btn.addEventListener('click', () => {
         return false;
     }
 
-    fetch('/userAdminPage/login',{
-        method : 'post',
+    fetch('/userAdminPage/login', {
+        method: 'post',
         body: JSON.stringify({
             uEmail: f.uEmail.value,
             uPw: f.uPw.value
         }),
-        headers: { "Content-type": "application/json; charset=utf-8" }
+        headers: {"Content-type": "application/json; charset=utf-8"}
     })
-        .then((Response)=> Response.text())
-        .then((result)=> {
-            if(result === 'fail'){
-                alert('아이디와 비밀번호가 다릅니다.\n 로그인 관련 문의는 고객센터로 문의주세요. \n TEL) 1588-0000')
-            }else{
-                location.href = '/userAdminPage/dashboard';
+        .then((Response) => Response.text())
+        .then((result) => {
+            if (result === 'fail') {
+                alert('아이디와 비밀번호가 다릅니다.\n 로그인 관련 문의는 고객센터로 문의주세요. \n TEL) 1588-0000');
+                f.uEmail.value = '';
+                f.uPw.value = '';
+            } else {
+                location.href = '/userAdminPage/dashboard'
             }
         })
         .catch((err) => console.log(err));
-
 });

@@ -3,6 +3,7 @@ package org.rainbow.company.employeeSupervisePage.service;
 import java.util.List;
 
 import org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO;
+import org.rainbow.company.employeeSupervisePage.domain.insert_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.mapper.searchEmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 	@Override 
 	public int getTotal() { 
 		log.info("getTotal..." ); 
-		return mapper.getTotal(); }
+		return mapper.getTotal(); 
+	}
 		
 	// 직원 정보 조회 & 편집
 	@Override
@@ -37,8 +39,9 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 		return mapper.get(eno);
 	}
 	
+	// 직원 정보 등록 
 	@Override
-	public void insert(get_employeeDTO dto) {
+	public void insert(insert_employeeDTO dto) {
 		log.info("insert..." + dto);
 		mapper.insert(dto);    
 	}

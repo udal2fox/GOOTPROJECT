@@ -1,12 +1,9 @@
 package org.rainbow.userAdminPage.service;
 
-import org.rainbow.userAdminPage.domain.userInfoVO;
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 
-@Service
 public interface userInfoService {
 
-    public HashMap<String,Object> userAdminLogin(String uEmail, String uPw);
+    // 사용자페이지 로그인
+    public HashMap<String, String> userAdminLogin(HashMap<String, String> map);
 }

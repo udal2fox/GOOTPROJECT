@@ -1,12 +1,15 @@
 package org.rainbow.userAdminPage.controller;
 
-
-import org.rainbow.userAdminPage.service.userInfoService;
+import org.rainbow.userAdminPage.service.userInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.log4j.Log4j;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ import java.util.Map;
 public class UserAdminController {
 
 	@Autowired
-	private userInfoService uService;
+	private userInfoServiceImpl uService;
 
 	// 최초 접근 시
 	@GetMapping("/userLogin")
@@ -26,66 +29,24 @@ public class UserAdminController {
 	}
 
 
-	// 로그인
+	// 사용자페이지 로그인
 	@ResponseBody
-	@PostMapping(value = "/userAdminLogin")
-	public String login(@RequestBody Map<String, Object> param) {
-		String uEmail = (String) param.get("uEmail");
-		String uPw = (String) param.get("uPw");
-		HashMap<String, Object> userInfo = uService.userAdminLogin(uEmail,uPw);
-		System.out.println(userInfo);
+	@PostMapping(value = "/login")
+	public ResponseEntity<String> login(@RequestBody Map<String, Object> param, HttpServletRequest request) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("uEmail", (String) param.get("uEmail"));
+		map.put("uPw", (String) param.get("uPw"));
+		HashMap<String, String> resultMap = uService.userAdminLogin(map);
+		if(resultMap == null) {
+			return new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+		}else {
+			HttpSession session = request.getSession();
+			session.setAttribute("userName", resultMap.get("uName"));
+			session.setAttribute("spotNo", resultMap.get("spotNo"));
+			return new ResponseEntity<String>("success",HttpStatus.OK);
+		}
 
-		return null;
 	}
 
-	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "/userAdminPage/dashboard";
-	}
-
-	@GetMapping("/manage_member")
-	public String member() {
-		return "/userAdminPage/manage_member";
-	}
-
-	@GetMapping("/manage_card")
-	public String card() {
-		return "/userAdminPage/manage_card";
-	}
-
-	@GetMapping("/manage_gift")
-	public String gift() {
-		return "/userAdminPage/manage_gift";
-	}
-
-	@GetMapping("/manage_gift_Edit")
-	public String gift_Edit() {
-		return "/userAdminPage/manage_gift_Edit";
-	}
-
-	@GetMapping("/manage_recipients")
-	public String recipients() {
-		return "/userAdminPage/manage_recipients";
-	}
-
-	@GetMapping("/usageHistory_details")
-	public String usageHistory_details() {
-		return "/userAdminPage/usageHistory_details";
-	}
-
-	@GetMapping("/usageHistory_list")
-	public String usageHistory_list() {
-		return "/userAdminPage/usageHistory_list";
-	}
-
-	@GetMapping("/userEdit")
-	public String userEdit() {
-		return "/userAdminPage/userEdit";
-	}
-
-	@GetMapping("/inquiryBoard")
-	public String inquiryBoard() {
-		return "/userAdminPage/inquiryBoard";
-	}
 
 }

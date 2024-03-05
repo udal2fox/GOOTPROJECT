@@ -1,0 +1,388 @@
+@charset "UTF-8";
+
+	body{
+		margin : 0;
+		padding : 0;
+		
+	}
+
+	.navBar{
+		position: fixed;
+		width : 100%;
+		top : 0;
+		
+	}
+
+/* 변수 생성 */
+:root {
+  
+  --bg-gray:#EEEEEE; 
+  --blue:rgb(75, 91, 225);
+  --basic-radius:3px;
+  
+}
+
+
+.entire{
+	width: 80%;
+	
+
+}
+
+
+   
+/** 타이틀 */
+	.title h3{
+		font-weight : bolder;
+
+	}
+	
+	
+	
+/** ------------기업 관리 (리스트) 페이지 시작--*/
+
+/** 서치바 */
+.searchBar_div {
+		
+    	box-sizing: border-box;
+    	background-color:var(--bg-gray);
+    	padding-bottom:10px;
+	}
+
+/** 서치바 테이블*/
+.searchBar_tbl {
+	table-layout: auto;
+	table-layout: fixed;
+	border: 6px solid var(--bg-gray);
+	width: 100%;
+	
+}
+
+.searchBar_tbl tr th {
+	width:80px;
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	font-size: 15px;
+	text-align: center;
+	
+
+}
+
+.searchBar_tbl td{
+	border: 6px solid var(--bg-gray);
+	
+}
+
+
+.checkbox_div, .radioBtn_div {
+	display: flex;
+	justify-content: space-around;
+
+}
+
+.searchBar_tbl input[type="text"], #searchBarBizStatus {
+	
+	width:100%;
+	border: none;
+	
+}
+
+
+
+
+#searchBarSearchBtn {
+	box-sizing: border-box;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	
+	
+	}
+	
+
+#searchBarResetBtn {
+	box-sizing: border-box;
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	}
+	
+
+.download_to_excel_btn_div {
+	
+    box-sizing: border-box;
+	text-align: right;
+	padding: 50px 5px 10px 5px;
+}
+	
+
+#downloadExcelBtn {
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width:140px;
+}
+
+
+.viewAFew_div {
+	
+    box-sizing: border-box;
+    text-align:right;
+    padding: 0px 5px 10px 5px;
+	
+}
+
+
+
+.list_div {
+	
+	box-sizing: border-box;
+	border : 5px solid var(--bg-gray);
+
+}
+
+.list_div_tbl {
+	 
+	border : 5px solid white;
+	table-layout: auto;
+	table-layout: fixed;
+	width:100%;
+}
+
+.list_div_tbl tr th {
+
+	font-size: 15px;
+	text-align: center;
+}
+
+.list_div_tbl td{
+	text-align: center;
+	
+}
+
+
+.top_bar_of_list {
+	border : 5px solid white;
+	
+	background-color:var(--bg-gray);
+	font-size: 15px;
+	font-weight : bolder;
+
+}
+
+
+
+#moveCompanyRegisterBtn {
+	box-sizing: border-box;
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+	
+}
+
+
+
+
+
+/** ------------기업 관리 (리스트) 페이지 끝--*/
+
+
+
+
+
+
+
+/** ----------기업 등록,기업 수정 페이지 시작 ---------------*/
+
+.company_register_div {
+
+	box-sizing: border-box;
+}
+
+.company_register_title {
+	margin-top:30px;
+	background-color : var(--bg-gray);
+	height: 50px;
+	padding-top:12px;
+
+}
+
+.company_register_tbl {
+	width: 100%;
+	background-color: var(--bg-gray);
+	table-layout: auto;
+	table-layout: fixed;
+	border: 7px solid var(--bg-gray);
+
+	
+}
+.company_register_tbl th {
+	width: 200px;
+	border: 10px solid var(--bg-gray);
+
+}
+.company_register_tbl tr {
+	width: 100%;
+
+}
+
+.company_register_tbl td {
+	width: 100%;
+	border: 10px solid var(--bg-gray);
+	
+	
+}
+
+
+#imgBtnSearchComName {
+        background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+      }
+
+#imgBtnBizLicenseFileUpload{
+	background: url( "/resources/images/mt-file_upload.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
+#imgBtnSearchBizNum {
+	  background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
+
+#imgBtnSearchAddr {
+	
+	background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
+
+#detailedAddr{
+	height: 56px;
+}
+
+
+#imgBtnSearchBizStatus {
+	
+	background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
+
+.btn_div {
+	width: var(--max-width);
+    box-sizing: border-box;
+	text-align: right;
+	padding-top:50px;
+}
+
+	
+#companyRegisterInsertBtn {
+	box-sizing: border-box;
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+	
+}
+
+
+#companyRegisterResetBtn{
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 120px;
+	
+}
+
+
+.company_register_tbl input[type="text"],
+.company_register_tbl input[type="date"],
+.company_registration_tbl input[type="email"]
+ {
+	border: none;
+	width:100%;
+	
+}
+
+
+
+
+
+#companyUpdateBtn {
+	box-sizing: border-box;
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+	
+}
+
+
+
+#companyUpdateResetBtn{
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 120px;
+	
+}
+
+
+
+/** ----------기업 등록,기업 수정 페이지 끝---------------*/
+
+
+
+
+
+
+
+
+

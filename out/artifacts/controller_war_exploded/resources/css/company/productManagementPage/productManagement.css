@@ -1,0 +1,116 @@
+		@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+		
+		.notosanskr * { 
+		 font-family: 'Noto Sans KR', sans-serif;
+		}
+		/* *
+		{
+			font-family: 'Noto Sans KR', sans-serif;
+			margin: 0 auto;
+		} */
+		
+		
+		.product-top-back {
+		    display: flex;
+		}
+		
+		.section {
+		    flex: 1; /* 각 섹션이 동일한 너비를 가지도록 설정 */
+		    margin-right: 10px;
+		    width: 740px;
+		}
+		
+		.flex-div {
+	        display: flex;
+   			align-items: center;
+   			justify-content: flex-start;
+   			padding-left: 70px;
+		}
+		
+		.flex-div div{
+		   padding-right: 20px;
+		}
+		.flex-div label
+		{
+			padding-right: 50px;
+		}
+		.input-group {
+		    margin-bottom: 10px;
+		}
+		#table-prd button
+		{
+			background-color: #eaeaea;
+			border-color: white;
+		}
+		#table-prd
+		{
+			width: 1500px;
+		}
+		#tdTop
+		{
+			padding-top: 25px;
+		}
+		
+		#table-prd th, td
+		{
+		    text-align: center;
+			vertical-align: middle;
+		}
+		.prdTable
+		{
+		 	border-spacing: 0px 30px;
+   		 	border-collapse: separate; 
+		}
+		/* .padLeft
+		{
+			padding-left: 55px;
+		} */
+
+
+
+
+
+
+		/*페이징 이미지사이즈  */
+		td img {height: 80px; width: 120px;}
+		.page-nation li{
+			list-style: none;
+		}
+		
+		.page-wrap{
+			    text-align: center;
+			    font-size: 0;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+		}
+		.page-nation {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		.page-nation a{
+			display: block;
+			margin: 0 3px;
+			flex: left;
+			border: 1px solid #e6e6e6;
+			width: 28px;
+			height: 28px;
+			line-height: 28px;
+			text-align: center;
+			background-color: #fff;
+			font-size: 13px;
+			color: black;
+			text-decoration: none;
+		}
+		
+		.page-nation a.active{
+			background-color: #0078ff;
+			color: #fff;
+		}
+		.page-nation a:hover{
+			background-color: #0078ff;
+			color: #fff;
+		}

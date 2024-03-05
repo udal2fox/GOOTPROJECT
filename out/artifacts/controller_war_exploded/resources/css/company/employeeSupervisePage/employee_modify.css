@@ -1,0 +1,119 @@
+	div{
+		display: block;
+	}
+	h4{	
+		padding-top: 10px;
+		margin-left: 120px;
+		text-align: left;
+		padding-bottom: 10px;
+	}
+	#insert-form-box{
+		width : 90%;
+		height: 540px;
+		border : none;
+		background-color: lightgray;
+		margin : auto;
+	}
+	.button-container{
+		margin-top : 5px;
+		text-align: right;
+	}
+	input[type='button']{
+		width : 200px;
+		height : 40px;
+		margin-left: 10px;
+		color: white;
+		font-weight: bold;
+		border : none;
+	}
+	#saveBtn{
+		background-color: #787DFF;
+	}
+	#closeBtn{
+		margin-right: 40px;
+		background-color: #001383; 
+	}
+	#table1{
+		margin-left : 70px;
+		height : 330px;
+		padding: 30px;
+	}
+	#table2{
+		height : 210px;
+		padding: 30px;
+		margin-left: 60px;
+	}
+	input[class='input1']{
+		text-align : center;
+		width : 180px;
+		height : 32px;
+		margin-left: 30px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		margin-right: 60px;
+		border-radius: 5px;
+		border : none;
+	}
+	input[class='input2']{
+		text-align : center;
+		width : 180px;
+		height : 32px;
+		margin-left: 30px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		margin-right: 60px;
+		border-radius: 5px;
+		border : none;
+	}
+	input[class='input3']{
+		text-align : center;
+		margin-left: 30px;
+		margin-bottom : -10px;
+		height : 40px;
+		width : 180px;
+		border-radius: 5px;
+		border : none;
+	}
+	input[class='input4']{
+		text-align : center;
+		margin-left: -90px;
+		margin-top : -10px;
+		height : 40px;
+		width : 300px;
+		border-radius: 5px;
+		border : none;
+	}
+	input[class='input5']{
+		text-align : center;
+		width : 200px;
+		height : 32px;
+		border-radius: 5px;
+		border : none;
+		margin-left: 60px;
+		margin-right: 70px;
+	}
+	input[class='input6']{
+		text-align : center;
+		width : 200px;
+		height : 32px;
+		border-radius: 5px;
+		border : none;
+		margin-left: 40px;
+		margin-right: 20px;
+	}
+	#bank-select{
+		border-radius : 5px;
+		border : none;
+		width : 180px;
+		height : 43px;
+		margin-left: 30px;
+		margin-bottom : -10px;
+	}
+	#top-table{
+		width: 100%;
+	}
+	#bottom-table{
+		width : 100%;
+		margin-top : 40px;
+		margin-left: 40px;
+	}

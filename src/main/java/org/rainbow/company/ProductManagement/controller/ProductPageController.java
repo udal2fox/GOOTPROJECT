@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.rainbow.company.ProductManagement.domain.prdInsertVO;
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
@@ -24,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,14 +45,8 @@ public class ProductPageController
 	
 	// 상품 조회 리스트 이동
     @GetMapping(value = "/moveProductPage")
-    public String moveProductMangerPage(Model model, Criteria cri) 
+    public String moveProductMangerPage(Model model) 
     {
-    	log.info("list...");
-		if(cri.getPageNum() == 0 && cri.getAmount() == 0)
-		{
-			cri.setPageNum(1);
-			cri.setAmount(10);
-		}
 	    List<productListVO> list = pService.prdList();
 	   
 //	    int total = pService.prdCount();
@@ -99,18 +95,21 @@ public class ProductPageController
     public String moveProductReg(Model model) 
     {
     	List<prdInputVO> codes = pService.getsupsNumber();
-    	List<prdInputVO> items = pService.getSubCtg();
     	
     	model.addAttribute("codes", codes);
-    	model.addAttribute("items", items);
-    	
     	
     	return "/company/productManagement/productReg";
     }
     // 상품 수정 이동
     @GetMapping(value = "/moveProductUpdate")
-    public String moveProductUpdate(Model model, Criteria cri) 
+    public String moveProductUpdate(@RequestParam("prdNo") String prdNo, Model model) 
     {
+    	List<prdInputVO> codes = pService.getsupsNumber();
+    	prdInputVO pvo = pService.getprdVo(prdNo);
+    	
+    	model.addAttribute("pvo", pvo);
+    	model.addAttribute("codes", codes);
+    	
     	return "/company/productManagement/productUpdate";
     }
     
@@ -191,8 +190,6 @@ public class ProductPageController
     	
     	checkValue.put("checkValues", checkValues);
     	
-    	System.out.println(checkValue);
-    	 
     	List<prdDownVO> downlist = pService.downExcelList(checkValue);
     	System.out.println(downlist);
     	
@@ -200,6 +197,44 @@ public class ProductPageController
         // 리스트를 넣으면 엑셀화됨.
         ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
+    
+    /** 상품 개별등록*/
+    @PostMapping(value = "/prdReg.do")
+    public String prdReg(prdInsertVO pvo)
+    {
+    	log.info(pvo);
+    	
+    	int result = pService.productInput(pvo);
+    	
+    	log.info(result);
+    	return "redirect:/moveProductPage";
+    }
+    
+    /** 상품 개별수정*/
+    @PostMapping("/prdUpdate")
+    public String prdUpdate(suppliersVO svo)
+    {
+    	log.info(svo);
+    	System.out.println(svo.getSupsSt());
+    	System.out.println(svo.getSupsBnt());
+    	pService.supsUpdate(svo);
+    	
+    	return "redirect:/moveProductPage";
+
+    }
+    
+    /** 상품 개별삭제*/
+    @PostMapping("/prdDelete")
+    public String prdDelete(suppliersVO svo)
+    {
+    	log.info(svo);
+
+    	pService.supsDelete(svo);
+    	
+    	return "redirect:/moveProductPage";
+
+    }
+    
     
     // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
     

@@ -1,4 +1,6 @@
-		
+/**
+ * 
+ */
 	let cri = document.querySelector('.prdCri');
 	let sal = document.querySelector('.prdSal');
 	let cost = document.querySelectorAll('.cost');
@@ -44,7 +46,17 @@
 	    }
 	  });
 	});
-	
+
+
+
+
+
+
+
+
+
+
+
 	// 라디오버튼 이벤트 과세시 세율 활성 비과세시 비활성화 기능
 	document.querySelectorAll('[name="prdTaxExSt"]').forEach(function(radio) {
 	  radio.addEventListener('change', function() {
@@ -63,22 +75,8 @@
 	  });
 	});
 
-	
-	// 랜덤한 문자 + 숫자 생성
-	function randomCode(length) 
-	{
-		  const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
-		  let randomString = '';
-		  for (let i = 0; i < length; i++) 
-		  {
-		    const randomIndex = Math.floor(Math.random() * charset.length);
-		    randomString += charset[randomIndex];
-		  }
-		  return randomString;
-	}
-	document.querySelector('.randomPrdNo').value = randomCode(8);
-		
-	
+
+
 	function prdReg(f)
 	{
 		if(f.prdSdc.value == '' || f.prdName.value == '')
@@ -100,8 +98,3 @@
 	{
 		window.history.go(-1); // 뒤로 한 페이지 이동
 	} 
-	
-	
-	
-	
-	

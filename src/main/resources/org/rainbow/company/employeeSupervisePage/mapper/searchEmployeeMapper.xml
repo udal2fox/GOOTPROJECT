@@ -33,29 +33,40 @@
 			e.eno = #{e.eno}
 	</select>
 	
-	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO">
-		  INSERT INTO RAIN_EMP_tbl (eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt)
-   		  VALUES (
-       			#{eName}, 
-       			#{ePhone}, 
-       			#{job}, 
-       			#{sal}, 
-       			#{email}, 
-       			#{eAddr}, 
-       			#{eAddr2}, 
-       			#{identyNum}, 
-       			#{salAccount}, 
-       			#{workType}, 
-       			#{idStatus}, 
-       			#{eBank}, 
-       			sysdate, 
-       			NULL
-    			)
+	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.insert_employeeDTO">
+		 <![CDATA[
+        	INSERT INTO RAIN_EMP_tbl (eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt, deptNo)
+        		VALUES (
+            		#{eName}, 
+            		#{ePhone}, 
+            		#{job}, 
+            		#{sal}, 
+            		#{email}, 
+            		#{eAddr}, 
+            		#{eAddr2}, 
+            		#{identyNum}, 
+            		#{salAccount}, 
+           		 	#{workType}, 
+            		#{idStatus}, 
+            		#{eBank}, 
+            		NOW(),
+            		'',
+            		CASE
+                		WHEN #{dName} = '인사' THEN 1
+                		WHEN #{dName} = '재무' THEN 2
+                		WHEN #{dName} = '영업' THEN 3
+                		WHEN #{dName} = '상품' THEN 4
+                		WHEN #{dName} = '대표' THEN 0
+            		END
+        	)
+    	]]>
+    	
+    	
+		<!-- INSERT INTO RAIN_DEPT_tbl (DName)
+		VALUES (
+    		#{dName}
+		) -->
 
-    		INSERT INTO RAIN_DEPT_tbl dName
-    		VALUES (
-        		#{dName}
-    			)	
 	</insert>
 	
 </mapper>

@@ -82,6 +82,26 @@ public class productPageServiceImpl implements productPageService
 		return pMapper.getSupsVO(supsNo);
 	}
 
+	@Override
+	public void supsUpdate(suppliersVO vo) {
+		pMapper.supsUpdate(vo);
+	}
+
+	@Override
+	public void supsDelete(suppliersVO vo) {
+		pMapper.supsDelete(vo);
+	}
+
+	@Override
+	public List<prdInputVO> getsupsNumber() {
+		return pMapper.getsupsNumber();
+	}
+
+	@Override
+	public List<prdInputVO> getSubCtg() {
+		return pMapper.getSubCtg();
+	}
+
 		
 	
 

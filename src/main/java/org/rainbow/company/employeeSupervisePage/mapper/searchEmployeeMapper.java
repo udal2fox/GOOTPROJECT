@@ -2,8 +2,7 @@ package org.rainbow.company.employeeSupervisePage.mapper;
 
 import java.util.List;
 
-import org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO;
-import org.rainbow.company.employeeSupervisePage.domain.insert_employeeDTO;
+import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 
 
@@ -16,8 +15,11 @@ public interface searchEmployeeMapper {
 	public int getTotal();
 	
 	// 직원 정보 조회 
-	public get_employeeDTO get(int eno);
+	public rain_EmpVO get(int eno);
 	
 	// 직원 정보 등록
-	public void insert(insert_employeeDTO dto); 
+	public void insert(rain_EmpVO vo); 
+	
+	// 직원 정보 편집
+	public void update(rain_EmpVO vo);
 }

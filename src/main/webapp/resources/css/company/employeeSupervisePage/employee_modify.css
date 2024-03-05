@@ -101,6 +101,16 @@
 		margin-left: 40px;
 		margin-right: 20px;
 	}
+	#workType-select, #job-select,#dName-select{
+	 	width : 180px;
+		height : 32px;
+		margin-left: 30px;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		margin-right: 60px;
+		border-radius: 5px;
+		border : none; 
+	}
 	#bank-select{
 		border-radius : 5px;
 		border : none;

@@ -7,9 +7,14 @@
 	<!-- 전체 직원 리스트 -->
 	<select id="getList" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO">
 	
-    	SELECT e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.hireDt, e.endDt, e.idStatus
-    	FROM RAIN_EMP_tbl e
-    	JOIN RAIN_DEPT_tbl d ON e.deptNo = d.deptNo
+    	SELECT 
+    		e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.hireDt, e.endDt, e.idStatus
+    	FROM 
+    		RAIN_EMP_tbl e
+    	JOIN 
+    		RAIN_DEPT_tbl d 
+    	ON 
+    		e.deptNo = d.deptNo
     	ORDER BY e.eno DESC
     	
 	</select>
@@ -19,24 +24,31 @@
 		SELECT count(*) FROM RAIN_EMP_tbl
 	</select> 
 	
+        	<!-- d.dName AS dName, -->
 	<!-- 직원 정보 조회  -->
-	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO">
+	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+			
 		SELECT 
-			e.eName, e.email, e.ePhone, CONCAT(SUBSTRING(e.identyNum, 1, 2), '년 ', SUBSTRING(e.identyNum, 3, 2), '월 ', SUBSTRING(e.identyNum, 5, 2), '일') AS identyNum, d.dName, e.job, e.workType, e.sal, e.eAddr, e.eBank, e.salAccount, e.hireDt, e.endDt, e.idStatus
-		FROM 
-			RAIN_EMP_tbl e
-		JOIN 
-			RAIN_DEPT_tbl d 
-		ON 
-			e.deptNo = d.deptNo
-		WHERE 
-			e.eno = #{e.eno}
+        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, 
+        	CONCAT(SUBSTRING(e.identyNum, 1, 2), '년 ', SUBSTRING(e.identyNum, 3, 2), '월 ', SUBSTRING(e.identyNum, 5, 2), '일') AS identyNum, 
+        	e.job, e.workType, e.sal, e.eAddr, e.eAddr2, e.eBank, e.salAccount, e.hireDt, e.endDt, e.idStatus
+    	FROM 
+        	RAIN_EMP_tbl e
+    	JOIN 
+        	RAIN_DEPT_tbl d 
+        ON 
+        	e.deptNo = d.deptNo
+    	WHERE 
+        	e.eno = #{eno}
+				
 	</select>
 	
-	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.insert_employeeDTO">
-		 <![CDATA[
-        	INSERT INTO RAIN_EMP_tbl (eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt, deptNo)
+	<!-- 직원 정보 등록 -->
+	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+	
+        	INSERT INTO RAIN_EMP_tbl ( deptNo, eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt)
         		VALUES (
+        			#{deptNo},
             		#{eName}, 
             		#{ePhone}, 
             		#{job}, 
@@ -50,23 +62,23 @@
             		#{idStatus}, 
             		#{eBank}, 
             		NOW(),
-            		'',
-            		CASE
-                		WHEN #{dName} = '인사' THEN 1
-                		WHEN #{dName} = '재무' THEN 2
-                		WHEN #{dName} = '영업' THEN 3
-                		WHEN #{dName} = '상품' THEN 4
-                		WHEN #{dName} = '대표' THEN 0
-            		END
+            		#{endDt}	
         	)
-    	]]>
-    	
-    	
-		<!-- INSERT INTO RAIN_DEPT_tbl (DName)
-		VALUES (
-    		#{dName}
-		) -->
-
+   
 	</insert>
+	
+	<!-- 직원 정보 편집 -->
+	<update id="update" parameterType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+			UPDATE RAIN_EMP_tbl 
+			SET 
+    			deptNo = #{deptNo}
+    			job = #{job}, 
+    			sal = #{sal}, 
+    			workType = #{workType}, 
+    			idStatus = #{idStatus}, 
+    			endDt = #{endDt}
+			WHERE
+    			eno = #{eno}
+	</update>
 	
 </mapper>

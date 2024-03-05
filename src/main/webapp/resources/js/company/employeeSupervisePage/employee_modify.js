@@ -9,6 +9,8 @@ linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);*/
 
+const f = document.forms[0];
+
 document.querySelectorAll('input[type="button"]').forEach( btn => {
 	btn.addEventListener( 'click', (event) => {
 		event.preventDefault(); 
@@ -17,11 +19,18 @@ document.querySelectorAll('input[type="button"]').forEach( btn => {
 		
 		if( type === 'closeBtn') close();
 		else if ( type === 'saveBtn'){
-			
+			update(f);
 		}
 	})
 })
 
 function close(){
 	location.href = '/searchEmployee';
+}
+
+function update(f){
+
+	 console.log(f);
+	 f.action = '/employee_modify';
+	 f.submit();
 }

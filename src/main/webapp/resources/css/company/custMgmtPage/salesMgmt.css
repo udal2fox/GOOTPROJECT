@@ -51,32 +51,18 @@
 
 
 .searchBar_tbl {
-	table-layout: auto;
-	table-layout: fixed;
-	border: 6px solid var(--bg-gray);
-	width: 100%;
+	
+
+	box-sizing: border-box;
+	border-spacing: 0px 30px;
+   	border-collapse: separate; 
+   	width: 100%;
 	
 }
 
 
-.searchBar_tbl tr th {
-	width:80px;
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
-	font-size: 15px;
-	text-align: center;
-	
 
-}
-
-
-
-.searchBar_tbl td{
-	border: 6px solid var(--bg-gray);
-	
-}
-
-.searchBar_tbl input[type="text"], #searchBarSalesStatus {
+.searchBar_tbl input[type="text"] {
 	
 	width:100%;
 	border: none;
@@ -91,6 +77,32 @@
 }
 
 
+.searchBar_section_layout {
+	box-sizing: border-box;
+	        display: flex;
+   			align-items: center;
+   			justify-content: flex-start;
+   			padding-left: 70px;
+		}
+		
+		
+.searchBar_section_layout div{
+	box-sizing: border-box;
+		   padding-right: 20px;
+		}
+
+.input-group {
+	box-sizing: border-box;
+		    margin-bottom: 10px;
+		}
+		
+		
+.btn btn-secondary btn-sm {
+	
+	margin-right: 10px;
+}		
+		
+		
 #searchBarSearchBtn {
 	margin-left:1100px;
 	background-color: var(--blue);
@@ -166,6 +178,8 @@
 	font-weight : bolder;
 
 }
+
+
 
 
 

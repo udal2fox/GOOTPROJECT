@@ -19,7 +19,10 @@
 	        SELECT *
 			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
 			WHERE p.supsNo = s.supsNo
-			AND (prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR prdName LIKE CONCAT('%', #{keyword}, '%'))
+			AND (
+					prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR 
+					prdName LIKE CONCAT('%', #{keyword}, '%') OR supsCo LIKE CONCAT('%', #{keyword}, '%')
+				)
 			ORDER BY prdNo ASC;
 			
 	</select>
@@ -37,19 +40,30 @@
 	</insert>
 	
 	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
-	<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
-	        SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+	    <!-- 
+
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        <if test="item != '상품권' and item != '현물' and item != '판매중' and item != '일시품절' and item != '단종'">
+	            AND  prdNo = #{item} OR prdMajorCtg = #{item} OR prdSubCtg LIKE CONCAT('%', #{item}, '%') OR 
+	                 prdName LIKE CONCAT('%', #{item}, '%') OR supsCo LIKE CONCAT('%', #{item}, '%')
+	        </if>
+	    </foreach> -->
+	    
+		<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
+		  	SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
 		    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
 		    WHERE s.supsNo = p.supsNo
 		    AND p.prdMajorCtg IN
-	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
-	        #{item}
-	    </foreach>
-	    AND p.prdSt IN
-	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
-	        #{item}
-	    </foreach>
-	</select>
+		    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		    AND p.prdSt IN
+		    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		</select>
+
+	
 	<!--  
 		foreach 마이바티스 반복
 		item 변수 이름
@@ -75,8 +89,39 @@
 	<select id="getSubCtg" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
 		select DISTINCT prdSubCtg from RAIN_Products_tbl
 	</select>
-
 	
+	<!-- 상품 개별 등록 -->
+	<insert id="productInput">
+	   insert into RAIN_Products_tbl 
+	   values
+	   (
+	   		#{prdNo}, #{supsNo}, #{prdSdc}, #{prdTaxExSt}, #{prdMajorCtg}, #{prdSubCtg}, #{prdName}, #{prdCstPri}, 
+	   		#{prdCstSup}, 
+	   		<if test="prdCstTax != null">
+	   			#{prdCstTax}
+	   		</if>
+	   		<if test="prdCstTax == null">
+	   			0,
+	   		</if>
+	   		#{prdSal}, #{prdSalSup}, 
+	   		<if test="prdSalTax != null">
+	   			#{prdSalTax}
+	   		</if>
+	   		<if test="prdSalTax == null">
+	   			0,
+	   		</if>
+	   		#{prdMargin}, #{prdSt}, #{prdImg}
+	   )
+	   
+	</insert>
+	
+	<!--  -->
+	<select id="getprdVo" parameterType="String" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+		select * from RAIN_Products_tbl where prdNo = #{prdNo}
+	</select>
+	
+	
+
 	<!-- 공급처 시작 -->
 	<!--공급처 리스트   -->
 	<select id="supsList" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
@@ -90,7 +135,7 @@
 	        SELECT *
 			FROM RAIN_Suppliers_tbl
 			WHERE
-			supsNo = #{keyword} OR supsCo = #{keyword} OR supsCt = #{keyword}
+			supsNo = #{keyword} OR supsCo LIKE CONCAT('%', #{keyword}, '%') OR supsCt = #{keyword}
 			ORDER BY supsNo ASC;
 			
 	</select>

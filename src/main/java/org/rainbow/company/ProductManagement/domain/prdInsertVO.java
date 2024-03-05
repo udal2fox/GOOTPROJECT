@@ -4,20 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-/** 프로덕트 리스트 출력용 VO  */
-public class productListVO 
+public class prdInsertVO
 {
 	/** 상품코드 */
 	private String prdNo;
 	
 	/** 입점업체코드 */
 	private String supsNo; 
-	
-	/** 공급업체 상호명 */
-	private String supsCo;
 	
 	/** 표준유통코드 */
 	private String prdSdc;
@@ -35,31 +31,30 @@ public class productListVO
 	private String prdName;	
 	
 	/** 원가 */
-	private int	prdCstPri; 
+	private String prdCstPri; 
 	
 	/** 원가-공급액 */
-	private int	prdCstSup; 
+	private String	prdCstSup; 
 	
 	/** 원가-세액 */
-	private int	prdCstTax; 
+	private String	prdCstTax; 
 	
 	/** 판매가 */
-	private int	prdSal; 
+	private String	prdSal; 
 	
 	/** 판매가-공급액 */
-	private int	prdSalSup; 
+	private String	prdSalSup; 
 	
 	/** 판매가-세액 */
-	private int	prdSalTax; 
+	private String	prdSalTax; 
 	
 	/** 마진율 */
-	private double prdMargin; 
+	private String prdMargin; 
 	
 	/** 상태 */
 	private String prdSt;
 	
 	/** 이미지 */
 	private String prdImg;
-
-    
+	
 }

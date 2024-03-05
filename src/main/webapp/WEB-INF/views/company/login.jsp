@@ -37,7 +37,7 @@
 				<div>
 				
 					<!-- 로그인 버튼 -->
-					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인">
+					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인" onclick="location.href='moveSuppliers'">
 				</div>
 			</form>
 		</div>

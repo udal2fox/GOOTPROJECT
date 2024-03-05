@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ￬ﾆﾡ￭ﾘﾄ￬ﾄﾝ
+Built-By: shucr
 Build-Jdk: 11.0.14
 Created-By: Maven Integration for Eclipse
 

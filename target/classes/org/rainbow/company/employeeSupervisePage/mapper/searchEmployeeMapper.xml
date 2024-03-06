@@ -7,9 +7,20 @@
 	<!-- 전체 직원 리스트 -->
 	<select id="getList" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO">
 	
+<<<<<<< HEAD
     	SELECT e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.hireDt, e.endDt, e.idStatus
     	FROM RAIN_EMP_tbl e
     	JOIN RAIN_DEPT_tbl d ON e.deptNo = d.deptNo
+=======
+    	SELECT 
+    		e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.hireDt, e.endDt, e.idStatus
+    	FROM 
+    		RAIN_EMP_tbl e
+    	JOIN 
+    		RAIN_DEPT_tbl d 
+    	ON 
+    		e.deptNo = d.deptNo
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
     	ORDER BY e.eno DESC
     	
 	</select>
@@ -19,6 +30,7 @@
 		SELECT count(*) FROM RAIN_EMP_tbl
 	</select> 
 	
+<<<<<<< HEAD
 	<!-- 직원 정보 조회  -->
 	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.get_employeeDTO">
 		SELECT 
@@ -37,6 +49,33 @@
 		 <![CDATA[
         	INSERT INTO RAIN_EMP_tbl (eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt, deptNo)
         		VALUES (
+=======
+        	<!-- d.dName AS dName, -->
+	<!-- 직원 정보 조회  -->
+	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+			
+		SELECT 
+        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, 
+        	CONCAT(SUBSTRING(e.identyNum, 1, 2), '년 ', SUBSTRING(e.identyNum, 3, 2), '월 ', SUBSTRING(e.identyNum, 5, 2), '일') AS identyNum, 
+        	e.job, e.workType, e.sal, e.eAddr, e.eAddr2, e.eBank, e.salAccount, e.hireDt, e.endDt, e.idStatus
+    	FROM 
+        	RAIN_EMP_tbl e
+    	JOIN 
+        	RAIN_DEPT_tbl d 
+        ON 
+        	e.deptNo = d.deptNo
+    	WHERE 
+        	e.eno = #{eno}
+				
+	</select>
+	
+	<!-- 직원 정보 등록 -->
+	<insert id="insert" parameterType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+	
+        	INSERT INTO RAIN_EMP_tbl ( deptNo, eName, ePhone, job, sal, email, eAddr, eAddr2, identyNum, salAccount, workType, idStatus, eBank, hireDt, endDt)
+        		VALUES (
+        			#{deptNo},
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
             		#{eName}, 
             		#{ePhone}, 
             		#{job}, 
@@ -50,6 +89,7 @@
             		#{idStatus}, 
             		#{eBank}, 
             		NOW(),
+<<<<<<< HEAD
             		'',
             		CASE
                 		WHEN #{dName} = '인사' THEN 1
@@ -69,4 +109,25 @@
 
 	</insert>
 	
+=======
+            		#{endDt}	
+        	)
+   
+	</insert>
+	
+	<!-- 직원 정보 편집 -->
+	<update id="update" parameterType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
+			UPDATE RAIN_EMP_tbl 
+			SET 
+    			deptNo = #{deptNo}
+    			job = #{job}, 
+    			sal = #{sal}, 
+    			workType = #{workType}, 
+    			idStatus = #{idStatus}, 
+    			endDt = #{endDt}
+			WHERE
+    			eno = #{eno}
+	</update>
+	
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 </mapper>

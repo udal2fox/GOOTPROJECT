@@ -2,7 +2,11 @@ package org.rainbow.company.employeeSupervisePage.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+<<<<<<< HEAD
 import org.rainbow.company.employeeSupervisePage.domain.insert_employeeDTO;
+=======
+import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +35,7 @@ public class employeeSupervisePageController {
 	@PostMapping(value = "/employee_insert")
 	public String insert(HttpServletRequest request, RedirectAttributes rttr ) {
 		
+<<<<<<< HEAD
 		
 		  insert_employeeDTO dto = new insert_employeeDTO();
 		  
@@ -57,12 +62,64 @@ public class employeeSupervisePageController {
 		rttr.addFlashAttribute("result" , "success");
 		//RedirectAttributes rttr 
 		//redirect:
+=======
+		  rain_EmpVO vo = new rain_EmpVO();
+  
+		// dName 값을 받아옵니다.
+		  String dName = request.getParameter("dName");
+
+		// dName을 기반으로 deptNo를 결정합니다.
+		    int deptNo;
+		    switch (dName) {
+		        case "인사":
+		            deptNo = 1;
+		            break;
+		        case "재무":
+		            deptNo = 2;
+		            break;
+		        case "영업":
+		            deptNo = 3;
+		            break;
+		        case "상품":
+		            deptNo = 4;
+		            break;
+		        case "대표":
+		            deptNo = 0;
+		            break;
+		        default:
+		            // 기본값 설정 혹은 오류 처리
+		            deptNo = -1;
+		            break;
+		    }
+
+		  vo.setDeptNo(deptNo);
+		  vo.setEName(request.getParameter("eName"));
+		  vo.setEmail(request.getParameter("email"));
+		  vo.setJob(request.getParameter("job"));
+		  vo.setEAddr(request.getParameter("eAddr"));
+		  vo.setEAddr2(request.getParameter("eAddr2"));
+		  vo.setEPhone(request.getParameter("ePhone"));
+		  vo.setWorkType(request.getParameter("workType"));
+		  vo.setEBank(request.getParameter("eBank"));
+		  vo.setIdentyNum(request.getParameter("identyNum"));
+		  vo.setSal(Integer.parseInt(request.getParameter("sal")));
+		  vo.setSalAccount(request.getParameter("salAccount"));
+		  vo.setIdStatus(request.getParameter("idStatus"));
+		  		
+		log.info("insert..." + vo);
+		System.out.println("ssssss");
+		service.insert(vo);
+		
+		rttr.addFlashAttribute("result" , "success");
+		
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 		return "redirect:/searchEmployee";
 	}
 	
 	// 직원 정보 편집 페이지
 	@GetMapping("/employee_modify")
 	public String employee_modify(@RequestParam("eno") int eno, Model model) {
+<<<<<<< HEAD
 		
 			log.info("get..." + service.get(eno));
 			System.out.println(service.get(eno));
@@ -71,6 +128,56 @@ public class employeeSupervisePageController {
 			
 			return "/company/employeeSupervisePage/employee_modify";
 	}
+=======
+			log.info("get..." + service.get(eno));
+			
+			rain_EmpVO vo = service.get(eno);
+			
+			String dName = "";
+
+			switch (vo.getDeptNo()) {
+			    case 1:
+			        dName = "인사";
+			        break;
+			    case 2:
+			        dName = "재무";
+			        break;
+			    case 3:
+			        dName = "영업";
+			        break;
+			    case 4:
+			        dName = "상품";
+			        break;
+			    case 0:
+			        dName = "대표";
+			        break;
+			}
+
+			System.out.println(vo);
+			model.addAttribute("dName", dName);
+			model.addAttribute("vo", vo);
+			
+			return "/company/employeeSupervisePage/employee_modify";
+	}
+	
+	// 직원 정보 편집
+	@PostMapping(value = "/employee_modify")
+	public String update( rain_EmpVO vo, RedirectAttributes rttr ) {
+		
+		// '-' 값을 null로 변환
+	    if ("-".equals(vo.getEndDt())) {
+	        vo.setEndDt(null);
+	    }
+	
+		service.update(vo);
+		
+		log.info("update..." + vo);
+			
+		rttr.addFlashAttribute("result" , "success");
+		 
+		return "redirect:/searchEmployee";
+	}
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 		
 	// 프로필 편집 페이지
 	@GetMapping("/profile_modify")

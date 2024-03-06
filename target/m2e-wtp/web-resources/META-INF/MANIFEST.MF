@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: xroro
+=======
+Built-By: ￬ﾆﾡ￭ﾘﾄ￬ﾄﾝ
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 Build-Jdk: 11.0.14
 Created-By: Maven Integration for Eclipse
 

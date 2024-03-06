@@ -1,6 +1,9 @@
 package org.rainbow.company.ProductManagement.domain;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 
 import com.alibaba.excel.annotation.ExcelProperty;
 

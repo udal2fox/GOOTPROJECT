@@ -79,8 +79,11 @@ function download()
     });
 
 	
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
     // 서버로 데이터 전송
     fetch('/downloadExcel', {
         method: 'POST',

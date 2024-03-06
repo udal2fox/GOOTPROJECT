@@ -1,4 +1,6 @@
-		
+/**
+ * 
+ */
 	let cri = document.querySelector('.prdCri');
 	let sal = document.querySelector('.prdSal');
 	let cost = document.querySelectorAll('.cost');
@@ -27,11 +29,7 @@
 	        criSub.value = 0;
 	        salSub.value = 0;
 	      } else {
-<<<<<<< HEAD
-	        magin.value = (((salValue - criValue) / salValue) * 100).toFixed(2) + '%';
-=======
 	        magin.value = (((salValue - criValue) / salValue)).toFixed(2);
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 	        
 	        // 과세 여부에 따라 세액을 계산하거나 0으로 설정
 	        if (document.querySelector('#exampleRadios1').checked) {
@@ -48,7 +46,17 @@
 	    }
 	  });
 	});
-	
+
+
+
+
+
+
+
+
+
+
+
 	// 라디오버튼 이벤트 과세시 세율 활성 비과세시 비활성화 기능
 	document.querySelectorAll('[name="prdTaxExSt"]').forEach(function(radio) {
 	  radio.addEventListener('change', function() {
@@ -67,31 +75,11 @@
 	  });
 	});
 
-	
-	// 랜덤한 문자 + 숫자 생성
-	function randomCode(length) 
-	{
-		  const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
-		  let randomString = '';
-		  for (let i = 0; i < length; i++) 
-		  {
-		    const randomIndex = Math.floor(Math.random() * charset.length);
-		    randomString += charset[randomIndex];
-		  }
-		  return randomString;
-	}
-	document.querySelector('.randomPrdNo').value = randomCode(8);
-		
-	
-<<<<<<< HEAD
-	function supsReg(f)
-	{
-		if(aa)
-=======
+
+
 	function prdReg(f)
 	{
 		if(f.prdSdc.value == '' || f.prdName.value == '')
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 		{
 			alert("필수정보를 입력해주세요...");
 			return false;
@@ -110,8 +98,3 @@
 	{
 		window.history.go(-1); // 뒤로 한 페이지 이동
 	} 
-	
-	
-	
-	
-	

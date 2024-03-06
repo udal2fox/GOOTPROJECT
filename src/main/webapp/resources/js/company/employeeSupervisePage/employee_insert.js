@@ -33,6 +33,7 @@ function insert(f) {
 	if (!/^.{2,10}$/.test(f.eName.value)) {
 	    alert("이름은 최소 2글자에서 최대 10글자까지 입력해야 합니다.");
 	    return false;
+<<<<<<< HEAD
     } else if (f.dName.value != '인사' && f.dName.value != '재무' && f.dName.value != '영업' && f.dName.value != '상품') {
         alert("부서명이 올바르지 않습니다. 인사, 재무, 영업, 상품 중 하나를 입력하세요.");
         return false;
@@ -42,6 +43,11 @@ function insert(f) {
     } else if (f.job.value == '') {
         alert("직급을 입력하세요");
         return false;
+=======
+    } else if (!/^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])-(?:[1234]\d{6})$/.test(f.identyNum.value)) {
+        alert("올바른 주민등록번호 형식이 아닙니다.");
+        return false;
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
     } else if (!/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/.test(f.email.value)) {
         alert("이메일 양식이 올바르지 않습니다");
         return false;
@@ -57,4 +63,12 @@ function insert(f) {
 	return true;
 }
 
+<<<<<<< HEAD
 
+=======
+document.getElementById('searchIcon').addEventListener('click', function() {
+    // sample6_execDaumPostcode() 함수 실행
+    sample6_execDaumPostcode();
+	
+});
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03

@@ -13,7 +13,11 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
          <!-- log4jdbc --> 
          <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+<<<<<<< HEAD
          <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false" />
+=======
+      	 <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false&amp;abandonedConnectionCleanup=true&amp;removeAbandoned=true&amp;removeAbandonedTimeout=300"></property>
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
          <property name="username" value="root"></property>
          <property name="password" value="tiger"></property>
    </bean> 

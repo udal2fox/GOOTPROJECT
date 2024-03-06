@@ -5,6 +5,10 @@ import java.util.Map;
 
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
+<<<<<<< HEAD
+=======
+import org.rainbow.company.ProductManagement.domain.prdInsertVO;
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
@@ -28,8 +32,16 @@ public interface productPageService
 	/** 입점업체코드 가져오기 */
 	public List<prdInputVO> getsupsNumber();
 	
+<<<<<<< HEAD
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();
+=======
+	/** 상품 개별 등록 */
+	public int productInput(prdInsertVO pvo);
+	
+	/** 상품 수정 리스트 가져오기*/
+	public prdInputVO getprdVo(String prdNo);
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 	
 	//------------------ 공급처 ------------------------
 	

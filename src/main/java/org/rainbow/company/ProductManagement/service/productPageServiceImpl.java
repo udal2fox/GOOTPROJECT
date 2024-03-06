@@ -5,6 +5,10 @@ import java.util.Map;
 
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
+<<<<<<< HEAD
+=======
+import org.rainbow.company.ProductManagement.domain.prdInsertVO;
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
@@ -98,8 +102,18 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<prdInputVO> getSubCtg() {
 		return pMapper.getSubCtg();
+=======
+	public int productInput(prdInsertVO pvo) {
+		return pMapper.productInput(pvo);
+	}
+
+	@Override
+	public prdInputVO getprdVo(String prdNo) {
+		return pMapper.getprdVo(prdNo);
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 	}
 
 		

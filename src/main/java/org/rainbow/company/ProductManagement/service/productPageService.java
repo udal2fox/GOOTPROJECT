@@ -28,7 +28,6 @@ public interface productPageService
 	
 	/** 입점업체코드 가져오기 */
 	public List<prdInputVO> getsupsNumber();
-	
 
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();

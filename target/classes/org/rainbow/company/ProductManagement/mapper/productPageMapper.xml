@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.rainbow.company.ProductManagement.mapper.productPageMapper">
+	
+	<!-- productList   -->
+	<select id="prdList" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
+	
+	        SELECT *
+			    FROM RAIN_Suppliers_tbl s, RAIN_Products_tbl p
+			    where  p.supsNo = s.supsNo
+			    order by p.prdNo asc
+		
+	</select>
+	
+	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.ProductManagement.domain.productListVO">
+	      
+	        SELECT *
+			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+			WHERE p.supsNo = s.supsNo
+			AND (prdNo = #{keyword} OR prdMajorCtg = #{keyword} OR prdSubCtg LIKE CONCAT('%', #{keyword}, '%') OR prdName LIKE CONCAT('%', #{keyword}, '%'))
+			ORDER BY prdNo ASC;
+			
+	</select>
+	
+	
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id= "insertPrdExcel" parameterType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+		insert into RAIN_Products_tbl values
+		(
+			#{prdNo}, #{supsNo}, #{prdSdc} ,#{prdTaxExSt},
+			#{prdMajorCtg} ,#{prdSubCtg} ,#{prdName} ,#{prdCstPri},	
+			#{prdCstSup}, #{prdCstTax}, #{prdSal}, #{prdSalSup} ,#{prdSalTax}, 
+			#{prdMargin}, #{prdSt}, #{prdImg}
+		)
+	</insert>
+	
+	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
+	<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
+	        SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+		    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+		    WHERE s.supsNo = p.supsNo
+		    AND p.prdMajorCtg IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	    AND p.prdSt IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</select>
+	<!--  
+		foreach 마이바티스 반복
+		item 변수 이름
+		collection="ex)checkValues" 반복할 리스트 지정
+		open="(" separator="," close=")" 시작 , 구분자 , 끝 부분 지정
+		지금 쿼리 같은경우 
+		<foreach item="item" collection="checkValues"> 이런식으로
+		기본값을 넣어도 동작하는데 문제없는것 같다. // x 다써줘야 된다.
+		
+		SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
+		FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+		WHERE s.supsNo = p.supsNo
+		AND p.prdMajorCtg IN ('value1', 'value2', 'value3')
+		AND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 
+	-->
+	<!-- supsNo 가졍오기  -->
+	<select id="getsupsNumber" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+		select DISTINCT supsNo from RAIN_Suppliers_tbl
+		order by supsNo asc
+	</select>
+		
+	<!-- prdSubCtg 가져오기  -->
+	<select id="getSubCtg" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+		select DISTINCT prdSubCtg from RAIN_Products_tbl
+	</select>
+
+	
+	<!-- 공급처 시작 -->
+	<!--공급처 리스트   -->
+	<select id="supsList" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+				SELECT *
+			    FROM RAIN_Suppliers_tbl
+			    order by supsNo asc
+	</select>
+	<!-- 공급처 리스트 검색  -->
+	<select id="supsSearch"  resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+	      
+	        SELECT *
+			FROM RAIN_Suppliers_tbl
+			WHERE
+			supsNo = #{keyword} OR supsCo = #{keyword} OR supsCt = #{keyword}
+			ORDER BY supsNo ASC;
+			
+	</select>
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id="insertSupsExcel" parameterType="java.util.Map">
+	    insert into RAIN_Suppliers_tbl
+	    (supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsBizLic, supsCoEmail, supsCt, supsSt, supsName, supsPhone, supsEmail, supsSubName, supsSubPhone, supsSubEmail)
+	    values
+	    (
+	        #{supsNo}, #{supsCo}, #{supsBnt}, #{supsBizRegNum},
+	        #{supsAddr}, #{supsBizLic}, #{supsCoEmail}, #{supsCt},
+	        #{supsSt}, #{supsName}, #{supsPhone}, #{supsEmail},
+	        <if test="supsSubName != null">
+	            #{supsSubName},
+	            #{supsSubPhone},
+	            #{supsSubEmail}
+	        </if>
+	        <if test="supsSubName == null">
+	            '', '', ''
+	        </if>
+	    )
+	</insert>
+	
+	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
+	<select id="supsExcelDown" resultType="org.rainbow.company.ProductManagement.domain.supsDownVO">
+	        SELECT supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsCt, supsCoEmail, supsSt
+		    FROM  RAIN_Suppliers_tbl
+		    WHERE 
+		    supsBnt IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	   		AND supsSt IN
+	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	        #{item}
+	    </foreach>
+	</select>
+
+
+	<!-- 공급처 등록수 카운팅  -->	
+	<select id="supsNoCount" resultType="int">
+		SELECT count(*) from RAIN_Suppliers_tbl;
+	</select>
+	
+	<!-- 공급처 등록 reg  -->
+	<insert id="insertSups" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+	    insert into RAIN_Suppliers_tbl
+	    (supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsBizLic, supsCoEmail, supsCt, supsSt, supsName, supsPhone, supsEmail, supsSubName, supsSubPhone, supsSubEmail)
+	    values
+	    (
+	        #{supsNo}, #{supsCo}, #{supsBnt}, #{supsBizRegNum},
+	        #{supsAddr}, #{supsBizLic}, #{supsCoEmail}, #{supsCt},
+	        #{supsSt}, #{supsName}, #{supsPhone}, #{supsEmail},
+	        <if test="supsSubName != null">
+	            #{supsSubName},
+	            #{supsSubPhone},
+	            #{supsSubEmail}
+	        </if>
+	        <if test="supsSubName == null">
+	            '', '', ''
+	        </if>
+	    )
+	</insert>
+	
+	<!-- 공급처 수정 기존정보 가져오기 -->
+	<select id="getSupsVO" parameterType="String" resultType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+		select * from RAIN_Suppliers_tbl where supsNo = #{supsNo}  
+	</select>	
+	
+	<!--공급처 수정 -->
+	<update id="supsUpdate" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+    update RAIN_Suppliers_tbl
+    set supsCo = #{supsCo}, 
+        supsAddr = #{supsAddr}, 
+        supsBnt = #{supsBnt}, 
+        supsBizRegNum = #{supsBizRegNum}, 
+        supsBizLic = #{supsBizLic},
+        supsCoEmail = #{supsCoEmail}, 
+        supsCt = #{supsCt},
+        supsName = #{supsName}, 
+        supsPhone = #{supsPhone}, 
+        supsEmail = #{supsEmail}, 
+        supsSt = #{supsSt},
+        supsSubName = #{supsSubName}, 
+        supsSubPhone = #{supsSubPhone}, 
+        supsSubEmail = #{supsSubEmail}
+    where supsNo = #{supsNo}
+</update>
+
+	
+	
+	<!--공급처 삭제 -->
+	<delete id="supsDelete" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
+		delete from RAIN_Suppliers_tbl where supsNo = #{supsNo}
+	</delete>
+	
+	
+</mapper>

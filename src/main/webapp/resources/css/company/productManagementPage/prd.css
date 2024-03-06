@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.h2st{
+	width: 1500px; padding-top: 30px;
+}
+
+.prdinputTable
+{
+	background: #eaeaea;
+	border-spacing: 15px 30px;
+	border-collapse: separate;
+	width: 1500px;
+}
+
+.prdRegBtn
+{
+	text-align: right; width: 1500px; padding-top: 20px;
+}

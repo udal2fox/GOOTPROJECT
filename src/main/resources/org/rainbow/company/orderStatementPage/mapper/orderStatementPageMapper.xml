@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.rainbow.company.orderStatementPage.mapper.orderStatementPageMapper">
+
+    <!-- 계산서 발행 페이지 - 내역 조회 -->
+	<select id="ordStatlist" resultType="org.rainbow.company.orderStatementPage.domain.testVO">        
+        
+        SELECT a.recDate, a.spotNo, c.cName, c.cBizType, b.sName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recIssStat
+        FROM RAIN_receipt_tbl a
+        JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+        ORDER BY a.recDate
+        
+    </select>
+</mapper>

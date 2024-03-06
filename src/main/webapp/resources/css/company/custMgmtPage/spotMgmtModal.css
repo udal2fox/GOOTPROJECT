@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+#empList_modal {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+#empInpo_modal{
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
+#managerInpo_modal{
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
+
+/** 모달창 시작*/
+
+
+.modal {
+
+
+   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
+.modal-content {
+  box-sizing: border-box;
+  background-color: #fefefe;
+
+  border: 1px solid #888;
+   width: 100%;
+   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  	
+ 
+}
+
+.modal-top {
+	
+	 box-sizing: border-box;
+	  padding-top:10px;
+	  width: 100%;
+}
+
+.modal-footer {
+	
+	 box-sizing: border-box;
+	 width: 100%;
+	 
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+}
+
+
+
+
+/** 게시글 목록 div*/
+.list_div_modal {
+	
+	box-sizing: border-box;
+	border : 5px solid #EEEEEE;
+	width:100%;
+
+}
+
+.list_div_tbl_modal {
+	 
+	border : 5px solid white;
+	table-layout: auto;
+	table-layout: fixed;
+	width:100%;
+}
+
+.list_div_tbl_modal tr th {
+
+	font-size: 13px;
+	text-align: center;
+}
+
+.list_div_tbl_modal td{
+	text-align: center;
+	
+}
+
+/** 게시글 목록 상단 바*/
+.top_bar_of_list_modal {
+	border : 5px solid white;
+	
+	background-color:#EEEEEE;
+	font-size: 13px;
+	font-weight : bolder;
+
+}
+
+
+
+
+input[type="text"], 
+input[type="date"],
+input[type="number"],
+input[type="email"],
+select,
+textarea
+ {
+	border: none;
+	width:100%;
+	
+}

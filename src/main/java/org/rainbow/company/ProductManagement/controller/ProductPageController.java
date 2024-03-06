@@ -222,28 +222,49 @@ public class ProductPageController
     }
     
     /** 상품 개별수정*/
-    @PostMapping("/prdUpdate")
-    public String prdUpdate(suppliersVO svo , Model model)
+    @PostMapping("/prdUpdate.do")
+    public String prdUpdate(prdInsertVO pvo , Model model)
     {
-    	log.info(svo);
-    	System.out.println(svo.getSupsSt());
-    	System.out.println(svo.getSupsBnt());
-    	pService.supsUpdate(svo);
+    	log.info(pvo);
     	
-    	return "redirect:/moveProductPage";
-
+    	int prdUpdateResult = pService.prdUpdate(pvo); 
+    	
+    	String result = "";
+    	if(prdUpdateResult >= 1 )
+    	{
+    		result = "prdUpdateSuccess";
+    	}
+    	else
+    	{
+    		result = "prdUpdatefail";
+    	}
+    	
+    	model.addAttribute("prdUpdateResult", result);
+    	
+    	return "/company/productManagement/prdResult";
     }
     
     /** 상품 개별삭제*/
-    @PostMapping("/prdDelete")
-    public String prdDelete(suppliersVO svo , Model model)
+    @PostMapping("/prdDelete.do")
+    public String prdDelete(prdInsertVO pvo , Model model)
     {
-    	log.info(svo);
-
-    	pService.supsDelete(svo);
+    	log.info(pvo);
     	
-    	return "redirect:/moveProductPage";
-
+    	int prdDelResult = pService.prdDelete(pvo);
+    	
+    	String result = "";
+    	if(prdDelResult >= 1 )
+    	{
+    		result = "prdDelSuccess";
+    	}
+    	else
+    	{
+    		result = "prdDelfail";
+    	}
+    	
+    	model.addAttribute("prdDelResult", result);
+    	
+    	return "/company/productManagement/prdResult";
     }
     
     

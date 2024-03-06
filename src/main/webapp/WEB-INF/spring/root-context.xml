@@ -13,7 +13,7 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
          <!-- log4jdbc --> 
          <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-      	 <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false&amp;abandonedConnectionCleanup=true&amp;removeAbandoned=true&amp;removeAbandonedTimeout=300"></property>
+    	 <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false"/>
          <property name="username" value="root"></property>
          <property name="password" value="tiger"></property>
    </bean> 
@@ -31,28 +31,29 @@
 
 	<!-- @Autowired 사용할 매퍼 서비스 꼭등록할것!! -->
 
-
-
-
 	<!-- 사원 테이블 mapper OR service -->
 	<mybatis-spring:scan
 		base-package="org.rainbow.company.employeeSupervisePage.mapper" />
 	<context:component-scan
 		base-package="org.rainbow.company.employeeSupervisePage.service" />
 
-
-
-	<!-- 상품관리 mapper OR service -->
+	<!-- 상품관리  mapper OR service -->
 	<mybatis-spring:scan
 		base-package="org.rainbow.company.ProductManagement.mapper" />
 	<context:component-scan
 		base-package="org.rainbow.company.ProductManagement.service" />
 		
-		<!-- 계산서발행 -->
+	<!-- 정산관리 mapper OR service  -->
 	<mybatis-spring:scan
-		base-package="org.rainbow.company.orderStatementPage.mapper" />
+		base-package="org.rainbow.company.calculateManagement.mapper" />
 	<context:component-scan
-		base-package="org.rainbow.company.orderStatementPage.service" />	
+		base-package="org.rainbow.company.calculateManagement.service" />	
+		
+	<!-- 매출관리 mapper OR service  -->
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.salesManagement.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.salesManagement.service" />	
 		
 	<!-- @Autowired 사용할 매퍼 서비스 신정우 -->
 	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>
@@ -63,8 +64,6 @@
 			base-package="org.rainbow.userAdminPage.mapper"/>
 	<context:component-scan
 			base-package="org.rainbow.userAdminPage.service"/>
-
-
 
 	<!-- 트랜젝션 및 aop 관련 항목들 -->
 	<bean id="transactionManager"

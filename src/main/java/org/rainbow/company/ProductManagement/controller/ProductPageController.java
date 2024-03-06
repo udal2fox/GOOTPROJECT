@@ -25,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +44,16 @@ public class ProductPageController
 	
 	// 상품 조회 리스트 이동
     @GetMapping(value = "/moveProductPage")
+    public String moveProductMangerPage(Model model, Criteria cri) 
+    {
+    	log.info("list...");
+		if(cri.getPageNum() == 0 && cri.getAmount() == 0)
+		{
+			cri.setPageNum(1);
+			cri.setAmount(10);
+		}
+		return null;
+    }	
     public String moveProductMangerPage(Model model) 
     {
 	    List<productListVO> list = pService.prdList();
@@ -95,6 +104,11 @@ public class ProductPageController
     public String moveProductReg(Model model) 
     {
     	List<prdInputVO> codes = pService.getsupsNumber();
+    	List<prdInputVO> items = pService.getSubCtg();
+    	
+    	model.addAttribute("codes", codes);
+    	model.addAttribute("items", items);
+    	
     	
     	model.addAttribute("codes", codes);
     	
@@ -191,6 +205,8 @@ public class ProductPageController
     	
     	checkValue.put("checkValues", checkValues);
     	
+    	System.out.println(checkValue);
+    	 
     	List<prdDownVO> downlist = pService.downExcelList(checkValue);
     	System.out.println(downlist);
     	

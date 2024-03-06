@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-/** 프로덕트 리스트 출력용 VO  */
+/** 프로젝트 리스트 출력용 VO  */
 public class productListVO 
 {
 	/** 상품코드 */

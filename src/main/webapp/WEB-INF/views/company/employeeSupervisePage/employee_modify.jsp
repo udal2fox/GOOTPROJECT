@@ -9,13 +9,20 @@
 			<h4>임직원 편집</h4>
 		</div>
 			<div id="insert-form-box">
+<<<<<<< HEAD
+				<form action="" method="POST">
+=======
 				<form method="POST">
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 					<div id="table1">
 						<table id="top-table">
 							<tr>
 								<th> 이름 </th>
 								<td><input class="input1" type="text" name="eName" value="${vo.EName}" readonly></td>
 								<th> 부서 </th>
+<<<<<<< HEAD
+								<td><input class="input2" type="text" name="dName" value="${vo.DName}"></td>
+=======
 								<td>
 									<select id="dName-select" name="deptNo">
     									<option value="1" ${dName.equals("인사") ? "selected" : ""}>인사</option>
@@ -26,6 +33,7 @@
 									</select>
 								<%-- <input class="input2" type="text" name="dName" value="${dName}"> --%>
 								</td>
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 								<th> 상세주소 </th>
 								<td>
 									<div style="position: relative;">
@@ -37,6 +45,11 @@
 								<th> 이메일 주소 </th>
 								<td><input class="input1" type="text" name="email" value="${vo.email }" readonly></td>
 								<th> 직급 </th>
+<<<<<<< HEAD
+								<td><input class="input2" type="text" name="job" value="${vo.job }"></td>
+								<th></th>
+								<td><input class="input4" type="text" name="eAddr2" value="${vo.EAddr2 }"></td>
+=======
 								<td>
 								 	<select id="job-select" name="job">
     									<option value="팀장" ${vo.job == '팀장' ? 'selected' : ''}>팀장</option>
@@ -49,11 +62,15 @@
 								</td>
 								<th></th>
 								<td><input class="input4" type="text" name="eAddr2" value="${vo.EAddr2 }" readonly></td>
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 							</tr>
 							<tr>
 								<th> 전화번호 </th>
 								<td><input class="input1" type="text" name="ePhone" value="${vo.EPhone }" readonly></td>
 								<th> 근무형태 </th>
+<<<<<<< HEAD
+								<td><input class="input2" type="text" name="workType" value="${vo.workType }"></td>
+=======
 								<td>
 									<select id="workType-select" name="workType">
     									<option value="정규직" ${vo.workType == '정규직' ? 'selected' : ''}>정규직</option>
@@ -62,6 +79,7 @@
 								
 								<%-- <input class="input2" type="text" name="workType" value="${vo.workType }"> --%>
 								</td>
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 								<th> 급여계좌 </th>
 								<td><input class="input3" type="text" name="ebank" value="${vo.EBank }" readonly></td>
 							</tr>
@@ -88,12 +106,20 @@
 						</tr>
 					</table>
 				</div>
+<<<<<<< HEAD
+					<div class="button-container">
+						<input id="saveBtn" type="button" name="save" value="저장">
+						<input id="closeBtn" type="button" name="close" value="닫기">
+					</div>
+				</form>
+=======
 				<%-- <input type="hidden" name="eno" value="${vo.eno }"> --%>
 			</form>
 				<div class="button-container">
 					<input id="saveBtn" type="button" name="save" value="저장">
 					<input id="closeBtn" type="button" name="close" value="닫기">
 				</div>
+>>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 			</div>
 	
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_modify.js"></script>

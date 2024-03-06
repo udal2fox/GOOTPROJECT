@@ -10,7 +10,6 @@ import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
-import org.rainbow.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -99,6 +98,10 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
+	public List<prdInputVO> getSubCtg() {
+		return pMapper.getSubCtg();
+	}	
+	
 	public int productInput(prdInsertVO pvo) {
 		return pMapper.productInput(pvo);
 	}

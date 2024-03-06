@@ -18,9 +18,7 @@ public class orderStatementPageVO {
 	
 	private double recSum, recSup, recTax;
 	
-	private String cName, sName, cBizType, recPayMth;
-	
-	private boolean recPayStat;
+	private String cName, sName, cBizType, recPayMth, recPayStat;
 	
 }
 

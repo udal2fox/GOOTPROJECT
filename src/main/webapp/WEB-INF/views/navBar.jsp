@@ -176,7 +176,7 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/settlementManagePage">거래명세</a></li>
+                            <li class="category"><a class="category-link" href="/orderStatementPage">거래명세</a></li>
                             <li class="category"><a class="category-link" href="/unrecoveredManagement">미수관리</a></li>
                             <li class="category"><a class="category-link" href="/orderReceiptPage">계산서발행</a></li>
                         </ul>

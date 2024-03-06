@@ -19,6 +19,7 @@ document.querySelectorAll('input[type="button"]').forEach( btn => {
 		
 		if( type === 'closeBtn') close();
 		else if ( type === 'saveBtn'){
+			
 			update(f);
 		}
 	})

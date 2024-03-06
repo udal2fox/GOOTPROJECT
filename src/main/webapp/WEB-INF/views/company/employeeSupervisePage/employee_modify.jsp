@@ -88,7 +88,6 @@
 						</tr>
 					</table>
 				</div>
-				<%-- <input type="hidden" name="eno" value="${vo.eno }"> --%>
 			</form>
 				<div class="button-container">
 					<input id="saveBtn" type="button" name="save" value="저장">

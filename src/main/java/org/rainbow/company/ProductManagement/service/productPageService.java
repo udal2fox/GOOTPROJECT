@@ -28,7 +28,10 @@ public interface productPageService
 	
 	/** 입점업체코드 가져오기 */
 	public List<prdInputVO> getsupsNumber();
-	
+
+	/** 소분류 가져오기 */
+	public List<prdInputVO> getSubCtg();
+
 	/** 상품 개별 등록 */
 	public int productInput(prdInsertVO pvo);
 	
@@ -59,10 +62,10 @@ public interface productPageService
 	public suppliersVO getSupsVO(String supsNo);
 	
 	/** 공급처 수정 */
-	public void supsUpdate(suppliersVO vo);
+	public int supsUpdate(suppliersVO vo);
 	
 	/** 공급처 삭제*/
-	public void supsDelete(suppliersVO vo);
+	public int supsDelete(suppliersVO vo);
 	
 	
 	

@@ -62,7 +62,6 @@
 										<option value="정규직">정규직</option>
 										<option value="비정규직">비정규직</option>
 									</select>
-								</td>
 								<th> 급여계좌 </th>
 								<td>
 									<select id="bank-select" name="eBank">
@@ -104,7 +103,7 @@
 				<input id="closeBtn" type="button" name="close" value="닫기">
 			</div>
 	</div>
-
+	
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_insert.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -156,5 +155,6 @@
         }).open();
     }
 </script>
+
 </body>
 </html>

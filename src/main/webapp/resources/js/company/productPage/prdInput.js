@@ -27,6 +27,7 @@
 	        criSub.value = 0;
 	        salSub.value = 0;
 	      } else {
+
 	        magin.value = (((salValue - criValue) / salValue)).toFixed(2);
 	        
 	        // 과세 여부에 따라 세액을 계산하거나 0으로 설정
@@ -78,6 +79,7 @@
 	}
 	document.querySelector('.randomPrdNo').value = randomCode(8);
 		
+	
 	
 	function prdReg(f)
 	{

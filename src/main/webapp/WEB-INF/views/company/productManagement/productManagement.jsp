@@ -132,7 +132,7 @@
     </div>
     <!--페이지 부분제거후 js 로 그릴예정 -->
     <!-- page -->
-    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
+    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">	
     <ul class="page-nation">
         <!-- 페이지네이션은 이곳에 동적으로 생성 -->
         

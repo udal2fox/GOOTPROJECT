@@ -13,10 +13,10 @@
 	<div class="container-fluid" align="center">
 		<h2 class="h2st">상품 관리</h2>
 		<div>
-			<form action="/prdReg.do" method="post">
+			<form action="" method="post">
 				<table class="prdinputTable">
 					<tr>
-						<td>상품코드</td><td colspan="3"><input type="text" class="form-control randomPrdNo" name="prdNo" readonly value="${pvo.prdNo }"></td>
+						<td>상품코드</td><td colspan="3"><input type="text" class="form-control-plaintext randomPrdNo" name="prdNo" readonly value="${pvo.prdNo }"></td>
 					    <td></td>
 					    <td>원가</td><td colspan="3"><input type="text" class="form-control cost prdCri" placeholder="필수값" value="${pvo.prdCstPri}" name="prdCstPri"></td>
 					</tr>
@@ -42,7 +42,7 @@
 							</select>
 					    </td>
 					    <td></td>
-					    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly disabled="disabled" name="prdCstTax" value="${pvo.prdCstTax}" ></td>
+					    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly name="prdCstTax" value="${pvo.prdCstTax}" ></td>
 					</tr>
 					<tr>
 						<td>상품명</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값" name="prdName" value="${pvo.prdName}"></td>
@@ -57,7 +57,7 @@
 						  	<label class="form-check-label" for="exampleRadios1">과세</label>
 						</td> 	
 						<td>
-  							<input class="form-check-input" type="radio" name="prdTaxExSt" id="exampleRadios1" value="X"
+  							<input class="form-check-input taxX" type="radio" name="prdTaxExSt" id="exampleRadios1" value="X"
   							<c:if test="${pvo.prdTaxExSt eq 'X' }"> checked="checked" </c:if>>
 						  	<label class="form-check-label" for="exampleRadios1">비과세</label>
 						</td>
@@ -74,7 +74,7 @@
 						    </select>
 						</td>
 					    <td></td>
-					    <td>판매가-세액</td><td colspan="3"><input type="text" class="form-control tax saltax" readonly disabled="disabled" name="prdSalTax" value="${pvo.prdSalTax}"></td>
+					    <td>판매가-세액</td><td colspan="3"><input type="text" class="form-control tax saltax" readonly name="prdSalTax" value="${pvo.prdSalTax}"></td>
 					</tr>
 					<tr>
 						<td>소분류</td>
@@ -85,7 +85,7 @@
 					    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="${pvo.prdMargin}" name="prdMargin"></td>
 					</tr>
 					<tr>
-						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="prdImg"></td>
+						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="prdImg" value="${pvo.prdImg }"></td>
 						<td>상품상태</td>
 						<td>
   							<input class="form-check-input" type="radio" name="prdSt" id="exampleRadios1" value="판매중"
@@ -105,8 +105,8 @@
 					</tr>
 				</table>
 				<div class="prdRegBtn">
-					<button type="button" class="btn btn-primary" onclick="prdReg(this.form);">등록</button>
-					<button type="button" class="btn btn-secondary">삭제</button>
+					<button type="button" class="btn btn-primary" onclick="prdUpdate(this.form);">수정</button>
+					<button type="button" class="btn btn-secondary" onclick="prdDelte(this.form);">삭제</button>
 					<button type="button" class="btn btn-primary" onclick="backPage();">취소</button>
 				</div>
 			</form>		

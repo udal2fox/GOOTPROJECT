@@ -17,8 +17,8 @@ function fetchSearchResults(keyword) {
             let msg = '';
             list.forEach(list => {
                 msg += '<tr class="product" data-type="'+list.prdMajorCtg+'" data-status="'+list.prdSt+'">'+
-                            '<td><a href="moveSuppliersUpdate">'+list.supsCo+'</a></td>'+
-                            '<td><a href="moveProductUpdate">'+list.prdNo+'</a></td>'+
+                            '<td><a href="moveSuppliersUpdate?supsNo='+list.supsNo+'">'+list.supsCo+'</a></td>'+
+                            '<td><a href="moveProductUpdate?prdNo='+list.prdNo+'">'+list.prdNo+'</a></td>'+
                             '<td>'+list.prdSdc+'</td>'+
                             '<td>'+list.prdMajorCtg+'</td>'+
                             '<td>'+list.prdSubCtg+'</td>'+

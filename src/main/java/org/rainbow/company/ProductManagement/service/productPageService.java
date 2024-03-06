@@ -38,6 +38,12 @@ public interface productPageService
 	/** 상품 수정 리스트 가져오기*/
 	public prdInputVO getprdVo(String prdNo);
 	
+	/** 상품 수정 */
+	public int prdUpdate(prdInsertVO pvo);
+	
+	/** 상품 삭제*/
+	public int prdDelete(prdInsertVO pvo);
+	
 	//------------------ 공급처 ------------------------
 	
 	/** 공급처 리스트 조회 */ 

@@ -115,10 +115,53 @@
 	   
 	</insert>
 	
-	<!--  -->
+	<!-- 수정창 이동시 vo 가져가기  -->
 	<select id="getprdVo" parameterType="String" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
 		select * from RAIN_Products_tbl where prdNo = #{prdNo}
 	</select>
+	
+	<!-- 상품 수정  -->
+	<update id="prdUpdate">
+		 update RAIN_Products_tbl
+		    set supsNo = #{supsNo}, 
+		        prdSdc = #{prdSdc}, 
+		        prdTaxExSt = #{prdTaxExSt}, 
+		        prdMajorCtg = #{prdMajorCtg}, 
+		        prdSubCtg = #{prdSubCtg},
+		        prdName = #{prdName}, 
+		        prdCstPri = #{prdCstPri},
+		        prdCstSup = #{prdCstSup}, 
+		    <if test="prdCstTax != null">  
+		        prdCstTax = #{prdCstTax}, 
+		    </if>    
+		    <if test="prdCstTax == null">  
+		        prdCstTax = 0,
+		    </if>    
+		        prdSal = #{prdSal}, 
+		        prdSalSup = #{prdSalSup},
+		       
+		     <if test="prdSalTax != null">  
+		        prdSalTax = #{prdSalTax},
+		    </if>    
+		    <if test="prdSalTax == null">  
+		        prdSalTax = 0,
+		    </if>       
+		        prdMargin = #{prdMargin}, 
+		        prdSt = #{prdSt},
+		    <if test="prdImg != null">  
+		        prdImg = #{prdImg}
+		    </if>    
+		    <if test="prdImg == null">  
+		        prdSalTax = ''
+		    </if>     
+		        
+	    where prdNo = #{prdNo}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id="prdDelete">
+		delete from RAIN_Products_tbl where prdNo = #{prdNo}
+	</delete>
 	
 	
 

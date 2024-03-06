@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
-
+<link rel="shortcut icon" href="#">
 </head>
 <body>
 	<div class="navBar">
@@ -177,8 +177,8 @@
 
 </div>
 </div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesSearch.js"></script>
 
 </body>
 </html>

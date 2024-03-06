@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.rainbow.company.ProductManagement.domain.prdDownVO;
 import org.rainbow.company.ProductManagement.domain.prdInputVO;
+import org.rainbow.company.ProductManagement.domain.prdInsertVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
@@ -27,9 +28,15 @@ public interface productPageService
 	
 	/** 입점업체코드 가져오기 */
 	public List<prdInputVO> getsupsNumber();
-	
+
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();
+
+	/** 상품 개별 등록 */
+	public int productInput(prdInsertVO pvo);
+	
+	/** 상품 수정 리스트 가져오기*/
+	public prdInputVO getprdVo(String prdNo);
 	
 	//------------------ 공급처 ------------------------
 	
@@ -55,10 +62,10 @@ public interface productPageService
 	public suppliersVO getSupsVO(String supsNo);
 	
 	/** 공급처 수정 */
-	public void supsUpdate(suppliersVO vo);
+	public int supsUpdate(suppliersVO vo);
 	
 	/** 공급처 삭제*/
-	public void supsDelete(suppliersVO vo);
+	public int supsDelete(suppliersVO vo);
 	
 	
 	

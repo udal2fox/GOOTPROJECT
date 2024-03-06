@@ -42,6 +42,9 @@ function insert(f) {
     } else if (f.job.value == '') {
         alert("직급을 입력하세요");
         return false;
+    } else if (!/^\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])-(?:[1234]\d{6})$/.test(f.identyNum.value)) {
+        alert("올바른 주민등록번호 형식이 아닙니다.");
+        return false;
     } else if (!/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/.test(f.email.value)) {
         alert("이메일 양식이 올바르지 않습니다");
         return false;
@@ -57,4 +60,8 @@ function insert(f) {
 	return true;
 }
 
-
+document.getElementById('searchIcon').addEventListener('click', function() {
+    // sample6_execDaumPostcode() 함수 실행
+    sample6_execDaumPostcode();
+	
+});

@@ -1,1 +1,2 @@
-if(sessionStorage.getItem('userInfo') == null){location.href = "/userAdminPage/userLogin"}
+const spotNo = document.querySelector("#userEdit").getAttribute('href');
+sessionStorage.setItem("no",spotNo);

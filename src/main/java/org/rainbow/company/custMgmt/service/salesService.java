@@ -7,6 +7,12 @@ import org.rainbow.company.custMgmt.domain.cshVO;
 
 
 public interface salesService {
+	
+	/** 서치바-키워드 검색*/
+	public List<consultVO> getSearch(String keyword);
+	
+	
+
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
 	public List<consultVO> salesList();

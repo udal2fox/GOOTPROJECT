@@ -7,7 +7,7 @@ import org.rainbow.company.custMgmt.domain.cshVO;
 import org.rainbow.company.custMgmt.mapper.salesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import lombok.extern.log4j.Log4j;
 
@@ -17,6 +17,14 @@ public class salesServiceImpl implements salesService {
 
 	@Autowired
 	private salesMapper salesMapper;
+	
+	@Override
+	public List<consultVO> getSearch(String keyword) {
+		
+		return salesMapper.getSearch(keyword);
+	}
+	
+
 
 	@Override
 	public List<consultVO> salesList() {

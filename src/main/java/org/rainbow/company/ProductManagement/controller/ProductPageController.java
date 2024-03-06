@@ -108,6 +108,7 @@ public class ProductPageController
     	prdInputVO pvo = pService.getprdVo(prdNo);
     	
     	model.addAttribute("pvo", pvo);
+    	log.info(pvo);
     	model.addAttribute("codes", codes);
     	
     	return "/company/productManagement/productUpdate";

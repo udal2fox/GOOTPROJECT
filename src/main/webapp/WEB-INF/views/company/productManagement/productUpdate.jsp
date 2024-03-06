@@ -47,7 +47,7 @@
 						<tr>
 							<td>상품명</td><td colspan="3"><input type="text" class="form-control" placeholder="필수값" name="prdName" value="${pvo.prdName}"></td>
 						    <td></td>
-						    <td>판매가</td><td colspan="3"><input type="text" class="form-control cost prdSal" placeholder="필수값" value="0" name="prdSal" value="${pvo.prdSal}"></td>
+						    <td>판매가</td><td colspan="3"><input type="text" class="form-control cost prdSal" placeholder="필수값" name="prdSal" value="${pvo.prdSal}"></td>
 						</tr>
 						<tr>	
 							<td>비과세여부</td>
@@ -63,7 +63,7 @@
 							</td>
 							<td></td>	
 							<td></td>
-							<td>판매가 공급액</td><td colspan="3"><input type="text" class="form-control salSub" readonly name="prdSalSup" value="${pvo.prdSalSup}"></td> 
+							<td>판매가 공급액</td><td colspan="3"><input type="text" class="form-control salSub" readonly name="prdSalSup" value="${pvo.getPrdSalSup()}"></td> 
 						</tr>
 						<tr>
 							<td>대분류</td>
@@ -113,6 +113,6 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" src="/resources/js/company/productPage/prdUpdate.js"></script> 
+	<!-- <script type="text/javascript" src="/resources/js/company/productPage/prdUpdate.js"></script>  -->
 	
 	</html>

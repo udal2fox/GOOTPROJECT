@@ -32,7 +32,7 @@ public class employeeSupervisePageController {
 	public String insert(HttpServletRequest request, RedirectAttributes rttr ) {
 		
 		  rain_EmpVO vo = new rain_EmpVO();
-  
+		  
 		// dName 값을 받아옵니다.
 		  String dName = request.getParameter("dName");
 
@@ -122,9 +122,9 @@ public class employeeSupervisePageController {
 	public String update( rain_EmpVO vo, RedirectAttributes rttr ) {
 		
 		// '-' 값을 null로 변환
-	    if ("-".equals(vo.getEndDt())) {
-	        vo.setEndDt(null);
-	    }
+//	    if ("-".equals(vo.getEndDt())) {
+//	        vo.setEndDt(null);
+//	    }
 	
 		service.update(vo);
 		

@@ -101,8 +101,6 @@
 		margin-left: 40px;
 		margin-right: 20px;
 	}
-<<<<<<< HEAD
-=======
 	#workType-select, #job-select,#dName-select{
 	 	width : 180px;
 		height : 32px;
@@ -113,7 +111,6 @@
 		border-radius: 5px;
 		border : none; 
 	}
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 	#bank-select{
 		border-radius : 5px;
 		border : none;

@@ -16,14 +16,6 @@
 								<th> 이름 </th>
 								<td><input class="input1" type="text" name="eName" placeholder="이름은 최소 2글자부터 10글자까지 입력하세요"></td>
 								<th> 부서 </th>
-<<<<<<< HEAD
-								<td><input class="input2" type="text" name="dName" placeholder="상품, 재무, 인사, 상품 중 하나를 입력하세요"></td>
-								<th> 상세주소 </th>
-								<td>
-									<div style="position: relative;">
-										<input class="input3" type="text" name="eAddr">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="position: absolute; top: 60%; transform: translateY(-50%); right: 105px;">
-=======
 								<td>
 									<select id="dName-select" name="dName">
 										<option value="인사">인사</option>
@@ -37,7 +29,6 @@
 									<div style="position: relative;">
 										<input id="sample6_postcode" class="input3" type="text" name="eAddr">
 										<svg id="searchIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="position: absolute; top: 60%; transform: translateY(-50%); right: 105px;">
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
             								<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
         								</svg>
         							</div>
@@ -47,11 +38,6 @@
 								<th> 이메일 주소 </th>
 								<td><input class="input1" type="text" name="email" placeholder="@ 포함한 이메일 주소를 입력하세요"></td>
 								<th> 직급 </th>
-<<<<<<< HEAD
-								<td><input class="input2" type="text" name="job"></td>
-								<th></th>
-								<td><input class="input4" type="text" name="eAddr2"></td>
-=======
 								<td>
 									<select id="job-select" name="job">
 										<option value="팀장">팀장</option>
@@ -66,22 +52,16 @@
 									<input id="sample6_address" class="input4" type="text" name="eAddr2">
 									<input type="hidden" id="sample6_extraAddress">
 								</td>
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 							</tr>
 							<tr>
 								<th> 전화번호 </th>
 								<td><input class="input1" type="text" name="ePhone" placeholder="- 을 포함해서 입력하세요"></td>
 								<th> 근무형태 </th>
-<<<<<<< HEAD
-								<td><input class="input2" type="text" name="workType"></td>
-=======
 								<td>
 									<select id="workType-select" name="workType">
 										<option value="정규직">정규직</option>
 										<option value="비정규직">비정규직</option>
 									</select>
-								</td>
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
 								<th> 급여계좌 </th>
 								<td>
 									<select id="bank-select" name="eBank">
@@ -123,11 +103,7 @@
 				<input id="closeBtn" type="button" name="close" value="닫기">
 			</div>
 	</div>
-<<<<<<< HEAD
 	
-	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_insert.js"></script>
-=======
-
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/employee_insert.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -179,6 +155,6 @@
         }).open();
     }
 </script>
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
+
 </body>
 </html>

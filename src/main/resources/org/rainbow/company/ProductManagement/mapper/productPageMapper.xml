@@ -224,7 +224,6 @@
 	        supsSubEmail = #{supsSubEmail}
     where supsNo = #{supsNo}
 	</update>
-
 	
 	
 	<!--공급처 삭제 -->

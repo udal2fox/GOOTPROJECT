@@ -201,19 +201,29 @@ public class ProductPageController
     
     /** 상품 개별등록*/
     @PostMapping(value = "/prdReg.do")
-    public String prdReg(prdInsertVO pvo)
+    public String prdReg(prdInsertVO pvo , Model model)
     {
     	log.info(pvo);
     	
-    	int result = pService.productInput(pvo);
+    	int prdInsertresult = pService.productInput(pvo);
+    	String result = "";
+    	if(prdInsertresult >= 1 )
+    	{
+    		result = "prdInsertSuccess";
+    	}
+    	else
+    	{
+    		result = "prdInsertDelfail";
+    	}
     	
-    	log.info(result);
-    	return "redirect:/moveProductPage";
+    	model.addAttribute("prdInsertresult", result);
+    	
+    	return "/company/productManagement/prdResult";
     }
     
     /** 상품 개별수정*/
     @PostMapping("/prdUpdate")
-    public String prdUpdate(suppliersVO svo)
+    public String prdUpdate(suppliersVO svo , Model model)
     {
     	log.info(svo);
     	System.out.println(svo.getSupsSt());
@@ -226,7 +236,7 @@ public class ProductPageController
     
     /** 상품 개별삭제*/
     @PostMapping("/prdDelete")
-    public String prdDelete(suppliersVO svo)
+    public String prdDelete(suppliersVO svo , Model model)
     {
     	log.info(svo);
 
@@ -317,38 +327,72 @@ public class ProductPageController
     
     // 공급처 등록 일단 파일 어떻게 넣을지 판단 안되서.. 파일 넣는기능 제외하고 그냥 인서트
     @PostMapping("/insertSupsReg")
-    public String insertSupsReg(suppliersVO svo)
+    public String insertSupsReg(suppliersVO svo, Model model)
     {
     	log.info(svo);
 
-    	pService.insertSups(svo);
+    	int supInsertReulst = pService.insertSups(svo);
     	
-    	return "redirect:/moveSuppliers";
-
+    	String result = "";
+    	if(supInsertReulst >= 1 )
+    	{
+    		result = "supInsertSuccess";
+    	}
+    	else
+    	{
+    		result = "supInsertfail";
+    	}
+    	
+    	model.addAttribute("supInsertReulst", result);
+    	
+    	return "/company/productManagement/prdResult";
     }
     
     // 공급처 수정
     @PostMapping("/supsUpdate")
-    public String supsUpdate(suppliersVO svo)
+    public String supsUpdate(suppliersVO svo, Model model)
     {
     	log.info(svo);
     	System.out.println(svo.getSupsSt());
     	System.out.println(svo.getSupsBnt());
-    	pService.supsUpdate(svo);
+    	int supUpResult = pService.supsUpdate(svo);
     	
-    	return "redirect:/moveSuppliers";
-
+    	String result = "";
+    	if(supUpResult >= 1 )
+    	{
+    		result = "supUpSuccess";
+    	}
+    	else
+    	{
+    		result = "supUpfail";
+    	}
+    	
+    	model.addAttribute("subUpResult", result);
+    	
+    	return "/company/productManagement/prdResult";
     }
     
     // 공급처 삭제
     @PostMapping("/supsDelete")
-    public String supsDelete(suppliersVO svo)
+    public String supsDelete(suppliersVO svo, Model model)
     {
     	log.info(svo);
 
-    	pService.supsDelete(svo);
+    	int supDelResult = pService.supsDelete(svo);
+    	String result = "";
+    	if(supDelResult >= 1 )
+    	{
+    		result = "subDelSuccess";
+    	}
+    	else
+    	{
+    		result = "subDelfail";
+    	}
     	
-    	return "redirect:/moveSuppliers";
+    	model.addAttribute("supDelResult", result);
+    	
+    	
+    	return "/company/productManagement/prdResult";
 
     }
     

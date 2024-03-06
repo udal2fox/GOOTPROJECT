@@ -113,6 +113,6 @@
 			</div>
 		</div>
 	</body>
-	<!-- <script type="text/javascript" src="/resources/js/company/productPage/prdUpdate.js"></script>  -->
+	<script type="text/javascript" src="/resources/js/company/productPage/prdUpdate.js"></script>
 	
 	</html>

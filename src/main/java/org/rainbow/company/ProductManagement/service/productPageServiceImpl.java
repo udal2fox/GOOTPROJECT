@@ -84,13 +84,13 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public void supsUpdate(suppliersVO vo) {
-		pMapper.supsUpdate(vo);
+	public int supsUpdate(suppliersVO vo) {
+		return pMapper.supsUpdate(vo);
 	}
 
 	@Override
-	public void supsDelete(suppliersVO vo) {
-		pMapper.supsDelete(vo);
+	public int supsDelete(suppliersVO vo) {
+		return pMapper.supsDelete(vo);
 	}
 
 	@Override

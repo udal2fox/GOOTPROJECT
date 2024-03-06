@@ -17,6 +17,13 @@ function cssBinding(cssFiles) {
 
 
 
+
+
+
+
+
+
+
 document.getElementById("moveSpotRegisterBtn").addEventListener('click', ()=>{
 	
 	

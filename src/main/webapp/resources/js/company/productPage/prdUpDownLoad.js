@@ -78,7 +78,7 @@ function download()
  		}
     });
 
-	
+		
     // 서버로 데이터 전송
     fetch('/downloadExcel', {
         method: 'POST',

@@ -10,7 +10,6 @@ import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
-import org.rainbow.domain.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,13 +83,13 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public void supsUpdate(suppliersVO vo) {
-		pMapper.supsUpdate(vo);
+	public int supsUpdate(suppliersVO vo) {
+		return pMapper.supsUpdate(vo);
 	}
 
 	@Override
-	public void supsDelete(suppliersVO vo) {
-		pMapper.supsDelete(vo);
+	public int supsDelete(suppliersVO vo) {
+		return pMapper.supsDelete(vo);
 	}
 
 	@Override
@@ -99,6 +98,10 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
+	public List<prdInputVO> getSubCtg() {
+		return pMapper.getSubCtg();
+	}	
+	
 	public int productInput(prdInsertVO pvo) {
 		return pMapper.productInput(pvo);
 	}

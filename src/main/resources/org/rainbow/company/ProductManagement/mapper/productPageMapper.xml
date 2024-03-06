@@ -207,24 +207,23 @@
 	
 	<!--공급처 수정 -->
 	<update id="supsUpdate" parameterType="org.rainbow.company.ProductManagement.domain.suppliersVO">
-    update RAIN_Suppliers_tbl
-    set supsCo = #{supsCo}, 
-        supsAddr = #{supsAddr}, 
-        supsBnt = #{supsBnt}, 
-        supsBizRegNum = #{supsBizRegNum}, 
-        supsBizLic = #{supsBizLic},
-        supsCoEmail = #{supsCoEmail}, 
-        supsCt = #{supsCt},
-        supsName = #{supsName}, 
-        supsPhone = #{supsPhone}, 
-        supsEmail = #{supsEmail}, 
-        supsSt = #{supsSt},
-        supsSubName = #{supsSubName}, 
-        supsSubPhone = #{supsSubPhone}, 
-        supsSubEmail = #{supsSubEmail}
+	    update RAIN_Suppliers_tbl
+	    set supsCo = #{supsCo}, 
+	        supsAddr = #{supsAddr}, 
+	        supsBnt = #{supsBnt}, 
+	        supsBizRegNum = #{supsBizRegNum}, 
+	        supsBizLic = #{supsBizLic},
+	        supsCoEmail = #{supsCoEmail}, 
+	        supsCt = #{supsCt},
+	        supsName = #{supsName}, 
+	        supsPhone = #{supsPhone}, 
+	        supsEmail = #{supsEmail}, 
+	        supsSt = #{supsSt},
+	        supsSubName = #{supsSubName}, 
+	        supsSubPhone = #{supsSubPhone}, 
+	        supsSubEmail = #{supsSubEmail}
     where supsNo = #{supsNo}
-</update>
-
+	</update>
 	
 	
 	<!--공급처 삭제 -->

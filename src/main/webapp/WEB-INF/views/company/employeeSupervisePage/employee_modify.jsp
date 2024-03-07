@@ -44,6 +44,7 @@
     									<option value="대리" ${vo.job == '대리' ? 'selected' : ''}>대리</option>
     									<option value="팀원" ${vo.job == '팀원' ? 'selected' : ''}>팀원</option>
     									<option value="인턴" ${vo.job == '인턴' ? 'selected' : ''}>인턴</option>
+    									<option value="대표" ${vo.job == '대표' ? 'selected' : ''}>대표</option>
 									</select> 
 								<%-- <input class="input2" type="text" name="job" value="${vo.job }"> --%>
 								</td>

@@ -26,16 +26,19 @@ btn.addEventListener("click", () => {
       userEmail: f.userEmail.value,
       userPw: f.userPw.value,
     }),
-    headers: { "Content-type": "application/json; charset=utf-8"}
+    headers: { "Content-type": "application/json; charset=utf-8" },
   })
-    .then((Response) => Response.json())
-    .then((json) => {
-      if(json == null){
-        alert('아이디와 비밀번호가 다릅니다.');
+    .then((Response) => {
+      if (Response.status == "400") {
+        alert("아이디와 비밀번호가 다릅니다.");
         f.reset();
-      }else{
-        sessionStorage.setItem("no", JSON.parse(json.spotNo));
-        //location.href = '/userAdminPage/dashboard'
+      } else {
+        Response.json().then((result) => {
+          sessionStorage.setItem("Okja",result.spotNo);
+          alert("로그인 되었습니다.");
+          location.href = '/userAdminPage/dashboard/'+ result.spotNo;
+        });
       }
-    });
+    })
+    .catch((err) => console.log(err));
 });

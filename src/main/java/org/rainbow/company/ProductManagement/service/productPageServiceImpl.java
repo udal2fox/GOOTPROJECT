@@ -111,6 +111,16 @@ public class productPageServiceImpl implements productPageService
 		return pMapper.getprdVo(prdNo);
 	}
 
+	@Override
+	public int prdUpdate(prdInsertVO pvo) {
+		return pMapper.prdUpdate(pvo);
+	}
+
+	@Override
+	public int prdDelete(prdInsertVO pvo) {
+		return pMapper.prdDelete(pvo);
+	}
+
 		
 	
 

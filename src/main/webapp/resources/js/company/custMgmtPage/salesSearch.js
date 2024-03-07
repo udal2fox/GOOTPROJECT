@@ -8,7 +8,7 @@ document.querySelector('#searchBarSearchBtn').addEventListener('click', function
 //console.log("서치바 검색 버튼 클릭 이벤트");
  currentKeyword = document.querySelector('#searchBarKeyword').value; // 현재 키워드 갱신
  
- //console.log(currentKeyword);
+// console.log(currentKeyword);
  fetchSearchResults(currentKeyword); // 검색 결과 요청
  
 });
@@ -20,17 +20,8 @@ function fetchSearchResults(keyword) {
     // alert(1);
 
 
-    const searchKeyword = {
-        method: 'POST',
-        //  body: 'keyword=' + encodeURIComponent(keyword), 
-        body: JSON.stringify(keyword),
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8' 
-        }
 
-    };
-
-    fetch('/searchBarKeyword', searchKeyword)
+    fetch('/search?keyword=' + keyword)
         .then(response => response.json())
         .then(list => {
             let msg = '';
@@ -51,39 +42,12 @@ function fetchSearchResults(keyword) {
             const tblBody = document.querySelector('#sales_tbl');
             tblBody.innerHTML = msg;
 
-          /*  drawPagination();
-            goToPage(1);
-            resetCheckboxes();*/
+  
 
         })
         .catch(error => console.error('Error:', error));
-}
+} 
 
 
 
-// 필터링된 영업 상태, 기간 가져오기
-function getFilteredSearchBar() {
-	
-	//선택된 영업 상태 값 가져오기 
-    let typeFilters = Array.from(document.querySelectorAll('input[name="serviceStatus"]:checked')).map(function (checkbox) {
-        return checkbox.value;
-    });
-    
-    
-    //선택된 날짜 값 가져오기(아직 구현 안됨) 
-    
-    
-  
 
-    // 여기서 새로운 영업 리스트를 가져오도록 수정
-    let salesList = document.querySelectorAll('.salesList'); // 전체 영업 리스트
-    let filteredSalesList = Array.from(salesList).filter(function (salesList) {
-       
-        return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
-    });
-
-    return filteredProducts;
-}
-
-
-// 서치 끝

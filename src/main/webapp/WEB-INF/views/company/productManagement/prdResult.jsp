@@ -17,7 +17,7 @@
 				location.href = '/moveProductPage';
 			</script>
 		</c:when>
-		<c:when test="${prdInsertresult eq  'prdInsertDelfail'}">
+		<c:when test="${prdInsertresult eq  'prdInsertfail'}">
 			<script type="text/javascript">
 				alert("상품 개별등록 실패");
 				location.href = '/moveProductPage';
@@ -26,13 +26,13 @@
 	</c:choose>
 	<!-- 상품 수정  -->
 	<c:choose>
-		<c:when test="${prdInsertresult eq  'prdInsertSuccess'}">
+		<c:when test="${prdUpdateResult eq  'prdUpdateSuccess'}">
 			<script type="text/javascript">
 				alert("상품  수정 성공");
 				location.href = '/moveProductPage';
 			</script>
 		</c:when>
-		<c:when test="${prdInsertresult eq  'prdInsertSuccess'}">
+		<c:when test="${prdUpdateResult eq  'prdUpdatefail'}">
 			<script type="text/javascript">
 				alert("상품 수정 실패");
 				location.href = '/moveProductPage';
@@ -41,13 +41,13 @@
 	</c:choose>
 	<!-- 상품 삭제  -->
 	<c:choose>
-		<c:when test="${prdInsertresult eq  'prdInsertSuccess'}">
+		<c:when test="${prdDelResult eq 'prdDelSuccess'}">
 			<script type="text/javascript">
 				alert("상품 삭제 성공");
 				location.href = '/moveProductPage';
 			</script>
 		</c:when>
-		<c:when test="${prdInsertresult eq  'prdInsertSuccess'}">
+		<c:when test="${prdDelResult eq 'prdDelfail'}">
 			<script type="text/javascript">
 				alert("상품 삭제 실패");
 				location.href = '/moveProductPage';

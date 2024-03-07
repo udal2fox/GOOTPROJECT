@@ -120,6 +120,9 @@
             color: var(--white-color);
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
 </head>
 
 <body>
@@ -176,8 +179,8 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/settlementManagePage">거래명세</a></li>
-                            <li class="category"><a class="category-link" href="/unrecoveredManagement">미수관리</a></li>
+                            <li class="category"><a class="category-link" href="/TradeDetailPage">거래명세</a></li>
+                            <li class="category"><a class="category-link" href="/unrecoveredMGT">미수관리</a></li>
                             <li class="category"><a class="category-link" href="/orderReceiptPage">계산서발행</a></li>
                         </ul>
                     </li>

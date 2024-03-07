@@ -25,6 +25,8 @@ public class spotController {
 		
 		model.addAttribute("spotVO",spotService.spotList());
 		
+		
+		
 		return "/company/custMgmtPage/spotMgmt/spotList";	
 		 
 	}

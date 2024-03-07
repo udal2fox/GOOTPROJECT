@@ -115,8 +115,8 @@
 			                <td>${ex.prdMajorCtg }</td>
 			                <td>${ex.prdSubCtg }</td>
 			                <td>
-			                		<img alt="" src="${ex.prdImg}" align="left">
-			                		<div id="tdTop">${ex.prdName }</div>
+		                		<img alt="" src="${ex.prdImg}" align="left">
+		                		<div id="tdTop">${ex.prdName }</div>
 			                </td>
 			                <td><fmt:formatNumber value="${ex.prdCstPri }" type="currency"/></td>
               				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>

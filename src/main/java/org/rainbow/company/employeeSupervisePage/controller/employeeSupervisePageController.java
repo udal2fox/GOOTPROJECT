@@ -1,5 +1,10 @@
 package org.rainbow.company.employeeSupervisePage.controller;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
@@ -117,15 +122,38 @@ public class employeeSupervisePageController {
 			return "/company/employeeSupervisePage/employee_modify";
 	}
 	
+	
 	// 직원 정보 편집
 	@PostMapping(value = "/employee_modify")
-	public String update( rain_EmpVO vo, RedirectAttributes rttr ) {
+	public String update(HttpServletRequest request, RedirectAttributes rttr) {
 		
-		// '-' 값을 null로 변환
-//	    if ("-".equals(vo.getEndDt())) {
-//	        vo.setEndDt(null);
-//	    }
-	
+		int eno = Integer.parseInt(request.getParameter("eno"));
+	    rain_EmpVO vo = service.get(eno);
+		
+		vo.setDeptNo(Integer.parseInt(request.getParameter("deptNo")));
+		vo.setJob(request.getParameter("job"));
+		vo.setWorkType(request.getParameter("workType"));
+		vo.setSal(Integer.parseInt(request.getParameter("sal")));
+		vo.setIdStatus(request.getParameter("idStatus"));
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date endDate = null;
+		String endDtString = request.getParameter("endDt");
+
+		if (endDtString != null && !endDtString.isEmpty()) {
+		    if ("-".equals(endDtString)) {
+		        endDate = null;
+		    } else {
+		        try {
+		            endDate = new java.sql.Date(dateFormat.parse(endDtString).getTime());
+		        } catch (ParseException e) {
+		            e.printStackTrace(); // 오류 처리
+		        }
+		    }
+		}
+
+		vo.setEndDt(endDate);
+
 		service.update(vo);
 		
 		log.info("update..." + vo);

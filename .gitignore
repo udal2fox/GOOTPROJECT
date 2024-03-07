@@ -1,5 +1,4 @@
 /.metadata/
-<<<<<<< HEAD
 
 ## 폴더무시
 .idea/
@@ -10,4 +9,4 @@ out/
 # Ignore compiled output
 out/
 target/
->>>>>>> 4c4150e691fa61b13ae5a8dbfb64d70e7ba06f03
+

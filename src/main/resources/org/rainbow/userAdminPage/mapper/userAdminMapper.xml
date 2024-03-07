@@ -9,6 +9,12 @@
 		select userName, spotNo from RAIN_cUser_tbl
 		where userEmail = #{userEmail} and userPw = #{userPw}
 	</select>
+	
+	<!-- // 대쉬보드 정보 가져오기 -->
+	<select id="getDashboard" parameterType="int" resultType="java.util.HashMap">
+		select * from RAIN_cSpot_tbl
+		where spotNo = #{spotNo}
+	</select>
 
 
 

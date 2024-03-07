@@ -8,13 +8,15 @@ const regPw =
 
 btn.addEventListener("click", () => {
   if (!f.userEmail.value || !regMail.test(f.userEmail.value)) {
-    alert("올바른 형식의 이메일이 아닙니다.");
+    swal("올바른 형식의 이메일이 아닙니다.", "", "error");
     f.userEmail.focus();
     return false;
   }
   if (!f.userPw.value || !regPw.test(f.userPw.value)) {
-    alert(
-      "정확한 비밀번호를 입력하세요. (8자리 이상, 영문, 숫자, 특수문자 포함)"
+    swal(
+      "정확한 비밀번호를 입력하세요.",
+      "8자리 이상 대문자, 숫자, 특수문자 포함",
+      "error"
     );
     f.userPw.focus();
     return false;
@@ -30,13 +32,16 @@ btn.addEventListener("click", () => {
   })
     .then((Response) => {
       if (Response.status == "400") {
-        alert("아이디와 비밀번호가 다릅니다.");
+        swal("아이디와 비밀번호가 다릅니다.", "", "error");
         f.reset();
       } else {
         Response.json().then((result) => {
-          sessionStorage.setItem("Okja",result.spotNo);
-          alert("로그인 되었습니다.");
-          location.href = '/userAdminPage/dashboard/'+ result.spotNo;
+          sessionStorage.setItem("Okja", result.spotNo);
+          swal("로그인 완료!", "반갑습니다.담당자님", "success");
+          setTimeout(function () {
+            location.href =
+              "/userAdminPage/goDashboard/" + sessionStorage.getItem("Okja");
+          }, 1500);
         });
       }
     })

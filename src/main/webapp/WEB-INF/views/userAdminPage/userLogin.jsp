@@ -13,7 +13,8 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/userAdminPage/userLogin.css">
-    <title>Admin Login</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<title>Rainbow BirthDay</title>
 
 </head>
 
@@ -57,14 +58,14 @@
                     <div class="sub-span"><span>간편한 임직원 생일 복지 서비스를 이용해 보세요.</span></div>
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" name="userEmail" placeholder="name@example.com">
+                        <input type="text" class="form-control" id="floatingInput" name="userEmail" placeholder="name@example.com" value="Lex@acompany.com">
                         <label for="floatingInput">
                             <ion-icon name="mail"></ion-icon>
                             &ensp; 이메일 주소
                         </label>
                     </div>
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" name="userPw" placeholder="Password">
+                        <input type="password" class="form-control" id="floatingPassword" name="userPw" placeholder="Password" value="Asdf123!@#">
                         <label for="floatingPassword">
                             <ion-icon name="key"></ion-icon>
                             &ensp; 비밀번호

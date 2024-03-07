@@ -20,4 +20,9 @@ public class userAdminServiceImpl implements userAdminService{
 		log.info("service login info..." + inputMap);
 		return userMapper.customerLogin(inputMap);
 	}
+	
+	@Override
+	public HashMap<String, Object> getDashboard(int spotNo) {
+		return userMapper.getDashboard(spotNo);
+	}
 }

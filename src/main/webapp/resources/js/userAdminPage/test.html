@@ -17,7 +17,6 @@
         <!-- IONICONS -->
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
         <title>Rainbow BirthDay</title>
     </head>
@@ -32,7 +31,7 @@
                                 <img src="/resources/images/CI_png_2021.png" width="110" alt="companyLogo">
                             </div>
                             <div class="sidebar_brand">
-                                <a href="#" id="dashboard" class="sidebar_logo">
+                                <a href="/userAdminPage/dashboard/${sessionScope.spotNo}" class="sidebar_logo">
                                     <span>관리자페이지</span></a>
                             </div>
                             <div class="sidebar_list">
@@ -66,7 +65,7 @@
             <main>
                 <div class="mainContainer d-flex flex-column">
                     <header class="p-2 text-end">
-                        <span class="px-2" id="companyInfo"></span> <a href="/userAdminPage/userEdit/${sessionScope.spotNo}" id="userEdit">
+                        <span class="px-2" id="companyInfo"></span> <a href="${sessionScope.spotNo}" id="userEdit">
                             <ion-icon name="person"></ion-icon> <span id="userName">${sessionScope.userName}</span>님
                             반갑습니다.
                         </a>

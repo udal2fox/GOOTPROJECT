@@ -5,4 +5,6 @@ import java.util.HashMap;
 public interface userAdminMapper {
 
 	public HashMap<String, Object> customerLogin(HashMap<String, String> inputMap);
+	
+	public HashMap<String, Object> getDashboard(int spotNo);
 }

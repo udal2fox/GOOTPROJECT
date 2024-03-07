@@ -1,16 +1,25 @@
-/* 즉시 실행 함수 
-   (fuction(){
-   	
-   })();
-*/
-
 
 // 전역 변수 공간
 const amount = 10; // 페이지당 보여줄 아이템 수
 let pageNum = 1; // 현재 페이지 번호
-let products = document.querySelectorAll('.product'); // 전체 상품 리스트
+let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
 let sortDirection = {}; // 정렬
 //------------
+
+// 데이트 피커 
+flatpickr.localize(flatpickr.l10ns.ko);
+
+let datePick1 = document.querySelector('.datePick1');
+	datePick1.flatpickr({
+		   local: 'ko'
+		   
+	});
+let datePick2 = document.querySelector('.datePick2');
+	datePick2.flatpickr({
+		   local: 'ko'
+		   
+	});
+
 
 
 filter();
@@ -18,10 +27,10 @@ filter();
 function filter() {
 	
     // allCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-typeAll').addEventListener('change', function() {
+    document.getElementById('td-BusinessAll').addEventListener('change', function() {
         // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
         let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').forEach(function(checkbox) {
+        document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').forEach(function(checkbox) {
             console.log(checkbox);
             checkbox.checked = isChecked;
         });
@@ -31,10 +40,10 @@ function filter() {
     });
 
     // allListCheck 체크박스 이벤트 리스너 등록
-    document.getElementById('product-statusAll').addEventListener('change', function() {
+    document.getElementById('td-calculateAll').addEventListener('change', function() {
         // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
         let isChecked = this.checked;
-        document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').forEach(function(checkbox) {
+        document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').forEach(function(checkbox) {
             checkbox.checked = isChecked;
         });
         // 필터링 적용
@@ -47,11 +56,11 @@ function filter() {
         checkbox.addEventListener('change', function() {
             // allCheck 체크박스 상태 업데이트
             let isTypeAllChecked = isAllTypeCheckboxesChecked();
-            document.getElementById('product-typeAll').checked = isTypeAllChecked;
+            document.getElementById('td-BusinessAll').checked = isTypeAllChecked;
 
             // allListCheck 체크박스 상태 업데이트
             let isStatusAllChecked = isAllStatusCheckboxesChecked();
-            document.getElementById('product-statusAll').checked = isStatusAllChecked;
+            document.getElementById('td-calculateAll').checked = isStatusAllChecked;
 
             // 필터링 적용
             filterProducts();
@@ -61,21 +70,21 @@ function filter() {
     // 상품 필터링 함수
     function filterProducts() {
         // 선택된 상품 종류 필터 및 상태 필터 가져오기
-        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
+        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
-        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
+        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
 
         // 전체 체크 상태 확인
-        let isAllTypeChecked = document.getElementById('product-typeAll').checked;
-        let isAllStatusChecked = document.getElementById('product-statusAll').checked;
+        let isAllTypeChecked = document.getElementById('td-BusinessAll').checked;
+        let isAllStatusChecked = document.getElementById('td-calculateAll').checked;
 
         // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
         if (!isAllTypeChecked && typeFilters.length === 0) {
             // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
+            document.querySelectorAll('.td').forEach(function(product) {
                 product.style.display = 'none';
             });
             // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
@@ -86,7 +95,7 @@ function filter() {
         // 모든 상품상태 체크박스가 해제되었을 때 조회되지 않도록 처리
         if (!isAllStatusChecked && statusFilters.length === 0) {
             // 모든 상품 숨기기
-            document.querySelectorAll('.product').forEach(function(product) {
+            document.querySelectorAll('.td').forEach(function(product) {
                 product.style.display = 'none';
             });
             // 여기서 필터값 가져오고 페이징 다시그리기ㅈ
@@ -95,7 +104,7 @@ function filter() {
         }
 
         // 각 상품을 순회하면서 필터링 적용
-        document.querySelectorAll('.product').forEach(function(product) {
+        document.querySelectorAll('.td').forEach(function(product) {
             let type = product.getAttribute('data-type');
             let status = product.getAttribute('data-status');
 
@@ -116,18 +125,18 @@ function filter() {
     function isAllTypeCheckboxesChecked() 
     {
         // 상품 종류 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
         // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-type"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
     }
 
     // 상품 상태 체크박스 모두 선택 여부 확인 함수
     function isAllStatusCheckboxesChecked() 
     {
         // 상품 상태 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="product-status"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
     }
 };
 
@@ -233,14 +242,14 @@ function drawPagination()
 //필터링된 상품 리스트 가져오기
 function getFilteredProducts() 
 {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-type"]:checked')).map(function(checkbox) {
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="product-status"]:checked')).map(function(checkbox) {
+    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
 
-    return Array.from(products).filter(function(product) {
+    return Array.from(tds).filter(function(product) {
         let type = product.getAttribute('data-type');
         let status = product.getAttribute('data-status');
         return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
@@ -283,15 +292,8 @@ document.querySelectorAll('.sort-btn').forEach(button => {
 
 function getCellValue(row, column) {
     const columnIndex = {
-        "supsCo": 0,
-        "prdNo": 1,
-        "prdSdc": 2,
-        "prdMajorCtg": 3,
-        "prdSubCtg": 4,
-        "prdName": 5,
-        "prdCstPri": 6,
-        "prdSal": 7,
-        "prdMargin": 8
+        "recDate": 6,
+        "recSum": 7	
     } [column];
 
     const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
@@ -299,7 +301,7 @@ function getCellValue(row, column) {
 }
 
 function sortTable(column) {
-    const tbody = document.querySelector('.table tbody');
+    const tbody = document.querySelector('.saleStatsTableInfo tbody');
     const rows = Array.from(tbody.querySelectorAll('tr'));
 
     // 정렬 방식에 따라 정렬

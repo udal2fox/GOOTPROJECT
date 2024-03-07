@@ -2,16 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.rainbow.company.calculateMGT.mapper.TradeDetailMapper">
+<mapper namespace="org.rainbow.company.calculateManagement.mapper.TradeDetailMapper">
 
     <!-- 계산서 발행 페이지 - 내역 조회 -->
 	<select id="tradeDetailList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">        
         
        	SELECT a.recNo, c.comName, c.comBizType, b.spName, 
-               a.recDate, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation
+               a.recDate, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
-        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo;
+        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+        JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
+        JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
         
     </select>
 </mapper>

@@ -21,10 +21,10 @@
 					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
 					<td align="center" style="padding-right:15px;"> 결제수단 </td>
 					<td colspan="2"> 
-						<select class="form-select">
-							<option>신용카드</option>
-							<option>계좌이체</option>
-							<option>간편결제</option>
+						<select class="form-select payMth">
+							<option data-filter="td-pay" value="신용카드">신용카드</option>
+							<option data-filter="td-pay" value="계좌이체">계좌이체</option>
+							<option data-filter="td-pay" value="간편결제">간편결제</option>
 						</select>
 					</td>	
 				</tr>
@@ -91,7 +91,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="td" items="${list}">
-					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}">
+					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}" data-pay="${td.recPayMth}">
 						<td><input type="checkbox" name="categoryAll"></td>
 						<td>${td.recNo}</td>
 						<td>${td.comName}</td>

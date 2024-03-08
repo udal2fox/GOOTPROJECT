@@ -66,6 +66,7 @@ function filter() {
             filterProducts();
         });
     });
+    
 
     // 상품 필터링 함수
     function filterProducts() {
@@ -76,7 +77,7 @@ function filter() {
         let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
-
+       
         // 전체 체크 상태 확인
         let isAllTypeChecked = document.getElementById('td-BusinessAll').checked;
         let isAllStatusChecked = document.getElementById('td-calculateAll').checked;
@@ -107,13 +108,15 @@ function filter() {
         document.querySelectorAll('.td').forEach(function(product) {
             let type = product.getAttribute('data-type');
             let status = product.getAttribute('data-status');
-
+                 
             // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
             if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
                 product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
             } else {
                 product.style.display = 'none';
             }
+            
+            
             // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
             drawPagination(1, Math.ceil(getFilteredProducts().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
             goToPage(1); 																		   
@@ -138,6 +141,8 @@ function filter() {
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
         return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
     }
+    
+    
 };
 
 // 필터 끝

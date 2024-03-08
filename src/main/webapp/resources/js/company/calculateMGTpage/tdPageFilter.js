@@ -21,7 +21,6 @@ let datePick2 = document.querySelector('.datePick2');
 	});
 
 
-
 filter();
 
 function filter() {
@@ -120,21 +119,22 @@ function filter() {
 
         });
     }
-
+    
+    // 체크박스 들 카운팅
     // 상품 종류 체크박스 모두 선택 여부 확인 함수
     function isAllTypeCheckboxesChecked() 
     {
         // 상품 종류 체크박스 중 선택된 개수 확인
         const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
         // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').length;
     }
 
     // 상품 상태 체크박스 모두 선택 여부 확인 함수
     function isAllStatusCheckboxesChecked() 
     {
         // 상품 상태 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked').length;
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
         return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
     }
@@ -319,3 +319,63 @@ function sortTable(column) {
     tbody.innerHTML = '';
     rows.forEach(row => tbody.appendChild(row));
 }
+// 모먼트 js 날짜 계산
+
+moment.locale('ko'); // 한국어 설정
+// 오늘 날짜 가져오기
+const today = moment();
+// 현재 주의 시작 마지막날짜(월요일 시작 일요일끝) ex 오늘기준 0308 0304 ~ 0310
+const startWeek = moment().startOf('week').add(1, 'days');
+const endWeek = moment().endOf('week').add(1, 'days');
+
+// 현재 달 계산
+const nowStartMonth = moment().startOf('month');
+const nowEndMonth = moment().endOf('month');
+
+// 지날달 계산
+const lastStartDate = moment().subtract(1, 'months').startOf('month');
+const lastEndDate = moment().subtract(1, 'months').endOf('month');
+
+//현재 분기의 계산
+const quarterStartDate = moment().startOf('quarter');
+const quarterEndDate = moment().endOf('quarter');
+
+const firDate = document.querySelector('.datePick1');
+const secDate = document.querySelector('.datePick2');
+
+document.querySelectorAll('.dateBtn').forEach((e)=>{
+	e.addEventListener('click', (btn)=>{
+		console.log(e.value);
+		if(e.value == '오늘')
+		{
+			firDate.value = today.format('YYYY-MM-DD');
+			secDate.value = today.format('YYYY-MM-DD');
+		}
+		else if(e.value == '최근1주')
+		{
+			firDate.value = startWeek.format('YYYY-MM-DD');
+			secDate.value = endWeek.format('YYYY-MM-DD');
+		}
+		else if(e.value == '이번달')
+		{
+			firDate.value = nowStartMonth.format('YYYY-MM-DD');
+			secDate.value = nowEndMonth.format('YYYY-MM-DD');
+		}
+		else if(e.value == '지난달')
+		{
+			firDate.value = lastStartDate.format('YYYY-MM-DD');
+			secDate.value = lastEndDate.format('YYYY-MM-DD');
+		}
+		else if(e.value == '지난분기')
+		{
+			firDate.value = quarterStartDate.format('YYYY-MM-DD');
+			secDate.value = quarterEndDate.format('YYYY-MM-DD');
+		}	
+	})
+});
+
+
+
+
+
+

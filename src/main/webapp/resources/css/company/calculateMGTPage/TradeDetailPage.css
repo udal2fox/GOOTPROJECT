@@ -13,6 +13,8 @@
 	width: 1200px;
 	background-color: #eaeaea;
 	padding-top: 10px;
+    border-spacing: 2px;
+ 	border-collapse: separate;
 	
 }
 
@@ -21,6 +23,7 @@
 	width: 1200px;
 	text-align: center;
 	margin-top: 20px;
+
 }
 
 .saleStatsTableInfo{
@@ -32,7 +35,7 @@
 	background: #eaeaea;
 }
 
-.paintLightgray{
+.paintLightgray td{
 	
 	background-color: #ccc;
 	font-weight: bold;
@@ -81,7 +84,24 @@
  	width: 85px;
  	height: 35px;
  }
+.misu
+{
+	display: flex;
+	width: 1200px;
+    justify-content: space-between;
+} 
 
+.misuTotal
+{
+	color: red;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.threebtnDiv input[type=button]	
+{
+	padding-left: 10px;
+}
 
 .page-wrap{
 			    text-align: center;

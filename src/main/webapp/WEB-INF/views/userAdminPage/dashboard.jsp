@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/favicon_rainbow.jpg" type="image/x-icon">
+<title>Rainbow BirthDay</title>
 </head>
 <body>
 
@@ -26,33 +27,33 @@
 						<tbody>
 							<tr>
 								<th class="align-middle text-center">서비스 시작일자</th>
-								<td class="align-middle text-center">${test}</td>
+								<td class="align-middle text-center">${result.spAgreementDate}</td>
 								<th class="align-middle text-center">전월 이용금액</th>
-								<td class="align-middle text-center">${price}<span>원</span></td>
+								<td class="align-middle text-center">${0}<span>원</span></td>
 								<td class="text-center"><button type="button"
 										class="btn btn-outline-primary">거래명세서 내려받기</button></td>
 							</tr>
 							<tr>
 								<th class="align-middle text-center">1인당 예산</th>
-								<td class="align-middle text-center">${sVO.sBdgt}<span>원</span></td>
+								<td class="align-middle text-center">${result.spBdgt}<span>원</span></td>
 								<th class="align-middle text-center">당월 이용금액</th>
-								<td class="align-middle text-center">${price}<span>원</span></td>
+								<td class="align-middle text-center">${0}<span>원</span></td>
 								<td class="text-center"><button type="button"
 										class="btn btn-outline-primary">거래명세서 내려받기</button></td>
 							</tr>
 							<tr>
 								<th class="align-middle text-center">지점 임직원 수</th>
-								<td class="align-middle text-center">${sVO.sEmpNum} <span>명</span></td>
+								<td class="align-middle text-center">${result.spEmpNum}<span>명</span></td>
 								<th class="align-middle text-center">전년 이용금액</th>
-								<td class="align-middle text-center">${price}<span>원</span></td>
+								<td class="align-middle text-center">${0}<span>원</span></td>
 								<td class="text-center text-center"><button type="button"
 										class="btn btn-outline-primary">거래명세서 내려받기</button></td>
 							</tr>
 							<tr>
 								<th class="align-middle text-center">임직원 업데이트 일자</th>
-								<td class="align-middle text-center">${sVO.updateDate}</td>
+								<td class="align-middle text-center">${result.spEmpUpdate}</td>
 								<th class="align-middle text-center">금년 이용금액</th>
-								<td class="align-middle text-center">${price}<span>원</span></td>
+								<td class="align-middle text-center">${0}<span>원</span></td>
 								<td class="text-center"><button type="button"
 										class="btn btn-outline-primary">거래명세서 내려받기</button></td>
 							</tr>

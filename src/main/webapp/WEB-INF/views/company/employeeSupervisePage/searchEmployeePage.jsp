@@ -29,24 +29,24 @@
 		<hr style="border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;">
 
 		<div id="searchResult_table">
-			<table id="searchResult">
+			<table id="searchResult" class="table">
 				<thead>
 					<tr id="table_header">
-						<th>사번</th>
+						<th>사번<button type="button" class="sort-btn" data-column="eno">🔽</button></th>
 						<th>이름</th>
 						<th>이메일</th>
 						<th>연락처</th>
-						<th>부서</th>
-						<th>직급</th>
+						<th>부서<button type="button" class="sort-btn" data-column="dName">🔽</button></th>
+						<th>직급<button type="button" class="sort-btn" data-column="job">🔽</button></th>
 						<th>재직상태</th>
-						<th>입사일</th>
-						<th>퇴사일</th>
-						<th>계정상태</th>
+						<th>입사일<button type="button" class="sort-btn" data-column="hireDt">🔽</button></th>
+						<th>퇴사일<button type="button" class="sort-btn" data-column="endDt">🔽</button></th>
+						<th>계정상태<button type="button" class="sort-btn" data-column="idStatus">🔽</button></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="vo" items="${list }">
-						<tr>
+						<tr class="employee">
 							<td><a href="${vo.eno }">${vo.eno }</a></td>
 							<td>${vo.EName }</td>
 							<td>${vo.email }</td>
@@ -64,9 +64,31 @@
 				<div class="insertEmployeeBtn">
 					<button id="insertBtn" name="insertEmployee">신규등록</button>
 				</div>
+				
+				
+				<!-- 페이징 영역 -->
+				<div class="page-wrap">
+					<ul class="page-nation">
+						<c:if test="${pageMaker.prev }">
+							<li class="previous">
+								<a href="${pageMaker.startPage-1 }"> &lt; </a>
+							</li>
+						</c:if>
+						<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
+							<li>
+								<a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }"> ${num } </a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next }">
+							<li>
+								<a href="${pageMaker.endPage + 1 }"> &gt; </a>
+							</li>
+						</c:if>
+					</ul>
+				</div>
+			</div>
 		</div>
-	</div>	
-	
+
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage.js"></script>
 </body>
 </html>

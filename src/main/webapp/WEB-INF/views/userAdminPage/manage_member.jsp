@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="icon" href="/resources/images/favicon_rainbow.jpg" type="image/x-icon">
+<title>Rainbow BirthDay</title>
 </head>
 <body>
 

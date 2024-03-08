@@ -3,7 +3,6 @@
 <%@ include file="../../navBar.jsp" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-
 <link rel="stylesheet" href="/resources/css/company/calculateMGTPage/TradeDetailPage.css">
 <body>
 	<div class="container-fluid" align="center">
@@ -11,23 +10,6 @@
 			<tr class="rowWhite">
 				<td colspan="10"><h2>거래명세</h2> </td>
 			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-				<tr>
-					<td> 키워드   </td> 
-					<td colspan="2"> <input type="text" placeholder="거래명세번호/기업명/지점명"> </td>
-					<td><input type="button" class="btn btn-primary" value="검색"></td>
-					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
-					<td align="center" style="padding-right:15px;"> 결제수단 </td>
-					<td colspan="2"> 
-						<select class="form-select payMth">
-							<option data-filter="td-pay" value="신용카드">신용카드</option>
-							<option data-filter="td-pay" value="계좌이체">계좌이체</option>
-							<option data-filter="td-pay" value="간편결제">간편결제</option>
-						</select>
-					</td>	
-				</tr>
 			<tr>
 				<td> 기업 구분 </td>
 				<td> 
@@ -48,29 +30,49 @@
 				</td>	
 			</tr>
 			<tr>
-				<td>기간</td>
+				<td>&nbsp;</td>
+			</tr>
+				<tr>
+					<td> 키워드   </td> 
+					<td colspan="1"> <input type="text" placeholder="거래명세번호/기업명/지점명" style="width: 382px"> </td>
+					<td><input type="button" class="btn btn-primary" value="검색"></td>
+					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
+					<td align="center" style="padding-right:15px;"> 결제수단 </td>
+					<td colspan="2"> 
+						<select class="form-select payMth">
+							<option data-filter="td-pay" value="신용카드">신용카드</option>
+							<option data-filter="td-pay" value="계좌이체">계좌이체</option>
+							<option data-filter="td-pay" value="간편결제">간편결제</option>
+						</select>
+					</td>	
+				</tr>
+			<tr>
+				<td style="padding-top: 10px">기간</td>
 				<td>
 					<input class="datePick1" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
 					 ~ 
 					<input class="datePick2" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
 				</td>
-				<td><input type="button" class="btn btn-secondary" value="오늘"></td>
-				<td><input type="button" class="btn btn-secondary" value="최근 1주"></td>
-				<td><input type="button" class="btn btn-secondary" value="이번달"></td>
-				<td><input type="button" class="btn btn-secondary" value="지난달"></td>
-				<td><input type="button" class="btn btn-secondary" value="지난분기"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="이번달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난분기"></td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
-				<td>
-					<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
-					<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
-				</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		
+		<div>
+			<div class="threebtnDiv" align="right" style="width: 1200px;">
+				<input type="button" class="btn btn-primary" value="결제완료">
+				<input type="button" class="btn btn-primary" value="대손처리">
+				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
+				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
+			</div>
+		</div>
 		<table border="1" class="saleStatsTableInfo">
 			<thead>
 			<tr>
@@ -91,10 +93,10 @@
 			</thead>
 			<tbody>
 				<c:forEach var="td" items="${list}">
-					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}" data-pay="${td.recPayMth}">
+					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}">
 						<td><input type="checkbox" name="categoryAll"></td>
 						<td>${td.recNo}</td>
-						<td>${td.comName}</td>
+						<td><a href="/companyView">${td.comName}</a></td>
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
@@ -106,7 +108,7 @@
 						<td>${td.recPayMth}</td>
 						<td>${td.recSortation}</td>
 					</tr>
-				</c:forEach>
+				</c:forEach>	
 			</tbody>	
 		</table>
 	</div>

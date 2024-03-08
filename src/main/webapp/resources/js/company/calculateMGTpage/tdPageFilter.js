@@ -21,7 +21,6 @@ let datePick2 = document.querySelector('.datePick2');
 	});
 
 
-
 filter();
 
 function filter() {
@@ -66,7 +65,6 @@ function filter() {
             filterProducts();
         });
     });
-    
 
     // 상품 필터링 함수
     function filterProducts() {
@@ -77,7 +75,7 @@ function filter() {
         let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
             return checkbox.value;
         });
-       
+
         // 전체 체크 상태 확인
         let isAllTypeChecked = document.getElementById('td-BusinessAll').checked;
         let isAllStatusChecked = document.getElementById('td-calculateAll').checked;
@@ -108,41 +106,38 @@ function filter() {
         document.querySelectorAll('.td').forEach(function(product) {
             let type = product.getAttribute('data-type');
             let status = product.getAttribute('data-status');
-                 
+
             // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
             if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
                 product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
             } else {
                 product.style.display = 'none';
             }
-            
-            
             // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
             drawPagination(1, Math.ceil(getFilteredProducts().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
             goToPage(1); 																		   
 
         });
     }
-
+    
+    // 체크박스 들 카운팅
     // 상품 종류 체크박스 모두 선택 여부 확인 함수
     function isAllTypeCheckboxesChecked() 
     {
         // 상품 종류 체크박스 중 선택된 개수 확인
         const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
         // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
+        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').length;
     }
 
     // 상품 상태 체크박스 모두 선택 여부 확인 함수
     function isAllStatusCheckboxesChecked() 
     {
         // 상품 상태 체크박스 중 선택된 개수 확인
-        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
+        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked').length;
         // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
         return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
     }
-    
-    
 };
 
 // 필터 끝
@@ -324,3 +319,63 @@ function sortTable(column) {
     tbody.innerHTML = '';
     rows.forEach(row => tbody.appendChild(row));
 }
+// 모먼트 js 날짜 계산
+
+moment.locale('ko'); // 한국어 설정
+// 오늘 날짜 가져오기
+const today = moment();
+// 현재 주의 시작 마지막날짜(월요일 시작 일요일끝) ex 오늘기준 0308 0304 ~ 0310
+const startWeek = moment().startOf('week').add(1, 'days');
+const endWeek = moment().endOf('week').add(1, 'days');
+
+// 현재 달 계산
+const nowStartMonth = moment().startOf('month');
+const nowEndMonth = moment().endOf('month');
+
+// 지날달 계산
+const lastStartDate = moment().subtract(1, 'months').startOf('month');
+const lastEndDate = moment().subtract(1, 'months').endOf('month');
+
+//현재 분기의 계산
+const quarterStartDate = moment().startOf('quarter');
+const quarterEndDate = moment().endOf('quarter');
+
+const firDate = document.querySelector('.datePick1');
+const secDate = document.querySelector('.datePick2');
+
+document.querySelectorAll('.dateBtn').forEach((e)=>{
+	e.addEventListener('click', (btn)=>{
+		console.log(e.value);
+		if(e.value == '오늘')
+		{
+			firDate.value = today.format('YYYY-MM-DD');
+			secDate.value = today.format('YYYY-MM-DD');
+		}
+		else if(e.value == '최근1주')
+		{
+			firDate.value = startWeek.format('YYYY-MM-DD');
+			secDate.value = endWeek.format('YYYY-MM-DD');
+		}
+		else if(e.value == '이번달')
+		{
+			firDate.value = nowStartMonth.format('YYYY-MM-DD');
+			secDate.value = nowEndMonth.format('YYYY-MM-DD');
+		}
+		else if(e.value == '지난달')
+		{
+			firDate.value = lastStartDate.format('YYYY-MM-DD');
+			secDate.value = lastEndDate.format('YYYY-MM-DD');
+		}
+		else if(e.value == '지난분기')
+		{
+			firDate.value = quarterStartDate.format('YYYY-MM-DD');
+			secDate.value = quarterEndDate.format('YYYY-MM-DD');
+		}	
+	})
+});
+
+
+
+
+
+

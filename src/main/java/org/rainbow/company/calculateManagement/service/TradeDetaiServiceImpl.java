@@ -3,6 +3,7 @@ package org.rainbow.company.calculateManagement.service;
 import java.util.List;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
+import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.mapper.TradeDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,11 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	@Override
 	public List<TradeDetailListVO> tradeDetailList() {
 		return tMapper.tradeDetailList();
+	}
+
+	@Override
+	public List<TradeDetailListVO> searchTd(TradeDetailSearchDTO tdDTO) {
+		return tMapper.searchTd(tdDTO);
 	}
 	
 

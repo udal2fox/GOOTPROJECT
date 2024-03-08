@@ -17,6 +17,50 @@
         
     </select>
     
+    <select id="searchTd" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
+    	
+    SELECT 
+    a.recNo, c.comName, c.comBizType, b.spName, 
+    a.recDate, a.recSum, a.recSup, a.recTax, 
+    e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation, 
+    c.companyNo, b.spotNo
+FROM 
+    RAIN_receipt_tbl a    
+    JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+    JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+    JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+    JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+WHERE
+    1 = 1
+    <if test="recPayMth != null and recPayMth != '전체' ">
+        AND a.recPayMth = '${recPayMth}' 
+    </if>
+    <if test="keyword != null and keyword != ''">
+        AND (
+            a.recNo = '${keyword}' 
+            OR c.comName LIKE '%${keyword}%' 
+            OR b.spName LIKE '%${keyword}%'
+        )
+    </if>
+    <if test="firDate != null and secDate != null">
+        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+    </if>
+
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <!-- 거래미수 기업 연결 아직안함 -->
     <select id="misuCom" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">

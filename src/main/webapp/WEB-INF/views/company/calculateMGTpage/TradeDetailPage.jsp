@@ -32,26 +32,29 @@
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
+			<tr>
+				<td style="padding-right:15px;"> 결제수단 </td>
+				<td colspan="1"> 
+					<select class="form-select payMth" style="width: 382px">
+						<option data-filter="td-pay" value="전체">전체</option>
+						<option data-filter="td-pay" value="신용카드">신용카드</option>
+						<option data-filter="td-pay" value="계좌이체">계좌이체</option>
+						<option data-filter="td-pay" value="간편결제">간편결제</option>
+				   </select>
+				</td>
+			</tr>
 				<tr>
 					<td> 키워드   </td> 
-					<td colspan="1"> <input type="text" placeholder="거래명세번호/기업명/지점명" style="width: 382px"> </td>
-					<td><input type="button" class="btn btn-primary" value="검색"></td>
+					<td colspan="1"> <input type="text" placeholder=" 거래명세번호/기업명/지점명" style="width: 382px" id="tdKeyword"> </td>
+					<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
-					<td align="center" style="padding-right:15px;"> 결제수단 </td>
-					<td colspan="2"> 
-						<select class="form-select payMth">
-							<option data-filter="td-pay" value="신용카드">신용카드</option>
-							<option data-filter="td-pay" value="계좌이체">계좌이체</option>
-							<option data-filter="td-pay" value="간편결제">간편결제</option>
-						</select>
-					</td>	
 				</tr>
 			<tr>
 				<td style="padding-top: 10px">기간</td>
 				<td>
-					<input class="datePick1" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
+					<input class="datePick1" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
 					 ~ 
-					<input class="datePick2" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
+					<input class="datePick2" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
 				</td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>
@@ -65,10 +68,10 @@
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<div>
+		<div style="padding-top: 20px;">
 			<div class="threebtnDiv" align="right" style="width: 1200px;">
-				<input type="button" class="btn btn-primary" value="결제완료">
-				<input type="button" class="btn btn-primary" value="대손처리">
+				<input type="button" class="btn btn-primary PaymentBtn" value="결제완료">
+				<input type="button" class="btn btn-primary BigHandBtn" value="대손처리">
 				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
 				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
 			</div>
@@ -76,7 +79,7 @@
 		<table border="1" class="saleStatsTableInfo">
 			<thead>
 			<tr>
-				<th><input type="checkbox" name="categoryAll" value="전체"></th>
+				<th><input type="checkbox" id="checkboxTdAll" value="전체"></th>
 				<th>거래명세번호</th>
 				<th>기업명</th>
 				<th>기업구분</th>
@@ -94,7 +97,7 @@
 			<tbody>
 				<c:forEach var="td" items="${list}">
 					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}">
-						<td><input type="checkbox" name="categoryAll"></td>
+						<td><input type="checkbox" name="checkboxTd"></td>
 						<td>${td.recNo}</td>
 						<td><a href="/companyView">${td.comName}</a></td>
 						<td>${td.comBizType}</td>
@@ -120,5 +123,6 @@
     </div>
 </body>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageFilter.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageSearch.js"></script> 
 	
 </html>

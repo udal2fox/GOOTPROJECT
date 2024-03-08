@@ -24,5 +24,27 @@ public class companyServiceImpl implements companyService{
 		return companyMapper.companyList();
 	}
 	
+	@Override
+	public int companyRegister(companyVO vo) {
+		
+		log.info("companyRegister...  vo: " + vo);
+		
+		return companyMapper.companyRegister(vo);
+	}
+	
+	@Override
+	public companyVO companyView(int companyNo) {
+		
+		return companyMapper.companyView(companyNo);
+	}
+	
+	@Override
+	public List<companyVO> checkBizNum(List<String> bizNumArray) {
+		
+		return companyMapper.checkBizNum(bizNumArray);
+	}
+	
+	
+	
 
 }

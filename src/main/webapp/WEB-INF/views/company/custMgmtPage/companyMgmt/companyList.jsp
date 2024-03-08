@@ -112,7 +112,7 @@
          <thead>
             <tr class="top_bar_of_list">
                <th>번호</th>
-
+			   <th>기업명</th>
                <th>사업자 번호</th>
                <th>사업자 구분</th>
                <th>지역</th>
@@ -125,7 +125,7 @@
       			 <c:forEach var="vo" items="${companyVO }">
                <tr class="companyList">
                   <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
-
+				  <td>${vo.comName }</td>
                   <td>${vo.comBizNum }</td>
                   <td>${vo.comBizType }</td>
                   <td>${vo.comArea }</td>
@@ -142,11 +142,11 @@
 </div>
 </div>
 	<div class="btn_div">
-		<input type="button"  class="companyListBtns" id="moveCompanyRegisterBtn" value="기업 등록">
+		<button type="button" class="companyListBtns" id="moveCompanyRegisterBtn" onclick="location.href='/moveCompanyRegister'">기업 등록</button>
+		
 	</div>
 </div>
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>
 </html>

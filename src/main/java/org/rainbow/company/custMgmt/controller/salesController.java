@@ -81,7 +81,7 @@ public class salesController {
 	/** 'salesView.jsp' 에서 영업 내용, 영업 히스토리 저장(수정)하기 */
 	@PostMapping("/saveSales")
 	public String saveSales(consultVO vo, RedirectAttributes rttr) {
-		log.info("saveSales...." + vo);
+		log.info("saveSales_success" + vo);
 
 		salesService.saveSales(vo);
 

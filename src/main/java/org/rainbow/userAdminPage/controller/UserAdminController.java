@@ -1,6 +1,7 @@
 package org.rainbow.userAdminPage.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -38,7 +40,7 @@ public class UserAdminController {
 		return "userAdminPage/userLogin";
 	}
 
-	// userAdminPage 로그인
+	// 사용자 로그인
 	@ResponseBody
 	@PostMapping(value = "/adminLogin", consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<HashMap<String, Object>> customerLogin(@RequestBody HashMap<String, String> userMap,
@@ -69,7 +71,7 @@ public class UserAdminController {
 		}
 	}
 
-	// userAdminPage 로그아웃
+	// 사용자 로그아웃
 	@GetMapping("/goLogout")
 	public String goLogout(HttpServletRequest req) {
 		HttpSession session = req.getSession(false);
@@ -77,29 +79,59 @@ public class UserAdminController {
 		return "/userAdminPage/userLogin";
 	}
 
-	// 고객관리자 개인정보 수정페이지 이동
+	// 사용자 개인정보 수정페이지 이동
 	@GetMapping("/userEdit/{no}")
 	public String userEdit(@PathVariable String no, Model model) {
-		
+		int spotNo = Integer.parseInt(no);
+		HashMap<String, Object> userMap = userService.getUserInfo(spotNo);
+		model.addAttribute("result", userMap);
 		return "/userAdminPage/userEdit";
+	}
+
+	// 사용자 개인정보 업데이트
+	@ResponseBody
+	@PostMapping("/updateUserInfo/{no}")
+	public ResponseEntity<String> updateUserInfo(@RequestBody HashMap<String, Object> updateInfo,
+			@PathVariable String no) {
+		int spotNo = Integer.parseInt(no);
+		updateInfo.put("spotNo", spotNo);
+		log.info("updateInfo..." + updateInfo);
+		int result = userService.updateUserInfo(updateInfo);
+		System.out.println("업데이트 결과값: " + result);
+		if (result > 0) {
+			return new ResponseEntity<String>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	// dashboard 정보 가져오기
 	@GetMapping("/goDashboard/{no}")
 	public String getDashboard(@PathVariable String no, Model model) {
 		int spotNo = Integer.parseInt(no);
-		HashMap<String, Object> infoMap = userService.getDashboard(spotNo);
-		log.info("infoMap..." + infoMap);
-		model.addAttribute("result", infoMap);
+		HashMap<String, Object> dashboardMap = userService.getDashboard(spotNo);
+		log.info("infoMap..." + dashboardMap);
+		model.addAttribute("result", dashboardMap);
 		return "/userAdminPage/dashboard";
 	}
 
 	// 직원관리 페이지 이동
-	@GetMapping("/goManagemember/{no}")
-	public String goManagemember(@PathVariable String no, Model model) {
-		return "/userAdminPage/manage_member";
+	@GetMapping("/goManagemember")
+	public String goManagemember() {
+	    return "/userAdminPage/manage_member";
 	}
-
+	
+    @GetMapping(value="/manage_member/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<HashMap<String, Object>>> getEmpList(@PathVariable String no) {
+        int sNo = Integer.parseInt(no);
+        // 컨트롤러에서 서비스를 호출하여 직원 리스트를 가져옵니다.
+        List<HashMap<String, Object>> empList = userService.getEmpList(sNo);
+        log.info("empList..." + empList);
+        // ResponseEntity에 직원 리스트와 HttpStatus를 담아 반환합니다.
+        return new ResponseEntity<>(empList, HttpStatus.OK);
+    }
+	
+	
 	// 이용현황 페이지 이동
 	@GetMapping("/goUsagehistorylist/{no}")
 	public String goUsagehistorylist(@PathVariable String no, Model model) {

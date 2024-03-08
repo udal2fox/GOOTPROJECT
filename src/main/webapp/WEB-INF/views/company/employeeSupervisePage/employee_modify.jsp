@@ -44,6 +44,7 @@
     									<option value="대리" ${vo.job == '대리' ? 'selected' : ''}>대리</option>
     									<option value="팀원" ${vo.job == '팀원' ? 'selected' : ''}>팀원</option>
     									<option value="인턴" ${vo.job == '인턴' ? 'selected' : ''}>인턴</option>
+    									<option value="대표" ${vo.job == '대표' ? 'selected' : ''}>대표</option>
 									</select> 
 								<%-- <input class="input2" type="text" name="job" value="${vo.job }"> --%>
 								</td>
@@ -84,10 +85,18 @@
 							<th>퇴사일</th>
 							<td><input class="input5" type="text" name="endDt" value="${empty vo.endDt ? '-' : vo.endDt }"></td>
 							<th>계정상태</th>
-							<td><input class="input6" type="text" name="idStatus" value="${vo.idStatus}"></td>
+							<td>
+								<select id="idStatus-select" name="idStatus">
+									<option value="활성" ${vo.idStatus == '활성' ? 'selected' : ''}>활성</option>
+									<option value="비활성" ${vo.idStatus == '비활성' ? 'selected' : ''}>비활성</option>
+								</select>
+		
+							<%-- <input class="input6" type="text" name="idStatus" value="${vo.idStatus}"> --%>
+							</td>
 						</tr>
 					</table>
 				</div>
+				<input type="hidden" name="eno" value="${vo.eno }">
 			</form>
 				<div class="button-container">
 					<input id="saveBtn" type="button" name="save" value="저장">

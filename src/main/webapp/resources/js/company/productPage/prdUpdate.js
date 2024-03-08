@@ -77,9 +77,19 @@
 	  });
 	});
 
+	// 수정창 비과세시 disalble 안걸리는상태값 받을떄
+	(function taxDisable() {
+		if(document.querySelector('taxX').checked='checked')
+		{
+			document.querySelectorAll(".tax").forEach(function(e) {
+		        e.disabled = true;
+		        e.value = 0;
+			});
+		}
+	})();	
 
 
-	function prdReg(f)
+	function prdUpdate(f)
 	{
 		if(f.prdSdc.value == '' || f.prdName.value == '')
 		{
@@ -87,12 +97,22 @@
 			return false;
 		
 		}
-		if(confirm("상품을  등록하시겠습니까?"))
+		if(confirm("상품을  수정하시겠습니까?"))
 		{
+			f.action = 'prdUpdate.do';
 			f.submit();
 		}
 		else return false;	
 		
+	}
+	function prdDelte(f)
+	{
+		if(confirm("상품을  삭제하시겠습니까?"))
+		{
+			f.action = 'prdDelete.do';
+			f.submit();
+		}
+		else return false;	
 	}
 	
 	// 이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.

@@ -88,5 +88,4 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="/resources/js/company/productPage/prdInput.js"></script> 
-	
 	</html>

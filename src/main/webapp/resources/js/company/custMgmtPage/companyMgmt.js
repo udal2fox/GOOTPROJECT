@@ -31,30 +31,30 @@ document.querySelectorAll('.companyListBtns').forEach( btn => {
 /**----------------------서치바 관련------------------------ */
 
 
-function searchBarSearchResult(){
-	
-	//키워드 요소 가져오기
-	const searchBarKeword = f.querySelector('input[name="searchBarKeword"]').value;
-	
-	//지역 요소 가져오기
-	const area = f.querySelector('input[name="area"]').value;
-	
-	//기업 구분 요소 가져오기
-	const bizType = f.querySelector('input[name="bizType"]').value;
-	
-	//업태 요소 가져오기
-	const searchBarBizStatus = f.querySelector('select[name="searchBarBizStatus"]').value;
-	
-	
-	console.log(searchBarKeword);
-	console.log(area);
-	console.log(bizType);
-	console.log(searchBarBizStatus);
-	
-	
-	
-	
-}
+//function searchBarSearchResult(){
+//	
+//	//키워드 요소 가져오기
+//	const searchBarKeword = f.querySelector('input[name="searchBarKeword"]').value;
+//	
+//	//지역 요소 가져오기
+//	const area = f.querySelector('input[name="area"]').value;
+//	
+//	//기업 구분 요소 가져오기
+//	const bizType = f.querySelector('input[name="bizType"]').value;
+//	
+//	//업태 요소 가져오기
+//	const searchBarBizStatus = f.querySelector('select[name="searchBarBizStatus"]').value;
+//	
+//	
+//	console.log(searchBarKeword);
+//	console.log(area);
+//	console.log(bizType);
+//	console.log(searchBarBizStatus);
+//	
+//	
+//	
+//	
+//}
 
 
 
@@ -64,18 +64,15 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 	aEle.addEventListener('click', function(e){
 		e.preventDefault();
 		
-	/*	let companyNo = this.getAttribute("href");
-		
-		console.log(companyNo);*/
+		let companyNo = this.getAttribute("href");
 
-
-		
-		location.href = '/companyView';
+		location.href = '/companyView?companyNo=' + companyNo;
 		
 	})
 })
 
-document.getElementById("moveCompanyRegisterBtn").addEventListener('click', ()=>{
-	
-	location.href = '/companyRegister';
-})
+
+
+
+
+

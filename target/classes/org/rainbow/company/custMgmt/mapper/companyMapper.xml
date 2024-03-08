@@ -11,8 +11,27 @@
   
   </select>
   
+  <!-- 새로운 기업 등록하기-->
+  <insert id="companyRegister" parameterType="org.rainbow.company.custMgmt.domain.companyVO">
+  insert into  RAIN_cCompany_tbl(comCEO) values (#{comCEO})
+
+<!--   insert into RAIN_cCompany_tbl (consultNo,comName,comBizLicenseFile,comBizNum,comBizType,comArea,comAddr,comDetailAddr ,comBizStatus,comBizCategory, comCEO, comContact, comEmail, comOpenningDate )values (#{consultNo},#{comName},#{comBizLicenseFile},#{comBizNum},#{comBizType},#{comArea},#{comAddr},#{comDetailAddr},#{comBizStatus},#{comBizCategory},#{comCEO},#{comContact},#{comEmail},#{comOpenningDate})  
+ -->  
+  </insert>
+  
+   <!-- 기업 정보  가져오기-->
+  <select id="companyView" resultType="org.rainbow.company.custMgmt.domain.companyVO" parameterType="int">
+  	select * from RAIN_cCompany_tbl where companyNo=#{companyNo}
+  </select>
   
   
+  
+<!--    <select id="checkBizNum" resultType="org.rainbow.company.custMgmt.domain.companyVO">
+        SELECT * FROM RAIN_cCompany_tbl WHERE biz_num IN
+        <foreach item="item" collection="bizNumArray" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select> -->
   
   
   </mapper>

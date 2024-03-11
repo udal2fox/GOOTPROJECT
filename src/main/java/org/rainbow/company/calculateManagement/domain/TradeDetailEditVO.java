@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 	
+// 에딧 창 필요정보
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,13 +23,13 @@ public class TradeDetailEditVO {
 	private String comBizType;
 	
 	/** 담당자 */
-	private String userName;
+	private String cEmpName;
 		
 	/** 대표연락처 */
-	private String userContact;
+	private String cEmpTel;
 	
 	/** 대표메일 */
-	private String userEmail;
+	private String cEmpEmail;
 	
 	/** 일자 */
 	private Date recDate;
@@ -76,7 +77,7 @@ public class TradeDetailEditVO {
 	private String prdNo;
 	
 	/** 상품명*/
-	private String prd_prdName;
+	private String prdName;
 	
 	/** 판매가*/
 	private int prdSal;

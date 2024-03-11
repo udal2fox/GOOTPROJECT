@@ -25,7 +25,8 @@
 		UPDATE RAIN_cUser_tbl
 		SET userEmail = #{userEmail},
 		userContact = #{userContact},
-		userPw = #{userPw},
+		userPw =
+		#{userPw},
 		userPwUpdate = now()
 		WHERE spotNo = 1;
 	</update>
@@ -37,12 +38,63 @@
 		select * from RAIN_cSpot_tbl
 		where spotNo = #{spotNo}
 	</select>
-	
+
 	<!-- // 직원정보 가져오기 -->
-	<select id="getEmpList" parameterType="int" resultType="java.util.HashMap">
+	<select id="getEmpList" parameterType="int"
+		resultType="java.util.HashMap">
 		select * from RAIN_cEMP_tbl
 		where sNo = #{sNo}
 	</select>
+
+	<!-- // 직원정보 추가하기 -->
+	<insert id="addUserEmp" parameterType="java.util.HashMap">
+		INSERT INTO RAIN_cEMP_tbl (
+			sNo, 
+			cEmpName, 
+			cEmpTel, 
+			cEmpEmail, 
+			cEmpPosition, 
+			cEmpBirth, 
+			receiveGift
+			) 
+		VALUES (
+			#{sNo}, 
+			#{cEmpName}, 
+			#{cEmpTel}, 
+			#{cEmpEmail}, 
+			#{cEmpPosition}, 
+			#{cEmpBirth}, 
+			0
+			)
+	</insert>
+
+	<!-- // 고객지원 리스트 가져오기 -->
+	<select id="getInquiryList" parameterType="int"
+		resultType="java.util.HashMap">
+		select * from RAIN_spotQnA_tbl
+		where spotNo = #{spotNo}
+	</select>
+
+	<!-- // 고객지원 문의글 등록 -->
+	<insert id="addQnA" parameterType="java.util.HashMap">
+		insert into RAIN_spotQnA_tbl(
+		spotQnANo,
+		spotNo,
+		questionDate,
+		questionTitle,
+		questionContent
+		)
+		values(
+		DEFAULT,
+		#{spotNo},
+		now(),
+		#{questionTitle},
+		#{questionContent}
+		)
+		order by questionDate desc
+	</insert>
+
+
 
 
 

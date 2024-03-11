@@ -67,8 +67,8 @@
 								<div class="form-check">
 									<!--기본선물 편집으로 들어올 경우 type radio로 변경-->
 									<input class="form-check-input" type="checkbox" value=""
-										id="${productNo}"> <label class="form-check-label"
-										for="${productNo}">
+										id="1"> <label class="form-check-label"
+										for="1">
 										<div class="card" style="width: 150px;">
 											<img src="/image/card_blue.png"
 												class="card-img-top object-fit-fill border rounded"

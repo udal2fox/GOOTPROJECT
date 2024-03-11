@@ -179,6 +179,14 @@ public class UserAdminController {
 	public String goManagegift(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_gift";
 	}
+	
+	// 선물 편집 페이지 이동
+	@GetMapping("/manage_gift_Edit")
+	public String goGiftEdit() {
+		return "/userAdminPage/manage_gift_Edit";
+	}
+
+	
 
 	// 생일카드관리 페이지 이동
 	@GetMapping("/goManagecard/{no}")

@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+.alignTable{
+	
+	padding-top: 100px;
+	padding-left: 270px;
+	font-weight: bold;
+}
+
+.saleStatsTableSearch{
+	
+	margin-top: 10px;
+	width: 1200px;
+	background-color: #eaeaea;
+	padding-top: 10px;
+    border-spacing: 2px;
+ 	border-collapse: separate;
+	
+}
+
+.saleStatsTableCal{
+	
+	width: 1200px;
+	text-align: center;
+	margin-top: 20px;
+
+}
+
+.saleStatsTableInfo{
+	
+	width: 1200px;
+	text-align: center;
+	margin-top: 20px;
+	border: 3px solid #ccc;
+	background: #eaeaea;
+}
+
+.paintLightgray td{
+	
+	background-color: #ccc;
+	font-weight: bold;
+}
+
+#paintLightblue{
+	
+	background-color: rgb(52, 152, 219);
+	color: #fff;;
+}
+
+.termBtn{
+	
+	width: 80px;
+	height: 30px;
+	border: none;
+	font-weight: bold;
+}
+
+.termBtnDown{
+	
+	width: 160px;
+	height: 40px;
+	border: none;
+	color: white;
+	font-weight: bold;
+}
+
+.termInput{
+	
+	width: 99px;
+	
+}
+.sort-btn
+{
+	background-color: #eaeaea;
+	border-color: white;
+}
+
+.td
+{
+	background-color: white;
+}
+ input[type=button]	
+ {
+ 	width: 85px;
+ 	height: 35px;
+ }
+.misu
+{
+	display: flex;
+	width: 1200px;
+    justify-content: space-between;
+} 
+
+.misuTotal
+{
+	color: red;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.threebtnDiv input[type=button]	
+{
+	padding-left: 10px;
+}
+
+.page-wrap{
+			    text-align: center;
+			    font-size: 0;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+		}
+		.page-nation {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		.page-nation a{
+			display: block;
+			margin: 0 3px;
+			flex: left;
+			border: 1px solid #e6e6e6;
+			width: 28px;
+			height: 28px;
+			line-height: 28px;
+			text-align: center;
+			background-color: #fff;
+			font-size: 13px;
+			color: black;
+			text-decoration: none;
+		}
+		
+		.page-nation a.active{
+			background-color: #0078ff;
+			color: #fff;
+		}
+		.page-nation a:hover{
+			background-color: #0078ff;
+			color: #fff;
+		}

@@ -1,0 +1,334 @@
+@charset "UTF-8";
+
+	body{
+		margin : 0;
+		padding : 0;
+		
+	}
+
+	.navBar{
+		position: fixed;
+		width : 100%;
+		top : 0;
+		
+	}
+
+/* 변수 생성 */
+:root {
+  
+  --bg-gray:#EEEEEE; 
+  --blue:rgb(75, 91, 225);
+  --basic-radius:3px;
+  
+}
+
+
+.entire{
+	width: 80%;
+
+}
+
+
+   
+/** 타이틀 */
+
+	.title h3{
+		font-weight : bolder;
+		
+	}
+	
+	
+	
+/** ------------신규 영업 (리스트) 페이지 시작--*/
+
+
+.searchBar_div {
+		
+    	box-sizing: border-box;
+    	background-color:var(--bg-gray);
+    	padding-bottom:10px;
+	}
+
+
+.searchBar_tbl {
+	
+
+	box-sizing: border-box;
+	border-spacing: 0px 30px;
+   	border-collapse: separate; 
+   	width: 100%;
+	
+}
+
+
+
+.searchBar_tbl input[type="text"] {
+	
+	width:100%;
+	border: none;
+	
+}
+
+.searchBar_tbl input[type="date"] {
+	border: none;
+	width:130px;
+	text-align: center;
+
+}
+
+
+.searchBar_section_layout {
+	box-sizing: border-box;
+	        display: flex;
+   			align-items: center;
+   			justify-content: flex-start;
+   			padding-left: 70px;
+		}
+		
+		
+.searchBar_section_layout div{
+	box-sizing: border-box;
+		   padding-right: 20px;
+		}
+
+.input-group {
+	box-sizing: border-box;
+		    margin-bottom: 10px;
+		}
+		
+		
+.btn btn-secondary btn-sm {
+	
+	margin-right: 10px;
+}		
+		
+		
+#searchBarSearchBtn {
+	margin-left:1100px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	
+	}
+	
+#searchBarResetBtn {
+	background-color:rgb(255, 255, 255);
+	color:var(--blue);
+	border-color:rgb(255, 255, 255);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width: 80px;
+	}
+	
+.download_to_excel_btn_div {
+	
+    box-sizing: border-box;
+	text-align: right;
+	padding: 50px 5px 10px 5px;
+}
+	
+
+#downloadExcelBtn {
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	width:140px;
+}
+
+
+
+
+.list_div {
+	
+	box-sizing: border-box;
+	border : 5px solid var(--bg-gray);
+
+}
+
+.list_div_tbl {
+	 
+	border : 5px solid white;
+	table-layout: auto;
+	table-layout: fixed;
+	width:100%;
+}
+
+.list_div_tbl tr th {
+
+	font-size: 15px;
+	text-align: center;
+}
+
+.list_div_tbl td{
+	text-align: center;
+	
+}
+
+
+.top_bar_of_list {
+	border : 5px solid white;
+	
+	background-color:var(--bg-gray);
+	font-size: 15px;
+	font-weight : bolder;
+
+}
+
+
+
+
+
+/** ------------신규 영업 (리스트) 페이지 끝--*/
+
+
+
+
+
+
+/** ------------신규 영업 (상세보기) 페이지 시작-- */
+
+.subject_title {
+	
+	margin-top:30px;
+	background-color : var(--bg-gray);
+	height: 50px;
+	padding-top:12px;
+	
+}
+
+.subject_content_tbl {
+	
+	box-sizing: border-box;
+	width: 100%;
+	table-layout: fixed;
+	border: 6px solid var(--bg-gray);
+	
+
+}
+.subject_content_tbl tr th {
+	width:120px;
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	text-align: center;
+	font-size: 15px;
+}
+.subject_content_tbl td {
+	
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	
+}
+
+
+.tbl_subtitle {
+	
+	width:120px;
+	background-color: var(--bg-gray);
+	border: 6px solid var(--bg-gray);
+	text-align: center;
+	
+	font-weight: bolder;
+}
+
+#inquiryDetails {
+	text-align:left;
+}
+
+
+#imgBtnSearchEname {
+        background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+      }
+
+
+
+input[type="text"],input[type="email"],  select {
+	border:none;
+	text-align: center;
+}
+
+textarea{
+	border:none;
+}
+
+
+.space_img_btns {
+	box-sizing: border-box;
+	background-color: var(--bg-gray);
+	padding-left: 1000px;
+
+}
+
+
+
+ #imgBtnPlus {
+ box-sizing: border-box;
+        background: url( "/resources/images/ul-plus-circle.svg" ) no-repeat;
+        border: none;
+      	width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-size: contain;
+        margin-right:20px;
+        
+        
+        
+      }
+
+#imgBtnMinus {
+	box-sizing: border-box;
+        background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
+        border: none;
+      	  width: 30px;
+        height: 30px;
+        cursor: pointer;
+        background-size: contain;
+      }
+
+
+
+
+
+.btn_div {
+	width: var(--max-width);
+    box-sizing: border-box;
+	text-align: right;
+	padding-top:50px;
+}
+
+
+
+#saveBtn {
+	
+    box-sizing: border-box;
+	width:120px;
+	background-color: var(--blue);
+	color: rgb(255, 255, 255);
+	border-color:var(--blue);
+	border-radius: var(--basic-radius);
+	border: 5px 10px 5px 10px;
+	
+}
+
+
+
+/** ------------신규 영업 (상세보기) 페이지 끝-- */
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,91 @@
+	div {
+    	display: block;
+    	vertical-align: top;
+	}
+	#head-line {
+    	width: 100%;
+    	height: 100px;
+    	background-color: #003BBA;
+	}
+	#logo {
+    	margin-top: 20px;
+    	margin-left: 20px;
+    	max-width: 100px;
+    	max-height: 100px;
+	}
+	#footer-line {
+    	width: 100%;
+    	height: 140px;
+    	background-color: gray;
+    	position: fixed;
+    	bottom: 0;
+    	left: 0;
+    	text-align: left;
+	}
+	p {
+    	padding: 50px 120px 50px 0;
+    	margin-left: 920px;
+    	width: 860px;
+	}
+	body {
+    	padding-bottom: 180px;
+    	margin: 0;
+    	position: relative;
+	}
+	#loginForm {
+    	padding-top: 150px;
+    	width: 100%;
+    	text-align: center;
+	}
+	#loginBox {
+    	width: 40%;
+    	height: auto;
+    	margin: auto;
+    	padding: 20px;
+   	 	box-sizing: border-box;
+	}
+	input[type='text'] {
+    	border-top-right-radius: 10px;
+    	border-bottom-right-radius: 10px;
+    	width: 90%;
+    	height: 50px;
+   	 	border-left: none;
+    	text-indent: 20px;
+    	border: 0.5px solid silver;
+	}
+	input[type='button'] {
+    	width: 60%;
+    	height: 60px;
+    	background-color: #CDC6FF;
+    	border: none;
+    	border-radius: 10px;
+    	margin-top: 40px;
+    	color : white;
+    	font-size: 20px;
+  		font-weight: bold;
+	}
+	#usernameBar,
+	#userpwBar {
+    	width: 60%;
+    	height: 55px;
+    	display: flex;
+    	align-items: center;
+    	margin: 0 auto;
+	}
+	#userpwBar{
+		margin-top: 10px;
+	}
+	.bi.bi-people-fill,
+	.bi.bi-key-fill {
+    	width: 43.5px;
+    	height: 43.5px;
+    	fill: gray;
+    	margin: 0 10px;
+	}
+	.d-inline-block {
+		border: 0.5px solid silver;
+		border-right: none;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		height: 52px;
+	}

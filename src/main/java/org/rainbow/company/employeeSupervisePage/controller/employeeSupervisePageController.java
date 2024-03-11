@@ -3,12 +3,16 @@ package org.rainbow.company.employeeSupervisePage.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.RowBounds;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
+import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
+import org.rainbow.domain.Criteria;
+import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +29,38 @@ public class employeeSupervisePageController {
 
 	@Autowired
 	searchEmployeeServiceImpl service;
+	
+	
+	// 직원 조회 페이지
+	@GetMapping("/searchEmployee")
+	public String searchEmployee(Model model, Criteria cri) {
+			  
+		if( cri.getPageNum() == 0 && cri.getAmount() == 0) {
+			cri.setPageNum(1);
+			cri.setAmount(13);
+		}
+		
+		// offset 설정
+	    cri.setOffset((cri.getPageNum() - 1) * cri.getAmount());
 
+	    // getList() 메서드 호출 시, Criteria 객체만을 인자로 전달
+	    List<rain_employeeDTO> employeeList = service.getList(cri);
+
+			 	
+		log.info("getList..." + employeeList);
+		System.out.println(service.getList(cri));
+			 
+		//전체 직원 수 
+		int total = service.getTotal(); 
+		log.info("total...." + total);
+			 
+		// PageDTO 객체 list 화면으로 전달
+		model.addAttribute("list", employeeList);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+			
+		return "/company/employeeSupervisePage/searchEmployeePage";
+	}
+		
 	// 직원 정보 등록 페이지 이동
 	@GetMapping("/employee_insert")
 	public String employee_insert() {
@@ -169,18 +204,5 @@ public class employeeSupervisePageController {
 		return "/company/employeeSupervisePage/profile_modify";
 	}
 
-	// 직원 조회 페이지
-	@GetMapping("/searchEmployee")
-	public String searchEmployee(Model model) {
-
-		 log.info("getList..." + service.getList());
-		 System.out.println(service.getList());
-		  
-		 model.addAttribute("list", service.getList());
-		 //전체 직원 수 
-		 int total = service.getTotal(); 
-		 log.info("total...." + total);
-		
-		return "/company/employeeSupervisePage/searchEmployeePage";
-	}
 }
+	

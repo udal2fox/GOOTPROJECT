@@ -11,6 +11,12 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
+	#searchBar-select {
+		widht : 90%;
+    	display: flex; 
+    	align-items: center; 
+    	gap: 20px; 
+	}
 	#searchBar{
 		display : inline-block;
 		margin-left: 80px;
@@ -18,6 +24,7 @@
 	#selectDept{
 		display : inline-block;
 		margin-left: 100px;
+		margin-right: 400px;
 	}
 	span{
 		margin-right: 20px;
@@ -37,7 +44,7 @@
 	#execelBtn{
 		width : 167px;
 		height: 40px;
-		margin-left: 715px;
+	 	margin-left: 460px;
 		border: none;
 		border-radius: 5px;
 		background-color: #787DFF;
@@ -75,7 +82,7 @@
 		border-radius: 5px;
 		background-color: skyblue;
 		color: white;
-		margin-right: 65px;
+		margin-right: 75px;
 	}
 	#table_header{
 		background-color: #eaeaea;
@@ -86,8 +93,6 @@
 	.sort-btn{
 		border-color: white;
 	}
-	
-	 
 	.page-wrap{
 		position: sticky;
 		width: 100%;
@@ -126,4 +131,4 @@
 		background-color: #0078ff;
 		color: #fff;
 	}
-	 */
+	 

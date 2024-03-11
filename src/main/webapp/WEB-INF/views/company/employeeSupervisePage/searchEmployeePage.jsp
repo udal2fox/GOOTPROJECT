@@ -62,9 +62,17 @@
 					</c:forEach>
 				</tbody>
 			</table>
-				<div class="insertEmployeeBtn">
-					<button id="insertBtn" name="insertEmployee">신규등록</button>
-				</div>
+ 			<%-- deptNo가 1인 인사팀 경우에만 버튼을 보이도록 함 --%>
+				<c:choose>
+    				<c:when test="${deptNo == 1}">
+        				<div class="insertEmployeeBtn">
+            				<button id="insertBtn" name="insertEmployee">신규등록</button>
+        				</div>
+    				</c:when>
+    			 	<c:otherwise>
+        	<%-- 인사팀 아닌 경우에는 아무것도 출력하지 않음 --%>
+   				 	</c:otherwise>
+				</c:choose>
 				
 				
 				<!-- 페이징 영역 -->

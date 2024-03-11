@@ -41,12 +41,12 @@ document.getElementById("loginBtn").addEventListener("click", () => {
       }else {
           Response.json().then((result) => {
           sessionStorage.setItem("Okja", result.eno);
- 
-			location.href = "/searchEmployee?" + sessionStorage.getItem("Okja");
-		
+          sessionStorage.setItem("deptNo", result.deptNo);
+          
+          location.href = "/searchEmployee?" + sessionStorage.getItem("Okja");
 	})
   }
-})
+})	
 	.catch( err => {
 		// 에러 처리
 		console.log('Fetch error:', err);

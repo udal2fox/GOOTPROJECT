@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.RowBounds;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
@@ -200,7 +201,39 @@ public class employeeSupervisePageController {
 		
 	// 프로필 편집 페이지
 	@GetMapping("/profile_modify")
-	public String profile_modify() {
+	public String profile_modify(HttpSession session, Model model) {
+		
+		// 세션에서 필요한 값들 가져오기
+        Integer eno = (Integer) session.getAttribute("eno");
+        
+        
+        rain_EmpVO vo = service.get(eno);
+     
+        String dName = "";
+        
+		switch (vo.getDeptNo()) {
+		    case 1:
+		        dName = "인사";
+		        break;
+		    case 2:
+		        dName = "재무";
+		        break;
+		    case 3:
+		        dName = "영업";
+		        break;
+		    case 4:
+		        dName = "상품";
+		        break;
+		    case 0:
+		        dName = "대표";
+		        break;
+		}
+
+		model.addAttribute("dName", dName);
+        model.addAttribute("vo", vo);
+        
+        log.info("move profilePage" + model);
+		
 		return "/company/employeeSupervisePage/profile_modify";
 	}
 

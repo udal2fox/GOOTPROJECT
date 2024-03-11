@@ -27,7 +27,7 @@ function showQnAList(data) {
   } else {
     // 데이터가 있는 경우
     data.reverse().forEach((QnA) => {
-      // 각 직원의 정보를 반복해서 표시
+      // 각 문의 정보를 반복해서 표시
       msg += '<div class="accordion-item" id="QnA">';
       msg += '<h2 class="accordion-header">';
       msg += '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#'+QnA.spotQnANo+'">';
@@ -83,5 +83,7 @@ inputBtn.addEventListener('click',()=>{
 function formatAnswer(content){
   if(content == undefined){
     return '잠시만 기다려주시면 담당부서에서 답변드릴 예정입니다.'
+  }else{
+    return content;
   }
 }

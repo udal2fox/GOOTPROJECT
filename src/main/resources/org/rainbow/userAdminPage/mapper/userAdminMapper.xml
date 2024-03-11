@@ -76,20 +76,17 @@
 	<!-- // 고객지원 문의글 등록 -->
 	<insert id="addQnA" parameterType="java.util.HashMap">
 		insert into RAIN_spotQnA_tbl(
-		spotQnANo,
 		spotNo,
 		questionDate,
 		questionTitle,
 		questionContent
 		)
 		values(
-		DEFAULT,
 		#{spotNo},
 		now(),
 		#{questionTitle},
 		#{questionContent}
 		)
-		order by questionDate desc
 	</insert>
 
 </mapper>

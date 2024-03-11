@@ -96,7 +96,6 @@ public class UserAdminController {
 		updateInfo.put("spotNo", spotNo);
 		log.info("updateInfo..." + updateInfo);
 		int result = userService.updateUserInfo(updateInfo);
-		System.out.println("업데이트 결과값: " + result);
 		if (result > 0) {
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} else {

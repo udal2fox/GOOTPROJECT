@@ -45,10 +45,10 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	}
 
 	@Override
-	public List<TradeDetailEditVO> editTdList() 
-	{
-		return tMapper.editTdList();
+	public List<TradeDetailEditVO> editTdList(String recNo) {
+		return tMapper.editTdList(recNo);
 	}
+
 	
 	
 	

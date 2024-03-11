@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// 거레 명세 테이블 기존
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

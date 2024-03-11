@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 	<link rel="stylesheet" href="/resources/css/company/login.css">
+
 </head>
 <body>
 	<div id="head-line">
@@ -25,6 +27,7 @@
 					<!-- 아이디 input -->
 					<input type="text" class="eId" name="eId" placeholder="Username">
 				</div>
+				
 				<div id="userpwBar">
 					<div class="d-inline-block p-3 rounded-circle" style="background-color: #D3D3D3;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="gray" class="bi bi-key-fill" viewBox="0 0 16 16">
@@ -35,8 +38,8 @@
 					<!-- 비밀번호 input -->
 					<input type="text" class="ePw" name="ePw" placeholder="●●●●">
 				</div>
-				<div>
 				
+				<div>
 					<!-- 로그인 버튼 -->    
 					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인">
 				</div>

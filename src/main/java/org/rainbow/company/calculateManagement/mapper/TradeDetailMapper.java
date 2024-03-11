@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
+import org.rainbow.company.calculateManagement.domain.tdDownVO;
 
 
 public interface TradeDetailMapper {
@@ -14,5 +15,13 @@ public interface TradeDetailMapper {
 	/** tdList 서치*/
 	public List<TradeDetailListVO> searchTd(TradeDetailSearchDTO tdDTO);
 	
+	/** tdList 결제처리 */
+	public int paymentProcessing(List<String> recNo);
+	
+	/** tdList 대손처리 */
+	public int bigHandProcessing(List<String> recNo);
+	
+	/** 다운받을 리스트 서치 */
+	public List<tdDownVO> tdDownList(List<String> checkValues);
 	
 }

@@ -1,53 +1,4 @@
 
-document.getElementById("uploadBtn").addEventListener("click", function() {
-  document.getElementById("excelUpload").click();
-});
-
-// 선택된 파일 이름 표시
-document.getElementById("excelUpload").addEventListener("change", function() {
-	let input = this;
-	let files = input.files;
-	let fileName = input.files[0].name;
-	console.log(files[0]);
-	console.log(input);
-	console.log(fileName);
-	
-	// 파일이 없거나 1개 이상인 경우
-    if (files.length !== 1) {
-        alert("하나의 파일을 선택해주세요.");
-        input.value = '';
-        
-        return;
-    }
-    let formData = new FormData();
-	formData.append("EXCEL", files[0]);
-    
-    if(confirm("파일 을 업로드 하시 것슴까!?"))
-	{
-    	fetch('/prdExcelInput', {
-    		  method: 'POST',
-    		  body: formData
-    		})
-    		.then(response => response.text())
-    		.then(data => 
-    		{
-    		  console.log('서버 응답:', data);
-    		  if(data === 'success') alert("인풋 성공");
-    		  else alert("인풋 실패");
-    		  
-    		})
-    		.catch(error => 
-    		{
-    		  console.error('오류 발생:', error);
-    		  alert("엑셀 업로드 실패!!");
-    		});
-	}
-    else
-	{
-    	return false;
-	}
-	
-});
 
 
 // 다운로드 버튼 눌러서 함수호출
@@ -63,7 +14,7 @@ function download()
     // 상품 분류 체크박스들의 값을 가져옵니다.
     let checkedValues = [];
     
-    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="td-Business"]:checked').forEach(function(checkbox) {
         if(checkbox.value != '전체')
 		{
         	checkedValues.push(checkbox.value);
@@ -71,16 +22,18 @@ function download()
     });
 
     // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="td-calculate"]:checked').forEach(function(checkbox) {
     	 if(checkbox.value != '전체')
  		{
          	checkedValues.push(checkbox.value);
  		}
     });
+    
+    console.log(checkedValues);
 
 		
     // 서버로 데이터 전송
-    fetch('/downloadExcel', {
+    fetch('/tdExcelDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkedValues)

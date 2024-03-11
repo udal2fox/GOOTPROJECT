@@ -42,8 +42,7 @@
 			<section class="col p-5">
 				<div class="overflow-auto" style="height: 650px;">
 					<div class="accordion accordion-flush p-2" id="inquiryBoard">
-
-						<div class="accordion-item">
+						<div class="accordion-item" id="QnA">
 							<h2 class="accordion-header">
 								<button class="accordion-button collapsed" type="button"
 									data-bs-toggle="collapse" data-bs-target="#${1}">
@@ -92,24 +91,23 @@
 				aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
-			<form action="#">
+			<form id="inputQnA">
 				<div class="m-4">
 					<label for="inquiryTitle" class="form-label fw-bold">문의제목</label> <input
 						type="text" class="form-control border border-dark-subtle"
-						id="inquiryTitle" placeholder="제목을 입력해주세요.">
+						id="inquiryTitle" name="inquiryTitle" placeholder="제목을 입력해주세요.">
 				</div>
 				<div class="m-4">
 					<label for="inquiryBody" class="form-label fw-bold">문의내용</label>
-					<textarea class="form-control border border-dark-subtle"
-						id="customMessege" placeholder="내용을 입력해주세요." rows="15"></textarea>
+					<textarea class="form-control border border-dark-subtle" id="customMessege" name="customMessege" placeholder="내용을 입력해주세요." rows="15"></textarea>
 				</div>
 				<div class="text-end m-4">
-					<button type="button" class="btn btn-primary" style="width: 150px;">문의
-						등록하기</button>
+					<button type="button" class="btn btn-primary" style="width: 150px;" id="inputBtn"></button>
 				</div>
 			</form>
 		</div>
 	</div>
 
 </body>
+<script src="/resources/js/userAdminPage/inquiryBoard.js"></script>
 </html>

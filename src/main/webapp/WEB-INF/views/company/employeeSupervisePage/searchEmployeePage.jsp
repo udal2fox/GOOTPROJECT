@@ -4,6 +4,7 @@
 <%@ include file="../../navBar.jsp" %> 
 
  <link rel="stylesheet" href="/resources/css/company/employeeSupervisePage/searchEmployeePage.css">
+
 <body>
 
 	<div id="pull-wrap">
@@ -97,6 +98,7 @@
 				</div>
 			</div>
 		</div>
+
 		
 	
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage1.js"></script>

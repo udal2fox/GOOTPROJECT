@@ -32,6 +32,21 @@
 			<tr>
 				<td>&nbsp;</td>
 			</tr>
+<<<<<<< HEAD
+				<tr>
+					<td> 키워드   </td> 
+					<td colspan="1"> <input type="text" placeholder="거래명세번호/기업명/지점명" style="width: 382px"> </td>
+					<td><input type="button" class="btn btn-primary" value="검색"></td>
+					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
+					<td align="center" style="padding-right:15px;"> 결제수단 </td>
+					<td colspan="2"> 
+						<select class="form-select payMth">
+							<option data-filter="td-pay" value="신용카드">신용카드</option>
+							<option data-filter="td-pay" value="계좌이체">계좌이체</option>
+							<option data-filter="td-pay" value="간편결제">간편결제</option>
+						</select>
+					</td>	
+=======
 			<tr>
 				<td style="padding-right:15px;"> 결제수단 </td>
 				<td colspan="1"> 
@@ -48,13 +63,20 @@
 					<td colspan="1"> <input type="text" placeholder=" 거래명세번호/기업명/지점명" style="width: 382px" id="tdKeyword"> </td>
 					<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
+>>>>>>> origin/master
 				</tr>
 			<tr>
 				<td style="padding-top: 10px">기간</td>
 				<td>
+<<<<<<< HEAD
+					<input class="datePick1" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
+					 ~ 
+					<input class="datePick2" type="text" placeholder="날짜를 선택하세요.." readonly="readonly">
+=======
 					<input class="datePick1" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
 					 ~ 
 					<input class="datePick2" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
+>>>>>>> origin/master
 				</td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>
@@ -68,18 +90,33 @@
 				<td>&nbsp;</td>
 			</tr>
 		</table>
+<<<<<<< HEAD
+		<div>
+			<div class="threebtnDiv" align="right" style="width: 1200px;">
+				<input type="button" class="btn btn-primary" value="결제완료">
+				<input type="button" class="btn btn-primary" value="대손처리">
+=======
 		<div style="padding-top: 20px;">
 			<div class="threebtnDiv" align="right" style="width: 1200px;">
 				<input type="button" class="btn btn-primary PaymentBtn" value="결제완료">
 				<input type="button" class="btn btn-primary BigHandBtn" value="대손처리">
+<<<<<<< HEAD
+>>>>>>> origin/master
 				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
 				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
+=======
+				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기" id="downloadButton">
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 			</div>
 		</div>
 		<table border="1" class="saleStatsTableInfo">
 			<thead>
 			<tr>
+<<<<<<< HEAD
+				<th><input type="checkbox" name="categoryAll" value="전체"></th>
+=======
 				<th><input type="checkbox" id="checkboxTdAll" value="전체"></th>
+>>>>>>> origin/master
 				<th>거래명세번호</th>
 				<th>기업명</th>
 				<th>기업구분</th>
@@ -91,15 +128,24 @@
 				<th>원가</th>
 				<th>마진율</th>
 				<th>결제수단</th>
-				<th>정산여부</th>
+				<th>정산여부<button type="button" class="sort-btn" data-column="recSortation">🔽</button></th>
 			</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="td" items="${list}">
 					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}">
+<<<<<<< HEAD
+						<td><input type="checkbox" name="categoryAll"></td>
+=======
 						<td><input type="checkbox" name="checkboxTd"></td>
+<<<<<<< HEAD
+>>>>>>> origin/master
 						<td>${td.recNo}</td>
 						<td><a href="/companyView">${td.comName}</a></td>
+=======
+						<td><a href="/tradeDetailEdit?recNo=${td.recNo }"> ${td.recNo}</a></td>
+						<td><a href="/companyView?companyNo=${td.companyNo}">${td.comName}</a></td>
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
@@ -123,6 +169,13 @@
     </div>
 </body>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageFilter.js"></script> 
+<<<<<<< HEAD
+=======
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageSearch.js"></script> 
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdUpDownLoad.js"></script> 
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 	
 </html>

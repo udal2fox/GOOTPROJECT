@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -130,6 +129,15 @@ public class UserAdminController {
         // ResponseEntity에 직원 리스트와 HttpStatus를 담아 반환합니다.
         return new ResponseEntity<>(empList, HttpStatus.OK);
     }
+    
+    @PostMapping(value="/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public ResponseEntity<String> addUserEmp(@RequestBody HashMap<String, Object> addForm) {
+        log.info("InquiryList..." + addForm);
+        boolean result = userService.addUserEmp(addForm);
+        System.out.println(result);
+        return result == true ? new ResponseEntity<String>("success",HttpStatus.OK) : new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
+    }
 	
 	
 	// 이용현황 페이지 이동
@@ -141,6 +149,29 @@ public class UserAdminController {
 	// 고객지원 페이지 이동
 	@GetMapping("/goInquiryboard/{no}")
 	public String goInquiryboard(@PathVariable String no, Model model) {
+		return "/userAdminPage/inquiryBoard";
+	}
+	
+	// 고객지원 문의 리스트 가져오기
+	@ResponseBody
+	@GetMapping(value="/getInquiryboard/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getInquiryList(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		// 컨트롤러에서 서비스를 호출하여 문의 리스트를 가져옵니다.
+		List<HashMap<String, Object>> InquiryList = userService.getInquiryList(spotNo);
+		log.info("InquiryList..." + InquiryList);
+		return new ResponseEntity<>(InquiryList,HttpStatus.OK);
+	}
+	
+	// 고객지원 문의글 등록하기
+	@PostMapping("/addQnA/{no}")
+	public String addQnA(@RequestParam("inquiryTitle") String inquiryTitle, @RequestParam("customMessege") String customMessege, @PathVariable("no") String spotNo) {
+		HashMap<String, Object> addQnAMap = new HashMap<String, Object>();
+		addQnAMap.put("questionTitle", inquiryTitle);
+		addQnAMap.put("questionContent", customMessege);
+		addQnAMap.put("spotNo", Integer.parseInt(spotNo));
+		boolean result = userService.addQnA(addQnAMap);
+		log.info("addQnA..." + result);
 		return "/userAdminPage/inquiryBoard";
 	}
 

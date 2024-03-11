@@ -15,9 +15,13 @@
     		RAIN_DEPT_tbl d 
     	ON 
     		e.deptNo = d.deptNo
+<<<<<<< HEAD
+    	ORDER BY e.eno DESC
+=======
     	ORDER BY 
     		e.eno DESC 
     	LIMIT #{amount} OFFSET #{offset}
+>>>>>>> origin/master
     	
 	</select>
 	

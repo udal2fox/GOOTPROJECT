@@ -41,4 +41,19 @@ public class userAdminServiceImpl implements userAdminService{
 	public List<HashMap<String, Object>> getEmpList(int sNo) {
 		return userMapper.getEmpList(sNo);
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> getInquiryList(int spotNo) {
+		return userMapper.getInquiryList(spotNo);
+	}
+	
+	@Override
+	public boolean addQnA(HashMap<String, Object> addQnAMap) {
+		return userMapper.addQnA(addQnAMap);
+	}
+	
+	@Override
+	public boolean addUserEmp(HashMap<String, Object> addForm) {
+		return userMapper.addUserEmp(addForm);
+	}
 }

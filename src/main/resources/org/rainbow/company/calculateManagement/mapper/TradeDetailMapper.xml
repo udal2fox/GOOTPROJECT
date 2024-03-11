@@ -17,7 +17,12 @@
         
     </select>
     
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
     <!-- 거래 명세 검색  -->
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
     <select id="searchTd" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	
     SELECT 
@@ -96,6 +101,7 @@
     
     
     
+>>>>>>> origin/master
     
     <!-- 거래미수 기업 연결 아직안함 -->
     <select id="misuCom" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">

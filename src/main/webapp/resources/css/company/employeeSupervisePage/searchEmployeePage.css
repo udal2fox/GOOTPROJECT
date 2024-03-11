@@ -11,12 +11,15 @@
 		padding-top: 20px;
 		padding-bottom: 20px;
 	}
+<<<<<<< HEAD
+=======
 	#searchBar-select {
 		widht : 90%;
     	display: flex; 
     	align-items: center; 
     	gap: 20px; 
 	}
+>>>>>>> origin/master
 	#searchBar{
 		display : inline-block;
 		margin-left: 80px;
@@ -24,7 +27,10 @@
 	#selectDept{
 		display : inline-block;
 		margin-left: 100px;
+<<<<<<< HEAD
+=======
 		margin-right: 400px;
+>>>>>>> origin/master
 	}
 	span{
 		margin-right: 20px;
@@ -44,7 +50,11 @@
 	#execelBtn{
 		width : 167px;
 		height: 40px;
+<<<<<<< HEAD
+		margin-left: 715px;
+=======
 	 	margin-left: 460px;
+>>>>>>> origin/master
 		border: none;
 		border-radius: 5px;
 		background-color: #787DFF;
@@ -82,7 +92,11 @@
 		border-radius: 5px;
 		background-color: skyblue;
 		color: white;
+<<<<<<< HEAD
+		margin-right: 65px;
+=======
 		margin-right: 75px;
+>>>>>>> origin/master
 	}
 	#table_header{
 		background-color: #eaeaea;
@@ -93,6 +107,11 @@
 	.sort-btn{
 		border-color: white;
 	}
+<<<<<<< HEAD
+	
+	 
+=======
+>>>>>>> origin/master
 	.page-wrap{
 		position: sticky;
 		width: 100%;
@@ -131,4 +150,8 @@
 		background-color: #0078ff;
 		color: #fff;
 	}
+<<<<<<< HEAD
+	 */
+=======
 	 
+>>>>>>> origin/master

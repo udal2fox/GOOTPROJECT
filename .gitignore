@@ -1,9 +1,4 @@
 /.metadata/
-
-## 폴더무시
-.idea/
-out/
-=======
 # Ignore IntelliJ IDEA files
 .idea/
 # Ignore compiled output

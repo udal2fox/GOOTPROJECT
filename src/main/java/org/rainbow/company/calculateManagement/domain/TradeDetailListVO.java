@@ -30,11 +30,15 @@ public class TradeDetailListVO
 	// 원가
 	private int prdCstPri;
 	// 마진율
-	private double	 prdMargin;
+	private double prdMargin;
 	// 결제 수단
 	private String recPayMth;
 	// 정산여부
 	private String recSortation;
+	// 기업 기본키
+	private String companyNo;
+	// 지점 기본키
+	private String spotNo;
 	
 	
 }

@@ -12,7 +12,7 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
     <title>Document</title>
-
+	
     <style>
         /* GOOGLE FONTS */
         @font-face {
@@ -122,7 +122,8 @@
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-	<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script> <!--데이트피커  -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script><!-- 날짜 계산용 모먼트 라이브러리  -->
 </head>
 
 <body>

@@ -63,11 +63,10 @@
 								<th>연락처</th>
 								<th>이메일</th>
 								<th>생년월일</th>
-								<th>1인당 예산</th>
 								<th>선물 수령여부</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="empList">
 							<tr class="text-center">
 								<td><input class="form-check-input" type="checkbox"></td>
 								<td>${member_seq}</td>
@@ -76,7 +75,6 @@
 								<td>${member_phone}</td>
 								<td>${member_email}</td>
 								<td>${member_birth}</td>
-								<td>${member_budget}</td>
 								<td>${member_gift}</td>
 							</tr>
 
@@ -158,7 +156,6 @@
 									<th>연락처</th>
 									<th>이메일</th>
 									<th>생년월일</th>
-									<th>1인당 예산</th>
 									<th>선물 수령여부</th>
 								</tr>
 							</thead>
@@ -170,7 +167,6 @@
 									<td><input type="number" value="${phone}"></td>
 									<td><input type="mail" value="${value}"></td>
 									<td><input type="date" value="${date}"></td>
-									<td><input type="number" value="${budget}" readonly></td>
 									<td><select class="form-select" aria-label="status">
 											<option selected>여부</option>
 											<option value="1">O</option>
@@ -220,6 +216,5 @@
 
 
 </body>
-
-
+<script src="/resources/js/userAdminPage/manage_member.js"></script>
 </html>

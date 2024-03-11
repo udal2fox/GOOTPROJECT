@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../navBar.jsp" %> 
 
+<<<<<<< HEAD
+=======
+ <link rel="stylesheet" href="/resources/css/company/employeeSupervisePage/searchEmployeePage.css">
+>>>>>>> origin/master
 <body>
 
 	<div id="pull-wrap">
@@ -88,7 +92,13 @@
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 
+=======
+		
+	
+	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage1.js"></script>
+>>>>>>> origin/master
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage.js"></script>
 </body>
 </html>

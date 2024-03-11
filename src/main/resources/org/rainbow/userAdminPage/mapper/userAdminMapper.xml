@@ -25,8 +25,7 @@
 		UPDATE RAIN_cUser_tbl
 		SET userEmail = #{userEmail},
 		userContact = #{userContact},
-		userPw =
-		#{userPw},
+		userPw = #{userPw},
 		userPwUpdate = now()
 		WHERE spotNo = 1;
 	</update>
@@ -38,10 +37,9 @@
 		select * from RAIN_cSpot_tbl
 		where spotNo = #{spotNo}
 	</select>
-
+	
 	<!-- // 직원정보 가져오기 -->
-	<select id="getEmpList" parameterType="int"
-		resultType="java.util.HashMap">
+	<select id="getEmpList" parameterType="int" resultType="java.util.HashMap">
 		select * from RAIN_cEMP_tbl
 		where sNo = #{sNo}
 	</select>
@@ -93,9 +91,5 @@
 		)
 		order by questionDate desc
 	</insert>
-
-
-
-
 
 </mapper>

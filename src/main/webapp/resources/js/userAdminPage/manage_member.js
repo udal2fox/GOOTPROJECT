@@ -1,4 +1,5 @@
 // *****************************직원 정보 가져오는 부분*****************************
+
 // 직원 정보를 가져오고 화면에 표시하는 부분입니다.
 const path = "/userAdminPage/manage_member/" + okja; // API 경로 설정
 
@@ -14,6 +15,7 @@ fetch(path)
 
 // 직원 목록을 표시하는 함수입니다.
 function showEmpList(data) {
+
   let msg = ""; // HTML을 저장하는 변수
   let tbody = document.querySelector("#empList"); // HTML 테이블의 tbody 요소
 

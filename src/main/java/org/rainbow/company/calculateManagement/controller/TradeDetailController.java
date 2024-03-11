@@ -4,11 +4,26 @@ package org.rainbow.company.calculateManagement.controller;
 import java.util.List;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
+<<<<<<< HEAD
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
+import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+>>>>>>> origin/master
 
 import lombok.extern.log4j.Log4j;
 
@@ -19,6 +34,11 @@ public class TradeDetailController {
 	@Autowired
 	TradeDetaiServiceImpl tService;
 	
+<<<<<<< HEAD
+=======
+	
+	// 거래 명세 페이지 이동 
+>>>>>>> origin/master
 	@GetMapping(value = "/TradeDetailPage")
 	public String orderStatementPage(Model model) {
 		
@@ -29,4 +49,36 @@ public class TradeDetailController {
 		
 		return "/company/calculateMGTpage/TradeDetailPage";
 	}
+<<<<<<< HEAD
+=======
+	
+	// 거레 명세 검색 
+	@ResponseBody
+	@PostMapping(value = "/TradeDetailSearch.do", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<TradeDetailListVO>> tdSearch(@RequestBody TradeDetailSearchDTO tdDTO)
+	{
+		log.info(tdDTO);
+		List<TradeDetailListVO> list = tService.searchTd(tdDTO);
+		log.info(list);
+		return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
+				
+	}	
+		
+	  @ResponseBody
+	  @PostMapping("/Payment.do")
+	    public ResponseEntity<String> Payment (@RequestBody List<TradeDetailListVO> tradeDetailList) {
+	
+		  	log.info(tradeDetailList);
+	        return ResponseEntity.ok("Data received and processed successfully");
+	    }
+	 
+	  @ResponseBody
+	  @PostMapping("/bighand")
+	  public ResponseEntity<String> bighand(@RequestBody List<TradeDetailListVO> tradeDetailList) {
+		  log.info(tradeDetailList);
+		  return ResponseEntity.ok("Data received and processed successfully");
+	  }
+	
+	
+>>>>>>> origin/master
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 // ----- css 파일 추가
 // 1. 파일 경로 설정
@@ -9,10 +10,23 @@ linkEle.type = 'text/css';
 linkEle.href = CSS_FILE_PATH;
 // 3. head 태그에 link 엘리먼트 추가
 document.head.appendChild(linkEle);
+=======
+// ----- css 파일 추가
+// 1. 파일 경로 설정
+//const CSS_FILE_PATH = '/resources/css/company/employeeSupervisePage/searchEmployeePage.css';
+// 2. link 태그 생성
+//let linkEle = document.createElement('link');
+//linkEle.rel = 'stylesheet';
+//linkEle.type = 'text/css';
+//linkEle.href = CSS_FILE_PATH;
+// 3. head 태그에 link 엘리먼트 추가
+//document.head.appendChild(linkEle);
+>>>>>>> origin/master
 
 let employee = document.querySelectorAll('.employee');
 let sortDirection = {};
 
+<<<<<<< HEAD
 document.querySelectorAll('button').forEach( btn => {
 	btn.addEventListener( 'click', (event) => {
 		event.preventDefault(); 
@@ -43,6 +57,8 @@ document.querySelectorAll('tbody a').forEach(a => {
 	});
 });
 
+=======
+>>>>>>> origin/master
 //소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
 document.querySelectorAll('.sort-btn').forEach(button => {
     button.addEventListener('click', () => {
@@ -141,12 +157,23 @@ document.querySelectorAll(".page-nation li a").forEach( aEle => {
 		e.preventDefault();
 		
 		let pageNum = this.getAttribute("href");
+<<<<<<< HEAD
 		let amount = 10;
 		
 		setStorageData(pageNum, amount);
 		
+=======
+		let amount = 13;
+		
+		localStorage.setItem('pageNum', pageNum); // 페이지 번호 저장
+	    localStorage.setItem('amount', amount); // 수량 저장
+>>>>>>> origin/master
 		
 		let sendData = 'pageNum=' + pageNum + '&amount=' + amount;
 		location.href = '/searchEmployee?' + sendData;
 	});
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> origin/master

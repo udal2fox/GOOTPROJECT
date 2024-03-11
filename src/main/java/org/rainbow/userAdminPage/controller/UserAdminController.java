@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import jdk.net.SocketFlow.Status;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -140,7 +138,6 @@ public class UserAdminController {
         System.out.println(result);
         return result == true ? new ResponseEntity<String>("success",HttpStatus.OK) : new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
     }
-
 	
 	
 	// 이용현황 페이지 이동

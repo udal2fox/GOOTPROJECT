@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
+=======
+	<link rel="stylesheet" href="/resources/css/company/login.css">
+>>>>>>> origin/master
 </head>
 <body>
 	<div id="head-line">
@@ -12,7 +16,11 @@
 	</div>
 	
 <div id="loginForm">
+<<<<<<< HEAD
 		<div id="loginBox">
+=======
+		<div id="loginBox" class="loginBox">
+>>>>>>> origin/master
 			<form action="" method="POST">
 				<div id="usernameBar">
 					<div class="d-inline-block p-3 rounded-circle" style="background-color: #D3D3D3;">
@@ -22,7 +30,11 @@
 					</div>
 					
 					<!-- 아이디 input -->
+<<<<<<< HEAD
 					<input type="text" class="username" name="username" placeholder="Username">
+=======
+					<input type="text" class="eId" name="eId" placeholder="Username">
+>>>>>>> origin/master
 				</div>
 				<div id="userpwBar">
 					<div class="d-inline-block p-3 rounded-circle" style="background-color: #D3D3D3;">
@@ -32,12 +44,21 @@
 					</div>
 					
 					<!-- 비밀번호 input -->
+<<<<<<< HEAD
 					<input type="text" name="userpw" placeholder="●●●●">
 				</div>
 				<div>
 				
 					<!-- 로그인 버튼 -->
 					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인" onclick="location.href='moveSuppliers'">
+=======
+					<input type="text" class="ePw" name="ePw" placeholder="●●●●">
+				</div>
+				<div>
+				
+					<!-- 로그인 버튼 -->    
+					<input type="button" id="loginBtn" class="loginBtn" name="login" value="로그인">
+>>>>>>> origin/master
 				</div>
 			</form>
 		</div>

@@ -100,6 +100,7 @@
 				</div>
 				<div class="modal-body">
 					<div style="width: 1000px; margin: auto;">
+
 					<form id="addEmp">
 						<table class="table table-sm table-bordered" id="member_table"
 							style="width: 1000px;">
@@ -164,11 +165,11 @@
 							<tbody>
 								<tr class="text-center align-middle">
 									<td>${seq}</td>
-									<td class=""><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="number"></td>
-									<td><input type="mail"></td>
-									<td><input type="date"></td>
+									<td class=""><input type="text" value="${name}"></td>
+									<td><input type="text" value="${name}"></td>
+									<td><input type="number" value="${phone}"></td>
+									<td><input type="mail" value="${value}"></td>
+									<td><input type="date" value="${date}"></td>
 									<td><select class="form-select" aria-label="status">
 											<option selected>여부</option>
 											<option value="1">O</option>

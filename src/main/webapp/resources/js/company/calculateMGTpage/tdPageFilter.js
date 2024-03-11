@@ -682,7 +682,8 @@ document.querySelectorAll('.dateBtn').forEach((e)=>{
 	function getCellValue(row, column) {
 	    const columnIndex = {
 	        "recDate": 6,
-	        "recSum": 7
+	        "recSum": 7,
+	        "recSortation":12
 	    } [column];
 	
 	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
@@ -769,63 +770,155 @@ document.querySelectorAll('.dateBtn').forEach((e)=>{
 	    });
 	});
 	
-	
-	// "결제완료" 버튼 클릭 시 이벤트 처리
+	// 결제 완료처리	
 	document.querySelector('.PaymentBtn').addEventListener('click', function() {
-	    // 체크된 <td> 정보를 담을 배열
-	    let checkedDataList = [];
-
-	    // 체크된 체크박스를 모두 가져옴
-	    let checkboxes = document.getElementsByName('checkboxTd');
-	    checkboxes.forEach(function(checkbox) {
-	        if (checkbox.checked) {
-	            let row = checkbox.closest('tr');
-	            let tdList = row.querySelectorAll('td');
-
-	            // 각 <td>의 정보를 객체로 만들어서 배열에 추가
-	            let tdData = {
-	                recNo: tdList[1].textContent.trim(),
-	                comName: tdList[2].querySelector('a').textContent.trim(),
-	                comBizType: tdList[3].textContent.trim(),
-	                spName: tdList[4].textContent.trim(),
-	                recDate: tdList[5].textContent.trim(),
-	                recSum: tdList[6].textContent.trim(),
-	                recSup: tdList[7].textContent.trim(),
-	                recTax: tdList[8].textContent.trim(),
-	                prdCstPri: tdList[9].textContent.trim(),
-	                prdMargin: tdList[10].textContent.trim(),
-	                recPayMth: tdList[11].textContent.trim(),
-	                recSortation: tdList[12].textContent.trim()
-	            };
-
-	            checkedDataList.push(tdData);
-	        }
-	    });
-
-	    // fetch를 사용하여 서버로 데이터 전송
-	    fetch('/Payment.do', {
-	        method: 'POST',
-	        headers: {
-	            'Content-Type': 'application/json',
-	        },
-	        body: JSON.stringify(checkedDataList),
-	    })
-	    .then(response => {
-	        if (!response.ok) {
-	            throw new Error('Network response was not ok');
-	        }
-	        return response.json();
-	    })
-	    .then(data => {
-	        // 서버에서 받은 응답 처리
-	        console.log('Success:', data);
-	    })
-	    .catch(error => {
-	        console.error('Error:', error);
-	    });
+	    
+		if(confirm("결제처리를 완료 하시겠습니까?"))
+		{
+			let checkedDataList = [];
+	
+		    let checkboxes = document.getElementsByName('checkboxTd');
+		    checkboxes.forEach(function(checkbox) {
+		        if (checkbox.checked) {
+		            let row = checkbox.closest('tr');
+		            let tdList = row.querySelectorAll('td');
+	
+	   	            let recNo = tdList[1].textContent.trim(); 
+		            checkedDataList.push(recNo);
+		        }
+		    });
+	
+		    fetch('/Payment.do', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json',
+		        },
+		        body: JSON.stringify(checkedDataList),
+		    })
+		    .then(response => {
+		        if (!response.ok) {
+		            throw new Error('Network response was not ok');
+		        }
+		        return response.text();
+		    })
+		    .then(text => {
+		        console.log('Success:', text);
+		        if(text == 'Success'){
+		        	alert("결체 처리 성공");
+		        	location.reload();
+		        }
+		        else alert("결제 처리 실패"); 
+		    })
+		    .catch(error => {
+		        console.error('Error:', error);
+		    });
+		}
+		else
+		{
+			return false;
+		}
+	});
+	// 결제 완료처리	
+	document.querySelector('.PaymentBtn').addEventListener('click', function() {
+		
+		if(confirm("결제처리를 완료 하시겠습니까?"))
+		{
+			let checkedDataList = [];
+			
+			let checkboxes = document.getElementsByName('checkboxTd');
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					let row = checkbox.closest('tr');
+					let tdList = row.querySelectorAll('td');
+					
+					let recNo = tdList[1].textContent.trim(); 
+					checkedDataList.push(recNo);
+				}
+			});
+			
+			fetch('/Payment.do', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(checkedDataList),
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.text();
+			})
+			.then(text => {
+				console.log('Success:', text);
+				if(text == 'Success'){
+					alert("결체 처리 성공");
+					location.reload();
+				}
+				else alert("결제 처리 실패"); 
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		}
+		else
+		{
+			return false;
+		}
+	});
+	
+	
+	// 대손 완료처리	
+	document.querySelector('.BigHandBtn').addEventListener('click', function() {
+		
+		if(confirm("대손처리를 완료 하시겠습니까?"))
+		{
+			let checkedDataList = [];
+			
+			let checkboxes = document.getElementsByName('checkboxTd');
+			checkboxes.forEach(function(checkbox) {
+				if (checkbox.checked) {
+					let row = checkbox.closest('tr');
+					let tdList = row.querySelectorAll('td');
+					
+					let recNo = tdList[1].textContent.trim(); 
+					checkedDataList.push(recNo);
+				}
+			});
+			
+			fetch('/binHand.do', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(checkedDataList),
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.text();
+			})
+			.then(text => {
+				console.log('Success:', text);
+				if(text == 'Success'){
+					alert("대손 처리 성공");
+					location.reload();
+				}
+				else alert("대손 처리 실패"); 
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		}
+		else
+		{
+			return false;
+		}
 	});
 
 	
+<<<<<<< HEAD
 	// "대손처리" 버튼 클릭 시 이벤트 처리도 동일하게 구현
 	document.querySelector('.BigHandBtn').addEventListener('click', function() {
 		 // 체크된 <td> 정보를 담을 배열
@@ -882,6 +975,9 @@ document.querySelectorAll('.dateBtn').forEach((e)=>{
 	    });
 	});
 >>>>>>> origin/master
+=======
+	
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 
 
 

@@ -13,20 +13,30 @@ table {
 	border: 1px solid black;
 }
 
+button 
+{
+	width: 58px;
+	height: 35px;
+}
+input[type=text]
+{
+	width: 150px;
+}
+
 </style>
 </head>
 <body>
 <jsp:include page="../../navBar.jsp"/>
 
-<div class="container-fluid" align="center" style="padding: 100px; text-align: center;">
+<div class="container-fluid" align="center" >
 	<div class="product-top-back">
 		
 		
-		<div class="container" style="padding-top: 50px;">
-		<div align="left" style="font-weight: bold;">거래명세-편집</div>`
+		<div class="container">
+		<div align="left" style="padding-top: 50px;"><h2>거래명세-편집</h2></div>`
 		<p></p>
 			<h3 align="left">기업정보</h3>
-	        <table style="width: 1500px">
+	        <table style="width: 1300px">
 	            <tr>
 	        		<th>기업명</th><td><a href="#">불러오기</a></td>
 	        		<th>지점명</th><td><a href="#">불러오기</a></td>
@@ -46,7 +56,7 @@ table {
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">금액차감</h3>
-	        <table style="width: 1500px">
+	        <table style="width: 1300px">
 	        	<tr>
 	        		<th>적요(품목명)</th>	
 	        		<th>차감금액</th>	
@@ -58,20 +68,20 @@ table {
 	        		<th>금액조정</th>	
 	        	</tr>
 	        	<tr>
-	        		<td>입력 (필수값)</td>
-	        		<td>자동계산</td>
-	        		<td>입력 (필수값)</td>
-	        		<td>입력(선택값) / null=0 </td>
-	        		<td>자동계산</td>
-	        		<td>입력(필수값)</td>
-	        		<td>입력(선택값) / null=0 </td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
 	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
 	        	</tr>
 	        </table> 
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">금액차감</h3>
-	        <table style="width: 1500px">
+	        <table style="width: 1300px">
 	        	<tr>
 	        		<th>적요(품목명)</th>
 	        		<th>추가정산 금액</th>
@@ -83,20 +93,20 @@ table {
 	        		<th>금액조정</th>
 	        	</tr>	
 	        	<tr>
-	        		<td>입력(필수값)</td>
-	        		<td>자동계산</td>
-	        		<td>입력(필수값)</td>
-	        		<td>입력(선택값) / null=0</td>
-	        		<td>자동계산</td>
-	        		<td>입력(필수값)</td>
-	        		<td>입력(선택값) / null=0</td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
+	        		<td><input type="text"></td>
 	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
 	        	</tr>	
 	        </table> 
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">상세내역</h3>
-	        <table style="width: 1500px">
+	        <table style="width: 1300px">
 	        	<tr>
 	        		<th>대분류</th>
 	        		<th>소분류</th>
@@ -118,10 +128,9 @@ table {
 	        		<td>8</td>
 	        	</tr>	
 	        </table> 
-	        <p></p>
         </div>
         <div class="container" >
-       		<div class="buttonGp" align="right" style="width: 1320px">
+       		<div class="buttonGp" align="right" style="width: 1300px; padding-top: 15px;">
 	        	<div>
 	        		<button type="button" class="btn btn-primary">수정</button>
 	  				&nbsp;&nbsp;&nbsp;

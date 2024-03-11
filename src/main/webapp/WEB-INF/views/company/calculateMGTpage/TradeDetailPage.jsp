@@ -100,9 +100,13 @@
 			<div class="threebtnDiv" align="right" style="width: 1200px;">
 				<input type="button" class="btn btn-primary PaymentBtn" value="결제완료">
 				<input type="button" class="btn btn-primary BigHandBtn" value="대손처리">
+<<<<<<< HEAD
 >>>>>>> origin/master
 				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
 				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
+=======
+				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기" id="downloadButton">
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 			</div>
 		</div>
 		<table border="1" class="saleStatsTableInfo">
@@ -124,7 +128,7 @@
 				<th>원가</th>
 				<th>마진율</th>
 				<th>결제수단</th>
-				<th>정산여부</th>
+				<th>정산여부<button type="button" class="sort-btn" data-column="recSortation">🔽</button></th>
 			</tr>
 			</thead>
 			<tbody>
@@ -134,9 +138,14 @@
 						<td><input type="checkbox" name="categoryAll"></td>
 =======
 						<td><input type="checkbox" name="checkboxTd"></td>
+<<<<<<< HEAD
 >>>>>>> origin/master
 						<td>${td.recNo}</td>
 						<td><a href="/companyView">${td.comName}</a></td>
+=======
+						<td><a href="/tradeDetailEdit?recNo=${td.recNo }"> ${td.recNo}</a></td>
+						<td><a href="/companyView?companyNo=${td.companyNo}">${td.comName}</a></td>
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
@@ -163,6 +172,10 @@
 <<<<<<< HEAD
 =======
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageSearch.js"></script> 
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdUpDownLoad.js"></script> 
+>>>>>>> 71ecaf1cff3f3faa16691b0f27a6dcfc96adea51
 	
 </html>

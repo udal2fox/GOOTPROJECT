@@ -1,11 +1,16 @@
 package org.rainbow.company.calculateManagement.controller;
 
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
+import org.rainbow.company.calculateManagement.domain.tdDownVO;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
+import org.rainbow.domain.ExcelDownloadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,21 +55,56 @@ public class TradeDetailController {
 		return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
 				
 	}	
-		
-	  @ResponseBody
-	  @PostMapping("/Payment.do")
-	    public ResponseEntity<String> Payment (@RequestBody List<TradeDetailListVO> tradeDetailList) {
 	
-		  	log.info(tradeDetailList);
-	        return ResponseEntity.ok("Data received and processed successfully");
-	    }
+	// 결제완료처리
+	@ResponseBody
+	@PostMapping(value = "/Payment.do", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> Payment (@RequestBody List<String> recNo) {
+  	log.info(recNo);
+  	int result = tService.paymentProcessing(recNo);
+  	log.info(result);
+  	
+  	if(result >= 1 )
+    return ResponseEntity.ok("Success");
+  	else  return ResponseEntity.ok("Fail");
+	}
+	  
+	// 대손 처리 
+	@ResponseBody
+	@PostMapping(value = "/binHand.do", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> bigHand (@RequestBody List<String> recNo) {
+	log.info(recNo);
+	int result = tService.bigHandProcessing(recNo);
+	log.info(result);
+	
+	if(result >= 1 )
+	return ResponseEntity.ok("Success");
+	else  return ResponseEntity.ok("Fail");
+	}
+	
+	 /** 엑셀 데이터 다운로드 처리*/
+    @ResponseBody
+    @PostMapping("/tdExcelDown")
+    public void tdExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    {
+    	System.out.println(checkValues);
+
+    	 
+    	List<tdDownVO> downlist = tService.tdDownList(checkValues);
+    	
+    	log.info(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
 	 
-	  @ResponseBody
-	  @PostMapping("/bighand")
-	  public ResponseEntity<String> bighand(@RequestBody List<TradeDetailListVO> tradeDetailList) {
-		  log.info(tradeDetailList);
-		  return ResponseEntity.ok("Data received and processed successfully");
-	  }
+    /** 거래명세 수정 창으로 이동 */
+    @GetMapping("/tradeDetailEdit")
+    public String moveTDEdit(Model model)
+    {
+    	return "/company/calculateMGTpage/TradeDetailEditVO";
+    }
+    
 	
 	
 }

@@ -72,8 +72,7 @@
 			<div class="threebtnDiv" align="right" style="width: 1200px;">
 				<input type="button" class="btn btn-primary PaymentBtn" value="결제완료">
 				<input type="button" class="btn btn-primary BigHandBtn" value="대손처리">
-				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" style="display: none;">
-				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기">
+				<input type="button" class="btn btn-primary" style="width: 135px; height: 35px;" value="엑셀로 내려받기" id="downloadButton">
 			</div>
 		</div>
 		<table border="1" class="saleStatsTableInfo">
@@ -91,15 +90,15 @@
 				<th>원가</th>
 				<th>마진율</th>
 				<th>결제수단</th>
-				<th>정산여부</th>
+				<th>정산여부<button type="button" class="sort-btn" data-column="recSortation">🔽</button></th>
 			</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="td" items="${list}">
 					<tr class="td" data-type="${td.comBizType}" data-status="${td.recSortation}">
 						<td><input type="checkbox" name="checkboxTd"></td>
-						<td>${td.recNo}</td>
-						<td><a href="/companyView">${td.comName}</a></td>
+						<td><a href="/tradeDetailEdit?recNo=${td.recNo }"> ${td.recNo}</a></td>
+						<td><a href="/companyView?companyNo=${td.companyNo}">${td.comName}</a></td>
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
@@ -124,5 +123,6 @@
 </body>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageFilter.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageSearch.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdUpDownLoad.js"></script> 
 	
 </html>

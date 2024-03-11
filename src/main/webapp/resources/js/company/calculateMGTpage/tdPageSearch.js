@@ -40,7 +40,7 @@ function fetchSearchResults(keyword) {
             	msg += '<td><a href="/companyView">' + list.comName + '</a></td>';
             	msg += '<td>' + list.comBizType + '</td>';
             	msg += '<td>' + list.spName + '</td>';
-            	msg += '<td>' + list.recDate + '</td>';
+            	msg += '<td>' + myTime(list.recDate) + '</td>';
             	msg += '<td>' + list.recSum + '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';
@@ -95,5 +95,12 @@ function getFilteredProducts() {
     return filteredProducts;
 }
 
+function myTime(unixTimeStamp) {
+    moment.locale('ko'); // 한국어 설정
+	// 오늘 날짜 가져오기
+	const mytime = moment(unixTimeStamp).format('YYYY-MM-DD');
+
+    return mytime;
+}
 
 // 서치 끝

@@ -16,4 +16,6 @@ public class Criteria
 	/** 검색할때 필요해서 사용함 */
 	private String keyword;
 	
+	/** 페이징 처리 할 때 사용 */
+	private int offset;
 }

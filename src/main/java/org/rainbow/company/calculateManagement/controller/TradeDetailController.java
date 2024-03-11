@@ -7,13 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
-<<<<<<< HEAD
-import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-=======
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
@@ -28,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
->>>>>>> origin/master
 
 import lombok.extern.log4j.Log4j;
 
@@ -39,11 +31,8 @@ public class TradeDetailController {
 	@Autowired
 	TradeDetaiServiceImpl tService;
 	
-<<<<<<< HEAD
-=======
 	
 	// 거래 명세 페이지 이동 
->>>>>>> origin/master
 	@GetMapping(value = "/TradeDetailPage")
 	public String orderStatementPage(Model model) {
 		
@@ -54,8 +43,6 @@ public class TradeDetailController {
 		
 		return "/company/calculateMGTpage/TradeDetailPage";
 	}
-<<<<<<< HEAD
-=======
 	
 	// 거레 명세 검색 
 	@ResponseBody
@@ -120,5 +107,4 @@ public class TradeDetailController {
     
 	
 	
->>>>>>> origin/master
 }

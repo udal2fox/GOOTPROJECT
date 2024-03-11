@@ -3,14 +3,6 @@ package org.rainbow.company.employeeSupervisePage.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
-
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
-import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
-=======
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +13,6 @@ import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.PageDTO;
->>>>>>> origin/master
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +29,6 @@ public class employeeSupervisePageController {
 
 	@Autowired
 	searchEmployeeServiceImpl service;
-<<<<<<< HEAD
-
-=======
 	
 	
 	// 직원 조회 페이지
@@ -73,7 +61,6 @@ public class employeeSupervisePageController {
 		return "/company/employeeSupervisePage/searchEmployeePage";
 	}
 		
->>>>>>> origin/master
 	// 직원 정보 등록 페이지 이동
 	@GetMapping("/employee_insert")
 	public String employee_insert() {
@@ -217,23 +204,5 @@ public class employeeSupervisePageController {
 		return "/company/employeeSupervisePage/profile_modify";
 	}
 
-<<<<<<< HEAD
-	// 직원 조회 페이지
-	@GetMapping("/searchEmployee")
-	public String searchEmployee(Model model) {
-
-		 log.info("getList..." + service.getList());
-		 System.out.println(service.getList());
-		  
-		 model.addAttribute("list", service.getList());
-		 //전체 직원 수 
-		 int total = service.getTotal(); 
-		 log.info("total...." + total);
-		
-		return "/company/employeeSupervisePage/searchEmployeePage";
-	}
-}
-=======
 }
 	
->>>>>>> origin/master

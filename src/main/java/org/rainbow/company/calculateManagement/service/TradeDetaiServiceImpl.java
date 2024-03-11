@@ -2,6 +2,7 @@ package org.rainbow.company.calculateManagement.service;
 
 import java.util.List;
 
+import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
@@ -42,6 +43,12 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	public List<tdDownVO> tdDownList(List<String> checkValues) {
 		return tMapper.tdDownList(checkValues);
 	}
+
+	@Override
+	public List<TradeDetailEditVO> editTdList(String recNo) {
+		return tMapper.editTdList(recNo);
+	}
+
 	
 	
 	

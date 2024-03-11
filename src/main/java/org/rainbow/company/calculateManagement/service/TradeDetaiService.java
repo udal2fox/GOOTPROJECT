@@ -2,6 +2,7 @@ package org.rainbow.company.calculateManagement.service;
 
 import java.util.List;
 
+import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
@@ -24,5 +25,9 @@ public interface TradeDetaiService {
 	
 	/** 다운받을 리스트 서치 */
 	public List<tdDownVO> tdDownList(List<String> checkValues);
+	
+	/** 거레명세 수정 불러오기*/
+	public List<TradeDetailEditVO> editTdList(String recNo);
+	
 	
 }

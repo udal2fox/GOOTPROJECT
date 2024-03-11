@@ -25,7 +25,6 @@ public class login {
 	@Autowired
 	loginServiceImpl service;
 	
-	
 	// 사원 로그인
 	@ResponseBody
 	@PostMapping( value="/login", consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -37,6 +36,7 @@ public class login {
 		map.put("eId", (String) loginMap.get("eId"));
 		map.put("ePw", (String) loginMap.get("ePw"));
 		log.info("input info..." + map);
+		log.info("ePw..." + map);
 		
 		HashMap<String, Object> resultMap = service.doLogin(map);
 		log.info("result info..." + resultMap); // 결과 정보 확인

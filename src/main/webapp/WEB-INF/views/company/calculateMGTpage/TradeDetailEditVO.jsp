@@ -69,7 +69,7 @@ input[type=text]
 	        		<th>금액조정</th>	
 	        	</tr>
 	        	<tr>
-	        		<td><input type="text" id="recDedName"  onfocus="openModal()"></td>
+	        		<td><input type="text" id="recDedName"></td>
 	        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산"></td>
 	        		<td><input type="text" id="recDedSup" value="0"></td>
 	        		<td><input type="text" id="recDedTax" value="0"></td>
@@ -102,7 +102,7 @@ input[type=text]
 	        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산"></td>
 	        		<td><input type="text" id="recAddCstSup" value="0"></td>
 	        		<td><input type="text" id="recAddCstTax" value="0"></td>
-	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
+	        		<td><button type="button" class="btn btn-primary">${sessionScope.eName}</button></td>
 	        	</tr>	
 	        </table> 
         </div>
@@ -152,7 +152,7 @@ input[type=text]
 			        		<td>${edit.recAddName }</td>
 			        		<td>${edit.recAdd }</td>
 			        		<td>${edit.recAddCst }</td>
-			        		<td>${((edit.recAdd - edit.recAddCst ) / edit.recAdd) * 100 }</td>
+			        		<td>${((edit.recAdd - edit.recAddCst )/edit.recAdd) * 100}</td>
 			        		<td>${edit.recAddWorker}</td>
 			        	</tr>	
 		        	</c:if>
@@ -162,7 +162,7 @@ input[type=text]
         <div class="container" >
        		<div class="buttonGp" align="right" style="width: 1300px; padding-top: 15px;">
 	        	<div>
-	        		<input type="hidden" value="${sessionScope.eName}" id="">
+	        		<input type="hidden" value="${eName}" id="worker">
 	        		<button type="button" class="btn btn-primary">수정</button>
 	  				&nbsp;&nbsp;
 	        		<button type="button" class="btn btn btn-secondary">취소</button>

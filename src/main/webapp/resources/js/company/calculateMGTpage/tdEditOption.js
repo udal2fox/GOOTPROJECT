@@ -106,7 +106,7 @@
 	//랜덤한 문자 + 숫자 생성
 	function randomCode(length) 
 	{
-		  const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		  const charset = 'ABCDEFGHIJKLMNOPRSTUVWXYZ0123456789';
 		  let randomString = '';
 		  for (let i = 0; i < length; i++) 
 		  {
@@ -138,14 +138,42 @@
 			   '<td>금액차감</td>'+
 			   '<td>금액차감</td>'+
 			   '<td>'+randomCode(8)+'</td>'+
+			   '<td>'+recDedName.value	+'</td>'+
 			   '<td>'+recDed.value+'</td>'+
 			   '<td>'+recDedCst.value+'</td>'+
-			   '<td>'+((recDed.value - recDedCst.value)/ recDedCst.value) * 100 +'</td>'+
+			   '<td>'+((recDed.value - recDedCst.value)/ recDedCst.value).toFixed(2); +'</td>'+
 			   '<td>'+worker.value+'</td>';
 		
+		tbody.innerHTML += msg;
+	}
+	// 버튼 눌러서 테이블에 넣어주기
+	function inputAddCal() 
+	{
+		if(recAddName.value == null || recAddName.value == '' )
+		{
+			alert("품목명을 입력해주세요,");
+			recAddName.focus();
+		}
+		if(recAddSup.value == '' && recAddCstSup.value == '')
+		{
+			alert("금액을 입력해주세요");
+		}
 		
-			
+		let tbody = document.querySelector('.Detail');
 		
+		let msg = '';
+		
+		msg += '<tr>'+
+		'<td>금액차감</td>'+
+		'<td>금액차감</td>'+
+		'<td>'+randomCode(8)+'</td>'+
+		'<td>'+recAddName.value	+'</td>'+
+		'<td>'+recAdd.value+'</td>'+
+		'<td>'+recAddCst.value+'</td>'+
+		'<td>'+((recAdd.value - recAddCst.value)/ recAddCst.value).toFixed(2); +'</td>'+
+		'<td>'+worker.value+'</td>';
+		
+		tbody.innerHTML += msg;
 	}
 	
 	

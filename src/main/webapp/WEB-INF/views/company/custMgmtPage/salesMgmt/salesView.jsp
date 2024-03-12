@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSalesViewDetails.jsp</title>
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<div class="navBar">
 		<jsp:include page="../../../navBar.jsp"/>

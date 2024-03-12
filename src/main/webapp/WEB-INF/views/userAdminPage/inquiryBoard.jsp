@@ -102,7 +102,7 @@
 					<textarea class="form-control border border-dark-subtle" id="customMessege" name="customMessege" placeholder="내용을 입력해주세요." rows="15"></textarea>
 				</div>
 				<div class="text-end m-4">
-					<button type="button" class="btn btn-primary" style="width: 150px;" id="inputBtn"></button>
+					<button type="button" class="btn btn-primary" style="width: 150px;" id="inputBtn">문의 남기기</button>
 				</div>
 			</form>
 		</div>

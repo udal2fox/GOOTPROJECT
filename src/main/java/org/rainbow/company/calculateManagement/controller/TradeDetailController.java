@@ -37,14 +37,10 @@ public class TradeDetailController {
 	
 	// 거래 명세 페이지 이동 
 	@GetMapping(value = "/TradeDetailPage")
-	public String orderStatementPage(Model model, HttpSession session) 
+	public String orderStatementPage(Model model)
 	{
-		String eName = (String) session.getAttribute("eName");
-		
-	    log.info(eName);
 		List<TradeDetailListVO> list = tService.tradeDetailList();
 		
-		model.addAttribute("eName", eName);
 		model.addAttribute("list", list);
 		
 		return "/company/calculateMGTpage/TradeDetailPage";
@@ -106,12 +102,16 @@ public class TradeDetailController {
 	 
     /** 거래명세 수정 창으로 이동 */
     @GetMapping("/tradeDetailEdit")
-    public String moveTDEdit(Model model, @RequestParam("recNo") String recNo)
+    public String moveTDEdit(Model model, @RequestParam("recNo") String recNo, HttpSession session)
     {
-    	log.info(recNo);
+    	
+    	String eName = (String) session.getAttribute("eName");
+		model.addAttribute("eName", eName);
+    	
     	
     	TradeDetailEditVO tdevo = tService.editTdList(recNo);
     	model.addAttribute("edit", tdevo);
+    	model.addAttribute("recNo", recNo);
     	log.info(tdevo);
     	
     	return "/company/calculateMGTpage/TradeDetailEditVO";

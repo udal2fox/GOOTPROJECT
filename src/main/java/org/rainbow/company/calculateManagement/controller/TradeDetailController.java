@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
@@ -36,12 +37,15 @@ public class TradeDetailController {
 	
 	// 거래 명세 페이지 이동 
 	@GetMapping(value = "/TradeDetailPage")
-	public String orderStatementPage(Model model) {
+	public String orderStatementPage(Model model, HttpSession session) 
+	{
+		String eName = (String) session.getAttribute("eName");
 		
+	    log.info(eName);
 		List<TradeDetailListVO> list = tService.tradeDetailList();
 		
+		model.addAttribute("eName", eName);
 		model.addAttribute("list", list);
-		
 		
 		return "/company/calculateMGTpage/TradeDetailPage";
 	}
@@ -112,7 +116,6 @@ public class TradeDetailController {
     	
     	return "/company/calculateMGTpage/TradeDetailEditVO";
     }
-    
 	
 	
 }

@@ -41,10 +41,22 @@ public class TradeDetailEditVO {
 	private String recSortation;
 	
 	/** 금액차감 적요(품목명) */
-	private String ded_prdName;
+	private String recDedName;
+	
+	/** 금액차감 상품코드 */
+	private String recDedPrdCode;
+	
+	/** 차금 금액 */
+	private int recDed;
 	
 	/** 차감 공급액 */
 	private int recDedSup;
+	
+	/** 차감  세액 */
+	private int recDedTax;
+	
+	/** 차감 원가 */
+	private int recDedCst;
 	
 	/** 원가-공급액 */
 	private int recDedCstSup;
@@ -52,8 +64,17 @@ public class TradeDetailEditVO {
 	/** 원가 -세액 */
 	private int recDedCstTax;
 	
+	/** 차감 작업자 */
+	private String recDedWorker;
+	
 	/** 추가 정산 적요(품목명) */
-	private String add_prdName;
+	private String recAddName;
+	
+	/** 추가정산 상품코드*/
+	private String recAddPrdCode;
+	
+	/** 추가 금액 */
+	private int recAdd;
 	
 	/** 추가정산 공급액 */
 	private int recAddSup;
@@ -61,11 +82,17 @@ public class TradeDetailEditVO {
 	/** 추가정산 세액 */
 	private int recAddTax;
 	
+	/** 추 가정산 원가 */
+	private int recAddCst;
+	
 	/** 원가 -공급액 */
 	private int recAddCstSup;
 	
 	/** 원가-세액 */
 	private int recAddCstTax;
+	
+	/** 추가정산 작업자 */
+	private String recAddWorker;
 	
 	/** 대분류*/
 	private String prdMajorCtg;

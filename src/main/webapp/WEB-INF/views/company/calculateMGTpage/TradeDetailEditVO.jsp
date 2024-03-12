@@ -68,13 +68,13 @@ input[type=text]
 	        		<th>금액조정</th>	
 	        	</tr>
 	        	<tr>
-	        		<td><input type="text"></td>
-	        		<td><input type="text" id="recDed"></td>
+	        		<td><input type="text" id="recDedName"></td>
+	        		<td><input type="text" id="recDed" readonly placeholder="자동계산"></td>
 	        		<td><input type="text" id="recDedSup"></td>
 	        		<td><input type="text" id="recDedTax"></td>
-	        		<td><input type="text" id="여기부터 작업시작-------!!!!!!!"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
+	        		<td><input type="text" id="recDedCst" readonly placeholder="자동계산"></td>
+	        		<td><input type="text" id="recDedCstSup"></td>
+	        		<td><input type="text" id="recDedCstTax"></td>
 	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
 	        	</tr>
 	        </table> 
@@ -93,13 +93,13 @@ input[type=text]
 	        		<th>금액조정</th>
 	        	</tr>	
 	        	<tr>
-	        		<td><input type="text"></td>
-	        		<td><input type="text" id="recAdd"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
+	        		<td><input type="text" id="recAddName"></td>
+	        		<td><input type="text" id="recAdd" readonly placeholder="자동계산"></td>
+	        		<td><input type="text" id="recAddSup"></td>
+	        		<td><input type="text" id="recAddTax"></td>
+	        		<td><input type="text" id="recAddCst" readonly placeholder="자동계산"></td>
+	        		<td><input type="text" id="recAddCstSup"></td>
+	        		<td><input type="text" id="recAddCstTax"></td>
 	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
 	        	</tr>	
 	        </table> 
@@ -132,6 +132,7 @@ input[type=text]
         <div class="container" >
        		<div class="buttonGp" align="right" style="width: 1300px; padding-top: 15px;">
 	        	<div>
+	        		<input type="hidden" value="${sessionScope.eName}" id="">
 	        		<button type="button" class="btn btn-primary">수정</button>
 	  				&nbsp;&nbsp;&nbsp;
 	        		<button type="button" class="btn btn-primary">목록</button>
@@ -140,6 +141,6 @@ input[type=text]
         </div>
     </div>
 </div> 
-
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdEditOption.js"></script> 
 </body>
 </html>

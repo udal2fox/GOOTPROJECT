@@ -116,29 +116,29 @@ public class UserAdminController {
 	// 직원관리 페이지 이동
 	@GetMapping("/goManagemember")
 	public String goManagemember() {
-	    return "/userAdminPage/manage_member";
+		return "/userAdminPage/manage_member";
 	}
-	
-    @GetMapping(value="/manage_member/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<HashMap<String, Object>>> getEmpList(@PathVariable String no) {
-        int sNo = Integer.parseInt(no);
-        // 컨트롤러에서 서비스를 호출하여 직원 리스트를 가져옵니다.
-        List<HashMap<String, Object>> empList = userService.getEmpList(sNo);
-        log.info("empList..." + empList);
-        // ResponseEntity에 직원 리스트와 HttpStatus를 담아 반환합니다.
-        return new ResponseEntity<>(empList, HttpStatus.OK);
-    }
-    
-    @PostMapping(value="/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
-    @ResponseBody
-    public ResponseEntity<String> addUserEmp(@RequestBody HashMap<String, Object> addForm) {
-        log.info("InquiryList..." + addForm);
-        boolean result = userService.addUserEmp(addForm);
-        System.out.println(result);
-        return result == true ? new ResponseEntity<String>("success",HttpStatus.OK) : new ResponseEntity<String>("fail",HttpStatus.BAD_REQUEST);
-    }
-	
-	
+
+	@GetMapping(value = "/manage_member/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getEmpList(@PathVariable String no) {
+		int sNo = Integer.parseInt(no);
+		// 컨트롤러에서 서비스를 호출하여 직원 리스트를 가져옵니다.
+		List<HashMap<String, Object>> empList = userService.getEmpList(sNo);
+		log.info("empList..." + empList);
+		// ResponseEntity에 직원 리스트와 HttpStatus를 담아 반환합니다.
+		return new ResponseEntity<>(empList, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	@ResponseBody
+	public ResponseEntity<String> addUserEmp(@RequestBody HashMap<String, Object> addForm) {
+		log.info("InquiryList..." + addForm);
+		boolean result = userService.addUserEmp(addForm);
+		System.out.println(result);
+		return result == true ? new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+	}
+
 	// 이용현황 페이지 이동
 	@GetMapping("/goUsagehistorylist/{no}")
 	public String goUsagehistorylist(@PathVariable String no, Model model) {
@@ -150,21 +150,22 @@ public class UserAdminController {
 	public String goInquiryboard(@PathVariable String no, Model model) {
 		return "/userAdminPage/inquiryBoard";
 	}
-	
+
 	// 고객지원 문의 리스트 가져오기
 	@ResponseBody
-	@GetMapping(value="/getInquiryboard/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<HashMap<String, Object>>> getInquiryList(@PathVariable String no){
+	@GetMapping(value = "/getInquiryboard/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getInquiryList(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		// 컨트롤러에서 서비스를 호출하여 문의 리스트를 가져옵니다.
 		List<HashMap<String, Object>> InquiryList = userService.getInquiryList(spotNo);
 		log.info("InquiryList..." + InquiryList);
-		return new ResponseEntity<>(InquiryList,HttpStatus.OK);
+		return new ResponseEntity<>(InquiryList, HttpStatus.OK);
 	}
-	
+
 	// 고객지원 문의글 등록하기
 	@PostMapping("/addQnA/{no}")
-	public String addQnA(@RequestParam("inquiryTitle") String inquiryTitle, @RequestParam("customMessege") String customMessege, @PathVariable("no") String spotNo) {
+	public String addQnA(@RequestParam("inquiryTitle") String inquiryTitle,
+			@RequestParam("customMessege") String customMessege, @PathVariable("no") String spotNo) {
 		HashMap<String, Object> addQnAMap = new HashMap<String, Object>();
 		addQnAMap.put("questionTitle", inquiryTitle);
 		addQnAMap.put("questionContent", customMessege);
@@ -179,14 +180,26 @@ public class UserAdminController {
 	public String goManagegift(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_gift";
 	}
-	
-	// 선물 편집 페이지 이동
-	@GetMapping("/manage_gift_Edit")
-	public String goGiftEdit() {
-		return "/userAdminPage/manage_gift_Edit";
+
+	// 지점 선물 편집 페이지 이동
+	@GetMapping("/giftCustom")
+	public String goCustom() {
+		return "/userAdminPage/giftCustom";
 	}
 
-	
+	// 기본 선물 편집 페이지 이동
+	@GetMapping("/giftDefault")
+	public String goDefault() {
+		return "/userAdminPage/giftDefault";
+	}
+
+	// 지점 선물 전체리스트 가져오기
+	@GetMapping(value = "/getGiftList", produces = MediaType.APPLICATION_PROBLEM_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getGiftList() {
+		List<HashMap<String, Object>> result = userService.getGiftList();
+		log.info("선물리스트..." + result);
+		return new ResponseEntity<List<HashMap<String, Object>>>(result, HttpStatus.OK);
+	}
 
 	// 생일카드관리 페이지 이동
 	@GetMapping("/goManagecard/{no}")

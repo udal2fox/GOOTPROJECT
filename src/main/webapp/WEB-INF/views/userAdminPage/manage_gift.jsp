@@ -28,7 +28,7 @@
 								다운</button>
 						</div>
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary w-100">편집</button>
+							<button type="button" class="btn btn-outline-primary w-100" id="customGiftBtn">편집</button>
 						</div>
 					</div>
 					<div class="overflow-auto m-3" style="height: 600px;">
@@ -37,47 +37,7 @@
 								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
 								<span>${productName}</span></li>
 
-							<!--임시 데이터 (삭제예정)-->
-
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
+							
 						</ul>
 					</div>
 				</article>
@@ -91,7 +51,7 @@
 							<span class="fw-bold fs-5">기본 지정 선물</span>
 						</div>
 						<div class="col col-sm-4">
-							<button type="button" class="btn btn-outline-primary w-100">편집</button>
+							<button type="button" class="btn btn-outline-primary w-100" id="defaultGiftBtn">편집</button>
 						</div>
 					</div>
 					<div class="overflow-auto m-3">
@@ -142,6 +102,5 @@
 
 
 </body>
-
-
+<script src="/resources/js/userAdminPage/manage_gift.js"></script>
 </html>

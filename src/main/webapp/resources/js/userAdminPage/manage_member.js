@@ -110,7 +110,7 @@ addBtn.addEventListener("click", () => {
   .then((text) =>{
     if(text === 'success'){
       swal("직원이 추가되었습니다.");
-      location.href = "/userAdminPage/manage_member";
+      location.href = "/userAdminPage/goManagemember";
     }else{
       swal("실패하였습니다. 창 종료 후 재시도 해주세요.")
     }
@@ -119,3 +119,4 @@ addBtn.addEventListener("click", () => {
     console.error('There has been a problem with your fetch operation:', error);
   });
 });
+

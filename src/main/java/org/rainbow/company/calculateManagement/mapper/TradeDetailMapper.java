@@ -26,6 +26,6 @@ public interface TradeDetailMapper {
 	public List<tdDownVO> tdDownList(List<String> checkValues);
 	
 	/** 거레명세 수정 불러오기*/
-	public List<TradeDetailEditVO> editTdList(String recNo);
+	public TradeDetailEditVO editTdList(String recNo);
 	
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.log4j.Log4j;
@@ -100,8 +102,14 @@ public class TradeDetailController {
 	 
     /** 거래명세 수정 창으로 이동 */
     @GetMapping("/tradeDetailEdit")
-    public String moveTDEdit(Model model)
+    public String moveTDEdit(Model model, @RequestParam("recNo") String recNo)
     {
+    	log.info(recNo);
+    	
+    	TradeDetailEditVO tdevo = tService.editTdList(recNo);
+    	model.addAttribute("edit", tdevo);
+    	log.info(tdevo);
+    	
     	return "/company/calculateMGTpage/TradeDetailEditVO";
     }
     

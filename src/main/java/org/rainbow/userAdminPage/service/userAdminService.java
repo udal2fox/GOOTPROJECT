@@ -20,4 +20,6 @@ public interface userAdminService {
 	public boolean addQnA(HashMap<String, Object> addQnAMap);
 	
 	public boolean addUserEmp(HashMap<String, Object> addForm);
+	
+	public List<HashMap<String, Object>> getGiftList();
 }

@@ -4,7 +4,7 @@
  <mapper namespace="org.rainbow.company.custMgmt.mapper.salesMapper">
  
    <!-- 서치바 - 키워드 검색 결과 가져오기 -->
- 	<select id="getSearch" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+ 	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO">
 	      
 	        SELECT *
 			FROM RAIN_consult_tbl

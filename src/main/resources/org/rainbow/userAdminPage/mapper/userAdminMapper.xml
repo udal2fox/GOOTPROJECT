@@ -76,20 +76,23 @@
 	<!-- // 고객지원 문의글 등록 -->
 	<insert id="addQnA" parameterType="java.util.HashMap">
 		insert into RAIN_spotQnA_tbl(
-		spotQnANo,
 		spotNo,
 		questionDate,
 		questionTitle,
 		questionContent
 		)
 		values(
-		DEFAULT,
 		#{spotNo},
 		now(),
 		#{questionTitle},
 		#{questionContent}
 		)
-		order by questionDate desc
 	</insert>
+	
+	<!-- // 상품 전체 리스트 가져오기 -->
+	<select id="getGiftList" resultType="java.util.HashMap">
+		select * from RAIN_Products_tbl
+		where prdSt = '판매중'
+	</select>
 
 </mapper>

@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
-<link rel="shortcut icon" href="#">
 </head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <body>
 	<div class="navBar">
 		<jsp:include page="../../../navBar.jsp"/>
@@ -42,36 +42,36 @@
 
 				<label>영업 상태</label>
 				<div class="checkbox_div"> <!-- form-check -->
-				<input type="checkbox" name="serviceStatus" value="전체" checked="checked" id="csStatus_all">
+				<input type="checkbox" class="searchbar_checkbox" name="serviceStatus" value="전체" checked="checked" id="csStatus_typeAll"  data-check-all="csStatus_type">
 				<label for="csStatus_all">전체</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="최초 인입" checked="checked" id="csStatus_firstIncoming" >
+				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="최초 인입" checked="checked" data-filter="csStatus_type" id="csStatus_firstIncoming" >
 				<label for="csStatus_firstIncoming">최초 인입</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="응대 완료" checked="checked" id="csStatus_response">
+				<input type="checkbox"  class="searchbar_checkbox"  name="serviceStatus" value="응대 완료" checked="checked" data-filter="csStatus_type" id="csStatus_response">
 				<label for="csStatus_response">응대 완료</label>
 				</div>
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="견적 발송 완료" checked="checked" id="csStatus_quotationSent">
+				<input type="checkbox"  class="searchbar_checkbox" name="serviceStatus" value="견적 발송 완료" checked="checked" data-filter="csStatus_type" id="csStatus_quotationSent">
 				<label for="csStatus_quotationSent">견적 발송 완료</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="미팅 완료" checked="checked" id="csStatus_meeting">
+				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="미팅 완료" checked="checked" data-filter="csStatus_type"  id="csStatus_meeting">
 				<label for="csStatus_meeting">미팅 완료</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="계약 완료" checked="checked" id="csStatus_contractCompleted">
+				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="계약 완료" checked="checked" data-filter="csStatus_type" id="csStatus_contractCompleted">
 				<label for="csStatus_contractCompleted">계약 완료</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="계약 실패" checked="checked" id="csStatus_contractFailure">
+				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="계약 실패" checked="checked"  data-filter="csStatus_type" id="csStatus_contractFailure">
 				<label for="csStatus_contractFailure">계약 실패</label>
 				</div>
 				</div>
@@ -152,33 +152,9 @@
          </tbody>
       </table>
 </div>
-<!-- page -->
-		<div class="page-wrap">
-			<ul class="page-nation">
-				<c:if test="${pageMaker.prev }"> <!-- prev 라는 현재 페이지가 있으면 (이전 페이지로 이동하는 태그 생성)-->
-					<li class="previous">
-						<a href="${pageMaker.startPage-1 }">&lt;</a>
-					</li>
-				</c:if>
-				<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
-					<li>
-						<a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }">${num }</a>
-						<!-- 여기서 href 라는 속성은 어디가기 위한 속성이 아니라 값을 가지고 오기위한 것임 -->
-					</li>
-				</c:forEach>
-				<c:if test="${pageMaker.next }"> <!-- next 라는 다음 페이지가 있으면 (다음 페이지로 이동하는 태그 생성)-->
-					<li>
-						<a href="${pageMaker.endPage + 1 }">&gt;</a>
-					</li>
-				</c:if>
-			</ul>
-		</div>
-
-
 </div>
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesSearch.js"></script>
-
 </body>
 </html>

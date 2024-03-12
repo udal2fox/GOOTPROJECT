@@ -19,10 +19,10 @@
 										</svg>
 									<input type="file" id="img-upload" style="display: none" accept="image/*">
 									<input type="hidden" name="profilePicture">
-									<div id="img-white-line">
-										<span id="img-change"> 프로필사진 변경 </span>
-										<span id="img-save"> 저장 </span>
-									</div>
+								</div>
+								<div id="img-white-line">
+									<span id="img-change"> 프로필사진 변경 </span>
+									<span id="img-save"> 저장 </span>
 								</div>
 							</div>
 								<table id="table1">

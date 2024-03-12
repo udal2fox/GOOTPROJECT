@@ -8,12 +8,14 @@ document.getElementById('searchIcon').addEventListener('click', function() {
 });
 
 document.getElementById('img-change').addEventListener('click', function() {
-	const imgUpload = document.getElementById('img-upload');
-    if (imgUpload) {
+	  const imgUpload = document.getElementById('img-upload');
+	  const profileImgDiv = document.getElementById('profile-img'); 
+	  if (profileImgDiv != null) {
+		  profileImgDiv.innerHTML = '';
         // 파일 탐색기 열기
         imgUpload.click();
     } else {
-        console.error("img-upload element not found.");
+    	console.error("img-upload element not found.");
     }
 });
 
@@ -29,13 +31,20 @@ document.getElementById('img-upload').addEventListener('change', function() {
         img.src = imgSrc;
         img.width = 302;
         img.height = 152;
-
+        
         // 이미지 표시 영역에 새로운 이미지 추가
         const profileImgDiv = document.getElementById('profile-img');
         profileImgDiv.innerHTML = ''; // 기존 내용 지우기
         profileImgDiv.appendChild(img);
+        
+        const imgUpload = document.getElementById('img-upload');
+        if (imgUpload) {
+            const newInput = imgUpload.cloneNode(true);
+            imgUpload.parentNode.replaceChild(newInput, imgUpload);
+        } else {
+            console.error("img-upload element not found.");
+        }
     };
-
     reader.readAsDataURL(file); // 파일을 읽어 데이터 URL로 변환
 });
 

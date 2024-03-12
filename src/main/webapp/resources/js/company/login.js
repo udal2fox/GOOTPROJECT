@@ -42,6 +42,7 @@ document.getElementById("loginBtn").addEventListener("click", () => {
           Response.json().then((result) => {
           sessionStorage.setItem("Okja", result.eno);
           sessionStorage.setItem("deptNo", result.deptNo);
+          sessionStorage.setItem("eName", result.eName);
           
           location.href = "/searchEmployee?" + sessionStorage.getItem("Okja");
 	})

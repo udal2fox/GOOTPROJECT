@@ -117,5 +117,20 @@ public class TradeDetailController {
     	return "/company/calculateMGTpage/TradeDetailEditVO";
     }
 	
-	
+    /** 거레 명세 수정  */
+    @ResponseBody
+    @PostMapping(value = "/TdEdit.do", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> tdEditDo(@RequestBody TradeDetailEditVO vo)
+    {
+    	
+    	log.info(vo);
+    	
+    	
+    	int result = tService.editTdupdate(vo);
+    	
+    	if(result >= 1 )
+    	return ResponseEntity.ok("Success");
+    	else  return ResponseEntity.ok("Fail");
+    	
+    }
 }

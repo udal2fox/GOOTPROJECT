@@ -32,7 +32,6 @@ input[type=text]
 <div class="container-fluid" align="center" >
 	<div class="product-top-back">
 		
-		
 		<div class="container">
 		<div align="left" style="padding-top: 50px;"><h2>거래명세-편집</h2></div>`
 		<p></p>
@@ -79,7 +78,7 @@ input[type=text]
 		        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산"></td>
 		        		<td><input type="text" id="recDedCstSup" value="0"></td>
 		        		<td><input type="text" id="recDedCstTax" value="0"></td>
-		        		<td><button type="button" class="btn btn-primary" onclick="inputDedCal()">버튼</button></td>
+		        		<td><button type="button" class="btn btn-primary dedbtn" onclick="inputDedCal()">버튼</button></td>
 		        	</tr>
 	        	</tbody>
 	        </table> 
@@ -109,7 +108,7 @@ input[type=text]
 		        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산"></td>
 		        		<td><input type="text" id="recAddCstSup" value="0"></td>
 		        		<td><input type="text" id="recAddCstTax" value="0"></td>
-		        		<td><button type="button" class="btn btn-primary" onclick="inputAddCal()">버튼</button></td>
+		        		<td><button type="button" class="btn btn-primary addbtn" onclick="inputAddCal()">버튼</button></td>
 		        	</tr>
 	        	</tbody>	
 	        </table> 
@@ -154,8 +153,8 @@ input[type=text]
 		        	</c:if>
 		        	<c:if test="${not empty edit.recAddName}">
 			        	<tr>
-			        		<td>금액차감</td>
-			        		<td>금액차감</td>
+			        		<td>추가정산</td>
+			        		<td>추가정산</td>
 			        		<td>${edit.recAddPrdCode }</td>
 			        		<td>${edit.recAddName }</td>
 			        		<td>${edit.recAdd }</td>
@@ -172,7 +171,7 @@ input[type=text]
 	        	<div>
 	        		<input type="hidden" value="${recNo}" id="recNo">
 	        		<input type="hidden" value="${eName}" id="worker">
-	        		<button type="button" class="btn btn-primary">수정</button>
+	        		<button type="button" class="btn btn-primary" onclick="EditTradeDetail()">수정</button>
 	  				&nbsp;&nbsp;
 	        		<button type="button" class="btn btn btn-secondary" onclick="reload()">취소</button>
 	  				&nbsp;&nbsp;

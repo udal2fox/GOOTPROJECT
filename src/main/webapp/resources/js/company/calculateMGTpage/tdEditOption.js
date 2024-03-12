@@ -54,7 +54,6 @@
 	    if (isNaN(cstSupValue)) {
 	        cstSupValue = 0;
 	    }
-	
 	    let result = supValue + taxValue;
 	    let cstResult = cstTaxValue + cstSupValue;
 	
@@ -150,6 +149,15 @@
 			   '</tr>';
 		
 		tbody.innerHTML += msg;
+		
+		recDedName.disabled = true;
+	    recDed.disabled = true;
+	    recDedSup.disabled = true;
+	    recDedTax.disabled = true;
+	    recDedCst.disabled = true;
+	    recDedCstSup.disabled = true;
+	    recDedCstTax.disabled = true;
+		document.querySelector('.dedbtn').disabled = true;	
 	}
 	
 	
@@ -183,6 +191,16 @@
 		
 		tbody.innerHTML += msg;
 		
+		recAddName.disabled = true;
+	    recAdd.disabled = true;
+	    recAddSup.disabled = true;
+	    recAddTax.disabled = true;
+	    recAddCst.disabled = true;
+	    recAddCstSup.disabled = true;
+	    recAddCstTax.disabled = true;
+	    
+	    document.querySelector('.addbtn').disabled = true;	
+		
 		
 	}
 	
@@ -196,30 +214,58 @@
 		else return false;
 	}
 	
-	function EditTradeDetail()
-	{
-		if(confirm("거래명세서를 편집하시겠습니까?"))
-		{
-			data = {
-				recDedName : 'a',
-				recDed : document.getElementById("recDed"),
-				recDedSup : document.getElementById("recDedSup"),
-				recDedTax : document.getElementById("recDedTax"),
-				recDedCst : document.getElementById("recDedCst"),
-				recDedCstSup : document.getElementById("recDedCstSup"),
-				recDedCstTax : document.getElementById("recDedCstTax"),
-				recDedWorker : document.getElementById("worker"),
-				recAddName : document.getElementById("recAddName"),
-				recAdd : document.getElementById("recAdd"),
-				recAddSup : document.getElementById("recAddSup"),
-				recAddTax : document.getElementById("recAddTax"),
-				recAddCst : document.getElementById("recAddCst"),
-				recAddCstSup : document.getElementById("recAddCstSup"),
-				recAddCstTax : document.getElementById("recAddCstTax"),
-				recAddWorker : document.getElementById("worker"),
-			}
-		}	
+	
+	
+	
+	function EditTradeDetail() {
+	    if (confirm("거래명세서를 편집하시겠습니까?")) {
+	        let data = {
+	            recDedName: document.getElementById("recDedName").value,
+	            recDed: document.getElementById("recDed").value,
+	            recDedSup: document.getElementById("recDedSup").value,
+	            recDedTax: document.getElementById("recDedTax").value,
+	            recDedCst: document.getElementById("recDedCst").value,
+	            recDedCstSup: document.getElementById("recDedCstSup").value,
+	            recDedCstTax: document.getElementById("recDedCstTax").value,
+	            recDedWorker: document.getElementById("worker").value,
+	            recAddName: document.getElementById("recAddName").value,
+	            recAdd: document.getElementById("recAdd").value,
+	            recAddSup: document.getElementById("recAddSup").value,
+	            recAddTax: document.getElementById("recAddTax").value,
+	            recAddCst: document.getElementById("recAddCst").value,
+	            recAddCstSup: document.getElementById("recAddCstSup").value,
+	            recAddCstTax: document.getElementById("recAddCstTax").value,
+	            recAddWorker: document.getElementById("worker").value,
+	            recNo: document.getElementById("recNo").value,
+	            recDedPrdCode : "여기 테이블 td 값 가져오면 됨",
+	            recAddPrdCode : "여기 테이블 td 값 가져오면 됨"
+	            
+	        };
+
+	        // 여기서 'data' 객체를 사용하여 패치 또는 Ajax 요청을 보낼 수 있습니다.
+	        fetch('TdEdit.do', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify(data)
+	        })
+	        .then(response => response.text())
+	        .then(text => {
+	        	console.log('Success:', text);
+				if(text == 'Success'){
+					alert("편집 성공");
+					location.reload();
+				}
+				else alert("편집 실패");
+	        })
+	        .catch((error) => {
+	            console.error('Error:', error);
+	            // 오류가 발생한 경우 여기에 처리할 내용을 추가할 수 있습니다.
+	        });
+	    }
 	}
+
 	
 	
 	

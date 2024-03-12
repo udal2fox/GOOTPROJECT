@@ -56,4 +56,9 @@ public class userAdminServiceImpl implements userAdminService{
 	public boolean addUserEmp(HashMap<String, Object> addForm) {
 		return userMapper.addUserEmp(addForm);
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> getGiftList() {
+		return userMapper.getGiftList();
+	}
 }

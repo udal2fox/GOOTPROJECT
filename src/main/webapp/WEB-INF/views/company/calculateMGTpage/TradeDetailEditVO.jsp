@@ -38,19 +38,19 @@ input[type=text]
 			<h3 align="left">기업정보</h3>
 	        <table style="width: 1300px">
 	            <tr>
-	        		<th>기업명</th><td><a href="#">불러오기</a></td>
-	        		<th>지점명</th><td><a href="#">불러오기</a></td>
-	        		<th>기업구분</th><td><a href="#">불러오기</a></td>	
+	        		<th>기업명</th><td>${edit.comName }</td>
+	        		<th>지점명</th><td>${edit.spName }</td>
+	        		<th>기업구분</th><td>${edit.comBizType }</td>	
 	        	</tr>
 	        	<tr>
-	        		<th>담당자</th><td><a href="#">불러오기</a></td>
-	        		<th>대표연락처</th><td><a href="#">불러오기</a></td>
-	        		<th>대표메일</th><td><a href="#">불러오기</a></td>	 
+	        		<th>담당자</th><td>${edit.getCEmpName()}</td>
+	        		<th>대표연락처</th><td>${edit.getCEmpTel()}</td>
+	        		<th>대표메일</th><td>${edit.getCEmpEmail() }</td>	 
 	        	</tr>
 	        	<tr>
-	        		<th>일자</th><td><a href="#">불러오기</a></td>
-	        		<th>결제수단</th><td><a href="#">불러오기</a></td>
-	        		<th>정산여부</th><td><a href="#">불러오기</a></td>	
+	        		<th>일자</th><td>${edit.recDate }</td>
+	        		<th>결제수단</th><td>${edit.recPayMth }</td>
+	        		<th>정산여부</th><td>${edit.recSortation }</td>	
 	        	</tr>
 	        </table> 
         </div>
@@ -69,10 +69,10 @@ input[type=text]
 	        	</tr>
 	        	<tr>
 	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
+	        		<td><input type="text" id="recDed"></td>
+	        		<td><input type="text" id="recDedSup"></td>
+	        		<td><input type="text" id="recDedTax"></td>
+	        		<td><input type="text" id="여기부터 작업시작-------!!!!!!!"></td>
 	        		<td><input type="text"></td>
 	        		<td><input type="text"></td>
 	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
@@ -80,7 +80,7 @@ input[type=text]
 	        </table> 
         </div>
 		<div class="container" style="padding-top: 50px;">
-			<h3 align="left">금액차감</h3>
+			<h3 align="left">추가정산</h3>
 	        <table style="width: 1300px">
 	        	<tr>
 	        		<th>적요(품목명)</th>
@@ -94,7 +94,7 @@ input[type=text]
 	        	</tr>	
 	        	<tr>
 	        		<td><input type="text"></td>
-	        		<td><input type="text"></td>
+	        		<td><input type="text" id="recAdd"></td>
 	        		<td><input type="text"></td>
 	        		<td><input type="text"></td>
 	        		<td><input type="text"></td>
@@ -118,14 +118,14 @@ input[type=text]
 	        		<th>주문자</th>
 	        	</tr>	
 	        	<tr>
-	        		<td>1</td>
-	        		<td>2</td>
-	        		<td>3</td>
-	        		<td>4</td>
-	        		<td>5</td>
-	        		<td>6</td>
-	        		<td>7</td>
-	        		<td>8</td>
+	        		<td>${edit.prdMajorCtg }</td>
+	        		<td>${edit.prdSubCtg }</td>
+	        		<td>${edit.prdNo }</td>
+	        		<td>${edit.prdName }</td>
+	        		<td>${edit.prdSal }</td>
+	        		<td>${edit.prdCstPri }</td>
+	        		<td>${edit.prdMargin }</td>
+	        		<td>${edit.getCEmpName()}</td>
 	        	</tr>	
 	        </table> 
         </div>
@@ -138,8 +138,8 @@ input[type=text]
 	        	</div>
 	        </div>	
         </div>
-        
     </div>
 </div> 
+
 </body>
 </html>

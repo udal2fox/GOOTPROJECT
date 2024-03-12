@@ -112,7 +112,6 @@ public class TradeDetailController {
     	
     	return "/company/calculateMGTpage/TradeDetailEditVO";
     }
-    
 	
 	
 }

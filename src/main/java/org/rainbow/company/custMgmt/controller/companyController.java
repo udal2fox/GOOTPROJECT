@@ -2,7 +2,6 @@ package org.rainbow.company.custMgmt.controller;
 
 import java.util.List;
 
-import org.joonzis.domain.BoardVO;
 import org.rainbow.company.custMgmt.domain.companyVO;
 import org.rainbow.company.custMgmt.service.companyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

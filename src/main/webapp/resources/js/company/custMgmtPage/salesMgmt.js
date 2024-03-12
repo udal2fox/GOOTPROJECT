@@ -7,9 +7,6 @@ document.querySelectorAll("tbody a").forEach(aEle => {
 		let consultNo = this.getAttribute("href");
 		
 		console.log(consultNo);
-
-
-		
 		location.href = '/salesView?consultNo=' + consultNo;
 		
 	})

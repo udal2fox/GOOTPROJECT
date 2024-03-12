@@ -1,49 +1,50 @@
-const f = document.querySelector(".login-form");
-const btn = document.querySelector("#login_btn");
+const form = document.querySelector(".login-form");
+const loginBtn = document.querySelector("#login_btn");
 
-const regMail =
-  /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-const regPw =
-  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
 
-btn.addEventListener("click", () => {
-  if (!f.userEmail.value || !regMail.test(f.userEmail.value)) {
-    swal("올바른 형식의 이메일이 아닙니다.", "", "error");
-    f.userEmail.focus();
+loginBtn.addEventListener("click", () => {
+  const userEmail = form.userEmail.value.trim();
+  const userPw = form.userPw.value.trim();
+
+  if (!userEmail || !emailRegex.test(userEmail)) {
+    swal("올바른 이메일 형식이 아닙니다.", "", "error");
+    form.userEmail.focus();
     return false;
   }
-  if (!f.userPw.value || !regPw.test(f.userPw.value)) {
+  
+  if (!userPw || !passwordRegex.test(userPw)) {
     swal(
       "정확한 비밀번호를 입력하세요.",
-      "8자리 이상 대문자, 숫자, 특수문자 포함",
+      "8자리 이상의 대소문자, 숫자, 특수문자를 포함해야 합니다.",
       "error"
     );
-    f.userPw.focus();
+    form.userPw.focus();
     return false;
   }
 
   fetch("/userAdminPage/adminLogin", {
-    method: "post",
+    method: "POST",
     body: JSON.stringify({
-      userEmail: f.userEmail.value,
-      userPw: f.userPw.value,
+      userEmail,
+      userPw,
     }),
-    headers: { "Content-type": "application/json; charset=utf-8" },
+    headers: { "Content-Type": "application/json; charset=utf-8" },
   })
-    .then((Response) => {
-      if (Response.status == "400") {
-        swal("아이디와 비밀번호가 다릅니다.", "", "error");
-        f.reset();
-      } else {
-        Response.json().then((result) => {
-          sessionStorage.setItem("Okja", result.spotNo);
-          swal("로그인 완료!", "반갑습니다.담당자님", "success");
-          setTimeout(function () {
-            location.href =
-              "/userAdminPage/goDashboard/" + sessionStorage.getItem("Okja");
-          }, 1500);
-        });
-      }
-    })
-    .catch((err) => console.log(err));
+  .then((response) => {
+    if (response.status === 400) {
+      swal("아이디와 비밀번호가 다릅니다.", "", "error");
+      form.reset();
+    } else {
+      response.json().then((result) => {
+        sessionStorage.setItem("Okja", result.spotNo);
+        swal("로그인 완료!", "반갑습니다. 담당자님", "success");
+        setTimeout(() => {
+          location.href = "/userAdminPage/goDashboard/" + sessionStorage.getItem("Okja");
+        }, 1500);
+      });
+    }
+  })
+  .catch((err) => console.log(err));
 });

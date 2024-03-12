@@ -7,7 +7,7 @@
     <!-- 계산서 발행 페이지 - 내역 조회 -->
 	<select id="tradeDetailList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">        
         
-       	SELECT a.recNo, c.comName, c.comBizType, b.spName, 
+       	SELECT a.recNo, c.comName, c.comBizType, b.spName, c.companyNo, b.spotNo,
                a.recDate, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
@@ -17,6 +17,89 @@
         
     </select>
     
+    <!-- 거래 명세 검색  -->
+    <select id="searchTd" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
+    	
+    SELECT 
+    a.recNo, c.comName, c.comBizType, b.spName, 
+    a.recDate, a.recSum, a.recSup, a.recTax, 
+    e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation, 
+    c.companyNo, b.spotNo
+	FROM 
+    RAIN_receipt_tbl a    
+    JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+    JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+    JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+    JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+	WHERE
+    1 = 1
+    <if test="recPayMth != null and recPayMth != '전체' ">
+        AND a.recPayMth = '${recPayMth}' 
+    </if>
+    <if test="keyword != null and keyword != ''">
+        AND (
+            a.recNo = '${keyword}' 
+            OR c.comName LIKE '%${keyword}%' 
+            OR b.spName LIKE '%${keyword}%'
+        )
+    </if>
+    <if test="firDate != null and secDate != null">
+        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+    </if>
+
+    </select>
+    
+    
+    <!-- 결제처리  -->
+    <update id="paymentProcessing" parameterType="java.util.List">
+		  	update RAIN_receipt_tbl
+		    set recSortation = '결제완료'
+		    where recNo IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	</update>    
+    
+    <!-- 대손처리 -->
+    <update id="bigHandProcessing" parameterType="java.util.List">
+		  	update RAIN_receipt_tbl
+		    set recSortation = '대손처리'
+		    where recNo IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+	</update>
+    
+    <!-- 체크박스로 받을 리스트만 출력  -->
+   <select id="tdDownList" parameterType="java.util.List" resultType="org.rainbow.company.calculateManagement.domain.tdDownVO">
+   		SELECT a.recNo, c.comName, c.comBizType, b.spName,
+               a.recDate, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation
+        FROM RAIN_receipt_tbl a    
+        JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+        JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
+        JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+        where c.comBizType IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		AND a.recSortation IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>  
+   </select> 
+    
+    <select id="editTdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
+    	SELECT c.comName, b.spName, c.comBizType, f.cEmpName, f.cEmpTel, f.cEmpEmail, a.recDate, a.recPayMth, a.recSortation,
+        e.prdMajorCtg, e.prdSubCtg, e.prdNo, e.prdName, e.prdSal, e.prdCstPri, e.prdMargin         
+        FROM RAIN_receipt_tbl a    
+        JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
+        JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
+        JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+        JOIN RAIN_cEMP_tbl f ON f.cEepNo = d.cEmpNo
+        WHERE a.recNo = #{recNo}
+    </select>
     
     <!-- 거래미수 기업 연결 아직안함 -->
     <select id="misuCom" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">

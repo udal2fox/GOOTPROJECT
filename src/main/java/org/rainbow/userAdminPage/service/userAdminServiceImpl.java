@@ -1,6 +1,7 @@
 package org.rainbow.userAdminPage.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.rainbow.userAdminPage.mapper.userAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,35 @@ public class userAdminServiceImpl implements userAdminService{
 	@Override
 	public HashMap<String, Object> getDashboard(int spotNo) {
 		return userMapper.getDashboard(spotNo);
+	}
+	
+	@Override
+	public HashMap<String, Object> getUserInfo(int spotNo) {
+		return userMapper.getUserInfo(spotNo);
+	}
+	
+	@Override
+	public int updateUserInfo(HashMap<String, Object> updateInfo) {
+		return userMapper.updateUserInfo(updateInfo);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getEmpList(int sNo) {
+		return userMapper.getEmpList(sNo);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getInquiryList(int spotNo) {
+		return userMapper.getInquiryList(spotNo);
+	}
+	
+	@Override
+	public boolean addQnA(HashMap<String, Object> addQnAMap) {
+		return userMapper.addQnA(addQnAMap);
+	}
+	
+	@Override
+	public boolean addUserEmp(HashMap<String, Object> addForm) {
+		return userMapper.addUserEmp(addForm);
 	}
 }

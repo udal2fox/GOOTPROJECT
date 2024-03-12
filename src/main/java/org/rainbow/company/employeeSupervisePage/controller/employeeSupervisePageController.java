@@ -3,12 +3,17 @@ package org.rainbow.company.employeeSupervisePage.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.RowBounds;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
+import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
+import org.rainbow.domain.Criteria;
+import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +30,38 @@ public class employeeSupervisePageController {
 
 	@Autowired
 	searchEmployeeServiceImpl service;
+	
+	
+	// 직원 조회 페이지
+	@GetMapping("/searchEmployee")
+	public String searchEmployee(Model model, Criteria cri) {
+			  
+		if( cri.getPageNum() == 0 && cri.getAmount() == 0) {
+			cri.setPageNum(1);
+			cri.setAmount(13);
+		}
+		
+		// offset 설정
+	    cri.setOffset((cri.getPageNum() - 1) * cri.getAmount());
 
+	    // getList() 메서드 호출 시, Criteria 객체만을 인자로 전달
+	    List<rain_employeeDTO> employeeList = service.getList(cri);
+
+			 	
+		log.info("getList..." + employeeList);
+		System.out.println(service.getList(cri));
+			 
+		//전체 직원 수 
+		int total = service.getTotal(); 
+		log.info("total...." + total);
+			 
+		// PageDTO 객체 list 화면으로 전달
+		model.addAttribute("list", employeeList);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+			
+		return "/company/employeeSupervisePage/searchEmployeePage";
+	}
+		
 	// 직원 정보 등록 페이지 이동
 	@GetMapping("/employee_insert")
 	public String employee_insert() {
@@ -165,22 +201,41 @@ public class employeeSupervisePageController {
 		
 	// 프로필 편집 페이지
 	@GetMapping("/profile_modify")
-	public String profile_modify() {
+	public String profile_modify(HttpSession session, Model model) {
+		
+		// 세션에서 필요한 값들 가져오기
+        Integer eno = (Integer) session.getAttribute("eno");
+        
+        
+        rain_EmpVO vo = service.get(eno);
+     
+        String dName = "";
+        
+		switch (vo.getDeptNo()) {
+		    case 1:
+		        dName = "인사";
+		        break;
+		    case 2:
+		        dName = "재무";
+		        break;
+		    case 3:
+		        dName = "영업";
+		        break;
+		    case 4:
+		        dName = "상품";
+		        break;
+		    case 0:
+		        dName = "대표";
+		        break;
+		}
+
+		model.addAttribute("dName", dName);
+        model.addAttribute("vo", vo);
+        
+        log.info("move profilePage" + model);
+		
 		return "/company/employeeSupervisePage/profile_modify";
 	}
 
-	// 직원 조회 페이지
-	@GetMapping("/searchEmployee")
-	public String searchEmployee(Model model) {
-
-		 log.info("getList..." + service.getList());
-		 System.out.println(service.getList());
-		  
-		 model.addAttribute("list", service.getList());
-		 //전체 직원 수 
-		 int total = service.getTotal(); 
-		 log.info("total...." + total);
-		
-		return "/company/employeeSupervisePage/searchEmployeePage";
-	}
 }
+	

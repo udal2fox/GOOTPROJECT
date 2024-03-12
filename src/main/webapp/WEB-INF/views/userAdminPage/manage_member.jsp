@@ -51,23 +51,22 @@
 
 	<section class="p-2">
 		<div class="container">
-			<div class="overflow-auto" style="height: 600px;">
+			<div class="overflow-auto" style="height: 700px;">
 				<div class="px-3">
 					<table class="table table-sm" id="member_table">
 						<thead class="table-danger">
 							<tr class="text-center">
-								<th><input class="form-check-input" type="checkbox"></th>
+								<th><input class="form-check-input" type="checkbox" onclick="checkAll()"></th>
 								<th>No.</th>
 								<th>이름</th>
 								<th>직급</th>
 								<th>연락처</th>
 								<th>이메일</th>
 								<th>생년월일</th>
-								<th>1인당 예산</th>
 								<th>선물 수령여부</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="empList">
 							<tr class="text-center">
 								<td><input class="form-check-input" type="checkbox"></td>
 								<td>${member_seq}</td>
@@ -76,7 +75,6 @@
 								<td>${member_phone}</td>
 								<td>${member_email}</td>
 								<td>${member_birth}</td>
-								<td>${member_budget}</td>
 								<td>${member_gift}</td>
 							</tr>
 
@@ -102,6 +100,8 @@
 				</div>
 				<div class="modal-body">
 					<div style="width: 1000px; margin: auto;">
+
+					<form id="addEmp">
 						<table class="table table-sm table-bordered" id="member_table"
 							style="width: 1000px;">
 							<thead class="table-danger">
@@ -115,20 +115,21 @@
 							</thead>
 							<tbody>
 								<tr class="text-center">
-									<td><input type="text"></td>
-									<td><input type="text"></td>
-									<td><input type="number" placeholder="숫자(-제외)"></td>
-									<td><input type="mail"></td>
-									<td><input type="date"></td>
+									<td><input type="text" name="cEmpName"></td>
+									<td><input type="text" name="cEmpPosition"></td>
+									<td><input type="number" placeholder="숫자(-제외)" name="cEmpTel"></td>
+									<td><input type="email" name="cEmpEmail"></td>
+									<td><input type="date" name="cEmpBirth"></td>
 								</tr>
 							</tbody>
 						</table>
+						</form>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">변경사항 저장</button>
+					<button type="button" class="btn btn-primary" id="addEmpBtn">추가하기</button>
 				</div>
 			</div>
 		</div>
@@ -158,7 +159,6 @@
 									<th>연락처</th>
 									<th>이메일</th>
 									<th>생년월일</th>
-									<th>1인당 예산</th>
 									<th>선물 수령여부</th>
 								</tr>
 							</thead>
@@ -170,7 +170,6 @@
 									<td><input type="number" value="${phone}"></td>
 									<td><input type="mail" value="${value}"></td>
 									<td><input type="date" value="${date}"></td>
-									<td><input type="number" value="${budget}" readonly></td>
 									<td><select class="form-select" aria-label="status">
 											<option selected>여부</option>
 											<option value="1">O</option>
@@ -220,6 +219,5 @@
 
 
 </body>
-
-
+<script src="/resources/js/userAdminPage/manage_member.js"></script>
 </html>

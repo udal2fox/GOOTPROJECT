@@ -15,7 +15,9 @@
     		RAIN_DEPT_tbl d 
     	ON 
     		e.deptNo = d.deptNo
-    	ORDER BY e.eno DESC
+    	ORDER BY 
+    		e.eno DESC 
+    	LIMIT #{amount} OFFSET #{offset}
     	
 	</select>
 	
@@ -29,7 +31,7 @@
 	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
 			
 		SELECT 
-        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, 
+        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, e.eId, e.ePw,
         	CONCAT(SUBSTRING(e.identyNum, 1, 2), '년 ', SUBSTRING(e.identyNum, 3, 2), '월 ', SUBSTRING(e.identyNum, 5, 2), '일') AS identyNum, 
         	e.job, e.workType, e.sal, e.eAddr, e.eAddr2, e.eBank, e.salAccount, e.hireDt, e.endDt, e.idStatus
     	FROM 

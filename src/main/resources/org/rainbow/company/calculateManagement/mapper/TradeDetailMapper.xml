@@ -88,10 +88,12 @@
 		        #{item}
 		    </foreach>  
    </select> 
-    
+    <!-- 거래명세 편집 들고갈 정보  -->
     <select id="editTdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
     	SELECT c.comName, b.spName, c.comBizType, f.cEmpName, f.cEmpTel, f.cEmpEmail, a.recDate, a.recPayMth, a.recSortation,
-        e.prdMajorCtg, e.prdSubCtg, e.prdNo, e.prdName, e.prdSal, e.prdCstPri, e.prdMargin         
+        e.prdMajorCtg, e.prdSubCtg, e.prdNo, e.prdName, e.prdSal, e.prdCstPri, e.prdMargin,
+        a.recDedName, a.recDedPrdCode, a.recDed, a.recDedSup, a.recDedTax, a.recDedCst, a.recDedCstSup, a.recDedCstTax,    
+        a.recAddName, a.recAddPrdCode, a.recAdd, a.recAddSup, a.recAddTax, a.recAddCst, a.recAddCstSup, a.recAddCstTax        
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
         JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
@@ -100,6 +102,36 @@
         JOIN RAIN_cEMP_tbl f ON f.cEepNo = d.cEmpNo
         WHERE a.recNo = #{recNo}
     </select>
+    
+    <update id="editTdupdate" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
+    	UPDATE RAIN_receipt_tbl
+		SET 
+		    recDedName = #{recDedName},
+		    recDed = #{recDed},
+		    recDedSup = #{recDedSup},
+		    recDedTax = #{recDedTax},
+		    recDedCst = #{recDedCst},
+		    recDedCstSup = #{recDedCstSup},
+		    recDedCstTax = #{recDedCstTax},
+		    recDedWorker = #{recDedWorker},
+		    
+		    recAddName = #{recAddName},
+		    recAdd = #{recAdd},
+		    recAddSup = #{recAddSup},
+		    recAddTax = #{recAddTax},
+		    recAddWorker = #{recAddWorker},
+		    recAddCst = #{recAddCst},
+		    recAddCstSup = #{recAddCstSup},
+		    recAddCstTax = #{recAddCstTax},
+		    recAddWorker = #{recAddWorker}
+		    
+		WHERE recNo = #{recNo}
+
+    </update>
+    
+    
+    
+    
     
     <!-- 거래미수 기업 연결 아직안함 -->
     <select id="misuCom" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
@@ -130,6 +162,9 @@
         JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
         JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
     </select>
+    
+    
+    
     
     
 </mapper>

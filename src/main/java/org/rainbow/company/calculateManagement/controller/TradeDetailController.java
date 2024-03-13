@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
@@ -36,12 +37,11 @@ public class TradeDetailController {
 	
 	// 거래 명세 페이지 이동 
 	@GetMapping(value = "/TradeDetailPage")
-	public String orderStatementPage(Model model) {
-		
+	public String orderStatementPage(Model model)
+	{
 		List<TradeDetailListVO> list = tService.tradeDetailList();
 		
 		model.addAttribute("list", list);
-		
 		
 		return "/company/calculateMGTpage/TradeDetailPage";
 	}
@@ -102,17 +102,35 @@ public class TradeDetailController {
 	 
     /** 거래명세 수정 창으로 이동 */
     @GetMapping("/tradeDetailEdit")
-    public String moveTDEdit(Model model, @RequestParam("recNo") String recNo)
+    public String moveTDEdit(Model model, @RequestParam("recNo") String recNo, HttpSession session)
     {
-    	log.info(recNo);
+    	
+    	String eName = (String) session.getAttribute("eName");
+		model.addAttribute("eName", eName);
+    	
     	
     	TradeDetailEditVO tdevo = tService.editTdList(recNo);
     	model.addAttribute("edit", tdevo);
+    	model.addAttribute("recNo", recNo);
     	log.info(tdevo);
     	
     	return "/company/calculateMGTpage/TradeDetailEditVO";
     }
-    
 	
-	
+    /** 거레 명세 수정  */
+    @ResponseBody
+    @PostMapping(value = "/TdEdit.do", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> tdEditDo(@RequestBody TradeDetailEditVO vo)
+    {
+    	
+    	log.info(vo);
+    	
+    	
+    	int result = tService.editTdupdate(vo);
+    	
+    	if(result >= 1 )
+    	return ResponseEntity.ok("Success");
+    	else  return ResponseEntity.ok("Fail");
+    	
+    }
 }

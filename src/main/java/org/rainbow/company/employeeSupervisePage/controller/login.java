@@ -48,6 +48,7 @@ public class login {
 			HttpSession session = request.getSession();
 			session.setAttribute("deptNo", (Integer) resultMap.get("deptNo"));
 			session.setAttribute("eno", (Integer) resultMap.get("eno"));
+			session.setAttribute("eName", (String) resultMap.get("eName"));
 
 			return ResponseEntity.ok().body(resultMap);
 		}

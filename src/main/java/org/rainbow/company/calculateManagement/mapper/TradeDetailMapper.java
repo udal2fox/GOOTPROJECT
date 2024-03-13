@@ -28,4 +28,7 @@ public interface TradeDetailMapper {
 	/** 거레명세 수정 불러오기*/
 	public TradeDetailEditVO editTdList(String recNo);
 	
+	/** 거래명세 수정 하기 */
+	public int editTdupdate(TradeDetailEditVO vo);
+	
 }

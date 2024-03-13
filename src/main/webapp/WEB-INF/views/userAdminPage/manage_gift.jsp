@@ -28,7 +28,7 @@
 								다운</button>
 						</div>
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary w-100" id="registGiftBtn">편집</button>
+							<button type="button" class="btn btn-outline-primary w-100" id="customGiftBtn">편집</button>
 						</div>
 					</div>
 					<div class="overflow-auto m-3" style="height: 600px;">
@@ -51,7 +51,7 @@
 							<span class="fw-bold fs-5">기본 지정 선물</span>
 						</div>
 						<div class="col col-sm-4">
-							<button type="button" class="btn btn-outline-primary w-100">편집</button>
+							<button type="button" class="btn btn-outline-primary w-100" id="defaultGiftBtn">편집</button>
 						</div>
 					</div>
 					<div class="overflow-auto m-3">

@@ -49,6 +49,11 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 		return tMapper.editTdList(recNo);
 	}
 
+	@Override
+	public int editTdupdate(TradeDetailEditVO vo) {
+		return tMapper.editTdupdate(vo);
+	}
+
 	
 	
 	

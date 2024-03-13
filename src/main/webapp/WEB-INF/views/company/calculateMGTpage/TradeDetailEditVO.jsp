@@ -32,7 +32,6 @@ input[type=text]
 <div class="container-fluid" align="center" >
 	<div class="product-top-back">
 		
-		
 		<div class="container">
 		<div align="left" style="padding-top: 50px;"><h2>거래명세-편집</h2></div>`
 		<p></p>
@@ -58,52 +57,60 @@ input[type=text]
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">금액차감</h3>
 	        <table style="width: 1300px">
-	        	<tr>
-	        		<th>적요(품목명)</th>	
-	        		<th>차감금액</th>	
-	        		<th>차감 공급액</th>	
-	        		<th>차감 세액</th>	
-	        		<th>원가</th>	
-	        		<th>원가-공급액</th>	
-	        		<th>원가-세액</th>	
-	        		<th>금액조정</th>	
-	        	</tr>
-	        	<tr>
-	        		<td><input type="text" id="recDedName"></td>
-	        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recDedSup" value="0"></td>
-	        		<td><input type="text" id="recDedTax" value="0"></td>
-	        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recDedCstSup" value="0"></td>
-	        		<td><input type="text" id="recDedCstTax" value="0"></td>
-	        		<td><button type="button" class="btn btn-primary" onclick="inputDedCal()">버튼</button></td>
-	        	</tr>
+				<thead>	
+		        	<tr>
+		        		<th>적요(품목명)</th>	
+		        		<th>차감금액</th>	
+		        		<th>차감 공급액</th>	
+		        		<th>차감 세액</th>	
+		        		<th>원가</th>	
+		        		<th>원가-공급액</th>	
+		        		<th>원가-세액</th>	
+		        		<th>금액조정</th>	
+		        	</tr>
+	        	</thead>
+	        	<tbody class="daBody1">
+		        	<tr>
+		        		<td><input type="text" id="recDedName"></td>
+		        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산"></td>
+		        		<td><input type="text" id="recDedSup" value="0"></td>
+		        		<td><input type="text" id="recDedTax" value="0"></td>
+		        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산"></td>
+		        		<td><input type="text" id="recDedCstSup" value="0"></td>
+		        		<td><input type="text" id="recDedCstTax" value="0"></td>
+		        		<td><button type="button" class="btn btn-primary dedbtn" onclick="inputDedCal()">버튼</button></td>
+		        	</tr>
+	        	</tbody>
 	        </table> 
 	        <input type="hidden" id="hiddenDedCode">
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">추가정산</h3>
 	        <table style="width: 1300px">
-	        	<tr>
-	        		<th>적요(품목명)</th>
-	        		<th>추가정산 금액</th>
-	        		<th>추가정산 공급액</th>
-	        		<th>추가정산 세액</th>
-	        		<th>원가</th>
-	        		<th>원가-공급액</th>
-	        		<th>원가-세액</th>
-	        		<th>금액조정</th>
-	        	</tr>	
-	        	<tr>
-	        		<td><input type="text" id="recAddName"></td>
-	        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recAddSup" value="0"></td>
-	        		<td><input type="text" id="recAddTax" value="0"></td>
-	        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recAddCstSup" value="0"></td>
-	        		<td><input type="text" id="recAddCstTax" value="0"></td>
-	        		<td><button type="button" class="btn btn-primary">${sessionScope.eName}</button></td>
-	        	</tr>	
+	        	<thead>
+		        	<tr>
+		        		<th>적요(품목명)</th>
+		        		<th>추가정산 금액</th>
+		        		<th>추가정산 공급액</th>
+		        		<th>추가정산 세액</th>
+		        		<th>원가</th>
+		        		<th>원가-공급액</th>
+		        		<th>원가-세액</th>
+		        		<th>금액조정</th>
+		        	</tr>
+	        	</thead>	
+	        	<tbody class="daBody1">
+		        	<tr>
+		        		<td><input type="text" id="recAddName"></td>
+		        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산"></td>
+		        		<td><input type="text" id="recAddSup" value="0"></td>
+		        		<td><input type="text" id="recAddTax" value="0"></td>
+		        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산"></td>
+		        		<td><input type="text" id="recAddCstSup" value="0"></td>
+		        		<td><input type="text" id="recAddCstTax" value="0"></td>
+		        		<td><button type="button" class="btn btn-primary addbtn" onclick="inputAddCal()">버튼</button></td>
+		        	</tr>
+	        	</tbody>	
 	        </table> 
         </div>
 		<div class="container" style="padding-top: 50px;">
@@ -146,8 +153,8 @@ input[type=text]
 		        	</c:if>
 		        	<c:if test="${not empty edit.recAddName}">
 			        	<tr>
-			        		<td>금액차감</td>
-			        		<td>금액차감</td>
+			        		<td>추가정산</td>
+			        		<td>추가정산</td>
 			        		<td>${edit.recAddPrdCode }</td>
 			        		<td>${edit.recAddName }</td>
 			        		<td>${edit.recAdd }</td>
@@ -162,10 +169,11 @@ input[type=text]
         <div class="container" >
        		<div class="buttonGp" align="right" style="width: 1300px; padding-top: 15px;">
 	        	<div>
+	        		<input type="hidden" value="${recNo}" id="recNo">
 	        		<input type="hidden" value="${eName}" id="worker">
-	        		<button type="button" class="btn btn-primary">수정</button>
+	        		<button type="button" class="btn btn-primary" onclick="EditTradeDetail()">수정</button>
 	  				&nbsp;&nbsp;
-	        		<button type="button" class="btn btn btn-secondary">취소</button>
+	        		<button type="button" class="btn btn btn-secondary" onclick="reload()">취소</button>
 	  				&nbsp;&nbsp;
 	        		<button type="button" class="btn btn btn-secondary">목록</button>
 	        	</div>

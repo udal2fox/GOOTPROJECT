@@ -4,12 +4,12 @@
  <mapper namespace="org.rainbow.company.custMgmt.mapper.salesMapper">
  
    <!-- 서치바 - 키워드 검색 결과 가져오기 -->
- 	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+ 	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
 	      
 	        SELECT *
 			FROM RAIN_consult_tbl
-			WHERE csCompanyName = #{keyword} OR csName = #{keyword} OR csEmail OR csEname = #{keyword} OR prdName
-			ORDER BY consultNo ASC;
+			WHERE csCompanyName = '#{keyword}' OR csName = '#{keyword}' OR csEmail = '#{keyword}' OR csEname = '#{keyword}'
+			ORDER BY consultNo ASC
 			
 	</select>
 	

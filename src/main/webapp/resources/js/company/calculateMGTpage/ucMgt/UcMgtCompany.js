@@ -65,7 +65,7 @@
 	        });
 	    });
 	
-	    
+	
 	
 	    // 상품 필터링 함수
 	    function filterProducts() {
@@ -265,57 +265,11 @@
 	// 페이징 끝
 	
 	
-	
-	
 	// 리셋 그냥 새로고침''
 	document.querySelector('#reset').addEventListener('click', function() {
 	    console.log("dd");
 	    location.reload();
 	});
-	
-	
-	// 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
-	document.querySelectorAll('.sort-btn').forEach(button => {
-	    button.addEventListener('click', () => {
-	        const column = button.dataset.column;
-	        sortDirection[column] = !sortDirection[column]; // 정렬 방향을 변경
-	
-	        // 정렬 방향에 따라 버튼 모양 변경
-	        button.innerText = sortDirection[column] ? '🔽' : '🔼';
-	        sortTable(column);
-	    });
-	});
-	
-	function getCellValue(row, column) {
-	    const columnIndex = {
-	        "recDate": 6,
-	        "recSum": 7,
-	        "recSortation":12
-	    } [column];
-	
-	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
-	    return cell ? cell.textContent.trim() : "";
-	}
-	
-	function sortTable(column) {
-	    const tbody = document.querySelector('.saleStatsTableInfo tbody');
-	    const rows = Array.from(tbody.querySelectorAll('tr'));
-	
-	    // 정렬 방식에 따라 정렬
-	    rows.sort((a, b) => {
-	        const aValue = getCellValue(a, column);
-	        const bValue = getCellValue(b, column);
-	        if (sortDirection[column]) {
-	            return aValue.localeCompare(bValue);
-	        } else {
-	            return bValue.localeCompare(aValue);
-	        }
-	    });
-	
-	    // 정렬된 행을 테이블에 적용
-	    tbody.innerHTML = '';
-	    rows.forEach(row => tbody.appendChild(row));
-	}
 	
 	
 	// 모먼트 js 날짜 계산
@@ -377,152 +331,31 @@
 	    });
 	});
 	
-	// 결제 완료처리	
-	document.querySelector('.PaymentBtn').addEventListener('click', function() {
+	
+	(function totalUc() {
+	    let data = [];
+	    let uctable = document.querySelectorAll('.saleStatsTableInfo tr');
 	    
-		if(confirm("결제처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-	
-		    let checkboxes = document.getElementsByName('checkboxTd');
-		    checkboxes.forEach(function(checkbox) {
-		        if (checkbox.checked) {
-		            let row = checkbox.closest('tr');
-		            let tdList = row.querySelectorAll('td');
-	
-	   	            let recNo = tdList[1].textContent.trim(); 
-		            checkedDataList.push(recNo);
-		        }
-		    });
-	
-		    fetch('/Payment.do', {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json',
-		        },
-		        body: JSON.stringify(checkedDataList),
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw new Error('Network response was not ok');
-		        }
-		        return response.text();
-		    })
-		    .then(text => {
-		        console.log('Success:', text);
-		        if(text == 'Success'){
-		        	alert("결체 처리 성공");
-		        	location.reload();
-		        }
-		        else alert("결제 처리 실패"); 
-		    })
-		    .catch(error => {
-		        console.error('Error:', error);
-		    });
-		}
-		else
-		{
-			return false;
-		}
-	});
-	// 결제 완료처리	
-	document.querySelector('.PaymentBtn').addEventListener('click', function() {
-		
-		if(confirm("결제처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-			
-			let checkboxes = document.getElementsByName('checkboxTd');
-			checkboxes.forEach(function(checkbox) {
-				if (checkbox.checked) {
-					let row = checkbox.closest('tr');
-					let tdList = row.querySelectorAll('td');
-					
-					let recNo = tdList[1].textContent.trim(); 
-					checkedDataList.push(recNo);
-				}
-			});
-			
-			fetch('/Payment.do', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(checkedDataList),
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.text();
-			})
-			.then(text => {
-				console.log('Success:', text);
-				if(text == 'Success'){
-					alert("결체 처리 성공");
-					location.reload();
-				}
-				else alert("결제 처리 실패"); 
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		}
-		else
-		{
-			return false;
-		}
-	});
-	
-	
-	// 대손 완료처리	
-	document.querySelector('.BigHandBtn').addEventListener('click', function() {
-		
-		if(confirm("대손처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-			
-			let checkboxes = document.getElementsByName('checkboxTd');
-			checkboxes.forEach(function(checkbox) {
-				if (checkbox.checked) {
-					let row = checkbox.closest('tr');
-					let tdList = row.querySelectorAll('td');
-					
-					let recNo = tdList[1].textContent.trim(); 
-					checkedDataList.push(recNo);
-				}
-			});
-			
-			fetch('/binHand.do', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(checkedDataList),
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.text();
-			})
-			.then(text => {
-				console.log('Success:', text);
-				if(text == 'Success'){
-					alert("대손 처리 성공");
-					location.reload();
-				}
-				else alert("대손 처리 실패"); 
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		}
-		else
-		{
-			return false;
-		}
-	});
+	    uctable.forEach(function(uc, index) {
+	        if (index !== 0) {
+	            let tdList = uc.querySelectorAll('td');
+	            let recNo = parseInt(tdList[4].textContent.trim());
+	            data.push(recNo);
+	        }
+	    });
+	    console.log(data);
+	    
+	    let total = data.reduce((acc, curr) => acc + curr, 0);
+	    console.log("총합: ", total.toLocaleString('ko-KR', { style: 'decimal' }));
+	   // 현재 값(current value) (curr): 현재 배열 요소를 가르킴. 콜백 함수는 배열의 각 요소에 대해 한 번씩 호출.
+	   // 현재 인덱스(index): 현재 배열 요소의 인덱스.
+	   // 원본 배열(array): reduce()가 호출된 배열 
+	   
+	    let ucTotal = document.querySelector('.misuTotal').innerHTML = '총 미수 금액 : '+total.toLocaleString('ko-KR', { style: 'decimal' })+'원';
+	    
+	    
+	})();
+
 
 	
 	

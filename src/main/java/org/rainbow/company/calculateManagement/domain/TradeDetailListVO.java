@@ -40,6 +40,10 @@ public class TradeDetailListVO
 	private String companyNo;
 	// 지점 기본키
 	private String spotNo;
+	// 기업이메일 메일기능 삽입시 활용해봄
+	private String comEmail;
+	
+	
 	
 	
 }

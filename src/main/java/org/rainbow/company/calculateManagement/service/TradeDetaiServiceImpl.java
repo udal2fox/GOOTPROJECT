@@ -6,6 +6,7 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
+import org.rainbow.company.calculateManagement.domain.ucComDownVO;
 import org.rainbow.company.calculateManagement.mapper.TradeDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +55,22 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 		return tMapper.editTdupdate(vo);
 	}
 
+	// 미수관리 시작
+	@Override
+	public List<TradeDetailListVO> ucCompany() {
+		return tMapper.ucCompany();
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucComSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.ucComSearch(tdDTO);
+	}
+
+	@Override
+	public List<ucComDownVO> ucComDown(List<String> checkValues) {
+		return tMapper.ucComDown(checkValues);
+	}
+	
 	
 	
 	

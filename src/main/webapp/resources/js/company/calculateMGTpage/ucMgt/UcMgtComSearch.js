@@ -22,7 +22,7 @@ function fetchSearchResults(keyword) {
 	
 	console.log(searchKeyword);
 	
-	fetch('/TradeDetailSearch.do',
+	fetch('/ucComSearch.do',
 	{
 		method : 'POST',
 		body :  JSON.stringify(searchKeyword),
@@ -34,17 +34,15 @@ function fetchSearchResults(keyword) {
             let msg = '';
             list.forEach(list => {
             	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
-            	msg += '<td><input type="checkbox" name="categoryAll"></td>';
-            	msg += '<td><a href="/tradeDetailEdit?recNo='+ list.recNo+'">'+list.recNo+'</td>';
-            	msg += '<td><a href="/companyView?companyNo='+list.companyNo+ '">' + list.comName + '</a></td>';
+            	msg += '<td><input type="checkbox" name="checkboxTd"></td>';
+            	msg += '<td>' + list.companyNo + '</td>';
+            	msg += '<td>' + list.comName + '</td>';
             	msg += '<td>' + list.comBizType + '</td>';
-            	msg += '<td>' + list.spName + '</td>';
-            	msg += '<td>' + myTime(list.recDate) + '</td>';
             	msg += '<td>' + list.recSum + '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';
             	msg += '<td>' + list.prdCstPri + '</td>';
-            	msg += '<td>' + (list.prdMargin * 100) + '%</td>';
+            	msg += '<td>' + list.prdMargin + '</td>';
             	msg += '<td>' + list.recPayMth + '</td>';
             	msg += '<td>' + list.recSortation + '</td>';
             	msg += '</tr>';
@@ -56,6 +54,18 @@ function fetchSearchResults(keyword) {
             drawPagination();
             goToPage(1);
             resetCheckboxes();
+            
+         // 체크박스를 클릭했을 때 이벤트
+        	document.getElementById("checkboxTdAll").addEventListener("click", function() {
+        	    // 전체 체크박스의 상태를 게또
+        	    let isChecked = this.checked;
+        	    
+        	    // 모든 하위 체크박스들을 가져와서 상태를 가져오기
+        	    let checkboxes = document.getElementsByName("checkboxTd");
+        	    checkboxes.forEach(function(checkbox) {
+        	        checkbox.checked = isChecked;
+        	    });
+        	});
 
         })
         .catch(error => console.error('Error:', error));
@@ -94,12 +104,4 @@ function getFilteredProducts() {
     return filteredProducts;
 }
 
-function myTime(unixTimeStamp) {
-    moment.locale('ko'); // 한국어 설정
-	// 오늘 날짜 가져오기
-	const mytime = moment(unixTimeStamp).format('YYYY-MM-DD');
 
-    return mytime;
-}
-
-// 서치 끝

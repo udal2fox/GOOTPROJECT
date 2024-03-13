@@ -2,97 +2,89 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="org.rainbow.userAdminPage.mapper.userAdminMapper">
+<mapper namespace="org.rainbow.userAdminPage.mapper.userAdminMapper">
 
-	<!-- // 사용자페이지 로그인 -->
-	<select id="customerLogin" parameterType="java.util.HashMap"
-		resultType="java.util.HashMap">
-		select userName, spotNo from RAIN_cUser_tbl
-		where userEmail
-		= #{userEmail} and userPw = #{userPw}
-	</select>
+    <!-- // 사용자페이지 로그인 -->
+    <select id="customerLogin" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        select userName, spotNo
+        from RAIN_cUser_tbl
+        where userEmail = #{userEmail} and userPw = #{userPw}
+    </select>
 
-	<!-- // 사용자 정보 가져오기 -->
-	<select id="getUserInfo" parameterType="int"
-		resultType="java.util.HashMap">
-		select * from RAIN_cUser_tbl
-		where spotNo = #{spotNo}
-	</select>
+    <!-- // 사용자 정보 가져오기 -->
+    <select id="getUserInfo" parameterType="int" resultType="java.util.HashMap">
+        select *
+        from RAIN_cUser_tbl
+        where spotNo = #{spotNo}
+    </select>
 
-	<!-- // 사용자 정보 수정하기 -->
-	<update id="updateUserInfo" parameterType="java.util.HashMap">
-		UPDATE RAIN_cUser_tbl
-		SET userEmail = #{userEmail},
-		userContact = #{userContact},
-		userPw = #{userPw},
-		userPwUpdate = now()
-		WHERE spotNo = 1;
-	</update>
+    <!-- // 사용자 정보 수정하기 -->
+    <update id="updateUserInfo" parameterType="java.util.HashMap">
+        UPDATE RAIN_cUser_tbl
+        SET userEmail = #{userEmail},
+            userContact = #{userContact},
+            userPw = #{userPw},
+            userPwUpdate = now()
+        WHERE spotNo = 1;
+    </update>
 
+    <!-- // 대쉬보드 정보 가져오기 -->
+    <select id="getDashboard" parameterType="int" resultType="java.util.HashMap">
+        select *
+        from RAIN_cSpot_tbl
+        where spotNo = #{spotNo}
+    </select>
 
-	<!-- // 대쉬보드 정보 가져오기 -->
-	<select id="getDashboard" parameterType="int"
-		resultType="java.util.HashMap">
-		select * from RAIN_cSpot_tbl
-		where spotNo = #{spotNo}
-	</select>
-	
-	<!-- // 직원정보 가져오기 -->
-	<select id="getEmpList" parameterType="int" resultType="java.util.HashMap">
-		select * from RAIN_cEMP_tbl
-		where sNo = #{sNo}
-	</select>
+    <!-- // 직원정보 가져오기 -->
+    <select id="getEmpList" parameterType="int" resultType="java.util.HashMap">
+        select *
+        from RAIN_cEMP_tbl
+        where sNo = #{sNo}
+    </select>
 
-	<!-- // 직원정보 추가하기 -->
-	<insert id="addUserEmp" parameterType="java.util.HashMap">
-		INSERT INTO RAIN_cEMP_tbl (
-			sNo, 
-			cEmpName, 
-			cEmpTel, 
-			cEmpEmail, 
-			cEmpPosition, 
-			cEmpBirth, 
-			receiveGift
-			) 
-		VALUES (
-			#{sNo}, 
-			#{cEmpName}, 
-			#{cEmpTel}, 
-			#{cEmpEmail}, 
-			#{cEmpPosition}, 
-			#{cEmpBirth}, 
-			0
-			)
-	</insert>
+    <!-- // 직원정보 추가하기 -->
+    <insert id="addUserEmp" parameterType="java.util.HashMap">
+        INSERT INTO RAIN_cEMP_tbl (sNo, cEmpName, cEmpTel, cEmpEmail, cEmpPosition, cEmpBirth, receiveGift)
+        VALUES (#{sNo}, #{cEmpName}, #{cEmpTel}, #{cEmpEmail}, #{cEmpPosition}, #{cEmpBirth}, 0)
+    </insert>
 
-	<!-- // 고객지원 리스트 가져오기 -->
-	<select id="getInquiryList" parameterType="int"
-		resultType="java.util.HashMap">
-		select * from RAIN_spotQnA_tbl
-		where spotNo = #{spotNo}
-	</select>
+    <!-- // 직원 수정하기 -->
+    <update id="updateEmp" parameterType="java.util.HashMap">
+        update RAIN_cEMP_tbl set
+        cEmpName = #{cEmpName},
+        cEmpTel = #{cEmpTel},
+        cEmpEmail = #{cEmpEmail},
+        cEmpPosition = #{cEmpPosition},
+        cEmpBirth = #{cEmpBirth},
+        receiveGift = #{receiveGift}
+        where cEepNo = #{no}
+    </update>
+    
+    <!-- 직원 삭제를 처리하는 쿼리 -->
+    <delete id="deleteEmployees" parameterType="java.util.HashMap">
+        DELETE FROM RAIN_cEMP_tbl
+        WHERE sNo = #{sNo}
+        AND cEmpNo = #{cEmpNo}
+    </delete>
 
-	<!-- // 고객지원 문의글 등록 -->
-	<insert id="addQnA" parameterType="java.util.HashMap">
-		insert into RAIN_spotQnA_tbl(
-		spotNo,
-		questionDate,
-		questionTitle,
-		questionContent
-		)
-		values(
-		#{spotNo},
-		now(),
-		#{questionTitle},
-		#{questionContent}
-		)
-	</insert>
-	
-	<!-- // 상품 전체 리스트 가져오기 -->
-	<select id="getGiftList" resultType="java.util.HashMap">
-		select * from RAIN_Products_tbl
-		where prdSt = '판매중'
-	</select>
+    <!-- // 고객지원 리스트 가져오기 -->
+    <select id="getInquiryList" parameterType="int" resultType="java.util.HashMap">
+        select *
+        from RAIN_spotQnA_tbl
+        where spotNo = #{spotNo}
+    </select>
+
+    <!-- // 고객지원 문의글 등록 -->
+    <insert id="addQnA" parameterType="java.util.HashMap">
+        insert into RAIN_spotQnA_tbl (spotNo, questionDate, questionTitle, questionContent)
+        values (#{spotNo}, now(), #{questionTitle}, #{questionContent})
+    </insert>
+
+    <!-- // 상품 전체 리스트 가져오기 -->
+    <select id="getGiftList" resultType="java.util.HashMap">
+        select *
+        from RAIN_Products_tbl
+        where prdSt = '판매중'
+    </select>
 
 </mapper>

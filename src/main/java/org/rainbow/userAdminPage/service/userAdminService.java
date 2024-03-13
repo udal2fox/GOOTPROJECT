@@ -22,4 +22,8 @@ public interface userAdminService {
 	public boolean addUserEmp(HashMap<String, Object> addForm);
 	
 	public List<HashMap<String, Object>> getGiftList();
+	
+	public boolean updateEmp(HashMap<String, Object> emp);
+	
+	public boolean deleteEmployees(List<HashMap<String, Integer>> deleteParams);
 }

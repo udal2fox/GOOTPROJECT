@@ -23,11 +23,7 @@
 						<div class="col d-flex align-items-center justify-content-center">
 							<span class="fw-bold fs-5">현재 선물 리스트</span>
 						</div>
-						<div class="col">
-							<button type="button" class="btn btn-outline-primary w-100">엑셀로
-								다운</button>
-						</div>
-						<div class="col">
+						<div class="col col-sm-4">
 							<button type="button" class="btn btn-outline-primary w-100" id="customGiftBtn">편집</button>
 						</div>
 					</div>

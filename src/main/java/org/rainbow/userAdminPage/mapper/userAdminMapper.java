@@ -21,5 +21,9 @@ public interface userAdminMapper {
 	
 	public boolean addUserEmp(HashMap<String, Object> addForm);
 	
+	public boolean updateEmp(HashMap<String, Object> emp);
+	
 	public List<HashMap<String, Object>> getGiftList();
+	
+	public boolean deleteEmployees(HashMap<String, Integer> deleteParams);
 }

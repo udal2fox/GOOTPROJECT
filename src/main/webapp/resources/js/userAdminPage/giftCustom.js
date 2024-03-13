@@ -34,7 +34,16 @@ window.onload = () => {
   });
 
   // 초기화 버튼에 클릭 이벤트 추가
-  document.getElementById("resetButton").addEventListener("click", resetCheckboxes);
+  document
+    .getElementById("resetButton")
+    .addEventListener("click", resetCheckboxes);
+
+// 이벤트 위임을 사용하여 체크박스 변경 이벤트를 캐치
+document.getElementById("productList").addEventListener("change", function (event) {
+  if (event.target.classList.contains("form-check-input")) {
+    countCheckboxes();
+  }
+});
 };
 
 // 선물 목록을 화면에 표시하는 함수
@@ -45,13 +54,27 @@ function showGiftList(data) {
     // 각 선물에 대한 HTML 요소 생성
     msg += '<div class="col p-1">';
     msg += '<div class="form-check">';
-    msg += '<input class="form-check-input" type="checkbox" value="' + product.prdNo + '" id="' + product.prdNo + '">';
+    msg +=
+      '<input class="form-check-input" type="checkbox" value="' +
+      product.prdNo +
+      '" id="' +
+      product.prdNo +
+      '">';
     msg += '<label class="form-check-label" for="' + product.prdNo + '">';
     msg += '<div class="card" style="width: 150px;">';
-    msg += '<img src="' + product.prdImg + '" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">';
+    msg +=
+      '<img src="' +
+      product.prdImg +
+      '" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">';
     msg += '<div class="card-body">';
-    msg += '<span class="card-text" style="font-size: 0.7rem;">' + product.prdName + "</span><br>";
-    msg += '<span class="card-text" style="font-size: 0.7rem;">금액 : ' + product.prdSal.toLocaleString() + "원</span>";
+    msg +=
+      '<span class="card-text" style="font-size: 0.7rem;">' +
+      product.prdName +
+      "</span><br>";
+    msg +=
+      '<span class="card-text" style="font-size: 0.7rem;">금액 : ' +
+      product.prdSal.toLocaleString() +
+      "원</span>";
     msg += "</div></div></label></div></div>";
   });
   productList.innerHTML = msg; // HTML 문자열을 HTML 요소에 할당하여 화면에 출력
@@ -64,7 +87,9 @@ function filterGiftsByPrice(price) {
     .then((response) => response.json()) // 응답을 JSON 형식으로 변환
     .then((list) => {
       // 가격에 따라 필터링된 선물 목록 생성
-      let filteredList = list.filter((product) => product.prdSal <= price && product.prdSal > price - 20000);
+      let filteredList = list.filter(
+        (product) => product.prdSal <= price && product.prdSal > price - 20000
+      );
       showGiftList(filteredList); // 필터링된 선물 목록을 화면에 표시
     })
     .catch((err) => console.log(err)); // 오류 발생 시 콘솔에 로그 출력
@@ -77,6 +102,15 @@ function resetCheckboxes() {
   // 각 체크박스의 상태를 해제
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
+    countCheckboxes()
   });
+}
+
+// 체크박스 체크된 숫자 카운팅 함수
+function countCheckboxes() {
+  let count = document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+  ).length;
+  document.querySelector("#selectGift").setAttribute("value", count);
 }
 

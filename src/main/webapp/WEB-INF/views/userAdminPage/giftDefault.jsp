@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/resources/images/favicon_rainbow.jpg" type="image/x-icon">
-    <title>Rainbow BirthDay</title>
+<meta charset="UTF-8">
+<link rel="icon" href="/resources/images/favicon_rainbow.jpg" type="image/x-icon">
+<title>Rainbow BirthDay</title>
 </head>
 <body>
     <!-- 공통 사이드바를 포함합니다. -->
@@ -17,38 +18,29 @@
                 <!-- 선물 가격대별 필터링 버튼 -->
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100">전체</button>
+                        <button type="button" class="btn btn-outline-secondary w-100" id="total">전체</button>
                     </div>
                     <div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">1만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">2만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">3만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">5만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">7만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">10만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">15만원</button>
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-outline-secondary w-100">20만원</button>
-					</div>
-					<div class="col-2">
-						<input type="text" class="form-control w-100" name="search">
-					</div>
-					<div class="col">
-						<button type="button" class="btn btn-primary w-100">검색</button>
-					</div>
+                        <button type="button" class="btn btn-outline-secondary w-100" id="10000">1만원</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary w-100" id="30000">3만원</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary w-100" id="50000">5만원</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary w-100" id="80000">8만원</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-secondary w-100" id="100000">10만원</button>
+                    </div>
+                    <div class="col-2">
+                        <input type="text" class="form-control w-100" name="search">
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-primary w-100" id="searchKeyword">검색</button>
+                    </div>
                     <!-- 다른 가격대에 대한 버튼을 추가합니다. -->
                     <!-- 예시: <div class="col"> <button type="button" class="btn btn-outline-secondary w-100">1만원</button> </div> -->
                 </div>
@@ -63,8 +55,7 @@
                                 <!-- 각 선물 옵션에 대한 체크박스 -->
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="1">
-                                    <label class="form-check-label" for="1">
-                                        <!-- 선물 이미지와 설명을 표시합니다. -->
+                                    <label class="form-check-label" for="1"> <!-- 선물 이미지와 설명을 표시합니다. -->
                                         <div class="card" style="width: 150px;">
                                             <img src="" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">
                                             <div class="card-body">
@@ -86,7 +77,7 @@
                     <div class="p-2 flex-grow-1">
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <label for="selectGift" class="col-form-label fw-bold">선택한 선물 수 : &nbsp</label>
+                                <label for="selectGift" class="col-form-label fw-bold" id="checkCount">선택한 선물 수 : </label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" id="selectGift" class="form-control" readonly>
@@ -95,17 +86,17 @@
                     </div>
                     <div class="p-2">
                         <!-- 선택 사항 초기화 버튼 -->
-                        <button type="button" class="btn btn-secondary" style="width: 200px">초기화</button>
+                        <button type="button" class="btn btn-secondary" style="width: 200px" id="resetButton">초기화</button>
                     </div>
                     <div class="p-2">
                         <!-- 선택 사항 저장 버튼 -->
-                        <button type="button" class="btn btn-primary" style="width: 200px">저장</button>
+                        <button type="button" class="btn btn-primary" style="width: 200px" id="saveButton">저장</button>
                     </div>
                 </div>
             </article>
         </section>
     </div>
 </body>
-    <!-- 사용자 정의 선물 기능을 위한 스크립트를 포함합니다. -->
-    <script src="/resources/js/userAdminPage/giftDefault.js"></script>
+<!-- 사용자 정의 선물 기능을 위한 스크립트를 포함합니다. -->
+<script src="/resources/js/userAdminPage/giftDefault.js"></script>
 </html>

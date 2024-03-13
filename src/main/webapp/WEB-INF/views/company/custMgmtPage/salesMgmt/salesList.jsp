@@ -36,43 +36,39 @@
                             <input type="text" class="form-control" placeholder="기업명/담당자명/이메일/영업 담당자" aria-label="키워드 입력" aria-describedby="test" id="searchBarKeyword">
                         </div>
 
-
-
-
-
 				<label>영업 상태</label>
 				<div class="checkbox_div"> <!-- form-check -->
 				<input type="checkbox" class="searchbar_checkbox" name="serviceStatus" value="전체" checked="checked" id="csStatus_typeAll"  data-check-all="csStatus_type">
-				<label for="csStatus_all">전체</label>
+				<label class="searchbar_checkbox_lable" for="csStatus_typeAll">전체</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="최초 인입" checked="checked" data-filter="csStatus_type" id="csStatus_firstIncoming" >
-				<label for="csStatus_firstIncoming">최초 인입</label>
+				<input type="checkbox" class="searchbar_checkbox_filter"  name="serviceStatus" value="최초 인입" checked="checked" data-filter="csStatus_type" id="csStatus_firstIncoming" >
+				<label class="searchbar_checkbox_lable" for="csStatus_firstIncoming">최초 인입</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox"  class="searchbar_checkbox"  name="serviceStatus" value="응대 완료" checked="checked" data-filter="csStatus_type" id="csStatus_response">
-				<label for="csStatus_response">응대 완료</label>
+				<input type="checkbox"  class="searchbar_checkbox_filter"  name="serviceStatus" value="응대 완료" checked="checked" data-filter="csStatus_type" id="csStatus_response">
+				<label class="searchbar_checkbox_lable" for="csStatus_response">응대 완료</label>
 				</div>
 				<div class="checkbox_div">
-				<input type="checkbox"  class="searchbar_checkbox" name="serviceStatus" value="견적 발송 완료" checked="checked" data-filter="csStatus_type" id="csStatus_quotationSent">
-				<label for="csStatus_quotationSent">견적 발송 완료</label>
-				</div>
-				
-				<div class="checkbox_div">
-				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="미팅 완료" checked="checked" data-filter="csStatus_type"  id="csStatus_meeting">
-				<label for="csStatus_meeting">미팅 완료</label>
+				<input type="checkbox"  class="searchbar_checkbox_filter" name="serviceStatus" value="견적 발송 완료" checked="checked" data-filter="csStatus_type" id="csStatus_quotationSent">
+				<label class="searchbar_checkbox_lable" for="csStatus_quotationSent">견적 발송 완료</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="계약 완료" checked="checked" data-filter="csStatus_type" id="csStatus_contractCompleted">
-				<label for="csStatus_contractCompleted">계약 완료</label>
+				<input type="checkbox" class="searchbar_checkbox_filter"  name="serviceStatus" value="미팅 완료" checked="checked" data-filter="csStatus_type"  id="csStatus_meeting">
+				<label class="searchbar_checkbox_lable" for="csStatus_meeting">미팅 완료</label>
 				</div>
 				
 				<div class="checkbox_div">
-				<input type="checkbox" class="searchbar_checkbox"  name="serviceStatus" value="계약 실패" checked="checked"  data-filter="csStatus_type" id="csStatus_contractFailure">
-				<label for="csStatus_contractFailure">계약 실패</label>
+				<input type="checkbox" class="searchbar_checkbox_filter"  name="serviceStatus" value="계약 완료" checked="checked" data-filter="csStatus_type" id="csStatus_contractCompleted">
+				<label class="searchbar_checkbox_lable" for="csStatus_contractCompleted">계약 완료</label>
+				</div>
+				
+				<div class="checkbox_div">
+				<input type="checkbox" class="searchbar_checkbox_filter"  name="serviceStatus" value="계약 실패" checked="checked"  data-filter="csStatus_type" id="csStatus_contractFailure">
+				<label class="searchbar_checkbox_lable" for="csStatus_contractFailure">계약 실패</label>
 				</div>
 				</div>
 				</div>
@@ -90,15 +86,18 @@
 
 				<label>기간</label>
 				<div>
-				<input type="date" id="searchBar_startDate"> ~ <input type="date"  id="searchBar_endDate">
+				<input class="datePick1" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly" id="searchBar_startDate">
+					 ~ 
+					<input class="datePick2" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly" id="searchBar_endDate">
+				
 				</div>
 				
 				
-				<button type="button" class="btn btn-secondary btn-sm">오늘</button>
-				<button type="button" class="btn btn-secondary btn-sm">일주일</button>
-				<button type="button" class="btn btn-secondary btn-sm">이번 달</button>
-				<button type="button" class="btn btn-secondary btn-sm">지난 달</button>
-				<button type="button" class="btn btn-secondary btn-sm">지난 분기</button>
+				<input type="button" class="btn btn-secondary dateBtn" value="오늘">
+				<input type="button" class="btn btn-secondary dateBtn" value="최근1주">
+				<input type="button" class="btn btn-secondary dateBtn" value="이번달">
+				<input type="button" class="btn btn-secondary dateBtn" value="지난달">
+				<input type="button" class="btn btn-secondary dateBtn" value="지난분기">
 				</div>
 				</div>
 				
@@ -118,43 +117,49 @@
 		
 	
 	<div class="list_div">
-
+		<form>
       <table class="list_div_tbl" id="sales_tbl">
          <thead>
             <tr class="top_bar_of_list">
-               <th>번호</th>
-               <th>신청일</th>
-               <th>기업명</th>
-               <th>신청인</th>
+               <th>번호<button type="button" class="sort-btn" data-column="consultNo">🔽</button></th>
+               <th>신청일<button type="button" class="sort-btn" data-column="csDate">🔽</button></th>
+               <th>기업명<button type="button" class="sort-btn" data-column="csCompanyName">🔽</button></th>
+               <th>신청인<button type="button" class="sort-btn" data-column="csName">🔽</button></th>
                <th>연락처</th>
                <th>이메일</th>
                <th>예산</th>
                <th>상태</th>
-               <th>담당자</th>
+               <th>담당자<button type="button" class="sort-btn" data-column="csEname">🔽</button></th>
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="vo" items="${consultVO }">
-               <tr class="salesList">
-                  <td><a href="${vo.consultNo }">${vo.consultNo }</a></td>
-                  <td>${vo.csDate }</td>
-                  <td>${vo.csCompanyName }</td>
-                  <td>${vo.csName }</td>
-                  <td>${vo.csContact }</td>
-                  <td>${vo.csEmail }</td>
-                  <td>${vo.csBdgt }</td>
-                  <td>${vo.csStatus }</td>
-				  <td>${vo.csEname }</td>
-               </tr>
-            </c:forEach>
-    
-            
+            <c:forEach var="vo" items="${consultVO}" >
+			   <tr class="salesList" data-type="${vo.csStatus}">
+			      <td><a href="${vo.consultNo}">${vo.consultNo}</a></td>
+			      <td>${vo.csDate}</td>
+			      <td>${vo.csCompanyName}</td>
+			      <td>${vo.csName}</td>
+			      <td>${vo.csContact}</td>
+			      <td>${vo.csEmail}</td>
+			      <td>${vo.csBdgt}</td>
+			      <td>${vo.csStatus}</td>
+			      <td>${vo.csEname}</td>
+			   </tr>
+			</c:forEach> 
          </tbody>
       </table>
+      </form>
+</div>
+<div id="pagination" class="page-wrap" style="width: 1200;">	
+    <ul class="page-nation">
+        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
+        
+    </ul>
+    </div>
 </div>
 </div>
-</div>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesSearch.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesFilter.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
 </body>
 </html>

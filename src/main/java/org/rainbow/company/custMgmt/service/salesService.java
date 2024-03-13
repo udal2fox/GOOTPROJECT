@@ -2,6 +2,7 @@ package org.rainbow.company.custMgmt.service;
 
 import java.util.List;
 
+import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
 
@@ -9,7 +10,7 @@ import org.rainbow.company.custMgmt.domain.cshVO;
 public interface salesService {
 	
 	/** 서치바-키워드 검색*/
-	public List<consultVO> getSearch(String keyword);
+	public List<consultVO> getSearch(consultSearchDTO consultSearchDTO);
 	
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */

@@ -9,13 +9,7 @@
    SELECT consultNo, csDate, csCompanyName, csName, csContact, csEmail, csBdgt, csStatus, csEname
    FROM RAIN_consult_tbl
    WHERE 1 = 1
-   <if test="csStatus != null and !csStatus.equals('전체')">
-      AND csStatus IN
-      <foreach item="item" index="index" collection="list"
-               open="(" separator="," close=")">
-         #{item}
-      </foreach>
-   </if>
+
    <if test="keyword != null and keyword != ''">
       AND (
          csCompanyName = #{keyword} 

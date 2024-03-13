@@ -4,18 +4,24 @@
  <mapper namespace="org.rainbow.company.custMgmt.mapper.salesMapper">
  
    <!-- 서치바 - 키워드 검색 결과 가져오기 -->
- 	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
-	      
-	        SELECT *
-			FROM RAIN_consult_tbl
-			WHERE csCompanyName = '#{keyword}' OR csName = '#{keyword}' OR csEmail = '#{keyword}' OR csEname = '#{keyword}'
-			ORDER BY consultNo ASC
-			
-	</select>
 	
-	
+	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
+   SELECT consultNo, csDate, csCompanyName, csName, csContact, csEmail, csBdgt, csStatus, csEname
+   FROM RAIN_consult_tbl
+   WHERE 1 = 1
 
-	
+   <if test="keyword != null and keyword != ''">
+      AND (
+         csCompanyName = #{keyword} 
+         OR csName LIKE #{keyword} 
+         OR csEmail LIKE #{keyword}
+         OR csEname LIKE #{keyword} 
+      )
+   </if>
+   <if test="firDate != null and secDate != null">
+      AND csDate BETWEEN #{firDate} AND #{secDate}
+   </if>
+</select>
 	
  
 

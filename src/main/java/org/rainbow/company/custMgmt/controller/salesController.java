@@ -32,7 +32,7 @@ public class salesController {
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
 
-	@GetMapping(value = "/salesList")
+	@PostMapping(value = "/salesList")
 	public String salesList(Model model) {
 		log.info("salesList_success");
 
@@ -41,8 +41,7 @@ public class salesController {
 		return "/company/custMgmtPage/salesMgmt/salesList";
 
 	}
-	  
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/search.do", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<consultVO>> salesSearch(@RequestBody consultSearchDTO consultSearchDTO) {
@@ -56,11 +55,9 @@ public class salesController {
 	    
 	   
 	}
-	
-
 
 	/** 'salesView.jsp' 에서 상담 신청 내용 가져오기 */
-	@GetMapping("/salesView")
+	@PostMapping("/salesView")
 	public String salesView(int consultNo, Model model) {
 		log.info("salesView_success" + consultNo);
 		model.addAttribute("consultVO", salesService.salesView(consultNo));

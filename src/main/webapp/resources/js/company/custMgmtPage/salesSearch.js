@@ -1,3 +1,8 @@
+/** 전역 변수 구역 */
+let checkboxes = document.querySelectorAll('.searchbar_checkbox_filter');
+
+console.log(checkboxes);
+
 /** 서치바 검색 기능 구현 */
 
 //키워드와 현재 페이지를 저장하는 전역 변수
@@ -15,60 +20,96 @@ console.log("서치바 검색 버튼 클릭 이벤트");
 
 
 
+/*//서치바-키워드 가져오기 
+function fetchSearchResults(keyword) {
+    let searchKeyword = {
+        keyword: document.getElementById('searchBarKeyword').value,
+        serviceStatus : Array.from(checkboxes, checkbox => checkbox.value), // 배열로 변환하여 전송
+        firDate : document.querySelector('.datePick1').value,
+        secDate : document.querySelector('.datePick2').value
+    };
+    let jsonData = JSON.stringify(searchKeyword);
+    console.log(jsonData);
+    
+    fetch('/search.do', {
+        method: 'POST',
+        body: JSON.stringify(jsonData),
+        headers: {'Content-type': 'application/json; charset=utf-8'}
+    })
+    .then(response => response.json())
+    .then(list => {
+        console.log(list);
+        let msg = '';
+        list.forEach(list => {
+            msg += '<tr>' +
+                '<tr class="salesList" data-type="' + list.csStatus +'">' +
+                '<td><a href="' + list.consultNo + '">' + list.consultNo + '</a></td>'+
+                '<td>' + list.csDate + '</td>' +
+                '<td>' + list.csCompanyName + '</td>' +
+                '<td>' + list.csName + '</td>' +
+                '<td>' + list.csContact + '</td>' +
+                '<td>' + list.csEmail + '</td>' +
+                '<td>' + list.csBdgt + '</td>' +
+                '<td>' + list.csStatus + '</td>' +
+                '<td>' + list.csEname + '</td>' +
+                '</tr>';
+        });
+
+        resetCheckboxes();
+        const tblBody = document.querySelector('#sales_tbl tbody');
+        tblBody.innerHTML = msg;
+
+        drawPagination();
+        goToPage(1);
+        resetCheckboxes();
+    })
+    .catch(error => console.error('Error:', error));
+}*/
+
 //서치바-키워드 가져오기 
 function fetchSearchResults(keyword) {
-	
-	const searchKeyword = {
-		    "keyword": document.getElementById('searchBarKeyword').value,
-		    "serviceStatus": document.querySelector('.searchbar_checkbox').value,
-		    "firDate" : document.querySelector('.datePick1').value,
-		    "secDate" :	document.querySelector('.datePick2').value
-		}
-	console.log(searchKeyword);
-//배열 또는 리스트 map 
-	fetch('/search.do',
-			{
-				method : 'POST',
-				body :  JSON.stringify(searchKeyword),
-				headers : {'Content-type':'application/json; charset=utf-8'}
-			})
-		        .then(response => response.json())
-		        .then(list => {
-		        	console.log(list);
-		            let msg = '';
-		            list.forEach(list => {
-		            msg += '<tr>' +
-               		'<tr class="salesList" data-type="' + list.csStatus +'">' +
-		            '<td><a href="' + list.consultNo + '">' + list.consultNo + '</a></td>'+
-		            '<td>' + list.csDate + '</td>' +
-                    '<td>' + list.csCompanyName + '</td>' +
-                    '<td>' + list.csName + '</td>' +
-                    '<td>' + list.csContact + '</td>' +
-                    '<td>' + list.csEmail + '</td>' +
-                    '<td>' + list.csBdgt + '</td>' +
-                    '<td>' + list.csStatus + '</td>' +
-                    '<td>' + list.csEname + '</td>' +
-                    '</tr>';
-            });
-		            	
+    let searchKeyword = {
+        keyword: document.getElementById('searchBarKeyword').value,
+        firDate : document.querySelector('.datePick1').value,
+        secDate : document.querySelector('.datePick2').value
+    };
+    let jsonData = JSON.stringify(searchKeyword);
+    console.log(jsonData);
+    
+    fetch('/search.do', {
+        method: 'POST',
+        body: JSON.stringify(jsonData),
+        headers: {'Content-type': 'application/json; charset=utf-8'}
+    })
+    .then(response => response.json())
+    .then(list => {
+        console.log(list);
+        let msg = '';
+        list.forEach(list => {
+            msg += '<tr>' +
+                '<tr class="salesList" data-type="' + list.csStatus +'">' +
+                '<td><a href="' + list.consultNo + '">' + list.consultNo + '</a></td>'+
+                '<td>' + list.csDate + '</td>' +
+                '<td>' + list.csCompanyName + '</td>' +
+                '<td>' + list.csName + '</td>' +
+                '<td>' + list.csContact + '</td>' +
+                '<td>' + list.csEmail + '</td>' +
+                '<td>' + list.csBdgt + '</td>' +
+                '<td>' + list.csStatus + '</td>' +
+                '<td>' + list.csEname + '</td>' +
+                '</tr>';
+        });
 
-            resetCheckboxes();
-            const tblBody = document.querySelector('#sales_tbl tbody');
-            tblBody.innerHTML = msg;
-            
-            drawPagination();
-            goToPage(1);
-            resetCheckboxes();
+        resetCheckboxes();
+        const tblBody = document.querySelector('#sales_tbl tbody');
+        tblBody.innerHTML = msg;
 
-  
-
-        })
-        .catch(error => console.error('Error:', error));
-} 
-
-
-
-
+        drawPagination();
+        goToPage(1);
+        resetCheckboxes();
+    })
+    .catch(error => console.error('Error:', error));
+}
 
 //체크박스 상태 초기화 함수 이기능을 안걸어두면 체크 박스 꺼져있는데 검색하면 체크박스 무시하고나옴 // 이거 예외처리하면 코드 너무 길어짐;;
 function resetCheckboxes() {

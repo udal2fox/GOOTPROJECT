@@ -1,16 +1,12 @@
 package org.rainbow.company.custMgmt.controller;
 
 
-
-
-
-
 import java.util.List;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
-
 import org.rainbow.company.custMgmt.service.salesServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,8 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
@@ -30,27 +27,12 @@ import lombok.extern.log4j.Log4j;
 public class salesController {
 
 	@Autowired
-	private salesServiceImpl salesService;
+	salesServiceImpl salesService;
 
-
-	
-	  
-	/** 서치바 -키워드 검색 */
-	@ResponseBody
-	@GetMapping(value = "/company/custMgmtPage/salesMgmt/salesList/search", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<consultVO>> search(@RequestParam("keyword") String keyword) {
-	    log.info("키워드 잘 넘어오니" + keyword);
-
-	    List<consultVO> list = salesService.getSearch(keyword);
-	    log.info(list);
-
-	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
-	}
-	
 
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
 
-	@GetMapping("/salesList")
+	@PostMapping(value = "/salesList")
 	public String salesList(Model model) {
 		log.info("salesList_success");
 
@@ -59,11 +41,23 @@ public class salesController {
 		return "/company/custMgmtPage/salesMgmt/salesList";
 
 	}
-	
-	
+
+	@ResponseBody
+	@RequestMapping(value = "/search.do", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<consultVO>> salesSearch(@RequestBody consultSearchDTO consultSearchDTO) {
+	    
+		log.info("검색"+consultSearchDTO);
+
+	    List<consultVO> list = salesService.getSearch(consultSearchDTO);
+	    log.info(list);
+
+	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
+	    
+	   
+	}
 
 	/** 'salesView.jsp' 에서 상담 신청 내용 가져오기 */
-	@GetMapping("/salesView")
+	@PostMapping("/salesView")
 	public String salesView(int consultNo, Model model) {
 		log.info("salesView_success" + consultNo);
 		model.addAttribute("consultVO", salesService.salesView(consultNo));

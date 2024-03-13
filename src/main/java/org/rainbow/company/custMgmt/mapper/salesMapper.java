@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.rainbow.company.custMgmt.domain.consultExcelDownloadVO;
+import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
 
@@ -13,7 +14,7 @@ public interface salesMapper {
 	
 
 	/** 서치바-키워드 검색*/
-	public List<consultVO> getSearch(String keyword);
+	public List<consultVO> getSearch(consultSearchDTO consultSearchDTO);
 	
 	
 

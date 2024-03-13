@@ -11,6 +11,7 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
+import org.rainbow.company.calculateManagement.domain.ucComDownVO;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -133,4 +136,46 @@ public class TradeDetailController {
     	else  return ResponseEntity.ok("Fail");
     	
     }
+    
+    //미수 관리 시작
+    // 미수관리 기업 리스트
+    @RequestMapping(value = "/unrecoveredMGT", method = RequestMethod.GET)
+	public String test(Model model) {
+		
+    	List<TradeDetailListVO> tdlvo = tService.ucCompany();
+    	
+    	log.info(tdlvo);
+    	
+    	model.addAttribute("ucList", tdlvo);
+    	
+		return "/company/calculateMGTpage/unrecoveredMGTCompany";
+	}
+    
+    // 미수관리 기업 서치
+    @ResponseBody
+    @PostMapping(value = "/ucComSearch.do" ,produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<TradeDetailListVO>> ucComSearch(@RequestBody TradeDetailSearchDTO tdDTO)
+    {
+    	
+    	log.info(tdDTO);
+		List<TradeDetailListVO> list = tService.ucComSearch(tdDTO);
+		log.info(list);
+    	return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
+    }
+    
+    // 미수관리 기업 다운로드
+    @ResponseBody
+    @PostMapping("/ucComDown")
+    public void ucComExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    {
+    	System.out.println(checkValues);
+    	 
+    	List<ucComDownVO> downlist = tService.ucComDown(checkValues);
+    	
+    	log.info(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
 }

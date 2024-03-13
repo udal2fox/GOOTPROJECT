@@ -92,8 +92,8 @@
     <select id="editTdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
     	SELECT c.comName, b.spName, c.comBizType, f.cEmpName, f.cEmpTel, f.cEmpEmail, a.recDate, a.recPayMth, a.recSortation,
         e.prdMajorCtg, e.prdSubCtg, e.prdNo, e.prdName, e.prdSal, e.prdCstPri, e.prdMargin,
-        a.recDedName, a.recDedPrdCode, a.recDed, a.recDedSup, a.recDedTax, a.recDedCst, a.recDedCstSup, a.recDedCstTax,    
-        a.recAddName, a.recAddPrdCode, a.recAdd, a.recAddSup, a.recAddTax, a.recAddCst, a.recAddCstSup, a.recAddCstTax        
+        a.recDedName, a.recDedPrdCode, a.recDed, a.recDedSup, a.recDedTax, a.recDedCst, a.recDedCstSup, a.recDedCstTax, a.recDedWorker, a.recDedPrdCode,   
+        a.recAddName, a.recAddPrdCode, a.recAdd, a.recAddSup, a.recAddTax, a.recAddCst, a.recAddCstSup, a.recAddCstTax, a.recAddWorker, a.recAddPrdCode      
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
         JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
@@ -103,6 +103,7 @@
         WHERE a.recNo = #{recNo}
     </select>
     
+    <!-- 거래 명세 편집  -->
     <update id="editTdupdate" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
     	UPDATE RAIN_receipt_tbl
 		SET 
@@ -114,6 +115,7 @@
 		    recDedCstSup = #{recDedCstSup},
 		    recDedCstTax = #{recDedCstTax},
 		    recDedWorker = #{recDedWorker},
+		    recDedPrdCode = #{recDedPrdCode},
 		    
 		    recAddName = #{recAddName},
 		    recAdd = #{recAdd},
@@ -123,26 +125,88 @@
 		    recAddCst = #{recAddCst},
 		    recAddCstSup = #{recAddCstSup},
 		    recAddCstTax = #{recAddCstTax},
-		    recAddWorker = #{recAddWorker}
-		    
+		    recAddPrdCode = #{recAddPrdCode}
 		WHERE recNo = #{recNo}
-
     </update>
     
-    
-    
-    
-    
     <!-- 거래미수 기업 연결 아직안함 -->
-    <select id="misuCom" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-    	 SELECT c.companyNo, c.comName, c.comBizType, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation
+    <select id="ucCompany" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
+         SELECT c.companyNo, c.comName, c.comBizType, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, 
+         a.recSortation, c.comEmail, a.recNo 
          FROM RAIN_receipt_tbl a
          JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
-         JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo	
+         JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo		
          JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
          JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
+         Order by c.companyNo
     </select>
     
+    <select id="ucComSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
+    	SELECT c.companyNo, c.comName, c.comBizType, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, 
+        a.recSortation, c.comEmail, a.recNo 
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo		
+		JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+		JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
+		AND a.recNo IN (
+		    SELECT a.recNo
+		    FROM RAIN_receipt_tbl a
+		    JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		    JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo		
+		    JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+		    JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+		    WHERE 1=1
+		    <if test="recPayMth != null and recPayMth != '전체' ">
+		        AND a.recPayMth = '${recPayMth}' 
+		    </if>
+		    <if test="keyword != null and keyword != ''">
+		        AND (
+		            c.companyNo = '${keyword}' 
+		            OR c.comName LIKE '%${keyword}%'
+		        )
+		    </if>
+		    <if test="firDate != null and secDate != null">
+		        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+		    </if>
+		)
+		ORDER BY c.companyNo;
+     </select>
+     
+    <!-- 미수관리 기업 다운로드 리스트  -->
+    <select id="ucComDown" parameterType="java.util.List" resultType="org.rainbow.company.calculateManagement.domain.ucComDownVO">
+   		SELECT c.companyNo, c.comName, c.comBizType, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, 
+        a.recSortation, c.comEmail, a.recNo 
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo		
+		JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+		JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
+		AND a.recNo IN (
+		    SELECT a.recNo
+		    FROM RAIN_receipt_tbl a
+		    JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		    JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo		
+		    JOIN RAIN_order_tbl d ON a.ordNo = d.ordNo
+		    JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+		    WHERE 1=1
+		    and c.comBizType IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+			AND a.recSortation IN
+		    <foreach item="item" collection="list" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>  
+		)
+		ORDER BY c.companyNo;
+    
+    </select>
+    
+    	
     <!--거래미수 지점 연결 안함  -->
     <select id="misugeejum">
     	SELECT a.recNo, c.comName, c.comBizType, b.spName, a.recDate, a.recSum, a.recSup, a.recTax, e.prdCstPri, e.prdMargin, a.recPayMth, a.recSortation

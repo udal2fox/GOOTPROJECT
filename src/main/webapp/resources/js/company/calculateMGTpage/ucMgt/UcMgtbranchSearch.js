@@ -22,7 +22,7 @@ function fetchSearchResults(keyword) {
 	
 	console.log(searchKeyword);
 	
-	fetch('/ucComSearch.do',
+	fetch('/ucbranchSearch.do',
 	{
 		method : 'POST',
 		body :  JSON.stringify(searchKeyword),
@@ -35,9 +35,10 @@ function fetchSearchResults(keyword) {
             list.forEach(list => {
             	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
             	msg += '<td><input type="checkbox" name="checkboxTd"></td>';
-            	msg += '<td>' + list.companyNo + '</td>';
+            	msg += '<td>' + list.spotNo + '</td>';
             	msg += '<td>' + list.comName + '</td>';
             	msg += '<td>' + list.comBizType + '</td>';
+            	msg += '<td>' + list.spName + '</td>';
             	msg += '<td>' + list.recSum + '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';

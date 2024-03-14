@@ -70,6 +70,23 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	public List<ucComDownVO> ucComDown(List<String> checkValues) {
 		return tMapper.ucComDown(checkValues);
 	}
+
+	@Override
+	public List<TradeDetailListVO> ucBranchList() {
+		return tMapper.ucBranchList();
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucBranchSearch(TradeDetailSearchDTO tdDTO) {
+		List<TradeDetailListVO> ucbvo = tMapper.ucBranchSearch(tdDTO);
+		return ucbvo;
+	}
+	
+	@Override
+	public List<TradeDetailListVO> uctdList() {
+		return tMapper.uctdList();
+	}
+
 	
 	
 	

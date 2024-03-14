@@ -44,5 +44,15 @@ public interface TradeDetaiService {
 	/** 미수기업다운 리스트 */
 	public List<ucComDownVO> ucComDown(List<String> checkValues);
 	
+	/** 미수관리 지점 리스트 */
+	public List<TradeDetailListVO> ucBranchList();
+	
+	/** 미수관리 지점 검색 */
+	public List<TradeDetailListVO> ucBranchSearch(TradeDetailSearchDTO tdDTO);
+	
+	/** 미수관리 거래명세 리스트 */
+	public List<TradeDetailListVO> uctdList();
+	
+	
 	
 }

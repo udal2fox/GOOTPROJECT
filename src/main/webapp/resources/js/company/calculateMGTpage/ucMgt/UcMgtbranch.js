@@ -338,7 +338,7 @@
 	    uctable.forEach(function(uc, index) {
 	        if (index !== 0) {
 	            let tdList = uc.querySelectorAll('td');
-	            let recNo = parseInt(tdList[4].textContent.trim());
+	            let recNo = parseInt(tdList[5].textContent.trim());
 	            data.push(recNo);
 	        }
 	    });
@@ -368,7 +368,7 @@
 			        let pdv = {
 			            comName: tdList[2].textContent.trim(),
 			            email: email, // 
-			            recSum : tdList[4].textContent.trim()
+			            recSum : tdList[5].textContent.trim()
 			        };
 
 			        checkedDataList.push(pdv);

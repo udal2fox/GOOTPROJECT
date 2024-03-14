@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td> 키워드   </td> 
-				<td colspan="2"> <input type="text" placeholder="기업관리번호/기업명" style="width: 318px;" id="tdKeyword"> </td>
+				<td colspan="2"> <input type="text" placeholder="거래명세번호/기업명/지점명" style="width: 318px;" id="tdKeyword"> </td>
 				<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 				<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>	
 			</tr>
@@ -66,7 +66,7 @@
 				<td> 출력기준 </td>
 				<td colspan="4">
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="comPage" value="기업" name="inlineRadioOptions" <c:if test="${pst eq '기업'}">checked="checked"</c:if>>
+						<input class="form-check-input" type="radio" id="comPage" value="기업" name="inlineRadioOptions">
 						<label class="form-check-label" for="comPage">기업</label>
 					</div>
 					<div class="form-check form-check-inline">
@@ -74,7 +74,7 @@
 						<label class="form-check-label" for="branchPage">지점</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="tdPage" value="거래명세서" name="inlineRadioOptions">
+						<input class="form-check-input" type="radio" id="tdPage" value="거래명세서" name="inlineRadioOptions" <c:if test="${pst eq '거래명세' }">checked="checked"</c:if>>
 						<label class="form-check-label" for="tdPage">거래명세서</label>
 					</div>
 				</td>	
@@ -93,14 +93,16 @@
 			<thead>
 			<tr class="paintLightgray">
 				<td><input type="checkbox" id="checkboxTdAll" value="전체"></td>
-				<td> 기업관리번호 </td>
+				<td> 거래명세번호 </td>
 				<td> 기업명 </td>
 				<td> 기업구분 </td>
-				<td> 합계<button type="button" class="sort-btn" data-column="recSum">🔽</button> </td>
-				<td> 공급액 </td>
-				<td> 세액 </td>
-				<td> 원가  </td>
-				<td> 마진율</td>
+				<td> 지점명 </td>
+				<td> 일자 </td>
+				<td> 합계 </td>
+				<td> 공급액  </td>
+				<td> 세액</td>
+				<td> 원가 </td>
+				<td> 마진율 </td>
 				<td> 결제수단 </td>
 				<td> 정산여부 </td>
 			</tr>
@@ -109,9 +111,11 @@
 			<c:forEach var="uc" items="${ucList}">
 				<tr class="td" data-type="${uc.comBizType}" data-status="${uc.recSortation}" com-Email= "${uc.comEmail}">
 					<td><input type="checkbox" name="checkboxTd"></td>
-					<td>${uc.companyNo }</td>
+					<td>${uc.recNo }</td>
 					<td>${uc.comName }</td>
 					<td>${uc.comBizType }</td>
+					<td>${uc.spName }</td>
+					<td>${uc.recDate }</td>
 					<td>${uc.recSum }</td>
 					<td>${uc.recSup }</td>
 					<td>${uc.recTax }</td>
@@ -130,7 +134,7 @@
 	    </ul>
     </div>
 </body>
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtCompany.js"></script> 
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtComSearch.js"></script> 
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtCompanyDown.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranch.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranchSearch.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranchDown.js"></script> 
 </html>

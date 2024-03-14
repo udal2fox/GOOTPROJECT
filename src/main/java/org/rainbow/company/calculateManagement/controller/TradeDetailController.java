@@ -14,6 +14,7 @@ import org.rainbow.company.calculateManagement.domain.tdDownVO;
 import org.rainbow.company.calculateManagement.domain.ucComDownVO;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.rainbow.domain.ExcelDownloadUtil;
+import org.rainbow.domain.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -140,12 +141,14 @@ public class TradeDetailController {
     //미수 관리 시작
     // 미수관리 기업 리스트
     @RequestMapping(value = "/unrecoveredMGT", method = RequestMethod.GET)
-	public String test(Model model) {
+	public String comMgt(Model model) {
 		
     	List<TradeDetailListVO> tdlvo = tService.ucCompany();
     	
+    	
     	log.info(tdlvo);
     	
+    	model.addAttribute("pst", "기업");
     	model.addAttribute("ucList", tdlvo);
     	
 		return "/company/calculateMGTpage/unrecoveredMGTCompany";
@@ -177,5 +180,89 @@ public class TradeDetailController {
         // 리스트를 넣으면 엑셀화됨.
     	ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
+    
+    // 기업 미수금 메일 전송
+    @ResponseBody
+    @PostMapping(value = "/ucComMailSend", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> ucMailSend(@RequestBody List<TradeDetailListVO> vo)
+    {
+    	if(vo != null) 
+    	{
+	    	for(TradeDetailListVO em : vo)
+	    	{
+	    		String receiver = "wns1923@naver.com"; // 메일 받을 주소 확인하기 위해 일단고정
+	            String title = "미수금 알림입니다.";
+	            String content = "<h2>안녕하세요 rianbow 재무팀입니다.</h2><br>"+em.getComName()+ " 기업의 미수금은  : "+em.getRecSum() + "원 입니다 " + 
+	            " 문의사항이 있으시면 언제든지 연락주세요.\n" + "감사합니다." ;
+	            MailSender.sendEmail(receiver, title, content);
+	    	}
+	    	return ResponseEntity.ok("Success");
+    	}
+    	else
+    	{
+    		return ResponseEntity.ok("fali");
+    	}
+    	
+    }
+    
+    // 미수관리 지점 리스트 이동
+    @RequestMapping(value = "/unrecoveredMGTbranch", method = RequestMethod.GET)
+   	public String branchMgt(Model model) {
+   		
+       	List<TradeDetailListVO> tdlvo = tService.ucBranchList();
+       	
+       	log.info(tdlvo);
+       	model.addAttribute("pst", "지점");
+       	model.addAttribute("ucList", tdlvo);
+       	
+   		return "/company/calculateMGTpage/unrecoveredMGTbranch";
+   	}
+    
+    // 미수관리 기업 서치
+    @ResponseBody
+    @PostMapping(value = "/ucbranchSearch.do" ,produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<TradeDetailListVO>> ucbranchSearch(@RequestBody TradeDetailSearchDTO tdDTO)
+    {
+    	
+    	log.info(tdDTO);
+		List<TradeDetailListVO> list = tService.ucBranchSearch(tdDTO);
+				
+		log.info(list);
+    	return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
+		
+    }
+    
+    // 미수관리 기업 다운로드
+    @ResponseBody
+    @PostMapping("/ucbranchDown")
+    public void ucbranchExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    {
+    	System.out.println(checkValues);
+    	 
+    	List<ucComDownVO> downlist = tService.ucComDown(checkValues);
+    	
+    	log.info(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
+    
+    
+    
+    // 미수관리 거래명세 리스트 이동
+    @RequestMapping(value = "/unrecoveredMGTtd", method = RequestMethod.GET)
+   	public String tdMgt(Model model) {
+   		
+       	List<TradeDetailListVO> tdlvo = tService.uctdList();
+       	
+       	log.info(tdlvo);
+       	model.addAttribute("pst", "거래명세");
+       	model.addAttribute("ucList", tdlvo);
+       	
+   		return "/company/calculateMGTpage/unrecoveredMGTtd";
+   	}
+    
+    
     
 }

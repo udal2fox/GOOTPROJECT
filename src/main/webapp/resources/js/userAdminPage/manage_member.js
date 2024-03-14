@@ -32,7 +32,7 @@ function showEmpList(data) {
       msg += '<tr class="text-center">';
       msg +=
         '<td><input class="form-check-input" type="checkbox" name="empCheck"></td>';
-      msg += '<td data-code="' + emp.cEepNo + '">' + ++n + "</td>";
+      msg += '<td data-code="' + emp.cEmpNo + '">' + ++n + "</td>";
       msg += "<td>" + emp.cEmpName + "</td>";
       msg += "<td>" + emp.cEmpPosition + "</td>";
       msg += "<td>" + formatPhoneNumber(emp.cEmpTel) + "</td>"; // 전화번호 형식 변환
@@ -146,7 +146,6 @@ document
       var cEmpTel = td[4].innerText;
       var cEmpEmail = td[5].innerText;
       var cEmpBirth = td[6].innerText;
-      var receiveGift = td[7].innerText;
 
       msg += '<tr class="text-center align-middle">';
       msg += "<td>" + no + "</td>";
@@ -250,8 +249,9 @@ document.querySelector("#checkDelete").addEventListener('click', () => {
   checkboxes.forEach((checkbox) => {
     let tr = checkbox.parentElement.parentElement;
     let td = tr.children;
-    let cEepNo = td[1].dataset.code;
-    empNumbers.push(cEepNo);
+    let cEmpNo = td[1].dataset.code; // 직원 번호를 해당하는 td에서 가져옴
+    empNumbers.push(cEmpNo);
+    console.log(empNumbers);
   });
 
   // 직원 삭제 확인 여부 확인
@@ -269,7 +269,7 @@ document.querySelector("#checkDelete").addEventListener('click', () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ empNumbers: empNumbers }),
+        body: JSON.stringify(empNumbers), // 직원 번호들만 전송하도록 수정
       })
         .then((response) => response.text())
         .then((text) => {

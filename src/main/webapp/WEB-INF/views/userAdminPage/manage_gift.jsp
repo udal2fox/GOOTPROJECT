@@ -28,12 +28,11 @@
 						</div>
 					</div>
 					<div class="overflow-auto m-3" style="height: 600px;">
-						<ul class="text-start" style="list-style: none;">
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-
-							
+						<ul class="text-start" style="list-style: none;" id="customList">
+							<li class="my-2 bg-secondary-subtle p-2 rounded-2">
+								<img src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
+								<span>${productName}</span>
+							</li>
 						</ul>
 					</div>
 				</article>

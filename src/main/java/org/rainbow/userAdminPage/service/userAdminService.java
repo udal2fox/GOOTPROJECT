@@ -26,4 +26,8 @@ public interface userAdminService {
 	public boolean updateEmp(HashMap<String, Object> emp);
 	
 	public boolean deleteEmployees(List<HashMap<String, Integer>> deleteParams);
+	
+	public boolean updateCustomGift(HashMap<String, Object> customGift);
+	
+	public List<HashMap<String, Object>> getCustomGift(int spotNo);
 }

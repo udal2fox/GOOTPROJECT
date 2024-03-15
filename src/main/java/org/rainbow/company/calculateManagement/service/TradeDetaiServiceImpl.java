@@ -6,7 +6,9 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
+import org.rainbow.company.calculateManagement.domain.ucBranchDownVO;
 import org.rainbow.company.calculateManagement.domain.ucComDownVO;
+import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.mapper.TradeDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +43,8 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	}
 
 	@Override
-	public List<tdDownVO> tdDownList(List<String> checkValues) {
-		return tMapper.tdDownList(checkValues);
+	public List<tdDownVO> tdDownList(TradeDetailSearchDTO sdto) {
+		return tMapper.tdDownList(sdto);
 	}
 
 	@Override
@@ -67,8 +69,8 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	}
 
 	@Override
-	public List<ucComDownVO> ucComDown(List<String> checkValues) {
-		return tMapper.ucComDown(checkValues);
+	public List<ucComDownVO> ucComDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucComDown(sdto);
 	}
 
 	@Override
@@ -85,6 +87,21 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	@Override
 	public List<TradeDetailListVO> uctdList() {
 		return tMapper.uctdList();
+	}
+
+	@Override
+	public List<ucBranchDownVO> ucBranchDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucBranchDown(sdto);
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucTdSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.ucTdSearch(tdDTO);
+	}
+
+	@Override
+	public List<ucTdDown> ucTdDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucTdDown(sdto);
 	}
 
 	

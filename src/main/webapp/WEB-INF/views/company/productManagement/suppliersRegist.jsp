@@ -46,7 +46,7 @@
 					    <td>담당자이름2</td><td colspan="3"><input type="text" class="form-control" placeholder="선택값" name="supsSubName"></td>
 					</tr>
 					<tr>
-						<td>사업자등록증</td><td colspan="3"><input type="file" class="form-control" id="supsBizLic" name="supsBizLic" multiple="multiple"></td>
+						<td>사업자등록증</td><td colspan="3"><input type="file" class="form-control" id="supsBizLic" name="supsBizLic"></td>
 					    <td></td>
 					    <td>담당자 연락처2</td><td colspan="3"><input type="text" class="form-control" placeholder="선택값" name="supsSubPhone"></td>
 					</tr>

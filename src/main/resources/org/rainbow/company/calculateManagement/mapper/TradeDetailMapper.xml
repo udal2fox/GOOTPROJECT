@@ -112,7 +112,7 @@
         JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo
         JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
         JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
-        JOIN RAIN_cEMP_tbl f ON f.cEepNo = d.cEmpNo
+        JOIN RAIN_cEMP_tbl f ON f.cEmpNo = d.cEmpNo
         WHERE a.recNo = #{recNo}
     </select>
     
@@ -407,6 +407,18 @@
 		)
 		ORDER BY c.companyNo;
     
+    </select>
+    
+    <!-- 계산서 스타트  -->
+    <!-- 계산서 발행 리스트  -->
+    <select id="IoBillList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
+    	SELECT a.recNo, b.spotNo, c.comName, c.comBizType, b.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation
+        FROM RAIN_receipt_tbl a
+        JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+        JOIN RAIN_cCompany_tbl c ON b.companyNo = c.companyNo	
+        JOIN RAIN_order_tbl d ON  a.ordNo = d.ordNo
+        JOIN RAIN_Products_tbl e ON d.prdNo = e.prdNo
+		WHERE a.recSortation = '계산서미발행'
     </select>
     
     

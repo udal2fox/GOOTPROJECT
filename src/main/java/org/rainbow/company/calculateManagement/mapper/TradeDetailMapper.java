@@ -63,4 +63,8 @@ public interface TradeDetailMapper {
 	/** 미수관리 다운 리스트 받기*/
 	public List<ucTdDown> ucTdDown(TradeDetailSearchDTO sdto);
 	
+	// 계산서 발행
+	public List<TradeDetailListVO> IoBillList();
+	
+	
 }

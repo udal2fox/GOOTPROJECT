@@ -65,6 +65,11 @@ public interface TradeDetaiService {
 	public List<ucTdDown> ucTdDown(TradeDetailSearchDTO sdto);
 	
 	
+	// 계산서 발행 시작
+	/** 계산서 발행 페이지 리스트*/
+	public List<TradeDetailListVO> IoBillList();
+	
+	
 	
 	
 	

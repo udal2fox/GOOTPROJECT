@@ -104,6 +104,11 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 		return tMapper.ucTdDown(sdto);
 	}
 
+	@Override
+	public List<TradeDetailListVO> IoBillList() {
+		return tMapper.IoBillList();
+	}
+
 	
 	
 	

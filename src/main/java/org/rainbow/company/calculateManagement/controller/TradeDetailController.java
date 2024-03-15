@@ -294,6 +294,20 @@ public class TradeDetailController {
     	ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
+    //------------ 계산서 발행 ㄱㄱ
+    
+    @GetMapping("/moveIoBill")
+    public String moveIoBill(Model model)
+	{
+		List<TradeDetailListVO> list = tService.IoBillList();
+		
+		model.addAttribute("list", list);
+		log.info("list...."+list);
+		
+		return "/company/calculateMGTpage/issuanceOfBill";
+	}
+    
+    
     
     
 }

@@ -38,12 +38,14 @@ window.onload = () => {
     .getElementById("resetButton")
     .addEventListener("click", resetCheckboxes);
 
-// 이벤트 위임을 사용하여 체크박스 변경 이벤트를 캐치
-document.getElementById("productList").addEventListener("change", function (event) {
-  if (event.target.classList.contains("form-check-input")) {
-    countCheckboxes();
-  }
-});
+  // 이벤트 위임을 사용하여 체크박스 변경 이벤트를 캐치
+  document
+    .getElementById("productList")
+    .addEventListener("change", function (event) {
+      if (event.target.classList.contains("form-check-input")) {
+        countCheckboxes();
+      }
+    });
 };
 
 // 선물 목록을 화면에 표시하는 함수
@@ -54,27 +56,13 @@ function showGiftList(data) {
     // 각 선물에 대한 HTML 요소 생성
     msg += '<div class="col p-1">';
     msg += '<div class="form-check">';
-    msg +=
-      '<input class="form-check-input" type="checkbox" value="' +
-      product.prdNo +
-      '" id="' +
-      product.prdNo +
-      '">';
+    msg += '<input class="form-check-input" type="checkbox" data-code="' + product.prdNo + '" id="' + product.prdNo + '">';
     msg += '<label class="form-check-label" for="' + product.prdNo + '">';
     msg += '<div class="card" style="width: 150px;">';
-    msg +=
-      '<img src="' +
-      product.prdImg +
-      '" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">';
+    msg += '<img src="' + product.prdImg + '" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">';
     msg += '<div class="card-body">';
-    msg +=
-      '<span class="card-text" style="font-size: 0.7rem;">' +
-      product.prdName +
-      "</span><br>";
-    msg +=
-      '<span class="card-text" style="font-size: 0.7rem;">금액 : ' +
-      product.prdSal.toLocaleString() +
-      "원</span>";
+    msg += '<span class="card-text" style="font-size: 0.7rem;">' + product.prdName + "</span><br>";
+    msg += '<span class="card-text" style="font-size: 0.7rem;">금액 : ' + product.prdSal.toLocaleString() + "원</span>";
     msg += "</div></div></label></div></div>";
   });
   productList.innerHTML = msg; // HTML 문자열을 HTML 요소에 할당하여 화면에 출력
@@ -102,7 +90,7 @@ function resetCheckboxes() {
   // 각 체크박스의 상태를 해제
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
-    countCheckboxes()
+    countCheckboxes();
   });
 }
 
@@ -113,4 +101,50 @@ function countCheckboxes() {
   ).length;
   document.querySelector("#selectGift").setAttribute("value", count);
 }
+
+// 체크박스 체크된 상품 DB저장
+document.querySelector("#saveButton").addEventListener("click", () => {
+  let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+  if (checkboxes.length === 0) {
+    swal("선택된 상품이 없습니다.");
+    return;
+  }
+
+  // 선택된 상품의 상품코드를 담을 배열
+  let saveProduct = [];
+
+  // 선택된 상품의 상품코드를 배열에 저장
+  checkboxes.forEach((checkbox) => {
+    let prdNo = checkbox.dataset.code; 
+    saveProduct.push(prdNo);
+  });
+
+  fetch("/userAdminPage/customGift/" + sessionStorage.getItem("Okja"), {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(saveProduct), // 선택된 상품코드 배열을 전송
+  })
+    .then((Response) => Response.text())
+    .then((text) => {
+      if (text === "success") {
+        swal("선택된 선물이 저장되었습니다.", {
+          icon: "success",
+        }).then(() => {
+          location.href =
+            "/userAdminPage/goManagegift";
+        });
+      } else {
+        swal("선물 저장에 실패했습니다. 다시 시도해주세요.", {
+          icon: "error",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("서버에 요청을 보내는 중 오류가 발생했습니다:", error);
+      swal("오류가 발생하여 선물 저장에 실패했습니다.", { icon: "error" });
+    });
+});
 

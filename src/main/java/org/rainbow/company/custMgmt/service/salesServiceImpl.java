@@ -2,6 +2,7 @@ package org.rainbow.company.custMgmt.service;
 
 import java.util.List;
 
+import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
 import org.rainbow.company.custMgmt.mapper.salesMapper;
@@ -19,9 +20,9 @@ public class salesServiceImpl implements salesService {
 	private salesMapper salesMapper;
 	
 	@Override
-	public List<consultVO> getSearch(String keyword) {
+	public List<consultVO> getSearch(consultSearchDTO consultSearchDTO) {
 		
-		return salesMapper.getSearch(keyword);
+		return salesMapper.getSearch(consultSearchDTO);
 	}
 	
 

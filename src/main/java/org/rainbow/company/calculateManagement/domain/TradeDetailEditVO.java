@@ -115,6 +115,8 @@ public class TradeDetailEditVO {
 	/** 마진율*/
 	private double prdMargin;
 	
+	//거래명세번호
+	private int recNo;
 			
 	
 }

@@ -20,4 +20,6 @@ public class TradeDetailSearchDTO
 	private Date firDate;
 	
 	private Date secDate;
+	
+	private String[] checkedValues;
 }

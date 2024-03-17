@@ -21,5 +21,15 @@ public interface userAdminMapper {
 	
 	public boolean addUserEmp(HashMap<String, Object> addForm);
 	
+	public boolean updateEmp(HashMap<String, Object> emp);
+	
 	public List<HashMap<String, Object>> getGiftList();
+	
+	public boolean deleteEmployees(HashMap<String, Integer> deleteParams);
+	
+	public boolean updateCustomGift(HashMap<String, Object> customGift);
+	
+	public String getCustomGift(int spotNo);
+	
+	public HashMap<String, Object> getProduct(String prdNo);
 }

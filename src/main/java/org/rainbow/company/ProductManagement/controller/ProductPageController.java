@@ -15,9 +15,9 @@ import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.service.productPageServiceImpl;
-import org.rainbow.domain.Criteria;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.ExcelListener;
+import org.rainbow.domain.ImageUploader1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +39,9 @@ public class ProductPageController
 {
 	@Autowired
 	productPageServiceImpl pService;
+	
+	@Autowired
+    private ImageUploader1 imageUploader;
 	
 	// 상품관리 페이지 이동  모음 --------------------------------------------------------------------------------
 	
@@ -199,24 +201,42 @@ public class ProductPageController
         ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
-    /** 상품 개별등록*/
+    
+    
+    
+    /** 상품 개별등록
+     * @throws IOException */
     @PostMapping(value = "/prdReg.do")
-    public String prdReg(prdInsertVO pvo , Model model)
+    public String prdReg(MultipartFile file, prdInsertVO pvo, Model model) throws IOException 
     {
-    	log.info(pvo);
-    	
-    	int prdInsertresult = pService.productInput(pvo);
     	String result = "";
-    	if(prdInsertresult >= 1 )
-    	{
-    		result = "prdInsertSuccess";
-    	}
-    	else
-    	{
-    		result = "prdInsertDelfail";
-    	}
-    	
-    	model.addAttribute("prdInsertresult", result);
+        log.info("파일 정보: " + file.getOriginalFilename());
+        log.info("상품 정보: " + pvo);
+        
+        String imageUrl = imageUploader.uploadImage(file); 
+        log.info(imageUrl);
+        if (imageUrl != null)
+        {
+        	pvo.setPrdImg(imageUrl);
+	    	int prdInsertresult = pService.productInput(pvo);
+	    	if(prdInsertresult >= 1 )
+	    	{
+	    		result = "prdInsertSuccess";
+	    	}
+	    	else
+	    	{
+	    		result = "prdInsertDelfail";
+	    	}
+	    	
+	    	model.addAttribute("prdInsertresult", result);
+        }
+        else
+        {
+        	result = "prdInsertDelfail";
+        	model.addAttribute("prdInsertresult", result);
+        }
+
+        // 파일 업로드 후 처리할 내용이 있다면 이 곳에 추가
     	
     	return "/company/productManagement/prdResult";
     }

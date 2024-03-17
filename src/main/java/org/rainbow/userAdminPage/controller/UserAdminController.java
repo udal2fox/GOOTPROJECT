@@ -1,5 +1,6 @@
 package org.rainbow.userAdminPage.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -119,6 +120,7 @@ public class UserAdminController {
 		return "/userAdminPage/manage_member";
 	}
 
+	// 직원 리스트 가져오기
 	@GetMapping(value = "/manage_member/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<HashMap<String, Object>>> getEmpList(@PathVariable String no) {
 		int sNo = Integer.parseInt(no);
@@ -129,14 +131,65 @@ public class UserAdminController {
 		return new ResponseEntity<>(empList, HttpStatus.OK);
 	}
 
+	// 직원 추가하기
 	@PostMapping(value = "/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
 	public ResponseEntity<String> addUserEmp(@RequestBody HashMap<String, Object> addForm) {
 		log.info("InquiryList..." + addForm);
 		boolean result = userService.addUserEmp(addForm);
-		System.out.println(result);
+		System.out.println("추가여부 : " + result);
 		return result == true ? new ResponseEntity<String>("success", HttpStatus.OK)
 				: new ResponseEntity<String>("fail", HttpStatus.BAD_REQUEST);
+	}
+
+	// 직원 수정하기
+	@ResponseBody
+	@PostMapping("/updateEmp")
+	public ResponseEntity<String> updateEmp(@RequestBody List<HashMap<String, Object>> updateEmp) {
+		try {
+			for (HashMap<String, Object> emp : updateEmp) {
+				log.info("수정정보.." + emp);
+				boolean result = userService.updateEmp(emp);
+				System.out.println("수정여부 : " + result);
+			}
+			// 업데이트 성공 시 success 반환
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 업데이트 실패 시 fail 반환
+			return new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// 직원 삭제하기
+	@ResponseBody
+	@PostMapping("/deleteEmp/{no}")
+	public String deleteEmployees(@PathVariable String no, @RequestBody List<String> empNumbers) {
+		try {
+			int sNo = Integer.parseInt(no);
+			System.out.println(empNumbers);
+			List<HashMap<String, Integer>> deleteParams = new ArrayList<>();
+
+			// empNumbers 리스트의 각 요소를 deleteParams에 추가합니다.
+			for (String empNumber : empNumbers) {
+				HashMap<String, Integer> deleteParam = new HashMap<>();
+				deleteParam.put("sNo", sNo);
+				deleteParam.put("cEmpNo", Integer.parseInt(empNumber));
+				deleteParams.add(deleteParam);
+			}
+			System.out.println(deleteParams);
+			// 서비스 계층을 통해 직원 삭제를 처리
+			boolean result = userService.deleteEmployees(deleteParams);
+
+			if (result) {
+				return "success"; // 삭제 성공시 success 반환
+			} else {
+				return "error"; // 삭제 실패시 error 반환
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error"; // 삭제 실패시 error 반환
+		}
 	}
 
 	// 이용현황 페이지 이동
@@ -176,15 +229,50 @@ public class UserAdminController {
 	}
 
 	// 선물관리 페이지 이동
-	@GetMapping("/goManagegift/{no}")
-	public String goManagegift(@PathVariable String no, Model model) {
+	@GetMapping("/goManagegift")
+	public String goManagegift() {		
 		return "/userAdminPage/manage_gift";
+	}
+	
+	// 지점 커스텀 선물 가져오기
+	@ResponseBody
+	@GetMapping(value = "/getCustomGift/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getCustomGift(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		List<HashMap<String, Object>> result = userService.getCustomGift(spotNo);
+		log.info("지점 커스텀 선물 리스트.." + result);
+		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
 	}
 
 	// 지점 선물 편집 페이지 이동
 	@GetMapping("/giftCustom")
 	public String goCustom() {
 		return "/userAdminPage/giftCustom";
+	}
+
+	// 지점 커스텀 선물 저장
+	@ResponseBody
+	@PostMapping("/customGift/{no}")
+	public String saveCustom(@PathVariable String no, @RequestBody String giftList) {
+		try {
+			int spotNo = Integer.parseInt(no);
+			HashMap<String, Object> customGift = new HashMap<String, Object>();
+			customGift.put("spotNo", spotNo);
+			customGift.put("spEditGift", giftList);
+			log.info(customGift);
+
+			boolean result = userService.updateCustomGift(customGift);
+			log.info(result);
+
+			if (result) {
+				return "success";
+			} else {
+				return "error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 	}
 
 	// 기본 선물 편집 페이지 이동

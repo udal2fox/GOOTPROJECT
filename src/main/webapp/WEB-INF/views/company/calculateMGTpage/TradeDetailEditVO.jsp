@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,8 @@ input[type=text]
 <div class="container-fluid" align="center" >
 	<div class="product-top-back">
 		
-		
 		<div class="container">
-		<div align="left" style="padding-top: 50px;"><h2>거래명세-편집</h2></div>`
+		<div align="left" style="padding-top: 30px;"><h2>거래명세-편집</h2></div>`
 		<p></p>
 			<h3 align="left">기업정보</h3>
 	        <table style="width: 1300px">
@@ -58,57 +58,65 @@ input[type=text]
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">금액차감</h3>
 	        <table style="width: 1300px">
-	        	<tr>
-	        		<th>적요(품목명)</th>	
-	        		<th>차감금액</th>	
-	        		<th>차감 공급액</th>	
-	        		<th>차감 세액</th>	
-	        		<th>원가</th>	
-	        		<th>원가-공급액</th>	
-	        		<th>원가-세액</th>	
-	        		<th>금액조정</th>	
-	        	</tr>
-	        	<tr>
-	        		<td><input type="text" id="recDedName"  onfocus="openModal()"></td>
-	        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recDedSup" value="0"></td>
-	        		<td><input type="text" id="recDedTax" value="0"></td>
-	        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recDedCstSup" value="0"></td>
-	        		<td><input type="text" id="recDedCstTax" value="0"></td>
-	        		<td><button type="button" class="btn btn-primary" onclick="inputDedCal()">버튼</button></td>
-	        	</tr>
+				<thead>	
+		        	<tr>
+		        		<th>적요(품목명)</th>	
+		        		<th>차감금액</th>	
+		        		<th>차감 공급액</th>	
+		        		<th>차감 세액</th>	
+		        		<th>원가</th>	
+		        		<th>원가-공급액</th>	
+		        		<th>원가-세액</th>	
+		        		<th>금액조정</th>	
+		        	</tr>
+	        	</thead>
+	        	<tbody class="daBody1">
+		        	<tr>
+		        		<td><input type="text" id="recDedName" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedSup" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedTax" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedCstSup" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedCstTax" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><button type="button" class="btn btn-primary dedbtn" onclick="inputDedCal()" <c:if test="${not empty edit.recDedName}">disabled</c:if>>버튼</button></td>
+		        	</tr>
+	        	</tbody>
 	        </table> 
 	        <input type="hidden" id="hiddenDedCode">
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">추가정산</h3>
 	        <table style="width: 1300px">
-	        	<tr>
-	        		<th>적요(품목명)</th>
-	        		<th>추가정산 금액</th>
-	        		<th>추가정산 공급액</th>
-	        		<th>추가정산 세액</th>
-	        		<th>원가</th>
-	        		<th>원가-공급액</th>
-	        		<th>원가-세액</th>
-	        		<th>금액조정</th>
-	        	</tr>	
-	        	<tr>
-	        		<td><input type="text" id="recAddName"></td>
-	        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recAddSup" value="0"></td>
-	        		<td><input type="text" id="recAddTax" value="0"></td>
-	        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산"></td>
-	        		<td><input type="text" id="recAddCstSup" value="0"></td>
-	        		<td><input type="text" id="recAddCstTax" value="0"></td>
-	        		<td><button type="button" class="btn btn-primary">버튼</button></td>
-	        	</tr>	
+	        	<thead>
+		        	<tr>
+		        		<th>적요(품목명)</th>
+		        		<th>추가정산 금액</th>
+		        		<th>추가정산 공급액</th>
+		        		<th>추가정산 세액</th>
+		        		<th>원가</th>
+		        		<th>원가-공급액</th>
+		        		<th>원가-세액</th>
+		        		<th>금액조정</th>
+		        	</tr>
+	        	</thead>	
+	        	<tbody class="daBody1">
+		        	<tr>
+		        		<td><input type="text" id="recAddName" <c:if test="${not empty edit.recAddName}">disabled</c:if> ></td>
+		        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddSup" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddTax" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCstSup" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCstTax" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
+		        		<td><button type="button" class="btn btn-primary addbtn" onclick="inputAddCal()" <c:if test="${not empty edit.recAddName}">disabled</c:if>>버튼</button></td>
+		        	</tr>
+	        	</tbody>	
 	        </table> 
         </div>
 		<div class="container" style="padding-top: 50px;">
 			<h3 align="left">상세내역</h3>
-	        <table style="width: 1300px">
+	        <table style="width: 1300px" class="detailtable">
 	        	<thead>
 		        	<tr>
 		        		<th>대분류</th>
@@ -140,19 +148,19 @@ input[type=text]
 			        		<td>${edit.recDedName }</td>
 			        		<td>${edit.recDed }</td>
 			        		<td>${edit.recDedCst }</td>
-			        		<td>${((edit.recDed - edit.recDedCst ) / edit.recDed) * 100 }</td>
+			        		<td><fmt:formatNumber value="${((edit.recDed - edit.recDedCst ) / edit.recDed) * 100 }" pattern=".00"/></td>
 			        		<td>${edit.recDedWorker}</td>
 			        	</tr>	
 		        	</c:if>
 		        	<c:if test="${not empty edit.recAddName}">
 			        	<tr>
-			        		<td>금액차감</td>
-			        		<td>금액차감</td>
+			        		<td>추가정산</td>
+			        		<td>추가정산</td>
 			        		<td>${edit.recAddPrdCode }</td>
 			        		<td>${edit.recAddName }</td>
 			        		<td>${edit.recAdd }</td>
 			        		<td>${edit.recAddCst }</td>
-			        		<td>${((edit.recAdd - edit.recAddCst ) / edit.recAdd) * 100 }</td>
+			        		<td><fmt:formatNumber value="${((edit.recAdd - edit.recAddCst )/edit.recAdd) * 100}" pattern=".00"/></td>
 			        		<td>${edit.recAddWorker}</td>
 			        	</tr>	
 		        	</c:if>
@@ -162,10 +170,11 @@ input[type=text]
         <div class="container" >
        		<div class="buttonGp" align="right" style="width: 1300px; padding-top: 15px;">
 	        	<div>
-	        		<input type="hidden" value="${sessionScope.eName}" id="">
-	        		<button type="button" class="btn btn-primary">수정</button>
+	        		<input type="hidden" value="${recNo}" id="recNo">
+	        		<input type="hidden" value="${eName}" id="worker">
+	        		<button type="button" class="btn btn-primary" onclick="EditTradeDetail()">수정</button>
 	  				&nbsp;&nbsp;
-	        		<button type="button" class="btn btn btn-secondary">취소</button>
+	        		<button type="button" class="btn btn btn-secondary" onclick="reload()">취소</button>
 	  				&nbsp;&nbsp;
 	        		<button type="button" class="btn btn btn-secondary">목록</button>
 	        	</div>

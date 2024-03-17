@@ -26,12 +26,12 @@
 		SELECT count(*) FROM RAIN_EMP_tbl
 	</select> 
 	
-        	<!-- d.dName AS dName, -->
+ 
 	<!-- 직원 정보 조회  -->
 	<select id="get" parameterType="int" resultType="org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO">
 			
 		SELECT 
-        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, e.eId, e.ePw,
+        	e.eno, e.deptNo, e.eName, e.email, e.ePhone, d.dName AS dName, e.eId, e.ePw, e.profilePicture,
         	CONCAT(SUBSTRING(e.identyNum, 1, 2), '년 ', SUBSTRING(e.identyNum, 3, 2), '월 ', SUBSTRING(e.identyNum, 5, 2), '일') AS identyNum, 
         	e.job, e.workType, e.sal, e.eAddr, e.eAddr2, e.eBank, e.salAccount, e.hireDt, e.endDt, e.idStatus
     	FROM 
@@ -81,6 +81,21 @@
     			endDt = #{endDt}
 			WHERE
     			eno = #{eno}
+	</update>
+	
+	<!-- 개인 프로필 편집 -->
+	<update id="profile_update" parameterType="java.util.HashMap">
+		UPDATE RAIN_EMP_tbl 
+			SET 
+    			ePhone = #{ePhone},
+    			ePw = #{ePw}, 
+    			eAddr = #{eAddr},
+    			eAddr2 = #{eAddr2},
+    			salAccount = #{salAccount},
+    			eBank = #{eBank}
+			WHERE
+    			eno = #{eno}
+    			
 	</update>
 	
 </mapper>

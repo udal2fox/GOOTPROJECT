@@ -154,7 +154,7 @@
                         </a>
                         <ul class="dropdown-menu text-small shadow">
                             <li><a class="dropdown-item" href="/profile_modify">프로필 수정</a></li>
-                            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                            <li><a class="dropdown-item" href="/Gologout">로그아웃</a></li>
                         </ul>
                     </div>
                 </div>

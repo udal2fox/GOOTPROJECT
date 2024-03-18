@@ -33,6 +33,10 @@ window.onload = () => {
     filterGiftsByPrice(100000);
   });
 
+  // 닫기 버튼에 클릭 이벤트 추가
+  document.querySelector("#cancleButton").addEventListener("click",()=>{
+    location.href = "/userAdminPage/goManagegift";
+  })
   // 초기화 버튼에 클릭 이벤트 추가
   document
     .getElementById("resetButton")

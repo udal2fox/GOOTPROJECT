@@ -29,7 +29,21 @@ public interface userAdminMapper {
 	
 	public boolean updateCustomGift(HashMap<String, Object> customGift);
 	
+	public boolean updateDefaultGift(HashMap<String, Object> defaultGift);
+	
 	public String getCustomGift(int spotNo);
 	
+	public String getDefaultGift(int spotNo);
+	
 	public HashMap<String, Object> getProduct(String prdNo);
+	
+	public int countBySpotNo(int spotNo);
+	
+	public boolean updateCard(HashMap<String, Object> cardForm);
+	
+	public boolean insertCard(HashMap<String, Object> cardForm);
+
+	public HashMap<String, Object> getCardInfo(int spotNo);
+	
+	
 }

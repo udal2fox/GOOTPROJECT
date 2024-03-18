@@ -115,10 +115,15 @@ addBtn.addEventListener("click", () => {
     .then((Response) => Response.text())
     .then((text) => {
       if (text === "success") {
-        swal("직원이 추가되었습니다.");
-        location.href = "/userAdminPage/goManagemember";
+        swal("새로운 직원이 추가되었습니다.", {
+          icon: "success",
+        }).then(() => {
+          location.href = "/userAdminPage/goManagemember";
+        });
       } else {
-        swal("실패하였습니다. 창 종료 후 재시도 해주세요.");
+        swal("직원 등록이 실패하였습니다. 다시 시도해주세요.", {
+          icon: "error",
+        });
       }
     })
     .catch((error) => {
@@ -134,6 +139,12 @@ document
     let checkboxes = document.querySelectorAll(
       'input[name="empCheck"]:checked'
     );
+
+    if (checkboxes.length === 0) {
+      swal("선택된 직원이 없습니다.");
+      return;
+    }
+
     let editList = document.querySelector("#editList");
     let msg = "";
     checkboxes.forEach(function (checkbox) {
@@ -216,12 +227,15 @@ document.querySelector("#editMemberBtn").addEventListener("click", function () {
       .then((response) => response.text())
       .then((text) => {
         if (text === "success") {
-          swal("직원 정보가 수정되었습니다.");
-          setTimeout(() => {
+          swal("선택된 직원이 수정되었습니다.", {
+            icon: "success",
+          }).then(() => {
             location.href = "/userAdminPage/goManagemember";
-          }, 1500);
+          });
         } else {
-          swal("수정 실패하였습니다. 다시 시도해주세요.");
+          swal("직원 수정을 실패하였습니다. 다시 시도해주세요.", {
+            icon: "error",
+          });
         }
       })
       .catch((error) => {

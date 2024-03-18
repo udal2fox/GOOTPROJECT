@@ -100,13 +100,23 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	}
 
 	@Override
-	public List<ucTdDown> ucTdDown(TradeDetailSearchDTO sdto) {
+	public List<tdDownVO> ucTdDown(TradeDetailSearchDTO sdto) {
 		return tMapper.ucTdDown(sdto);
 	}
 
 	@Override
 	public List<TradeDetailListVO> IoBillList() {
 		return tMapper.IoBillList();
+	}
+
+	@Override
+	public int billMakeProcessing(List<String> recNo) {
+		return tMapper.billMakeProcessing(recNo);
+	}
+
+	@Override
+	public List<TradeDetailListVO> billSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.billSearch(tdDTO);
 	}
 
 	

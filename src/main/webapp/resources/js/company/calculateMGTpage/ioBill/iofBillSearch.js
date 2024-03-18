@@ -15,14 +15,13 @@ function fetchSearchResults(keyword) {
   
 	const searchKeyword = {
 	    "keyword": document.getElementById('tdKeyword').value,
-	    "recPayMth": document.querySelector('.payMth').value,
 	    "firDate" : document.querySelector('.datePick1').value,
 	    "secDate" :	document.querySelector('.datePick2').value
 	}
 	
 	console.log(searchKeyword);
 	
-	fetch('/ucComSearch.do',
+	fetch('/iofBillSearch.do',
 	{
 		method : 'POST',
 		body :  JSON.stringify(searchKeyword),
@@ -33,18 +32,18 @@ function fetchSearchResults(keyword) {
         	console.log(list);
             let msg = '';
             list.forEach(list => {
-            	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
+            	msg += '<tr class="td" data-type="' + list.comBizType + '">';
             	msg += '<td><input type="checkbox" name="checkboxTd"></td>';
-            	msg += '<td>' + list.companyNo + '</td>';
+            	msg += '<td>' + list.spotNo + '</td>';
             	msg += '<td>' + list.comName + '</td>';
             	msg += '<td>' + list.comBizType + '</td>';
-            	msg += '<td>' + (list.recSum - list.recDed + list.recAdd) + '</td>';
+            	msg += '<td>' + list.spName + '</td>';
+            	msg += '<td>' + (list.recSum -list.recDed + list.recAdd )+ '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';
-            	msg += '<td>' + list.prdCstPri + '</td>';
-            	msg += '<td>' + list.prdMargin + '</td>';
             	msg += '<td>' + list.recPayMth + '</td>';
             	msg += '<td>' + list.recSortation + '</td>';
+            	msg += '<td><a href = "/tradeDetailEdit?recNo='+list.recNo+'"> 보기 </a><td>';
             	msg += '</tr>';
             });
             resetCheckboxes();
@@ -81,7 +80,6 @@ function resetCheckboxes() {
 
     // "전체 선택" 체크박스도 초기화
     document.getElementById('td-BusinessAll').checked = true;
-    document.getElementById('td-calculateAll').checked = true;
 }
 
 
@@ -90,16 +88,12 @@ function getFilteredProducts() {
     let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
-    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function (checkbox) {
-        return checkbox.value;
-    });
 
     // 여기서 새로운 상품 리스트를 가져오도록 수정
     let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
     let filteredProducts = Array.from(tds).filter(function (tds) {
         let type = tds.getAttribute('data-type');
-        let status = tds.getAttribute('data-status');
-        return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
+        return (typeFilters.length === 0 || typeFilters.includes(type));
     });
 
     return filteredProducts;

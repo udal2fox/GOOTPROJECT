@@ -61,10 +61,16 @@ public interface TradeDetailMapper {
 	public List<TradeDetailListVO> ucTdSearch(TradeDetailSearchDTO tdDTO);
 	
 	/** 미수관리 다운 리스트 받기*/
-	public List<ucTdDown> ucTdDown(TradeDetailSearchDTO sdto);
+	public List<tdDownVO> ucTdDown(TradeDetailSearchDTO sdto);
 	
 	// 계산서 발행
 	public List<TradeDetailListVO> IoBillList();
+	
+	/** 계산서 발행 처리*/
+	public int billMakeProcessing(List<String> recNo);
+	
+	/** 계산서 검색 기능 */
+	public List<TradeDetailListVO> billSearch(TradeDetailSearchDTO tdDTO);
 	
 	
 }

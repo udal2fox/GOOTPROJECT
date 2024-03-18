@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td> 키워드   </td> 
-				<td colspan="2"> <input type="text" placeholder="기업관리번호/기업명" style="width: 318px;" id="tdKeyword"> </td>
+				<td colspan="2"> <input type="text" placeholder="지점관리번호/기업명/지점명" style="width: 318px;" id="tdKeyword"> </td>
 				<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 				<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>	
 			</tr>
@@ -41,9 +41,9 @@
 				<td><input type="button" class="btn btn-primary dateBtn" value="지난분기"></td>
 			</tr>
 		</table>
-		<div class ="misu" style="padding-top: 25px">
+		<div class ="misu" style="padding-top: 25px; flex-direction: row-reverse ">
 			<div> 	
-				<input type="button" class="btn btn-primary" id="" value="계산서 발행" style="width: 185px; height: 35px;">	
+				<input type="button" class="btn btn-primary billmakeBtn" value="계산서 발행" style="width: 185px; height: 35px;">	
 			</div>	
 		</div>
 
@@ -65,18 +65,18 @@
 			</thead>
 			<tbody>
 			<c:forEach var="uc" items="${list}">
-				<tr class="td" data-type="${uc.comBizType}">
+				<tr class="td" data-type="${uc.comBizType}" recNo = ${uc.recNo }>
 					<td><input type="checkbox" name="checkboxTd"></td>
 					<td>${uc.spotNo }</td>
 					<td>${uc.comName }</td>
 					<td>${uc.comBizType }</td>	
 					<td>${uc.spName }</td>	
-					<td>${uc.recSum }</td>
+					<td>${uc.recSum - uc.recDed + uc.recAdd }</td>
 					<td>${uc.recSup }</td>
 					<td>${uc.recTax }</td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
-					<td><a href="#">보기</a></td>
+					<td><a href="/tradeDetailEdit?recNo=${uc.recNo }">보기</a></td>
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -88,4 +88,7 @@
 	    </ul>
     </div>
 </body>
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ioBill/iofBillOption.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ioBill/iofBillSearch.js"></script> 
+
 </html>

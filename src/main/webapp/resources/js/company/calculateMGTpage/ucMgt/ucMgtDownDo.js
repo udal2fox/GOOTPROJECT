@@ -37,7 +37,7 @@ function download()
 
 		
     // 서버로 데이터 전송
-    fetch('/ucbranchDown', {
+    fetch('/ucTdDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(sdto)

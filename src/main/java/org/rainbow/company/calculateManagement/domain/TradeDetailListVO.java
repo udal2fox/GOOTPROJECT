@@ -44,6 +44,12 @@ public class TradeDetailListVO
 	private String comEmail;
 	// 담당자 이메일
 	private String cEmpEmail;
+	/** 차금 금액 */
+	private int recDed;
+	
+	/** 추가 금액 */
+	private int recAdd;
+	
 	
 	
 	

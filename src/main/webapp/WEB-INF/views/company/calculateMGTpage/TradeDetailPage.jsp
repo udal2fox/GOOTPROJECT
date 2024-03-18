@@ -102,7 +102,7 @@
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
-						<td>${td.recSum}</td>
+						<td>${td.recSum - td.recDed + td.recAdd}</td>
 						<td>${td.recSup}</td>
 						<td>${td.recTax}</td>
 						<td>${td.prdCstPri}</td>

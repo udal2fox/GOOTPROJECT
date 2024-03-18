@@ -112,7 +112,7 @@
 					<td>${uc.companyNo }</td>
 					<td>${uc.comName }</td>
 					<td>${uc.comBizType }</td>
-					<td>${uc.recSum }</td>
+					<td>${uc.recSum - uc.recDed + uc.recAdd }</td>
 					<td>${uc.recSup }</td>
 					<td>${uc.recTax }</td>
 					<td>${uc.prdCstPri }</td>

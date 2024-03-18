@@ -23,8 +23,12 @@ fetch("/userAdminPage/getCardInfo/" + Okja)
 
     // 발신자명 입력
     var sendNameInput = document.getElementById("sendName");
-    sendNameInput.value = sendName || "기업명 또는 대표자명";
-
+    if(sendName === ''){
+      sendNameInput.value = "기업명 또는 대표자명";
+    }else{
+      sendNameInput.value = sendName;
+    }
+    
     // 라디오 버튼 체크
     var basicRadio = document.getElementById("basic");
     var customRadio = document.getElementById("custom");
@@ -36,9 +40,12 @@ fetch("/userAdminPage/getCardInfo/" + Okja)
 
     // 메세지 텍스트 설정
     var customMessegeInput = document.getElementById("customMessege");
-    customMessegeInput.value =
-      messegeContent ||
-      "안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.<br> <br> ▶ 선물 선택하러 가기";
+    if (messegeContent === "") {
+      customMessegeInput.value = "안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.<br> <br> ▶ 선물 선택하러 가기";
+    } else {
+      customMessegeInput.value = messegeContent;
+    } 
+    document.querySelector("#messegePreview").innerHTML = customMessegeInput.value
   })
   .catch((error) => console.error("Fetch Error:", error));
 

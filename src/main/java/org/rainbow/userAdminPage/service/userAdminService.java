@@ -38,4 +38,6 @@ public interface userAdminService {
 	public boolean saveCard(HashMap<String, Object> cardForm);
 	
 	public HashMap<String, Object> getCardInfo(int spotNo);
+	
+	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
 }

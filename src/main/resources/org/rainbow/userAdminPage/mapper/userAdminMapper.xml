@@ -100,5 +100,16 @@
     <select id="getCardInfo" resultType="HashMap">
     	SELECT * FROM BirthdayCards WHERE spotNo = #{spotNo}
     </select>
+    
+    <select id="getRecipients" parameterType="HashMap" resultType="HashMap">
+		SELECT * FROM RAIN_cEMP_tbl
+		LEFT JOIN RAIN_order_tbl ON RAIN_cEMP_tbl.cEmpNo = RAIN_order_tbl.cEmpNo
+		WHERE 
+			sNo = #{spotNo}
+		AND
+			DATE_FORMAT(cEmpBirth, '%m') = #{month}
+		AND
+			YEAR(RAIN_order_tbl.sentDate) = #{year};
+</select>
 
 </mapper>

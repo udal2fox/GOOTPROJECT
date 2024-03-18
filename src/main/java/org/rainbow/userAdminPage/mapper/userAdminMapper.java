@@ -45,5 +45,7 @@ public interface userAdminMapper {
 
 	public HashMap<String, Object> getCardInfo(int spotNo);
 	
+	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
+	
 	
 }

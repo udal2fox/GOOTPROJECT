@@ -102,7 +102,7 @@
                                 <input type="text" class="form-control border border-dark-subtle" id="sendName" placeholder="기업명 또는 대표자명">
                             </div>
                             <div class="btn-group m-4" role="group" aria-label="Basic radio toggle button group">
-                                <input type="radio" class="btn-check" name="btnradio" id="basic" autocomplete="off" checked>
+                                <input type="radio" class="btn-check" name="btnradio" id="basic" autocomplete="off" readonly="readonly" checked>
                                 <label class="btn btn-outline-danger" for="basic" style="width: 100px;">기본</label>
                                 <input type="radio" class="btn-check" name="btnradio" id="custom" autocomplete="off">
                                 <label class="btn btn-outline-danger" for="custom" style="width: 100px;">맞춤</label>

@@ -352,5 +352,21 @@ public class UserAdminController {
 	public String goManagerecipients(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_recipients";
 	}
+	
+	// 월별 대상자 리스트 가져오기
+	@ResponseBody
+	@GetMapping(value="/recipients/{no}/{month}/{year}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getRecipients(@PathVariable String no, @PathVariable String month, @PathVariable String year){
+		int spotNo = Integer.parseInt(no);
+		HashMap<String, Object> inputValue = new HashMap<String, Object>();
+		inputValue.put("spotNo", spotNo);
+		inputValue.put("month", month);
+		inputValue.put("year", year);
+		log.info(inputValue);
+		List<HashMap<String, Object>> result = userService.getRecipients(inputValue);
+		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
+	}
 
+	
+	
 }

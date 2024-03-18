@@ -23,9 +23,9 @@
 				<div>
 					<div aria-label="pagination">
 						<ul class="pagination d-flex justify-content-end fw-semibold">
-							<li class="page-item"><a class="page-link" href="#">지난달</a></li>
-							<li class="page-item"><a class="page-link" href="#">2024년 00월</a></li>
-							<li class="page-item"><a class="page-link" href="#">다음달</a></li>
+							<li class="page-item"><a class="page-link" href="#" id="lastMonth">지난달</a></li>
+							<li class="page-item"><a class="page-link" href="#" id="thisMonth">2024년 03월</a></li>
+							<li class="page-item"><a class="page-link" href="#" id="nextMonth">다음달</a></li>
 						</ul>
 					</div>
 				</div>
@@ -38,7 +38,7 @@
 							style="background-color: #FF5798; color: #150070;">
 							<div class="card-body">
 								<h5 class="card-title fw-semibold">발송 대상자</h5>
-								<h4 class="card-text fw-bold text-end">{000}
+								<h4 class="card-text fw-bold text-end" id="numOfRecipients">
 									<span>명</span>
 								</h4>
 							</div>
@@ -49,7 +49,7 @@
 							style="background-color: #FF83D9; color: #150070;">
 							<div class="card-body">
 								<h5 class="card-title fw-semibold">축하카드 미발송</h5>
-								<h4 class="card-text fw-bold text-end">{000}
+								<h4 class="card-text fw-bold text-end" id="notSentCount">
 									<span>명</span>
 								</h4>
 							</div>
@@ -60,7 +60,7 @@
 							style="background-color: #F2AFFF; color: #150070;">
 							<div class="card-body">
 								<h5 class="card-title fw-semibold">선물 선택 중</h5>
-								<h4 class="card-text fw-bold text-end">{000}
+								<h4 class="card-text fw-bold text-end" id="selectingCount">
 									<span>명</span>
 								</h4>
 							</div>
@@ -71,7 +71,7 @@
 							style="background-color: #DCD9FF; color: #150070;">
 							<div class="card-body">
 								<h5 class="card-title fw-semibold">선물 선택 완료</h5>
-								<h4 class="card-text fw-bold text-end">{000}
+								<h4 class="card-text fw-bold text-end" id="selectedCount">
 									<span>명</span>
 								</h4>
 							</div>
@@ -82,7 +82,7 @@
 							style="background-color: #A3A2FD; color: #150070;">
 							<div class="card-body">
 								<h5 class="card-title fw-semibold">선물 발송 완료</h5>
-								<h4 class="card-text fw-bold text-end">{000}
+								<h4 class="card-text fw-bold text-end" id="sentCount">
 									<span>명</span>
 								</h4>
 							</div>
@@ -102,21 +102,21 @@
 								<th>연락처</th>
 								<th>이메일</th>
 								<th>생년월일</th>
-								<th>1인당 예산</th>
 								<th>상태</th>
+								<th>선택금액</th>
 								<th>취소</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="recipientList">
 							<tr class="text-center align-middle">
-								<td>{member_seq}</td>
-								<td>{member_name}</td>
-								<td>{member_grade}</td>
-								<td>{member_phone}</td>
-								<td>{member_email}</td>
-								<td>{member_birth}</td>
-								<td>{member_budget}</td>
-								<td>{status}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 								<td><a type="button" class="btn btn-danger">취소</a></td>
 							</tr>
 						</tbody>
@@ -132,4 +132,5 @@
 	</div>
 	
 </body>
+<script src="/resources/js/userAdminPage/manage_recipients.js"></script>
 </html>

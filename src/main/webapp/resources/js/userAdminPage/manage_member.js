@@ -310,3 +310,39 @@ document.querySelector("#checkDelete").addEventListener('click', () => {
     }
   });
 });
+
+// 직원 검색 버튼 클릭 시
+document.getElementById("searchBtn").addEventListener("click", function () {
+  var keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+  var rows = document.getElementById("empList").getElementsByTagName("tr");
+
+  for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 1; j < cells.length; j++) { // 첫 번째 열은 체크박스이므로 검색에서 제외
+          var cellContent = cells[j].innerText.toLowerCase();
+          if (cellContent.includes(keyword)) {
+              found = true;
+              break;
+          }
+      }
+
+      if (found) {
+          rows[i].style.display = "";
+      } else {
+          rows[i].style.display = "none";
+      }
+  }
+});
+
+// 검색 입력란 엔터 키 이벤트 추가
+document.getElementById("searchInput").addEventListener("keyup", function(event) {
+  // 키코드가 13일 때(Enter 키)
+  if (event.keyCode === 13) {
+      // 기본 동작 방지
+      event.preventDefault();
+      // Search 버튼 클릭 이벤트 호출
+      document.getElementById("searchBtn").click();
+  }
+});

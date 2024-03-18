@@ -151,5 +151,10 @@ public class userAdminServiceImpl implements userAdminService {
 	public HashMap<String, Object> getCardInfo(int spotNo) {
 		return userMapper.getCardInfo(spotNo);
 	}
+	
+	@Override
+	public List<HashMap<String, Object>> getRecipients(HashMap<String, Object> inputValue) {
+		return userMapper.getRecipients(inputValue);
+	}
 
 }

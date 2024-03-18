@@ -29,5 +29,15 @@ public interface userAdminService {
 	
 	public boolean updateCustomGift(HashMap<String, Object> customGift);
 	
+	public boolean updateDefaultGift(HashMap<String, Object> defaultGift);
+	
 	public List<HashMap<String, Object>> getCustomGift(int spotNo);
+	
+	public HashMap<String, Object> getDefaultGift(int spotNo);
+	
+	public boolean saveCard(HashMap<String, Object> cardForm);
+	
+	public HashMap<String, Object> getCardInfo(int spotNo);
+	
+	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
 }

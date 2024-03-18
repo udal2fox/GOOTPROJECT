@@ -115,10 +115,15 @@ addBtn.addEventListener("click", () => {
     .then((Response) => Response.text())
     .then((text) => {
       if (text === "success") {
-        swal("직원이 추가되었습니다.");
-        location.href = "/userAdminPage/goManagemember";
+        swal("새로운 직원이 추가되었습니다.", {
+          icon: "success",
+        }).then(() => {
+          location.href = "/userAdminPage/goManagemember";
+        });
       } else {
-        swal("실패하였습니다. 창 종료 후 재시도 해주세요.");
+        swal("직원 등록이 실패하였습니다. 다시 시도해주세요.", {
+          icon: "error",
+        });
       }
     })
     .catch((error) => {
@@ -134,6 +139,12 @@ document
     let checkboxes = document.querySelectorAll(
       'input[name="empCheck"]:checked'
     );
+
+    if (checkboxes.length === 0) {
+      swal("선택된 직원이 없습니다.");
+      return;
+    }
+
     let editList = document.querySelector("#editList");
     let msg = "";
     checkboxes.forEach(function (checkbox) {
@@ -216,12 +227,15 @@ document.querySelector("#editMemberBtn").addEventListener("click", function () {
       .then((response) => response.text())
       .then((text) => {
         if (text === "success") {
-          swal("직원 정보가 수정되었습니다.");
-          setTimeout(() => {
+          swal("선택된 직원이 수정되었습니다.", {
+            icon: "success",
+          }).then(() => {
             location.href = "/userAdminPage/goManagemember";
-          }, 1500);
+          });
         } else {
-          swal("수정 실패하였습니다. 다시 시도해주세요.");
+          swal("직원 수정을 실패하였습니다. 다시 시도해주세요.", {
+            icon: "error",
+          });
         }
       })
       .catch((error) => {
@@ -295,4 +309,40 @@ document.querySelector("#checkDelete").addEventListener('click', () => {
       swal("선택된 직원 삭제가 취소되었습니다.");
     }
   });
+});
+
+// 직원 검색 버튼 클릭 시
+document.getElementById("searchBtn").addEventListener("click", function () {
+  var keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+  var rows = document.getElementById("empList").getElementsByTagName("tr");
+
+  for (var i = 0; i < rows.length; i++) {
+      var cells = rows[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 1; j < cells.length; j++) { // 첫 번째 열은 체크박스이므로 검색에서 제외
+          var cellContent = cells[j].innerText.toLowerCase();
+          if (cellContent.includes(keyword)) {
+              found = true;
+              break;
+          }
+      }
+
+      if (found) {
+          rows[i].style.display = "";
+      } else {
+          rows[i].style.display = "none";
+      }
+  }
+});
+
+// 검색 입력란 엔터 키 이벤트 추가
+document.getElementById("searchInput").addEventListener("keyup", function(event) {
+  // 키코드가 13일 때(Enter 키)
+  if (event.keyCode === 13) {
+      // 기본 동작 방지
+      event.preventDefault();
+      // Search 버튼 클릭 이벤트 호출
+      document.getElementById("searchBtn").click();
+  }
 });

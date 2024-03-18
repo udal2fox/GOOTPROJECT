@@ -19,7 +19,7 @@
         <div class="row px-5">
             <!-- 직원 검색 폼 -->
             <div id="search_group" class="col">
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" onsubmit="return false;">
                     <input id="searchInput" class="form-control" type="search" placeholder="직원검색" aria-label="Search">
                     <button class="btn btn-outline-primary" type="button" id="searchBtn">Search</button>
                 </form>

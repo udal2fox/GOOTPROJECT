@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="overflow-auto m-3">
-						<ul class="text-start" style="list-style: none;">
+						<ul class="text-start" style="list-style: none;" id="defaultInfo">
 							<li class="my-2 bg-secondary-subtle rounded-2"><img src=""
 								alt="productimg" width="auto" height="40px" class="p-2">&nbsp&nbsp&nbsp
 								<span>${productName}</span></li>

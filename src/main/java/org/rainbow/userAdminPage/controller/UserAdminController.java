@@ -243,6 +243,16 @@ public class UserAdminController {
 		log.info("지점 커스텀 선물 리스트.." + result);
 		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
 	}
+	
+	// 지점 기본 선물 가져오기
+	@ResponseBody
+	@GetMapping(value="/getDefaultGift/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String, Object>> getDefailtInfo(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		HashMap<String, Object> result = userService.getDefaultGift(spotNo);
+		log.info("지점 기본 선물 정보.." + result);
+		return new ResponseEntity<HashMap<String,Object>>(result, HttpStatus.OK);
+	}
 
 	// 지점 선물 편집 페이지 이동
 	@GetMapping("/giftCustom")
@@ -274,6 +284,23 @@ public class UserAdminController {
 			return "error";
 		}
 	}
+	
+	// 지점 기본 선물 저장
+	@ResponseBody
+	@PostMapping("/defaultGift")
+	public String saveDefault(@RequestBody HashMap<String, Object> defaultGift) {
+		try {
+			boolean result = userService.updateDefaultGift(defaultGift);
+			if (result) {
+				return "success";
+			} else {
+				return "error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
 
 	// 기본 선물 편집 페이지 이동
 	@GetMapping("/giftDefault")
@@ -294,11 +321,52 @@ public class UserAdminController {
 	public String goManagecard(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_card";
 	}
+	
+	// 생일카드정보 가져오기
+	@ResponseBody
+	@GetMapping(value="/getCardInfo/{no}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String, Object>> getCardInfo(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		HashMap<String, Object> result = userService.getCardInfo(spotNo);
+		log.info("생일카드정보.."+result);
+		return new ResponseEntity<HashMap<String, Object>>(result,HttpStatus.OK);
+	}
+	
+    // 생일카드 커스텀 내용 저장
+    @ResponseBody
+    @PostMapping("/saveCard/{no}")
+    public String saveCard (@RequestBody HashMap<String, Object> cardForm, @PathVariable String no) {
+    	int spotNo = Integer.parseInt(no);
+    	cardForm.put("spotNo", spotNo);
+    	log.info("카드커스텀.."+cardForm);
+        boolean result = userService.saveCard(cardForm);
+        if (result) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
 
 	// 이번달 대상자 현황 페이지 이동
 	@GetMapping("/goManagerecipients/{no}")
 	public String goManagerecipients(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_recipients";
 	}
+	
+	// 월별 대상자 리스트 가져오기
+	@ResponseBody
+	@GetMapping(value="/recipients/{no}/{month}/{year}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getRecipients(@PathVariable String no, @PathVariable String month, @PathVariable String year){
+		int spotNo = Integer.parseInt(no);
+		HashMap<String, Object> inputValue = new HashMap<String, Object>();
+		inputValue.put("spotNo", spotNo);
+		inputValue.put("month", month);
+		inputValue.put("year", year);
+		log.info(inputValue);
+		List<HashMap<String, Object>> result = userService.getRecipients(inputValue);
+		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
+	}
 
+	
+	
 }

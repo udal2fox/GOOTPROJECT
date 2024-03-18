@@ -134,7 +134,7 @@
 	    </ul>
     </div>
 </body>
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranch.js"></script> 
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranchSearch.js"></script> 
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtbranchDown.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttd.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdSearch.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdDown.js"></script> 
 </html>

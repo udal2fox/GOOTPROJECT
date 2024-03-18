@@ -10,14 +10,18 @@ document.getElementById('downloadButton').addEventListener('click', ()=>{
 
 function download() 
 {
-	// 폼데이터에 체크박스 의 벨류를 들고가서 리스트 조회 후 그리스트로 다운받게 끔 변환
-    // 상품 분류 체크박스들의 값을 가져옵니다.
-    let checkedValues = [];
+    let sdto = {
+    		"keyword": document.getElementById('tdKeyword').value,
+		    "recPayMth": document.querySelector('.payMth').value,
+		    "firDate" : document.querySelector('.datePick1').value,
+		    "secDate" :	document.querySelector('.datePick2').value,
+		    "checkedValues": [] //
+    };
     
     document.querySelectorAll('input[type=checkbox][data-filter="td-Business"]:checked').forEach(function(checkbox) {
         if(checkbox.value != '전체')
 		{
-        	checkedValues.push(checkbox.value);
+        	sdto.checkedValues.push(checkbox.value);
 		}
     });
 
@@ -25,22 +29,22 @@ function download()
     document.querySelectorAll('input[type=checkbox][data-filter="td-calculate"]:checked').forEach(function(checkbox) {
     	 if(checkbox.value != '전체')
  		{
-         	checkedValues.push(checkbox.value);
+    		 sdto.checkedValues.push(checkbox.value);
  		}
     });
-    
-    console.log(checkedValues);
+    console.log(sdto);
 
 		
     // 서버로 데이터 전송
-    fetch('/tdExcelDown', {
+    fetch('/ucTdDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(checkedValues)
+        body: JSON.stringify(sdto)
     })
     .then(response => response.blob())
     .then(blob =>
     {
+    	console.log(blob);
         // 엑셀 파일 다운로드	
         const url = window.URL.createObjectURL(new Blob([blob])); 	// Blob 데이터로부터 URL 생성
         const a = document.createElement('a');  					// <a> 요소 생성

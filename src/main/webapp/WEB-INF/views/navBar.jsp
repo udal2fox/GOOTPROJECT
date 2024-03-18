@@ -154,7 +154,7 @@
                         </a>
                         <ul class="dropdown-menu text-small shadow">
                             <li><a class="dropdown-item" href="/profile_modify">프로필 수정</a></li>
-                            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                            <li><a class="dropdown-item" href="/Gologout">로그아웃</a></li>
                         </ul>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                         <ul class="subMenu-category px-5">
                             <li class="category"><a class="category-link" href="/TradeDetailPage">거래명세</a></li>
                             <li class="category"><a class="category-link" href="/unrecoveredMGT">미수관리</a></li>
-                            <li class="category"><a class="category-link" href="/orderReceiptPage">계산서발행</a></li>
+                            <li class="category"><a class="category-link" href="/moveIoBill">계산서발행</a></li>
                         </ul>
                     </li>
                     <li>

@@ -3,23 +3,28 @@ package org.rainbow.company.employeeSupervisePage.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.RowBounds;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.rainbow.domain.Criteria;
 import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
@@ -30,8 +35,7 @@ public class employeeSupervisePageController {
 
 	@Autowired
 	searchEmployeeServiceImpl service;
-	
-	
+
 	// 직원 조회 페이지
 	@GetMapping("/searchEmployee")
 	public String searchEmployee(Model model, Criteria cri) {
@@ -171,22 +175,25 @@ public class employeeSupervisePageController {
 		vo.setWorkType(request.getParameter("workType"));
 		vo.setSal(Integer.parseInt(request.getParameter("sal")));
 		vo.setIdStatus(request.getParameter("idStatus"));
-
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date endDate = null;
 		String endDtString = request.getParameter("endDt");
 
 		if (endDtString != null && !endDtString.isEmpty()) {
-		    if ("-".equals(endDtString)) {
-		        endDate = null;
-		    } else {
+			 if (endDtString.matches("\\d{4}[.\\-]\\d{2}[.\\-]\\d{2}")) {
+				 // "."을 "-"로 변경
+			     endDtString = endDtString.replaceAll("[.]", "-"); 
+			     // yyyyMMdd를 yyyy-MM-dd로 변경
+			     endDtString = endDtString.replaceAll("(\\d{4})(\\d{2})(\\d{2})", "$1-$2-$3");
+			    }
+			 
 		        try {
 		            endDate = new java.sql.Date(dateFormat.parse(endDtString).getTime());
 		        } catch (ParseException e) {
 		            e.printStackTrace(); // 오류 처리
 		        }
 		    }
-		}
 
 		vo.setEndDt(endDate);
 
@@ -205,7 +212,6 @@ public class employeeSupervisePageController {
 		
 		// 세션에서 필요한 값들 가져오기
         Integer eno = (Integer) session.getAttribute("eno");
-        
         
         rain_EmpVO vo = service.get(eno);
      
@@ -237,5 +243,16 @@ public class employeeSupervisePageController {
 		return "/company/employeeSupervisePage/profile_modify";
 	}
 
+	
+	// 프로필 편집
+	@ResponseBody
+	@PostMapping(value = "/profile_modify", consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<String> profile_update(@RequestBody HashMap<String, Object> result){
+		System.out.println(result);
+		service.profile_update(result);
+		return service.profile_update(result) == 1?
+				new ResponseEntity<String>( "success", HttpStatus.OK ):
+					new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	} 
 }
 	

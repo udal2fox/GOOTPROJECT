@@ -1,5 +1,6 @@
 package org.rainbow.company.employeeSupervisePage.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
@@ -23,4 +24,7 @@ public interface searchEmployeeService {
 	
 	// 직원 정보 편집
 	public void update(rain_EmpVO vo);
+	
+	// 개인 프로필 편집
+	public int profile_update(HashMap<String, Object> result);
 }

@@ -11,7 +11,9 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
+import org.rainbow.company.calculateManagement.domain.ucBranchDownVO;
 import org.rainbow.company.calculateManagement.domain.ucComDownVO;
+import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.MailSender;
@@ -80,6 +82,10 @@ public class TradeDetailController {
 	@PostMapping(value = "/binHand.do", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> bigHand (@RequestBody List<String> recNo) {
 	log.info(recNo);
+	 if (recNo.isEmpty()) {
+	        return ResponseEntity.ok("Fail");
+	    }
+	
 	int result = tService.bigHandProcessing(recNo);
 	log.info(result);
 	
@@ -91,12 +97,11 @@ public class TradeDetailController {
 	 /** 엑셀 데이터 다운로드 처리*/
     @ResponseBody
     @PostMapping("/tdExcelDown")
-    public void tdExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    public void tdExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(checkValues);
-
+    	log.info(sdto);
     	 
-    	List<tdDownVO> downlist = tService.tdDownList(checkValues);
+    	List<tdDownVO> downlist = tService.tdDownList(sdto);
     	
     	log.info(downlist);
     	
@@ -169,11 +174,11 @@ public class TradeDetailController {
     // 미수관리 기업 다운로드
     @ResponseBody
     @PostMapping("/ucComDown")
-    public void ucComExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    public void ucComExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(checkValues);
+    	System.out.println(sdto);
     	 
-    	List<ucComDownVO> downlist = tService.ucComDown(checkValues);
+    	List<ucComDownVO> downlist = tService.ucComDown(sdto);
     	
     	log.info(downlist);
     	
@@ -186,7 +191,7 @@ public class TradeDetailController {
     @PostMapping(value = "/ucComMailSend", produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> ucMailSend(@RequestBody List<TradeDetailListVO> vo)
     {
-    	if(vo != null) 
+    	if(	!vo.isEmpty()) 
     	{
 	    	for(TradeDetailListVO em : vo)
 	    	{
@@ -235,19 +240,17 @@ public class TradeDetailController {
     // 미수관리 기업 다운로드
     @ResponseBody
     @PostMapping("/ucbranchDown")
-    public void ucbranchExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    public void ucbranchExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(checkValues);
+    	System.out.println(sdto);
     	 
-    	List<ucComDownVO> downlist = tService.ucComDown(checkValues);
+    	List<ucBranchDownVO> downlist = tService.ucBranchDown(sdto);
     	
     	log.info(downlist);
     	
         // 리스트를 넣으면 엑셀화됨.
     	ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
-    
-    
     
     
     // 미수관리 거래명세 리스트 이동
@@ -262,6 +265,48 @@ public class TradeDetailController {
        	
    		return "/company/calculateMGTpage/unrecoveredMGTtd";
    	}
+    // 미수관리 기업 서치
+    @ResponseBody
+    @PostMapping(value = "/ucTdSearch.do" ,produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<TradeDetailListVO>> ucTdSearch(@RequestBody TradeDetailSearchDTO tdDTO)
+    {
+    	
+    	log.info(tdDTO);
+		List<TradeDetailListVO> list = tService.ucTdSearch(tdDTO);
+				
+		log.info(list);
+    	return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
+		
+    }
+    
+    // 미수관리 기업 다운로드
+    @ResponseBody
+    @PostMapping("/ucTdDown")
+    public void ucTdExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
+    {
+    	System.out.println(sdto);
+    	 
+    	List<ucTdDown> downlist = tService.ucTdDown(sdto);
+    	
+    	log.info(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
+    //------------ 계산서 발행 ㄱㄱ
+    
+    @GetMapping("/moveIoBill")
+    public String moveIoBill(Model model)
+	{
+		List<TradeDetailListVO> list = tService.IoBillList();
+		
+		model.addAttribute("list", list);
+		log.info("list...."+list);
+		
+		return "/company/calculateMGTpage/issuanceOfBill";
+	}
+    
     
     
     

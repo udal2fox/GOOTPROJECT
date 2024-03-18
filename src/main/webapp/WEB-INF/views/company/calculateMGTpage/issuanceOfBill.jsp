@@ -42,10 +42,7 @@
 			</tr>
 		</table>
 		<div class ="misu" style="padding-top: 25px">
-			<div>
-				  <span class="misuTotal"> 000,000,000원</span>	
-			</div>
-			<div>	
+			<div> 	
 				<input type="button" class="btn btn-primary" id="" value="계산서 발행" style="width: 185px; height: 35px;">	
 			</div>	
 		</div>
@@ -57,6 +54,7 @@
 				<td> 지점관리번호 </td>
 				<td> 기업명 </td>
 				<td> 기업구분 </td>
+				<td> 지점명 </td>
 				<td> 합계 </td>
 				<td> 공급액 </td>
 				<td> 세액 </td>
@@ -66,19 +64,19 @@
 			</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="uc" items="${ucList}">
+			<c:forEach var="uc" items="${list}">
 				<tr class="td" data-type="${uc.comBizType}">
 					<td><input type="checkbox" name="checkboxTd"></td>
-					<td>${uc.companyNo }</td>
+					<td>${uc.spotNo }</td>
 					<td>${uc.comName }</td>
 					<td>${uc.comBizType }</td>	
+					<td>${uc.spName }</td>	
 					<td>${uc.recSum }</td>
 					<td>${uc.recSup }</td>
 					<td>${uc.recTax }</td>
-					<td>${uc.prdCstPri }</td>
-					<td>${uc.prdMargin }</td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
+					<td><a href="#">보기</a></td>
 				</tr>
 			</c:forEach>
 			</tbody>

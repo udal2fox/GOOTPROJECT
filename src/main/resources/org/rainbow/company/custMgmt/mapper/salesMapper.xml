@@ -71,6 +71,16 @@ set cshDate1=#{cshDate1}, cshContent1=#{cshContent1},
 where consultNo=#{consultNo}
 	
 	</update>
+	
+	
+	<!-- 기업명 찾기 모달창 : 기업 리스트 가져오기 -->
+	<select id="searchCompanyListModal"  resultType="org.rainbow.company.custMgmt.domain.consultVO">
+
+	SELECT cs.csCompanyName  
+	FROM RAIN_cCompany_tbl com Inner Join  RAIN_consult_tbl cs 
+	WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL
+        
+	</select>
  
  
  

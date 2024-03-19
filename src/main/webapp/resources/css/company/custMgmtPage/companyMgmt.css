@@ -179,6 +179,60 @@
 }
 
 
+.page-wrap{
+			    text-align: center;
+			    font-size: 0;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+		}
+		.page-nation {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		.page-nation a{
+			display: block;
+			margin: 0 3px;
+			flex: left;
+			border: 1px solid #e6e6e6;
+			width: 28px;
+			height: 28px;
+			line-height: 28px;
+			text-align: center;
+			background-color: #fff;
+			font-size: 13px;
+			color: black;
+			text-decoration: none;
+		}
+		
+		.page-nation a.active{
+			background-color: #0078ff;
+			color: #fff;
+		}
+		.page-nation a:hover{
+			background-color: #0078ff;
+			color: #fff;
+		}
+
+
+.sort-btn
+{
+	background-color: #eaeaea;
+	border-color: white;
+}
+
+
+
+
+
+
+
+
+
+
 
 #moveCompanyRegisterBtn {
 	box-sizing: border-box;
@@ -206,12 +260,12 @@
 
 /** ----------기업 등록,기업 수정 페이지 시작 ---------------*/
 
-.company_register_div {
+.companyMgmt_div {
 
 	box-sizing: border-box;
 }
 
-.company_register_title {
+.companyMgmt_title {
 	margin-top:30px;
 	background-color : var(--bg-gray);
 	height: 50px;
@@ -219,7 +273,7 @@
 
 }
 
-.company_register_tbl {
+.companyMgmt_tbl {
 	width: 100%;
 	background-color: var(--bg-gray);
 	table-layout: auto;
@@ -228,17 +282,18 @@
 
 	
 }
-.company_register_tbl th {
+.companyMgmt_tbl_title {
 	width: 200px;
 	border: 10px solid var(--bg-gray);
+	font-weight: bold;
 
 }
-.company_register_tbl tr {
+.companyMgmt_tbl tr {
 	width: 100%;
 
 }
 
-.company_register_tbl td {
+.companyMgmt_tbl td {
 	width: 100%;
 	border: 10px solid var(--bg-gray);
 	
@@ -337,17 +392,29 @@
 }
 
 
-.company_register_tbl input[type="text"],
-.company_register_tbl input[type="date"],
-.company_registration_tbl input[type="email"]
+.companyMgmt_tbl input[type="text"],
+.companyMgmt_tbl input[type="date"],
+.companyMgmt_tbl input[type="email"]
  {
 	border: none;
 	width:100%;
 	
 }
 
+.input-with-image {
+    position: relative;
+}
 
+.input-with-image input[type="text"] {
+    padding-right: 50px; /* 이미지를 감안하여 오른쪽에 여백을 줍니다. */
+}
 
+.input-with-image input[type="button"],#imgBtnBizLicenseFileUpload {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* 텍스트 입력 상자 오른쪽에 위치시킵니다. */
+    transform: translateY(-50%);
+}
 
 
 #companyUpdateBtn {

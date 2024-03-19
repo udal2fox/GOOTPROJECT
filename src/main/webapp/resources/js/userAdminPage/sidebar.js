@@ -53,7 +53,7 @@ logout.forEach((btn) => {
 manage_gift.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
-    location.href = "/userAdminPage/goManagegift/" + okja;
+    location.href = "/userAdminPage/goManagegift";
   });
 });
 

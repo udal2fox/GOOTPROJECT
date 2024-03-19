@@ -39,7 +39,19 @@ public class TradeDetailListVO
 	// 기업 기본키
 	private String companyNo;
 	// 지점 기본키
-	private String spotNo;
+	private int spotNo;
+	// 기업이메일 메일기능 삽입시 활용해봄
+	private String comEmail;
+	// 담당자 이메일
+	private String cEmpEmail;
+	/** 차금 금액 */
+	private int recDed;
+	
+	/** 추가 금액 */
+	private int recAdd;
+	
+	
+	
 	
 	
 }

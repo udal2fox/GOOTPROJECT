@@ -33,15 +33,14 @@ function fetchSearchResults(keyword) {
         	console.log(list);
             let msg = '';
             list.forEach(list => {
-            	
             	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
             	msg += '<td><input type="checkbox" name="categoryAll"></td>';
-            	msg += '<td>' + list.recNo + '</td>';
-            	msg += '<td><a href="/companyView">' + list.comName + '</a></td>';
+            	msg += '<td><a href="/tradeDetailEdit?recNo='+ list.recNo+'">'+list.recNo+'</td>';
+            	msg += '<td><a href="/companyView?companyNo='+list.companyNo+ '">' + list.comName + '</a></td>';
             	msg += '<td>' + list.comBizType + '</td>';
             	msg += '<td>' + list.spName + '</td>';
             	msg += '<td>' + myTime(list.recDate) + '</td>';
-            	msg += '<td>' + list.recSum + '</td>';
+            	msg += '<td>' + (list.recSum - list.recDed + list.recAdd) + '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';
             	msg += '<td>' + list.prdCstPri + '</td>';

@@ -6,6 +6,9 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailEditVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailListVO;
 import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
+import org.rainbow.company.calculateManagement.domain.ucBranchDownVO;
+import org.rainbow.company.calculateManagement.domain.ucComDownVO;
+import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.mapper.TradeDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +43,8 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	}
 
 	@Override
-	public List<tdDownVO> tdDownList(List<String> checkValues) {
-		return tMapper.tdDownList(checkValues);
+	public List<tdDownVO> tdDownList(TradeDetailSearchDTO sdto) {
+		return tMapper.tdDownList(sdto);
 	}
 
 	@Override
@@ -54,6 +57,69 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 		return tMapper.editTdupdate(vo);
 	}
 
+	// 미수관리 시작
+	@Override
+	public List<TradeDetailListVO> ucCompany() {
+		return tMapper.ucCompany();
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucComSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.ucComSearch(tdDTO);
+	}
+
+	@Override
+	public List<ucComDownVO> ucComDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucComDown(sdto);
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucBranchList() {
+		return tMapper.ucBranchList();
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucBranchSearch(TradeDetailSearchDTO tdDTO) {
+		List<TradeDetailListVO> ucbvo = tMapper.ucBranchSearch(tdDTO);
+		return ucbvo;
+	}
+	
+	@Override
+	public List<TradeDetailListVO> uctdList() {
+		return tMapper.uctdList();
+	}
+
+	@Override
+	public List<ucBranchDownVO> ucBranchDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucBranchDown(sdto);
+	}
+
+	@Override
+	public List<TradeDetailListVO> ucTdSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.ucTdSearch(tdDTO);
+	}
+
+	@Override
+	public List<tdDownVO> ucTdDown(TradeDetailSearchDTO sdto) {
+		return tMapper.ucTdDown(sdto);
+	}
+
+	@Override
+	public List<TradeDetailListVO> IoBillList() {
+		return tMapper.IoBillList();
+	}
+
+	@Override
+	public int billMakeProcessing(List<String> recNo) {
+		return tMapper.billMakeProcessing(recNo);
+	}
+
+	@Override
+	public List<TradeDetailListVO> billSearch(TradeDetailSearchDTO tdDTO) {
+		return tMapper.billSearch(tdDTO);
+	}
+
+	
 	
 	
 	

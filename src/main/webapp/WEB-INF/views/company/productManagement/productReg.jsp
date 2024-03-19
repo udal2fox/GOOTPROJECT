@@ -13,7 +13,7 @@
 		<div class="container-fluid" align="center">
 			<h2 class="h2st">상품 신규등록</h2>
 			<div>
-				<form action="/prdReg.do" method="post">
+				<form action="/prdReg.do" method="post" enctype="multipart/form-data" >
 					<table class="prdinputTable">
 						<tr>
 							<td>상품코드</td><td colspan="3"><input type="text" class="form-control randomPrdNo" name="prdNo" readonly></td>
@@ -75,7 +75,7 @@
 						    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="0" name="prdMargin"></td>
 						</tr>
 						<tr>
-							<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="prdImg"></td>
+							<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="file"></td>
 						</tr>
 					</table>
 					<div class="prdRegBtn">

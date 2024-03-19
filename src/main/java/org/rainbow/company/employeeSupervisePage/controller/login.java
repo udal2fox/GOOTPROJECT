@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,5 +53,17 @@ public class login {
 
 			return ResponseEntity.ok().body(resultMap);
 		}
+	}
+	
+	@GetMapping("/Gologout")
+	public String Gologout(HttpServletRequest request) {
+		
+		// 현재 세션을 가져와서 초기화
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate(); // 세션 초기화
+	    }
+		
+		return "/company/login";
 	}
 }

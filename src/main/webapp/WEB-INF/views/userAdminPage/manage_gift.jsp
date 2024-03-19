@@ -23,21 +23,16 @@
 						<div class="col d-flex align-items-center justify-content-center">
 							<span class="fw-bold fs-5">현재 선물 리스트</span>
 						</div>
-						<div class="col">
-							<button type="button" class="btn btn-outline-primary w-100">엑셀로
-								다운</button>
-						</div>
-						<div class="col">
+						<div class="col col-sm-4">
 							<button type="button" class="btn btn-outline-primary w-100" id="customGiftBtn">편집</button>
 						</div>
 					</div>
 					<div class="overflow-auto m-3" style="height: 600px;">
-						<ul class="text-start" style="list-style: none;">
-							<li class="my-2 bg-secondary-subtle p-2 rounded-2"><img
-								src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
-								<span>${productName}</span></li>
-
-							
+						<ul class="text-start" style="list-style: none;" id="customList">
+							<li class="my-2 bg-secondary-subtle p-2 rounded-2">
+								<img src="" alt="productimg" width="auto" height="40px">&nbsp&nbsp&nbsp
+								<span>${productName}</span>
+							</li>
 						</ul>
 					</div>
 				</article>
@@ -55,7 +50,7 @@
 						</div>
 					</div>
 					<div class="overflow-auto m-3">
-						<ul class="text-start" style="list-style: none;">
+						<ul class="text-start" style="list-style: none;" id="defaultInfo">
 							<li class="my-2 bg-secondary-subtle rounded-2"><img src=""
 								alt="productimg" width="auto" height="40px" class="p-2">&nbsp&nbsp&nbsp
 								<span>${productName}</span></li>

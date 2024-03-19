@@ -140,7 +140,7 @@
 		msg += '<tr>'+
 			   '<td>금액차감</td>'+
 			   '<td>금액차감</td>'+
-			   '<td>'+randomCode(8)+'</td>'+
+			   '<td class="findDedcode">'+randomCode(8)+'</td>'+
 			   '<td>'+recDedName.value	+'</td>'+
 			   '<td>'+recDed.value+'</td>'+
 			   '<td>'+recDedCst.value+'</td>'+
@@ -158,6 +158,8 @@
 	    recDedCstSup.disabled = true;
 	    recDedCstTax.disabled = true;
 		document.querySelector('.dedbtn').disabled = true;	
+		
+		dedCode = document.querySelector('.findDedcode').textContent;
 	}
 	
 	
@@ -181,7 +183,7 @@
 		msg += '<tr>'+
 		'<td>추가정산</td>'+
 		'<td>추가정산</td>'+
-		'<td>'+randomCode(8)+'</td>'+
+		'<td class="findAddcode">'+randomCode(8)+'</td>'+
 		'<td>'+recAddName.value	+'</td>'+
 		'<td>'+recAdd.value+'</td>'+
 		'<td>'+recAddCst.value+'</td>'+
@@ -201,7 +203,7 @@
 	    
 	    document.querySelector('.addbtn').disabled = true;	
 		
-		
+	    addCode = document.querySelector('.findAddcode').textContent;
 	}
 	
 	
@@ -214,12 +216,18 @@
 		else return false;
 	}
 	
-	
+	let addCode;
+	let dedCode;
 	
 	
 	function EditTradeDetail() {
-	    if (confirm("거래명세서를 편집하시겠습니까?")) {
+
+		console.log("추가정산 코드:", addCode);
+		console.log("금액차감 코드:", dedCode);
+		
+		if (confirm("거래명세서를 편집하시겠습니까?")) {
 	        let data = {
+	        		
 	            recDedName: document.getElementById("recDedName").value,
 	            recDed: document.getElementById("recDed").value,
 	            recDedSup: document.getElementById("recDedSup").value,
@@ -237,8 +245,8 @@
 	            recAddCstTax: document.getElementById("recAddCstTax").value,
 	            recAddWorker: document.getElementById("worker").value,
 	            recNo: document.getElementById("recNo").value,
-	            recDedPrdCode : "여기 테이블 td 값 가져오면 됨",
-	            recAddPrdCode : "여기 테이블 td 값 가져오면 됨"
+	            recDedPrdCode : addCode,
+	            recAddPrdCode : dedCode
 	            
 	        };
 
@@ -265,6 +273,12 @@
 	        });
 	    }
 	}
+	
+	// 이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
+	function backPage() 
+	{
+		window.history.go(-1); // 뒤로 한 페이지 이동
+	} 
 
 	
 	

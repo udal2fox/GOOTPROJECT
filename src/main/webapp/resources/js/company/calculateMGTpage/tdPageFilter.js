@@ -65,21 +65,7 @@
 	        });
 	    });
 	
-	
-	    document.querySelector('.payMth').addEventListener('change', function(e) {
-	        // allCheck 체크박스 상태 업데이트
-	        let isTypeAllChecked = isAllTypeCheckboxesChecked();
-	        document.getElementById('td-BusinessAll').checked = isTypeAllChecked;
-	
-	        // allListCheck 체크박스 상태 업데이트
-	        let isStatusAllChecked = isAllStatusCheckboxesChecked();
-	        document.getElementById('td-calculateAll').checked = isStatusAllChecked;
-	
-	        // 필터링 적용
-	        filterProducts();
-	
-	    });
-	
+	    
 	
 	    // 상품 필터링 함수
 	    function filterProducts() {
@@ -503,6 +489,12 @@
 					let tdList = row.querySelectorAll('td');
 					
 					let recNo = tdList[1].textContent.trim(); 
+					let recPayMth = tdList[12].textContent.trim(); 
+					if(recPayMth == '결제완료')
+					{
+						alert("대손 처리 실패");
+						return;
+					}
 					checkedDataList.push(recNo);
 				}
 			});

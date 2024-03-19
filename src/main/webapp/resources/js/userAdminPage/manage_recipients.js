@@ -119,7 +119,12 @@ function fetchData() {
           msg += '<td>' + formatTimestamp(recipient.cEmpBirth) + '</td>';
           msg += '<td>' + recipient.step + '</td>';
           msg += '<td>' + (recipient.totalAmount ? numberWithCommas(recipient.totalAmount) + '원' : '0원') + '</td>';
-          msg += '<td></td>';
+          // '미발송'인 경우에만 버튼 활성화
+          if (recipient.step === '미발송') {
+            msg += '<td><button type="button" class="btn btn-outline-success" onclick="sendGift(' + recipient.id + ')">바로발송</button></td>';
+          } else {
+            msg += '<td></td>';
+          }
           msg += '</tr>';
         });
       }
@@ -155,4 +160,10 @@ function formatTimestamp(unixTimeStamp) {
 // 세자리마다 쉼표를 찍는 함수
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 선물을 발송하는 함수
+function sendGift(recipientId) {
+  // 여기에 선물 발송 코드 추가
+  console.log("Recipient ID:", recipientId);
 }

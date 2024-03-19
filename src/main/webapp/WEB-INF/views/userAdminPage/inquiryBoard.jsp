@@ -14,13 +14,14 @@
 	<jsp:include page="sidebar.jsp"></jsp:include>
 	<section class="container">
 		<div class="row">
-			<section class="col p-5">
+			<section class="col-4 p-5">
 				<div class="">
 					<div class="card">
 						<h5 class="card-header fw-bolder">문의하기</h5>
 						<div class="card-body px-5">
 							<p class="card-text text-start">문의사항이 있으시면</p>
-							<p class="card-text text-start">아래 문의 남기기 버튼을 이용해주세요.</p>
+							<p class="card-text text-start">아래 문의 남기기 버튼을</p>
+							<p class="card-text text-start">이용해주세요.</p>
 							<br>
 							<p class="card-text text-start">빠르게 답변드리도록 하겠습니다.</p>
 							<br>
@@ -39,35 +40,11 @@
 				</div>
 			</section>
 
-			<section class="col p-5">
+			<section class="col-8 p-5">
 				<div class="overflow-auto" style="height: 650px;">
 					<div class="accordion accordion-flush p-2" id="inquiryBoard">
 						<div class="accordion-item" id="QnA">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button"
-									data-bs-toggle="collapse" data-bs-target="#${1}">
-									<span class="fst-italic">2024-01-20</span>&nbsp; &nbsp; &nbsp;
-									<span class="fw-bolder text-break">23년 미납금액이 있다고
-										연락받았습니다.</span>
-								</button>
-							</h2>
-							<div id="${1}" class="accordion-collapse collapse"
-								data-bs-parent="#inquiryBoard">
-								<div class="accordion-body">
-									<p>[문의]</p>
-									<span class="text-break">${inquiryBody} 작년 미납한 금액이 있다고
-										연락 받았습니다. 모두 결제 한 것으로 알고 있는데 확인 부탁드려요</span>
-								</div>
-							</div>
-							<div id="${1}" class="accordion-collapse collapse"
-								data-bs-parent="#inquiryBoard">
-								<div class="accordion-body">
-									<p>[답변]</p>
-									<span class="text-break">${inquiryBody} 23년 10월 12일에
-										'신정우'임직원이 선택한 선물에 대해서 결제가 되지 않았습니다. 거래처원장 담당자님 메일로 전달드리도록
-										하겠습니다. 감사합니다.</span>
-								</div>
-							</div>
+
 						</div>
 
 

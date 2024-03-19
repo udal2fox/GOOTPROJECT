@@ -110,6 +110,19 @@
 			DATE_FORMAT(cEmpBirth, '%m') = #{month}
 		AND
 			YEAR(RAIN_order_tbl.sentDate) = #{year};
-</select>
+	</select>
+	
+	<select id="getUsageList" parameterType="int" resultType="HashMap">
+		<![CDATA[
+		SELECT EXTRACT(YEAR FROM recDate) AS year,
+       	EXTRACT(MONTH FROM recDate) AS month,
+       	COUNT(*) AS count,
+       	SUM(recSum) AS totalSum
+		FROM RAIN_receipt_tbl
+		WHERE recSum <> 0 AND spotNo = #{spotNo}
+		GROUP BY EXTRACT(YEAR FROM recDate), EXTRACT(MONTH FROM recDate)
+		ORDER BY year DESC, month DESC
+		]]>
+	</select>
 
 </mapper>

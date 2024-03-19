@@ -197,6 +197,17 @@ public class UserAdminController {
 	public String goUsagehistorylist(@PathVariable String no, Model model) {
 		return "/userAdminPage/usageHistory_list";
 	}
+	
+	// 이용현황 페이지 리스트 가져오기
+	@ResponseBody
+	@GetMapping(value="/getUsageList/{no}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getUsageList(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		List<HashMap<String, Object>> usageList = userService.getUsageList(spotNo);
+		log.info("usageList..." + usageList);
+		return new ResponseEntity<List<HashMap<String,Object>>>(usageList,HttpStatus.OK);
+	}
+	
 
 	// 고객지원 페이지 이동
 	@GetMapping("/goInquiryboard/{no}")

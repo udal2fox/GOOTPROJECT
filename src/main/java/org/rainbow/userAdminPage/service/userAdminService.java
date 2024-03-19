@@ -40,4 +40,6 @@ public interface userAdminService {
 	public HashMap<String, Object> getCardInfo(int spotNo);
 	
 	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
+	
+	public List<HashMap<String, Object>> getUsageList(int spotNo);
 }

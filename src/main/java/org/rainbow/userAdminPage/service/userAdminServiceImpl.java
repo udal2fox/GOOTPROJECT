@@ -157,4 +157,8 @@ public class userAdminServiceImpl implements userAdminService {
 		return userMapper.getRecipients(inputValue);
 	}
 
+@Override
+	public List<HashMap<String, Object>> getUsageList(int spotNo) {
+		return userMapper.getUsageList(spotNo);
+	}
 }

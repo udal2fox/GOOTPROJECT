@@ -19,7 +19,7 @@
 	<div class="container mt-5">
 
 		<section class="row">
-			<section class="col ps-5">
+			<section class="col-4 ps-5">
 
 				<div class="my-3">
 					<h5 class="fw-bold">이용현황</h5>
@@ -36,7 +36,7 @@
 
 			</section>
 
-			<section class="col pe-5">
+			<section class="col-8 pe-5">
 
 				<article>
 					<div class="text-end" style="margin-right: 10%;">
@@ -47,8 +47,8 @@
 				<article>
 					<div class="my-3">
 						<div class="overflow-auto" style="height: 600px;">
-							<div style="width: 90%;">
-
+							<div style="width: 90%;" id="usageList">
+								<!-- -->
 								<div class="my-2">
 									<a href="" class="text-decoration-none" style="color: black;">
 										<div class="row bg-danger-subtle p-3 rounded-2">
@@ -70,7 +70,7 @@
 										</div>
 									</a>
 								</div>
-
+								<!-- -->
 							</div>
 						</div>
 					</div>
@@ -86,4 +86,5 @@
 	</main>
 	</div>
 </body>
+<script src="/resources/js/userAdminPage/usageHistory_list.js"></script>
 </html>

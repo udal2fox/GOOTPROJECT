@@ -104,7 +104,7 @@
 								<th>생년월일</th>
 								<th>상태</th>
 								<th>선택금액</th>
-								<th>취소</th>
+								<th>수동발송</th>
 							</tr>
 						</thead>
 						<tbody id="recipientList">

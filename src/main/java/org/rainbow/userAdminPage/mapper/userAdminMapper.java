@@ -47,5 +47,7 @@ public interface userAdminMapper {
 	
 	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
 	
+	public List<HashMap<String, Object>> getUsageList(int spotNo);
+	
 	
 }

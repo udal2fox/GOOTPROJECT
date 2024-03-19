@@ -62,14 +62,20 @@ function showGiftList(data) {
     msg += '<div class="form-check">';
     msg += '<input class="form-check-input" type="checkbox" data-code="' + product.prdNo + '" id="' + product.prdNo + '">';
     msg += '<label class="form-check-label" for="' + product.prdNo + '">';
-    msg += '<div class="card" style="width: 150px;">';
+    msg += '<div class="card" style="width:160px;">';
     msg += '<img src="' + product.prdImg + '" class="card-img-top object-fit-fill border rounded" alt="product" width="150px" height="150px">';
     msg += '<div class="card-body">';
-    msg += '<span class="card-text" style="font-size: 0.7rem;">' + product.prdName + "</span><br>";
-    msg += '<span class="card-text" style="font-size: 0.7rem;">금액 : ' + product.prdSal.toLocaleString() + "원</span>";
+    msg += '<div style="height:85px;"><span class="card-text" style="font-size: 0.7rem;">' + extractProductName(product.prdName) + "</span></div>";
+    msg += '<div><span class="card-text" style="font-size: 0.7rem;">▶ 금액 : ' + product.prdSal.toLocaleString() + "원</span></div>";
     msg += "</div></div></label></div></div>";
   });
   productList.innerHTML = msg; // HTML 문자열을 HTML 요소에 할당하여 화면에 출력
+}
+
+// product.prdName 값에서 []와 () 안에 있는 텍스트를 제외하고 반환하는 함수
+function extractProductName(productName) {
+  // 정규 표현식을 사용하여 []와 () 안에 있는 텍스트를 제거
+  return productName.replace(/[\[\(].*?[\]\)]/g, '').trim();
 }
 
 // 특정 가격 이하의 선물만 표시하는 함수

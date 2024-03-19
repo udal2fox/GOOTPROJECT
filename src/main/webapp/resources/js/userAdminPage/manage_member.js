@@ -29,7 +29,7 @@ function showEmpList(data) {
     let n = 0;
     data.forEach((emp) => {
       // 각 직원의 정보를 반복해서 표시
-      msg += '<tr class="text-center">';
+      msg += '<tr class="text-center" style="font-size: 1rem">';
       msg +=
         '<td><input class="form-check-input" type="checkbox" name="empCheck"></td>';
       msg += '<td data-code="' + emp.cEmpNo + '">' + ++n + "</td>";

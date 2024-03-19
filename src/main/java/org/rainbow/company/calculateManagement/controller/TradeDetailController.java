@@ -13,7 +13,6 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
 import org.rainbow.company.calculateManagement.domain.ucBranchDownVO;
 import org.rainbow.company.calculateManagement.domain.ucComDownVO;
-import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.MailSender;

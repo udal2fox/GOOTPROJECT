@@ -14,7 +14,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         
     </select>
     
@@ -28,7 +28,7 @@
     JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
     JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
     JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-    JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+    LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 	WHERE
     1 = 1
     <if test="recPayMth != null and recPayMth != '전체' ">
@@ -77,7 +77,7 @@
 		    JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 		    JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 		    JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-		    JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+		    LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 			WHERE
 		    1 = 1
 		    and e.comBizType IN
@@ -114,7 +114,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recNo = #{recNo}
     </select>
     
@@ -153,7 +153,7 @@
          JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
          JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
          JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-         JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
          WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
          Order by e.companyNo
     </select>
@@ -167,7 +167,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -176,7 +176,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    <if test="recPayMth != null and recPayMth != '전체' ">
 		        AND a.recPayMth = '${recPayMth}' 
@@ -203,7 +203,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -212,7 +212,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    and e.comBizType IN
 		    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
@@ -247,7 +247,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
         ORDER BY d.spotNo
     </select>
@@ -260,7 +260,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -269,7 +269,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    <if test="recPayMth != null and recPayMth != '전체' ">
 		        AND a.recPayMth = '${recPayMth}' 
@@ -296,7 +296,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -305,7 +305,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    and e.comBizType IN
 		    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
@@ -340,7 +340,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
         ORDER BY a.recNo
     </select>
@@ -353,7 +353,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -362,7 +362,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    <if test="recPayMth != null and recPayMth != '전체' ">
 		        AND a.recPayMth = '${recPayMth}' 
@@ -390,7 +390,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -399,7 +399,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    <if test="recPayMth != null and recPayMth != '전체' ">
 		        AND a.recPayMth = '${recPayMth}' 
@@ -436,7 +436,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation = '계산서미발행'
     </select>
     
@@ -458,7 +458,7 @@
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN '카드미결제'
 		AND a.recNo IN (
 		    SELECT a.recNo
@@ -467,7 +467,7 @@
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
 	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
-	        JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
+	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
 		    <if test="keyword != null and keyword != ''">
 		        AND (

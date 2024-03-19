@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/companyMgmt.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
-<link rel="shortcut icon" href="#">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
 	<div class="navBar">
@@ -27,17 +27,24 @@
 				<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
+						<input type="text" class="searchBarKeyword" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
 					</td>
 					<td></td>
 					<th>지역</th>
 					<td>
 					<div class="checkbox_div">
-						<input type="checkbox" name="area" value="전체" checked="checked">전체
-						<input type="checkbox" name="area" value="서울" checked="checked">서울
-						<input type="checkbox" name="area" value="경기" checked="checked">경기
-						<input type="checkbox" name="area" value="부산" checked="checked">부산
-						<input type="checkbox" name="area" value="그 외" checked="checked">그 외
+	
+						<input type="checkbox" class="searchbar_checkbox" name="area" value="전체" checked="checked" id="comArea_typeAll"  data-check-all="comArea_type">
+						<label class="searchbar_checkbox_lable" for="comArea_typeAll">전체</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="서울" checked="checked" id="comArea_seoul"  data-filter="csStatus_type">
+						<label class="searchbar_checkbox_lable" for="comArea_seoul">서울</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="경기" checked="checked" id="comArea_gyeonggi"  data-filter="csStatus_type">
+						<label class="searchbar_checkbox_lable" for="comArea_gyeonggi">경기</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="부산" checked="checked" id="comArea_busan"  data-filter="csStatus_type">
+						<label class="searchbar_checkbox_lable" for="comArea_busan">부산</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="그 외" checked="checked" id="comArea_etc"  data-filter="csStatus_type">
+						<label class="searchbar_checkbox_lable" for="comArea_etc">그 외</label>
+					
 					</div>
 					</td>
 					<td></td>
@@ -47,9 +54,9 @@
 					<th>기업 구분</th>
 					<td>
 					<div class="radioBtn_div">
-						<input type="radio" name="bizType" value="전체" checked="checked">전체
-						<input type="radio" name="bizType" value="법인">법인
-						<input type="radio" name="bizType" value="개인">개인
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="전체" checked="checked">전체
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="법인">법인
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="개인">개인
 					
 					</div>
 					</td>
@@ -57,7 +64,7 @@
 					<th>업태</th>
 					<td>
 						<select name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
-							<option value="선택">==선택==</option>
+							<option value="선택">선택</option>
 							<option value="농업 및 임업">농업 및 임업</option>
 							<option value="어업">어업</option>
 							<option value="광업">광업</option>
@@ -108,22 +115,23 @@
 	<div class="list_div">
 		
 	 <div>
+	 <form>
       <table class="list_div_tbl" id="company_tbl">
          <thead>
             <tr class="top_bar_of_list">
-               <th>번호</th>
-			   <th>기업명</th>
+               <th>번호<button type="button" class="sort-btn" data-column="companyNo">🔽</button></th>
+			   <th>기업명<button type="button" class="sort-btn" data-column="comName">🔽</button></th>
                <th>사업자 번호</th>
-               <th>사업자 구분</th>
-               <th>지역</th>
+               <th>사업자 구분<button type="button" class="sort-btn" data-column="comBizType">🔽</button></th>
+               <th>지역<button type="button" class="sort-btn" data-column="comArea">🔽</button></th>
                <th>주소</th>
                <th>연락처</th>
-               <th>업태</th>
+               <th>업태<button type="button" class="sort-btn" data-column="comBizStatus">🔽</button></th>
             </tr>
             </thead>
   			<tbody>
       			 <c:forEach var="vo" items="${companyVO }">
-               <tr class="companyList">
+               <tr class="companyList" data-type="${vo.comArea}">
                   <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
 				  <td>${vo.comName }</td>
                   <td>${vo.comBizNum }</td>
@@ -137,16 +145,27 @@
             
          </tbody>
       </table>
-
+</form>
 
 </div>
+<div id="pagination" class="page-wrap" style="width: 1200;">	
+    <ul class="page-nation">
+        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
+        
+    </ul>
+    </div>
+</div>
+
+
 </div>
 	<div class="btn_div">
 		<button type="button" class="companyListBtns" id="moveCompanyRegisterBtn" onclick="location.href='/moveCompanyRegister'">기업 등록</button>
 		
 	</div>
 </div>
-</div>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/companyFilter.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/companySearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
 </body>
 </html>

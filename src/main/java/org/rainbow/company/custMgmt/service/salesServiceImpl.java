@@ -59,6 +59,12 @@ public class salesServiceImpl implements salesService {
 		
 		return salesMapper.saveConsultHistory(cshvo);
 	}
+	
+	@Override
+	public List<consultVO> searchCompanyListModal() {
+		log.info("searchCompanyListModal...." );
+		return salesMapper.searchCompanyListModal();
+	}
 
 
 

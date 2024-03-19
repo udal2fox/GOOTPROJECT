@@ -73,7 +73,7 @@
 							<tr>
 								<td id="uploadedFileName">
 								<!-- db에 저장된 파일 불러오기 구현된겨 안된겨 아직 확인 불가-->
-								${{companyVO.comBizLicenseFile}
+								${companyVO.comBizLicenseFile}
 								</td>
 								<td></td>
 							</tr>

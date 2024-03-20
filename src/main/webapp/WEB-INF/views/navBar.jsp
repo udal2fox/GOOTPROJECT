@@ -189,7 +189,7 @@
                     <li>
                         <ul class="subMenu-category px-5">
                             <li class="category"><a class="category-link" href="/moveSalesStatsCom">기업별 통계</a></li>
-                            <li class="category"><a class="category-link" href="/moveSalesStatsCom">상품별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/moveSalesStatsPrd">상품별 통계</a></li>
                         </ul>
                     </li>
                     <li>

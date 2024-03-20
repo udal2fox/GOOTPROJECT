@@ -414,7 +414,7 @@
 		    <if test="firDate != null and secDate != null">
 		        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
 		    </if>
-		      and e.comBizType IN
+		     and e.comBizType IN
 		    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
 		        #{item}
 		    </foreach>

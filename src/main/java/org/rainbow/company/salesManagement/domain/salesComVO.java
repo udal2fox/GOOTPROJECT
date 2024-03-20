@@ -11,7 +11,9 @@ public class salesComVO
 {
 	private int companyNo;
 	
-	private String companyName;
+	private String comName;
+	
+	private String comBizType;
 	
 	private int recSumTotal;
 	

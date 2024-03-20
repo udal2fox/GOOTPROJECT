@@ -37,16 +37,6 @@
 	        filterProducts();
 	    });
 	
-	    // allListCheck 체크박스 이벤트 리스너 등록
-	    document.getElementById('td-calculateAll').addEventListener('change', function() {
-	        // allListCheck 체크박스 상태에 따라 상품 상태 체크박스 상태 변경
-	        let isChecked = this.checked;
-	        document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').forEach(function(checkbox) {
-	            checkbox.checked = isChecked;
-	        });
-	        // 필터링 적용
-	        filterProducts();
-	    });
 	
 	
 	    // 체크박스가 변경될 때 필터링 함수를 호출하는 이벤트 리스너 등록
@@ -56,16 +46,12 @@
 	            let isTypeAllChecked = isAllTypeCheckboxesChecked();
 	            document.getElementById('td-BusinessAll').checked = isTypeAllChecked;
 	
-	            // allListCheck 체크박스 상태 업데이트
-	            let isStatusAllChecked = isAllStatusCheckboxesChecked();
-	            document.getElementById('td-calculateAll').checked = isStatusAllChecked;
-	
 	            // 필터링 적용
 	            filterProducts();
 	        });
 	    });
 	
-	    
+	
 	
 	    // 상품 필터링 함수
 	    function filterProducts() {
@@ -73,13 +59,9 @@
 	        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
 	            return checkbox.value;
 	        });
-	        let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
-	            return checkbox.value;
-	        });
 	
 	        // 전체 체크 상태 확인
 	        let isAllTypeChecked = document.getElementById('td-BusinessAll').checked;
-	        let isAllStatusChecked = document.getElementById('td-calculateAll').checked;
 	
 	        // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
 	        if (!isAllTypeChecked && typeFilters.length === 0) {
@@ -92,24 +74,13 @@
 	            return;
 	        }
 	
-	        // 모든 상품상태 체크박스가 해제되었을 때 조회되지 않도록 처리
-	        if (!isAllStatusChecked && statusFilters.length === 0) {
-	            // 모든 상품 숨기기
-	            document.querySelectorAll('.td').forEach(function(product) {
-	                product.style.display = 'none';
-	            });
-	            // 여기서 필터값 가져오고 페이징 다시그리기ㅈ
-	            removePagination();
-	            return;
-	        }
 	
 	        // 각 상품을 순회하면서 필터링 적용
 	        document.querySelectorAll('.td').forEach(function(product) {
 	            let type = product.getAttribute('data-type');
-	            let status = product.getAttribute('data-status');
 	
 	            // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
-	            if ((typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status))) {
+	            if ((typeFilters.length === 0 || typeFilters.includes(type))) {
 	                product.style.display = 'table-row'; // 테이블의 경우 display를 'table-row'로 설정
 	            } else {
 	                product.style.display = 'none';
@@ -117,7 +88,6 @@
 	            // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
 	            drawPagination(1, Math.ceil(getFilteredProducts().length / amount)); // <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
 	            goToPage(1);
-	
 	        });
 	    }
 	
@@ -130,13 +100,6 @@
 	        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').length;
 	    }
 	
-	    // 상품 상태 체크박스 모두 선택 여부 확인 함수
-	    function isAllStatusCheckboxesChecked() {
-	        // 상품 상태 체크박스 중 선택된 개수 확인
-	        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked').length;
-	        // 상품 상태 체크박스 개수만큼 모두 선택된 경우 true 반환
-	        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]').length;
-	    }
 	};
 	
 	// 필터 끝
@@ -241,20 +204,16 @@
 	    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
 	        return checkbox.value;
 	    });
-	    let statusFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-calculate"]:checked')).map(function(checkbox) {
-	        return checkbox.value;
-	    });
 	
 	    return Array.from(tds).filter(function(product) {
 	        let type = product.getAttribute('data-type');
-	        let status = product.getAttribute('data-status');
-	        return (typeFilters.length === 0 || typeFilters.includes(type)) && (statusFilters.length === 0 || statusFilters.includes(status));
+	        return (typeFilters.length === 0 || typeFilters.includes(type));
 	    });
 	}
 	
 	function removePagination() {
 	    const paginationElement = document.getElementById('pagination');
-	    paginationElement.innerHTML = ''; 
+	    paginationElement.innerHTML = ''; // 페이지네이션 요소의 내용을 청소
 	}
 	
 	
@@ -265,57 +224,11 @@
 	// 페이징 끝
 	
 	
-	
-	
 	// 리셋 그냥 새로고침''
 	document.querySelector('#reset').addEventListener('click', function() {
 	    console.log("dd");
 	    location.reload();
 	});
-	
-	
-	// 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능
-	document.querySelectorAll('.sort-btn').forEach(button => {
-	    button.addEventListener('click', () => {
-	        const column = button.dataset.column;
-	        sortDirection[column] = !sortDirection[column]; // 정렬 방향을 변경
-	
-	        // 정렬 방향에 따라 버튼 모양 변경
-	        button.innerText = sortDirection[column] ? '🔽' : '🔼';
-	        sortTable(column);
-	    });
-	});
-	
-	function getCellValue(row, column) {
-	    const columnIndex = {
-	        "recDate": 5,
-	        "recSum": 6,
-	        "recSortation":12
-	    } [column];
-	
-	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
-	    return cell ? cell.textContent.trim() : "";
-	}
-	
-	function sortTable(column) {
-	    const tbody = document.querySelector('.saleStatsTableInfo tbody');
-	    const rows = Array.from(tbody.querySelectorAll('tr'));
-	
-	    // 정렬 방식에 따라 정렬
-	    rows.sort((a, b) => {
-	        const aValue = getCellValue(a, column);
-	        const bValue = getCellValue(b, column);
-	        if (sortDirection[column]) {
-	            return aValue.localeCompare(bValue);
-	        } else {
-	            return bValue.localeCompare(aValue);
-	        }
-	    });
-	
-	    // 정렬된 행을 테이블에 적용
-	    tbody.innerHTML = '';
-	    rows.forEach(row => tbody.appendChild(row));
-	}
 	
 	
 	// 모먼트 js 날짜 계산
@@ -365,126 +278,11 @@
 	});
 	
 	
-	// 체크박스를 클릭했을 때 이벤트
-	document.getElementById("checkboxTdAll").addEventListener("click", function() {
-	    // 전체 체크박스의 상태를 게또
-	    let isChecked = this.checked;
-	    
-	    // 모든 하위 체크박스들을 가져와서 상태를 가져오기
-	    let checkboxes = document.getElementsByName("checkboxTd");
-	    checkboxes.forEach(function(checkbox) {
-	        checkbox.checked = isChecked;
-	    });
-	});
 	
-	// 결제 완료처리	
-	document.querySelector('.PaymentBtn').addEventListener('click', function() {
+	
 		
-		if(confirm("결제처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-			
-			let checkboxes = document.getElementsByName('checkboxTd');
-			checkboxes.forEach(function(checkbox) {
-				if (checkbox.checked) {
-					let row = checkbox.closest('tr');
-					let tdList = row.querySelectorAll('td');
-					
-					let recNo = tdList[1].textContent.trim(); 
-					let recPayMth = tdList[12].textContent.trim();
-					if(recPayMth == '계산서미발행')
-					{
-						return;
-					}
-					checkedDataList.push(recNo);
-				}
-			});
-			
-			fetch('/Payment.do', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(checkedDataList),
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.text();
-			})
-			.then(text => {
-				console.log('Success:', text);
-				if(text == 'Success'){
-					alert("결체 처리 성공");
-					location.reload();
-				}
-				else alert("결제 처리 실패"); 
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		}
-		else
-		{
-			return false;
-		}
-	});
-	
-	
-	// 대손 완료처리	
-	document.querySelector('.BigHandBtn').addEventListener('click', function() {
+
 		
-		if(confirm("대손처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-			
-			let checkboxes = document.getElementsByName('checkboxTd');
-			checkboxes.forEach(function(checkbox) {
-				if (checkbox.checked) {
-					let row = checkbox.closest('tr');
-					let tdList = row.querySelectorAll('td');
-					
-					let recNo = tdList[1].textContent.trim(); 
-					let recPayMth = tdList[12].textContent.trim(); 
-					if(recPayMth == '결제완료')
-					{
-						return;
-					}
-					checkedDataList.push(recNo);
-				}
-			});
-			
-			fetch('/binHand.do', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(checkedDataList),
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.text();
-			})
-			.then(text => {
-				console.log('Success:', text);
-				if(text == 'Success'){
-					alert("대손 처리 성공");
-					location.reload();
-				}
-				else alert("대손 처리 실패"); 
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		}
-		else
-		{
-			return false;
-		}
-	});
 
 	
 	

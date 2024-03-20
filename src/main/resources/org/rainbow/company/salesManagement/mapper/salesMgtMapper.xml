@@ -4,6 +4,7 @@
 
 <mapper namespace="org.rainbow.company.salesManagement.mapper.salesMgtMapper">
 	
+	<!-- 차트 시작  -->
 	<select id="monthChartData" resultType="org.rainbow.company.salesManagement.domain.monthChartVO">
 		SELECT
 		DATE_FORMAT(recDate, '%Y-%m') AS recSum_month,
@@ -31,7 +32,7 @@
 	
 	
 	<select id="salesComList" resultType="org.rainbow.company.salesManagement.domain.salesComVO">
-		select b.companyNo, e.comName, sum(a.recSum) recSumTotal , sum(a.recSup) recSupTotal, sum(a.recTax) recTaxTotal, sum(d.prdCstPri) prdCstPriTotal, 
+		select b.companyNo, e.comName, e.comBizType, sum(a.recSum) recSumTotal , sum(a.recSup) recSupTotal, sum(a.recTax) recTaxTotal, sum(d.prdCstPri) prdCstPriTotal, 
 		sum(d.prdCstSup) prdCstSupTotal, sum(d.prdCstTax) prdCstTaxTotal, 
 		sum(a.recAdd - a.recDed) resADTotal, sum(a.recAddSup - a.recDedSup) resADSupTotal,
 		sum(a.recAddTax - a.recAddCstTax) resADTaxTotal
@@ -43,6 +44,96 @@
 		GROUP BY b.companyNo
 	</select>
 	
+	<select id="salesTotal" resultType="org.rainbow.company.salesManagement.domain.salasTotalVO">
+		select count(c.prdNo) salePrd, sum(a.recSum) totalSum, sum(c.prdCstPri) totalBuy, sum(a.recAdd - a.recDed) recAdTotal 
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
+		JOIN RAIN_Products_tbl c ON c.prdNo = b.prdNo 
+		GROUP BY a.recSum
+	</select>
+	
+	<select id="salesComDown" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.salesManagement.domain.smgtComDownVO">
+		select b.companyNo, e.comName, sum(a.recSum) recSumTotal , sum(a.recSup) recSupTotal, sum(a.recTax) recTaxTotal, sum(d.prdCstPri) prdCstPriTotal, 
+		sum(d.prdCstSup) prdCstSupTotal, sum(d.prdCstTax) prdCstTaxTotal, 
+		sum(a.recAdd - a.recDed) resADTotal, sum(a.recAddSup - a.recDedSup) resADSupTotal,
+		sum(a.recAddTax - a.recAddCstTax) resADTaxTotal
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		JOIN RAIN_order_tbl c ON a.ordNo = c.ordNo
+		LEFT JOIN RAIN_Products_tbl d ON c.prdNo = d.prdNo
+		JOIN RAIN_cCompany_tbl e ON b.companyNo = e.companyNo
+		where 1=1 
+			and e.comBizType IN
+		    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+			<if test="keyword != null and keyword != ''">
+		        AND (
+		            b.companyNo = '${keyword}' 
+		            OR e.comName LIKE '%${keyword}%'
+		        )
+		    </if>
+		    <if test="firDate != null and secDate != null">
+		        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+		    </if>
+		    
+		GROUP BY b.companyNo
+	</select>
+	
+	<!--vat서치  -->
+	<select id="salesVatTotal" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.salesManagement.domain.salasTotalVO">
+		select count(c.prdNo) salePrd, sum(a.recSum) totalSum, sum(c.prdCstPri) totalBuy, sum(a.recAdd - a.recDed) recAdTotal 
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
+		JOIN RAIN_Products_tbl c ON c.prdNo = b.prdNo
+		where 1=1 
+			<if test="keyword != null and keyword != ''">
+		        AND (
+		            b.companyNo = '${keyword}' 
+		            OR e.comName LIKE '%${keyword}%'
+		        )
+		    </if>
+		    <if test="firDate != null and secDate != null">
+		        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+		    </if> 
+		GROUP BY a.recSum
+	</select>
+	
+	<!-- 기업 매출 통계 서치 -->
+	<select id="salesComSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.salesManagement.domain.salesComVO">
+		select b.companyNo, e.comName, sum(a.recSum) recSumTotal , sum(a.recSup) recSupTotal, sum(a.recTax) recTaxTotal, sum(d.prdCstPri) prdCstPriTotal, 
+		sum(d.prdCstSup) prdCstSupTotal, sum(d.prdCstTax) prdCstTaxTotal, 
+		sum(a.recAdd - a.recDed) resADTotal, sum(a.recAddSup - a.recDedSup) resADSupTotal,
+		sum(a.recAddTax - a.recAddCstTax) resADTaxTotal
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		JOIN RAIN_order_tbl c ON a.ordNo = c.ordNo
+		LEFT JOIN RAIN_Products_tbl d ON c.prdNo = d.prdNo
+		JOIN RAIN_cCompany_tbl e ON b.companyNo = e.companyNo
+		where 1=1 
+			<if test="keyword != null and keyword != ''">
+		        AND (
+		            b.companyNo = '${keyword}' 
+		            OR e.comName LIKE '%${keyword}%'
+		        )
+		    </if>
+		    <if test="firDate != null and secDate != null">
+		        AND STR_TO_DATE(a.recDate, '%Y-%m-%d') BETWEEN '${firDate}' AND '${secDate}'
+		    </if>
+		    
+		GROUP BY b.companyNo
+	</select>
+	
+	<!-- 상품별 매출 통계 -->
+	<select id="salesPrdList" resultType="org.rainbow.company.salesManagement.domain.salesPrdVO">
+		select d.prdNo, d.prdMajorCtg, d.prdSubCtg, d.prdName, sum(a.recSum) totalSum, sum(d.prdCstPri) totalCstPri, sum((a.recSum - d.prdCstPri)/a.recSum) totalMagin, d.prdSal, d.prdCstPri, d.prdMargin, d.prdSt 
+		FROM RAIN_receipt_tbl a
+		JOIN RAIN_cSpot_tbl b ON a.spotNo = b.spotNo
+		JOIN RAIN_order_tbl c ON a.ordNo = c.ordNo
+		JOIN RAIN_Products_tbl d ON c.prdNo = d.prdNo
+		GROUP BY d.prdNo, d.prdMajorCtg, d.prdSubCtg, d.prdName, d.prdSal, 
+		d.prdCstPri, d.prdMargin, d.prdSt
+	</select>
 
 
 	

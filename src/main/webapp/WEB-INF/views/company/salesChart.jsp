@@ -40,8 +40,8 @@
 	  .then(data => {
 	    console.log(data);
 	    
-	    const recSum_month = data.map(item => item.recSum_month); // recSum_month 배열 추출
-	    const total_amount = data.map(item => item.total_amount); // total_amount 배열 추출
+	    const recSum_month = data.map(item => item.recSum_month); 
+	    const total_amount = data.map(item => item.total_amount); 
 	    
 	    console.log(recSum_month);
 	    console.log(total_amount);
@@ -77,8 +77,8 @@
 	  .then(data => {
 	    console.log(data);
 	    
-	    const recSum_quarter = data.map(item => item.recSum_quarter); // recSum_month 배열 추출
-	    const quarter_amount = data.map(item => item.quarter_amount); // total_amount 배열 추출
+	    const recSum_quarter = data.map(item => item.recSum_quarter); 
+	    const quarter_amount = data.map(item => item.quarter_amount); 
 	    
 	    console.log(recSum_quarter);
 	    console.log(quarter_amount);

@@ -11,7 +11,6 @@ import org.rainbow.company.salesManagement.domain.monthChartVO;
 import org.rainbow.company.salesManagement.domain.salasTotalVO;
 import org.rainbow.company.salesManagement.domain.salesComVO;
 import org.rainbow.company.salesManagement.domain.salesPrdVO;
-import org.rainbow.company.salesManagement.domain.smgtComDownVO;
 import org.rainbow.company.salesManagement.service.salesMgtService;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,14 +78,14 @@ public class SalesMgtController
 		return "/company/salesMGTpage/salesStatsCom";
 	}
 	
-	 /** 엑셀 데이터 다운로드 처리*/
+	 /** 기업 통계 엑셀 데이터 다운로드 처리*/
     @ResponseBody
     @PostMapping("/smgtComDown")
     public void smgtComDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
     	log.info(sdto);
     	 
-    	List<smgtComDownVO> downlist = sms.salesComDown(sdto);
+    	List<salesComVO> downlist = sms.salesComDown(sdto);
     	
     	log.info(downlist);
     	
@@ -131,6 +130,33 @@ public class SalesMgtController
 		
 		return "/company/salesMGTpage/salesStatsPrd";
 	}
+	
+	/** 상품별 통계 엑셀 데이터 다운로드 처리*/
+    @ResponseBody
+    @PostMapping("/smgtPrdDown")
+    public void smgtPrdDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
+    {
+    	log.info(sdto);
+    	 
+    	List<salesPrdVO> downlist = sms.salesPrdDown(sdto);
+    	
+    	log.info(downlist);
+    	
+        // 리스트를 넣으면 엑셀화됨.
+    	ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
     
+    /** 상품통계통계 서치  */
+    @ResponseBody
+	@PostMapping(value = "/salesPrdSearch", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<salesPrdVO>> salePrdSearch(@RequestBody TradeDetailSearchDTO sdto)
+	{
+    	log.info(sdto);
+		List<salesPrdVO> list = sms.salesPrdSearch(sdto);
+		log.info(list);
+		
+		return new ResponseEntity<List<salesPrdVO>>(list, HttpStatus.OK);
+				
+	}
 	
 }

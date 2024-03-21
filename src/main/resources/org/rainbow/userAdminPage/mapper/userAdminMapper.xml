@@ -1,118 +1,238 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.rainbow.userAdminPage.mapper.userAdminMapper">
-    
-    <!-- 사용자페이지 로그인 -->
-    <select id="customerLogin" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT userName, spotNo FROM RAIN_cUser_tbl WHERE userEmail = #{userEmail} and userPw = #{userPw}
-    </select>
+<mapper
+	namespace="org.rainbow.userAdminPage.mapper.userAdminMapper">
 
-    <!-- 사용자 정보 가져오기 -->
-    <select id="getUserInfo" parameterType="int" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_cUser_tbl WHERE spotNo = #{spotNo}
-    </select>
+	<!-- 사용자페이지 로그인 -->
+	<select id="customerLogin" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		SELECT userName, spotNo FROM RAIN_cUser_tbl WHERE userEmail
+		= #{userEmail}
+		and userPw = #{userPw}
+	</select>
 
-    <!-- 사용자 정보 수정하기 -->
-    <update id="updateUserInfo" parameterType="java.util.HashMap">
-        UPDATE RAIN_cUser_tbl SET userEmail = #{userEmail}, userContact = #{userContact}, userPw = #{userPw}, userPwUpdate = now() WHERE spotNo = 1;
-    </update>
+	<!-- 사용자 정보 가져오기 -->
+	<select id="getUserInfo" parameterType="int"
+		resultType="java.util.HashMap">
+		SELECT * FROM RAIN_cUser_tbl WHERE spotNo = #{spotNo}
+	</select>
 
-    <!-- 대쉬보드 정보 가져오기 -->
-    <select id="getDashboard" parameterType="int" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_cSpot_tbl WHERE spotNo = #{spotNo}
-    </select>
+	<!-- 사용자 정보 수정하기 -->
+	<update id="updateUserInfo" parameterType="java.util.HashMap">
+		UPDATE RAIN_cUser_tbl
+		SET userEmail = #{userEmail}, userContact =
+		#{userContact}, userPw =
+		#{userPw}, userPwUpdate = now() WHERE spotNo
+		= 1;
+	</update>
 
-    <!-- 직원정보 가져오기 -->
-    <select id="getEmpList" parameterType="int" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_cEMP_tbl WHERE sNo = #{sNo}
-    </select>
+	<!-- 대쉬보드 정보 가져오기 -->
+	<select id="getDashboard" parameterType="int"
+		resultType="HashMap">
+		SELECT
+		spAgreementDate,
+		spBdgt,
+		spEmpNum,
+		spEmpUpdate,
+		(SELECT
+		SUM(recSum) FROM RAIN_receipt_tbl WHERE spotNo = #{spotNo} AND
+		YEAR(recDate)
+		= YEAR(CURRENT_DATE) AND MONTH(recDate) =
+		MONTH(CURRENT_DATE)) AS
+		thisMonth,
+		(SELECT SUM(recSum) FROM
+		RAIN_receipt_tbl WHERE spotNo = #{spotNo} AND
+		YEAR(recDate) =
+		YEAR(CURRENT_DATE - INTERVAL 1 MONTH) AND
+		MONTH(recDate) =
+		MONTH(CURRENT_DATE - INTERVAL 1 MONTH)) AS lastMonth,
+		(SELECT
+		SUM(recSum) FROM RAIN_receipt_tbl WHERE spotNo = #{spotNo} AND
+		YEAR(recDate) = YEAR(CURRENT_DATE)) AS thisYear,
+		(SELECT SUM(recSum)
+		FROM RAIN_receipt_tbl WHERE spotNo = #{spotNo} AND YEAR(recDate)
+		=
+		YEAR(CURRENT_DATE - INTERVAL 1 YEAR)) AS lastYear
+		FROM
+		RAIN_cSpot_tbl
+		WHERE
+		spotNo = #{spotNo};
 
-    <!-- 직원정보 추가하기 -->
-    <insert id="addUserEmp" parameterType="java.util.HashMap">
-        INSERT INTO RAIN_cEMP_tbl (sNo, cEmpName, cEmpTel, cEmpEmail, cEmpPosition, cEmpBirth, receiveGift) VALUES (#{sNo}, #{cEmpName}, #{cEmpTel}, #{cEmpEmail}, #{cEmpPosition}, #{cEmpBirth}, 0)
-    </insert>
+	</select>
 
-    <!-- 직원 수정하기 -->
-    <update id="updateEmp" parameterType="java.util.HashMap">
-        UPDATE RAIN_cEMP_tbl SET cEmpName = #{cEmpName}, cEmpTel = #{cEmpTel}, cEmpEmail = #{cEmpEmail}, cEmpPosition = #{cEmpPosition}, cEmpBirth = #{cEmpBirth}, receiveGift = #{receiveGift} WHERE cEmpNo = #{no}
-    </update>
-
-    <!-- 직원 삭제를 처리하는 쿼리 -->
-    <delete id="deleteEmployees" parameterType="java.util.HashMap">
-        DELETE FROM RAIN_cEMP_tbl WHERE sNo = #{sNo} AND cEmpNo = #{cEmpNo}
-    </delete>
-
-    <!-- 고객지원 리스트 가져오기 -->
-    <select id="getInquiryList" parameterType="int" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_spotQnA_tbl WHERE spotNo = #{spotNo}
-    </select>
-
-    <!-- 고객지원 문의글 등록 -->
-    <insert id="addQnA" parameterType="java.util.HashMap">
-        INSERT INTO RAIN_spotQnA_tbl (spotNo, questionDate, questionTitle, questionContent) VALUES (#{spotNo}, now(), #{questionTitle}, #{questionContent})
-    </insert>
-
-    <!-- 상품 전체 리스트 가져오기 -->
-    <select id="getGiftList" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_Products_tbl WHERE prdSt = '판매중'
-    </select>
-
-    <!-- 상품 커스텀 리스트 저장 -->
-    <update id="updateCustomGift" parameterType="java.util.HashMap">
-        UPDATE RAIN_cSpot_tbl SET spEditGift = #{spEditGift} WHERE spotNo = #{spotNo}
-    </update>
-
-    <!-- 기본 상품 저장 -->
-    <update id="updateDefaultGift" parameterType="java.util.HashMap">
-        UPDATE RAIN_cSpot_tbl SET spDefaultGift = #{spDefaultGift} WHERE spotNo = #{spotNo}
-    </update>
-
-    <!-- 저장된 커스텀 상품 번호 리스트 가져오기 -->
-    <select id="getCustomGift" parameterType="int" resultType="String">
-        SELECT spEditGift FROM RAIN_cSpot_tbl WHERE spotNo = #{spotNo}
-    </select>
-
-    <!-- 저장된 기본 상품 번호 가져오기 -->
-    <select id="getDefaultGift" parameterType="int" resultType="String">
-        SELECT spDefaultGift FROM RAIN_cSpot_tbl WHERE spotNo = #{spotNo}
-    </select>
-
-    <!-- 상품정보 가져오기 -->
-    <select id="getProduct" parameterType="String" resultType="java.util.HashMap">
-        SELECT * FROM RAIN_Products_tbl WHERE prdNo = #{prdNo}
-    </select>
-
-    <!-- 1. cardForm의 spotNo와 동일한 기존 데이터가 있는지 확인 -->
-    <select id="countBySpotNo" parameterType="int" resultType="int">
-        SELECT COUNT(*) FROM BirthdayCards WHERE spotNo = #{spotNo}
-    </select>
-
-    <!-- 2. spotNo와 동일한 데이터가 없다면 cardForm의 값을 테이블의 데이터로 넣어줌 -->
-    <insert id="insertCard" parameterType="HashMap">
-       INSERT INTO BirthdayCards (spotNo, selectedTheme, sendName, checkedValue, messegeContent) VALUES (#{spotNo}, #{selectedTheme}, #{sendName}, #{checkedValue}, #{messegeContent})
-    </insert>
-
-    <!-- 3. 만약 spotNo와 동일한 데이터가 있다면 기존 데이터를 cardForm으로 변경 -->
-    <update id="updateCard" parameterType="HashMap">
-        UPDATE BirthdayCards SET selectedTheme = #{selectedTheme}, sendName = #{sendName}, checkedValue = #{checkedValue}, messegeContent = #{messegeContent} WHERE spotNo = #{spotNo}
-    </update>
-    
-    <select id="getCardInfo" resultType="HashMap">
-    	SELECT * FROM BirthdayCards WHERE spotNo = #{spotNo}
-    </select>
-    
-    <select id="getRecipients" parameterType="HashMap" resultType="HashMap">
-		SELECT * FROM RAIN_cEMP_tbl
-		LEFT JOIN RAIN_order_tbl ON RAIN_cEMP_tbl.cEmpNo = RAIN_order_tbl.cEmpNo
-		WHERE 
-			sNo = #{spotNo}
-		AND
-			DATE_FORMAT(cEmpBirth, '%m') = #{month}
-		AND
-			YEAR(RAIN_order_tbl.sentDate) = #{year};
+	<!-- 상품 top5 정보 가져오기 -->
+	<select id="getBestTop5" parameterType="int"
+		resultType="HashMap">
+SELECT
+    P.prdNo,
+    P.prdName,
+    P.prdImg,
+    SUM(O.count) AS total_count
+FROM
+    RAIN_order_tbl O
+JOIN
+    RAIN_Products_tbl P ON O.prdNo = P.prdNo
+WHERE
+    O.spotNo = #{spotNo}
+    AND O.step = '발송완료'
+GROUP BY
+    P.prdNo, P.prdName, P.prdImg
+ORDER BY
+    total_count DESC
+LIMIT 5;
 	</select>
 	
-	<select id="getUsageList" parameterType="int" resultType="HashMap">
+	<!-- 최근 6개월 사용금액 가져오기 -->
+	<select id="getMonthlyData" parameterType="int" resultType="HashMap">
+	SELECT 
+    YEAR(recDate) AS year,
+    MONTH(recDate) AS month,
+    SUM(recSum) AS total_recSum
+FROM 
+    RAIN_receipt_tbl
+WHERE 
+    spotNo = #{spotNo}
+    AND recDate BETWEEN DATE_ADD(LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 6 MONTH)), INTERVAL 1 DAY) AND LAST_DAY(CURDATE())
+GROUP BY 
+    YEAR(recDate),
+    MONTH(recDate)
+ORDER BY 
+    year DESC,
+    month DESC;
+	</select>
+
+	<!-- 직원정보 가져오기 -->
+	<select id="getEmpList" parameterType="int"
+		resultType="java.util.HashMap">
+		SELECT * FROM RAIN_cEMP_tbl WHERE sNo = #{sNo}
+	</select>
+
+	<!-- 직원정보 추가하기 -->
+	<insert id="addUserEmp" parameterType="java.util.HashMap">
+		INSERT INTO RAIN_cEMP_tbl
+		(sNo, cEmpName, cEmpTel, cEmpEmail, cEmpPosition,
+		cEmpBirth,
+		receiveGift) VALUES (#{sNo}, #{cEmpName}, #{cEmpTel},
+		#{cEmpEmail},
+		#{cEmpPosition}, #{cEmpBirth}, 0)
+	</insert>
+
+	<!-- 직원 수정하기 -->
+	<update id="updateEmp" parameterType="java.util.HashMap">
+		UPDATE RAIN_cEMP_tbl SET
+		cEmpName = #{cEmpName}, cEmpTel = #{cEmpTel},
+		cEmpEmail = #{cEmpEmail},
+		cEmpPosition = #{cEmpPosition}, cEmpBirth =
+		#{cEmpBirth}, receiveGift =
+		#{receiveGift} WHERE cEmpNo = #{no}
+	</update>
+
+	<!-- 직원 삭제를 처리하는 쿼리 -->
+	<delete id="deleteEmployees" parameterType="java.util.HashMap">
+		DELETE FROM
+		RAIN_cEMP_tbl WHERE sNo = #{sNo} AND cEmpNo = #{cEmpNo}
+	</delete>
+
+	<!-- 고객지원 리스트 가져오기 -->
+	<select id="getInquiryList" parameterType="int"
+		resultType="java.util.HashMap">
+		SELECT * FROM RAIN_spotQnA_tbl WHERE spotNo = #{spotNo}
+	</select>
+
+	<!-- 고객지원 문의글 등록 -->
+	<insert id="addQnA" parameterType="java.util.HashMap">
+		INSERT INTO RAIN_spotQnA_tbl
+		(spotNo, questionDate, questionTitle,
+		questionContent) VALUES
+		(#{spotNo}, now(), #{questionTitle},
+		#{questionContent})
+	</insert>
+
+	<!-- 상품 전체 리스트 가져오기 -->
+	<select id="getGiftList" resultType="java.util.HashMap">
+		SELECT * FROM
+		RAIN_Products_tbl WHERE prdSt = '판매중'
+	</select>
+
+	<!-- 상품 커스텀 리스트 저장 -->
+	<update id="updateCustomGift" parameterType="java.util.HashMap">
+		UPDATE
+		RAIN_cSpot_tbl SET spEditGift = #{spEditGift} WHERE spotNo =
+		#{spotNo}
+	</update>
+
+	<!-- 기본 상품 저장 -->
+	<update id="updateDefaultGift" parameterType="java.util.HashMap">
+		UPDATE
+		RAIN_cSpot_tbl SET spDefaultGift = #{spDefaultGift} WHERE spotNo =
+		#{spotNo}
+	</update>
+
+	<!-- 저장된 커스텀 상품 번호 리스트 가져오기 -->
+	<select id="getCustomGift" parameterType="int"
+		resultType="String">
+		SELECT spEditGift FROM RAIN_cSpot_tbl WHERE spotNo =
+		#{spotNo}
+	</select>
+
+	<!-- 저장된 기본 상품 번호 가져오기 -->
+	<select id="getDefaultGift" parameterType="int"
+		resultType="String">
+		SELECT spDefaultGift FROM RAIN_cSpot_tbl WHERE spotNo =
+		#{spotNo}
+	</select>
+
+	<!-- 상품정보 가져오기 -->
+	<select id="getProduct" parameterType="String"
+		resultType="java.util.HashMap">
+		SELECT * FROM RAIN_Products_tbl WHERE prdNo = #{prdNo}
+	</select>
+
+	<!-- 1. cardForm의 spotNo와 동일한 기존 데이터가 있는지 확인 -->
+	<select id="countBySpotNo" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM BirthdayCards WHERE spotNo = #{spotNo}
+	</select>
+
+	<!-- 2. spotNo와 동일한 데이터가 없다면 cardForm의 값을 테이블의 데이터로 넣어줌 -->
+	<insert id="insertCard" parameterType="HashMap">
+		INSERT INTO BirthdayCards
+		(spotNo, selectedTheme, sendName, checkedValue,
+		messegeContent) VALUES
+		(#{spotNo}, #{selectedTheme}, #{sendName},
+		#{checkedValue},
+		#{messegeContent})
+	</insert>
+
+	<!-- 3. 만약 spotNo와 동일한 데이터가 있다면 기존 데이터를 cardForm으로 변경 -->
+	<update id="updateCard" parameterType="HashMap">
+		UPDATE BirthdayCards SET
+		selectedTheme = #{selectedTheme}, sendName =
+		#{sendName}, checkedValue
+		= #{checkedValue}, messegeContent =
+		#{messegeContent} WHERE spotNo =
+		#{spotNo}
+	</update>
+
+	<select id="getCardInfo" resultType="HashMap">
+		SELECT * FROM BirthdayCards
+		WHERE spotNo = #{spotNo}
+	</select>
+
+	<select id="getRecipients" parameterType="HashMap"
+		resultType="HashMap">
+		SELECT * FROM RAIN_cEMP_tbl
+		LEFT JOIN RAIN_order_tbl ON
+		RAIN_cEMP_tbl.cEmpNo = RAIN_order_tbl.cEmpNo
+		WHERE
+		sNo = #{spotNo}
+		AND
+		DATE_FORMAT(cEmpBirth, '%m') = #{month}
+		AND
+		YEAR(RAIN_order_tbl.sentDate) = #{year};
+	</select>
+
+	<select id="getUsageList" parameterType="int"
+		resultType="HashMap">
 		<![CDATA[
 		SELECT EXTRACT(YEAR FROM recDate) AS year,
        	EXTRACT(MONTH FROM recDate) AS month,
@@ -124,13 +244,18 @@
 		ORDER BY year DESC, month DESC
 		]]>
 	</select>
-	
-	<select id="getDetailUsage" parameterType="HashMap" resultType="HashMap">
+
+	<select id="getDetailUsage" parameterType="HashMap"
+		resultType="HashMap">
 		SELECT * FROM RAIN_order_tbl AS o
-		INNER JOIN RAIN_receipt_tbl AS r ON o.ordNo = r.ordNo
-		INNER JOIN RAIN_cEMP_tbl AS e ON o.cEmpNo = e.cEmpNo
-		INNER JOIN RAIN_Products_tbl AS p ON o.prdNo = p.prdNo
-		WHERE DATE_FORMAT(r.recDate, '%Y-%m') = #{recDate} and r.spotNo = #{spotNo} and o.step = '발송완료';
+		INNER JOIN
+		RAIN_receipt_tbl AS r ON o.ordNo = r.ordNo
+		INNER JOIN RAIN_cEMP_tbl AS
+		e ON o.cEmpNo = e.cEmpNo
+		INNER JOIN RAIN_Products_tbl AS p ON o.prdNo =
+		p.prdNo
+		WHERE DATE_FORMAT(r.recDate, '%Y-%m') = #{recDate} and r.spotNo
+		= #{spotNo} and o.step = '발송완료';
 	</select>
 
 </mapper>

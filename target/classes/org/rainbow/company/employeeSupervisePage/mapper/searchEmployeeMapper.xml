@@ -92,6 +92,7 @@
     			eAddr = #{eAddr},
     			eAddr2 = #{eAddr2},
     			salAccount = #{salAccount},
+				profilePicture = #{profilePicture},
     			eBank = #{eBank}
 			WHERE
     			eno = #{eno}

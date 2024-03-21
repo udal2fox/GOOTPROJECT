@@ -13,7 +13,6 @@ import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.calculateManagement.domain.tdDownVO;
 import org.rainbow.company.calculateManagement.domain.ucBranchDownVO;
 import org.rainbow.company.calculateManagement.domain.ucComDownVO;
-import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.service.TradeDetaiServiceImpl;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.MailSender;
@@ -67,31 +66,31 @@ public class TradeDetailController {
 	// 결제완료처리
 	@ResponseBody
 	@PostMapping(value = "/Payment.do", produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> Payment (@RequestBody List<String> recNo) {
-  	log.info(recNo);
-  	int result = tService.paymentProcessing(recNo);
-  	log.info(result);
-  	
-  	if(result >= 1 )
-    return ResponseEntity.ok("Success");
-  	else  return ResponseEntity.ok("Fail");
+		public ResponseEntity<String> Payment (@RequestBody List<String> recNo) {
+	  	log.info(recNo);
+	  	int result = tService.paymentProcessing(recNo);
+	  	log.info(result);
+	  	
+	  	if(result >= 1 )
+	    return ResponseEntity.ok("Success");
+	  	else  return ResponseEntity.ok("Fail");
 	}
 	  
 	// 대손 처리 
 	@ResponseBody
 	@PostMapping(value = "/binHand.do", produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> bigHand (@RequestBody List<String> recNo) {
-	log.info(recNo);
-	 if (recNo.isEmpty()) {
-	        return ResponseEntity.ok("Fail");
-	    }
-	
-	int result = tService.bigHandProcessing(recNo);
-	log.info(result);
-	
-	if(result >= 1 )
-	return ResponseEntity.ok("Success");
-	else  return ResponseEntity.ok("Fail");
+		public ResponseEntity<String> bigHand (@RequestBody List<String> recNo) {
+		log.info(recNo);
+		 if (recNo.isEmpty()) {
+		        return ResponseEntity.ok("Fail");
+		    }
+		
+		int result = tService.bigHandProcessing(recNo);
+		log.info(result);
+		
+		if(result >= 1 )
+		return ResponseEntity.ok("Success");
+		else  return ResponseEntity.ok("Fail");
 	}
 	
 	 /** 엑셀 데이터 다운로드 처리*/
@@ -284,9 +283,9 @@ public class TradeDetailController {
     @PostMapping("/ucTdDown")
     public void ucTdExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(sdto);
+    	System.out.println("거래명세기준"+sdto);
     	 
-    	List<ucTdDown> downlist = tService.ucTdDown(sdto);
+    	List<tdDownVO> downlist = tService.ucTdDown(sdto);
     	
     	log.info(downlist);
     	
@@ -307,6 +306,37 @@ public class TradeDetailController {
 		return "/company/calculateMGTpage/issuanceOfBill";
 	}
     
+	
+	// 계산서 발행 처리
+	@ResponseBody
+	@PostMapping(value = "/billMake.do", produces = MediaType.TEXT_PLAIN_VALUE)
+		public ResponseEntity<String> billMake (@RequestBody List<String> recNo) {
+		log.info(recNo);
+		 if (recNo.isEmpty()) {
+		        return ResponseEntity.ok("Fail");
+		    }
+		
+		int result = tService.bigHandProcessing(recNo);
+		log.info(result);
+		
+		if(result >= 1 )
+		return ResponseEntity.ok("Success");
+		else  return ResponseEntity.ok("Fail");
+	}
+	
+	// 계산서 발행 서치
+	@ResponseBody
+	@PostMapping(value = "iofBillSearch.do", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	 public ResponseEntity<List<TradeDetailListVO>> iofBillSearch(@RequestBody TradeDetailSearchDTO tdDTO)
+    {
+    	
+    	log.info(tdDTO);
+		List<TradeDetailListVO> list = tService.ucBranchSearch(tdDTO);
+				
+		log.info(list);
+    	return new ResponseEntity<List<TradeDetailListVO>>(list, HttpStatus.OK);
+		
+    }
     
     
     

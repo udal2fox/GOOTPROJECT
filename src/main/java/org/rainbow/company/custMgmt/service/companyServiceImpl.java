@@ -3,6 +3,7 @@ package org.rainbow.company.custMgmt.service;
 
 import java.util.List;
 
+import org.rainbow.company.custMgmt.domain.companySearchDTO;
 import org.rainbow.company.custMgmt.domain.companyVO;
 import org.rainbow.company.custMgmt.mapper.companyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 public class companyServiceImpl implements companyService{
+	
+	@Override
+	public List<companyVO> getSearch(companySearchDTO companySearchDTO) {
+		
+		return companyMapper.getSearch(companySearchDTO);
+	}
 	
 	@Autowired
 	private companyMapper companyMapper;
@@ -37,6 +44,7 @@ public class companyServiceImpl implements companyService{
 		
 		return companyMapper.companyView(companyNo);
 	}
+	
 	
 	@Override
 	public List<companyVO> checkBizNum(List<String> bizNumArray) {

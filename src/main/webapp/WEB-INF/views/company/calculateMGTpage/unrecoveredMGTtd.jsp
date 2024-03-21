@@ -116,7 +116,7 @@
 					<td>${uc.comBizType }</td>
 					<td>${uc.spName }</td>
 					<td>${uc.recDate }</td>
-					<td>${uc.recSum }</td>
+					<td>${uc.recSum - uc.recDed + uc.recAdd }</td>
 					<td>${uc.recSup }</td>
 					<td>${uc.recTax }</td>
 					<td>${uc.prdCstPri }</td>
@@ -136,5 +136,5 @@
 </body>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttd.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdSearch.js"></script> 
-<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdDown.js"></script> 
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/ucMgtDownDo.js"></script> 
 </html>

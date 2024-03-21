@@ -254,7 +254,7 @@
 	
 	function removePagination() {
 	    const paginationElement = document.getElementById('pagination');
-	    paginationElement.innerHTML = ''; // 페이지네이션 요소의 내용을 청소
+	    paginationElement.innerHTML = ''; 
 	}
 	
 	
@@ -274,7 +274,7 @@
 	});
 	
 	
-	// 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
+	// 소트 버튼에 클릭 이벤트를 추가하여 정렬 기능
 	document.querySelectorAll('.sort-btn').forEach(button => {
 	    button.addEventListener('click', () => {
 	        const column = button.dataset.column;
@@ -288,8 +288,8 @@
 	
 	function getCellValue(row, column) {
 	    const columnIndex = {
-	        "recDate": 6,
-	        "recSum": 7,
+	        "recDate": 5,
+	        "recSum": 6,
 	        "recSortation":12
 	    } [column];
 	
@@ -379,54 +379,6 @@
 	
 	// 결제 완료처리	
 	document.querySelector('.PaymentBtn').addEventListener('click', function() {
-	    
-		if(confirm("결제처리를 완료 하시겠습니까?"))
-		{
-			let checkedDataList = [];
-	
-		    let checkboxes = document.getElementsByName('checkboxTd');
-		    checkboxes.forEach(function(checkbox) {
-		        if (checkbox.checked) {
-		            let row = checkbox.closest('tr');
-		            let tdList = row.querySelectorAll('td');
-	
-	   	            let recNo = tdList[1].textContent.trim(); 
-		            checkedDataList.push(recNo);
-		        }
-		    });
-	
-		    fetch('/Payment.do', {
-		        method: 'POST',
-		        headers: {
-		            'Content-Type': 'application/json',
-		        },
-		        body: JSON.stringify(checkedDataList),
-		    })
-		    .then(response => {
-		        if (!response.ok) {
-		            throw new Error('Network response was not ok');
-		        }
-		        return response.text();
-		    })
-		    .then(text => {
-		        console.log('Success:', text);
-		        if(text == 'Success'){
-		        	alert("결체 처리 성공");
-		        	location.reload();
-		        }
-		        else alert("결제 처리 실패"); 
-		    })
-		    .catch(error => {
-		        console.error('Error:', error);
-		    });
-		}
-		else
-		{
-			return false;
-		}
-	});
-	// 결제 완료처리	
-	document.querySelector('.PaymentBtn').addEventListener('click', function() {
 		
 		if(confirm("결제처리를 완료 하시겠습니까?"))
 		{
@@ -439,6 +391,11 @@
 					let tdList = row.querySelectorAll('td');
 					
 					let recNo = tdList[1].textContent.trim(); 
+					let recPayMth = tdList[12].textContent.trim();
+					if(recPayMth == '계산서미발행')
+					{
+						return;
+					}
 					checkedDataList.push(recNo);
 				}
 			});
@@ -492,7 +449,6 @@
 					let recPayMth = tdList[12].textContent.trim(); 
 					if(recPayMth == '결제완료')
 					{
-						alert("대손 처리 실패");
 						return;
 					}
 					checkedDataList.push(recNo);

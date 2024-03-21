@@ -13,7 +13,6 @@ function download()
 	// 폼데이터에 체크박스 의 벨류를 들고가서 리스트 조회 후 그리스트로 다운받게 끔 변환
 	let sdto = {
     		"keyword": document.getElementById('tdKeyword').value,
-		    "recPayMth": document.querySelector('.payMth').value,
 		    "firDate" : document.querySelector('.datePick1').value,
 		    "secDate" :	document.querySelector('.datePick2').value,
 		    "checkedValues": [] // 
@@ -26,18 +25,11 @@ function download()
 		}
     });
 
-    // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="td-calculate"]:checked').forEach(function(checkbox) {
-    	 if(checkbox.value != '전체')
- 		{
-    		 sdto.checkedValues.push(checkbox.value);
- 		}
-    });
     console.log(sdto);
 
 		
     // 서버로 데이터 전송
-    fetch('/ucbranchDown', {
+    fetch('/smgtComDown', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(sdto)

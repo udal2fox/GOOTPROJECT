@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Document</title>
 	
     <style>
@@ -131,7 +132,7 @@
         <div class="navi">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
                 <div class="col text-center" style="width: 10%;">
-                    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none align-middle">
+                    <a href="/moveSalesChart" class="d-inline-flex link-body-emphasis text-decoration-none align-middle">
                         <img src="/resources/images/rainbow_white.png" height="60px" alt="">
                     </a>
                 </div>
@@ -187,8 +188,8 @@
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/salesStatsViewCompanyname">기업별 통계</a></li>
-                            <li class="category"><a class="category-link" href="/salesStatsView">상품별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/moveSalesStatsCom">기업별 통계</a></li>
+                            <li class="category"><a class="category-link" href="/moveSalesStatsPrd">상품별 통계</a></li>
                         </ul>
                     </li>
                     <li>

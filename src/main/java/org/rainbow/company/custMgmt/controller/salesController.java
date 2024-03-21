@@ -78,5 +78,14 @@ public class salesController {
 		return "redirect:/salesList";
 
 	}
-
+	
+	
+	@GetMapping("/searchModal")
+	public ResponseEntity<List<consultVO>> searchModal() {
+		log.info("안녕");
+		log.info("searchCompanyListModal_success");
+	    List<consultVO> list = salesService.searchCompanyListModal();    
+	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
+	}
+    
 }

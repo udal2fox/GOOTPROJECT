@@ -78,12 +78,16 @@
          <thead>
             <tr class="top_bar_of_list">
          
+                <th>기업 번호</th>
                <th>지점 번호</th>
+               <th>기업명</th>
                <th>지점명</th>
                <th>주소</th>
                <th>계약일자</th>
                <th>상태</th>
-               <th>상태변경일자</th>
+               <th>상태 변경 일자</th>
+               <th>담당자</th>
+               <th>직원 리스트</th>
                
                
             </tr>
@@ -91,12 +95,16 @@
          <tbody>
             <c:forEach var="vo" items="${spotVO }">
                <tr class="spotList">
-                  <td><a href="${vo.spotNo }">${vo.spotNo }</a></td>
-                  <td>${vo.spName}</td>
-                  <td>${vo.spAddr}</td>
-                  <td>${vo.spAgreementDate}</td>
-                  <td>${vo.spStatus}</td>
-                  <td>${vo.spChangeDate}</td>
+                   <td><a href="/spotUpdate">1</a></td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td>test</td>
+            	<td><a href="#" id="open_managerInpo_modal">담당자</a></td>
+            	<td><a href="#" id="open_empList_modal">test</a></td>
         
                </tr>
             </c:forEach>

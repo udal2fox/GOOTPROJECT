@@ -39,7 +39,7 @@ function fetchSearchResults(keyword) {
             	msg += '<td>' + list.comName + '</td>';
             	msg += '<td>' + list.comBizType + '</td>';
             	msg += '<td>' + list.spName + '</td>';
-            	msg += '<td>' + list.recSum + '</td>';
+            	msg += '<td>' + (list.recSum - list.recDed + list.recAdd) + '</td>';
             	msg += '<td>' + list.recSup + '</td>';
             	msg += '<td>' + list.recTax + '</td>';
             	msg += '<td>' + list.prdCstPri + '</td>';

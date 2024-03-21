@@ -176,7 +176,7 @@ input[type=text]
 	  				&nbsp;&nbsp;
 	        		<button type="button" class="btn btn btn-secondary" onclick="reload()">취소</button>
 	  				&nbsp;&nbsp;
-	        		<button type="button" class="btn btn btn-secondary">목록</button>
+	        		<button type="button" class="btn btn btn-secondary" onclick="backPage()">목록</button>
 	        	</div>
 	        </div>	
         </div>

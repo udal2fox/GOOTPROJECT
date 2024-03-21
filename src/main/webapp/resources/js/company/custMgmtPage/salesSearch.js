@@ -19,53 +19,6 @@ console.log("서치바 검색 버튼 클릭 이벤트");
 });
 
 
-
-/*//서치바-키워드 가져오기 
-function fetchSearchResults(keyword) {
-    let searchKeyword = {
-        keyword: document.getElementById('searchBarKeyword').value,
-        serviceStatus : Array.from(checkboxes, checkbox => checkbox.value), // 배열로 변환하여 전송
-        firDate : document.querySelector('.datePick1').value,
-        secDate : document.querySelector('.datePick2').value
-    };
-    let jsonData = JSON.stringify(searchKeyword);
-    console.log(jsonData);
-    
-    fetch('/search.do', {
-        method: 'POST',
-        body: JSON.stringify(jsonData),
-        headers: {'Content-type': 'application/json; charset=utf-8'}
-    })
-    .then(response => response.json())
-    .then(list => {
-        console.log(list);
-        let msg = '';
-        list.forEach(list => {
-            msg += '<tr>' +
-                '<tr class="salesList" data-type="' + list.csStatus +'">' +
-                '<td><a href="' + list.consultNo + '">' + list.consultNo + '</a></td>'+
-                '<td>' + list.csDate + '</td>' +
-                '<td>' + list.csCompanyName + '</td>' +
-                '<td>' + list.csName + '</td>' +
-                '<td>' + list.csContact + '</td>' +
-                '<td>' + list.csEmail + '</td>' +
-                '<td>' + list.csBdgt + '</td>' +
-                '<td>' + list.csStatus + '</td>' +
-                '<td>' + list.csEname + '</td>' +
-                '</tr>';
-        });
-
-        resetCheckboxes();
-        const tblBody = document.querySelector('#sales_tbl tbody');
-        tblBody.innerHTML = msg;
-
-        drawPagination();
-        goToPage(1);
-        resetCheckboxes();
-    })
-    .catch(error => console.error('Error:', error));
-}*/
-
 //서치바-키워드 가져오기 
 function fetchSearchResults(keyword) {
     let searchKeyword = {
@@ -73,12 +26,13 @@ function fetchSearchResults(keyword) {
         firDate : document.querySelector('.datePick1').value,
         secDate : document.querySelector('.datePick2').value
     };
+    
     let jsonData = JSON.stringify(searchKeyword);
     console.log(jsonData);
     
     fetch('/search.do', {
         method: 'POST',
-        body: JSON.stringify(jsonData),
+        body: jsonData,
         headers: {'Content-type': 'application/json; charset=utf-8'}
     })
     .then(response => response.json())

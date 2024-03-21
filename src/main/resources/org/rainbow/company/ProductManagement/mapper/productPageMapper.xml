@@ -10,7 +10,7 @@
 	        SELECT *
 			    FROM RAIN_Suppliers_tbl s, RAIN_Products_tbl p
 			    where  p.supsNo = s.supsNo
-			    order by p.prdNo asc
+			    
 		
 	</select>
 	

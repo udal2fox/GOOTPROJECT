@@ -112,7 +112,7 @@
 						</div>
 					</div>
 					<div class="p-2">
-						<!-- 선택 사항 초기화 버튼 -->
+						<!-- 닫기 버튼 -->
 						<button type="button" class="btn btn-secondary"
 							style="width: 200px" id="cancleButton">취소</button>
 					</div>

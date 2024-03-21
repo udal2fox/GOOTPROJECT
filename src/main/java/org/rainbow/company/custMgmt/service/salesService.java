@@ -28,6 +28,9 @@ public interface salesService {
 	
 	/** 'salesView.jsp' 에서 영업 히스토리 저장(수정)하기 */
 	public int saveConsultHistory(cshVO cshvo);
+	
+	/** 기업명 찾기 모달창 : 기업 리스트 가져오기*/
+	public List<consultVO> searchCompanyListModal();
 											 
 
 }

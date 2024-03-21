@@ -76,7 +76,8 @@ function save(){
 		f.checkEPw.focus();
 		return; 
 	}
-	console.log(f.profilePicture.value);
+
+	console.log(profilePictureSrc);
 	const formData = new FormData();
     formData.append('eno', f.eno.value);
     formData.append('deptNo', f.deptNo.value);
@@ -87,11 +88,20 @@ function save(){
     formData.append('eAddr2', f.eAddr2.value);
     formData.append('salAccount', f.salAccount.value);
     formData.append('eBank', f.eBank.value);
+    // vo에 저장된 이미지URL로 저장할 때
+    if (profilePictureSrc) {
+        formData.append('profilePicturePath', profilePictureSrc);
+    } else {
+        formData.append('profilePicturePath', 'null'); 
+    }
+    // 파일 탐색기로 선택한 이미지 저장할 때
     if (selectedFile) {
         formData.append('profilePicture', selectedFile);
     }else {
     	formData.append('profilePicture', 'null');
 	}
+    console.log(formData.get("profilePicturePath"));
+    console.log(formData.get("profilePicture"));
 
     fetch("/profile_modify", {
         method: 'POST',

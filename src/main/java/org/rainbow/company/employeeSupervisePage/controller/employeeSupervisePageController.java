@@ -268,9 +268,10 @@ public class employeeSupervisePageController {
 */	 
   // 이미지 포함 프로필 편집
   @ResponseBody
-  @PostMapping(value = "/profile_modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, 
+  @PostMapping(value = "/profile_modify", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data" }, 
   produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
   public ResponseEntity<String> profile_update(@RequestPart("profilePicture") MultipartFile file,
+		  									   @RequestParam("profilePicturePath") String profilePicturePath,
 		  									   @RequestParam("eno") int eno,
 		  									   @RequestParam("ePhone") String ePhone, 
 		  									   @RequestParam("ePw") String ePw, 
@@ -279,6 +280,7 @@ public class employeeSupervisePageController {
 		  									   @RequestParam("salAccount") String salAccount, 
 		  									   @RequestParam("eBank") String eBank){ 
 	  
+	  log.info("profilePicturePath");
 	  String imageUrl = null;
 
 	  // 프로필 정보 설정
@@ -304,12 +306,20 @@ public class employeeSupervisePageController {
       result.put("eBank", eBank);
       log.info(result.get("eBank"));
 	  
-	  try {
-		if (file != null && !file.isEmpty()) {
-			  imageUrl = imageUploader.uploadImage(file);
-			}                      
+	  try {	
+		  if (file != null && !file.isEmpty()) {
+		        // 파일이 전송된 경우 이미지 업로드 수행
+		        imageUrl = imageUploader.uploadImage(file);
+		    } else if (file == null && profilePicturePath != null && !profilePicturePath.isEmpty()) {
+		        // 파일이 전송되지 않고 이미지 URL이 전송된 경우
+		        imageUrl = profilePicturePath;
+		    } else {
+		        // 파일과 이미지 URL이 모두 null인 경우
+		        imageUrl = null;
+		    }
 
-			result.put("profilePicture", imageUrl != null ? imageUrl : null);
+		    // 프로필 이미지 URL 또는 파일 경로를 프로필 정보에 추가
+		    result.put("profilePicture", imageUrl);
 	        log.info(result.get("profilePicture"));
 	        
 	        // 프로필 업데이트

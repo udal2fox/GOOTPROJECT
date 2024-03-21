@@ -58,7 +58,6 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 	@Override
 	public int profile_update(HashMap<String, Object> result) {
 		log.info("profile update..." + result);
-		
 		return mapper.profile_update(result);
 	}
 }

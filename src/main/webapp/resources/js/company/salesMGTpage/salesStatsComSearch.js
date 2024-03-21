@@ -35,16 +35,21 @@ function fetchSearchResults(keyword) {
             	vmsg += '<tr>';
             	vmsg += '<td>VAT 별도</td>';
             	vmsg += '<td>'+list.salePrd+'</td>';
-            	vmsg += '<td>'+list.totalSum.toLocaleString('ko-KR')+'</td>';
+            	vmsg += '<td>'+(list.totalSum + list.recAdTotal).toLocaleString('ko-KR')+'</td>'; 
             	vmsg += '<td>'+list.totalBuy.toLocaleString('ko-KR')+'</td>';
-            	vmsg += '<td>'+((list.recAdTotal+list.totalSum - list.totalBuy)/list.totalBuy).toFixed(2)+'</td>';
+            	vmsg += '<td>'+((list.recAdTotal + list.totalSum - list.totalBuy)/(list.recAdTotal +list.totalBuy)).toFixed(2)+'</td>';
             	vmsg += '</tr>';
             	vmsg += '<tr>';
             	vmsg += '<td>VAT 포함</td>';
             	vmsg += '<td>'+list.salePrd+'</td>';
-            	vmsg += '<td>'+parseInt(list.totalSum + (list.totalSum * 0.1)).toLocaleString('ko-KR')+'</td>';
+            	vmsg += '<td>' + parseInt((list.recAdTotal + (list.recAdTotal * 0.1)) + (list.totalSum + (list.totalSum * 0.1))).toLocaleString('ko-KR') + '</td>';
             	vmsg += '<td>'+parseInt(list.totalBuy + (list.totalBuy * 0.1)).toLocaleString('ko-KR')+'</td>';
-            	vmsg += '<td>'+((list.recAdTotal+list.totalSum - list.totalBuy)/list.totalBuy).toFixed(2)+'</td>';
+            	vmsg += '<td>' + (
+            		    ((list.recAdTotal + (list.recAdTotal * 0.1)) + (list.totalSum + (list.totalSum * 0.1)) - (list.totalBuy + (list.totalBuy * 0.1)))
+            		    /
+            		    ((list.recAdTotal + (list.recAdTotal * 0.1)) + (list.totalSum + (list.totalSum * 0.1)))
+            		).toFixed(2) + '</td>';
+
             	vmsg += '</tr>';
             resetCheckboxes();
             const vatBody = document.querySelector('.vat');
@@ -80,7 +85,7 @@ function fetchSearchResults(keyword) {
             	msg += '<td>' + list.resADTotal.toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + list.resADSupTotal.toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + list.resADTaxTotal.toLocaleString('ko-KR') + '</td>';
-            	msg += '<td>' + (list.resADTotal + list.recSumTotal - list.prdCstPriTotal) / list.recSumTotal.toFixed(2) + '</td>';
+            	msg += '<td>' + ((list.resADTotal + list.recSumTotal - list.prdCstPriTotal) / list.recSumTotal).toFixed(2) + '</td>';
             	msg += '</tr>';
             });
             resetCheckboxes();

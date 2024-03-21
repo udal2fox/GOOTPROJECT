@@ -13,6 +13,7 @@ import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.service.searchEmployeeServiceImpl;
 import org.rainbow.domain.Criteria;
+import org.rainbow.domain.ImageUploader1;
 import org.rainbow.domain.PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
@@ -35,6 +37,9 @@ public class employeeSupervisePageController {
 
 	@Autowired
 	searchEmployeeServiceImpl service;
+	
+	@Autowired
+	private ImageUploader1 imageUploader;
 
 	// 직원 조회 페이지
 	@GetMapping("/searchEmployee")
@@ -244,15 +249,86 @@ public class employeeSupervisePageController {
 	}
 
 	
-	// 프로필 편집
-	@ResponseBody
-	@PostMapping(value = "/profile_modify", consumes = "application/json", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<String> profile_update(@RequestBody HashMap<String, Object> result){
-		System.out.println(result);
-		service.profile_update(result);
-		return service.profile_update(result) == 1?
-				new ResponseEntity<String>( "success", HttpStatus.OK ):
-					new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-	} 
+/*	
+	  // consumes = "application/json" @RequestParam("profilePicture") MultipartFile file 
+	  // 프로필 편집
+	  @ResponseBody
+	  @PostMapping(value = "/profile_modify", consumes = "application/json",
+	  produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+	  public ResponseEntity<String> profile_update(@RequestBody HashMap<String, Object> result){
+	  System.out.println(result);
+		  
+	  service.profile_update(result); 
+	  System.out.println(result); 
+	  return service.profile_update(result) == 1? 
+			  new ResponseEntity<String>( "success", HttpStatus.OK ): 
+				  new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		   }
 }
-	
+*/	 
+  // 이미지 포함 프로필 편집
+  @ResponseBody
+  @PostMapping(value = "/profile_modify", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data" }, 
+  produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+  public ResponseEntity<String> profile_update(@RequestPart("profilePicture") MultipartFile file,
+		  									   @RequestParam("profilePicturePath") String profilePicturePath,
+		  									   @RequestParam("eno") int eno,
+		  									   @RequestParam("ePhone") String ePhone, 
+		  									   @RequestParam("ePw") String ePw, 
+		  									   @RequestParam("eAddr") String eAddr, 
+		  									   @RequestParam("eAddr2") String eAddr2, 
+		  									   @RequestParam("salAccount") String salAccount, 
+		  									   @RequestParam("eBank") String eBank){ 
+	  
+	  log.info("profilePicturePath");
+	  String imageUrl = null;
+
+	  // 프로필 정보 설정
+      HashMap<String, Object> result = new HashMap<>();
+      
+      result.put("eno", eno);
+      
+      result.put("ePhone", ePhone);
+      log.info(result.get("ePhone"));
+      
+      result.put("ePw", ePw);
+      log.info(result.get("ePw"));
+      
+      result.put("eAddr", eAddr);
+      log.info(result.get("eAddr"));
+      
+      result.put("eAddr2", eAddr2);
+      log.info(result.get("eAddr2"));
+      
+      result.put("salAccount", salAccount);
+      log.info(result.get("salAccount"));
+      
+      result.put("eBank", eBank);
+      log.info(result.get("eBank"));
+	  
+	  try {	
+		  if (file != null && !file.isEmpty()) {
+		        // 파일이 전송된 경우 이미지 업로드 수행
+		        imageUrl = imageUploader.uploadImage(file);
+		    } else if (file == null && profilePicturePath != null && !profilePicturePath.isEmpty()) {
+		        // 파일이 전송되지 않고 이미지 URL이 전송된 경우
+		        imageUrl = profilePicturePath;
+		    } else {
+		        // 파일과 이미지 URL이 모두 null인 경우
+		        imageUrl = null;
+		    }
+
+		    // 프로필 이미지 URL 또는 파일 경로를 프로필 정보에 추가
+		    result.put("profilePicture", imageUrl);
+	        log.info(result.get("profilePicture"));
+	        
+	        // 프로필 업데이트
+	        service.profile_update(result);    
+	        log.info(result);
+	        return new ResponseEntity<String>("success", HttpStatus.OK);
+	    } catch (Exception e) { 
+	        e.printStackTrace(); 
+	        return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
+	    } 
+	}
+}

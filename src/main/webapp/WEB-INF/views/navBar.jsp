@@ -132,7 +132,7 @@
         <div class="navi">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
                 <div class="col text-center" style="width: 10%;">
-                    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none align-middle">
+                    <a href="/moveSalesChart" class="d-inline-flex link-body-emphasis text-decoration-none align-middle">
                         <img src="/resources/images/rainbow_white.png" height="60px" alt="">
                     </a>
                 </div>

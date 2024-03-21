@@ -7,7 +7,6 @@ import org.rainbow.company.salesManagement.domain.monthChartVO;
 import org.rainbow.company.salesManagement.domain.salasTotalVO;
 import org.rainbow.company.salesManagement.domain.salesComVO;
 import org.rainbow.company.salesManagement.domain.salesPrdVO;
-import org.rainbow.company.salesManagement.domain.smgtComDownVO;
 import org.rainbow.company.salesManagement.mapper.salesMgtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,8 +41,20 @@ public class salesMgtServiceImpl implements salesMgtService
 	}
 
 	@Override
-	public List<smgtComDownVO> salesComDown(TradeDetailSearchDTO sdto) {
-		return smMapper.salesComDown(sdto);
+	public List<salesComVO> salesComDown(TradeDetailSearchDTO sdto) {
+		List<salesComVO> scv = smMapper.salesComDown(sdto);
+		
+		for(salesComVO vo : scv)
+		{
+		     double marginPer = ( vo.getResADTotal() +vo.getRecSumTotal() - vo.getPrdCstPriTotal()) / (double) (vo.getRecSumTotal() + vo.getResADTotal());
+		        vo.setMarginPer(marginPer);
+			log.info(vo.getMarginPer());
+			log.info(vo.getResADTotal());
+			log.info(vo.getRecSumTotal());
+			log.info(vo.getPrdCstPriTotal());
+		}
+		
+		return scv;
 	}
 
 	@Override
@@ -59,6 +70,16 @@ public class salesMgtServiceImpl implements salesMgtService
 	@Override
 	public List<salesPrdVO> salesPrdList() {
 		return smMapper.salesPrdList();
+	}
+
+	@Override
+	public List<salesPrdVO> salesPrdDown(TradeDetailSearchDTO sdto) {
+		return smMapper.salesPrdDown(sdto);
+	}
+
+	@Override
+	public List<salesPrdVO> salesPrdSearch(TradeDetailSearchDTO sdto) {
+		return smMapper.salesPrdSearch(sdto);
 	}
 
 }

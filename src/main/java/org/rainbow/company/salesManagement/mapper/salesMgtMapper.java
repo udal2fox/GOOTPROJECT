@@ -7,7 +7,6 @@ import org.rainbow.company.salesManagement.domain.monthChartVO;
 import org.rainbow.company.salesManagement.domain.salasTotalVO;
 import org.rainbow.company.salesManagement.domain.salesComVO;
 import org.rainbow.company.salesManagement.domain.salesPrdVO;
-import org.rainbow.company.salesManagement.domain.smgtComDownVO;
 
 public interface salesMgtMapper 
 {
@@ -24,7 +23,7 @@ public interface salesMgtMapper
 	public salasTotalVO salesTotal();
 	
 	/** 기업매출 다운로드 */
-	public List<smgtComDownVO> salesComDown(TradeDetailSearchDTO sdto);
+	public List<salesComVO> salesComDown(TradeDetailSearchDTO sdto);
 	
 	/** vat 통계*/
 	public salasTotalVO salesVatTotal(TradeDetailSearchDTO sdto);
@@ -34,6 +33,12 @@ public interface salesMgtMapper
 	
 	/** 상품별 매출 통계 리스트*/
 	public List<salesPrdVO> salesPrdList();
+	
+	/** 기업매출 다운로드 */
+	public List<salesPrdVO> salesPrdDown(TradeDetailSearchDTO sdto);
+	
+	/** 기업매출 서치*/
+	public List<salesPrdVO> salesPrdSearch(TradeDetailSearchDTO sdto);
 	
 	
 }

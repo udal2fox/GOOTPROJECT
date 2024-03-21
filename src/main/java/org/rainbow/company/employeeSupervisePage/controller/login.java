@@ -64,6 +64,6 @@ public class login {
 	        session.invalidate(); // 세션 초기화
 	    }
 		
-		return "/company/login";
+		return "/index";
 	}
 }

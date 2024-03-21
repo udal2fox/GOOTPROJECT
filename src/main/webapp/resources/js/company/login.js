@@ -46,7 +46,7 @@ document.getElementById("loginBtn").addEventListener("click", () => {
           sessionStorage.setItem("deptNo", result.deptNo);
           sessionStorage.setItem("eName", result.eName);
           
-          location.href = "/searchEmployee?" + sessionStorage.getItem("Okja");
+          location.href = "/moveSalesChart?" + sessionStorage.getItem("Okja");
 	})
   }
 })	

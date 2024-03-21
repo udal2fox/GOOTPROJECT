@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.rainbow.userAdminPage.service.userAdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -206,6 +207,19 @@ public class UserAdminController {
 		List<HashMap<String, Object>> usageList = userService.getUsageList(spotNo);
 		log.info("usageList..." + usageList);
 		return new ResponseEntity<List<HashMap<String,Object>>>(usageList,HttpStatus.OK);
+	}
+	
+	@PostMapping("/usageDetailHistory")
+	public String getDetailUsage(@RequestParam String recDate, @RequestParam String no, Model model) {
+		HashMap<String, Object> inputMap = new HashMap<String, Object>();
+		inputMap.put("recDate", recDate);
+		int spotNo = Integer.parseInt(no);
+		inputMap.put("spotNo", spotNo);
+		// 서비스로부터 반환된 데이터를 모델에 추가
+	    HashMap<String, Object> detailUsageData = userService.getDetailUsage(inputMap);
+	    model.addAttribute("detailUsageData", detailUsageData);
+	    
+		return "/userAdminPage/usageHistory_details";
 	}
 	
 

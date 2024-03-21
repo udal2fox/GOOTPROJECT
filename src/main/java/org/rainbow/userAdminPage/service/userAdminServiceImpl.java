@@ -129,36 +129,42 @@ public class userAdminServiceImpl implements userAdminService {
 	public boolean updateDefaultGift(HashMap<String, Object> defaultGift) {
 		return userMapper.updateDefaultGift(defaultGift);
 	}
-	
+
 	@Override
 	public HashMap<String, Object> getDefaultGift(int spotNo) {
-			String prdNo = userMapper.getDefaultGift(spotNo);
-			HashMap<String, Object> defaultInfo = userMapper.getProduct(prdNo);
+		String prdNo = userMapper.getDefaultGift(spotNo);
+		HashMap<String, Object> defaultInfo = userMapper.getProduct(prdNo);
 		return defaultInfo;
 	}
-	
+
 	@Override
 	public boolean saveCard(HashMap<String, Object> cardForm) {
 		int count = userMapper.countBySpotNo((int) cardForm.get("spotNo"));
-		if(count == 1) {
+		if (count == 1) {
 			return userMapper.updateCard(cardForm);
-		}else {
+		} else {
 			return userMapper.insertCard(cardForm);
 		}
 	}
-	
+
 	@Override
 	public HashMap<String, Object> getCardInfo(int spotNo) {
 		return userMapper.getCardInfo(spotNo);
 	}
-	
+
 	@Override
 	public List<HashMap<String, Object>> getRecipients(HashMap<String, Object> inputValue) {
 		return userMapper.getRecipients(inputValue);
 	}
 
-@Override
+	@Override
 	public List<HashMap<String, Object>> getUsageList(int spotNo) {
 		return userMapper.getUsageList(spotNo);
 	}
+	
+	@Override
+	public HashMap<String, Object> getDetailUsage(HashMap<String, Object> inputMap) {
+		return userMapper.getDetailUsage(inputMap);
+	}
+
 }

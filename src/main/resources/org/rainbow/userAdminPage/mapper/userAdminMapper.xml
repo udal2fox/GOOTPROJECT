@@ -124,5 +124,13 @@
 		ORDER BY year DESC, month DESC
 		]]>
 	</select>
+	
+	<select id="getDetailUsage" parameterType="HashMap" resultType="HashMap">
+		SELECT * FROM RAIN_order_tbl AS o
+		INNER JOIN RAIN_receipt_tbl AS r ON o.ordNo = r.ordNo
+		INNER JOIN RAIN_cEMP_tbl AS e ON o.cEmpNo = e.cEmpNo
+		INNER JOIN RAIN_Products_tbl AS p ON o.prdNo = p.prdNo
+		WHERE DATE_FORMAT(r.recDate, '%Y-%m') = #{recDate} and r.spotNo = #{spotNo} and o.step = '발송완료';
+	</select>
 
 </mapper>

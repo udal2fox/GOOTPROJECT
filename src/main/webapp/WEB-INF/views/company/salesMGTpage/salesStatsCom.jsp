@@ -56,16 +56,16 @@
 			<tr>
 				<td class="paintLightgray">VAT 별도</td>
 				<td>${stvo.salePrd }</td>
-				<td><fmt:formatNumber value="${stvo.totalSum }" pattern="#,###"/></td>
+				<td><fmt:formatNumber value="${stvo.totalSum + stvo.recAdTotal}" pattern="#,###"/></td>
 				<td><fmt:formatNumber value="${stvo.totalBuy }" pattern="#,###"/></td>
-				<td><fmt:formatNumber value="${(stvo.recAdTotal+stvo.totalSum - stvo.totalBuy)  / stvo.totalSum }"	pattern="0.00"/></td>
+				<td><fmt:formatNumber value="${(stvo.recAdTotal+stvo.totalSum - stvo.totalBuy) / (stvo.recAdTotal + stvo.totalSum) }"	pattern="0.00"/></td>
 			</tr>		
 			<tr>
 			    <td class="paintLightgray">VAT 포함</td>
 			    <td>${stvo.salePrd}</td>
-			    <td><fmt:formatNumber value="${stvo.totalSum + (stvo.totalSum * 0.1)}" pattern="#,###"/></td>
+			    <td><fmt:formatNumber value="${ (stvo.recAdTotal +(stvo.recAdTotal * 0.1))  +(stvo.totalSum + (stvo.totalSum * 0.1))}" pattern="#,###"/></td>
 			    <td><fmt:formatNumber value="${stvo.totalBuy + (stvo.totalBuy * 0.1)}" pattern="#,###"/></td>
-			    <td><fmt:formatNumber value="${(stvo.recAdTotal + stvo.totalSum - stvo.totalBuy) / stvo.totalSum}" pattern="0.00"/></td>
+			    <td><fmt:formatNumber value="${((stvo.recAdTotal+(stvo.recAdTotal * 0.1)) + (stvo.totalSum + (stvo.totalSum * 0.1)) - (stvo.totalBuy + (stvo.totalBuy * 0.1))) / (stvo.totalSum + (stvo.totalSum * 0.1))}" pattern="0.00"/></td>
 			</tr>
 			</tbody>
 		</table>
@@ -101,7 +101,7 @@
 						<td><fmt:formatNumber value="${ex.resADTotal }" pattern="#,###"/></td>
 						<td><fmt:formatNumber value="${ex.resADSupTotal }" pattern="#,###"/></td>
 						<td><fmt:formatNumber value="${ex.resADTaxTotal }" pattern="#,###"/></td>
-						<td><fmt:formatNumber value="${(ex.resADTotal + ex.recSumTotal - ex.prdCstPriTotal) / ex.recSumTotal }"	pattern="0.00"/></td>
+						<td><fmt:formatNumber value="${ex.marginPer }"	pattern="0.00"/></td>
 					</tr>
 				</c:forEach>
 			</tbody>

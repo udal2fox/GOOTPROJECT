@@ -112,6 +112,6 @@
     </div>
 </body>
 <script type="text/javascript" src="/resources/js/company/salesMGTpage/salesStatsOption.js"></script> 
-<script type="text/javascript" src="/resources/js/company/salesMGTpage/salesStatsComSearch.js"></script> 
-<script type="text/javascript" src="/resources/js/company/salesMGTpage/salesStatsComDown.js"></script> 
+<script type="text/javascript" src="/resources/js/company/salesMGTpage/salesStatsPrdSearch.js"></script> 
+<script type="text/javascript" src="/resources/js/company/salesMGTpage/salesStatsPrdDown.js"></script> 
 </html>

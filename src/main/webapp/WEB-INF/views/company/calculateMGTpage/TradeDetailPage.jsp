@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <%@ include file="../../navBar.jsp" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -102,10 +103,10 @@
 						<td>${td.comBizType}</td>
 						<td>${td.spName}</td>
 						<td>${td.recDate}</td>
-						<td>${td.recSum - td.recDed + td.recAdd}</td>
-						<td>${td.recSup}</td>
-						<td>${td.recTax}</td>
-						<td>${td.prdCstPri}</td>
+						<td><fmt:formatNumber value="${td.recSum - td.recDed + td.recAdd}" pattern="#,###"/></td>
+						<td><fmt:formatNumber value="${td.recSup - td.recDedSup + td.recAddSup}" pattern="#,###"/></td>
+						<td><fmt:formatNumber value="${td.recTax - td.recDedTax + td.recAddTax}" pattern="#,###"/></td>
+						<td><fmt:formatNumber value="${td.prdCstPri}" pattern="#,###"/></td>
 						<td>${td.prdMargin * 100}%</td>
 						<td>${td.recPayMth}</td>
 						<td>${td.recSortation}</td>
@@ -121,6 +122,10 @@
     </ul>
     </div>
 </body>
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
+
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageFilter.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdPageSearch.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdUpDownLoad.js"></script> 

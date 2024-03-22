@@ -13,7 +13,7 @@
 	<div class="container-fluid" align="center">
 		<h2 class="h2st">상품 관리</h2>
 		<div>
-			<form action="" method="post">
+			<form action="" method="post" enctype="multipart/form-data">
 				<table class="prdinputTable">
 					<tr>
 						<td>상품코드</td><td colspan="3"><input type="text" class="form-control-plaintext randomPrdNo" name="prdNo" readonly value="${pvo.prdNo }"></td>
@@ -85,7 +85,7 @@
 					    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="${pvo.prdMargin}" name="prdMargin"></td>
 					</tr>
 					<tr>
-						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="prdImg" value="${pvo.prdImg }"></td>
+						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="file" value="${pvo.prdImg }"></td>
 						<td>상품상태</td>
 						<td>
   							<input class="form-check-input" type="radio" name="prdSt" id="exampleRadios1" value="판매중"
@@ -113,6 +113,9 @@
 		</div>
 	</div>
 </body>
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdUpdate.js"></script>
 
 </html>

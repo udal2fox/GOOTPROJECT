@@ -29,15 +29,33 @@
 	
 	
 	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
-	<insert id= "insertPrdExcel" parameterType="org.rainbow.company.ProductManagement.domain.prdInputVO">
-		insert into RAIN_Products_tbl values
-		(
-			#{prdNo}, #{supsNo}, #{prdSdc} ,#{prdTaxExSt},
-			#{prdMajorCtg} ,#{prdSubCtg} ,#{prdName} ,#{prdCstPri},	
-			#{prdCstSup}, #{prdCstTax}, #{prdSal}, #{prdSalSup} ,#{prdSalTax}, 
-			#{prdMargin}, #{prdSt}, #{prdImg}
-		)
+	<insert id="insertPrdExcel" parameterType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+	    insert into RAIN_Products_tbl values
+	    (
+	        #{prdNo}, #{supsNo}, #{prdSdc}, #{prdTaxExSt},
+	        #{prdMajorCtg}, #{prdSubCtg}, #{prdName}, #{prdCstPri},    
+	        #{prdCstSup}, #{prdCstTax}, #{prdSal}, #{prdSalSup}, #{prdSalTax}, 
+	        #{prdMargin}, #{prdSt}, #{prdImg}
+	    )
+	    on duplicate key update
+	    prdNo = #{prdNo},
+	    supsNo = #{supsNo},
+	    prdSdc = #{prdSdc},
+	    prdTaxExSt = #{prdTaxExSt},
+	    prdMajorCtg = #{prdMajorCtg},
+	    prdSubCtg = #{prdSubCtg},
+	    prdName = #{prdName},
+	    prdCstPri = #{prdCstPri},
+	    prdCstSup = #{prdCstSup},
+	    prdCstTax = #{prdCstTax},
+	    prdSal = #{prdSal},
+	    prdSalSup = #{prdSalSup},
+	    prdSalTax = #{prdSalTax},
+	    prdMargin = #{prdMargin},
+	    prdSt = #{prdSt},
+	    prdImg = #{prdImg}
 	</insert>
+
 	
 	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
 	    <!-- 

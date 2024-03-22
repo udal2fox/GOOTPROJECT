@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -242,14 +243,19 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
     }
     
-    /** 상품 개별수정*/
+    /** 상품 개별수정
+     * @throws IOException */
     @PostMapping("/prdUpdate.do")
-    public String prdUpdate(prdInsertVO pvo , Model model)
+    public String prdUpdate(@RequestPart(value = "file", required = false) MultipartFile file ,prdInsertVO pvo , Model model) throws IOException
     {
     	log.info(pvo);
     	
-    	int prdUpdateResult = pService.prdUpdate(pvo); 
     	
+    	String imageUrl = imageUploader.uploadImage(file); 
+    	
+    	pvo.setPrdImg(imageUrl);
+    	
+    	int prdUpdateResult = pService.prdUpdate(pvo); 
     	String result = "";
     	if(prdUpdateResult >= 1 )
     	{

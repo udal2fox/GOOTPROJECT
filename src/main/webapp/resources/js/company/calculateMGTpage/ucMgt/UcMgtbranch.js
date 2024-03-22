@@ -331,31 +331,43 @@
 	});
 	
 	totalUc();
+
 	function totalUc() {
 	    let data = [];
 	    let uctable = document.querySelectorAll('.saleStatsTableInfo tr');
-	    
-	    uctable.forEach(function(uc, index) {
+
+	    uctable.forEach(function (uc, index) {
 	        if (index !== 0) {
 	            let tdList = uc.querySelectorAll('td');
-	            let recNo = parseInt(tdList[5].textContent.trim());
+	            let recNo = parseInt(tdList[5].textContent.trim().replace(/[^0-9]/g, ''));
 	            data.push(recNo);
 	        }
 	    });
 	    console.log(data);
-	    
+
 	    let total = data.reduce((acc, curr) => acc + curr, 0);
-	    console.log("총합: ", total.toLocaleString('ko-KR', { style: 'decimal' }));
-	   // 현재 값(current value) (curr): 현재 배열 요소를 가르킴. 콜백 함수는 배열의 각 요소에 대해 한 번씩 호출.
-	   // 현재 인덱스(index): 현재 배열 요소의 인덱스.
-	   // 원본 배열(array): reduce()가 호출된 배열 
-	   
-	    let ucTotal = document.querySelector('.misuTotal').innerHTML = '총 미수 금액 : '+total.toLocaleString('ko-KR', { style: 'decimal' })+'원';
-	    
+	    console.log("총합: ", total);
+
+	    // 총합을 천 단위로 변환하여 출력
+	    let formattedTotal = formatToThousand(total);
+	    console.log("총합(천 단위): ", formattedTotal);
+
+	    let ucTotal = document.querySelector('.misuTotal').innerHTML = '총 미수 금액 : ' + formattedTotal;
 	};
+
+	// 천 단위로 변환하는 함수
+	function formatToThousand(num) {
+	    return num.toLocaleString('ko-KR');
+	}
 	
 	
 		document.querySelector('.ucMailSend').addEventListener('click', function() {
+			if(deptNo != 0 && deptNo != 2)
+			{
+				alert("불허된 접근입니다.")
+				return;
+			}
+			
 			let checkedDataList = [];
 
 			let checkboxes = document.getElementsByName('checkboxTd');

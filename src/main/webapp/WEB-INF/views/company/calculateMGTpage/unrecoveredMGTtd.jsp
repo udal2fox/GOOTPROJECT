@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ include file="../../navBar.jsp" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <link rel="stylesheet" href="/resources/css/company/calculateMGTPage/TradeDetailPage.css">
 <body>
@@ -116,10 +117,10 @@
 					<td>${uc.comBizType }</td>
 					<td>${uc.spName }</td>
 					<td>${uc.recDate }</td>
-					<td>${uc.recSum - uc.recDed + uc.recAdd }</td>
-					<td>${uc.recSup }</td>
-					<td>${uc.recTax }</td>
-					<td>${uc.prdCstPri }</td>
+					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.recTax - uc.recDedTax + uc.recAddTax}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.prdCstPri}" pattern="#,###"/></td>
 					<td>${uc.prdMargin }</td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
@@ -134,6 +135,9 @@
 	    </ul>
     </div>
 </body>
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttd.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdSearch.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/ucMgtDownDo.js"></script> 

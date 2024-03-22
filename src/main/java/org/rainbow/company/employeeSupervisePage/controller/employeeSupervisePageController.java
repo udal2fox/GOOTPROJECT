@@ -270,7 +270,7 @@ public class employeeSupervisePageController {
   @ResponseBody
   @PostMapping(value = "/profile_modify", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data" }, 
   produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
-  public ResponseEntity<String> profile_update(@RequestPart("profilePicture") MultipartFile file,
+  public ResponseEntity<String> profile_update(@RequestPart(value = "profilePicture", required = false) MultipartFile file,
 		  									   @RequestParam("profilePicturePath") String profilePicturePath,
 		  									   @RequestParam("eno") int eno,
 		  									   @RequestParam("ePhone") String ePhone, 

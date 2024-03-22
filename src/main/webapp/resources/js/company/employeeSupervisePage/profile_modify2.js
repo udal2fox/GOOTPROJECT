@@ -1,16 +1,17 @@
-// 이미지 vo에서 불러올 시 svg 아이콘 안 보이게 하기
-const profilePicture = document.getElementById('profilePicture');
-const imgIcon = document.getElementById('img-icon');
+window.onload = profile;
 
-//이미지 파일이 로드되었을 때
-profilePicture.onload = function() {
-	// 이미지 파일이 존재할 경우
-	imgIcon.style.display = 'none'; // SVG 아이콘 숨기기
+function profile() {
+	
+    var defaultImageUrl = "/resources/images/profile_img.png"; // 기본 이미지 경로를 지정합니다.
+
+    var profilePictureElement = document.getElementById("profilePicture");
+
+    // 만약 profilePictureSrc 값이 null이라면 기본 이미지 경로를 사용합니다.
+    if (!profilePictureSrc) {
+        profilePictureElement.src = defaultImageUrl;
+    } else {
+        profilePictureElement.src = profilePictureSrc;
+    }
 };
 
-//이미지 파일이 로드되지 않았을 때
-profilePicture.onerror = function() {
-    // 이미지 파일이 존재하지 않을 경우
-	profilePicture.style.display = 'none'; // 이미지 숨기기
-};
 

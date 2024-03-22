@@ -36,13 +36,13 @@
 	
 						<input type="checkbox" class="searchbar_checkbox" name="area" value="전체" checked="checked" id="comArea_typeAll"  data-check-all="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_typeAll">전체</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="서울" checked="checked" id="comArea_seoul"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="서울" checked="checked" id="comArea_seoul"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_seoul">서울</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="경기" checked="checked" id="comArea_gyeonggi"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="경기" checked="checked" id="comArea_gyeonggi"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_gyeonggi">경기</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="부산" checked="checked" id="comArea_busan"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="부산" checked="checked" id="comArea_busan"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_busan">부산</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="그 외" checked="checked" id="comArea_etc"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="그 외" checked="checked" id="comArea_etc"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_etc">그 외</label>
 					
 					</div>
@@ -54,16 +54,19 @@
 					<th>기업 구분</th>
 					<td>
 					<div class="radioBtn_div">
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="전체" checked="checked">전체
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="법인">법인
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="개인">개인
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="전체" checked="checked" id="bizType_typeAll"  data-check-all="bizType_type">
+						<label class="searchbar_radioBtn_lable" for="bizType_typeAll">전체</label>
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="법인" id="bizType_corporation"  data-filter="bizType_type">
+						<label class="searchbar_radioBtn_lable" for="bizType_corporation">법인</label>
+						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="개인" id="bizType_individual"  data-filter="bizType_type">
+						<label class="searchbar_radioBtn_lable" for="bizType_individual">개인</label>
 					
 					</div>
 					</td>
 					<td></td>
 					<th>업태</th>
 					<td>
-						<select name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
+						<select class="searchbar_selectbox_filter" name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
 							<option value="선택">선택</option>
 							<option value="농업 및 임업">농업 및 임업</option>
 							<option value="어업">어업</option>
@@ -96,7 +99,9 @@
 			
 		
 			<div class="download_to_excel_btn_div">
-				<input type="button" class="companyListBtns" id="downloadExcelBtn" value="엑셀로 내려받기">
+				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
+                <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
+                <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -167,5 +172,6 @@
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyFilter.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companySearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/companyUpDownLoad.js"></script>
 </body>
 </html>

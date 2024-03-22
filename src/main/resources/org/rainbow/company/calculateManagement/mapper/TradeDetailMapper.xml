@@ -12,7 +12,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         
@@ -26,7 +26,7 @@
     FROM RAIN_receipt_tbl a    
     JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
     JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-    JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+    JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
     JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
     LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 	WHERE
@@ -75,7 +75,7 @@
 		    FROM RAIN_receipt_tbl a    
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 		    JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-		    JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+		    JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 		    JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 		    LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 			WHERE
@@ -112,7 +112,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recNo = #{recNo}
@@ -151,7 +151,7 @@
          FROM RAIN_receipt_tbl a    
          JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
          JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+         JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
          JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
          LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
          WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -165,7 +165,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -174,7 +174,7 @@
 		    FROM RAIN_receipt_tbl a
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -201,7 +201,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -210,7 +210,7 @@
 		    FROM RAIN_receipt_tbl a    
 	        JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -245,7 +245,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -258,7 +258,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -267,7 +267,7 @@
 		    FROM RAIN_receipt_tbl a
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -294,7 +294,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -303,7 +303,7 @@
 		    FROM RAIN_receipt_tbl a    
 	        JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -338,7 +338,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -351,7 +351,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -360,7 +360,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -388,7 +388,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -397,7 +397,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -434,7 +434,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation = '계산서미발행'
@@ -456,7 +456,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN '카드미결제'
@@ -465,7 +465,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1

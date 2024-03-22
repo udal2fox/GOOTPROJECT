@@ -131,13 +131,13 @@ function fetchData() {
       tbody.innerHTML = msg;
 
       // 발송 대상자 수 표시
-      document.getElementById("numOfRecipients").textContent = totalCount;
+      document.getElementById("numOfRecipients").textContent = totalCount + '명';
 
       // 각 상태별로 카운트 표시
-      document.getElementById("notSentCount").textContent = notSentCount;
-      document.getElementById("selectingCount").textContent = selectingCount;
-      document.getElementById("selectedCount").textContent = selectedCount;
-      document.getElementById("sentCount").textContent = sentCount;
+      document.getElementById("notSentCount").textContent = notSentCount + '명';
+      document.getElementById("selectingCount").textContent = selectingCount + '명';
+      document.getElementById("selectedCount").textContent = selectedCount + '명';
+      document.getElementById("sentCount").textContent = sentCount + '명';
 
     })
     .catch((error) => {

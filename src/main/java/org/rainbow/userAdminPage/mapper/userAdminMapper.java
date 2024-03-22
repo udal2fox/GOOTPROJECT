@@ -9,6 +9,10 @@ public interface userAdminMapper {
 	
 	public HashMap<String, Object> getDashboard(int spotNo);
 	
+	public List<HashMap<String, Object>> getBestTop5(int spotNo);
+	
+	public List<HashMap<String, Object>> getMonthlyData(int spotNo);
+	
 	public HashMap<String, Object> getUserInfo(int spotNo);
 	
 	public int updateUserInfo(HashMap<String, Object> updateInfo);
@@ -49,6 +53,6 @@ public interface userAdminMapper {
 	
 	public List<HashMap<String, Object>> getUsageList(int spotNo);
 
-	public HashMap<String, Object> getDetailUsage(HashMap<String, Object> inputMap);
+	public List<HashMap<String, Object>> getDetailUsage(HashMap<String, Object> inputMap);
 	
 }

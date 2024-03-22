@@ -72,14 +72,14 @@ input[type=text]
 	        	</thead>
 	        	<tbody class="daBody1">
 		        	<tr>
-		        		<td><input type="text" id="recDedName" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recDedSup" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recDedTax" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedName" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDed" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'} ">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedSup" value="0" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedTax" value="0" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
 		        		<td><input type="text" id="recDedCst" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recDedCstSup" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recDedCstTax" value="0" <c:if test="${not empty edit.recDedName}">disabled</c:if>></td>
-		        		<td><button type="button" class="btn btn-primary dedbtn" onclick="inputDedCal()" <c:if test="${not empty edit.recDedName}">disabled</c:if>>버튼</button></td>
+		        		<td><input type="text" id="recDedCstSup" value="0" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recDedCstTax" value="0" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><button type="button" class="btn btn-primary dedbtn" onclick="inputDedCal()" <c:if test="${not empty edit.recDedName or edit.recSortation eq '결제완료'}">disabled</c:if>>버튼</button></td>
 		        	</tr>
 	        	</tbody>
 	        </table> 
@@ -102,14 +102,14 @@ input[type=text]
 	        	</thead>	
 	        	<tbody class="daBody1">
 		        	<tr>
-		        		<td><input type="text" id="recAddName" <c:if test="${not empty edit.recAddName}">disabled</c:if> ></td>
-		        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recAddSup" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recAddTax" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recAddCstSup" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><input type="text" id="recAddCstTax" value="0" <c:if test="${not empty edit.recAddName}">disabled</c:if>></td>
-		        		<td><button type="button" class="btn btn-primary addbtn" onclick="inputAddCal()" <c:if test="${not empty edit.recAddName}">disabled</c:if>>버튼</button></td>
+		        		<td><input type="text" id="recAddName" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if> ></td>
+		        		<td><input type="text" id="recAdd" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddSup" value="0" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddTax" value="0" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCst" class="form-control" readonly placeholder="자동계산" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCstSup" value="0" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><input type="text" id="recAddCstTax" value="0" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>></td>
+		        		<td><button type="button" class="btn btn-primary addbtn" onclick="inputAddCal()" <c:if test="${not empty edit.recAddName or edit.recSortation eq '결제완료'}">disabled</c:if>>버튼</button></td>
 		        	</tr>
 	        	</tbody>	
 	        </table> 
@@ -148,7 +148,7 @@ input[type=text]
 			        		<td>${edit.recDedName }</td>
 			        		<td>${edit.recDed }</td>
 			        		<td>${edit.recDedCst }</td>
-			        		<td><fmt:formatNumber value="${((edit.recDed - edit.recDedCst ) / edit.recDed) * 100 }" pattern=".00"/></td>
+			        		<td><fmt:formatNumber value="${((edit.recDed - edit.recDedCst ) / edit.recDed)}" pattern="0.00"/></td>
 			        		<td>${edit.recDedWorker}</td>
 			        	</tr>	
 		        	</c:if>
@@ -160,7 +160,7 @@ input[type=text]
 			        		<td>${edit.recAddName }</td>
 			        		<td>${edit.recAdd }</td>
 			        		<td>${edit.recAddCst }</td>
-			        		<td><fmt:formatNumber value="${((edit.recAdd - edit.recAddCst )/edit.recAdd) * 100}" pattern=".00"/></td>
+			        		<td><fmt:formatNumber value="${((edit.recAdd - edit.recAddCst )/edit.recAdd)}" pattern="0.00"/></td>
 			        		<td>${edit.recAddWorker}</td>
 			        	</tr>	
 		        	</c:if>
@@ -184,7 +184,9 @@ input[type=text]
 </div> 
 
 
-
+<script type="text/javascript">
+	let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/tdEditOption.js"></script> 
 </body>
 </html>

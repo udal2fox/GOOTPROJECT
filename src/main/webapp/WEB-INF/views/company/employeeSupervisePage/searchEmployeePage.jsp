@@ -20,6 +20,7 @@
          <div id="selectDept">
             <span>조직별 구분</span>
             <select class="dept-sb">
+               <option value="전체"> 전체 </option>
                <option value="인사"> 인사 </option>
                <option value="재무"> 재무 </option>
                <option value="영업"> 영업 </option>

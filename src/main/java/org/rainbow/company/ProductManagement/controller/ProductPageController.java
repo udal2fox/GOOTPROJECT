@@ -2,6 +2,7 @@ package org.rainbow.company.ProductManagement.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -287,6 +288,22 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
     }
     
+    // 상품 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exPrdExcel")
+    public void exPrdExcel(HttpServletResponse response) throws IOException
+    {
+    	List<prdDownVO> downlist = new ArrayList<>();
+    	prdDownVO vo = new prdDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
     
     // 상품 조회 리스트  기능끝 ------------------------------------------------------------------------------------
     
@@ -436,6 +453,22 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
 
     }
+ // 공급처 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exSupsExcel")
+    public void exSupsExcel(HttpServletResponse response) throws IOException
+    {
+    	List<supsDownVO> downlist = new ArrayList<>();
+    	supsDownVO vo = new supsDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
     
     // 공급처 리스트 기능 끝 ------------------------------------------------------------------------------------------------------
 }

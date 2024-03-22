@@ -23,13 +23,13 @@ const f = document.forms[0];
 
 //사업자 등록증 파일 업로드 버튼에 파일 업로드 기능 추가
 function updateFileName() {
-    const fileInput = document.getElementById('fileInput'); // 파일 업로드 버튼 
-    const fileListElement = document.getElementById('uploadedFileName'); // 파일 목록이 표시될 요소
+    const fileInput = document.getElementById('fileInput'); 
+    const fileListElement = document.getElementById('uploadedFileName'); 
 
     if (fileInput.files.length > 0) {
         for (let i = 0; i < fileInput.files.length; i++) {
-            const file = fileInput.files[i]; // 파일 객체
-            const fileName = file.name; // 파일의 이름
+            const file = fileInput.files[i]; 
+            const fileName = file.name; 
             
             // 파일을 다운로드할 수 있는 링크 생성
             const downloadLink = document.createElement('a');
@@ -61,16 +61,6 @@ function updateFileName() {
     }
 }
 
-
-/** 사업자 등록증 파일 업로드 버튼에 파일 업로드 기능 추가 */
-function updateFileName() {
-    const fileInput = document.getElementById('fileInput');
-    const fileNameInput = document.querySelector('input[name="comBizLicenseFile"]');
-
-    if (fileInput.files.length > 0) {
-        fileNameInput.value = fileInput.files[0].name;
-    }
-}
 
 
 /** 사업자 등록증 파일 db에 업로드 하기 */

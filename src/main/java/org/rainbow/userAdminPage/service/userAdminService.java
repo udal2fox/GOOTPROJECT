@@ -9,6 +9,10 @@ public interface userAdminService {
 	
 	public HashMap<String, Object> getDashboard(int spotNo);
 	
+	public List<HashMap<String, Object>> getBestTop5(int spotNo);
+	
+	public List<HashMap<String, Object>> getMonthlyData(int spotNo);
+	
 	public HashMap<String, Object> getUserInfo(int spotNo);
 	
 	public int updateUserInfo(HashMap<String, Object> updateInfo);
@@ -40,4 +44,8 @@ public interface userAdminService {
 	public HashMap<String, Object> getCardInfo(int spotNo);
 	
 	public List<HashMap<String, Object>> getRecipients (HashMap<String, Object> inputValue);
+	
+	public List<HashMap<String, Object>> getUsageList(int spotNo);
+	
+	public List<HashMap<String, Object>> getDetailUsage(HashMap<String, Object> inputMap);
 }

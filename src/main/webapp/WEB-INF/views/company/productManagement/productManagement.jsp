@@ -118,7 +118,7 @@
 		                		<img alt="" src="${ex.prdImg}" align="left">
 		                		<div id="tdTop">${ex.prdName }</div>
 			                </td>
-			                <td><fmt:formatNumber value="${ex.prdCstPri }" type="currency"/></td>
+			                <td><fmt:formatNumber value="${ex.prdCstPri }" pattern="#,###"/></td>
               				<td><fmt:formatNumber value="${ex.prdSal }"	   pattern="#,###"/></td>
               				<td><fmt:formatNumber value="${ex.prdMargin * 100}"	pattern=".00"/>%</td>
 			            </tr>

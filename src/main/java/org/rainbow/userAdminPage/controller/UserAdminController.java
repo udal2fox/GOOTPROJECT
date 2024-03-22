@@ -1,5 +1,7 @@
 package org.rainbow.userAdminPage.controller;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -110,8 +112,21 @@ public class UserAdminController {
 		int spotNo = Integer.parseInt(no);
 		HashMap<String, Object> dashboardMap = userService.getDashboard(spotNo);
 		log.info("infoMap..." + dashboardMap);
-		model.addAttribute("result", dashboardMap);
+		model.addAttribute("dashboard", dashboardMap);
+		List<HashMap<String, Object>> bestTop5 = userService.getBestTop5(spotNo);
+		log.info("bestTop5..." + bestTop5);
+		model.addAttribute("bestTop5", bestTop5);
+		System.out.println(model);
 		return "/userAdminPage/dashboard";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/getMonthlyData/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getMonthlyData(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		List<HashMap<String, Object>> MonthlyData = userService.getMonthlyData(spotNo);
+		log.info("MonthlyData.." + MonthlyData);
+		return new ResponseEntity<List<HashMap<String,Object>>>(MonthlyData,HttpStatus.OK);
 	}
 
 	// 직원관리 페이지 이동
@@ -197,6 +212,32 @@ public class UserAdminController {
 	public String goUsagehistorylist(@PathVariable String no, Model model) {
 		return "/userAdminPage/usageHistory_list";
 	}
+	
+	// 이용현황 페이지 리스트 가져오기
+	@ResponseBody
+	@GetMapping(value="/getUsageList/{no}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getUsageList(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		List<HashMap<String, Object>> usageList = userService.getUsageList(spotNo);
+		log.info("usageList..." + usageList);
+		return new ResponseEntity<List<HashMap<String,Object>>>(usageList,HttpStatus.OK);
+	}
+	
+	@PostMapping("/usageDetailHistory")
+	public String getDetailUsage(@RequestParam String recDate, @RequestParam String no, Model model) {
+		HashMap<String, Object> inputMap = new HashMap<String, Object>();
+		inputMap.put("recDate", recDate);
+		int spotNo = Integer.parseInt(no);
+		inputMap.put("spotNo", spotNo);
+		log.info(inputMap);
+		// 서비스로부터 반환된 데이터를 모델에 추가
+		List<HashMap<String, Object>> detailUsageData = userService.getDetailUsage(inputMap);
+	    log.info("detailUsageData.."+detailUsageData);
+	    model.addAttribute("detailUsageData", detailUsageData);
+	    
+		return "/userAdminPage/usageHistory_details";
+	}
+	
 
 	// 고객지원 페이지 이동
 	@GetMapping("/goInquiryboard/{no}")

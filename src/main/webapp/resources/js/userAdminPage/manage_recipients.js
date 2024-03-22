@@ -119,20 +119,25 @@ function fetchData() {
           msg += '<td>' + formatTimestamp(recipient.cEmpBirth) + '</td>';
           msg += '<td>' + recipient.step + '</td>';
           msg += '<td>' + (recipient.totalAmount ? numberWithCommas(recipient.totalAmount) + '원' : '0원') + '</td>';
-          msg += '<td></td>';
+          // '미발송'인 경우에만 버튼 활성화
+          if (recipient.step === '미발송') {
+            msg += '<td><button type="button" class="btn btn-outline-success" onclick="sendGift(' + recipient.id + ')">바로발송</button></td>';
+          } else {
+            msg += '<td></td>';
+          }
           msg += '</tr>';
         });
       }
       tbody.innerHTML = msg;
 
       // 발송 대상자 수 표시
-      document.getElementById("numOfRecipients").textContent = totalCount;
+      document.getElementById("numOfRecipients").textContent = totalCount + '명';
 
       // 각 상태별로 카운트 표시
-      document.getElementById("notSentCount").textContent = notSentCount;
-      document.getElementById("selectingCount").textContent = selectingCount;
-      document.getElementById("selectedCount").textContent = selectedCount;
-      document.getElementById("sentCount").textContent = sentCount;
+      document.getElementById("notSentCount").textContent = notSentCount + '명';
+      document.getElementById("selectingCount").textContent = selectingCount + '명';
+      document.getElementById("selectedCount").textContent = selectedCount + '명';
+      document.getElementById("sentCount").textContent = sentCount + '명';
 
     })
     .catch((error) => {
@@ -155,4 +160,10 @@ function formatTimestamp(unixTimeStamp) {
 // 세자리마다 쉼표를 찍는 함수
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 선물을 발송하는 함수
+function sendGift(recipientId) {
+  // 여기에 선물 발송 코드 추가
+  console.log("Recipient ID:", recipientId);
 }

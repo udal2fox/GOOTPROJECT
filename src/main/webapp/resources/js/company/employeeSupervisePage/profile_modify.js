@@ -1,4 +1,5 @@
 const f = document.forms[0];
+let selectedFile; 
 
 // 주소 API 실행 
 document.getElementById('searchIcon').addEventListener('click', function() {
@@ -7,7 +8,6 @@ document.getElementById('searchIcon').addEventListener('click', function() {
     sample6_execDaumPostcode();
 	
 });
-
 
 // 프로필 사진 편집
 document.getElementById('img-change').addEventListener('click', function() {
@@ -22,20 +22,15 @@ document.getElementById('img-change').addEventListener('click', function() {
 	});
 
 document.getElementById('img-upload').addEventListener('change', function() {
-    const file = this.files[0]; // 선택한 파일 객체 가져오기
+	selectedFile = this.files[0]; // 선택한 파일 객체 가져오기
     const reader = new FileReader(); // 파일을 읽기 위한 객체 생성
-    
-    const fileName = file.name; // 파일명 가져오기
-
+   
     reader.onload = function(event) {
-        const imgData = event.target.result; // 이미지 데이터 base64 가져오기
-        
-        
-        document.querySelector('input[name="profilePicture"]').value = file.name;
-
+    const imageURL = event.target.result; // 이미지 데이터 URL 가져오기
+    	
         // 이미지 요소 생성
         const img = document.createElement('img');
-        img.src = imgData;
+        img.src = imageURL;
         img.width = 302;
         img.height = 152;
         
@@ -44,20 +39,16 @@ document.getElementById('img-upload').addEventListener('change', function() {
         profileImgDiv.innerHTML = ''; // 기존 내용 지우기
         profileImgDiv.appendChild(img);
     };
-    // 파일을 읽어 데이터 base64로 변환
-    reader.readAsDataURL(file); 
+    // 파일을 읽어 이미지 URL로 변환
+    reader.readAsDataURL(selectedFile);
     
     this.value = '';
 });
 
-
 // 프로필 사진만 저장
 document.getElementById('img-save').addEventListener('click', function() {
-	const profilePicture = f.profilePicture.value;
-    console.log(profilePicture);
+	
 })
-
-
 
 document.querySelectorAll('input[type="button"]').forEach( btn => {
 	btn.addEventListener( 'click', (event) => {
@@ -72,47 +63,49 @@ document.querySelectorAll('input[type="button"]').forEach( btn => {
 	})
 })
 
+// 뒤로 가기 버튼
 function close(){
 	 window.history.back();
 }
 
+// 프로필 수정한 거 저장
 function save(){
+		
 	if( f.ePw.value !== f.checkEPw.value ){
 		alert("비밀번호가 일치 하지 않습니다");
 		f.checkEPw.focus();
 		return; 
 	}
 
-	console.log(typeof(f.ePw.value));
-	 console.log('프로필 수정 요청 데이터:', JSON.stringify({
-		    eno: f.eno.value,
-		    deptNo: f.deptNo.value,
-		    eName : f.eName.value,
-		    ePhone: f.ePhone.value,
-		    ePw: f.ePw.value,
-		    eAddr: f.eAddr.value,
-		    eAddr2: f.eAddr2.value,
-		    salAccount: f.salAccount.value,
-		    eBank: f.eBank.value,
-		}));
-	 
-	 var requestData = {
-			 eno: f.eno.value,
-			 deptNo: f.deptNo.value,
-			 eName : f.eName.value,
-			 ePhone: f.ePhone.value,
-			 ePw: f.ePw.value,
-			 eAddr: f.eAddr.value,
-			 eAddr2: f.eAddr2.value,
-			 salAccount: f.salAccount.value,
-			 eBank: f.eBank.value,
-	 };
+	console.log(profilePictureSrc);
+	const formData = new FormData();
+    formData.append('eno', f.eno.value);
+    formData.append('deptNo', f.deptNo.value);
+    formData.append('eName', f.eName.value);
+    formData.append('ePhone', f.ePhone.value);
+    formData.append('ePw', f.ePw.value);
+    formData.append('eAddr', f.eAddr.value);
+    formData.append('eAddr2', f.eAddr2.value);
+    formData.append('salAccount', f.salAccount.value);
+    formData.append('eBank', f.eBank.value);
+    // vo에 저장된 이미지URL로 저장할 때
+    if (profilePictureSrc) {
+        formData.append('profilePicturePath', profilePictureSrc);
+    } else {
+        formData.append('profilePicturePath', 'null'); 
+    }
+    // 파일 탐색기로 선택한 이미지 저장할 때
+    if (selectedFile) {
+        formData.append('profilePicture', selectedFile);
+    }else {
+    	formData.append('profilePicture', 'null');
+	}
+    console.log(formData.get("profilePicturePath"));
+    console.log(formData.get("profilePicture"));
+
     fetch("/profile_modify", {
         method: 'POST',
-        body: JSON.stringify(requestData),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-        }
+        body: formData,
     })
 	.then((response) => {
 		
@@ -139,4 +132,4 @@ function save(){
 		// 에러 메시지 출력
 		console.log('Error message:', err.message);
 	});
-};		
+  };	

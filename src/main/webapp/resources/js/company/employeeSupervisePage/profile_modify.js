@@ -92,13 +92,13 @@ function save(){
     if (profilePictureSrc) {
         formData.append('profilePicturePath', profilePictureSrc);
     } else {
-        formData.append('profilePicturePath', 'null'); 
+        formData.append('profilePicturePath', ''); 
     }
     // 파일 탐색기로 선택한 이미지 저장할 때
     if (selectedFile) {
         formData.append('profilePicture', selectedFile);
     }else {
-    	formData.append('profilePicture', 'null');
+    	formData.append('profilePicture', '');
 	}
     console.log(formData.get("profilePicturePath"));
     console.log(formData.get("profilePicture"));

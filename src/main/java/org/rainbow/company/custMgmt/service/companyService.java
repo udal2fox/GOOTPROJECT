@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.rainbow.company.custMgmt.domain.companyDownVO;
 import org.rainbow.company.custMgmt.domain.companyInputVO;
-import org.rainbow.company.custMgmt.domain.companySearchDTO;
 import org.rainbow.company.custMgmt.domain.companyVO;
 
 
@@ -14,7 +13,7 @@ import org.rainbow.company.custMgmt.domain.companyVO;
 public interface companyService {
 	
 	/** 서치바-키워드 검색*/
-	public List<companyVO> getSearch(companySearchDTO companySearchDTO);
+	public List<companyVO> giveKeyword(String keyword);
 	
 	
 	/** 'companyList.jsp' 에서 기업 리스트 가져오기  */

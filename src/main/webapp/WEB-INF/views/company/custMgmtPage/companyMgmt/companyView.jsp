@@ -26,8 +26,7 @@
 			</div>
 
 
-			<form action="/companyRegisterInsert" method="post"
-				id="companyRegisterForm" enctype="multipart/form-data">
+			<form action="/updateCompany" method="post" id="companyRegisterForm" enctype="multipart/form-data">
 				<div class="companyMgmt_div">
 					<h5 class="companyMgmt_title" align="left">●기업 편집</h5>
 					<table class="companyMgmt_tbl">
@@ -72,8 +71,11 @@
 				
 							<tr>
 							    <c:forEach var="file" items="${companyVO.comBizLicenseFile}">
-							        <td>${file}</td>
+							        <td id="uploadedFileName">${file}</td>
 							    </c:forEach>
+						
+					
+							   
 							</tr>
 
 							<tr>

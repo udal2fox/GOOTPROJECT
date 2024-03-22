@@ -135,13 +135,13 @@ function searchBizNum(bizNumArray) {
 
 
 
-/** 기업 정보 수정 */
-document.getElementById("companyUpdateBtn").addEventListener('click', () => {
-    
-	//로그인 한 사람의 권한이 영업팀일 경우 수정 권한 있음, 나머지는 수정 권한 없음 (추후)
-	//console.log(f.comCEO.value);
-	companyUpdate();
-});
+///** 기업 정보 수정 */
+//document.getElementById("companyUpdateBtn").addEventListener('click', () => {
+//    
+//	//로그인 한 사람의 권한이 영업팀일 경우 수정 권한 있음, 나머지는 수정 권한 없음 (추후)
+//	//console.log(f.comCEO.value);
+//	companyUpdate();
+//});
 
 function companyUpdate(vo,callback){
 
@@ -152,3 +152,70 @@ function backPage()
 {
 	window.history.go(-1); // 뒤로 한 페이지 이동
 } 
+
+
+
+
+
+
+//파일 업로드 버튼에 파일 업로드 기능 추가
+//document.getElementById("uploadedFileDownload").addEventListener('click', function() {
+//    // 서버로부터 파일 다운로드 URL을 얻어옵니다.
+//    fetch('/getCompanyLicenseFileURL')
+//        .then(response => response.text())
+//        .then(url => {
+//            // 서버로부터 받은 파일 다운로드 URL을 사용하여 다운로드 링크를 생성합니다.
+//            const downloadLink = document.createElement('a');
+//            downloadLink.href = url; // 서버에서 제공한 파일 다운로드 URL
+//            downloadLink.download = '${companyVO.comBizLicenseFile}'; // 다운로드 시 파일명 설정
+//            downloadLink.click(); // 링크 클릭하여 다운로드 시작
+//        })
+//        .catch(error => console.error('Error:', error));
+//});
+
+
+
+function uploadedFileName(comNo){
+	
+	let jsonData = JSON.stringify(comNo);
+	//console.log(jsonData);
+	
+	fetch('/getCompanyLicenseFileURL',{
+			method: 'POST',
+	        headers: {
+	            'Content-Type': 'application/json'
+	        },
+	        body: jsonData
+	})
+    .then(response => response.json())
+    .then(url => {
+        // 서버로부터 받은 파일 다운로드 URL을 사용하여 다운로드 링크를 생성합니다.
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url; // 서버에서 제공한 파일 다운로드 URL
+        downloadLink.download = '${companyVO.comBizLicenseFile}'; // 다운로드 시 파일명 설정
+        downloadLink.click(); // 링크 클릭하여 다운로드 시작
+    })
+    .catch(error => console.error('Error:', error));
+	
+};
+
+//기업 정보 update
+function updateCompanyView(){
+	let result = confirm("기업 정보를 변경하시겠습니까?");
+	
+	const a = f.comOpenningDate.value;
+	//console.log(a);
+	
+	if(result){
+		
+		
+		f.action='/updateCompany';
+		f.submit();
+		
+		
+	}
+	
+	
+	
+	
+}

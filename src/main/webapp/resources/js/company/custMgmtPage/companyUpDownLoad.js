@@ -1,4 +1,3 @@
-
 document.getElementById("uploadBtn").addEventListener("click", function() {
   document.getElementById("excelUpload").click();
 });
@@ -24,7 +23,7 @@ document.getElementById("excelUpload").addEventListener("change", function() {
     
     if(confirm("파일 을 업로드 하시 것슴까!?"))
 	{
-    	fetch('/prdExcelInput', {
+    	fetch('/companyExcelInput', {
     		  method: 'POST',
     		  body: formData
     		})
@@ -50,38 +49,52 @@ document.getElementById("excelUpload").addEventListener("change", function() {
 });
 
 
-// 다운로드 버튼 눌러서 함수호출
+// 다운로드 버튼 눌러서 함수 호출
 document.getElementById('downloadButton').addEventListener('click', ()=>{
 	download();
 });
 
 
-
 function download() 
 {
 	// 폼데이터에 체크박스 의 벨류를 들고가서 리스트 조회 후 그리스트로 다운받게 끔 변환
-    // 상품 분류 체크박스들의 값을 가져옵니다.
+    
+	// '지역' 체크 박스들의 값 가져오기
     let checkedValues = [];
     
-    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
+    document.querySelectorAll('input[type=checkbox][data-filter="comArea_type"]:checked').forEach(function(checkbox) {
         if(checkbox.value != '전체')
-		{	
+        {	
         	checkedValues.push(checkbox.value);
-        
 		}
     });
+    
+    //console.log(checkedValues);
 
-    // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
+   // '기업 구분' 라디오 버튼의 값 가져오기
+    document.querySelectorAll('input[type=radio][data-filter="bizType_type"]:checked').forEach(function(checkbox) {
     	 if(checkbox.value != '전체')
  		{
          	checkedValues.push(checkbox.value);
  		}
-    });
+   });
+    
+    //console.log(checkedValues);
+  
+   // '업태' 목록 상자의 값 가져오기
+    let selectElement = document.getElementById('searchBarBizStatus');
 
+    for (let i = 0; i < selectElement.options.length; i++) {
+        let option = selectElement.options[i];
+        if (option.selected && option.value !== '선택') {
+            checkedValues.push(option.value);
+        }
+    }
+
+    //console.log(checkedValues);
 		
     // 서버로 데이터 전송
-    fetch('/downloadExcel', {
+    fetch('/companyListDownloadExcel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(checkedValues)

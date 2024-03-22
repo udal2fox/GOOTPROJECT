@@ -1,5 +1,7 @@
 package org.rainbow.userAdminPage.controller;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +9,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.rainbow.userAdminPage.service.userAdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -111,8 +112,21 @@ public class UserAdminController {
 		int spotNo = Integer.parseInt(no);
 		HashMap<String, Object> dashboardMap = userService.getDashboard(spotNo);
 		log.info("infoMap..." + dashboardMap);
-		model.addAttribute("result", dashboardMap);
+		model.addAttribute("dashboard", dashboardMap);
+		List<HashMap<String, Object>> bestTop5 = userService.getBestTop5(spotNo);
+		log.info("bestTop5..." + bestTop5);
+		model.addAttribute("bestTop5", bestTop5);
+		System.out.println(model);
 		return "/userAdminPage/dashboard";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/getMonthlyData/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getMonthlyData(@PathVariable String no){
+		int spotNo = Integer.parseInt(no);
+		List<HashMap<String, Object>> MonthlyData = userService.getMonthlyData(spotNo);
+		log.info("MonthlyData.." + MonthlyData);
+		return new ResponseEntity<List<HashMap<String,Object>>>(MonthlyData,HttpStatus.OK);
 	}
 
 	// 직원관리 페이지 이동
@@ -215,8 +229,10 @@ public class UserAdminController {
 		inputMap.put("recDate", recDate);
 		int spotNo = Integer.parseInt(no);
 		inputMap.put("spotNo", spotNo);
+		log.info(inputMap);
 		// 서비스로부터 반환된 데이터를 모델에 추가
-	    HashMap<String, Object> detailUsageData = userService.getDetailUsage(inputMap);
+		List<HashMap<String, Object>> detailUsageData = userService.getDetailUsage(inputMap);
+	    log.info("detailUsageData.."+detailUsageData);
 	    model.addAttribute("detailUsageData", detailUsageData);
 	    
 		return "/userAdminPage/usageHistory_details";

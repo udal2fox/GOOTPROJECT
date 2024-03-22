@@ -46,8 +46,9 @@
                                 class="nav__icon"></ion-icon> <span class="sidebarname">로그아웃</span></a>
                         <hr>
                         <div class="advertisement">
-                            <a href="https://jejubeer.co.kr/shopxx/?idx=23"> <img
-                                    src="/resources/images/jejunubo.jpg" width="160" alt="banner1"></a>
+                            <a href="https://jejubeer.co.kr/shopxx/?idx=23"> 
+                            <img src="/resources/images/jejunubo.jpg" width="160" alt="banner1">
+                            </a>
                         </div>
                         <hr>
                         <div class="advertisement">
@@ -65,7 +66,7 @@
                 <header class="p-2 text-end">
                     <!-- 회사 정보 및 사용자 정보 -->
                     <span class="px-2" id="companyInfo"></span> <a href="/userAdminPage/userEdit/${sessionScope.spotNo}" id="userEdit">
-                        <ion-icon name="person"></ion-icon> <span id="userName">${sessionScope.userName}</span>님
+                       <img width="48" height="48" src="https://img.icons8.com/color/48/conference-call--v1.png" alt="conference-call--v1"/> <span id="userName">' ${sessionScope.userName} ' </span>님
                         반갑습니다.
                     </a>
 

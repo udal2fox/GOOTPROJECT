@@ -26,6 +26,10 @@
   
     AND comBizType = #{comBizType}
 </if>
+  <if test="comBizStatus != null and comBizStatus != '' and comBizStatus != '선택'">
+  
+    AND comBizStatus = #{comBizStatus}
+</if>
 </select>
   
   
@@ -43,5 +47,53 @@ insert into  RAIN_cCompany_tbl(comCEO) values (#{comCEO})
 	select * from RAIN_cCompany_tbl where companyNo=#{companyNo}
 </select>
 
+
+
+	<!-- 엑셀 파일 리스트로 받아서 인서트  -->
+	<insert id= "insertCompanyExcel" parameterType="org.rainbow.company.custMgmt.domain.companyInputVO">
+		insert into RAIN_cCompany_tbl values
+		(
+			#{companyNo}, #{consultNo}, #{comName} ,#{comBizLicenseFile},
+			#{comBizNum} ,#{comBizType} ,#{comArea} ,#{comAddr},	
+			#{comDetailAddr}, #{comBizStatus}, #{comBizCategory}, #{comCEO} ,#{comContact}, 
+			#{comEmail}, #{comOpenningDate}
+		)
+	</insert>
+
+
+
+		<select id="downExcelList" resultType="org.rainbow.company.custMgmt.domain.companyDownVO">
+		  	SELECT * 
+		    FROM RAIN_cCompany_tbl 
+		    WHERE 
+		     comArea IN
+		    <foreach item="item" collection="filteredValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		    AND comBizType IN
+		    <foreach item="item" collection="filteredValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		    AND  comBizStatus IN
+		    <foreach item="item" collection="filteredValues" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		</select>
+		
+		
+	<!--  db에 저장된 파일들 가져오기 및 파일 다운로드-->
+	<select id="getCompanyLicenseFileURL" resultType="org.rainbow.company.custMgmt.domain.companyVO" parameterType="string">
+		SELECT comBizLicenseFile FROM RAIN_cCompany_tbl where companyNo= #{jsonData}
+	</select>
+	
+<!-- 기업 정보 update -->
+
+	<update id="updateCompany" parameterType="org.rainbow.company.custMgmt.domain.companyVO">
+		 update RAIN_cCompany_tbl set comName=#{comName}, 
+		 comBizNum=#{comBizNum}, comBizType=#{comBizType}, comArea=#{comArea}, comAddr=#{comAddr},
+		 comDetailAddr=#{comDetailAddr}, comBizStatus=#{comBizStatus}, comBizCategory=#{comBizCategory},
+		 comCEO=#{comCEO}, comContact=#{comContact}, comEmail=#{comEmail}, comOpenningDate=#{comOpenningDate} 
+		 where companyNo=#{companyNo}
+	</update>
 
 </mapper>

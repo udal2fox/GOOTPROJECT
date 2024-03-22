@@ -34,6 +34,16 @@ public class userAdminServiceImpl implements userAdminService {
 	}
 
 	@Override
+	public List<HashMap<String, Object>> getBestTop5(int spotNo) {
+		return userMapper.getBestTop5(spotNo);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> getMonthlyData(int spotNo) {
+		return userMapper.getMonthlyData(spotNo);
+	}
+	
+	@Override
 	public HashMap<String, Object> getUserInfo(int spotNo) {
 		return userMapper.getUserInfo(spotNo);
 	}
@@ -163,7 +173,8 @@ public class userAdminServiceImpl implements userAdminService {
 	}
 	
 	@Override
-	public HashMap<String, Object> getDetailUsage(HashMap<String, Object> inputMap) {
+	public List<HashMap<String, Object>> getDetailUsage(HashMap<String, Object> inputMap) {
+		log.info(inputMap);
 		return userMapper.getDetailUsage(inputMap);
 	}
 

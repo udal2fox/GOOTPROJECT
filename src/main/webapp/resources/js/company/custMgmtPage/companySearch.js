@@ -1,6 +1,10 @@
 /** 전역 변수 구역 */
 const checkboxes = document.querySelectorAll('.searchbar_checkbox_filter');
 const radioButtons = document.querySelectorAll('.searchbar_radioBtn_filter');
+//목록상자의 값은 굳이 가져 올 필요가 없다
+
+
+
 let selectedRadioBtn = ''; 
 
 /** 서치바 검색 기능 구현 */
@@ -27,6 +31,7 @@ function fetchSearchResults(keyword, companyType) {
         comBizStatus: document.getElementById('searchBarBizStatus').value,
         comBizType: companyType
     };
+    
     let jsonData = JSON.stringify(searchKeyword);
     console.log(jsonData);
     

@@ -27,7 +27,7 @@ function showUsageList(data) {
       msg += '<a href="' + list.year + "-" + String(list.month).padStart(2, "0") + '" class="text-decoration-none" onclick="moveDatailUsage(event)" style="color: black;">';
       msg += '<div class="row bg-danger-subtle p-3 rounded-2 shadow-sm p-3 mb-5 bg-body-tertiary rounded">';
       msg += '<div class="col" style="width: 100px;">';
-      msg += '<ion-icon name="receipt" class="fs-3 p-2"></ion-icon>';
+      msg += '<img width="48" height="48" src="https://img.icons8.com/fluency/48/buy-with-card.png" alt="buy-with-card"/>';
       msg += '</div>';
       msg += '<div class="col">';
       msg += '<div>';
@@ -56,8 +56,11 @@ function numberWithCommas(x) {
 function moveDatailUsage(event) {
   event.preventDefault();
 
-  let recDate = event.target.getAttribute("href");
-  let no = sessionStorage.getItem("Okja");
+// 이벤트가 발생한 요소인 a 태그의 href 속성을 가져옵니다.
+let recDate = event.currentTarget.getAttribute("href");
+
+// sessionStorage에서 사용자 식별번호를 가져옵니다.
+let no = sessionStorage.getItem("Okja");
   
   const form = document.createElement("form");
   form.setAttribute("method", "POST");

@@ -4,31 +4,6 @@
 
 <mapper namespace="org.rainbow.company.salesManagement.mapper.salesMgtMapper">
 	
-	<!-- 차트 시작  -->
-	<select id="monthChartData" resultType="org.rainbow.company.salesManagement.domain.monthChartVO">
-		SELECT
-		DATE_FORMAT(recDate, '%Y-%m') AS recSum_month,
-		TRUNCATE(SUM(recSum),0) AS total_amount
-		FROM
-		    RAIN_receipt_tbl
-		GROUP BY
-		    DATE_FORMAT(recDate, '%Y-%m')
-		ORDER BY
-		recSum_month
-	</select>
-	
-	<select id="quarterChartData" resultType="org.rainbow.company.salesManagement.domain.monthChartVO">
-		SELECT
-	    CONCAT(YEAR(recDate), '년',
-	           QUARTER(recDate),'분기') AS recSum_quarter,
-	    TRUNCATE(SUM(recSum),0) AS quarter_amount
-		FROM
-		    RAIN_receipt_tbl
-		GROUP BY
-		     CONCAT(YEAR(recDate), '년',QUARTER(recDate),'분기')
-		ORDER BY
-		    recSum_quarter
-	</select>
 	
 	
 	<select id="salesComList" resultType="org.rainbow.company.salesManagement.domain.salesComVO">
@@ -235,6 +210,39 @@
 		GROUP BY
 		    d.prdNo, d.prdMajorCtg, d.prdSubCtg, d.prdName, d.prdSal, 
 			d.prdCstPri, d.prdMargin, d.prdSt
+	</select>
+	
+	<!-- 차트 시작  -->
+	<select id="monthChartData" resultType="org.rainbow.company.salesManagement.domain.monthChartVO">
+		SELECT
+	    DATE_FORMAT(recDate, '%Y-%m') AS recSum_month,
+	    TRUNCATE(SUM(recSum), 0) AS total_amount
+		FROM
+		    RAIN_receipt_tbl
+		WHERE
+		    recDate <![CDATA[ <= ]]> LAST_DAY(CURRENT_DATE())
+		GROUP BY
+		    DATE_FORMAT(recDate, '%Y-%m')
+		ORDER BY
+		    recSum_month
+		    
+	</select>
+	
+	<select id="quarterChartData" resultType="org.rainbow.company.salesManagement.domain.monthChartVO">
+		   <![CDATA[
+			  SELECT
+			    CONCAT(YEAR(recDate), '년', QUARTER(recDate), '분기') AS recSum_quarter,
+			    TRUNCATE(SUM(recSum), 0) AS quarter_amount
+			  FROM
+			    RAIN_receipt_tbl
+			  WHERE
+			    recDate >= DATE_FORMAT(NOW() - INTERVAL 1 YEAR, '%Y-01-01')
+			    AND recDate <= DATE_FORMAT(NOW() - INTERVAL 1 YEAR, '%Y-12-31')
+			  GROUP BY
+			    CONCAT(YEAR(recDate), '년', QUARTER(recDate), '분기')
+			  ORDER BY
+			    recSum_quarter;
+ 			]]>
 	</select>
 
 

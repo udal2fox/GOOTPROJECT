@@ -63,8 +63,19 @@ public class salesServiceImpl implements salesService {
 	@Override
 	public List<consultVO> searchCompanyListModal() {
 		log.info("searchCompanyListModal...." );
-		return salesMapper.searchCompanyListModal();
+		
+		List<consultVO> list = salesMapper.searchCompanyListModal();
+		
+		log.info(list);
+		
+		return list;
 	}
+	
+		@Override
+		public List<consultVO> searchModalComName(String companyName) {
+			log.info("searchModalComName...." );
+			return salesMapper.searchModalComName(companyName);
+		}
 
 
 

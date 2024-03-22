@@ -2,9 +2,7 @@ package org.rainbow.company.custMgmt.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,11 +13,11 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.rainbow.company.ProductManagement.domain.productListVO;
+
 import org.rainbow.company.custMgmt.domain.AttachFileDTO;
 import org.rainbow.company.custMgmt.domain.companyDownVO;
 import org.rainbow.company.custMgmt.domain.companyInputVO;
-import org.rainbow.company.custMgmt.domain.companySearchDTO;
+
 import org.rainbow.company.custMgmt.domain.companyVO;
 
 import org.rainbow.company.custMgmt.service.companyServiceImpl;
@@ -62,6 +60,24 @@ public class companyController {
 
 		return "/company/custMgmtPage/companyMgmt/companyList";
 	}
+	
+	/** 서치바에서 키워드 검색 */
+    @ResponseBody
+    @GetMapping(value = "/searchCompany", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<companyVO>> prdSeach(@RequestParam("keyword") String keyword)
+    {
+        log.info("keyword..."+keyword);
+        
+        
+        List<companyVO> list = companyService.giveKeyword(keyword);
+        log.info(list);
+        
+
+        // ResponseEntity에 list와 ptdo를 함께 담아 반환
+
+        // 리스트 비동기로 뿌려주기
+        return new ResponseEntity<List<companyVO>>(list, HttpStatus.OK);
+    }
 
 
 	/** 'companyList.jsp' 에서 기업 등록 버튼 누르면 'companyRegister.jsp'로 이동 */
@@ -83,23 +99,6 @@ public class companyController {
 		return "/company/custMgmtPage/companyMgmt/companyView";
 
 	}
-
-
-//	/** 'companyRegister.jsp' 에서 기업 정보 저장하기 */
-//	@PostMapping("/companyRegisterInsert")
-//	public String companyRegisterInsert(companyVO vo, RedirectAttributes rttr) {
-//		log.info("companyRegisterInsert_success");
-//		log.info("companyRegisterInsert_success" + vo);
-//		
-//		companyService.companyRegister(vo);
-//		
-//		
-//		
-//		rttr.addFlashAttribute("result","success");
-//		
-//		return "redirect:/companyList";
-//	}
-
 
 
 	/** 사업자등록증 파일 업로드1 */
@@ -325,20 +324,6 @@ public class companyController {
 //        return "redirect:/companyList"; 
 //    }
 
-    @ResponseBody
-    @GetMapping(value = "/searchCompany", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<companyVO>> prdSeach(@RequestParam("keyword") String keyword)
-    {
-        log.info("keyword..."+keyword);
-        
-        
-        List<companyVO> list = companyService.giveKeyword(keyword);
-        log.info(list);
-        
+    
 
-        // ResponseEntity에 list와 ptdo를 함께 담아 반환
-
-        // 리스트 비동기로 뿌려주기
-        return new ResponseEntity<List<companyVO>>(list, HttpStatus.OK);
-    }
 }

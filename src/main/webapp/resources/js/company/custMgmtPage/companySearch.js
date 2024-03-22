@@ -65,8 +65,8 @@ function getFilteredCompanys()
     // 여기서 새로운 기업 리스트를 가져오도록 수정
     let companys = document.querySelectorAll('.companyList'); 
     let filteredCompanys = Array.from(companys).filter(function (companyList) {
-        let comArea = product.getAttribute('data-comArea');
-        let comBizType = product.getAttribute('data-comBizType');
+        let comArea = companyList.getAttribute('data-comArea');
+        let comBizType = companyList.getAttribute('data-comBizType');
         return (comAreaFilter.length === 0 || comAreaFilter.includes(comArea)) && (comBizTypeFilter.length === 0 || comBizTypeFilter.includes(comBizType));
     });
 

@@ -12,26 +12,24 @@ filter();
 function filter() {
 	// 지역 체크박스 '전체'값 이벤트 리스너 등록 
 	document.getElementById('comArea_typeAll').addEventListener('change', function() {
-		
-		let isChecked = this.checked;
-		document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comArea_type"]').forEach(function(checkbox) {
-			console.log(checkbox);
-			checkbox.checked = isChecked;
-		});
+	    let isChecked = this.checked;
+	    document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comArea_type"]').forEach(function(checkbox) {
+	        checkbox.checked = isChecked;
+	    });
 
-		filterCompany();
+	    filterCompany(); // '전체'값 선택 시 필터링 함수 호출
+	   
 	});
-	
+
 	// 기업 구분 체크박스 '전체'값 이벤트 리스너 등록 
 	document.getElementById('comBizType_typeAll').addEventListener('change', function() {
-		
-		let isChecked = this.checked;
-		document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comBizType_type"]').forEach(function(checkbox) {
-			console.log(checkbox);
-			checkbox.checked = isChecked;
-		});
+	    let isChecked = this.checked;
+	    document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comBizType_type"]').forEach(function(checkbox) {
+	        checkbox.checked = isChecked;
+	    });
 
-		filterCompany();
+	    filterCompany(); // '전체'값 선택 시 필터링 함수 호출
+	   
 	});
 	
     
@@ -76,8 +74,7 @@ function filterCompany() {
         	
         	companyList.style.display = 'none';
         });
-        // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
-        removePagination();
+        
         return;
     }
     
@@ -88,8 +85,7 @@ function filterCompany() {
         	
         	companyList.style.display = 'none';
         });
-        // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
-        removePagination();
+       
         return;
     }
 
@@ -107,7 +103,7 @@ document.querySelectorAll('.companyList').forEach(function(companyList) {
     }
     
     // 필터링된 상품 개수를 기반으로 페이지네이션 다시 그리기
-    drawPagination(1, Math.ceil(getFilteredCompany().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
+    drawPagination(1, Math.ceil(getFilteredCompanys().length / amount));// <-- 그전에 함수에서 매개변수 사용했을때 방법  drawPagination(); 지금은 매개변수없이 돌아감
         goToPage(1); 																		   
 
     });
@@ -141,7 +137,7 @@ function goToPage(page) {
     const startIndex = (pageNum - 1) * amount;
     const endIndex = pageNum * amount;
 
-    const filteredConsults = getFilteredCompany(); // 필터링된 기업 리스트 가져오기
+    const filteredConsults = getFilteredCompanys(); // 필터링된 기업 리스트 가져오기
 
     // 필터링된 기업 리스트에서 페이지 범위에 해당하는 부분만 보여주기
     filteredConsults.forEach((companyList, index) => {
@@ -218,28 +214,24 @@ function drawPagination(totalFilteredCompany) {
 
 
 //필터링된 기업 리스트 가져오기
-function getFilteredCompany() 
-{
+function getFilteredCompanys() {
     let comAreaFilter = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comArea_type"]:checked')).map(function(checkbox) {
-    	return checkbox.value;
+        return checkbox.value;
     });
-    let bizTypeFilter = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comBizType_type"]:checked')).map(function(checkbox) {
+    let comBizTypeFilter = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comBizType_type"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
 
+    let filteredCompanies = Array.from(totalCompanyList).filter(function(companyList) {
+        let comArea = companyList.getAttribute('data-comArea');
+        let comBizType = companyList.getAttribute('data-comBizType');
 
-return Array.from(totalCompanyList).filter(function(companyList) {
-    let comArea = companyList.getAttribute('data-comArea');
-    let bizType = companyList.getAttribute('data-comBizType');
-   
-    return (comAreaFilter.length === 0 || comAreaFilter.includes(comArea)) && (bizTypeFilter.length === 0 || bizTypeFilter.includes(bizType));
+        return (comAreaFilter.length === 0 || comAreaFilter.includes(comArea)) && (comBizTypeFilter.length === 0 || comBizTypeFilter.includes(comBizType));
     });
+
+    return filteredCompanies;
 }
 
-function removePagination() {
-    const paginationElement = document.getElementById('pagination');
-    paginationElement.innerHTML = ''; // 페이지네이션 요소의 내용을 청소
-}
 
 
 //초기 페이지네이션 그리기

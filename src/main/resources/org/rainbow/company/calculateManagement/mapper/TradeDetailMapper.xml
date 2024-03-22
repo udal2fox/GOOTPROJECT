@@ -8,11 +8,12 @@
 	<select id="tradeDetailList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">        
         
         SELECT a.recNo, e.comName, e.comBizType, d.spName, d.companyNo, d.spotNo,
-               a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+               a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+               a.recDedTax, a.recAddTax
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         
@@ -22,11 +23,12 @@
     <select id="searchTd" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	
     SELECT a.recNo, e.comName, e.comBizType, d.spName, d.companyNo, d.spotNo,
-               a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+           a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
     FROM RAIN_receipt_tbl a    
     JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
     JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-    JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+    JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
     JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
     LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 	WHERE
@@ -75,7 +77,7 @@
 		    FROM RAIN_receipt_tbl a    
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 		    JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-		    JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+		    JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 		    JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 		    LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 			WHERE
@@ -112,7 +114,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recNo = #{recNo}
@@ -147,11 +149,12 @@
     <!-- 거래미수 기업 -->
     <select id="ucCompany" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
          SELECT e.companyNo, e.comName, e.comBizType, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, 
-         a.recSortation, e.comEmail, a.recNo, a.recDed, a.recAdd 
+         a.recSortation, e.comEmail, a.recNo, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax 
          FROM RAIN_receipt_tbl a    
          JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
          JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-         JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+         JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
          JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
          LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
          WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -161,11 +164,12 @@
     <!-- 거래미수 서치  -->
     <select id="ucComSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT e.companyNo, e.comName, e.comBizType, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, 
-        a.recSortation, e.comEmail, a.recNo , a.recDed, a.recAdd
+        a.recSortation, e.comEmail, a.recNo , a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -174,7 +178,7 @@
 		    FROM RAIN_receipt_tbl a
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -201,7 +205,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -210,7 +214,7 @@
 		    FROM RAIN_receipt_tbl a    
 	        JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -241,11 +245,12 @@
     <!--거래미수 지점   -->
     <select id="ucBranchList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT d.spotNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation,
-        a.recNo, c.cEmpEmail, a.recDed, a.recAdd     
+        a.recNo, c.cEmpEmail, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+          a.recDedTax, a.recAddTax  
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -254,11 +259,12 @@
     
     <!--거래미수 지점 검색  -->
     <select id="ucBranchSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-   		SELECT a.recNo, e.comName, e.comBizType, d.spName, d.spotNo, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation,c.cEmpEmail , a.recDed, a.recAdd    
+   		SELECT a.recNo, e.comName, e.comBizType, d.spName, d.spotNo, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation,c.cEmpEmail , a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax    
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -267,7 +273,7 @@
 		    FROM RAIN_receipt_tbl a
 		    JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -294,7 +300,7 @@
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -303,7 +309,7 @@
 		    FROM RAIN_receipt_tbl a    
 	        JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -334,11 +340,12 @@
    
     <!--명세서기준   -->
     <select id="uctdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
         WHERE a.recSortation = '계산서발행' or a.recSortation = '카드미결제' or a.recSortation = '계산서미발행'
@@ -347,11 +354,12 @@
     
     <!--거래미수 지점 검색  -->
     <select id="ucTdSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -360,7 +368,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -388,7 +396,7 @@
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN ('계산서발행', '카드미결제', '계산서미발행')
@@ -397,7 +405,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1
@@ -430,11 +438,12 @@
     <!-- 계산서 스타트  -->
     <!-- 계산서 발행 리스트  -->
     <select id="IoBillList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-    	SELECT a.recNo, d.spotNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+    	SELECT a.recNo, d.spotNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation = '계산서미발행'
@@ -452,11 +461,12 @@
 	
 	<!--계산서 발행 검색  -->
     <select id="billSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
-    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd
+    	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+           a.recDedTax, a.recAddTax
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
         JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
         LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		WHERE a.recSortation IN '카드미결제'
@@ -465,7 +475,7 @@
 	        FROM RAIN_receipt_tbl a
 	     	JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
 	        JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
-	        JOIN RAIN_cSpot_tbl d ON c.sNo = d.spotNo
+	        JOIN RAIN_cSpot_tbl d ON c.spotNo = d.spotNo
 	        JOIN RAIN_cCompany_tbl e ON e.companyNo =  d.companyNo
 	        LEFT JOIN RAIN_Products_tbl f ON b.prdNo = f.prdNo
 		    WHERE 1=1

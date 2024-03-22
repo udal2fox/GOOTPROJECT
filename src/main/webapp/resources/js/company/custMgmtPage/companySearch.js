@@ -1,71 +1,43 @@
-/** 전역 변수 구역 */
-const checkboxes = document.querySelectorAll('.searchbar_checkbox_filter');
-const radioButtons = document.querySelectorAll('.searchbar_radioBtn_filter');
-let selectedRadioBtn = ''; 
+// 서치 기능
 
-/** 서치바 검색 기능 구현 */
+//키워드와 현재 페이지를 저장하는 전역 변수
+let currentKeyword = '';
 
-// 검색 버튼 클릭 이벤트 핸들러
+//검색 버튼 클릭 이벤트 핸들러
 document.querySelector('#searchBarSearchBtn').addEventListener('click', function() {
-    // 라디오 버튼에서 선택된 값을 가져오기
-    radioButtons.forEach(function(radioButton) {
-        if (radioButton.checked) {
-            selectedRadioBtn = radioButton.value;
-        }
-    });
-
-    currentKeyword = document.querySelector('.searchBarKeyword').value; // 현재 키워드 갱신
-    fetchSearchResults(currentKeyword, selectedRadioBtn); // 검색 결과 요청
+ currentKeyword = document.querySelector('#keyword').value; // 현재 키워드 갱신
+ fetchSearchResults(currentKeyword); // 검색 결과 요청
+ 
 });
 
-// 서치바-검색 기능 
-function fetchSearchResults(keyword, companyType) {
-    console.log("검색 키워드: " + keyword + ", 기업 구분: " + companyType);
-    
-    let searchKeyword = {
-        keyword: keyword,
-        comBizStatus: document.getElementById('searchBarBizStatus').value,
-        comBizType: companyType
-    };
-    let jsonData = JSON.stringify(searchKeyword);
-    console.log(jsonData);
-    
-    fetch('/searchCompanyList', {
-        method: 'POST',
-        body: jsonData,
-        headers: {'Content-type': 'application/json; charset=utf-8'}
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("필터링된 리스트 불러오니: ", data);
-        
-        let msg = '';
-        data.forEach(item => {
-            msg += `
-                <tr class="companyList" data-type="${item.comArea}">
-                    <td><a href="${item.companyNo}">${item.companyNo}</a></td>
-                    <td>${item.comName}</td>
-                    <td>${item.comBizNum}</td>
-                    <td>${item.comBizType}</td>
-                    <td>${item.comArea}</td>
-                    <td>${item.comAddr}</td>
-                    <td>${item.comContact}</td>
-                    <td>${item.comBizStatus}</td>
-                </tr>
-            `;
-        });
+function fetchSearchResults(keyword) {
+    fetch('/searchCompany?keyword=' + keyword)
+        .then(response => response.json())
+        .then(list => {
+            let msg = '';
+            list.forEach(list => {
+            	  msg += '<tr class="companyList" data-comArea="'+list.comArea+'" data-comBizType="'+list.comBizType+'">'+
+                  '<td><a href="'+list.companyNo+'">'+list.companyNo+'</a></td>'+
+                  '<td>'+list.comName+'</td>'+
+                  '<td>'+list.comBizNum+'</td>'+
+                  '<td>'+list.comBizType+'</td>'+
+                  '<td>'+list.comArea+'</td>'+
+                  '<td>'+list.comAddr+'</td>'+
+                  '<td>'+list.comContact+'</td>'+
+                  '<td>'+list.comBizStatus+'</td>'+     
+              '</tr>';
+            });
+            resetCheckboxes();
+            const tableBody = document.querySelector('#company_tbl tbody');
+            tableBody.innerHTML = msg;
+            
+            drawPagination();
+            goToPage(1);
+            resetCheckboxes();
 
-        resetCheckboxes();
-        const tblBody = document.querySelector('#company_tbl tbody');
-        tblBody.innerHTML = msg;
-
-        drawPagination();
-        goToPage(1);
-        resetCheckboxes();
-    })
-    .catch(error => console.error('Error:', error));
+        })
+        .catch(error => console.error('Error:', error));
 }
-
 
 //체크박스 상태 초기화 함수 이기능을 안걸어두면 체크 박스 꺼져있는데 검색하면 체크박스 무시하고나옴 // 이거 예외처리하면 코드 너무 길어짐;;
 function resetCheckboxes() {
@@ -76,32 +48,27 @@ function resetCheckboxes() {
 
     // "전체 선택" 체크박스도 초기화
     document.getElementById('comArea_typeAll').checked = true;
+    document.getElementById('comBizType_typeAll').checked = true;
 }
 
-
-// 필터링된 기업 리스트 가져오기
-function getFilteredCompanys() {
-    let typeFilters = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comArea_type"]:checked')).map(function (checkbox) {
+//필터링된 기업 리스트 가져오기
+function getFilteredCompanys() 
+{
+    let comAreaFilter = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comArea_type"]:checked')).map(function(checkbox) {
+    	return checkbox.value;
+    });
+    let comBizTypeFilter = Array.from(document.querySelectorAll('.searchbar_checkbox_filter[data-filter="comBizType_type"]:checked')).map(function(checkbox) {
         return checkbox.value;
     });
 
 
-    // 여기서 새로운 상품 리스트를 가져오도록 수정
-    let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
-    let filteredProducts = Array.from(tds).filter(function (tds) {
-        let type = tds.getAttribute('data-type');
-        return (typeFilters.length === 0 || typeFilters.includes(type));
+    // 여기서 새로운 기업 리스트를 가져오도록 수정
+    let companys = document.querySelectorAll('.companyList'); 
+    let filteredCompanys = Array.from(companys).filter(function (companyList) {
+        let comArea = companyList.getAttribute('data-comArea');
+        let comBizType = companyList.getAttribute('data-comBizType');
+        return (comAreaFilter.length === 0 || comAreaFilter.includes(comArea)) && (comBizTypeFilter.length === 0 || comBizTypeFilter.includes(comBizType));
     });
 
     return filteredCompanys;
 }
-
-function myTime(unixTimeStamp) {
-    moment.locale('ko'); // 한국어 설정
-	// 오늘 날짜 가져오기
-	const mytime = moment(unixTimeStamp).format('YYYY-MM-DD');
-
-    return mytime;
-}
-
-// 서치 끝

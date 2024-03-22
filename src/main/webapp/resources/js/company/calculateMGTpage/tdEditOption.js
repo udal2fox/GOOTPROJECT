@@ -221,6 +221,12 @@
 	
 	
 	function EditTradeDetail() {
+		
+		if(deptNo != 0 && deptNo != 2)
+		{
+			alert("불허된 접근입니다.")
+			return;
+		}
 
 		console.log("추가정산 코드:", addCode);
 		console.log("금액차감 코드:", dedCode);

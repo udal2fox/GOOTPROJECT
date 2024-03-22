@@ -179,7 +179,13 @@
 }
 
 
-.page-wrap{
+/*페이징 이미지사이즈  */
+		td img {height: 80px; width: 120px;}
+		.page-nation li{
+			list-style: none;
+		}
+		
+		.page-wrap{
 			    text-align: center;
 			    font-size: 0;
 			    display: flex;

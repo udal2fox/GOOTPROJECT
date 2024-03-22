@@ -7,7 +7,6 @@
 </script>
 
 <body>
-	
 		<div>
 			<h4> 프로필 편집 </h4>
 		</div>
@@ -17,10 +16,7 @@
 						<div id="profile-all">
 							<div id="img-box">
 								<div id="profile-img">
-								 	<img id="profilePicture" src="${vo.profilePicture}" width="302px" height="152px" onerror="this.style.display='none'">
-									<svg id="img-icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" class="bi bi-person" viewBox="0 0 16 16" fill="white">
-  										<path fill="white" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-									</svg>
+								 	<img id="profilePicture" src="${vo.profilePicture}" width="302px" height="152px" onerror="profile()">
 								</div>
 								<div id="img-white-line">
 									<span id="img-change"> 프로필사진 변경 </span>
@@ -109,7 +105,8 @@
 			</form>
 		</div>
 	
-	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/profile_modify2.js"></script>	
+	
+	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/profile_modify2.js"></script>
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/profile_modify.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>

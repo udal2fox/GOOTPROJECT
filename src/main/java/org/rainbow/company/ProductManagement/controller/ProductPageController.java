@@ -2,6 +2,7 @@ package org.rainbow.company.ProductManagement.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -241,14 +243,19 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
     }
     
-    /** 상품 개별수정*/
+    /** 상품 개별수정
+     * @throws IOException */
     @PostMapping("/prdUpdate.do")
-    public String prdUpdate(prdInsertVO pvo , Model model)
+    public String prdUpdate(@RequestPart(value = "file", required = false) MultipartFile file ,prdInsertVO pvo , Model model) throws IOException
     {
     	log.info(pvo);
     	
-    	int prdUpdateResult = pService.prdUpdate(pvo); 
     	
+    	String imageUrl = imageUploader.uploadImage(file); 
+    	
+    	pvo.setPrdImg(imageUrl);
+    	
+    	int prdUpdateResult = pService.prdUpdate(pvo); 
     	String result = "";
     	if(prdUpdateResult >= 1 )
     	{
@@ -285,6 +292,22 @@ public class ProductPageController
     	model.addAttribute("prdDelResult", result);
     	
     	return "/company/productManagement/prdResult";
+    }
+    
+    // 상품 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exPrdExcel")
+    public void exPrdExcel(HttpServletResponse response) throws IOException
+    {
+    	List<prdDownVO> downlist = new ArrayList<>();
+    	prdDownVO vo = new prdDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
     
@@ -436,6 +459,22 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
 
     }
+ // 공급처 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exSupsExcel")
+    public void exSupsExcel(HttpServletResponse response) throws IOException
+    {
+    	List<supsDownVO> downlist = new ArrayList<>();
+    	supsDownVO vo = new supsDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
     
     // 공급처 리스트 기능 끝 ------------------------------------------------------------------------------------------------------
 }

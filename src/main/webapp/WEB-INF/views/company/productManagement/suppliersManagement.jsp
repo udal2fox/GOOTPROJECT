@@ -79,6 +79,7 @@
                        		<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
                             <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
                             <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
+                            <button type="button" class="btn btn-primary" id="exExcelSups">엑셀업로드 양식</button>
                         </div>
                         </div>
                     </div>
@@ -117,7 +118,7 @@
 			    </tbody>
 			</table>
 			<div style="width: 1500px;" align="left">
-		        <button type="button" class="btn btn-primary" onclick="location.href='moveSuppliersRegist'">신규 등록</button>
+		        <button type="button" class="btn btn-primary" onclick="moveSupsReg();">신규 등록</button>
 		    </div>
         </form>
     </div>
@@ -131,7 +132,9 @@
 </div>
 
 </div>
-
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/productPage/supsPageFilter.js"></script> 
 <script type="text/javascript" src="/resources/js/company/productPage/supsPageSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/productPage/supsUpDownLoad.js"></script>

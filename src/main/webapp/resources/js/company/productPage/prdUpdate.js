@@ -91,6 +91,11 @@
 
 	function prdUpdate(f)
 	{
+		if(deptNo != 0 && deptNo != 4)
+		{
+			alert("불허된 접근입니다.")
+			return;
+		}
 		if(f.prdSdc.value == '' || f.prdName.value == '')
 		{
 			alert("필수정보를 입력해주세요...");
@@ -107,6 +112,11 @@
 	}
 	function prdDelte(f)
 	{
+		if(deptNo != 0 && deptNo != 4)
+		{
+			alert("불허된 접근입니다.")
+			return;
+		}
 		if(confirm("상품을  삭제하시겠습니까?"))
 		{
 			f.action = 'prdDelete.do';

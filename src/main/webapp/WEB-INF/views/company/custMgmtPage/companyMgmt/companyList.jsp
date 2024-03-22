@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,22 +27,22 @@
 				<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" class="searchBarKeyword" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
+						<input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
 					</td>
 					<td></td>
 					<th>지역</th>
 					<td>
 					<div class="checkbox_div">
 	
-						<input type="checkbox" class="searchbar_checkbox" name="area" value="전체" checked="checked" id="comArea_typeAll"  data-check-all="comArea_type">
+						<input type="checkbox" class="searchbar_checkbox" name="comArea" value="전체" checked="checked" id="comArea_typeAll"  data-check-all="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_typeAll">전체</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="서울" checked="checked" id="comArea_seoul"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comArea" value="서울" checked="checked" id="comArea_seoul"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_seoul">서울</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="경기" checked="checked" id="comArea_gyeonggi"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comArea" value="경기" checked="checked" id="comArea_gyeonggi"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_gyeonggi">경기</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="부산" checked="checked" id="comArea_busan"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comArea" value="부산" checked="checked" id="comArea_busan"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_busan">부산</label>
-						<input type="checkbox" class="searchbar_checkbox_filter" name="area" value="그 외" checked="checked" id="comArea_etc"  data-filter="csStatus_type">
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comArea" value="그 외" checked="checked" id="comArea_etc"  data-filter="comArea_type">
 						<label class="searchbar_checkbox_lable" for="comArea_etc">그 외</label>
 					
 					</div>
@@ -53,24 +53,27 @@
 				<tr>
 					<th>기업 구분</th>
 					<td>
-					<div class="radioBtn_div">
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="전체" checked="checked">전체
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="법인">법인
-						<input type="radio" class="searchbar_radioBtn_filter" name="bizType" value="개인">개인
+					<div class="checkbox_div">
+						<input type="checkbox" class="searchbar_checkbox" name="comBizType" value="전체" checked="checked" id="comBizType_typeAll"  data-check-all="comBizType_type">
+						<label class="searchbar_checkbox_lable" for="comBizType_typeAll">전체</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comBizType" value="법인"  checked="checked" id="comBizType_corporation"  data-filter="comBizType_type">
+						<label class="searchbar_checkbox_lable" for="comBizType_corporation">법인</label>
+						<input type="checkbox" class="searchbar_checkbox_filter" name="comBizType" value="개인" checked="checked" id="comBizType_individual"  data-filter="comBizType_type">
+						<label class="searchbar_checkbox_lable" for="comBizType_individual">개인</label>
 					
-					</div>
-					</td>
-					<td></td>
-					<th>업태</th>
-					<td>
-						<select name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
+						</div>
+						</td>
+						<td></td>
+						<th>업태</th>
+						<td>
+						<select class="searchbar_selectbox_filter" name="searchBarBizStatus" id="searchBarBizStatus" style="text-align: center;">
 							<option value="선택">선택</option>
 							<option value="농업 및 임업">농업 및 임업</option>
 							<option value="어업">어업</option>
 							<option value="광업">광업</option>
 							<option value="제조업">제조업</option>
 							<option value="전기,가스 및 수도사업">전기,가스 및 수도사업</option>
-							<option value="건설업">건설업</option>
+								<option value="건설업">건설업</option>
 							<option value="도매 및 소매업">도매 및 소매업</option>
 							<option value="숙박 및 음식점업">숙박 및 음식점업</option>
 							<option value="운수업">운수업</option>
@@ -96,7 +99,9 @@
 			
 		
 			<div class="download_to_excel_btn_div">
-				<input type="button" class="companyListBtns" id="downloadExcelBtn" value="엑셀로 내려받기">
+				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
+                <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
+                <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -131,7 +136,7 @@
             </thead>
   			<tbody>
       			 <c:forEach var="vo" items="${companyVO }">
-               <tr class="companyList" data-type="${vo.comArea}">
+               <tr class="companyList" data-comArea="${vo.comArea}" data-comBizType="${vo.comBizType}">
                   <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
 				  <td>${vo.comName }</td>
                   <td>${vo.comBizNum }</td>
@@ -148,12 +153,13 @@
 </form>
 
 </div>
-<div id="pagination" class="page-wrap" style="width: 1200;">	
+    <!--페이지 부분제거후 js 로 그릴예정 -->
+    <!-- page -->
+    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">	
     <ul class="page-nation">
         <!-- 페이지네이션은 이곳에 동적으로 생성 -->
         
     </ul>
-    </div>
 </div>
 
 
@@ -163,9 +169,11 @@
 		
 	</div>
 </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyFilter.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companySearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/companyUpDownLoad.js"></script>
 </body>
 </html>

@@ -11,13 +11,15 @@
 </head>
 <body>
 <%@ include file="../navBar.jsp" %>
-<div class="container-fluid"> 
-	<div style="display: flex;">	
-		<div class="container " style="padding-top: 80px; width: 500px; height: 800px;">
-		  <h4>월별 매출 통계</h4>
-		  <canvas id="myChart1"></canvas>
+<div class="container-fluid" align="center"> 
+	<div style="display: flex; justify-content: center;" align="center">	
+		<div>
+			<div class="container " style="padding-top: 70px; width: 500px; height: 800px;">
+			  <h4>월별 매출 통계</h4>
+			  <canvas id="myChart1"></canvas>
+			</div>
 		</div>
-		<div style="padding-right: 30px;">
+		<div style="">
 			<div style="display: flex;">
 				<div class="container " style="padding-top: 80px; height: 400px; width: 500px;">
 				  <h4>분기 매출 통계</h4>
@@ -140,7 +142,7 @@
 	      type: 'line',
 	      data: {
 	        
-	   	  labels: ['03/2023','04/2023','05/2023','06/2023','07/2023','08/2023','09/2023','10/2023','11/2023','12/2023','01/2024', '02/2024' ],
+	   	  labels: ['23/03','23년4월','23년5월','23년6월','23년7월','23년8월','23년9월','23년10월','23년11월','23년12월','24년1월', '24년2월' ],
         datasets: [
 	        {
 	          label: '고객 수',

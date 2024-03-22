@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
 <!DOCTYPE html>
 <html lang="en">
 
@@ -149,7 +150,21 @@
                     <div class="flex-shrink-0 dropdown">
                         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <span id="profile">${team} / ${name}</span>
+                            <c:choose>
+                            	<c:when test="${sessionScope.deptNo eq 0}">
+                            		<c:set var="dept" value="대표"/>
+                            	</c:when>
+                            	<c:when test="${sessionScope.deptNo eq 1}">
+                            		<c:set var="dept" value="인사팀"/>
+                            	</c:when>
+                            	<c:when test="${sessionScope.deptNo eq 2}">
+                            		<c:set var="dept" value="영업팀"/>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<c:set var="dept" value="상품팀"/>
+                            	</c:otherwise>
+                            </c:choose>
+                            <span id="profile">${dept} / ${sessionScope.eName}&nbsp;&nbsp;&nbsp;</span>
                             <img src="https://github.com/mdo.png" alt="profile" width="auto" height="32"
                                 class="rounded-circle">
                         </a>

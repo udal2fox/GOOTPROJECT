@@ -24,8 +24,8 @@ function fetchSearchResults(keyword) {
                             '<td>'+list.prdSubCtg+'</td>'+
                             '<td>'+
                                 '<img alt="" src="'+list.prdImg+'" align="left" ><div id="tdTop">'+list.prdName+'</div></td>'+
-                            '<td>'+list.prdCstPri.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
-                            '<td>'+list.prdSal.toLocaleString('ko-KR', { style: 'currency', currency: 'KRW' })+'</td>'+
+                            '<td>'+list.prdCstPri.toLocaleString('ko-KR')+'</td>'+
+                            '<td>'+list.prdSal.toLocaleString('ko-KR')+'</td>'+
                             '<td>'+Math.ceil(list.prdMargin * 100 ).toFixed(2)+'%</td>'+
                         '</tr>';
             });

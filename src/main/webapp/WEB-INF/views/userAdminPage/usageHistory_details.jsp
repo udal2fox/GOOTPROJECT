@@ -49,7 +49,7 @@ table {
 
 				<!-- 상품권 및 현물상품 정보 테이블 -->
 				<div>
-					<table class="table table-bordered text-center mb-5 align-middle fw-bold">
+					<table class="table table-info table-bordered text-center mb-5 align-middle fw-bold">
 						<tr>
 							<th>
 								<h5>상 품 권</h5>
@@ -95,7 +95,7 @@ table {
 				<div class="overflow-auto">
 					<table class="table table-bordered text-center align-middle">
 						<thead>
-							<tr>
+							<tr class="table-primary">
 								<th style="width: 15%">날짜</th>
 								<th style="width: 15%">이름</th>
 								<th style="width: 15%">상품 이미지</th>
@@ -138,7 +138,7 @@ table {
 				<div class="overflow-auto">
 					<table class="table table-bordered text-center align-middle">
 						<thead>
-							<tr>
+							<tr class="table-primary">
 								<th style="width: 15%">날짜</th>
 								<th style="width: 15%">이름</th>
 								<th style="width: 15%">상품 이미지</th>

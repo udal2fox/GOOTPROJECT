@@ -63,74 +63,95 @@
 	<!-- 상품 top5 정보 가져오기 -->
 	<select id="getBestTop5" parameterType="int"
 		resultType="HashMap">
-SELECT
-    P.prdNo,
-    P.prdName,
-    P.prdImg,
-    SUM(O.count) AS total_count
-FROM
-    RAIN_order_tbl O
-JOIN
-    RAIN_Products_tbl P ON O.prdNo = P.prdNo
-WHERE
-    O.spotNo = #{spotNo}
-    AND O.step = '발송완료'
-GROUP BY
-    P.prdNo, P.prdName, P.prdImg
-ORDER BY
-    total_count DESC
-LIMIT 5;
+		SELECT
+		P.prdNo,
+		P.prdName,
+		P.prdImg,
+		SUM(O.count) AS
+		total_count
+		FROM
+		RAIN_order_tbl O
+		JOIN
+		RAIN_Products_tbl P ON O.prdNo =
+		P.prdNo
+		WHERE
+		O.spotNo = #{spotNo}
+		AND O.step = '발송완료'
+		GROUP BY
+		P.prdNo,
+		P.prdName, P.prdImg
+		ORDER BY
+		total_count DESC
+		LIMIT 5;
 	</select>
-	
+
 	<!-- 최근 6개월 사용금액 가져오기 -->
-	<select id="getMonthlyData" parameterType="int" resultType="HashMap">
-	SELECT 
-    YEAR(recDate) AS year,
-    MONTH(recDate) AS month,
-    SUM(recSum) AS total_recSum
-FROM 
-    RAIN_receipt_tbl
-WHERE 
-    spotNo = #{spotNo}
-    AND recDate BETWEEN DATE_ADD(LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 6 MONTH)), INTERVAL 1 DAY) AND LAST_DAY(CURDATE())
-GROUP BY 
-    YEAR(recDate),
-    MONTH(recDate)
-ORDER BY 
-    year DESC,
-    month DESC;
+	<select id="getMonthlyData" parameterType="int"
+		resultType="HashMap">
+		SELECT
+		YEAR(recDate) AS year,
+		MONTH(recDate) AS month,
+		SUM(recSum) AS total_recSum
+		FROM
+		RAIN_receipt_tbl
+		WHERE
+		spotNo = #{spotNo}
+		AND recDate BETWEEN DATE_ADD(LAST_DAY(DATE_SUB(CURDATE(), INTERVAL 6
+		MONTH)), INTERVAL 1 DAY) AND LAST_DAY(CURDATE())
+		GROUP BY
+		YEAR(recDate),
+		MONTH(recDate)
+		ORDER BY
+		year DESC,
+		month DESC;
 	</select>
 
 	<!-- 직원정보 가져오기 -->
 	<select id="getEmpList" parameterType="int"
 		resultType="java.util.HashMap">
-		SELECT * FROM RAIN_cEMP_tbl WHERE sNo = #{sNo}
+		SELECT * FROM RAIN_cEMP_tbl WHERE spotNo = #{spotNo}
 	</select>
 
 	<!-- 직원정보 추가하기 -->
-	<insert id="addUserEmp" parameterType="java.util.HashMap">
+	<insert id="addUserEmp" parameterType="HashMap">
 		INSERT INTO RAIN_cEMP_tbl
-		(sNo, cEmpName, cEmpTel, cEmpEmail, cEmpPosition,
-		cEmpBirth,
-		receiveGift) VALUES (#{sNo}, #{cEmpName}, #{cEmpTel},
-		#{cEmpEmail},
-		#{cEmpPosition}, #{cEmpBirth}, 0)
+			(spotNo, 
+			cEmpName, 
+			cEmpTel, 
+			cEmpEmail, 
+			cEmpPosition,
+			cEmpBirth) 
+		VALUES
+			(#{spotNo}, 
+			#{cEmpName}, 
+			#{cEmpTel},
+			#{cEmpEmail},
+			#{cEmpPosition},
+			#{cEmpBirth})
+		ON DUPLICATE KEY UPDATE
+			spotNo = #{spotNo},
+			cEmpName = #{cEmpName}, 
+			cEmpTel = #{cEmpTel}, 
+			cEmpEmail = #{cEmpEmail}, 
+			cEmpPosition = #{cEmpPosition},
+			cEmpBirth = #{cEmpBirth}
 	</insert>
 
 	<!-- 직원 수정하기 -->
 	<update id="updateEmp" parameterType="java.util.HashMap">
 		UPDATE RAIN_cEMP_tbl SET
-		cEmpName = #{cEmpName}, cEmpTel = #{cEmpTel},
-		cEmpEmail = #{cEmpEmail},
-		cEmpPosition = #{cEmpPosition}, cEmpBirth =
-		#{cEmpBirth}, receiveGift =
-		#{receiveGift} WHERE cEmpNo = #{no}
+			cEmpName = #{cEmpName}, 
+			cEmpTel = #{cEmpTel},
+			cEmpEmail = #{cEmpEmail},
+			cEmpPosition = #{cEmpPosition}, 
+			cEmpBirth = #{cEmpBirth} 
+		WHERE cEmpNo = #{no}
 	</update>
 
 	<!-- 직원 삭제를 처리하는 쿼리 -->
 	<delete id="deleteEmployees" parameterType="java.util.HashMap">
 		DELETE FROM
-		RAIN_cEMP_tbl WHERE sNo = #{sNo} AND cEmpNo = #{cEmpNo}
+		RAIN_cEMP_tbl WHERE spotNo = #{spotNo} AND cEmpNo = #{cEmpNo}
 	</delete>
 
 	<!-- 고객지원 리스트 가져오기 -->
@@ -224,7 +245,8 @@ ORDER BY
 		LEFT JOIN RAIN_order_tbl ON
 		RAIN_cEMP_tbl.cEmpNo = RAIN_order_tbl.cEmpNo
 		WHERE
-		sNo = #{spotNo}
+		RAIN_cEMP_tbl.spotNo
+		= #{spotNo}
 		AND
 		DATE_FORMAT(cEmpBirth, '%m') = #{month}
 		AND

@@ -114,7 +114,7 @@ function fetchData() {
           msg += '<td>' + ++n + '</td>';
           msg += '<td>' + recipient.cEmpName + '</td>';
           msg += '<td>' + recipient.cEmpPosition + '</td>';
-          msg += '<td>' + recipient.cEmpTel + '</td>';
+          msg += '<td>' + formatPhoneNumber(recipient.cEmpTel) + '</td>';
           msg += '<td>' + recipient.cEmpEmail + '</td>';
           msg += '<td>' + formatTimestamp(recipient.cEmpBirth) + '</td>';
           msg += '<td>' + recipient.step + '</td>';
@@ -166,4 +166,11 @@ function numberWithCommas(x) {
 function sendGift(recipientId) {
   // 여기에 선물 발송 코드 추가
   console.log("Recipient ID:", recipientId);
+}
+
+// 전화번호 형식을 변환하는 함수입니다.
+function formatPhoneNumber(num) {
+  return num
+    .replace(/[^0-9]/g, "") // 숫자 이외의 문자 제거
+    .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3"); // 특정 패턴에 맞게 변환
 }

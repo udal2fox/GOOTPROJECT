@@ -380,6 +380,12 @@
 	// 결제 완료처리	
 	document.querySelector('.PaymentBtn').addEventListener('click', function() {
 		
+		if(deptNo != 0 && deptNo != 2)
+		{
+			alert("불허된 접근입니다.")
+			return;
+		}
+		
 		if(confirm("결제처리를 완료 하시겠습니까?"))
 		{
 			let checkedDataList = [];
@@ -434,6 +440,12 @@
 	
 	// 대손 완료처리	
 	document.querySelector('.BigHandBtn').addEventListener('click', function() {
+		
+		if(deptNo != 0 && deptNo != 2)
+		{
+			alert("불허된 접근입니다.")
+			return;
+		}
 		
 		if(confirm("대손처리를 완료 하시겠습니까?"))
 		{

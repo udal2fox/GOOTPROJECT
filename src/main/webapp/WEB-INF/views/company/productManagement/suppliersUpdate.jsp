@@ -13,7 +13,7 @@
 	<div class="container-fluid" align="center">
 		<h2 align="left" class = "h2st">공급처 편집</h2>
 		<div>
-			<form method="post">
+			<form method="post" enctype="multipart/form-data">
 				<table class="prdinputTable">
 					<tr>
 						<td>입점업체코드</td><td colspan="3"><input type="text" class="form-control" readonly="readonly" value="${GSV.supsNo}" name="supsNo"></td>
@@ -90,7 +90,10 @@
 					    <td>담당자이름2</td><td colspan="3"><input type="text" class="form-control" name="supsSubName" value="${GSV.supsSubName }"></td>
 					</tr>
 					<tr>
-						<td>사업자등록증</td><td colspan="3"><input type="file" class="form-control" id="supsBizLic" name="supsBizLic" multiple="multiple"></td>
+						<td>사업자등록증</td><td colspan="3">
+						<input type="file" class="form-control" id="inputGroupFile02" name="file">
+					    <input type="hidden" name="existingImage" value="${GSV.supsBizLic}">
+						</td>
 					    <td></td>
 					    <td>담당자 연락처2</td><td colspan="3"><input type="text" class="form-control"name="supsSubPhone" value="${GSV.supsSubPhone }"></td>
 					</tr>
@@ -113,5 +116,8 @@
 		</div>
 	</div>
 </body>
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/productPage/supsUpdate.js"></script> 
 </html>

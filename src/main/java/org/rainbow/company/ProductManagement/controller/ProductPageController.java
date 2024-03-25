@@ -2,6 +2,7 @@ package org.rainbow.company.ProductManagement.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,6 +84,7 @@ public class ProductPageController
     	model.addAttribute("NSN", newSupsNo);
     	return "/company/productManagement/suppliersRegist";
     }
+    
     // 공급처 수정 이동
     @GetMapping(value = "/moveSuppliersUpdate")
     public String moveSuppliersUpdate(@RequestParam("supsNo") String supsNo, Model model) 
@@ -92,6 +95,8 @@ public class ProductPageController
     	
     	return "/company/productManagement/suppliersUpdate";
     }
+    
+    
     // 상품 개별 등록 이동
     @GetMapping(value = "/moveProductReg")
     public String moveProductReg(Model model) 
@@ -236,33 +241,44 @@ public class ProductPageController
         	model.addAttribute("prdInsertresult", result);
         }
 
-        // 파일 업로드 후 처리할 내용이 있다면 이 곳에 추가
     	
     	return "/company/productManagement/prdResult";
     }
     
-    /** 상품 개별수정*/
+    /** 상품 개별수정
+     * @throws IOException */
+    // 상품 개별수정 메소드에서 수정
     @PostMapping("/prdUpdate.do")
-    public String prdUpdate(prdInsertVO pvo , Model model)
+    public String prdUpdate(@RequestPart(value = "file", required = false) MultipartFile file,
+                            @RequestParam("existingImage") String existingImage,
+                            prdInsertVO pvo, Model model) throws IOException
     {
-    	log.info(pvo);
-    	
-    	int prdUpdateResult = pService.prdUpdate(pvo); 
-    	
-    	String result = "";
-    	if(prdUpdateResult >= 1 )
-    	{
-    		result = "prdUpdateSuccess";
-    	}
-    	else
-    	{
-    		result = "prdUpdatefail";
-    	}
-    	
-    	model.addAttribute("prdUpdateResult", result);
-    	
-    	return "/company/productManagement/prdResult";
+        log.info(pvo);
+
+        String imageUrl;
+        if (file != null && !file.isEmpty()) {
+            // 새로운 파일이 업로드되었을 때
+            imageUrl = imageUploader.uploadImage(file);
+        } else {
+            // 새로운 파일이 업로드되지 않았을 때는 기존 이미지를 사용
+            imageUrl = existingImage;
+        }
+
+        pvo.setPrdImg(imageUrl);
+
+        int prdUpdateResult = pService.prdUpdate(pvo);
+        String result = "";
+        if (prdUpdateResult >= 1) {
+            result = "prdUpdateSuccess";
+        } else {
+            result = "prdUpdatefail";
+        }
+
+        model.addAttribute("prdUpdateResult", result);
+
+        return "/company/productManagement/prdResult";
     }
+
     
     /** 상품 개별삭제*/
     @PostMapping("/prdDelete.do")
@@ -285,6 +301,22 @@ public class ProductPageController
     	model.addAttribute("prdDelResult", result);
     	
     	return "/company/productManagement/prdResult";
+    }
+    
+    // 상품 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exPrdExcel")
+    public void exPrdExcel(HttpServletResponse response) throws IOException
+    {
+    	List<prdDownVO> downlist = new ArrayList<>();
+    	prdDownVO vo = new prdDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
     
@@ -366,49 +398,64 @@ public class ProductPageController
     	ExcelDownloadUtil.dowonloadUtill(response, downlist);
     }
     
-    // 공급처 등록 일단 파일 어떻게 넣을지 판단 안되서.. 파일 넣는기능 제외하고 그냥 인서트
+    // 공급처 등록 
     @PostMapping("/insertSupsReg")
-    public String insertSupsReg(suppliersVO svo, Model model)
+    public String insertSupsReg(MultipartFile file, suppliersVO svo, Model model) throws IOException
     {
-    	log.info(svo);
-
-    	int supInsertReulst = pService.insertSups(svo);
-    	
     	String result = "";
-    	if(supInsertReulst >= 1 )
-    	{
-    		result = "supInsertSuccess";
-    	}
-    	else
-    	{
-    		result = "supInsertfail";
-    	}
-    	
-    	model.addAttribute("supInsertReulst", result);
+        log.info("파일 정보: " + file.getOriginalFilename());
+        log.info("상품 정보: " + svo);
+        
+        String imageUrl = imageUploader.uploadImage(file); 
+        log.info(imageUrl);
+        if (imageUrl != null)
+        {
+        	svo.setSupsBizLic(imageUrl);
+	    	int supInsertReulst = pService.insertSups(svo);
+	    	if(supInsertReulst >= 1 )
+	    	{
+	    		result = "supInsertSuccess";
+	    	}
+	    	else
+	    	{
+	    		result = "supInsertfail";
+	    	}
+	    	
+	    	model.addAttribute("supInsertReulst", result);
+        }
     	
     	return "/company/productManagement/prdResult";
     }
     
     // 공급처 수정
     @PostMapping("/supsUpdate")
-    public String supsUpdate(suppliersVO svo, Model model)
+    public String supsUpdate(@RequestPart(value = "file", required = false) MultipartFile file,
+            @RequestParam("existingImage") String existingImage,
+            suppliersVO svo, Model model) throws IOException
     {
+    	
+    	log.info(existingImage);
     	log.info(svo);
-    	System.out.println(svo.getSupsSt());
-    	System.out.println(svo.getSupsBnt());
-    	int supUpResult = pService.supsUpdate(svo);
-    	
-    	String result = "";
-    	if(supUpResult >= 1 )
-    	{
-    		result = "supUpSuccess";
-    	}
-    	else
-    	{
-    		result = "supUpfail";
-    	}
-    	
-    	model.addAttribute("subUpResult", result);
+    	String imageUrl;
+        if (file != null && !file.isEmpty()) {
+            // 새로운 파일이 업로드되었을 때
+            imageUrl = imageUploader.uploadImage(file);
+        } else {
+            // 새로운 파일이 업로드되지 않았을 때는 기존 이미지를 사용
+            imageUrl = existingImage;
+        }
+
+        svo.setSupsBizLic(imageUrl);
+
+        int supUpResult = pService.supsUpdate(svo);
+        String result = "";
+        if (supUpResult >= 1) {
+            result = "supUpSuccess";
+        } else {
+            result = "supUpfail";
+        }
+
+        model.addAttribute("subUpResult", result);
     	
     	return "/company/productManagement/prdResult";
     }
@@ -436,6 +483,22 @@ public class ProductPageController
     	return "/company/productManagement/prdResult";
 
     }
+ // 공급처 업로드용 엑셀 다운르드
+    @ResponseBody
+    @GetMapping("/exSupsExcel")
+    public void exSupsExcel(HttpServletResponse response) throws IOException
+    {
+    	List<supsDownVO> downlist = new ArrayList<>();
+    	supsDownVO vo = new supsDownVO();
+    	downlist.add(vo);
+    	
+    	System.out.println(downlist);
+    	
+    	
+        // 리스트를 넣으면 엑셀화됨.
+        ExcelDownloadUtil.dowonloadUtill(response, downlist);
+    }
+    
     
     // 공급처 리스트 기능 끝 ------------------------------------------------------------------------------------------------------
 }

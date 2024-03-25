@@ -317,3 +317,12 @@ function sortTable(column) {
     tbody.innerHTML = '';
     rows.forEach(row => tbody.appendChild(row));
 }
+
+function movePrdReg() {
+	if(deptNo != 0 && deptNo != 4)
+	{
+		alert("불허된 접근입니다.")
+		return;
+	}
+	location.href='/moveProductReg'
+}

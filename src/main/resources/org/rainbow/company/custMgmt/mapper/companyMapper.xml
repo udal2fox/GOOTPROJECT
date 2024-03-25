@@ -8,8 +8,8 @@
 		SELECT * FROM RAIN_cCompany_tbl ORDER by companyNo asc
 	</select>
 
-   <!-- 서치바 - 키워드 검색 결과 가져오기 -->
-	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.companyVO" parameterType="org.rainbow.company.custMgmt.domain.companySearchDTO">
+<!-- 서치바 - 키워드 검색 결과 가져오기 -->
+<!-- 	<select id="giveKeyword" resultType="org.rainbow.company.custMgmt.domain.companyVO" parameterType="org.rainbow.company.custMgmt.domain.companySearchDTO">
    SELECT companyNo, comName, comBizNum, comBizType, comArea, comAddr, comContact, comBizStatus
    FROM RAIN_cCompany_tbl
    WHERE 1 = 1
@@ -30,7 +30,18 @@
   
     AND comBizStatus = #{comBizStatus}
 </if>
-</select>
+</select>  -->
+
+	<select id="giveKeyword" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.custMgmt.domain.companyVO">
+	      
+	        SELECT *
+			FROM RAIN_cCompany_tbl 
+			WHERE 
+					comName LIKE CONCAT('%', #{keyword}, '%') OR comBizNum = #{keyword} OR comAddr LIKE CONCAT('%', #{keyword}, '%') OR comContact = #{keyword}   
+
+			ORDER BY companyNo ASC;
+			
+	</select>
   
   
   
@@ -89,7 +100,7 @@ insert into  RAIN_cCompany_tbl(comCEO) values (#{comCEO})
 <!-- 기업 정보 update -->
 
 	<update id="updateCompany" parameterType="org.rainbow.company.custMgmt.domain.companyVO">
-		 update RAIN_cCompany_tbl set comName=#{comName}, 
+		 update RAIN_cCompany_tbl set comName=#{comName}, comBizLicenseFile=#{comBizLicenseFile},
 		 comBizNum=#{comBizNum}, comBizType=#{comBizType}, comArea=#{comArea}, comAddr=#{comAddr},
 		 comDetailAddr=#{comDetailAddr}, comBizStatus=#{comBizStatus}, comBizCategory=#{comBizCategory},
 		 comCEO=#{comCEO}, comContact=#{comContact}, comEmail=#{comEmail}, comOpenningDate=#{comOpenningDate} 

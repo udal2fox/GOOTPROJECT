@@ -83,6 +83,7 @@
                        		<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
                             <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
                             <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
+                            <button type="button" class="btn btn-primary" id="exExcelPrd">엑셀업로드 양식</button>
                         </div>
                         </div>
                     </div>
@@ -126,7 +127,7 @@
 			    </tbody>
 			</table>
 			<div style="width: 1500px;" align="left">
-		        <button type="button" class="btn btn-primary" onclick="location.href='moveProductReg'">신규 등록</button>
+		        <button type="button" class="btn btn-primary" onclick="movePrdReg();">신규 등록</button>
 		    </div>
         </form>
     </div>
@@ -140,7 +141,9 @@
 </div>
 
 </div>
-
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdPageFilter.js"></script> 
 <script type="text/javascript" src="/resources/js/company/productPage/prdPageSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/productPage/prdUpDownLoad.js"></script>

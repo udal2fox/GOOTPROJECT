@@ -44,7 +44,7 @@
         <div class="overflow-auto" style="height: 700px;">
             <div class="px-3">
                 <!-- 직원 리스트 테이블 -->
-                <table class="table table-sm" id="member_table">
+                <table class="table table-hover table-sm" id="member_table">
                     <thead class="table-danger">
                         <tr class="text-center">
                             <th><input class="form-check-input" type="checkbox" onclick="checkAll()"></th>
@@ -54,7 +54,6 @@
                             <th>연락처</th>
                             <th>이메일</th>
                             <th>생년월일</th>
-                            <th>선물 수령여부</th>
                         </tr>
                     </thead>
                     <tbody id="empList">
@@ -130,7 +129,6 @@
                                 <th>연락처</th>
                                 <th>이메일</th>
                                 <th>생년월일</th>
-                                <th>선물 수령여부</th>
                             </tr>
                         </thead>
                         <tbody id="editList">
@@ -139,7 +137,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeUpdateModal">닫기</button>
                 <button type="button" class="btn btn-primary" id="editMemberBtn">변경사항 저장</button>
             </div>
         </div>
@@ -153,13 +151,22 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">일괄업로드</h1>
+            	<img width="48" height="48" src="https://img.icons8.com/color/48/add-user-group-woman-man-skin-type-7.png" alt="add-user-group-woman-man-skin-type-7"/>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">&nbsp;&nbsp;&nbsp;직원 일괄 업로드</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">...</div>
+            <div class="modal-body">
+				<div class="input-group">
+  					<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="allMemberInsert" aria-label="Upload">
+				</div>
+  					<hr>
+  					<p> 아래 링크에서 양식을 다운받고</p>
+  					<p> 해당 엑셀파일에 메모에 맞춰 입력해주세요.</p>
+  					<a href="#"> ▶ 업로드 양식 다운로드</a>
+			</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary">변경사항 저장</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeExcelModal">닫기</button>
+                <button type="button" class="btn btn-primary" id="allMemberInsert">변경사항 저장</button>
             </div>
         </div>
     </div>

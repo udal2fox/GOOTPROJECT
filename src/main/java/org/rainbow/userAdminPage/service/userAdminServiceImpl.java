@@ -8,9 +8,7 @@ import org.rainbow.userAdminPage.mapper.userAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -54,8 +52,8 @@ public class userAdminServiceImpl implements userAdminService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getEmpList(int sNo) {
-		return userMapper.getEmpList(sNo);
+	public List<HashMap<String, Object>> getEmpList(int spotNo) {
+		return userMapper.getEmpList(spotNo);
 	}
 
 	@Override
@@ -177,5 +175,6 @@ public class userAdminServiceImpl implements userAdminService {
 		log.info(inputMap);
 		return userMapper.getDetailUsage(inputMap);
 	}
+
 
 }

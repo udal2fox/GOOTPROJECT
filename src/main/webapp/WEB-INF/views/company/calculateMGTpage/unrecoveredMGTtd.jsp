@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ include file="../../navBar.jsp" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <link rel="stylesheet" href="/resources/css/company/calculateMGTPage/TradeDetailPage.css">
 <body>
@@ -44,15 +45,15 @@
 			</tr>
 			<tr>
 				<td> 키워드   </td> 
-				<td colspan="2"> <input type="text" placeholder="거래명세번호/기업명/지점명" style="width: 318px;" id="tdKeyword"> </td>
+				<td colspan="2"> <input type="text" placeholder="기업관리번호/기업명" style="width: 318px;" id="tdKeyword" class="form-control"> </td>
 				<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 				<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>	
 			</tr>
 			<tr>
 				<td>기간</td>
-				<td colspan="2">
-					<input type="text" class="datePick1" placeholder="내용을 입력하세요"  style="width: 150px" > ~ 
-					<input type="text" class="datePick2" placeholder="내용을 입력하세요" style="width: 150px">
+				<td colspan="2" style="display: flex; align-items:center;">
+					<input type="text" class="datePick1 form-control" placeholder="내용을 입력하세요"  style="width: 150px" > &nbsp;~&nbsp; 
+					<input type="text" class="datePick2 form-control" placeholder="내용을 입력하세요" style="width: 150px">
 				</td>
 				<td><input type="button" class="btn btn-primary dateBtn" value="오늘"></td>
 				<td><input type="button" class="btn btn-primary dateBtn" value="최근1주"></td>
@@ -116,10 +117,10 @@
 					<td>${uc.comBizType }</td>
 					<td>${uc.spName }</td>
 					<td>${uc.recDate }</td>
-					<td>${uc.recSum - uc.recDed + uc.recAdd }</td>
-					<td>${uc.recSup }</td>
-					<td>${uc.recTax }</td>
-					<td>${uc.prdCstPri }</td>
+					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.recTax - uc.recDedTax + uc.recAddTax}" pattern="#,###"/></td>
+					<td><fmt:formatNumber value="${uc.prdCstPri}" pattern="#,###"/></td>
 					<td>${uc.prdMargin }</td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
@@ -134,6 +135,9 @@
 	    </ul>
     </div>
 </body>
+<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+</script>
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttd.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgttdSearch.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/ucMgtDownDo.js"></script> 

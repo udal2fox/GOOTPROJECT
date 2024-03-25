@@ -46,9 +46,16 @@ public class TradeDetailListVO
 	private String cEmpEmail;
 	/** 차금 금액 */
 	private int recDed;
-	
-	/** 추가 금액 */
+	/** 추가 금액  */
 	private int recAdd;
+	/** 차금 금액 */
+	private int recDedSup;
+	/** 추가 금액 */
+	private int recAddSup;
+	/** 차금 금액 */
+	private int recDedTax;
+	/** 추가 금액 */
+	private int recAddTax;
 	
 	
 	

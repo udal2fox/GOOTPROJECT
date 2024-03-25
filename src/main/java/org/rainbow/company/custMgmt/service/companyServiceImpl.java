@@ -8,6 +8,7 @@ import org.rainbow.company.custMgmt.domain.companyDownVO;
 import org.rainbow.company.custMgmt.domain.companyInputVO;
 import org.rainbow.company.custMgmt.domain.companySearchDTO;
 import org.rainbow.company.custMgmt.domain.companyVO;
+import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.mapper.companyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,9 @@ import lombok.extern.log4j.Log4j;
 public class companyServiceImpl implements companyService{
 	
 	@Override
-	public List<companyVO> getSearch(companySearchDTO companySearchDTO) {
+	public List<companyVO> giveKeyword(String keyword) {
 		
-		return companyMapper.getSearch(companySearchDTO);
+		return companyMapper.giveKeyword(keyword);
 	}
 	
 	@Autowired
@@ -73,8 +74,11 @@ public class companyServiceImpl implements companyService{
 	}
 	@Override
 	public int updateCompany(companyVO vo) {
-		log.info("updateCompany...." );
-		return companyMapper.updateCompany(vo);
+		log.info("updateCompany...." + vo);
+		
+		int list = companyMapper.updateCompany(vo);
+		log.info(list);
+		return list;
 	}
 
 }

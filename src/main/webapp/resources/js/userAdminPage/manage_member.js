@@ -22,7 +22,7 @@ function showEmpList(data) {
     // 데이터가 비어있는 경우
     // 메시지 출력
     msg += '<tr class="text-center">';
-    msg += '<td colspan="8">등록된 임직원이 없습니다.</td>';
+    msg += '<td colspan="7">등록된 임직원이 없습니다.</td>';
     msg += "</tr>";
   } else {
     // 데이터가 있는 경우
@@ -38,7 +38,6 @@ function showEmpList(data) {
       msg += "<td>" + formatPhoneNumber(emp.cEmpTel) + "</td>"; // 전화번호 형식 변환
       msg += "<td>" + emp.cEmpEmail + "</td>";
       msg += "<td>" + formatTimestamp(emp.cEmpBirth) + "</td>"; // 날짜 형식 변환
-      msg += "<td>" + formatReceiveGift(emp.receiveGift) + "</td>";
       msg += "</tr>";
     });
   }
@@ -59,11 +58,6 @@ function formatPhoneNumber(num) {
   return num
     .replace(/[^0-9]/g, "") // 숫자 이외의 문자 제거
     .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3"); // 특정 패턴에 맞게 변환
-}
-
-// 선물 수령여부 형식을 변환하는 함수입니다.
-function formatReceiveGift(data) {
-  return data ? "O" : "X";
 }
 
 // *****************************직원 추가*****************************
@@ -96,13 +90,15 @@ addBtn.addEventListener("click", () => {
 
   // 직원 정보를 객체로 만듭니다.
   const formData = {
-    sNo: okja,
+    spotNo: okja,
     cEmpName: addEmpForm.cEmpName.value,
     cEmpPosition: addEmpForm.cEmpPosition.value,
     cEmpTel: addEmpForm.cEmpTel.value,
     cEmpEmail: addEmpForm.cEmpEmail.value,
     cEmpBirth: addEmpForm.cEmpBirth.value,
   };
+
+  console.log(formData);
 
   // 서버로 POST 요청을 보냅니다.
   fetch("/userAdminPage/addEmp", {
@@ -168,8 +164,6 @@ document
         '"></td>';
       msg += '<td><input type="mail" value="' + cEmpEmail + '"></td>';
       msg += '<td><input type="date" value="' + cEmpBirth + '"></td>';
-      msg +=
-        '<td><select class="form-select" aria-label="status"><option value="" selected>선택</option><option value="0">X</option><option value="1">O</option>';
       msg += "</select></td></tr>";
     });
     editList.innerHTML = msg;
@@ -202,14 +196,6 @@ document.querySelector("#editMemberBtn").addEventListener("click", function () {
     editedEmp.cEmpTel = row.querySelector("td:nth-child(4) input").value;
     editedEmp.cEmpEmail = row.querySelector("td:nth-child(5) input").value;
     editedEmp.cEmpBirth = row.querySelector("td:nth-child(6) input").value;
-    editedEmp.receiveGift = row.querySelector("td:nth-child(7) select").value;
-
-    // 유효성 검사: receiveGift 값이 0 또는 1이 아닌 경우 플래그 설정 및 경고 표시
-    if (editedEmp.receiveGift !== "0" && editedEmp.receiveGift !== "1") {
-      isValid = false;
-      swal("선물 수령여부가 선택되지 않았습니다.");
-      return; // 함수 종료
-    }
 
     editedData.push(editedEmp);
   });
@@ -345,4 +331,47 @@ document.getElementById("searchInput").addEventListener("keyup", function(event)
       // Search 버튼 클릭 이벤트 호출
       document.getElementById("searchBtn").click();
   }
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var insertButton = document.getElementById("allMemberInsert");
+  insertButton.addEventListener("click", function() {
+      var fileInput = document.getElementById("inputGroupFile04");
+      var file = fileInput.files[0];
+
+      if (file) {
+          var formData = new FormData();
+          formData.append("EXCEL", file);
+
+          fetch("/userAdminPage/allMemberInsert/"+sessionStorage.getItem("Okja"), 
+          {
+              method: "POST",
+              body: formData
+          })
+          .then(function(response) {
+              if (!response.ok) {
+                  throw new Error("서버 오류 발생");
+              }
+              return response.text();
+          })
+          .then(function(data) {
+              if (data === "success") {
+                // 업로드 완료 메시지 표시
+                swal("직원이 일괄 업로드 되었습니다.", {
+                  icon: "success",
+                }).then(() => {
+                  location.href = "/userAdminPage/goManagemember";
+                });
+              } else {
+                  swal("업로드 실패", "", "error");
+              }
+          })
+          .catch(function(error) {
+              swal(error.message, "", "error");
+          });
+      } else {
+          swal("파일을 선택해주세요.", "", "warning");
+      }
+  });
 });

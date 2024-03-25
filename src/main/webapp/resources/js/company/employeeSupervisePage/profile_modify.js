@@ -48,7 +48,50 @@ document.getElementById('img-upload').addEventListener('change', function() {
 // 프로필 사진만 저장
 document.getElementById('img-save').addEventListener('click', function() {
 	
-})
+	const formData = new FormData();
+	 formData.append('eno', f.eno.value);
+	 if (profilePictureSrc) {
+	        formData.append('profilePicturePath', profilePictureSrc);
+	    } else {
+	        formData.append('profilePicturePath', ''); 
+	    }
+	    // 파일 탐색기로 선택한 이미지 저장할 때
+	    if (selectedFile) {
+	        formData.append('profilePicture', selectedFile);
+	    }else {
+	    	formData.append('profilePicture', '');
+		}
+	    
+	    
+	    fetch("/profilePictureUpdate", {
+	        method: 'POST',
+	        body: formData,
+	    })
+		.then((response) => {
+			
+			if(response.ok){ 
+				// 요청이 성공하면 처리
+				alert('프로필 사진이 수정이 완료되었습니다.'); 
+				location.reload();
+			}else {
+	        	// 요청이 실패하면 에러 처리
+	        	console.error('프로필 사진 수정에 실패했습니다.');
+	            // 에러 메시지 출력
+	          response.json().then((error) => {
+	          console.error('에러 메시지:', error.message);
+	          })
+			}
+		})	
+		.then((data) => {
+			
+		})	
+		.catch( err => {
+			// 에러 처리
+			console.log('Fetch error:', err);
+			// 에러 메시지 출력
+			console.log('Error message:', err.message);
+		});
+	  });	
 
 document.querySelectorAll('input[type="button"]').forEach( btn => {
 	btn.addEventListener( 'click', (event) => {

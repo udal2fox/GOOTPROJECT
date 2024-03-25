@@ -1,7 +1,6 @@
 package org.rainbow.userAdminPage.controller;
 
-import java.time.Year;
-import java.time.YearMonth;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.rainbow.domain.ExcelListener;
 import org.rainbow.userAdminPage.service.userAdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.log4j.Log4j;
 
@@ -119,14 +120,14 @@ public class UserAdminController {
 		System.out.println(model);
 		return "/userAdminPage/dashboard";
 	}
-	
+
 	@ResponseBody
-	@GetMapping(value="/getMonthlyData/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<HashMap<String, Object>>> getMonthlyData(@PathVariable String no){
+	@GetMapping(value = "/getMonthlyData/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getMonthlyData(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		List<HashMap<String, Object>> MonthlyData = userService.getMonthlyData(spotNo);
 		log.info("MonthlyData.." + MonthlyData);
-		return new ResponseEntity<List<HashMap<String,Object>>>(MonthlyData,HttpStatus.OK);
+		return new ResponseEntity<List<HashMap<String, Object>>>(MonthlyData, HttpStatus.OK);
 	}
 
 	// 직원관리 페이지 이동
@@ -138,17 +139,17 @@ public class UserAdminController {
 	// 직원 리스트 가져오기
 	@GetMapping(value = "/manage_member/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<HashMap<String, Object>>> getEmpList(@PathVariable String no) {
-		int sNo = Integer.parseInt(no);
+		int spotNo = Integer.parseInt(no);
 		// 컨트롤러에서 서비스를 호출하여 직원 리스트를 가져옵니다.
-		List<HashMap<String, Object>> empList = userService.getEmpList(sNo);
+		List<HashMap<String, Object>> empList = userService.getEmpList(spotNo);
 		log.info("empList..." + empList);
 		// ResponseEntity에 직원 리스트와 HttpStatus를 담아 반환합니다.
 		return new ResponseEntity<>(empList, HttpStatus.OK);
 	}
 
 	// 직원 추가하기
-	@PostMapping(value = "/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	@ResponseBody
+	@PostMapping(value = "/addEmp", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> addUserEmp(@RequestBody HashMap<String, Object> addForm) {
 		log.info("InquiryList..." + addForm);
 		boolean result = userService.addUserEmp(addForm);
@@ -181,14 +182,14 @@ public class UserAdminController {
 	@PostMapping("/deleteEmp/{no}")
 	public String deleteEmployees(@PathVariable String no, @RequestBody List<String> empNumbers) {
 		try {
-			int sNo = Integer.parseInt(no);
+			int spotNo = Integer.parseInt(no);
 			System.out.println(empNumbers);
 			List<HashMap<String, Integer>> deleteParams = new ArrayList<>();
 
 			// empNumbers 리스트의 각 요소를 deleteParams에 추가합니다.
 			for (String empNumber : empNumbers) {
 				HashMap<String, Integer> deleteParam = new HashMap<>();
-				deleteParam.put("sNo", sNo);
+				deleteParam.put("spotNo", spotNo);
 				deleteParam.put("cEmpNo", Integer.parseInt(empNumber));
 				deleteParams.add(deleteParam);
 			}
@@ -207,22 +208,81 @@ public class UserAdminController {
 		}
 	}
 
+	@ResponseBody
+	@PostMapping(value = "/allMemberInsert/{no}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> ExcelUpload(@RequestParam("EXCEL") MultipartFile file, @PathVariable String no) {
+		// 업로드된 파일 확인
+		log.info("Excel data received: " + file.getOriginalFilename());
+
+		// spotNo를 정수형으로 변환
+		int spotNo = Integer.parseInt(no);
+
+		// 엑셀 파일을 처리하기 위한 리스너 생성
+		ExcelListener listener = new ExcelListener();
+
+		if (!file.isEmpty()) {
+			try {
+				// 엑셀 파일 처리를 위한 리스너로 데이터 추출
+				List<HashMap<String, Object>> dataList = listener.cMemberExcelListner(file.getInputStream());
+
+				// 추출된 데이터 확인
+				log.info("Data extracted from Excel: " + dataList);
+
+				// 데이터베이스에 엑셀 데이터 저장
+				boolean allDataProcessed = true; // 모든 데이터가 처리되었는지 여부를 나타내는 변수
+				for (HashMap<String, Object> addForm : dataList) {
+					// 데이터에 null 값이 있는지 확인
+					if (addForm.containsValue(null)) {
+						log.warn("Skipping data with null values: " + addForm);
+						allDataProcessed = false; // 데이터에 null 값이 있음을 표시
+						break; // for 루프를 중단하고 빠져나옴
+					}
+
+					// 데이터에 spotNo 추가
+					addForm.put("spotNo", spotNo);
+
+					// UserService를 통해 데이터베이스에 사용자 추가
+					boolean result = userService.addUserEmp(addForm);
+
+					// 저장 결과 확인 후 적절한 응답 반환
+					if (!result) {
+						log.error("Failed to add user: " + addForm);
+						return new ResponseEntity<>("failure", HttpStatus.INTERNAL_SERVER_ERROR);
+					}
+				}
+
+				// 데이터가 성공적으로 저장된 경우 성공 응답 반환
+				return new ResponseEntity<>("success", HttpStatus.OK);
+
+			} catch (IOException e) {
+				// 파일 읽기 실패 시 에러 응답 반환
+				log.error("Failed to read Excel file", e);
+				return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+		} else {
+			// 파일이 비어있을 경우 에러 응답 반환
+			log.error("No file uploaded");
+			return new ResponseEntity<>("no file", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	// 이용현황 페이지 이동
 	@GetMapping("/goUsagehistorylist/{no}")
 	public String goUsagehistorylist(@PathVariable String no, Model model) {
 		return "/userAdminPage/usageHistory_list";
 	}
-	
+
 	// 이용현황 페이지 리스트 가져오기
 	@ResponseBody
-	@GetMapping(value="/getUsageList/{no}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<HashMap<String, Object>>> getUsageList(@PathVariable String no){
+	@GetMapping(value = "/getUsageList/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getUsageList(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		List<HashMap<String, Object>> usageList = userService.getUsageList(spotNo);
 		log.info("usageList..." + usageList);
-		return new ResponseEntity<List<HashMap<String,Object>>>(usageList,HttpStatus.OK);
+		return new ResponseEntity<List<HashMap<String, Object>>>(usageList, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/usageDetailHistory")
 	public String getDetailUsage(@RequestParam String recDate, @RequestParam String no, Model model) {
 		HashMap<String, Object> inputMap = new HashMap<String, Object>();
@@ -232,12 +292,11 @@ public class UserAdminController {
 		log.info(inputMap);
 		// 서비스로부터 반환된 데이터를 모델에 추가
 		List<HashMap<String, Object>> detailUsageData = userService.getDetailUsage(inputMap);
-	    log.info("detailUsageData.."+detailUsageData);
-	    model.addAttribute("detailUsageData", detailUsageData);
-	    
+		log.info("detailUsageData.." + detailUsageData);
+		model.addAttribute("detailUsageData", detailUsageData);
+
 		return "/userAdminPage/usageHistory_details";
 	}
-	
 
 	// 고객지원 페이지 이동
 	@GetMapping("/goInquiryboard/{no}")
@@ -271,28 +330,28 @@ public class UserAdminController {
 
 	// 선물관리 페이지 이동
 	@GetMapping("/goManagegift")
-	public String goManagegift() {		
+	public String goManagegift() {
 		return "/userAdminPage/manage_gift";
 	}
-	
+
 	// 지점 커스텀 선물 가져오기
 	@ResponseBody
 	@GetMapping(value = "/getCustomGift/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<HashMap<String, Object>>> getCustomGift(@PathVariable String no){
+	public ResponseEntity<List<HashMap<String, Object>>> getCustomGift(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		List<HashMap<String, Object>> result = userService.getCustomGift(spotNo);
 		log.info("지점 커스텀 선물 리스트.." + result);
-		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
+		return new ResponseEntity<List<HashMap<String, Object>>>(result, HttpStatus.OK);
 	}
-	
+
 	// 지점 기본 선물 가져오기
 	@ResponseBody
-	@GetMapping(value="/getDefaultGift/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<HashMap<String, Object>> getDefailtInfo(@PathVariable String no){
+	@GetMapping(value = "/getDefaultGift/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String, Object>> getDefailtInfo(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		HashMap<String, Object> result = userService.getDefaultGift(spotNo);
 		log.info("지점 기본 선물 정보.." + result);
-		return new ResponseEntity<HashMap<String,Object>>(result, HttpStatus.OK);
+		return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
 	}
 
 	// 지점 선물 편집 페이지 이동
@@ -325,7 +384,7 @@ public class UserAdminController {
 			return "error";
 		}
 	}
-	
+
 	// 지점 기본 선물 저장
 	@ResponseBody
 	@PostMapping("/defaultGift")
@@ -362,42 +421,43 @@ public class UserAdminController {
 	public String goManagecard(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_card";
 	}
-	
+
 	// 생일카드정보 가져오기
 	@ResponseBody
-	@GetMapping(value="/getCardInfo/{no}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<HashMap<String, Object>> getCardInfo(@PathVariable String no){
+	@GetMapping(value = "/getCardInfo/{no}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<HashMap<String, Object>> getCardInfo(@PathVariable String no) {
 		int spotNo = Integer.parseInt(no);
 		HashMap<String, Object> result = userService.getCardInfo(spotNo);
-		log.info("생일카드정보.."+result);
-		return new ResponseEntity<HashMap<String, Object>>(result,HttpStatus.OK);
+		log.info("생일카드정보.." + result);
+		return new ResponseEntity<HashMap<String, Object>>(result, HttpStatus.OK);
 	}
-	
-    // 생일카드 커스텀 내용 저장
-    @ResponseBody
-    @PostMapping("/saveCard/{no}")
-    public String saveCard (@RequestBody HashMap<String, Object> cardForm, @PathVariable String no) {
-    	int spotNo = Integer.parseInt(no);
-    	cardForm.put("spotNo", spotNo);
-    	log.info("카드커스텀.."+cardForm);
-        boolean result = userService.saveCard(cardForm);
-        if (result) {
-            return "success";
-        } else {
-            return "error";
-        }
-    }
+
+	// 생일카드 커스텀 내용 저장
+	@ResponseBody
+	@PostMapping("/saveCard/{no}")
+	public String saveCard(@RequestBody HashMap<String, Object> cardForm, @PathVariable String no) {
+		int spotNo = Integer.parseInt(no);
+		cardForm.put("spotNo", spotNo);
+		log.info("카드커스텀.." + cardForm);
+		boolean result = userService.saveCard(cardForm);
+		if (result) {
+			return "success";
+		} else {
+			return "error";
+		}
+	}
 
 	// 이번달 대상자 현황 페이지 이동
 	@GetMapping("/goManagerecipients/{no}")
 	public String goManagerecipients(@PathVariable String no, Model model) {
 		return "/userAdminPage/manage_recipients";
 	}
-	
+
 	// 월별 대상자 리스트 가져오기
 	@ResponseBody
-	@GetMapping(value="/recipients/{no}/{month}/{year}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<HashMap<String, Object>>> getRecipients(@PathVariable String no, @PathVariable String month, @PathVariable String year){
+	@GetMapping(value = "/recipients/{no}/{month}/{year}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<HashMap<String, Object>>> getRecipients(@PathVariable String no,
+			@PathVariable String month, @PathVariable String year) {
 		int spotNo = Integer.parseInt(no);
 		HashMap<String, Object> inputValue = new HashMap<String, Object>();
 		inputValue.put("spotNo", spotNo);
@@ -405,9 +465,7 @@ public class UserAdminController {
 		inputValue.put("year", year);
 		log.info(inputValue);
 		List<HashMap<String, Object>> result = userService.getRecipients(inputValue);
-		return new ResponseEntity<List<HashMap<String,Object>>>(result, HttpStatus.OK);
+		return new ResponseEntity<List<HashMap<String, Object>>>(result, HttpStatus.OK);
 	}
 
-	
-	
 }

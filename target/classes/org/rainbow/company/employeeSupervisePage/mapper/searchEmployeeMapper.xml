@@ -99,4 +99,37 @@
     			
 	</update>
 	
+	<!-- 프로필 사진만 저장 -->
+	<update id="profilePictureUpdate" parameterType="java.util.HashMap">
+		UPDATE RAIN_EMP_tbl
+			SET
+				profilePicture = #{profilePicture}
+			WHERE
+				eno = #{eno}
+	</update>
+	
+	<select id="excelDown" parameterType="org.rainbow.company.employeeSupervisePage.domain.EmployeeSearchDTO" resultType="org.rainbow.company.employeeSupervisePage.domain.EmployeeExcelDTO">
+		SELECT 
+			e.eno, e.eName, e.email, e.ePhone, d.dName, e.job, e.workType, e.sal, e.eAddr, e.eAddr2, e.eBank, e.salAccount, e.identyNum
+		FROM 
+        	RAIN_EMP_tbl e
+    	JOIN 
+        	RAIN_DEPT_tbl d 
+        ON 
+        	e.deptNo = d.deptNo
+    	WHERE 
+    	1 = 1
+    	<if test="keyword != null and keyword != ''">
+   	 	AND ( e.eName LIKE '%${keyword}%' 
+   	 		OR 
+        	  e.email LIKE '%${keyword}%'
+        	OR
+        	  d.dName LIKE '%${keyword}%')
+        </if>
+        <if test="dName != null and dName != '전체' ">
+        	AND d.dName LIKE '%${dName}%'
+        </if>
+       ORDER BY e.eno
+	</select>
+	
 </mapper>

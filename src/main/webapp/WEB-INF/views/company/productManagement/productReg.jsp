@@ -87,5 +87,8 @@
 			</div>
 		</div>
 	</body>
+	<script>
+    let deptNo = <%= session.getAttribute("deptNo") %>;
+	</script>
 	<script type="text/javascript" src="/resources/js/company/productPage/prdInput.js"></script> 
 	</html>

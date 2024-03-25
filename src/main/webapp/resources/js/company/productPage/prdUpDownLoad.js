@@ -5,7 +5,7 @@ document.getElementById("uploadBtn").addEventListener("click", function() {
 
 // 선택된 파일 이름 표시
 document.getElementById("excelUpload").addEventListener("change", function() {
-	if(deptNo != 0 || deptNo != 4)
+	if(deptNo != 0 && deptNo != 4)
 	{
 		alert("불허된 접근입니다.")
 		return;

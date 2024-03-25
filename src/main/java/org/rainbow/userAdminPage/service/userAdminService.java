@@ -3,6 +3,7 @@ package org.rainbow.userAdminPage.service;
 import java.util.HashMap;
 import java.util.List;
 
+
 public interface userAdminService {
 	
 	public HashMap<String, Object> customerLogin(HashMap<String, String> inputMap);
@@ -17,7 +18,7 @@ public interface userAdminService {
 	
 	public int updateUserInfo(HashMap<String, Object> updateInfo);
 	
-	public List<HashMap<String, Object>> getEmpList(int sNo);
+	public List<HashMap<String, Object>> getEmpList(int spotNo);
 	
 	public List<HashMap<String, Object>> getInquiryList(int spotNo);
 	

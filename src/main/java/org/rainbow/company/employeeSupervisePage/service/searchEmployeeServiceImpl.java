@@ -3,6 +3,8 @@ package org.rainbow.company.employeeSupervisePage.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.rainbow.company.employeeSupervisePage.domain.EmployeeExcelDTO;
+import org.rainbow.company.employeeSupervisePage.domain.EmployeeSearchDTO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.company.employeeSupervisePage.mapper.searchEmployeeMapper;
@@ -59,5 +61,16 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 	public int profile_update(HashMap<String, Object> result) {
 		log.info("profile update..." + result);
 		return mapper.profile_update(result);
+	}
+	
+	@Override
+	public int profilePictureUpdate(HashMap<String, Object> result) {
+		log.info("profilePicture update..." + result);
+		return mapper.profilePictureUpdate(result);
+	}
+	
+	@Override
+	public List<EmployeeExcelDTO> excelDown(EmployeeSearchDTO empdto) {
+		return mapper.excelDown(empdto);
 	}
 }

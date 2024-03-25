@@ -146,8 +146,8 @@ input[type=text]
 			        		<td>금액차감</td>
 			        		<td>${edit.recDedPrdCode }</td>
 			        		<td>${edit.recDedName }</td>
-			        		<td>${edit.recDed }</td>
-			        		<td>${edit.recDedCst }</td>
+			        		<td><fmt:formatNumber value="${edit.recDed }" pattern="#,##"/></td>
+			        		<td><fmt:formatNumber value="${edit.recDedCst }" pattern="#,##"/></td>
 			        		<td><fmt:formatNumber value="${((edit.recDed - edit.recDedCst ) / edit.recDed)}" pattern="0.00"/></td>
 			        		<td>${edit.recDedWorker}</td>
 			        	</tr>	
@@ -158,8 +158,8 @@ input[type=text]
 			        		<td>추가정산</td>
 			        		<td>${edit.recAddPrdCode }</td>
 			        		<td>${edit.recAddName }</td>
-			        		<td>${edit.recAdd }</td>
-			        		<td>${edit.recAddCst }</td>
+			        		<td><fmt:formatNumber value="${edit.recAdd }" pattern="#,##"/></td>
+			        		<td><fmt:formatNumber value="${edit.recAddCst }" pattern="#,##"/></td>
 			        		<td><fmt:formatNumber value="${((edit.recAdd - edit.recAddCst )/edit.recAdd)}" pattern="0.00"/></td>
 			        		<td>${edit.recAddWorker}</td>
 			        	</tr>	

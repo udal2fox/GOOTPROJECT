@@ -92,6 +92,11 @@
     
 } 
 
+.saleStatsTableSearch td
+{
+	padding-left: 15px;
+} 
+
 .misuTotal
 {
 	color: red;

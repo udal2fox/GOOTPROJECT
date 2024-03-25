@@ -2,6 +2,9 @@ package org.rainbow.company.employeeSupervisePage.domain;
 
 import java.sql.Date;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,7 +50,10 @@ public class rain_EmpVO {
 	// 주민등록번호
 	private String identyNum;
 	
-	// 급여 계좌
+	// 급여 수급 은행
+	private String eBank;
+	
+	// 급여 계좌	
 	private String salAccount;
 	
 	// 근무형태
@@ -64,9 +70,6 @@ public class rain_EmpVO {
 	
 	// 계정 상태
 	private String idStatus;
-	
-	// 급여 수급 은행
-	private String eBank;
 	
 	// 입사일
 	private Date hireDt;

@@ -50,6 +50,7 @@ public class login {
 			session.setAttribute("deptNo", (Integer) resultMap.get("deptNo"));
 			session.setAttribute("eno", (Integer) resultMap.get("eno"));
 			session.setAttribute("eName", (String) resultMap.get("eName"));
+			session.setAttribute("profilePicture", (String) resultMap.get("profilePicture"));
 
 			return ResponseEntity.ok().body(resultMap);
 		}

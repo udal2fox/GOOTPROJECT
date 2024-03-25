@@ -7,7 +7,7 @@
 	<!-- 사원 로그인 -->
 	<select id="doLogin" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	
-		SELECT deptNo, eno, eName FROM
+		SELECT deptNo, eno, eName, profilePicture FROM
 			RAIN_EMP_tbl 
 		WHERE 
 			eId=#{eId} AND ePw=#{ePw}

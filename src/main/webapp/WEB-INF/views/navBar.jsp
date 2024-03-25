@@ -165,7 +165,7 @@
                             	</c:otherwise>
                             </c:choose>
                             <span id="profile">${dept} / ${sessionScope.eName}&nbsp;&nbsp;&nbsp;</span>
-                            <img src="https://github.com/mdo.png" alt="profile" width="auto" height="32"
+                            <img id="profilePicture" src="${sessionScope.profilePicture }" alt="profile" width="auto" height="32"
                                 class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small shadow">
@@ -225,6 +225,23 @@
     document.querySelector(".navi").addEventListener('click', (event) => {
         document.querySelector(".subMenu").classList.toggle("show")
     });
+    
+    profile();
+    function profile() {
+    	
+    	var profilePictureSrc = "${sessionScope.profilePicture }";
+        var defaultImageUrl = "/resources/images/profile_img.png"; // 기본 이미지 경로를 지정합니다.
+
+        var profilePictureElement = document.getElementById("profilePicture");
+
+        // 만약 profilePictureSrc 값이 null이라면 기본 이미지 경로를 사용합니다.
+        if (!profilePictureSrc) {
+            profilePictureElement.src = defaultImageUrl;
+        } else {
+            profilePictureElement.src = profilePictureSrc;
+        }
+    };
+
 </script>
 
 </html>

@@ -7,25 +7,27 @@ import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
 import org.rainbow.company.custMgmt.mapper.salesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
+@Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class salesServiceImpl implements salesService {
 
 	@Autowired
 	private salesMapper salesMapper;
 	
 	@Override
-	public List<consultVO> getSearch(consultSearchDTO consultSearchDTO) {
+	public List<consultVO> searchConsult(consultSearchDTO csSearchDto) {
 		
-		return salesMapper.getSearch(consultSearchDTO);
+		return salesMapper.searchConsult(csSearchDto);
 	}
-	
-
 
 	@Override
 	public List<consultVO> salesList() {
@@ -38,16 +40,30 @@ public class salesServiceImpl implements salesService {
 		return salesMapper.salesView(consultNo);
 	}
 	
-
 	@Override
-
-	public int saveSales(consultVO vo) {
+	public cshVO getCshVO(int consultNo) {
 		
-		return salesMapper.saveSales(vo);
+		return salesMapper.getCshVO(consultNo);
+	}
+	
+	@Transactional
+	@Override
+	public void saveSales(consultVO vo, cshVO cVO) {
+	    log.info("saveSales...." + vo);
+	    
+	    // 1. RAIN_consult_tbl 테이블에 항목 내용 업데이트
+	    salesMapper.saveSales(vo);
+	    
+	    // 2. 이미 존재하는 ConsultNo 가져오기
+	    int consultNo = vo.getConsultNo();
+	    log.info("consultNo " + consultNo);
+	    
+	    // 3. 새로운 테이블에 삽입
+	    salesMapper.insertCsh(cVO, consultNo);
 	}
 
-	@Override
 
+	@Override
 	public int saveFirstConsultHistory(cshVO cshvo) {
 		
 		return salesMapper.saveFirstConsultHistory(cshvo);

@@ -1,28 +1,25 @@
 	// 전역 변수 공간
 	let amount = 10; // 페이지당 보여줄 아이템 수
 	let pageNum = 1; // 현재 페이지 번호
-	let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
+	let spotLists = document.querySelectorAll('.spotList'); // 전체 상품 리스트
 	let sortDirection = {}; // 정렬
 	//------------
-	
-
-	
 	
 	filter();
 	
 	function filter() {
 	
 	    // allCheck 체크박스 이벤트 리스너 등록
-	    document.getElementById('td-BusinessAll').addEventListener('change', function() {
+	    document.getElementById('spotList-serviceStatusAll').addEventListener('change', function() {
 	        // allCheck 체크박스 상태에 따라 상품 종류 체크박스 상태 변경
 	        let isChecked = this.checked;
-	        document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').forEach(function(checkbox) {
+	        document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]').forEach(function(checkbox) {
 	            console.log(checkbox);
 	            checkbox.checked = isChecked;
 	        });
 	
 	        // 필터링 적용
-	        filterProducts();
+	        filterSpots();
 	    });
 	
 	
@@ -32,29 +29,29 @@
 	        checkbox.addEventListener('change', function() {
 	            // allCheck 체크박스 상태 업데이트
 	            let isTypeAllChecked = isAllTypeCheckboxesChecked();
-	            document.getElementById('td-BusinessAll').checked = isTypeAllChecked;
+	            document.getElementById('spotList-serviceStatusAll').checked = isTypeAllChecked;
 	
 	            // 필터링 적용
-	            filterProducts();
+	            filterSpots();
 	        });
 	    });
 	
 	
 	
 	    // 상품 필터링 함수
-	    function filterProducts() {
+	    function filterSpots() {
 	        // 선택된 상품 종류 필터 및 상태 필터 가져오기
-	        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
+	        let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]:checked')).map(function(checkbox) {
 	            return checkbox.value;
 	        });
 	
 	        // 전체 체크 상태 확인
-	        let isAllTypeChecked = document.getElementById('td-BusinessAll').checked;
+	        let isAllTypeChecked = document.getElementById('spotList-serviceStatusAll').checked;
 	
 	        // 모든 상품분류 체크박스가 해제되었을 때 조회되지 않도록 처리
 	        if (!isAllTypeChecked && typeFilters.length === 0) {
 	            // 모든 상품 숨기기
-	            document.querySelectorAll('.td').forEach(function(product) {
+	            document.querySelectorAll('.spotList').forEach(function(product) {
 	                product.style.display = 'none';
 	            });
 	            // 처리가 골치아파서 체크 꺼지면 리무브 해버림;
@@ -64,7 +61,7 @@
 	
 	
 	        // 각 상품을 순회하면서 필터링 적용
-	        document.querySelectorAll('.td').forEach(function(product) {
+	        document.querySelectorAll('.spotList').forEach(function(product) {
 	            let type = product.getAttribute('data-type');
 	
 	            // 상품 종류 및 상태가 필터에 포함되는 경우 보여주기, 그렇지 않은 경우 숨기기
@@ -83,9 +80,9 @@
 	    // 상품 종류 체크박스 모두 선택 여부 확인 함수
 	    function isAllTypeCheckboxesChecked() {
 	        // 상품 종류 체크박스 중 선택된 개수 확인
-	        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked').length;
+	        const checkedCount = document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]:checked').length;
 	        // 상품 종류 체크박스 개수만큼 모두 선택된 경우 true 반환
-	        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]').length;
+	        return checkedCount === document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]').length;
 	    }
 	
 	};
@@ -189,11 +186,11 @@
 	
 	//필터링된 상품 리스트 가져오기
 	function getFilteredProducts() {
-	    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function(checkbox) {
+	    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]:checked')).map(function(checkbox) {
 	        return checkbox.value;
 	    });
 	
-	    return Array.from(tds).filter(function(product) {
+	    return Array.from(spotLists).filter(function(product) {
 	        let type = product.getAttribute('data-type');
 	        return (typeFilters.length === 0 || typeFilters.includes(type));
 	    });
@@ -254,10 +251,10 @@
 
 	function getCellValue(row, column) {
 	    const columnIndex = {
-	    	    "comName": 1,
-	    	    "comBizType": 3,
-	    	    "comArea": 4,
-	    	    "comBizStatus": 7
+	    	    "comName": 2,
+	    	    "spName": 3,
+	    	    "spStatus": 7,
+	    	    "userName": 9
 	    } [column];
 
 	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);

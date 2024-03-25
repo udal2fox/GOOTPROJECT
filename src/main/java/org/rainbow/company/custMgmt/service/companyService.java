@@ -42,4 +42,10 @@ public interface companyService {
 	
 	/** 기업 정보 update*/
 	public int updateCompany(companyVO vo);
+	
+	/** 기업 연결 모달창 에서 기업 리스트 가져오기 */
+	public List<companyVO> takeComNameList();
+	
+	/** 기업 연결 모달창 에서 검색한 기업명 가져오기 */
+	public List<companyVO> searchTakeComName(String comName);
 }

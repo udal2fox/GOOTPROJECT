@@ -11,24 +11,26 @@ document.querySelector('#searchBarSearchBtn').addEventListener('click', function
 });
 
 function fetchSearchResults(keyword) {
-    fetch('/searchCompany?keyword=' + keyword)
+    fetch('/searchSpot?keyword=' + keyword)
         .then(response => response.json())
         .then(list => {
             let msg = '';
             list.forEach(list => {
-            	  msg += '<tr class="td" data-type="'+list.comBizType+'">'+
+            	  msg += '<tr class="spotList" data-type="'+list.spStatus+'">'+
                   '<td><a href="'+list.companyNo+'">'+list.companyNo+'</a></td>'+
+                  '<td><a href="'+list.spotNo+'">'+list.spotNo+'</a></td>'+
                   '<td>'+list.comName+'</td>'+
-                  '<td>'+list.comBizNum+'</td>'+
-                  '<td>'+list.comBizType+'</td>'+
-                  '<td>'+list.comArea+'</td>'+
-                  '<td>'+list.comAddr+'</td>'+
-                  '<td>'+list.comContact+'</td>'+
-                  '<td>'+list.comBizStatus+'</td>'+     
+                  '<td>'+list.spName+'</td>'+
+                  '<td>'+list.spAddr+'</td>'+
+                  '<td>'+list.spAgreementDate+'</td>'+
+                  '<td>'+list.spStatus+'</td>'+
+                  '<td>'+list.spChangeDate+'</td>'+ 
+                  '<td><a href=# id=open_managerInpo_modal>'+list.userName+'</a></td>'+
+                  '<td><a href=# id=open_empList_modal>보기</a></td>'+
               '</tr>';
             });
             resetCheckboxes();
-            const tableBody = document.querySelector('#company_tbl tbody');
+            const tableBody = document.querySelector('#spot_tbl tbody');
             tableBody.innerHTML = msg;
             
             drawPagination();
@@ -47,18 +49,18 @@ function resetCheckboxes() {
     });
 
     // "전체 선택" 체크박스도 초기화
-    document.getElementById('td-BusinessAll').checked = true;
+    document.getElementById('spotList-serviceStatusAll').checked = true;
 }
 
 
 //필터링된 상품 리스트 가져오기
 function getFilteredProducts() {
-    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="td-Business"]:checked')).map(function (checkbox) {
+    let typeFilters = Array.from(document.querySelectorAll('.filter-checkbox[data-filter="spotList-serviceStatus"]:checked')).map(function (checkbox) {
         return checkbox.value;
     });
 
     // 여기서 새로운 상품 리스트를 가져오도록 수정
-    let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
+    let tds = document.querySelectorAll('.spotLists'); // 전체 상품 리스트
     let filteredProducts = Array.from(tds).filter(function (tds) {
         let type = tds.getAttribute('data-type');
         return (typeFilters.length === 0 || typeFilters.includes(type));

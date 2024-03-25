@@ -6,9 +6,9 @@ import java.util.Map;
 
 import org.rainbow.company.custMgmt.domain.companyDownVO;
 import org.rainbow.company.custMgmt.domain.companyInputVO;
-import org.rainbow.company.custMgmt.domain.companySearchDTO;
+
 import org.rainbow.company.custMgmt.domain.companyVO;
-import org.rainbow.company.custMgmt.domain.consultVO;
+
 import org.rainbow.company.custMgmt.mapper.companyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +79,18 @@ public class companyServiceImpl implements companyService{
 		int list = companyMapper.updateCompany(vo);
 		log.info(list);
 		return list;
+	}
+	
+	@Override
+	public List<companyVO> takeComNameList() {
+		// TODO Auto-generated method stub
+		return companyMapper.takeComNameList();
+	}
+	
+	@Override
+	public List<companyVO> searchTakeComName(String comName) {
+		
+		return companyMapper.searchTakeComName(comName);
 	}
 
 }

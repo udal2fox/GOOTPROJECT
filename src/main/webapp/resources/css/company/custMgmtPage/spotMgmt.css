@@ -141,6 +141,7 @@
 }
 
 
+
 .list_div {
 	
 	box-sizing: border-box;
@@ -244,7 +245,7 @@
 #imgBtnSearchComName {
         background: url( "/resources/images/ul-search.svg" ) no-repeat;
         border: none;
-      	  width: 25px;
+      	 width: 25px;
         height: 25px;
         cursor: pointer;
         background-size: contain;
@@ -368,6 +369,20 @@ textarea
 	
 }
 
+.input-with-image {
+    position: relative;
+}
+
+.input-with-image input[type="text"], #imgBtnAgreementFileUpload {
+    padding-right: 50px; /* 이미지를 감안하여 오른쪽에 여백을 줍니다. */
+}
+
+.input-with-image input[type="button"]{
+    position: absolute;
+    top: 50%;
+    right: 5px; /* 텍스트 입력 상자 오른쪽에 위치시킵니다. */
+    transform: translateY(-50%);
+}
 
 
 

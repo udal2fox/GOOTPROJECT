@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,12 +14,15 @@ import lombok.Setter;
 public class spotVO {
 	
 	
-	private int spotNo, companyNo, spAgreementTerm, spEmpNum, spBdgt;
-	private String spName, spAddr, spDetailAddr, spContact, spAgreementFile, spAutoExtension, spPayMethod, spDefaultGift,
+	private int spotNo,companyNo, spAgreementTerm, spEmpNum, spBdgt;
+	private String spName, spAddr, spDetailAddr, spContact, spAgreementFile, spAutoExtension, spPayMethod, spDefaultGift,spEditGift,
 	spStatus, spCancelEname, spCancelReason, spCancelDetailReason;
 	
 	
 	private Date spAgreementDate, spChangeDate, spEmpUpdate;
+	
+	//기업명 따로 
+	private String comName;
 	
 	
 

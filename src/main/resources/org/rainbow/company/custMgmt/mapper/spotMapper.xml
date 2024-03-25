@@ -3,14 +3,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="org.rainbow.company.custMgmt.mapper.spotMapper">
  
- 
- 
-
-<!-- 상담 요청 리스트 가져오기-->
-<select id="spotList" resultType="org.rainbow.company.custMgmt.domain.spotVO">
+<!-- 지점 리스트 가져오기-->
+<select id="spotList" resultType="org.rainbow.company.custMgmt.domain.spotListVO">
    
-    SELECT * FROM RAIN_cSpot_tbl
+    SELECT cc.comName, cs.spotNo, cs.companyNo, cs.spName, cs.spAddr, cs.spAgreementDate, cs.spStatus, cs.spChangeDate, cu.userName
+	FROM RAIN_cCompany_tbl cc
+	INNER JOIN RAIN_cSpot_tbl cs ON cc.companyNo = cs.companyNo
+	INNER JOIN RAIN_cUser_tbl cu ON cs.spotNo = cu.spotNo;
+
    
 </select>
+
+	<select id="giveKeyword" parameterType="org.rainbow.domain.Criteria" resultType="org.rainbow.company.custMgmt.domain.spotListVO">
+	      
+			   SELECT cc.comName, cs.spName, cs.spAddr, cu.userName
+		FROM RAIN_cCompany_tbl cc
+		INNER JOIN RAIN_cSpot_tbl cs ON cc.companyNo = cs.companyNo
+		INNER JOIN RAIN_cUser_tbl cu ON cs.spotNo = cu.spotNo
+		WHERE 
+		    cc.comName LIKE CONCAT('%', #{keyword}, '%') OR
+		    cs.spName LIKE CONCAT('%', #{keyword}, '%') OR
+		    cs.spAddr LIKE CONCAT('%', #{keyword}, '%') OR
+		    cu.userName LIKE CONCAT('%', #{keyword}, '%')
+		ORDER BY cc.companyNo ASC;
+			
+	</select>
+	
+	
+	 <!-- 지점 정보  가져오기-->
+	<select id="spotView" resultType="org.rainbow.company.custMgmt.domain.spotVO" parameterType="int">
+	SELECT s.*, c.comName
+	FROM RAIN_cSpot_tbl s
+	INNER JOIN RAIN_cCompany_tbl c ON s.companyNo = c.companyNo
+	WHERE s.spotNo = #{spotNo}
+
+	</select>
+	
+	<!-- 지점 담당자 정보  가져오기 -->
+	  <select id="getUserVO" resultType="org.rainbow.company.custMgmt.domain.userVO" parameterType="int">
+	  	select * from RAIN_cUser_tbl where spotNo=#{spotNo}
+	  </select>
+	  
+
 
 </mapper>

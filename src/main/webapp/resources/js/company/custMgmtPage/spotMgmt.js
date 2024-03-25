@@ -16,14 +16,6 @@ function cssBinding(cssFiles) {
 }
 
 
-
-
-
-
-
-
-
-
 document.getElementById("moveSpotRegisterBtn").addEventListener('click', ()=>{
 	
 	
@@ -31,22 +23,23 @@ document.getElementById("moveSpotRegisterBtn").addEventListener('click', ()=>{
 })
 
 
+/** 'spotList.jsp' 에서 기업 번호, 지점 번호 클릭 시 각각 'companyView.jsp', 
+ * 'spotView.jsp'로 값 보내기  */
+document.querySelectorAll("tbody a").forEach((aEle, index) => {
+    aEle.addEventListener('click', function(e){
+        e.preventDefault();
+        
+        let companyNo = this.getAttribute("href");
+        let spotNo = this.getAttribute("href");
+        
+       // console.log("기업 번호: " + companyNo);
+      //  console.log("지점 번호: " + spotNo);
+        
+        if (index === 0) {
+        	location.href = '/companyView?companyNo=' + companyNo;
+        } else if (index === 1) {
+            location.href = '/spotView?spotNo=' + spotNo;
+        }
+    });
+});
 
-
-/** 'spotList.jsp' 에서 기업 번호, 지점 번호 클릭 시 'salesView.jsp'로 값 보내기  */
-document.querySelectorAll("tbody a").forEach(aEle => {
-	aEle.addEventListener('click', function(e){
-		e.preventDefault();
-		
-		let companyNo = this.getAttribute("href");
-		let spotNo = this.getAttribute("href");
-		
-		console.log("기업 번호 " + companyNo);
-		console.log("지점 번호 " +spotNo);
-
-
-		
-		//location.href = '/salesView?consultNo=' + consultNo;
-		
-	})
-})

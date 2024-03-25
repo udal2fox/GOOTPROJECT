@@ -47,7 +47,7 @@ document.getElementById("imgBtnSearchComName").addEventListener('click', functio
             json.forEach(item => {
                 msg += `
                     <tr class="list">
-                        <td><a href="#" class="companyLink" data-company="${item.comName}">${item.comName}</a></td>
+                        <td><a href="#" class="companyLink" data-company="${item.comName}" date-companyNo="${item.companyNo}">${item.comName}</a></td>
                     </tr>
                 `;
             });
@@ -97,7 +97,7 @@ document.getElementById("searchTakeComNameBtn").addEventListener('click', functi
         	json.forEach(item => {
                 msg += `
                     <tr class="list">
-                        <td><a href="#" class="companyLink" data-company="${item.comName}">${item.comName}</a></td>
+                        <td><a href="#" class="companyLink" data-company="${item.comName}" date-companyNo="${item.companyNo}>${item.comName}</a></td>
                     </tr>
                 `;
             });
@@ -120,24 +120,25 @@ document.getElementById("searchTakeComNameBtn").addEventListener('click', functi
 
 
 //기업명 변경하기
-function changeComName(){
-
+function changeComName() {
     document.querySelectorAll('.companyLink').forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault(); // 기본 링크 동작 방지
             let result = confirm("기업명을 선택하시겠습니까?");
-            if(result){
-                // 선택한 기업명을 가져와서 comName input 요소에 할당
+            if (result) {
+                // 선택한 기업명과 관리 번호 가져오기
                 let selectedCompanyName = this.dataset.company;
+                let selectedCompanyNo = this.dataset.companyNo;
+                // 가져온 정보를 원하는 곳에 적용
                 document.querySelector('input[name="comName"]').value = selectedCompanyName;
+                document.querySelector('input[name="companyNo"]').value = selectedCompanyNo;
             }
             document.querySelector('input[name="searchComName"]').value = ''; 
             takeComNameModal.style.display = 'none'; 
         });
     });
-	
-	
-};
+}
+
 
 
 
@@ -227,3 +228,148 @@ const totalItems = document.querySelectorAll('.list_div_tbl_modal tbody tr').len
 totalPages = Math.ceil(totalItems / amount);
 drawPagination();
 goToPage(1);
+
+
+
+
+/** --------------------담당자명 가져오기 모달창 시작------ */
+
+var takeCsNameModal = document.getElementById('takeCsName_modal');
+var openTakeCsNameModalBtn = document.getElementById('open_takeCsName_modal');
+var closeTakeCsNameModalBtn = document.getElementById('close_takeCsName_modal');
+
+
+/**기업 연결 모달창 열기 */ 
+openTakeCsNameModalBtn.onclick = function() {
+	takeCsNameModal.style.display = 'block';
+}
+
+/**기업 연결 모달창 닫기 */ 
+closeTakeCsNameModalBtn.onclick = function() {
+	takeCsNameModal.style.display = 'none';
+}
+
+/**기업 연결 모달창 닫기 (딴 곳 누를 시)*/ 
+window.onclick = function(event) {
+  if (event.target === takeCsNameModal) {
+	  takeCsNameModal.style.display = 'none';
+  }
+}
+
+//담당자명 가져오기(모달창)
+document.getElementById("imgBtnTakeCsName").addEventListener('click', function() {
+	//기업명 찾기 검색란 값 비우기
+	document.querySelector('input[name="searchTakeCsName"]').value = ''
+    // 모달 창 열기
+    let modal = document.getElementById('open_takeCsName_modal');
+    modal.style.display = "block";
+    
+    // 담당자명 리스트 가져오기
+    fetch('/takeCsNameList')
+    .then(response => response.json())
+    .then(json => {
+       // console.log("계약 완료된 기업 리스트 불러오기: ", json); 
+        
+        let msg = '';
+        if (json.length > 0) {
+            json.forEach(item => {
+                msg += `
+                    <tr class="list">
+                        <td><a href="#" class="csNameLink" data-csName="${item.csName}" data-email="${item.csEmail}">${item.csName}</a></td>
+                        <td>${item.csCompanyName}</td>
+                    </tr>
+                `;
+            });
+        } else {
+            msg = `
+                <tr>
+                    <td>등록 할 담당자가 없습니다.</td>
+                </tr>
+            `;
+        }
+        
+        const tableBody = document.querySelector('#takeCsName_tbl tbody');
+        tableBody.innerHTML = msg;
+
+        changeCsName();
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+//기업명 찾기(모달창)에서 기업명 검색 기능 
+document.getElementById("searchTakeCsNameBtn").addEventListener('click', function() {
+
+    let csName = document.querySelector('input[name="searchTakeCsName"]').value;
+    console.log("하이"+csName);
+    let jsonData = JSON.stringify({ csName: csName });
+    
+    fetch('/searchTakeCsName', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to search company');
+        }
+        return response.json();
+    })
+    .then(json => {
+    	
+    	console.log(json);
+ 
+        let msg = '';
+        if (json.length > 0) {
+        	json.forEach(item => {
+                msg += `
+                    <tr class="list">
+                      <td><a href="#" class="csNameLink" data-csName="${item.csName}" data-email="${item.csEmail}">${item.csName}</a></td>
+                	 <td>${item.csCompanyName}</td>
+                        
+                    </tr>
+                `;
+            });
+        } else {
+            msg = `
+                <tr>
+                    <td>찾으시는 담당자명이 없습니다.</td>
+                </tr>
+            `;
+        }
+        
+        // HTML을 원하는 위치에 추가 또는 변경
+        const tableBody = document.querySelector('#takeCsName_tbl tbody');
+        tableBody.innerHTML = msg;
+
+        changeCsName();
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+//담당자명 변경하기
+function changeCsName(){
+
+    document.querySelectorAll('.csNameLink').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // 기본 링크 동작 방지
+            let result = confirm("담당자명을 선택하시겠습니까?");
+            if(result){
+                // 선택한 기업명을 가져와서 comName input 요소에 할당
+                let selectedCsName = this.dataset.company;
+                let selectedUserEmail = this.dataset.email;
+                document.querySelector('input[name="csName"]').value = selectedCsName;
+                document.querySelector('input[name="userEmail"]').value = selectedUserEmail;
+            }
+            document.querySelector('input[name="searchComName"]').value = ''; 
+            takeCsNameModal.style.display = 'none'; 
+        });
+    });
+	
+	
+};
+
+

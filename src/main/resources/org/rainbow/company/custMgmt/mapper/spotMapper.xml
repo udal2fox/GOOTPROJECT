@@ -44,6 +44,27 @@
 	  	select * from RAIN_cUser_tbl where spotNo=#{spotNo}
 	  </select>
 	  
+	  <!-- 새로운 지점 insert -->
+	  <insert id="spotRegisterInsert" parameterType="org.rainbow.company.custMgmt.domain.spotVO">
+	  INSERT INTO RAIN_cSpot_tbl (companyNo, spName, spAddr, spDetailAddr, spAgreementFile, spContact,
+		spAgreementDate, spAgreementTerm, spAutoExtension, spPayMethod, spEmpNum, spBdgt, spStatus)
+		VALUES (#{companyNo}, #{spName}, #{spAddr}, #{spDetailAddr}, #{spAgreementFile}, #{spContact}, #{spAgreementDate},
+		#{spAgreementTerm}, #{spAutoExtension}, #{spPayMethod}, #{spEmpNum}, #{spBdgt}, '활동');
 
+	  </insert>
+
+	<!-- 지점 담당자 정보 저장 -->
+	<insert id="userRegisterInsert" parameterType="org.rainbow.company.custMgmt.domain.userVO">
+	   INSERT INTO RAIN_cUser_tbl (spotNo, companyNo, userName, userEmail, userPw)
+		VALUES (#{spotNo}, #{companyNo}, #{userName}, #{userEmail}, #{userPw});	
+	</insert>
+	  
+	<!-- 마지막 값 가져오기 -->
+	<select id="getSpotNo" resultType="int">
+		SELECT LAST_INSERT_ID() AS spotNo;
+
+	</select>
+	
+	
 
 </mapper>

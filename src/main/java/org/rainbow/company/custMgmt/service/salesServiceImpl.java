@@ -92,8 +92,18 @@ public class salesServiceImpl implements salesService {
 			log.info("searchModalComName...." );
 			return salesMapper.searchModalComName(companyName);
 		}
+		
+		@Override
+		public List<consultVO> takeCsNameList() {
+			
+			return salesMapper.takeCsNameList();
+		}
 
-
+		@Override
+		public List<consultVO> searchTakeCsName(String csName) {
+			
+			return salesMapper.searchTakeCsName(csName);
+		}
 
 
 }

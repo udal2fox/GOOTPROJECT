@@ -125,6 +125,26 @@
 		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL AND cs.csCompanyName LIKE CONCAT('%', #{companyName}, '%')
 
 	</select>
+	
+	 	 <!-- 담당자명  모달창 에서 담당자 리스트 가져오기 -->
+	<select id="takeCsNameList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+		SELECT cs.csCompanyName, cs.csName
+		FROM RAIN_consult_tbl cs
+		INNER JOIN RAIN_cCompany_tbl com 
+		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL
+
+	</select>
+	
+	 	 <!-- 담당자명  모달창 에서 검색한 담당자명 가져오기 -->
+	<select id="searchTakeCsName" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="string">
+		SELECT cs.csCompanyName, cs.csName
+		FROM RAIN_consult_tbl cs
+		INNER JOIN RAIN_cCompany_tbl com 
+		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL AND cs.csName LIKE CONCAT('%', #{csName}, '%')
+
+	</select>
+	
+	
  	
  
  </mapper>

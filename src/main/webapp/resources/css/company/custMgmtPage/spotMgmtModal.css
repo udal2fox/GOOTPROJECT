@@ -44,6 +44,17 @@
 	
 }
 
+#takeCsName_modal{
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
 
 /** 모달창 시작*/
 

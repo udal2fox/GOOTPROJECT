@@ -21,6 +21,9 @@ public interface spotService {
 	/** 'salesView.jsp' 에서  지점 담당자 정보 가져오기  */
 	public userVO getUserVO(int spotNo);
 	
+	/** 지점 정보 저장*/
+	public void spotRegisterInsert(spotVO vo,userVO userVO);
+	
 
 
 }

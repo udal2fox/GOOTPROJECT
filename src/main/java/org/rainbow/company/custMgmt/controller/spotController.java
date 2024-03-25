@@ -1,13 +1,19 @@
 package org.rainbow.company.custMgmt.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 import org.rainbow.company.custMgmt.domain.companyVO;
+import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.spotListVO;
 import org.rainbow.company.custMgmt.domain.spotVO;
 import org.rainbow.company.custMgmt.domain.userVO;
 import org.rainbow.company.custMgmt.service.companyServiceImpl;
+import org.rainbow.company.custMgmt.service.salesServiceImpl;
 import org.rainbow.company.custMgmt.service.spotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +21,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,6 +44,9 @@ public class spotController {
 	
 	@Autowired
 	private companyServiceImpl companyService;
+	
+	@Autowired
+	private salesServiceImpl salesService;
 	
 	
 	/** 'spotList.jsp' 에서 지점 리스트 가져오기 */
@@ -106,7 +120,7 @@ public class spotController {
 	}
 	
 	@PostMapping(value = "/searchTakeComName", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<companyVO>> searchModalComName(@RequestBody Map<String, String> jsonData) {
+	public ResponseEntity<List<companyVO>> searchTakeComName(@RequestBody Map<String, String> jsonData) {
 	    log.info("searchTakeComName_success");
 	    
 	    String comName = jsonData.get("comName"); 
@@ -121,8 +135,86 @@ public class spotController {
 	    return new ResponseEntity<List<companyVO>>(list, HttpStatus.OK);
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping(value = "/takeCsNameList", produces = {
+			MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<consultVO>> takeCsNameList() {
 
+	    log.info("takeCsNameList_success");
+	    List<consultVO> list = salesService.takeCsNameList();    
+	    log.info("리스트" + list);
+	    System.out.println("리스트" + list);
+	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
+	}
 	
+	@PostMapping(value = "/searchTakeCsName", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<consultVO>> searchTakeCsName(@RequestBody Map<String, String> jsonData) {
+	    log.info("searchTakeCsName_success");
+	    
+	    String csName = jsonData.get("csName"); 
+	    
+	    log.info("담당자명 검색" + csName);
+	    
+	    List<consultVO> list = salesService.searchTakeCsName(csName); 
+	    
+	    log.info("리스트" + list);
+	    System.out.println("리스트" + list);
+	    
+	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
+	}
 	
+
+	/** 지점 등록 하기*/
+	@PostMapping(value = "/spotRegisterInsert")
+	public String spotRegisterInsert(spotVO vo, userVO userVO, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	    log.info("spotRegisterInsert..." + vo);
+
+	    // 파일 업로드 처리
+	    if (!file.isEmpty()) {
+	        try {
+	            // 파일 업로드 경로 설정
+	            String uploadDir = "/uploads/";
+	            Path uploadPath = Paths.get(uploadDir);
+	            
+	            // 업로드 디렉토리가 없으면 생성
+	            if (!Files.exists(uploadPath)) {
+	                Files.createDirectories(uploadPath);
+	            }
+	            
+	            // 파일명 중복 방지를 위한 고유한 파일명 생성
+	            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	            Path filePath = uploadPath.resolve(fileName);
+	            Files.copy(file.getInputStream(), filePath);
+	            
+	            // 업로드된 파일 경로를 VO에 설정
+	            vo.setFilePath(filePath.toString());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    // 비밀번호를 랜덤하게 생성하여 VO 객체에 설정
+	    userVO.setUserPwRandomly();
+
+	    // 지점 정보, 지점 담당자 정보 저장
+	    spotService.spotRegisterInsert(vo, userVO);
+
+	    // 저장 성공 메시지 설정
+	    rttr.addFlashAttribute("message", "지점 등록이 완료되었습니다.");
+
+	    // 등록 후 리다이렉트할 경로 설정 (예시: 지점 목록 페이지)
+	    return "redirect:/spotList";
+	}
 
 }

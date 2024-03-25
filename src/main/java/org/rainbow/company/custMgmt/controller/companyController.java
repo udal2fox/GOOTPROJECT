@@ -14,7 +14,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 
 
-import org.rainbow.company.custMgmt.domain.AttachFileDTO;
+import org.rainbow.company.custMgmt.domain.spotAttachFileDTO;
 import org.rainbow.company.custMgmt.domain.companyDownVO;
 import org.rainbow.company.custMgmt.domain.companyInputVO;
 
@@ -115,8 +115,8 @@ public class companyController {
 	/** 사업자등록증 파일 업로드2 */
 	@ResponseBody 
 	@PostMapping(value="/uploadAsyncAction", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<AttachFileDTO>> uploadAsyncPost(MultipartFile[] uploadFile, Model model) {
-		List<AttachFileDTO> list = new ArrayList<AttachFileDTO>();
+	public ResponseEntity<List<spotAttachFileDTO>> uploadAsyncPost(MultipartFile[] uploadFile, Model model) {
+		List<spotAttachFileDTO> list = new ArrayList<spotAttachFileDTO>();
 		
 		//log.info(list);
 		
@@ -134,7 +134,7 @@ public class companyController {
 		for(MultipartFile file : uploadFile) {
 			
 			//파일 정보를 담을 AttachFileDTO 객체 생성
-			AttachFileDTO attachDTO = new AttachFileDTO();
+			spotAttachFileDTO attachDTO = new spotAttachFileDTO();
 			
 			//log.info("upload Async post");
 			//log.info("upload File Name : " + file.getOriginalFilename());
@@ -185,7 +185,7 @@ public class companyController {
 		
 
 
-	return new ResponseEntity<List<AttachFileDTO>>(list,HttpStatus.OK ); 
+	return new ResponseEntity<List<spotAttachFileDTO>>(list,HttpStatus.OK ); 
 	}//end uploadAsyncPost()
 
 	

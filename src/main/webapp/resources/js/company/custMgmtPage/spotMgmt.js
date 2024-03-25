@@ -15,6 +15,13 @@ function cssBinding(cssFiles) {
 	})
 }
 
+let datePickAll = document.querySelectorAll('input[type="date"]');
+datePickAll.forEach(function(input) {
+    flatpickr(input, {
+        locale: 'ko'
+    });
+});
+
 
 document.getElementById("moveSpotRegisterBtn").addEventListener('click', ()=>{
 	

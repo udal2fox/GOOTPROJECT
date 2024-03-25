@@ -36,6 +36,12 @@ public interface salesService {
 	
 	/** 기업명 찾기(모달창)에서 기업명 검색 기능 */
 	public List<consultVO> searchModalComName(String companyName);
+	
+	/** 담당자명  모달창 에서 담당자 리스트 가져오기 */
+	public List<consultVO> takeCsNameList();
+	
+	/** 담당자명  모달창 에서 검색한 담당자명 가져오기 */
+	public List<consultVO> searchTakeCsName(String csName);
 											 
 
 }

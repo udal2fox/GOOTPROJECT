@@ -279,6 +279,17 @@
 	
 }
 
+#imgBtnTakeCsName {
+	
+	background: url( "/resources/images/ul-search.svg" ) no-repeat;
+        border: none;
+      	  width: 25px;
+        height: 25px;
+        cursor: pointer;
+        background-size: contain;
+	
+}
+
 
 
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,19 +20,18 @@
 			<h3>지점 관리</h3>
 		</div>
 		
-			<form action="/spotRegisterInsert" method="post"
-				id="spotRegisterForm" enctype="multipart/form-data">
+			<form method="post" enctype="multipart/form-data">
 		<div class="spot_subject_div">
 			<h5 class="spot_subject_title" align="left">●지점 정보</h5>
 
 			<table class="spot_subject_tbl">
 				<thead>
 					<tr>
-						<th>기업 연결</th>
+						<th>기업명</th>
 						<td><div class="input-with-image">
 						<input type="text" name="comName" readonly><a href="#" id="open_takeComName_modal">
+						<input type="hidden" name="companyNo" value="">
 						<input type="button" id="imgBtnSearchComName"></a>
-						<input type="hidden" name="companyNo">
 						</div></td>
 						<td></td>
 
@@ -134,7 +135,7 @@
 						<td>
 						
 						
-							<select name="spAutoExtension">
+							<select name="spPayMethod">
 								<option value="계산서">계산서</option>
 								<option value="카드">카드</option>
 							
@@ -158,7 +159,7 @@
 					<tr>
 					<th>담당자명</th>
 					<td><div class="input-with-image">
-						<input type="text" name="csName" placeholder="담당자명 검색 또는 작성"><a href="#" id="open_takeCsName_modal">
+						<input type="text" name="userName" placeholder="담당자명 검색 또는 작성"><a href="#" id="open_takeCsName_modal">
 						<input type="button" id="imgBtnTakeCsName"></a>
 						</div></td>
 						<td></td>

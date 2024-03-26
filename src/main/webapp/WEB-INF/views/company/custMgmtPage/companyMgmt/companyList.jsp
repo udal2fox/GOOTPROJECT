@@ -100,7 +100,7 @@
          </tbody>
       </table>
 </form>
-
+</div>
 </div>
     <!--페이지 부분제거후 js 로 그릴예정 -->
     <!-- page -->
@@ -112,7 +112,7 @@
 </div>
 
 
-</div>
+
 	<div class="btn_div">
 		<button type="button" class="companyListBtns" id="moveCompanyRegisterBtn" onclick="location.href='/moveCompanyRegister'">기업 등록</button>
 		

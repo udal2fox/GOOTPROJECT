@@ -1,8 +1,9 @@
 package org.rainbow.company.custMgmt.mapper;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
+import org.rainbow.company.custMgmt.domain.consultAndCshVO;
 import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
@@ -25,17 +26,16 @@ public interface salesMapper {
 	public cshVO getCshVO(int consultNo);
 	
 	/** 'salesView.jsp' 에서 영업 내용 저장(수정)하기 */
-	public void saveSales(consultVO vo);
+	public void saveSales(consultAndCshVO vo);
 	
 	/** 'salesView.jsp' 에서 영업 히스토리 저장하기 */
-	public int insertCsh(@Param("cVO") cshVO cVO, @Param("consultNo") int consultNo);
+	public int insertCsh(Map<String, Object> params);
 
-	/** 'salesView.jsp' 에서 첫번째 영업 히스토리 저장(수정)하기 */
-	public int saveFirstConsultHistory(cshVO cshvo);
 	
-	/** 'salesView.jsp' 에서 영업 히스토리 저장(수정)하기 */
-	public int saveConsultHistory(cshVO cshvo);
+	/** 'salesView.jsp' 에서 영업 히스토리 수정하기 */
+	public int UpdateCsh(Map<String, Object> params);
 	
+
 	/** 기업명 찾기 모달창 : 기업 리스트 가져오기*/
 	public List<consultVO> searchCompanyListModal();
 	

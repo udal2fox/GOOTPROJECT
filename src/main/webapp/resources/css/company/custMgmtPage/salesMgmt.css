@@ -1,16 +1,19 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @charset "UTF-8";
 
+.notosanskr * { 
+		 font-family: 'Noto Sans KR', sans-serif;
+		}
+	
 	body{
 		margin : 0;
 		padding : 0;
-		
 	}
 
 	.navBar{
 		position: fixed;
 		width : 100%;
 		top : 0;
-		
 	}
 
 /* 변수 생성 */
@@ -43,68 +46,14 @@
 
 
 
-
 .searchBar_div {
-		
+		  padding: 20px;
+    border-radius: 10px;
     	box-sizing: border-box;
     	background-color:var(--bg-gray);
     	padding-bottom:10px;
 	}
 
-
-.searchBar_tbl {
-	
-
-	box-sizing: border-box;
-	border-spacing: 0px 30px;
-   	border-collapse: separate; 
-   	width: 100%;
-	
-}
-
-	
-.checkbox-container {
-	box-sizing: border-box;
-    display: flex;
-
-    
-}
-
-.checkbox-container input[type="checkbox"] {
-    margin-right: 10px; 
-}	
-		
-.input-group {
-	box-sizing: border-box;
-		    margin-bottom: 10px;
-		}
-		
-	
-		
-		
-
-#searchBarSearchBtn {
-	box-sizing: border-box;
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
-	
-	
-	}
-	
-
-#searchBarResetBtn {
-	box-sizing: border-box;
-	background-color:rgb(255, 255, 255);
-	color:var(--blue);
-	border-color:rgb(255, 255, 255);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
-	}
 	
 
 .download_to_excel_btn_div {
@@ -381,12 +330,64 @@ textarea{
 
 
 
+.searchBar_tbl {
+    width: 100%;
+    border-spacing: 0px 10px; /* 테이블 내부 간격 조정 */
+}
 
+.searchBar_tbl th, .searchBar_tbl td {
+    padding: 10px;
+    text-align: center;
+}
 
+/* 버튼 스타일 */
+.btn {
+    padding: 6px 12px; /* 버튼 내부 간격 */
+    font-size: 14px;
+    border-radius: 5px;
+}
 
+/* 검색 버튼과 초기화 버튼 스타일 */
+#searchBarSearchBtn, #searchBarResetBtn {
+    width: 80px; /* 버튼 너비 조정 */
+    margin-top: 10px;
+    margin-right: 5px; /* 버튼 간 간격 조정 */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
 
+#searchBarResetBtn {
+    background-color: #fff;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
 
+#searchBarResetBtn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
 
+/* 체크박스 스타일 */
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+}
 
+/* 날짜 입력란 스타일 */
+.datePick1, .datePick2 {
+    width: 120px;
+    padding: 5px;
+}
 
+/* 날짜 버튼 스타일 */
+.dateBtn {
+    margin-right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 

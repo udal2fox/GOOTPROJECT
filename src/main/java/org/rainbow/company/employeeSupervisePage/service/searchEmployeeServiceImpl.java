@@ -23,9 +23,9 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 	
 	// 전체 직원 리스트
 	@Override
-	public List<rain_employeeDTO> getList(Criteria cri) {
+	public List<rain_employeeDTO> getList() {
 		log.info("getList...");
-		return mapper.getList(cri);
+		return mapper.getList();
 	}
 	
 	// 전체 직원 수 카운팅

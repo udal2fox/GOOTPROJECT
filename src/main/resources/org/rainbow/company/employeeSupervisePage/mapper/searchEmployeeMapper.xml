@@ -17,8 +17,7 @@
     		e.deptNo = d.deptNo
     	ORDER BY 
     		e.eno DESC 
-    	LIMIT #{amount} OFFSET #{offset}
-    	
+
 	</select>
 	
 	<!-- 전체 직원 수 카운트 -->

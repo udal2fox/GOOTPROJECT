@@ -101,13 +101,13 @@
 						<td><a href="/tradeDetailEdit?recNo=${td.recNo }"> ${td.recNo}</a></td>
 						<td><a href="/companyView?companyNo=${td.companyNo}">${td.comName}</a></td>
 						<td>${td.comBizType}</td>
-						<td>${td.spName}</td>
+						<td><a href="/spotView?spotNo=${td.spotNo}">${td.spName}</a></td>
 						<td>${td.recDate}</td>
 						<td><fmt:formatNumber value="${td.recSum - td.recDed + td.recAdd}" pattern="#,###"/></td>
 						<td><fmt:formatNumber value="${td.recSup - td.recDedSup + td.recAddSup}" pattern="#,###"/></td>
 						<td><fmt:formatNumber value="${td.recTax - td.recDedTax + td.recAddTax}" pattern="#,###"/></td>
 						<td><fmt:formatNumber value="${td.prdCstPri}" pattern="#,###"/></td>
-						<td>${td.prdMargin * 100}%</td>
+						<td><fmt:formatNumber value="${td.prdMargin}" pattern="0.00"/></td>
 						<td>${td.recPayMth}</td>
 						<td>${td.recSortation}</td>
 					</tr>

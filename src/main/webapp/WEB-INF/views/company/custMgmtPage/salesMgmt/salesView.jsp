@@ -92,49 +92,122 @@
 	<table class="subject_content_tbl">
 	<thead>
 	
-	<tr>
+						<tr>
 						<td class="tbl_subtitle">영업 담당자</td>
-						<td>
-							<input type="text" name="csEname" value="${consultVO.csEname }" readonly>
-							
-						</td>
-						<td>
-							<input type="button" class="salesViewBtns" id="imgBtnSearchEname">
-						</td>
+						<td><div class="input-with-image">
+						<input type="text" name="csEname" readonly><a href="#" id="open_searchEname_modal">
+						<input type="button" id="imgBtnSearchEname"></a>
+						</div></td>
+						<td></td>
 						<td class="tbl_subtitle">영업 상태</td>
 						<td>
-							<select name="selectSalesStatus" id="selectSalesStatus">
-								<option value="최초 인입">최초 인입</option>
-								<option value="응대 완료">응대 완료</option>
-								<option value="견적 발송 완료">견적 발송 완료</option>
-								<option value="미팅 완료">미팅 완료</option>
-								<option value="계약 완료">계약 완료</option>
-								<option value="계약 실패">계약 실패</option>
+							<select name="csStatus" id="selectSalesStatus">
+							<option value="최초 인입" ${consultVO.csStatus eq '최초 인입' ? 'selected' : ''}>최초 인입</option>
+							<option value="응대 완료" ${consultVO.csStatus eq '응대 완료' ? 'selected' : ''}>응대 완료</option>
+							<option value="견적 발송 완료" ${consultVO.csStatus eq '견적 발송 완료' ? 'selected' : ''}>견적 발송 완료</option>
+							<option value="미팅 완료" ${consultVO.csStatus eq '미팅 완료' ? 'selected' : ''}>미팅 완료</option>
+							<option value="계약 완료" ${consultVO.csStatus eq '계약 완료' ? 'selected' : ''}>계약 완료</option>
+							<option value="계약 실패" ${consultVO.csStatus eq '계약 실패' ? 'selected' : ''}>계약 실패</option>
+							
+		
 							</select>
 						</td>
 						<td></td>
 						<td class="tbl_subtitle">응대일</td>
 						<td>
-							<input type="date" name="csResponseDate" value="${consultVO.csResponseDate }">
+							<input type="date" name="csResponseDate" placeholder="날짜 입력" value="${consultVO.csResponseDate }" >
 						</td>
 						<td></td>
 					</tr>
-					<tr>
-						<td class="tbl_subtitle">영업 히스토리</td>	
-						<td colspan="8" style="background-color: #EEEEEE;"></td>
-					</tr>
-					<tr>
-						<td class="tbl_subtitle">날짜 </td>
-						<td colspan="8"><input type="date" name="cshDate1" value="${cshVO.cshDate1 }"></td>
-					</tr>
-					<tr>
-						<td class="tbl_subtitle">내용</td>
-						<td colspan="8">
-						<textarea rows="10"  style="width: 90%; resize: none" name="cshContent1" >${cshVO.cshContent1 }</textarea>
-						</td>
-					</tr>
-	</thead>
-	</table>
+					 <tr>
+		                <td class="tbl_subtitle">영업 히스토리</td>
+		                <td colspan="8" style="background-color: #EEEEEE;"></td>
+		            </tr>
+			</thead>
+			</table>		
+		    <div class="salesHistory">
+		        <table class="subject_content_tbl">
+		            <tr>
+		                <td class="tbl_subtitle">날짜 </td>
+		                <td colspan="8">
+		                    <input type="date" name="cshDate1" placeholder="영업 날짜 선택" value="${cshVO.cshDate1 }" style="width: 150px">
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tbl_subtitle">내용</td>
+		                <td colspan="8">
+		                    <textarea rows="10" placeholder="영업 내용 입력" style="width: 90%; resize: none" name="cshContent1">${cshVO.cshContent1 }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		    
+		    
+			<div class="salesHistoryEntry" style="display: none;">
+		        <table class="subject_content_tbl">
+		            <tr>
+		                <td class="tbl_subtitle">날짜 </td>
+		                <td colspan="8">
+		                    <input type="date" name="cshDate2" placeholder="영업 날짜 선택" value="${cshVO.cshDate2 }" style="width: 150px">
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tbl_subtitle">내용</td>
+		                <td colspan="8">
+		                    <textarea rows="10" placeholder="영업 내용 입력" style="width: 90%; resize: none" name="cshContent2">${cshVO.cshContent2 }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		    	    <div class="salesHistoryEntry" style="display: none;">
+		        <table class="subject_content_tbl">
+		            <tr>
+		                <td class="tbl_subtitle">날짜 </td>
+		                <td colspan="8">
+		                    <input type="date" name="cshDate3" placeholder="영업 날짜 선택" value="${cshVO.cshDate3 }" style="width: 150px">
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tbl_subtitle">내용</td>
+		                <td colspan="8">
+		                    <textarea rows="10" placeholder="영업 내용 입력" style="width: 90%; resize: none" name="cshContent3">${cshVO.cshContent3 }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		    	    <div class="salesHistoryEntry" style="display: none;">
+		        <table class="subject_content_tbl">
+		            <tr>
+		                <td class="tbl_subtitle">날짜 </td>
+		                <td colspan="8">
+		                    <input type="date" name="cshDate4" placeholder="영업 날짜 선택" value="${cshVO.cshDate4 }" style="width: 150px">
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tbl_subtitle">내용</td>
+		                <td colspan="8">
+		                    <textarea rows="10" placeholder="영업 내용 입력" style="width: 90%; resize: none" name="cshContent4">${cshVO.cshContent4 }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+		    	    <div class="salesHistoryEntry" style="display: none;">
+		        <table class="subject_content_tbl">
+		            <tr>
+		                <td class="tbl_subtitle">날짜 </td>
+		                <td colspan="8">
+		                    <input type="date" name="cshDate5" placeholder="영업 날짜 선택" value="${cshVO.cshDate5 }" style="width: 150px">
+		                </td>
+		            </tr>
+		            <tr>
+		                <td class="tbl_subtitle">내용</td>
+		                <td colspan="8">
+		                    <textarea rows="10" placeholder="영업 내용 입력" style="width: 90%; resize: none" name="cshContent5">${cshVO.cshContent5 }</textarea>
+		                </td>
+		            </tr>
+		        </table>
+		    </div>
+
 	
 	<div class="space_img_btns">
 				 <input type="button" class="salesViewBtns" id="imgBtnPlus">

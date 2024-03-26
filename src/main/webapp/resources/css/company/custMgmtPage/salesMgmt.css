@@ -42,6 +42,8 @@
 /** ------------신규 영업 (리스트) 페이지 시작--*/
 
 
+
+
 .searchBar_div {
 		
     	box-sizing: border-box;
@@ -60,51 +62,29 @@
 	
 }
 
-
-
-.searchBar_tbl input[type="text"] {
 	
-	width:100%;
-	border: none;
-	
+.checkbox-container {
+	box-sizing: border-box;
+    display: flex;
+
+    
 }
 
-.searchBar_tbl input[type="date"] {
-	border: none;
-	width:130px;
-	text-align: center;
-
-}
-
-
-.searchBar_section_layout {
-	box-sizing: border-box;
-	        display: flex;
-   			align-items: center;
-   			justify-content: flex-start;
-   			padding-left: 70px;
-		}
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px; 
+}	
 		
-		
-.searchBar_section_layout div{
-	box-sizing: border-box;
-		   padding-right: 20px;
-		}
-
 .input-group {
 	box-sizing: border-box;
 		    margin-bottom: 10px;
 		}
 		
-		
-.btn btn-secondary btn-sm {
 	
-	margin-right: 10px;
-}		
 		
 		
+
 #searchBarSearchBtn {
-	margin-left:1100px;
+	box-sizing: border-box;
 	background-color: var(--blue);
 	color: rgb(255, 255, 255);
 	border-color:var(--blue);
@@ -112,9 +92,12 @@
 	border: 5px 10px 5px 10px;
 	width: 80px;
 	
+	
 	}
 	
+
 #searchBarResetBtn {
+	box-sizing: border-box;
 	background-color:rgb(255, 255, 255);
 	color:var(--blue);
 	border-color:rgb(255, 255, 255);
@@ -123,6 +106,7 @@
 	width: 80px;
 	}
 	
+
 .download_to_excel_btn_div {
 	
     box-sizing: border-box;
@@ -140,6 +124,14 @@
 	width:140px;
 }
 
+
+.viewAFew_div {
+	
+    box-sizing: border-box;
+    text-align:right;
+    padding: 0px 5px 10px 5px;
+	
+}
 
 
 
@@ -180,7 +172,13 @@
 }
 
 
-.page-wrap{
+/*페이징 이미지사이즈  */
+		td img {height: 80px; width: 120px;}
+		.page-nation li{
+			list-style: none;
+		}
+		
+		.page-wrap{
 			    text-align: center;
 			    font-size: 0;
 			    display: flex;
@@ -224,6 +222,7 @@
 	background-color: #eaeaea;
 	border-color: white;
 }
+
 
 /** ------------신규 영업 (리스트) 페이지 끝--*/
 
@@ -296,12 +295,24 @@
 input[type="text"],input[type="email"],  select {
 	border:none;
 	text-align: center;
+	width:100%;
 }
 
 textarea{
 	border:none;
+
 }
 
+.input-with-image input[type="text"] {
+    padding-right: 50px; 
+}
+
+.input-with-image input[type="button"]{
+    position: absolute;
+    top: 50%;
+    right: 5px; 
+    transform: translateY(-50%);
+}
 
 .space_img_btns {
 	box-sizing: border-box;
@@ -361,7 +372,9 @@ textarea{
 	
 }
 
-
+.input-with-image {
+    position: relative;
+}
 
 /** ------------신규 영업 (상세보기) 페이지 끝-- */
 

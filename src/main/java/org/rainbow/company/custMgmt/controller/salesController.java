@@ -1,10 +1,13 @@
 package org.rainbow.company.custMgmt.controller;
 
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
+import org.rainbow.company.custMgmt.domain.cshVO;
 import org.rainbow.company.custMgmt.service.salesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,13 +15,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j;
-
+@CrossOrigin(origins = "<http://localhost:8080>")
 @Log4j
 @Controller
 public class salesController {
@@ -26,10 +31,8 @@ public class salesController {
 	@Autowired
 	salesServiceImpl salesService;
 
-
 	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
-
-	@PostMapping(value = "/salesList")
+	@GetMapping(value = "/salesList")
 	public String salesList(Model model) {
 		log.info("salesList_success");
 
@@ -38,46 +41,59 @@ public class salesController {
 		return "/company/custMgmtPage/salesMgmt/salesList";
 
 	}
+	/** 서치바 키워드 및 기간 검색 */
+    @ResponseBody
+	@PostMapping(value = "/searchConsult", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<consultVO>> searchConsult(@RequestBody consultSearchDTO csSearchDto)
+	{
+    	log.info(csSearchDto);
+    	List<consultVO> list = salesService.searchConsult(csSearchDto);
+		log.info(list);
+		
+		return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
+				
+	}	
 
-//	@ResponseBody
-//	@RequestMapping(value = "/search.do", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-//	public ResponseEntity<List<consultVO>> salesSearch(@RequestBody consultSearchDTO consultSearchDTO) {
-//	    
-//		log.info("검색"+consultSearchDTO);
-//
-//	    List<consultVO> list = salesService.getSearch(consultSearchDTO);
-//	    log.info(list);
-//
-//	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
-//	    
-//	   
-//	}
+    @GetMapping("/salesView")
+    public String salesView(int consultNo, Model model) {
+        log.info("salesView_success" + consultNo);
+        
+        // consultVO 가져오기
+        consultVO consultVO = salesService.salesView(consultNo);
+        model.addAttribute("consultVO", consultVO);
+        
+        // cshVO 가져오기
+        cshVO cshVO = salesService.getCshVO(consultNo); 
+        model.addAttribute("cshVO", cshVO);
+        
+        return "/company/custMgmtPage/salesMgmt/salesView";
+    }
 
-	/** 'salesView.jsp' 에서 상담 신청 내용 가져오기 */
-	@PostMapping("/salesView")
-	public String salesView(int consultNo, Model model) {
-		log.info("salesView_success" + consultNo);
-		model.addAttribute("consultVO", salesService.salesView(consultNo));
-
-		return "/company/custMgmtPage/salesMgmt/salesView";
-
-	}
 
 	/** 'salesView.jsp' 에서 영업 내용, 영업 히스토리 저장(수정)하기 */
 	@PostMapping("/saveSales")
-	public String saveSales(consultVO vo, RedirectAttributes rttr) {
+	public String saveSales(consultVO vo, cshVO cVO, RedirectAttributes rttr) {
 		log.info("saveSales_success" + vo);
-
-		salesService.saveSales(vo);
-
-		rttr.addFlashAttribute("result", "success");
-
+		Date cshContent1 = cVO.getCshDate2();
+		log.info("영업" + cshContent1);
+		
+		salesService.saveSales(vo, cVO);
+		
+//		if(vo.getCshVOList() != null) {
+//		    vo.getCshVOList().forEach(cshList -> log.info("영업 히스토리 리스트 결과 : " + cshList));
+//		} else {
+//		    log.info("영업 히스토리 리스트가 null입니다.");
+//		}
+		
+		rttr.addFlashAttribute("result","success");
+		
 		return "redirect:/salesList";
-
 	}
+
 	
 	
-	@PostMapping(value = "/searchModal", produces = {
+
+	@GetMapping(value = "/searchModal", produces = {
 			MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<consultVO>> searchModal() {
 	    log.info("안녕");

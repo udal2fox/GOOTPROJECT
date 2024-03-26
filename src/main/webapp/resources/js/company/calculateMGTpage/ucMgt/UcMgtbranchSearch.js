@@ -36,9 +36,9 @@ function fetchSearchResults(keyword) {
             	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
             	msg += '<td><input type="checkbox" name="checkboxTd"></td>';
             	msg += '<td>' + list.spotNo + '</td>';
-            	msg += '<td>' + list.comName + '</td>';
+            	msg += '<td><a href="/companyView?companyNo='+list.companyNo+'">' + list.comName + '</a></td>';
             	msg += '<td>' + list.comBizType + '</td>';
-            	msg += '<td>' + list.spName + '</td>';
+            	msg += '<td><a href="/spotView?spotNo='+list.spotNo+'">' + list.spName + '</a></td>';
             	msg += '<td>' + (list.recSum - list.recDed + list.recAdd).toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + (list.recSup - list.recDedSup + list.recAddSup).toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + (list.recTax - list.recDedTax + list.recAddTax).toLocaleString('ko-KR') + '</td>';

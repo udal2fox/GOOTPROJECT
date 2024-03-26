@@ -74,7 +74,7 @@
 }
 
 
-.checkbox_div, .radioBtn_div {
+.checkbox_div {
 	display: flex;
 	justify-content: space-around;
 

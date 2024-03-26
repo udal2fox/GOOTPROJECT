@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AttachFileDTO {
+public class spotAttachFileDTO {
 	
-	private String fileName;
-	private String uploadPath;
 	private String uuid;
+	private String uploadPath;
+	private String fileName;
+	private int spotNo;
 
 }

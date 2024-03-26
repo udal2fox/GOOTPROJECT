@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,31 +51,20 @@ public class employeeSupervisePageController {
 
 	// 직원 조회 페이지
 	@GetMapping("/searchEmployee")
-	public String searchEmployee(Model model, Criteria cri) {
-			  
-		if( cri.getPageNum() == 0 && cri.getAmount() == 0) {
-			cri.setPageNum(1);
-			cri.setAmount(13);
-		}
-		
-		// offset 설정
-	    cri.setOffset((cri.getPageNum() - 1) * cri.getAmount());
+	public String searchEmployee(Model model) {
 
 	    // getList() 메서드 호출 시, Criteria 객체만을 인자로 전달
-	    List<rain_employeeDTO> employeeList = service.getList(cri);
-
-			 	
+	    List<rain_employeeDTO> employeeList = service.getList(); 
+		
 		log.info("getList..." + employeeList);
-		System.out.println(service.getList(cri));
-			 
+
 		//전체 직원 수 
 		int total = service.getTotal(); 
 		log.info("total...." + total);
 			 
 		// PageDTO 객체 list 화면으로 전달
 		model.addAttribute("list", employeeList);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-			
+	
 		return "/company/employeeSupervisePage/searchEmployeePage";
 	}
 		

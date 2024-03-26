@@ -13,7 +13,7 @@ import org.rainbow.domain.Criteria;
 public interface searchEmployeeMapper {
 	
 	// 전체 직원 리스트
-	public List<rain_employeeDTO> getList(Criteria cri);
+	public List<rain_employeeDTO> getList();
 	
 	// 전체 직원 수 카운팅 
 	public int getTotal();

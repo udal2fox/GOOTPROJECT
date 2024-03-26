@@ -135,9 +135,9 @@ input[type=text]
 		        		<td>${edit.prdSubCtg }</td>
 		        		<td>${edit.prdNo }</td>
 		        		<td>${edit.prdName }</td>
-		        		<td>${edit.prdSal }</td>
-		        		<td>${edit.prdCstPri }</td>
-		        		<td>${edit.prdMargin }</td>
+		        		<td><fmt:formatNumber value="${edit.prdSal }" pattern="#,###"/></td>
+		        		<td><fmt:formatNumber value="${edit.prdCstPri }" pattern="#,###"/></td>
+		        		<td><fmt:formatNumber value="${edit.prdMargin }" pattern="0.00"/></td>
 		        		<td>${edit.getCEmpName()}</td>
 		        	</tr>
 		        	<c:if test="${not empty edit.recDedName}">
@@ -146,8 +146,8 @@ input[type=text]
 			        		<td>금액차감</td>
 			        		<td>${edit.recDedPrdCode }</td>
 			        		<td>${edit.recDedName }</td>
-			        		<td><fmt:formatNumber value="${edit.recDed }" pattern="#,##"/></td>
-			        		<td><fmt:formatNumber value="${edit.recDedCst }" pattern="#,##"/></td>
+			        		<td><fmt:formatNumber value="${edit.recDed }" pattern="#,###"/></td>
+			        		<td><fmt:formatNumber value="${edit.recDedCst }" pattern="#,###"/></td>
 			        		<td><fmt:formatNumber value="${((edit.recDed - edit.recDedCst ) / edit.recDed)}" pattern="0.00"/></td>
 			        		<td>${edit.recDedWorker}</td>
 			        	</tr>	
@@ -158,8 +158,8 @@ input[type=text]
 			        		<td>추가정산</td>
 			        		<td>${edit.recAddPrdCode }</td>
 			        		<td>${edit.recAddName }</td>
-			        		<td><fmt:formatNumber value="${edit.recAdd }" pattern="#,##"/></td>
-			        		<td><fmt:formatNumber value="${edit.recAddCst }" pattern="#,##"/></td>
+			        		<td><fmt:formatNumber value="${edit.recAdd }" pattern="#,###"/></td>
+			        		<td><fmt:formatNumber value="${edit.recAddCst }" pattern="#,###"/></td>
 			        		<td><fmt:formatNumber value="${((edit.recAdd - edit.recAddCst )/edit.recAdd)}" pattern="0.00"/></td>
 			        		<td>${edit.recAddWorker}</td>
 			        	</tr>	

@@ -32,7 +32,6 @@
          <button id="excelBtn"> 엑셀로 내려받기 </button>
       </div>
       <hr style="border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;">
-
       <div id="searchResult_table">
          <table id="searchResult" class="table">
             <thead>
@@ -58,7 +57,7 @@
                      <td>${vo.EPhone }</td>
                      <td>${vo.DName }</td>
                      <td>${vo.job }</td>
-                     <td>${empty vo.endDt ? '재직 중' : '퇴사' }</td>
+                     <td>${empty vo.endDt ? '재직 중' : '퇴사'}</td>
                      <td>${vo.hireDt }</td>
                      <td>${empty vo.endDt ? '-' : vo.endDt }</td>
                      <td>${vo.idStatus }</td>   
@@ -78,32 +77,16 @@
                    </c:otherwise>
             </c:choose>
             
-            
-            <!-- 페이징 영역 -->
-            <div class="page-wrap">
-               <ul class="page-nation">
-                  <c:if test="${pageMaker.prev }">
-                     <li class="previous">
-                        <a href="${pageMaker.startPage-1 }"> &lt; </a>
-                     </li>
-                  </c:if>
-                  <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }" step="1">
-                     <li>
-                        <a href="${num }" class="${pageMaker.cri.pageNum == num ? 'active' : '' }"> ${num } </a>
-                     </li>
-                  </c:forEach>
-                  <c:if test="${pageMaker.next }">
-                     <li>
-                        <a href="${pageMaker.endPage + 1 }"> &gt; </a>
-                     </li>
-                  </c:if>
-               </ul>
-            </div>
-         </div>
-      </div>
+             <!-- page -->
+    		 <div id="pagination" class="page-wrap" align="center" style="width: 100%;">	
+    		 	<ul class="page-nation">
+        	 <!-- 페이지네이션은 이곳에 동적으로 생성 -->
+        
+    			</ul>
+			 </div>
+          </div>
+       </div>
 
-      
-   
    <script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage1.js"></script>
    <script type="text/javascript" src="/resources/js/company/employeeSupervisePage/searchEmployeePage.js"></script>
 </body>

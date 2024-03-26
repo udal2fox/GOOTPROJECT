@@ -183,35 +183,35 @@
                 <ul class="nav col-12 col-md-auto justify-content-center text-center" style="width: 80%; margin: auto;">
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/moveSuppliers">공급처 관리</a></li>
-                            <li class="category"><a class="category-link" href="/moveProductPage">상품 관리</a></li>
+                            <li class="category" onclick="movePage('/moveSuppliers')"><a class="category-link" href="#">공급처 관리</a></li>
+                            <li class="category" onclick="movePage('/moveProductPage')"><a class="category-link" href="#">상품 관리</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/salesList">신규영업</a></li>
-                            <li class="category"><a class="category-link" href="/companyList">기업관리</a></li>
-                            <li class="category"><a class="category-link" href="/spotList">지점관리</a></li>
+                      		<li class="category" onclick="movePage('/salesList')"><a class="category-link" href="#">신규영업</a></li>
+                            <li class="category" onclick="movePage('/companyList')"><a class="category-link" href="#">기업관리</a></li>
+                            <li class="category" onclick="movePage('/spotList')"><a class="category-link" href="#">지점관리</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/TradeDetailPage">거래명세</a></li>
-                            <li class="category"><a class="category-link" href="/unrecoveredMGT">미수관리</a></li>
-                            <li class="category"><a class="category-link" href="/moveIoBill">계산서발행</a></li>
+                        	<li class="category" onclick="movePage('/TradeDetailPage')"><a class="category-link" href="#">거래명세</a></li>
+                            <li class="category" onclick="movePage('/unrecoveredMGT')"><a class="category-link" href="#">미수관리</a></li>
+                            <li class="category" onclick="movePage('/moveIoBill')"><a class="category-link" href="#">계산서발행</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/moveSalesStatsCom">기업별 통계</a></li>
-                            <li class="category"><a class="category-link" href="/moveSalesStatsPrd">상품별 통계</a></li>
+                       		<li class="category" onclick="movePage('/moveSalesStatsCom')"><a class="category-link" href="#">기업별 통계</a></li>
+                            <li class="category" onclick="movePage('/moveSalesStatsPrd')"><a class="category-link" href="#">상품별 통계</a></li>
                         </ul>
                     </li>
                     <li>
                         <ul class="subMenu-category px-5">
-                            <li class="category"><a class="category-link" href="/orgchart">조직도</a></li>
-                            <li class="category"><a class="category-link" href="/searchEmployee">직원관리</a></li>
-                            <li class="category"><a class="category-link" href="">전자결재</a></li>
+                       		<li class="category" onclick="movePage('/orgchart')"><a class="category-link" href="#">조직도</a></li>
+                            <li class="category" onclick="movePage('/searchEmployee')"><a class="category-link" href="#">직원관리</a></li>
+                            <li class="category" onclick="movePage('')"><a class="category-link" href="#">전자결재</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -241,6 +241,19 @@
             profilePictureElement.src = profilePictureSrc;
         }
     };
+    
+    function movePage(url) {
+        location.href = url;
+    }
+
+    // 이벤트 리스너로 페이지 전환
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.category-link').forEach(item => {
+            item.addEventListener('click', function() {
+            	movePage();
+            });
+        });
+    });
 
 </script>
 

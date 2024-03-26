@@ -3,6 +3,8 @@ package org.rainbow.company.employeeSupervisePage.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.rainbow.company.employeeSupervisePage.domain.EmployeeExcelDTO;
+import org.rainbow.company.employeeSupervisePage.domain.EmployeeSearchDTO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
 import org.rainbow.domain.Criteria;
@@ -27,4 +29,10 @@ public interface searchEmployeeService {
 	
 	// 개인 프로필 편집
 	public int profile_update(HashMap<String, Object> result);
+	
+	// 프사만 저장
+	public int profilePictureUpdate(HashMap<String, Object> result);
+	
+	// 사원 리스트 엑셀화
+	public List<EmployeeExcelDTO> excelDown(EmployeeSearchDTO empdto);
 }

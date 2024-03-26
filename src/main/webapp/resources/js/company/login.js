@@ -45,6 +45,7 @@ document.getElementById("loginBtn").addEventListener("click", () => {
           sessionStorage.setItem("Okja", result.eno);
           sessionStorage.setItem("deptNo", result.deptNo);
           sessionStorage.setItem("eName", result.eName);
+          sessionStorage.setItem("profilePicture", result.profilePicture);
           
           location.href = "/moveSalesChart?" + sessionStorage.getItem("Okja");
 	})

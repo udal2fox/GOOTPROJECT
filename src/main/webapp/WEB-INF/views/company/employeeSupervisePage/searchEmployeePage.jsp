@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../../navBar.jsp" %> 
+<%@ include file="../../navBar.jsp" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
  <link rel="stylesheet" href="/resources/css/company/employeeSupervisePage/searchEmployeePage.css">
 
@@ -27,7 +29,7 @@
                <option value="상품"> 상품 </option>
             </select>
          </div>
-         <button id="execelBtn"> 엑셀로 내려받기 </button>
+         <button id="excelBtn"> 엑셀로 내려받기 </button>
       </div>
       <hr style="border : 0.5px solid gray; width: 98%; margin: 0 auto; margin-top: 10px; margin-bottom: 10px;">
 

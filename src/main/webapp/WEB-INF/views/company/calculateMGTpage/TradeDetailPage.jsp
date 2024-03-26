@@ -46,16 +46,16 @@
 			</tr>
 				<tr>
 					<td> 키워드   </td> 
-					<td colspan="1"> <input type="text" placeholder=" 거래명세번호/기업명/지점명" style="width: 382px" id="tdKeyword"> </td>
+					<td colspan="1"> <input type="text" placeholder=" 거래명세번호/기업명/지점명" style="width: 382px" id="tdKeyword" class="form-control"> </td>
 					<td><input type="button" class="btn btn-primary" value="검색" id="search"></td>
 					<td><input type="button" class="btn btn-primary" value="초기화" id="reset"></td>
 				</tr>
 			<tr>
 				<td style="padding-top: 10px">기간</td>
-				<td>
-					<input class="datePick1" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
-					 ~ 
-					<input class="datePick2" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly">
+				<td style="display: flex;align-items: center;" >
+					<input class="datePick1 form-control" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly" style="width: 179px">
+					 &nbsp;~ &nbsp;
+					<input class="datePick2 form-control" type="text" placeholder=" 날짜를 선택하세요.." readonly="readonly" style="width: 179px">
 				</td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
 				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>

@@ -16,7 +16,7 @@
 						<div id="profile-all">
 							<div id="img-box">
 								<div id="profile-img">
-								 	<img id="profilePicture" src="${vo.profilePicture}" width="302px" height="152px" onerror="profile()">
+								 	<img id="profilePicture" src="${vo.profilePicture}" width="302px" height="152px" onerror="this.src='/resources/images/profile_img.png';" >
 								</div>
 								<div id="img-white-line">
 									<span id="img-change"> 프로필사진 변경 </span>
@@ -106,7 +106,6 @@
 		</div>
 	
 	
-	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/profile_modify2.js"></script>
 	<script type="text/javascript" src="/resources/js/company/employeeSupervisePage/profile_modify.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>

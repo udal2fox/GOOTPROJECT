@@ -85,7 +85,10 @@
 					    <td>마진율</td><td colspan="3"><input type="text" class="form-control magin" readonly="readonly" value="${pvo.prdMargin}" name="prdMargin"></td>
 					</tr>
 					<tr>
-						<td>상품이미지</td><td colspan="3"><input type="file" class="form-control" id="inputGroupFile02" name="file" value="${pvo.prdImg }"></td>
+						<td>상품이미지</td><td colspan="3">
+						    <input type="file" class="form-control" id="inputGroupFile02" name="file">
+						    <input type="hidden" name="existingImage" value="${pvo.prdImg}">
+						</td>
 						<td>상품상태</td>
 						<td>
   							<input class="form-check-input" type="radio" name="prdSt" id="exampleRadios1" value="판매중"

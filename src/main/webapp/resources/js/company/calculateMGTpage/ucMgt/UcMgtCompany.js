@@ -352,7 +352,7 @@
 	    let formattedTotal = formatToThousand(total);
 	    console.log("총합(천 단위): ", formattedTotal);
 
-	    let ucTotal = document.querySelector('.misuTotal').innerHTML = '총 미수 금액 : ' + formattedTotal;
+	    let ucTotal = document.querySelector('.misuTotal').innerHTML = '총 미수 금액 : ' + formattedTotal+'원';
 	};
 
 	// 천 단위로 변환하는 함수

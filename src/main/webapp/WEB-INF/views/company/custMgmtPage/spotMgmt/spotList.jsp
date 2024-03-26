@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title></title>
 </head>
 <body>
@@ -28,7 +28,7 @@
 					<tr>
 					<th>키워드</th>
 					<td>
-						<input type="text" name="searchBarKeword" placeholder="기업명/담당자/메일주소/영업담당">
+					<input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/지점명/담당자/주소" style="text-align: center;">
 					</td>
 					<td rowspan="2"></td>
 					<th rowspan="2"></th>
@@ -40,10 +40,10 @@
 					<th>이용 상태</th>
 				<td>
 					<div class="checkbox_div">
-				<input type="checkbox" name="serviceStatus" value="전체" checked="checked" >전체
-				<input type="checkbox" name="serviceStatus" value="활동" checked="checked" >활동
-				<input type="checkbox" name="serviceStatus" value="중단" checked="checked" >중단
-				<input type="checkbox" name="serviceStatus" value="해지" checked="checked" >해지
+					<input class="form-check-input" type="checkbox" id="spotList-serviceStatusAll" value="전체" checked>전체
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="spotList-serviceStatus" value="활동" checked>활동   
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="spotList-serviceStatus" value="중단" checked>중단
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="spotList-serviceStatus" value="해지" checked>해지
 					</div>
 				</td>
 				</tr>
@@ -53,9 +53,10 @@
 			<input type="reset"  id="searchBarResetBtn" value="초기화">
 		</form>
 			</div>
-			
-					<div class="download_to_excel_btn_div">
-				<input type="button" class="companyListBtns" id="downloadExcelBtn" value="엑셀로 내려받기">
+			<div class="download_to_excel_btn_div">
+				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
+                <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
+                <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
 			</div>
 			<div class="viewAFew_div">
 				<select name="viewAFew" id="selectViewAFew">
@@ -74,54 +75,57 @@
 	<div class="list_div">
 		
 	 <div>
-      <table class="list_div_tbl">
+	 <form>
+      <table class="list_div_tbl" id="spot_tbl">
          <thead>
             <tr class="top_bar_of_list">
          
-                <th>기업 번호</th>
+               <th>기업 번호</th>
                <th>지점 번호</th>
-               <th>기업명</th>
-               <th>지점명</th>
+               <th>기업명<button type="button" class="sort-btn" data-column="comName">🔽</button></th>
+               <th>지점명<button type="button" class="sort-btn" data-column="spName">🔽</button></th>
                <th>주소</th>
                <th>계약일자</th>
-               <th>상태</th>
+               <th>상태<button type="button" class="sort-btn" data-column="spStatus">🔽</button></th>
                <th>상태 변경 일자</th>
-               <th>담당자</th>
-               <th>직원 리스트</th>
-               
-               
+               <th>담당자<button type="button" class="sort-btn" data-column="userName">🔽</button></th>
+               <th>직원 리스트</th>   
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="vo" items="${spotVO }">
-               <tr class="spotList">
-                   <td><a href="/spotUpdate">1</a></td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td>test</td>
-            	<td><a href="#" id="open_managerInpo_modal">담당자</a></td>
-            	<td><a href="#" id="open_empList_modal">test</a></td>
+            <c:forEach var="vo" items="${spotListVO }">
+               <tr class="spotList" data-type="${vo.spStatus}">
+                <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
+            	<td><a href="${vo.spotNo }">${vo.spotNo }</a></td>
+            	<td>${vo.comName }</td>
+            	<td>${vo.spName }</td>
+            	<td>${vo.spAddr }</td>
+            	<td>${vo.spAgreementDate }</td>
+            	<td>${vo.spStatus }</td>
+            	<td>${vo.spChangeDate }</td>
+            	<td><a href="#" id="open_managerInpo_modal">${vo.userName }</a></td>
+            	<td><a href="#" id="open_empList_modal">보기</a></td>
         
                </tr>
             </c:forEach>
          </tbody>
       </table>
-
-
+      </form>
 </div>
+
+    <!--페이지 부분제거후 js 로 그릴예정 -->
+    <!-- page -->
+    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">	
+    <ul class="page-nation">
+        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
+        
+    </ul>
+</div>
+
 </div>
 	<div class="btn_div">
 		<input type="button" id="moveSpotRegisterBtn" value="지점 등록">
 	</div>
-	
-
-
-
-	
 
 <!-------------------------------- 직원 리스트 모달-->
 <div class="modal" id="empList_modal">
@@ -147,7 +151,7 @@
                <th>주문일자</th>
                <th>상품</th>  
             </tr>
- 			        <tr>
+ 			<tr>
         	<td><a href="#" id="open_empInfo_modal">1</a></td>
         	<td>test</td>
         	<td>test</td>
@@ -271,6 +275,8 @@
 
 </div>
 </div>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotFilter.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotSearch.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmtModal.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>

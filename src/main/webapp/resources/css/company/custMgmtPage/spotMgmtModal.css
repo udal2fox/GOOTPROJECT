@@ -33,6 +33,28 @@
 	
 }
 
+#takeComName_modal{
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
+#takeCsName_modal{
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+	
+}
+
 
 /** 모달창 시작*/
 
@@ -141,3 +163,49 @@ textarea
 	width:100%;
 	
 }
+
+
+/*페이징 이미지사이즈  */
+		td img {height: 80px; width: 120px;}
+		.page-nation li{
+			list-style: none;
+		}
+		
+		.page-wrap{
+			    text-align: center;
+			    font-size: 0;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+		}
+		.page-nation {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		.page-nation a{
+			display: block;
+			margin: 0 3px;
+			flex: left;
+			border: 1px solid #e6e6e6;
+			width: 28px;
+			height: 28px;
+			line-height: 28px;
+			text-align: center;
+			background-color: #fff;
+			font-size: 13px;
+			color: black;
+			text-decoration: none;
+		}
+		
+		.page-nation a.active{
+			background-color: #0078ff;
+			color: #fff;
+		}
+		.page-nation a:hover{
+			background-color: #0078ff;
+			color: #fff;
+		}
+

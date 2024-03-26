@@ -5,17 +5,17 @@
  
    <!-- 서치바 - 키워드 검색 결과 가져오기 -->
 	
-	<select id="getSearch" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
+	<select id="searchConsult" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
    SELECT consultNo, csDate, csCompanyName, csName, csContact, csEmail, csBdgt, csStatus, csEname
    FROM RAIN_consult_tbl
    WHERE 1 = 1
 
    <if test="keyword != null and keyword != ''">
       AND (
-         csCompanyName = #{keyword} 
-         OR csName LIKE #{keyword} 
-         OR csEmail LIKE #{keyword}
-         OR csEname LIKE #{keyword} 
+         csCompanyName = '${keyword}' 
+         OR csName LIKE '%${keyword}% '
+         OR csEmail LIKE '%${keyword}% '
+         OR csEname = '${keyword}' 
       )
    </if>
    <if test="firDate != null and secDate != null">
@@ -25,53 +25,88 @@
 	
  
 
-<!-- 상담 요청 리스트 가져오기-->
-<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
-   
-    SELECT *
-    FROM RAIN_consult_tbl ORDER by consultNo asc
-   
-</select>
+	<!-- 상담 요청 리스트 가져오기-->
+	<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+	   
+	    SELECT *
+	    FROM RAIN_consult_tbl ORDER by consultNo asc
+	   
+	</select>
 
- <!-- 상담 요청 내용 가져오기-->
-  <select id="salesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
-  	select * from RAIN_consult_tbl where consultNo=#{consultNo}
-  </select>
+	 <!-- 상담 요청 내용 가져오기-->
+	  <select id="salesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
+	  	select * from RAIN_consult_tbl where consultNo=#{consultNo}
+	  </select>
+	  
+ 	
+ 	<!-- 영업 히스토리 내용 가져오기 -->
+	  <select id="getCshVO" resultType="org.rainbow.company.custMgmt.domain.cshVO" parameterType="int">
+	  	select * from RAIN_consultHistory_tbl where consultNo=#{consultNo}
+	  </select>
  
- 
- <!-- 영업 내용 저장(수정)하기 -->
- <update id="saveSales" parameterType="org.rainbow.company.custMgmt.domain.consultVO">
-  		update RAIN_consult_tbl
-set csStatus=#{csStatus}, csEname=#{csEname}, csResponseDate=#{csResponseDate},
-    csFailReason=#{csFailReason}, csFailDetailReason=#{csFailDetailReason}
-where consultNo=#{consultNo}
-
-  
-  </update>
-  
-  
-   <!-- 영업 히스토리1 내용 저장 하기 -->
-	<insert id="saveFirstConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
-	
-	insert into RAIN_consultHistory_tbl (consultNo, cshDate1, cshContent1)
-values (#{consultNo}, #{cshDate1}, #{cshContent1})
-	
-	</insert>
- 
- 
- <!-- 영업 히스토리 1,2,3,4,5 내용 저장(수정) 하기 -->
-	<update id="saveConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
-	
-	update RAIN_consultHistory_tbl
-set cshDate1=#{cshDate1}, cshContent1=#{cshContent1},
-    cshDate2=#{cshDate2}, cshContent2=#{cshContent2},
-    cshDate3=#{cshDate3}, cshContent3=#{cshContent3},
-    cshDate4=#{cshDate4}, cshContent4=#{cshContent4},
-    cshDate5=#{cshDate5}, cshContent5=#{cshContent5}
-where consultNo=#{consultNo}
-	
+	<!-- 영업 내용 저장(수정)하기 -->
+	<update id="saveSales" parameterType="org.rainbow.company.custMgmt.domain.consultVO">
+	    UPDATE RAIN_consult_tbl
+	    SET 
+	    csStatus = #{csStatus},
+	    csEname = #{csEname},
+	    csResponseDate = #{csResponseDate},
+	    <!-- csFailReason과 csFailDetailReason가 모두 존재하는 경우에만 업데이트 -->
+	    <if test="csFailReason != null and csFailDetailReason != null">
+	        csFailReason = #{csFailReason},
+	        csFailDetailReason = #{csFailDetailReason}
+	    </if>
+	    WHERE consultNo = #{consultNo}
 	</update>
-	
+  	
+  <!-- 영업 히스토리 내용 저장하기 -->
+	<insert id="insertCsh" parameterType="org.rainbow.company.custMgmt.domain.cshVO">
+    INSERT INTO RAIN_consultHistory_tbl (consultNo, cshDate1, cshContent1
+    <if test="cVO.cshDate2 != null and cVO.cshContent2 != null">
+        , cshDate2, cshContent2
+    </if>
+    <if test="cVO.cshDate3 != null and cVO.cshContent3 != null">
+        , cshDate3, cshContent3
+    </if>
+    <if test="cVO.cshDate4 != null and cVO.cshContent4 != null">
+        , cshDate4, cshContent4
+    </if>
+    <if test="cVO.cshDate5 != null and cVO.cshContent5 != null">
+        , cshDate5, cshContent5
+    </if>
+    )
+    VALUES (
+    #{cVO.consultNo}, #{cVO.cshDate1}, #{cVO.cshContent1}
+    <if test="cVO.cshDate2 != null and cVO.cshContent2 != null">
+        , #{cVO.cshDate2}, #{cVO.cshContent2}
+    </if>
+    <if test="cVO.cshDate3 != null and cVO.cshContent3 != null">
+        , #{cVO.cshDate3}, #{cVO.cshContent3}
+    </if>
+    <if test="cVO.cshDate4 != null and cVO.cshContent4 != null">
+        , #{cVO.cshDate4}, #{cVO.cshContent4}
+    </if>
+    <if test="cVO.cshDate5 != null and cVO.cshContent5 != null">
+        , #{cVO.cshDate5}, #{cVO.cshContent5}
+    </if>
+    )
+</insert>
+
+
+
+ 
+ 
+	 <!-- 영업 히스토리 1,2,3,4,5 내용 저장(수정) 하기 -->
+	<update id="saveConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
+	    UPDATE RAIN_consultHistory_tbl
+	    SET
+	    cshDate1=#{cshDate1}, cshContent1=#{cshContent1},
+	    cshDate2=#{cshDate2}, cshContent2=#{cshContent2},
+	    cshDate3=#{cshDate3}, cshContent3=#{cshContent3},
+	    cshDate4=#{cshDate4}, cshContent4=#{cshContent4},
+	    cshDate5=#{cshDate5}, cshContent5=#{cshContent5}
+	    WHERE consultNo=#{consultNo}
+	</update>
 	
 	 <!-- 기업명 찾기 모달창 : 기업 리스트 가져오기 -->
 	<select id="searchCompanyListModal" resultType="org.rainbow.company.custMgmt.domain.consultVO">
@@ -90,6 +125,26 @@ where consultNo=#{consultNo}
 		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL AND cs.csCompanyName LIKE CONCAT('%', #{companyName}, '%')
 
 	</select>
+	
+	 	 <!-- 담당자명  모달창 에서 담당자 리스트 가져오기 -->
+	<select id="takeCsNameList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+		SELECT cs.csCompanyName, cs.csName
+		FROM RAIN_consult_tbl cs
+		INNER JOIN RAIN_cCompany_tbl com 
+		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL
+
+	</select>
+	
+	 	 <!-- 담당자명  모달창 에서 검색한 담당자명 가져오기 -->
+	<select id="searchTakeCsName" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="string">
+		SELECT cs.csCompanyName, cs.csName
+		FROM RAIN_consult_tbl cs
+		INNER JOIN RAIN_cCompany_tbl com 
+		WHERE cs.csStatus = '계약 완료' AND com.comName IS NULL AND cs.csName LIKE CONCAT('%', #{csName}, '%')
+
+	</select>
+	
+	
  	
  
  </mapper>

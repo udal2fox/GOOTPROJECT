@@ -5,7 +5,7 @@
 
 	<!-- 기업 리스트 가져오기-->
 	<select id="companyList"  resultType="org.rainbow.company.custMgmt.domain.companyVO">
-		SELECT * FROM RAIN_cCompany_tbl ORDER by companyNo asc
+		SELECT * FROM RAIN_cCompany_tbl
 	</select>
 
 <!-- 서치바 - 키워드 검색 결과 가져오기 -->
@@ -106,5 +106,18 @@ insert into  RAIN_cCompany_tbl(comCEO) values (#{comCEO})
 		 comCEO=#{comCEO}, comContact=#{comContact}, comEmail=#{comEmail}, comOpenningDate=#{comOpenningDate} 
 		 where companyNo=#{companyNo}
 	</update>
+	
+		  <!-- 기업 연결 모달창 에서 기업 리스트 가져오기 -->
+	  <select id="takeComNameList" resultType="org.rainbow.company.custMgmt.domain.companyVO">
+	  	select comName from RAIN_cCompany_tbl
+	  </select>
+	  
+	   <!-- 기업 연결 모달창에서 기업명 검색 기능 -->
+	<select id="searchTakeComName" resultType="org.rainbow.company.custMgmt.domain.companyVO" parameterType="string">
+		SELECT comName
+		FROM RAIN_cCompany_tbl
+		WHERE comName LIKE CONCAT('%', #{comName}, '%')
+
+	</select>
 
 </mapper>

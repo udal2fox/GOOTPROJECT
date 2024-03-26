@@ -71,32 +71,33 @@ document.getElementById('exExcelPrd').addEventListener('click', ()=>{
 
 function download() 
 {
-	// 폼데이터에 체크박스 의 벨류를 들고가서 리스트 조회 후 그리스트로 다운받게 끔 변환
-    // 상품 분류 체크박스들의 값을 가져옵니다.
-    let checkedValues = [];
-    
-    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
-        if(checkbox.value != '전체')
-		{	
-        	checkedValues.push(checkbox.value);
-        
-		}
-    });
+	 let sdto = {
+	    		"keyword": document.getElementById('tdKeyword').value,
+			    "checkedValues": [] //
+	    };
+	    
+	    document.querySelectorAll('input[type=checkbox][data-filter="td-Business"]:checked').forEach(function(checkbox) {
+	        if(checkbox.value != '전체')
+			{
+	        	sdto.checkedValues.push(checkbox.value);
+			}
+	    });
 
-    // 상품 상태 체크박스들의 값을 가져옵니다.
-    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
-    	 if(checkbox.value != '전체')
- 		{
-         	checkedValues.push(checkbox.value);
- 		}
-    });
+	    // 상품 상태 체크박스들의 값을 가져옵니다.
+	    document.querySelectorAll('input[type=checkbox][data-filter="td-calculate"]:checked').forEach(function(checkbox) {
+	    	 if(checkbox.value != '전체')
+	 		{
+	    		 sdto.checkedValues.push(checkbox.value);
+	 		}
+	    });
+	    console.log(sdto);
 
 		
     // 서버로 데이터 전송
     fetch('/downloadExcel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(checkedValues)
+        body: JSON.stringify(sdto)
     })
     .then(response => response.blob())
     .then(blob =>

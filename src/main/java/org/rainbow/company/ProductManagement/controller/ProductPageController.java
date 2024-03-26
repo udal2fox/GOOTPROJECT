@@ -16,6 +16,7 @@ import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.service.productPageServiceImpl;
+import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.domain.ExcelDownloadUtil;
 import org.rainbow.domain.ExcelListener;
 import org.rainbow.domain.ImageUploader1;
@@ -190,15 +191,12 @@ public class ProductPageController
     /** 엑셀 데이터 다운로드 처리*/
     @ResponseBody
     @PostMapping("/downloadExcel")
-    public void downloadExcelData(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    public void downloadExcelData(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(checkValues);
+    	System.out.println(sdto);
 
-    	Map<String, Object> checkValue = new HashMap<>();
     	
-    	checkValue.put("checkValues", checkValues);
-    	
-    	List<prdDownVO> downlist = pService.downExcelList(checkValue);
+    	List<prdDownVO> downlist = pService.downExcelList(sdto);
     	System.out.println(downlist);
     	
     	
@@ -382,15 +380,12 @@ public class ProductPageController
     /** 엑셀 데이터 다운로드 처리*/
     @ResponseBody
     @PostMapping("/supsExcelDown")
-    public void supsExcelDown(HttpServletResponse response, @RequestBody List<String> checkValues) throws IOException 
+    public void supsExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(checkValues);
+    	System.out.println(sdto);
 
-    	Map<String, Object> checkValue = new HashMap<>();
-    	
-    	checkValue.put("checkValues", checkValues);
     	 
-    	List<supsDownVO> downlist = pService.supsExcelDown(checkValue);
+    	List<supsDownVO> downlist = pService.supsExcelDown(sdto);
     	
     	System.out.println(downlist);
     	

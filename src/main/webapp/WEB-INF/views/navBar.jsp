@@ -177,7 +177,6 @@
             </div>
         </div>
 
-
         <div class="subMenu hide py-3">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
                 <ul class="nav col-12 col-md-auto justify-content-center text-center" style="width: 80%; margin: auto;">
@@ -247,11 +246,9 @@
     }
 
     // 이벤트 리스너로 페이지 전환
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.category-link').forEach(item => {
-            item.addEventListener('click', function() {
-            	movePage();
-            });
+    document.querySelectorAll('.category-link').forEach(item => {
+        item.addEventListener('click', function() {
+        	movePage();
         });
     });
 

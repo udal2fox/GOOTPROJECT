@@ -28,8 +28,7 @@ public interface productPageService
 	public List<prdDownVO> downExcelList(TradeDetailSearchDTO sdto); // 파라미터 이름 수정
 	
 	/** 입점업체코드 가져오기 */
-	public List<prdInputVO> getsupsNumber();
-
+	public String getsupsNumber(String code);
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();
 

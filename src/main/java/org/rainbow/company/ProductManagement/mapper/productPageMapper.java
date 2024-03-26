@@ -28,8 +28,8 @@ public interface productPageMapper
 	/** 체크박스 벨류를 받아서 필터링된 전체 데이터를 리스트로 가져온다. */
 	public List<prdDownVO> downExcelList(TradeDetailSearchDTO sdto); // 파라미터 이름 수정
 	
-	/** 입점업체코드 가져오기 */
-	public List<prdInputVO> getsupsNumber();
+	/** 입점업체코드 비교 */
+	public String getsupsNumber(String code);
 	
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();

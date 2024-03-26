@@ -94,8 +94,8 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public List<prdInputVO> getsupsNumber() {
-		return pMapper.getsupsNumber();
+	public String getsupsNumber(String code) {
+		return pMapper.getsupsNumber(code);
 	}
 
 	@Override

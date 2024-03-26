@@ -58,7 +58,7 @@
 				<td>${stvo.salePrd }</td>
 				<td><fmt:formatNumber value="${stvo.totalSum + stvo.recAdTotal}" pattern="#,###"/></td>
 				<td><fmt:formatNumber value="${stvo.totalBuy }" pattern="#,###"/></td>
-				<td><fmt:formatNumber value="${(stvo.recAdTotal+stvo.totalSum - stvo.totalBuy) / (stvo.recAdTotal + stvo.totalSum) }"	pattern="0.00"/></td>
+				<td><fmt:formatNumber value="${((stvo.recAdTotal + stvo.totalSum) - stvo.totalBuy) / (stvo.recAdTotal + stvo.totalSum) }"	pattern="0.00"/></td>
 			</tr>		
 			<tr>
 			    <td class="paintLightgray">VAT 포함</td>

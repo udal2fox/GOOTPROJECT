@@ -114,7 +114,7 @@
 	// 이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
 	function backPage() 
 	{
-		window.history.go(-1); // 뒤로 한 페이지 이동
+		window.location = document.referrer; // 뒤로 한 페이지 이동
 	} 
 	
 	

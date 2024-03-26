@@ -112,10 +112,10 @@
 			<c:forEach var="uc" items="${ucList}">
 				<tr class="td" data-type="${uc.comBizType}" data-status="${uc.recSortation}" com-Email= "${uc.comEmail}">
 					<td><input type="checkbox" name="checkboxTd"></td>
-					<td>${uc.recNo }</td>
-					<td>${uc.comName }</td>
+					<td><a href="/tradeDetailEdit?recNo=${uc.recNo }">${uc.recNo }</a></td>
+					<td><a href="/companyView?companyNo=${td.companyNo}">${uc.comName }</a></td>
 					<td>${uc.comBizType }</td>
-					<td>${uc.spName }</td>
+					<td><a href="/spotView?spotNo=${td.spotNo}">${uc.spName }</a></td>
 					<td>${uc.recDate }</td>
 					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>

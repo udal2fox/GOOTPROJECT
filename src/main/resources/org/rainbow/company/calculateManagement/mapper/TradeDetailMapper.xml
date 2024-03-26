@@ -149,7 +149,7 @@
     <!-- 거래미수 기업 -->
     <select id="ucCompany" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
          SELECT e.companyNo, e.comName, e.comBizType, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, 
-         a.recSortation, e.comEmail, a.recNo, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+         a.recSortation, e.comEmail, a.recNo, a.recDed, a.recAdd, a.recDedSup, a.recAddSup, d.spotNo,
            a.recDedTax, a.recAddTax 
          FROM RAIN_receipt_tbl a    
          JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
@@ -164,7 +164,7 @@
     <!-- 거래미수 서치  -->
     <select id="ucComSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT e.companyNo, e.comName, e.comBizType, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, 
-        a.recSortation, e.comEmail, a.recNo , a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+        a.recSortation, e.comEmail, a.recNo , a.recDed, a.recAdd, a.recDedSup, a.recAddSup, d.spotNo,
            a.recDedTax, a.recAddTax
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
@@ -245,7 +245,7 @@
     <!--거래미수 지점   -->
     <select id="ucBranchList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT d.spotNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation,
-        a.recNo, c.cEmpEmail, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
+        a.recNo, c.cEmpEmail, a.recDed, a.recAdd, a.recDedSup, a.recAddSup, e.companyNo,
           a.recDedTax, a.recAddTax  
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
@@ -260,7 +260,7 @@
     <!--거래미수 지점 검색  -->
     <select id="ucBranchSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
    		SELECT a.recNo, e.comName, e.comBizType, d.spName, d.spotNo, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation,c.cEmpEmail , a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
-           a.recDedTax, a.recAddTax    
+           a.recDedTax, a.recAddTax , e.companyNo   
 		FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
@@ -341,7 +341,7 @@
     <!--명세서기준   -->
     <select id="uctdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
-           a.recDedTax, a.recAddTax
+           a.recDedTax, a.recAddTax, e.companyNo, d.spotNo 
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
@@ -352,10 +352,10 @@
         ORDER BY a.recNo
     </select>
     
-    <!--거래미수 지점 검색  -->
+    <!--거래미수 명세 검색  -->
     <select id="ucTdSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recDate, a.recSum, a.recSup, a.recTax, f.prdCstPri, f.prdMargin, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
-           a.recDedTax, a.recAddTax
+           a.recDedTax, a.recAddTax, e.companyNo, d.spotNo
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
@@ -439,7 +439,7 @@
     <!-- 계산서 발행 리스트  -->
     <select id="IoBillList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT a.recNo, d.spotNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
-           a.recDedTax, a.recAddTax
+           a.recDedTax, a.recAddTax, e.companyNo
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo
@@ -462,7 +462,7 @@
 	<!--계산서 발행 검색  -->
     <select id="billSearch" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailListVO">
     	SELECT a.recNo, e.comName, e.comBizType, d.spName, a.recSum, a.recSup, a.recTax, a.recPayMth, a.recSortation, a.recDed, a.recAdd, a.recDedSup, a.recAddSup,
-           a.recDedTax, a.recAddTax
+           a.recDedTax, a.recAddTax, e.companyNo
         FROM RAIN_receipt_tbl a    
         JOIN RAIN_order_tbl b ON a.ordNo = b.ordNo
         JOIN RAIN_cEMP_tbl c ON  b.cEmpNo = c.cEmpNo

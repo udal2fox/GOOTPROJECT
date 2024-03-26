@@ -108,6 +108,7 @@ public class ProductPageController
     	
     	return "/company/productManagement/productReg";
     }
+    
     // 상품 수정 이동
     @GetMapping(value = "/moveProductUpdate")
     public String moveProductUpdate(@RequestParam("prdNo") String prdNo, Model model) 
@@ -193,7 +194,7 @@ public class ProductPageController
     @PostMapping("/downloadExcel")
     public void downloadExcelData(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(sdto);
+    	log.info(sdto);
 
     	
     	List<prdDownVO> downlist = pService.downExcelList(sdto);
@@ -382,9 +383,8 @@ public class ProductPageController
     @PostMapping("/supsExcelDown")
     public void supsExcelDown(HttpServletResponse response, @RequestBody TradeDetailSearchDTO sdto) throws IOException 
     {
-    	System.out.println(sdto);
+    	log.info(sdto);
 
-    	 
     	List<supsDownVO> downlist = pService.supsExcelDown(sdto);
     	
     	System.out.println(downlist);

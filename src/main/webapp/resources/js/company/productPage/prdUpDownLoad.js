@@ -72,11 +72,11 @@ document.getElementById('exExcelPrd').addEventListener('click', ()=>{
 function download() 
 {
 	 let sdto = {
-	    		"keyword": document.getElementById('tdKeyword').value,
+	    		"keyword": document.getElementById('keyword').value,
 			    "checkedValues": [] //
 	    };
 	    
-	    document.querySelectorAll('input[type=checkbox][data-filter="td-Business"]:checked').forEach(function(checkbox) {
+	    document.querySelectorAll('input[type=checkbox][data-filter="product-type"]:checked').forEach(function(checkbox) {
 	        if(checkbox.value != '전체')
 			{
 	        	sdto.checkedValues.push(checkbox.value);
@@ -84,7 +84,7 @@ function download()
 	    });
 
 	    // 상품 상태 체크박스들의 값을 가져옵니다.
-	    document.querySelectorAll('input[type=checkbox][data-filter="td-calculate"]:checked').forEach(function(checkbox) {
+	    document.querySelectorAll('input[type=checkbox][data-filter="product-status"]:checked').forEach(function(checkbox) {
 	    	 if(checkbox.value != '전체')
 	 		{
 	    		 sdto.checkedValues.push(checkbox.value);

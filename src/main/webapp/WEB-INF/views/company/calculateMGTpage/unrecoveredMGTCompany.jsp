@@ -111,13 +111,13 @@
 				<tr class="td" data-type="${uc.comBizType}" data-status="${uc.recSortation}" com-Email= "${uc.comEmail}">
 					<td><input type="checkbox" name="checkboxTd"></td>
 					<td>${uc.companyNo }</td>
-					<td>${uc.comName }</td>
+					<td><a href="/companyView?companyNo=${uc.companyNo}">${uc.comName }</a></td>
 					<td>${uc.comBizType }</td>
 					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recTax - uc.recDedTax + uc.recAddTax}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.prdCstPri}" pattern="#,###"/></td>
-					<td>${uc.prdMargin }</td>
+					<td><fmt:formatNumber value="${uc.prdMargin }" pattern="0.00#"/></td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
 				</tr>

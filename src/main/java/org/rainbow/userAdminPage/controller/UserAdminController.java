@@ -1,16 +1,21 @@
 package org.rainbow.userAdminPage.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.rainbow.domain.ExcelListener;
 import org.rainbow.userAdminPage.service.userAdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -467,5 +472,47 @@ public class UserAdminController {
 		List<HashMap<String, Object>> result = userService.getRecipients(inputValue);
 		return new ResponseEntity<List<HashMap<String, Object>>>(result, HttpStatus.OK);
 	}
+	
+	
 
+
+    private static final String FILE_NAME = "임직원일괄업로드양식.xlsx";
+    // 파일이 위치한 상대 경로
+    private static final String FILE_PATH = "/resources/images/";
+
+    @Autowired
+    private ServletContext servletContext;
+
+    @ResponseBody
+    @GetMapping("/download/excel")
+    public ResponseEntity<Resource> downloadExcelTemplate() {
+        // 상대 경로를 절대 경로로 변환
+        String absoluteFilePath = servletContext.getRealPath(FILE_PATH + FILE_NAME);
+
+        try {
+            File file = new File(absoluteFilePath);
+            if (!file.exists()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+
+            // 파일을 리소스로 읽기
+            Resource resource = new FileSystemResource(file);
+
+            // 응답 헤더 설정
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + FILE_NAME);
+
+            // 파일의 Content-Type 지정
+            headers.setContentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+
+            // 응답 생성
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(resource);
+        } catch (Exception e) {
+            // 파일이 없는 경우
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }

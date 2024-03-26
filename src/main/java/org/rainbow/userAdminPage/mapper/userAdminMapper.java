@@ -56,4 +56,6 @@ public interface userAdminMapper {
 
 	public List<HashMap<String, Object>> getDetailUsage(HashMap<String, Object> inputMap);
 	
+	public HashMap<String, String> sendMail(int ordNo);
+	
 }

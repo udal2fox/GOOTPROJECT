@@ -52,14 +52,14 @@
 			<tr>
 				<td>기간</td>
 				<td colspan="2" style="display: flex; align-items:center;">
-					<input type="text" class="datePick1 form-control" placeholder="내용을 입력하세요"  style="width: 150px" > &nbsp;~&nbsp; 
-					<input type="text" class="datePick2 form-control" placeholder="내용을 입력하세요" style="width: 150px">
+					<input type="text" class="datePick1 form-control" placeholder="날짜를 선택하세요"  style="width: 150px" > &nbsp;~&nbsp; 
+					<input type="text" class="datePick2 form-control" placeholder="날짜를 선택하세요" style="width: 150px">
 				</td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="오늘"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="최근1주"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="이번달"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="지난달"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="지난분기"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="이번달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난분기"></td>
 				
 				<td><input type="button" class="btn btn-primary" value="엑셀로 내려받기" style="width: 135px; height: 35px;" id="downloadButton"></td>
 			</tr>
@@ -111,13 +111,13 @@
 				<tr class="td" data-type="${uc.comBizType}" data-status="${uc.recSortation}" com-Email= "${uc.comEmail}">
 					<td><input type="checkbox" name="checkboxTd"></td>
 					<td>${uc.companyNo }</td>
-					<td>${uc.comName }</td>
+					<td><a href="/companyView?companyNo=${uc.companyNo}">${uc.comName }</a></td>
 					<td>${uc.comBizType }</td>
 					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recTax - uc.recDedTax + uc.recAddTax}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.prdCstPri}" pattern="#,###"/></td>
-					<td>${uc.prdMargin }</td>
+					<td><fmt:formatNumber value="${uc.prdMargin }" pattern="0.00#"/></td>
 					<td>${uc.recPayMth }</td>
 					<td>${uc.recSortation }</td>
 				</tr>

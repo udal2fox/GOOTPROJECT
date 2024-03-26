@@ -79,11 +79,18 @@ function fetchData() {
   // '00월' 부분에서 '월'을 제외하고 숫자만 가져오기
   var monthNumber = thisMonthText.split(" ")[1].replace("월", "");
 
-  fetch("/userAdminPage/recipients/" + sessionStorage.getItem("Okja") + "/" + monthNumber + "/" + yearNumber)
+  fetch(
+    "/userAdminPage/recipients/" +
+      sessionStorage.getItem("Okja") +
+      "/" +
+      monthNumber +
+      "/" +
+      yearNumber
+  )
     .then((Response) => Response.json())
     .then((data) => {
       let tbody = document.getElementById("recipientList");
-      let msg = '';
+      let msg = "";
       let n = 0;
       let totalCount = 0; // 발송 대상자의 총 수를 저장하기 위한 변수
 
@@ -94,51 +101,61 @@ function fetchData() {
       let sentCount = 0;
 
       if (data.length === 0) {
-        msg += '<td colspan = "9"> 이번달 생일자는 없습니다. </td>'
+        msg += '<td colspan = "9"> 이번달 생일자는 없습니다. </td>';
       } else {
-        data.forEach(recipient => {
+        data.forEach((recipient) => {
           totalCount++; // 발송 대상자의 총 수 카운팅
 
           // 상태에 따라 카운트 증가
-          if (recipient.step === '미발송') {
+          if (recipient.step === "미발송") {
             notSentCount++;
-          } else if (recipient.step === '선택중') {
+          } else if (recipient.step === "선택중") {
             selectingCount++;
-          } else if (recipient.step === '선택완료') {
+          } else if (recipient.step === "선택완료") {
             selectedCount++;
-          } else if (recipient.step === '발송완료') {
+          } else if (recipient.step === "발송완료") {
             sentCount++;
           }
 
           msg += '<tr class="text-center align-middle">';
-          msg += '<td>' + ++n + '</td>';
-          msg += '<td>' + recipient.cEmpName + '</td>';
-          msg += '<td>' + recipient.cEmpPosition + '</td>';
-          msg += '<td>' + formatPhoneNumber(recipient.cEmpTel) + '</td>';
-          msg += '<td>' + recipient.cEmpEmail + '</td>';
-          msg += '<td>' + formatTimestamp(recipient.cEmpBirth) + '</td>';
-          msg += '<td>' + recipient.step + '</td>';
-          msg += '<td>' + (recipient.totalAmount ? numberWithCommas(recipient.totalAmount) + '원' : '0원') + '</td>';
+          msg += "<td>" + ++n + "</td>";
+          msg += "<td>" + recipient.cEmpName + "</td>";
+          msg += "<td>" + recipient.cEmpPosition + "</td>";
+          msg += "<td>" + formatPhoneNumber(recipient.cEmpTel) + "</td>";
+          msg += "<td>" + recipient.cEmpEmail + "</td>";
+          msg += "<td>" + formatTimestamp(recipient.cEmpBirth) + "</td>";
+          msg += "<td>" + recipient.step + "</td>";
+          msg +=
+            "<td>" +
+            (recipient.totalAmount
+              ? numberWithCommas(recipient.totalAmount) + "원"
+              : "0원") +
+            "</td>";
           // '미발송'인 경우에만 버튼 활성화
-          if (recipient.step === '미발송') {
-            msg += '<td><button type="button" class="btn btn-outline-success" onclick="sendGift(' + recipient.id + ')">바로발송</button></td>';
+          if (recipient.step === "미발송") {
+            msg +=
+              '<td><button type="button" class="btn btn-outline-success" onclick="sendGift(' +
+              recipient.ordNo +
+              ')">바로발송</button></td>';
           } else {
-            msg += '<td></td>';
+            msg += "<td></td>";
           }
-          msg += '</tr>';
+          msg += "</tr>";
         });
       }
       tbody.innerHTML = msg;
 
       // 발송 대상자 수 표시
-      document.getElementById("numOfRecipients").textContent = totalCount + '명';
+      document.getElementById("numOfRecipients").textContent =
+        totalCount + "명";
 
       // 각 상태별로 카운트 표시
-      document.getElementById("notSentCount").textContent = notSentCount + '명';
-      document.getElementById("selectingCount").textContent = selectingCount + '명';
-      document.getElementById("selectedCount").textContent = selectedCount + '명';
-      document.getElementById("sentCount").textContent = sentCount + '명';
-
+      document.getElementById("notSentCount").textContent = notSentCount + "명";
+      document.getElementById("selectingCount").textContent =
+        selectingCount + "명";
+      document.getElementById("selectedCount").textContent =
+        selectedCount + "명";
+      document.getElementById("sentCount").textContent = sentCount + "명";
     })
     .catch((error) => {
       console.log("서버에 요청을 보내는 중 오류가 발생했습니다:", error);
@@ -173,4 +190,24 @@ function formatPhoneNumber(num) {
   return num
     .replace(/[^0-9]/g, "") // 숫자 이외의 문자 제거
     .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3"); // 특정 패턴에 맞게 변환
+}
+
+// 선물을 발송하는 함수
+function sendGift(recipientId) {
+  // fetch를 사용하여 서버에 요청을 보냅니다.
+  fetch("/send-email/" + recipientId)
+    .then((response) => {
+      if (response.ok) {
+        swal("성공", "이메일을 성공적으로 보냈습니다.", "success");
+        // 선물 발송 성공 시 다시 데이터를 불러옵니다.
+        fetchData();
+      } else {
+        console.error("Failed to send email");
+        swal("오류", "이메일을 보내는 중 오류가 발생했습니다.", "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Error sending email:", error);
+      swal("오류", "서버에 요청을 보내는 중 오류가 발생했습니다.", "error");
+    });
 }

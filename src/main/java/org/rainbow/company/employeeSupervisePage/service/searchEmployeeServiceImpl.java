@@ -23,9 +23,9 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 	
 	// 전체 직원 리스트
 	@Override
-	public List<rain_employeeDTO> getList(Criteria cri) {
+	public List<rain_employeeDTO> getList() {
 		log.info("getList...");
-		return mapper.getList(cri);
+		return mapper.getList();
 	}
 	
 	// 전체 직원 수 카운팅
@@ -62,13 +62,13 @@ public class searchEmployeeServiceImpl implements searchEmployeeService {
 		log.info("profile update..." + result);
 		return mapper.profile_update(result);
 	}
-	
+	// 프사만 저장
 	@Override
 	public int profilePictureUpdate(HashMap<String, Object> result) {
 		log.info("profilePicture update..." + result);
 		return mapper.profilePictureUpdate(result);
 	}
-	
+	// 사원 리스트 엑셀화
 	@Override
 	public List<EmployeeExcelDTO> excelDown(EmployeeSearchDTO empdto) {
 		return mapper.excelDown(empdto);

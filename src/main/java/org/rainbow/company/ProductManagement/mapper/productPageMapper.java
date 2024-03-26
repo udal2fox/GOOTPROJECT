@@ -8,6 +8,7 @@ import org.rainbow.company.ProductManagement.domain.prdInputVO;
 import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
+import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.rainbow.company.ProductManagement.domain.prdInsertVO;
 
 public interface productPageMapper 
@@ -25,10 +26,10 @@ public interface productPageMapper
 	public int insertPrdExcel(prdInputVO vo);
 	
 	/** 체크박스 벨류를 받아서 필터링된 전체 데이터를 리스트로 가져온다. */
-	public List<prdDownVO> downExcelList(Map<String, Object> checkValue); // 파라미터 이름 수정
+	public List<prdDownVO> downExcelList(TradeDetailSearchDTO sdto); // 파라미터 이름 수정
 	
-	/** 입점업체코드 가져오기 */
-	public List<prdInputVO> getsupsNumber();
+	/** 입점업체코드 비교 */
+	public String getsupsNumber(String code);
 	
 	/** 소분류 가져오기 */
 	public List<prdInputVO> getSubCtg();
@@ -57,7 +58,7 @@ public interface productPageMapper
 	public int insertSupsExcel(suppliersVO vo);
 	
 	/** 체크박스 벨류를 받아서 필터링된 전체 데이터를 리스트로 가져온다. */
-	public List<supsDownVO> supsExcelDown(Map<String, Object> checkValue); // 파라미터 이름 수정
+	public List<supsDownVO> supsExcelDown(TradeDetailSearchDTO sdto); // 파라미터 이름 수정
 	
 	/** 공급처 등록 자동 할당값에 쓸 카운팅 */
 	public int supsNoCount();

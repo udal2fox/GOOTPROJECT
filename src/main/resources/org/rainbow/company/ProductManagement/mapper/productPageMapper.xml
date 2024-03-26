@@ -67,18 +67,29 @@
 	        </if>
 	    </foreach> -->
 	    
-		<select id="downExcelList" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
+		<select id="downExcelList" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.ProductManagement.domain.prdDownVO">
 		  	SELECT s.supsCo, p.prdNo, p.prdSdc, p.prdMajorCtg, p.prdSubCtg, p.prdName, p.prdCstPri, p.prdSal, p.prdMargin, p.prdImg
-		    FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
-		    WHERE s.supsNo = p.supsNo
-		    AND p.prdMajorCtg IN
-		    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
-		        #{item}
-		    </foreach>
-		    AND p.prdSt IN
-		    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
-		        #{item}
-		    </foreach>
+			FROM RAIN_Products_tbl p, RAIN_Suppliers_tbl s
+			WHERE s.supsNo = p.supsNo 
+			AND p.prdMajorCtg IN
+			<foreach item="item" collection="checkedValues" open="(" separator="," close=")">
+			    #{item}
+			</foreach>
+			AND p.prdSt IN
+			<foreach item="item" collection="checkedValues" open="(" separator="," close=")">
+			    #{item}
+			</foreach>
+			<if test="keyword != null and keyword != ''">
+			    AND (
+			        p.prdNo = '${keyword}' 
+			        OR s.supsCo LIKE '%${keyword}%' 
+			        OR p.prdMajorCtg LIKE '%${keyword}%'
+			        OR p.prdSubCtg LIKE '%${keyword}%'
+			        OR p.prdName LIKE '%${keyword}%'
+			    )
+			</if>
+
+
 		</select>
 
 	
@@ -98,9 +109,9 @@
 		AND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 
 	-->
 	<!-- supsNo 가졍오기  -->
-	<select id="getsupsNumber" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+	<select id="getsupsNumber" resultType="String" parameterType="String">
 		select DISTINCT supsNo from RAIN_Suppliers_tbl
-		order by supsNo asc
+		where supsNo = #{code}
 	</select>
 		
 	<!-- prdSubCtg 가져오기  -->
@@ -221,18 +232,25 @@
 	</insert>
 	
 	<!-- 동적으로  체크 박스 벨류 받아서 리스트 구해오기-->
-	<select id="supsExcelDown" resultType="org.rainbow.company.ProductManagement.domain.supsDownVO">
+	<select id="supsExcelDown" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO" resultType="org.rainbow.company.ProductManagement.domain.supsDownVO">
 	        SELECT supsNo, supsCo, supsBnt, supsBizRegNum, supsAddr, supsCt, supsCoEmail, supsSt
 		    FROM  RAIN_Suppliers_tbl
-		    WHERE 
-		    supsBnt IN
-	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+		    WHERE 1 = 1
+		    AND supsBnt IN
+	    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
 	        #{item}
 	    </foreach>
 	   		AND supsSt IN
-	    <foreach item="item" collection="checkValues" open="(" separator="," close=")">
+	    <foreach item="item" collection="checkedValues" open="(" separator="," close=")">
 	        #{item}
 	    </foreach>
+   		<if test="keyword != null and keyword != ''">
+		        AND (
+		            supsNo = '${keyword}' 
+		            OR supsCo LIKE '%${keyword}%' 
+		            OR supsCt = '%${keyword}%'
+		        )
+	    </if>
 	</select>
 
 

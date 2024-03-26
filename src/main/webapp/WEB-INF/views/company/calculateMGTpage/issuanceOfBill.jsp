@@ -32,8 +32,8 @@
 			<tr>
 				<td>기간</td>
 				<td colspan="2" style="display: flex; align-items:center;">
-					<input type="text" class="datePick1 form-control" placeholder="내용을 입력하세요"  style="width: 150px" > &nbsp;~&nbsp; 
-					<input type="text" class="datePick2 form-control" placeholder="내용을 입력하세요" style="width: 150px">
+					<input type="text" class="datePick1 form-control" placeholder="날짜를 선택하세요"  style="width: 150px" > &nbsp;~&nbsp; 
+					<input type="text" class="datePick2 form-control" placeholder="날짜를 선택하세요" style="width: 150px">
 				</td>
 				<td><input type="button" class="btn btn-primary dateBtn" value="오늘"></td>
 				<td><input type="button" class="btn btn-primary dateBtn" value="최근1주"></td>
@@ -69,9 +69,9 @@
 				<tr class="td" data-type="${uc.comBizType}" recNo = ${uc.recNo }>
 					<td><input type="checkbox" name="checkboxTd"></td>
 					<td>${uc.spotNo }</td>
-					<td>${uc.comName }</td>
+					<td><a href="/companyView?companyNo=${uc.companyNo}">${uc.comName }</a></td>
 					<td>${uc.comBizType }</td>	
-					<td>${uc.spName }</td>	
+					<td><a href="/spotView?spotNo=${uc.spotNo}">${uc.spName }</a></td>	
 					<td><fmt:formatNumber value="${uc.recSum - uc.recDed + uc.recAdd}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recSup - uc.recDedSup + uc.recAddSup}" pattern="#,###"/></td>
 					<td><fmt:formatNumber value="${uc.recTax - uc.recDedTax + uc.recAddTax}" pattern="#,###"/></td>

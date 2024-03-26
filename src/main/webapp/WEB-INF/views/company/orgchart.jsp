@@ -57,7 +57,7 @@
 					<ul class="orgHeader">
 						<li id="header">
 							<strong> 대표 </strong>
-							<p>지우새끼</p>
+							<p>황선홍</p>
 						</li>
 					</ul>
 				</div>

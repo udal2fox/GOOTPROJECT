@@ -10,6 +10,7 @@ import org.rainbow.company.ProductManagement.domain.productListVO;
 import org.rainbow.company.ProductManagement.domain.suppliersVO;
 import org.rainbow.company.ProductManagement.domain.supsDownVO;
 import org.rainbow.company.ProductManagement.mapper.productPageMapper;
+import org.rainbow.company.calculateManagement.domain.TradeDetailSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +41,8 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public List<prdDownVO> downExcelList(Map<String, Object> checkValue) {
-		return pMapper.downExcelList(checkValue);
+	public List<prdDownVO> downExcelList(TradeDetailSearchDTO sdto) {
+		return pMapper.downExcelList(sdto);
 	}
 
 	@Override
@@ -62,8 +63,8 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public List<supsDownVO> supsExcelDown(Map<String, Object> checkValue) {
-		return pMapper.supsExcelDown(checkValue);
+	public List<supsDownVO> supsExcelDown(TradeDetailSearchDTO sdto) {
+		return pMapper.supsExcelDown(sdto);
 	}
 
 	@Override
@@ -93,8 +94,8 @@ public class productPageServiceImpl implements productPageService
 	}
 
 	@Override
-	public List<prdInputVO> getsupsNumber() {
-		return pMapper.getsupsNumber();
+	public String getsupsNumber(String code) {
+		return pMapper.getsupsNumber(code);
 	}
 
 	@Override

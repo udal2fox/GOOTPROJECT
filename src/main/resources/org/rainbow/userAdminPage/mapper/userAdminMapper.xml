@@ -277,7 +277,24 @@
 		INNER JOIN RAIN_Products_tbl AS p ON o.prdNo =
 		p.prdNo
 		WHERE DATE_FORMAT(r.recDate, '%Y-%m') = #{recDate} and r.spotNo
-		= #{spotNo} and o.step = '발송완료';
+		= #{spotNo} and o.step = '발송완료'
+	</select>
+	
+	<select id="sendMail" parameterType="int" resultType="HashMap">
+		SELECT c.cEmpName, c.cEmpEmail, c.cEmpPosition, c.spotNo, b.selectedTheme, b.sendName, 
+			b.checkedValue, b.messegeContent, cCom.comName
+		FROM 
+			RAIN_order_tbl AS r
+		JOIN 
+			BirthdayCards AS b ON r.spotNo = b.spotNo
+		JOIN 
+			RAIN_cEMP_tbl AS c ON r.cEmpNo = c.cEmpNo
+		JOIN 
+			RAIN_cSpot_tbl AS s ON r.spotNo = s.spotNo
+		JOIN 
+			RAIN_cCompany_tbl AS cCom ON s.companyNo = cCom.companyNo
+		WHERE 
+			r.ordNo = #{ordNo}
 	</select>
 
 </mapper>

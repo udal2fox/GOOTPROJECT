@@ -35,16 +35,16 @@ function fetchSearchResults(keyword) {
             list.forEach(list => {
             	msg += '<tr class="td" data-type="' + list.comBizType + '" data-status="' + list.recSortation + '">';
             	msg += '<td><input type="checkbox" name="checkboxTd"></td>';
-            	msg += '<td>' + list.recNo + '</td>';
-            	msg += '<td>' + list.comName + '</td>';
+            	msg += '<td><a href="/tradeDetailEdit?recNo='+list.recNo +'">' + list.recNo + '</a></td>';
+            	msg += '<td><a href="/companyView?companyNo='+list.companyNo+'">' + list.comName + '</a></td>';
             	msg += '<td>' + list.comBizType + '</td>';
-            	msg += '<td>' + list.spName + '</td>';
+            	msg += '<td><a href="/spotView?spotNo='+list.spotNo+'">' + list.spName + '</a></td>';
             	msg += '<td>' + myTime(list.recDate) + '</td>';
             	msg += '<td>' + (list.recSum - list.recDed + list.recAdd).toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + (list.recSup - list.recDedSup + list.recAddSup).toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + (list.recTax - list.recDedTax + list.recAddTax).toLocaleString('ko-KR') + '</td>';
             	msg += '<td>' + list.prdCstPri.toLocaleString('ko-KR') + '</td>';
-            	msg += '<td>' + list.prdMargin + '</td>';
+            	msg += '<td>' + list.prdMargin.toFixed(2) + '</td>';
             	msg += '<td>' + list.recPayMth + '</td>';
             	msg += '<td>' + list.recSortation + '</td>';
             	msg += '</tr>';

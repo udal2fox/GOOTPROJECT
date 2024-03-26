@@ -17,23 +17,45 @@
             <article class="container text-center">
                 <!-- 선물 가격대별 필터링 버튼 -->
                 <div class="row">
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="total">전체</button>
+                    <div class="col text-center align-middle">
+                        <span>가격대 선택</span>
+                    </div>
+                    <!-- 시작 가격 선택 -->
+                    <div class="col-2">
+                        <select class="form-select" aria-label="Default select example" id="start_scope">
+                            <option selected value="0">0</option>
+                            <option value="10000">10,000</option>
+                            <option value="20000">20,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="70000">70,000</option>
+                            <option value="80000">80,000</option>
+                            <option value="100000">100,000</option>
+                            <option value="150000">150,000</option>
+                            <option value="200000">200,000</option>
+                        </select>
+                    </div>
+                    <div class="col text-center align-middle">
+                        <span> ~ </span>
+                    </div>
+                    <!-- 끝 가격 선택 -->
+                    <div class="col-2">
+                        <select class="form-select" aria-label="Default select example" id="end_scope">
+                            <option value="0">0</option>
+                            <option value="10000">10,000</option>
+                            <option value="20000">20,000</option>
+                            <option value="30000">30,000</option>
+                            <option value="50000">50,000</option>
+                            <option value="70000">70,000</option>
+                            <option value="80000">80,000</option>
+                            <option value="100000">100,000</option>
+                            <option value="150000">150,000</option>
+                            <option selected value="200000">200,000</option>
+                        </select>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="10000">1만원</button>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="30000">3만원</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="50000">5만원</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="80000">8만원</button>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-outline-secondary w-100" id="100000">10만원</button>
                     </div>
                     <div class="col-2">
                         <input type="text" class="form-control w-100" name="search">
@@ -41,8 +63,6 @@
                     <div class="col">
                         <button type="button" class="btn btn-primary w-100" id="searchKeyword">검색</button>
                     </div>
-                    <!-- 다른 가격대에 대한 버튼을 추가합니다. -->
-                    <!-- 예시: <div class="col"> <button type="button" class="btn btn-outline-secondary w-100">1만원</button> </div> -->
                 </div>
             </article>
             <hr>

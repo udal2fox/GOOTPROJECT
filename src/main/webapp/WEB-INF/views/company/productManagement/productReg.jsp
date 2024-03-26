@@ -28,11 +28,13 @@
 						<tr>
 							<td>입점업체코드</td>
 							<td colspan="3">
-								<select class="form-select" id="supNo" name="supsNo">
+								<input type="text" class="form-control searchCode" name="supsNo" onfocus="openModal()">
+								<%-- <select class="form-select" id="supNo" name="supsNo">
 								    <c:forEach var="no" items="${codes}">
 								    	<option value="${no.supsNo }">${no.supsNo}</option>
 								    </c:forEach>
-							    </select></td>
+							    </select> --%>
+						    </td>
 						    <td></td>
 						    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly disabled="disabled" name="prdCstTax"></td>
 						</tr>
@@ -86,6 +88,23 @@
 				</form>		
 			</div>
 		</div>
+		<!-- 검색 모달 -->
+		<div id="searchModal" class="modal">
+			<div class="modal-content" style="width: 1300px;">
+				<div class="modal-header">
+					<span class="close" onclick="closeModal()"></span>
+					<h2>입점업체 코드</h2>
+				</div>
+				<div class="modal-body" align="center" style="display: flex; justify-content: center;">
+					<input type="text" placeholder="코드 사용 가능여부 판단" id="keyword" class="form-control" style="width: 300px;">
+					<input type="button" class="btn btn-primary" id="searchBtn" value="검색" onclick="checkCode()">
+				</div>
+				<div class="modal-footer">
+					<button type="button" onclick="closeModal()" class="btn btn-secondary">닫기</button>
+				</div>
+			</div>
+		</div>
+		
 	</body>
 	<script>
     let deptNo = <%= session.getAttribute("deptNo") %>;

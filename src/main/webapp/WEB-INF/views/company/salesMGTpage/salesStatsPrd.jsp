@@ -35,11 +35,11 @@
 					<input type="text" class="datePick1 form-control" placeholder="내용을 입력하세요"  style="width: 150px" > &nbsp;~&nbsp; 
 					<input type="text" class="datePick2 form-control" placeholder="내용을 입력하세요" style="width: 150px">
 				</td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="오늘"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="최근1주"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="이번달"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="지난달"></td>
-				<td><input type="button" class="btn btn-primary dateBtn" value="지난분기"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="오늘"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="최근1주"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="이번달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난달"></td>
+				<td><input type="button" class="btn btn-secondary dateBtn" value="지난분기"></td>
 				<td><input type="button" class="btn btn-primary" value="엑셀로 내려받기" style="width: 135px; height: 35px;" id="downloadButton"></td>
 			</tr>
 		</table>

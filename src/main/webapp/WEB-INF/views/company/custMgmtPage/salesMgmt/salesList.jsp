@@ -21,48 +21,55 @@
             </div>
 
             <div class="searchBar_div">
-                <table class="searchBar_tbl">
-                    <thead>
-                        <tr>
-                            <th>키워드</th>
-                            <td>
-                                <input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/담당자명/이메일/영업 담당자" style="text-align: center;">
-                            </td>
-                            <td></td>
-                            <th>기업 구분</th>
-                            
-                            <td> 
-                            <div class="checkbox-container">
-                                <input class="form-check-input" type="checkbox" id="salesList-csStatusAll" value="전체" checked>전체 
-                                <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="최초 인입" checked>최초 인입
+    <table class="searchBar_tbl">
+        <thead>
+            <tr>
+                <td>키워드</td>
+                <td style="text-align: left;">
+                    <input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/담당자명/이메일/영업 담당자" style="text-align: center;">
+                </td>
+                <td></td>
+                <td></td>
+                
+             </tr>
+             <tr>
+                <td>기업 구분</td>
+                <td colspan="2" style="text-align: left;"> 
+                    <div class="checkbox-container">
+                        <input class="form-check-input" type="checkbox" id="salesList-csStatusAll" value="전체" checked>전체 
+			<input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="최초 인입" checked>최초 인입
                                 <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="응대 완료" checked>응대 완료
                                 <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="견적 발송 완료" checked>견적 발송 완료
                                 <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="미팅 완료" checked>미팅 완료
                                 <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="계약 완료" checked>계약 완료
                                 <input class="form-check-input filter-checkbox" type="checkbox" data-filter="salesList-csStatus" value="계약 실패" checked>계약 실패
-                            </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>기간</th>
-                            <td >
-                                <input type="text" class="datePick1" placeholder="내용을 입력하세요"  style="width: 150px" > ~ 
-								<input type="text" class="datePick2" placeholder="내용을 입력하세요" style="width: 150px">
-                            </td>
-                            <td></td>
-                            <th></th>
-                            <td><input type="button" class="btn btn-secondary dateBtn" value="오늘">
-                            <input type="button" class="btn btn-secondary dateBtn" value="최근1주">
-                            <input type="button" class="btn btn-secondary dateBtn" value="이번달">
-                            <input type="button" class="btn btn-secondary dateBtn" value="지난달">
-                            <input type="button" class="btn btn-secondary dateBtn" value="지난분기"></td>
-                        </tr>
-                    </thead>
-                </table>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>기간</td>
+                <td style="text-align: left;">
+                    <input type="text" class="datePick1" placeholder="시작일" style="width: 150px;"> ~ 
+                    <input type="text" class="datePick2" placeholder="종료일" style="width: 150px;">
+                </td>
+                <td style="text-align: left;">
+                	 <input type="button" class="btn btn-secondary dateBtn" value="오늘">
+                    <input type="button" class="btn btn-secondary dateBtn" value="최근1주">
+                    <input type="button" class="btn btn-secondary dateBtn" value="이번달">
+                    <input type="button" class="btn btn-secondary dateBtn" value="지난달">
+                    <input type="button" class="btn btn-secondary dateBtn" value="지난분기">
+                </td>
+                <td></td>
+
+            
                 
-            <input type="button" class="companyListBtns" id="searchBarSearchBtn" value="검색">
-			<input type="reset"  id="searchBarResetBtn" value="초기화">
-			</div>
+            </tr>
+        </thead>
+    </table>
+    <input type="button" class="companyListBtns" id="searchBarSearchBtn" value="검색">
+    <input type="reset" id="searchBarResetBtn" value="초기화">
+</div>
 			
 		
 			<div class="download_to_excel_btn_div">
@@ -99,19 +106,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="vo" items="${consultVO}">
-                                <tr class="salesList" data-type="${vo.csStatus}">
-                                    <td><a href="${vo.consultNo}">${vo.consultNo}</a></td>
-                                    <td>${vo.csDate}</td>
-                                    <td>${vo.csCompanyName}</td>
-                                    <td>${vo.csName}</td>
-                                    <td>${vo.csContact}</td>
-                                    <td>${vo.csEmail}</td>
-                                    <td>${vo.csBdgt}</td>
-                                    <td>${vo.csStatus}</td>
-                                    <td>${vo.csEname}</td>
-                                </tr>
-                            </c:forEach>
+
+							<c:forEach var="vo" items="${consultVO}">
+							    <tr class="salesList" data-type="${vo.csStatus}">
+							        <td><a href="${vo.consultNo}">${vo.consultNo}</a></td>
+							        <td>${vo.csDate}</td>
+							        <td>${vo.csCompanyName}</td>
+							        <td>${vo.csName}</td>
+							        <td>${vo.csContact}</td>
+							        <td>${vo.csEmail}</td>
+							        <td><fmt:formatNumber value="${vo.csBdgt}" pattern="###,###"/></td> <!-- 예산에 콤마 추가 -->
+							        <td>${vo.csStatus}</td>
+							        <td>${vo.csEname}</td>
+							    </tr>
+							</c:forEach>
+
+
                         </tbody>
                     </table>
                 </form>

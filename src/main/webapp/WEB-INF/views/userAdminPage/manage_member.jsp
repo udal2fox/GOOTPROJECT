@@ -162,7 +162,7 @@
   					<hr>
   					<p> 아래 링크에서 양식을 다운받고</p>
   					<p> 해당 엑셀파일에 메모에 맞춰 입력해주세요.</p>
-  					<a href="#"> ▶ 업로드 양식 다운로드</a>
+  					<a href="#" id="excelDown"> ▶ 업로드 양식 다운로드</a>
 			</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeExcelModal">닫기</button>

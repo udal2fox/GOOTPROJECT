@@ -175,6 +175,13 @@ public class userAdminServiceImpl implements userAdminService {
 		log.info(inputMap);
 		return userMapper.getDetailUsage(inputMap);
 	}
+	
+	@Override
+	public HashMap<String, String> sendMail(int ordNo) {
+		return userMapper.sendMail(ordNo);
+	}
+	
+	
 
 
 }

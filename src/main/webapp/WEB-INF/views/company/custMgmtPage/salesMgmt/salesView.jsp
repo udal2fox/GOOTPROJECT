@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSalesViewDetails.jsp</title>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -95,7 +96,7 @@
 						<tr>
 						<td class="tbl_subtitle">영업 담당자</td>
 						<td><div class="input-with-image">
-						<input type="text" name="csEname" readonly><a href="#" id="open_searchEname_modal">
+						<input type="text" name="csEname" value="${consultVO.csEname }" readonly><a href="#" id="open_searchEname_modal">
 						<input type="button" id="imgBtnSearchEname"></a>
 						</div></td>
 						<td></td>
@@ -248,7 +249,7 @@
 		<div class="btn_div">
 		<input type="button" class="salesViewBtns" id="saveBtn" value="저장">
 		<input type="hidden" name="consultNo" value="${consultVO.consultNo }">
-		
+		<input type="hidden" name="consultHistoryNo" value="${cshVO.consultHistoryNo }">
 		</div>
 </form>
 	</div>

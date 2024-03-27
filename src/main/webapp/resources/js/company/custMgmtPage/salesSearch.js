@@ -11,52 +11,60 @@ document.querySelector('#searchBarSearchBtn').addEventListener('click', function
 });
 
 
-//서치바-키워드 가져오기 
+//예산을 콤마가 포함된 형식으로 변환하는 함수
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 서치바-키워드 가져오기
 function fetchSearchResults(keyword) {
     let searchKeyword = {
         "keyword": keyword,
-        "firDate" : document.querySelector('.datePick1').value,
-        "secDate" : document.querySelector('.datePick2').value
+        "firDate": document.querySelector('.datePick1').value,
+        "secDate": document.querySelector('.datePick2').value
     };
     console.log(searchKeyword);
-    
+
     let jsonData = JSON.stringify(searchKeyword);
     console.log(jsonData);
-    
+
     fetch('/searchConsult', {
         method: 'POST',
         body: jsonData,
-        headers: {'Content-type': 'application/json; charset=utf-8'}
+        headers: { 'Content-type': 'application/json; charset=utf-8' }
     })
-    .then(response => response.json())
-    .then(list => {
-        console.log(list);
-        let msg = '';
-        list.forEach(list => {
-            msg += '<tr>' +
-                '<tr class="salesList" data-type="' + list.csStatus +'">' +
-                '<td><a href="' + list.consultNo + '">' + list.consultNo + '</a></td>'+
-                '<td>' + list.csDate + '</td>' +
-                '<td>' + list.csCompanyName + '</td>' +
-                '<td>' + list.csName + '</td>' +
-                '<td>' + list.csContact + '</td>' +
-                '<td>' + list.csEmail + '</td>' +
-                '<td>' + list.csBdgt + '</td>' +
-                '<td>' + list.csStatus + '</td>' +
-                '<td>' + list.csEname + '</td>' +
-                '</tr>';
-        });
-
-        resetCheckboxes();
-        const tblBody = document.querySelector('#sales_tbl tbody');
-        tblBody.innerHTML = msg;
-        
-        drawPagination();
-        goToPage(1);
-        resetCheckboxes();
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(list => {
+            console.log(list);
+            const tblBody = document.querySelector('#sales_tbl tbody');
+            if (list.length === 0) {
+                // 리스트가 비어 있는 경우 메시지 출력
+                tblBody.innerHTML = '<tr><td colspan="9">검색 결과가 없습니다.</td></tr>';
+            } else {
+                let msg = '';
+                list.forEach(item => {
+                    msg += '<tr class="salesList" data-type="' + item.csStatus + '">' +
+                        '<td><a href="' + item.consultNo + '">' + item.consultNo + '</a></td>' +
+                        '<td>' + myTime(item.csDate) + '</td>' + // 날짜 형식 변환
+                        '<td>' + item.csCompanyName + '</td>' +
+                        '<td>' + item.csName + '</td>' +
+                        '<td>' + item.csContact + '</td>' +
+                        '<td>' + item.csEmail + '</td>' +
+                        '<td>' + numberWithCommas(item.csBdgt) + '</td>' + // 예산에 콤마 추가
+                        '<td>' + item.csStatus + '</td>' +
+                        '<td>' + item.csEname + '</td>' +
+                        '</tr>';
+                });
+                tblBody.innerHTML = msg;
+                drawPagination();
+                goToPage(1);
+                resetCheckboxes();
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
+
+
 
 //체크박스 상태 초기화 함수 이기능을 안걸어두면 체크 박스 꺼져있는데 검색하면 체크박스 무시하고나옴 // 이거 예외처리하면 코드 너무 길어짐;;
 function resetCheckboxes() {

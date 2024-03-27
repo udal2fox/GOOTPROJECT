@@ -375,3 +375,30 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   });
 });
+
+document.getElementById("excelDown").addEventListener("click", function() {
+  const fileUrl = "/userAdminPage/download/excel"; // 다운로드할 파일의 URL
+
+  fetch(fileUrl)
+  .then(response => {
+      // 파일 다운로드를 위한 Blob 객체 생성
+      return response.blob();
+  })
+  .then(blob => {
+      // Blob 객체를 URL로 변환
+      const url = window.URL.createObjectURL(blob);
+      // 링크 생성
+      const a = document.createElement("a");
+      // 링크 속성 설정
+      a.href = url;
+      a.download = "임직원일괄업로드양식.xlsx"; // 다운로드할 파일 이름 지정
+      // 링크 클릭 (파일 다운로드 시작)
+      a.click();
+      // URL 해제
+      window.URL.revokeObjectURL(url);
+  })
+  .catch(error => {
+      console.error("파일 다운로드 중 오류가 발생했습니다:", error);
+      swal("오류", "파일 다운로드 중 오류가 발생했습니다.", "error");
+  });
+});

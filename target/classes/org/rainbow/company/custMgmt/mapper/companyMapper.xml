@@ -109,7 +109,7 @@ insert into  RAIN_cCompany_tbl(comCEO) values (#{comCEO})
 	
 		  <!-- 기업 연결 모달창 에서 기업 리스트 가져오기 -->
 	  <select id="takeComNameList" resultType="org.rainbow.company.custMgmt.domain.companyVO">
-	  	select comName from RAIN_cCompany_tbl
+	  	select companyNo,comName from RAIN_cCompany_tbl
 	  </select>
 	  
 	   <!-- 기업 연결 모달창에서 기업명 검색 기능 -->

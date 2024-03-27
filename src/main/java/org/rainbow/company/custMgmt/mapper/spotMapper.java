@@ -1,8 +1,9 @@
 package org.rainbow.company.custMgmt.mapper;
 
 import java.util.List;
+import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
+import org.rainbow.company.custMgmt.domain.spotAndUserVO;
 import org.rainbow.company.custMgmt.domain.spotListVO;
 import org.rainbow.company.custMgmt.domain.spotVO;
 import org.rainbow.company.custMgmt.domain.userVO;
@@ -22,11 +23,18 @@ public interface spotMapper {
 	public userVO getUserVO(int spotNo);
 	
 	/** 지점 정보 저장*/
-	public void spotRegisterInsert(spotVO vo);
+	public void spotRegisterInsert(spotAndUserVO vo);
 	
 	/** 지점 담당자 정보 저장*/
-	public void userRegisterInsert(@Param("userVO") userVO userVO, @Param("spotNo") int spotNo);
+	public void userRegisterInsert(Map<String, Object> params);
 	
 	/**마지막  spotNo 값 */
 	public int getSpotNo();
+	
+	/** 지점 정보 수정*/
+	public void spotUpdate(spotAndUserVO vo);
+	
+	/** 지점 담당자 정보 수정*/
+	public void userUpdate(Map<String, Object> params);
+
 }

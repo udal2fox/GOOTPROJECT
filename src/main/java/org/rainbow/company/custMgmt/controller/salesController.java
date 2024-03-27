@@ -1,10 +1,10 @@
 package org.rainbow.company.custMgmt.controller;
 
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.rainbow.company.custMgmt.domain.consultAndCshVO;
 import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
@@ -71,24 +71,25 @@ public class salesController {
 
 
 	/** 'salesView.jsp' 에서 영업 내용, 영업 히스토리 저장(수정)하기 */
-	@PostMapping("/saveSales")
-	public String saveSales(consultVO vo, cshVO cVO, RedirectAttributes rttr) {
-		log.info("saveSales_success" + vo);
-		Date cshContent1 = cVO.getCshDate2();
-		log.info("영업" + cshContent1);
-		
-		salesService.saveSales(vo, cVO);
-		
-//		if(vo.getCshVOList() != null) {
-//		    vo.getCshVOList().forEach(cshList -> log.info("영업 히스토리 리스트 결과 : " + cshList));
-//		} else {
-//		    log.info("영업 히스토리 리스트가 null입니다.");
-//		}
-		
-		rttr.addFlashAttribute("result","success");
-		
-		return "redirect:/salesList";
-	}
+    @PostMapping("/saveSales")
+    public String saveSales(consultAndCshVO vo, RedirectAttributes rttr) {
+        log.info("saveSales_success" + vo);
+        
+        // 클라이언트에서 전달한 consultHistoryNo를 사용하여 저장 또는 수정을 결정
+        if (vo.getConsultHistoryNo() != 0) {
+            // consultHistoryNo가 0이 아니면 수정을 수행
+            salesService.updateSalesAndHistory(vo);
+        } else {
+            // consultHistoryNo가 0이면 저장을 수행
+            salesService.saveSales(vo);
+        }
+        
+        rttr.addFlashAttribute("result","success");
+        
+        return "redirect:/salesList";
+    }
+
+
 
 	
 	

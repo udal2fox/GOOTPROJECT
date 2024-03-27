@@ -277,7 +277,7 @@
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotFilter.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotSearch.js"></script>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmtModal.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmtModal.js"></script>
 </body>
 </html>

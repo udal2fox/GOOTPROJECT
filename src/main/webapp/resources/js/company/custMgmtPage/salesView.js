@@ -27,27 +27,6 @@ csStatus.addEventListener('change', function() {
 });
 
 
-
-///**영업 내용 저장  */
-//function saveSales() {
-//	
-//	//alert(1);
-//	//console.log(f.consultNo.value);
-//
-//	
-//	if(f.csEname.value=='') {
-//		alert("영업 담당자를 선택하세요.");
-//		return;	
-//	}
-//	
-//
-//	f.action='/saveSales';
-//	f.submit();
-//	
-//	
-//	
-//}
-
 document.addEventListener("DOMContentLoaded", function () {
     // 페이지 로드 후 실행될 코드
 
@@ -163,85 +142,61 @@ function updateSalesHistoryVisibility() {
 }
 
 
-
+/** 영업 담당자에 세션에 저장된 이름 할당하기 */
     // 세션에서 아이디 가져오기
     const sessionId = sessionStorage.getItem('eName');
-
-    // 입력 필드에 아이디 설정
+    
     const csEnameInput = document.querySelector('input[name="csEname"]');
-    csEnameInput.value = sessionId;
+    const selectSalesStatus = document.getElementById('selectSalesStatus');
 
-    //영업 팀장에게만 권한주기
+    // 영업 상태가 '최초 인입'인 경우에만 세션 ID 할당
+    if (selectSalesStatus.value === '최초 인입') {
+        csEnameInput.value = sessionId;
+    } 
+
+
     
-//    /** 저장하기 */
-//    document.getElementById('saveBtn').addEventListener('click', function() {
-//    	alert(1);
-//
-//       let a=  f.cshDate1.value;
-//       console.log(a);
-//       
-////      let csNo =  f.consultNo.value;
-////      console.log(csNo);
-//    	if(f.csStatus.value=='최초 인입'){
-//    		alert("영업 상태를 수정하세요.")
-//    		return;
-//    	}
-//    	if(f.csResponseDate.value==''){
-//    		alert("응대일을 선택하세요.")
-//    		return;
-//    	}
-//    	
-//    	if(f.cshDate1.value==''){
-//    		alert("영업 히스토리 날짜를 선택하세요.")
-//    		return;
-//    	}
-//    	if(f.cshContent1.value==''){
-//    		alert("영업 히스토리 내용을 입력하세요.")
-//    		return;
-//    	}
-//    	
-//    	if(f.csStatus.value=='계약 실패' && f.csFailDetailReason.value==''){
-//    		alert("계약 실패 상세 사유를 작성해주세요.")
-//    		return;
-//    	}
-//
-//    	//f.action='/saveSales';
-//    	//f.submit();
-//    });
-    
-    /** 저장하기 */
     document.getElementById('saveBtn').addEventListener('click', function() {
     	alert(1);
-
-      // let a=  f.cshDate1.value;
-     //  console.log(a);
-       
-//      let csNo =  f.consultNo.value;
-//      console.log(csNo);
-    	if(f.csStatus.value=='최초 인입'){
-    		alert("영업 상태를 수정하세요.")
-    		return;
-    	}
-    	if(f.csResponseDate.value==''){
-    		alert("응대일을 선택하세요.")
-    		return;
-    	}
-    	
-    	if(f.cshDate1.value==''){
-    		alert("영업 히스토리 날짜를 선택하세요.")
-    		return;
-    	}
-    	if(f.cshContent1.value==''){
-    		alert("영업 히스토리 내용을 입력하세요.")
-    		return;
-    	}
-    	
-    	if(f.csStatus.value=='계약 실패' && f.csFailDetailReason.value==''){
-    		alert("계약 실패 상세 사유를 작성해주세요.")
-    		return;
-    	}
-
-    	f.action='/saveSales';
-    	f.submit();
+        if (f.csEname.value === '') {
+            alert("영업 담당자를 선택하세요.");
+            return;
+        }
+        
+        if (f.csStatus.value === '최초 인입') {
+            alert("영업 상태를 수정하세요.");
+            return;
+        }
+        
+        if (f.csResponseDate.value === '') {
+            alert("응대일을 선택하세요.");
+            return;
+        }
+        
+        if (f.cshDate1.value === '') {
+            alert("영업 히스토리 날짜를 선택하세요.");
+            return;
+        }
+        
+        if (f.cshContent1.value === '') {
+            alert("영업 히스토리 내용을 입력하세요.");
+            return;
+        }
+        
+        if (f.csStatus.value === '계약 실패' && f.csFailDetailReason.value === '') {
+            alert("계약 실패 상세 사유를 작성해주세요.");
+            return;
+        }
+        
+        console.log(document.getElementsByName("consultHistoryNo")[0].value);
+        console.log(f.csEname.value);
+        console.log(f.csStatus.value);
+        console.log(f.csResponseDate.value);
+        console.log(f.cshDate1.value);
+        console.log(f.cshContent1.value);
+        console.log(f.csFailDetailReason.value);
+        
+       // f.action = "/saveSales";
+       // f.submit();
     });
-    
+

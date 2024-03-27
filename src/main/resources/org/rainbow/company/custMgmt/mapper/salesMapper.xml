@@ -3,6 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="org.rainbow.company.custMgmt.mapper.salesMapper">
  
+ 	<!-- 상담 요청 리스트 가져오기-->
+	<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
+	   
+	    SELECT *
+	    FROM RAIN_consult_tbl ORDER by consultNo DESC
+	   
+	</select>
+ 
    <!-- 서치바 - 키워드 검색 결과 가져오기 -->
 	
 	<select id="searchConsult" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="org.rainbow.company.custMgmt.domain.consultSearchDTO">
@@ -13,8 +21,8 @@
    <if test="keyword != null and keyword != ''">
       AND (
          csCompanyName = '${keyword}' 
-         OR csName LIKE '%${keyword}% '
-         OR csEmail LIKE '%${keyword}% '
+         OR csName LIKE CONCAT('%', #{keyword}, '%')
+         OR csEmail = '${keyword}'
          OR csEname = '${keyword}' 
       )
    </if>
@@ -22,30 +30,20 @@
       AND csDate BETWEEN #{firDate} AND #{secDate}
    </if>
 </select>
-	
- 
 
-	<!-- 상담 요청 리스트 가져오기-->
-	<select id="salesList" resultType="org.rainbow.company.custMgmt.domain.consultVO">
-	   
-	    SELECT *
-	    FROM RAIN_consult_tbl ORDER by consultNo asc
-	   
-	</select>
 
 	 <!-- 상담 요청 내용 가져오기-->
 	  <select id="salesView" resultType="org.rainbow.company.custMgmt.domain.consultVO" parameterType="int">
 	  	select * from RAIN_consult_tbl where consultNo=#{consultNo}
 	  </select>
 	  
- 	
  	<!-- 영업 히스토리 내용 가져오기 -->
 	  <select id="getCshVO" resultType="org.rainbow.company.custMgmt.domain.cshVO" parameterType="int">
 	  	select * from RAIN_consultHistory_tbl where consultNo=#{consultNo}
 	  </select>
  
 	<!-- 영업 내용 저장(수정)하기 -->
-	<update id="saveSales" parameterType="org.rainbow.company.custMgmt.domain.consultVO">
+	<update id="saveSales" parameterType="org.rainbow.company.custMgmt.domain.consultAndCshVO">
 	    UPDATE RAIN_consult_tbl
 	    SET 
 	    csStatus = #{csStatus},
@@ -60,53 +58,57 @@
 	</update>
   	
   <!-- 영업 히스토리 내용 저장하기 -->
-	<insert id="insertCsh" parameterType="org.rainbow.company.custMgmt.domain.cshVO">
-    INSERT INTO RAIN_consultHistory_tbl (consultNo, cshDate1, cshContent1
-    <if test="cVO.cshDate2 != null and cVO.cshContent2 != null">
-        , cshDate2, cshContent2
+	<insert id="insertCsh" parameterType="java.util.Map">
+	    INSERT INTO RAIN_consultHistory_tbl (consultNo, cshDate1, cshContent1, cshDate2, cshContent2, cshDate3, cshContent3, cshDate4, cshContent4, cshDate5, cshContent5)
+	    VALUES (
+	    #{vo.consultNo}, 
+	    <if test="vo.cshDate1 != null and vo.cshContent1 != null">
+	        #{vo.cshDate1}, #{vo.cshContent1},
+	    </if>
+	    <if test="vo.cshDate2 != null and vo.cshContent2 != null">
+	        #{vo.cshDate2}, #{vo.cshContent2},
+	    </if>
+	    <if test="vo.cshDate3 != null and vo.cshContent3 != null">
+	        #{vo.cshDate3}, #{vo.cshContent3},
+	    </if>
+	    <if test="vo.cshDate4 != null and vo.cshContent4 != null">
+	        #{vo.cshDate4}, #{vo.cshContent4},
+	    </if>
+	    <if test="vo.cshDate5 != null and vo.cshContent5 != null">
+	        #{vo.cshDate5}, #{vo.cshContent5},
+	    </if>
+	    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+	    )
+	</insert>
+	
+	
+	
+	  <!-- 영업 히스토리 내용 수정하기 -->
+	<update id="updateCsh" parameterType="java.util.Map">
+    UPDATE RAIN_consultHistory_tbl
+    SET
+    <if test="vo.cshDate1 != null and vo.cshContent1 != null">
+        cshDate1 = #{vo.cshDate1}, cshContent1 = #{vo.cshContent1},
     </if>
-    <if test="cVO.cshDate3 != null and cVO.cshContent3 != null">
-        , cshDate3, cshContent3
+    <if test="vo.cshDate2 != null and vo.cshContent2 != null">
+        cshDate2 = #{vo.cshDate2}, cshContent2 = #{vo.cshContent2},
     </if>
-    <if test="cVO.cshDate4 != null and cVO.cshContent4 != null">
-        , cshDate4, cshContent4
+    <if test="vo.cshDate3 != null and vo.cshContent3 != null">
+        cshDate3 = #{vo.cshDate3}, cshContent3 = #{vo.cshContent3},
     </if>
-    <if test="cVO.cshDate5 != null and cVO.cshContent5 != null">
-        , cshDate5, cshContent5
+    <if test="vo.cshDate4 != null and vo.cshContent4 != null">
+        cshDate4 = #{vo.cshDate4}, cshContent4 = #{vo.cshContent4},
     </if>
-    )
-    VALUES (
-    #{cVO.consultNo}, #{cVO.cshDate1}, #{cVO.cshContent1}
-    <if test="cVO.cshDate2 != null and cVO.cshContent2 != null">
-        , #{cVO.cshDate2}, #{cVO.cshContent2}
+    <if test="vo.cshDate5 != null and vo.cshContent5 != null">
+        cshDate5 = #{vo.cshDate5}, cshContent5 = #{vo.cshContent5},
     </if>
-    <if test="cVO.cshDate3 != null and cVO.cshContent3 != null">
-        , #{cVO.cshDate3}, #{cVO.cshContent3}
-    </if>
-    <if test="cVO.cshDate4 != null and cVO.cshContent4 != null">
-        , #{cVO.cshDate4}, #{cVO.cshContent4}
-    </if>
-    <if test="cVO.cshDate5 != null and cVO.cshContent5 != null">
-        , #{cVO.cshDate5}, #{cVO.cshContent5}
-    </if>
-    )
-</insert>
+    WHERE consultHistoryNo = #{vo.consultHistoryNo}
+</update>
 
 
 
- 
- 
-	 <!-- 영업 히스토리 1,2,3,4,5 내용 저장(수정) 하기 -->
-	<update id="saveConsultHistory" parameterType="org.rainbow.company.custMgmt.domain.cshVO"><!-- parameterType 생략 가능 -->
-	    UPDATE RAIN_consultHistory_tbl
-	    SET
-	    cshDate1=#{cshDate1}, cshContent1=#{cshContent1},
-	    cshDate2=#{cshDate2}, cshContent2=#{cshContent2},
-	    cshDate3=#{cshDate3}, cshContent3=#{cshContent3},
-	    cshDate4=#{cshDate4}, cshContent4=#{cshContent4},
-	    cshDate5=#{cshDate5}, cshContent5=#{cshContent5}
-	    WHERE consultNo=#{consultNo}
-	</update>
+
+
 	
 	 <!-- 기업명 찾기 모달창 : 기업 리스트 가져오기 -->
 	<select id="searchCompanyListModal" resultType="org.rainbow.company.custMgmt.domain.consultVO">

@@ -21,7 +21,7 @@
 			<h3>지점 관리</h3>
 		</div>
 		
-		
+		<form method="post" enctype="multipart/form-data">
 		<div class="spot_subject_div">
 			<h5 class="spot_subject_title" align="left">●지점 정보</h5>
 
@@ -31,10 +31,10 @@
 						<th>기업명</th>
 						<td><div class="input-with-image">
 						<input type="text" name="comName" readonly value="${spotVO.comName }"><a href="#" id="open_takeComName_modal">
+						<input type="hidden" name="companyNo" value="">
 						<input type="button" id="imgBtnSearchComName"></a>
 						</div></td>
 						<td></td>
-
 						<th>지점명</th>
 						<td>
 							<input type="text" name="spName" value="${spotVO.spName }">
@@ -56,7 +56,7 @@
 				
 						<tr>
 							<td colspan="2" rowspan="2">
-							<input type="text" placeholder="상세 주소" name="spDetailAddr" id="detailedAddr" readonly value="${spotVO.spDetailAddr }"></td>
+							<input type="text" placeholder="상세 주소" name="spDetailAddr" id="detailedAddr" value="${spotVO.spDetailAddr }"></td>
 						
 						<th>연락처</th>
 						<td>
@@ -76,6 +76,8 @@
 								<input type="file" name="file" id="fileInput" multiple="multiple"
 									style="display: none;" onchange="updateFileName()"> 
 								<label for="fileInput" id="imgBtnAgreementFileUpload"></label>
+								
+								 <input type="file" name="newFile" id="newFileInput" multiple="multiple" style="display: none;">
 								</div>
 								</td>
 						<td></td>
@@ -84,10 +86,12 @@
 					</tr>
 				
 
-					<tr>
-						<td>파일명</td>
-						<td></td>
-					</tr>
+				<tr>
+				    <td id="uploadedFileName">
+				        <a href="#" onclick="downloadFile('${spotVO.spAgreementFile}')">${spotVO.spAgreementFile}</a>
+				    </td>
+				    <td></td>
+				</tr>
 
 					<tr>
 						<th>약정 기간</th>
@@ -131,7 +135,7 @@
 						<td>
 						
 						
-							<select name="spAutoExtension">
+							<select name="spPayMethod">
 								<option value="계산서" ${spotVO.spAutoExtension eq '계산서' ? 'selected' : ''}>계산서</option>
 								<option value="카드" ${spotVO.spAutoExtension eq '카드' ? 'selected' : ''}>카드</option>
 							
@@ -157,14 +161,14 @@
 								<option value="중단" ${spotVO.spStatus eq '중단' ? 'selected' : ''}>중단</option>
 								<option value="해지" ${spotVO.spStatus eq '해지' ? 'selected' : ''}>해지</option>
 							</select>
-
+							<input type="hidden" name="spChangeDate" id="spChangeDate" value="">
 					</td>
 					<td></td>
 					<th></th>
 					<td></td>
 					<td></td>
 					</tr>
-					<tr>
+					<tr class="termination-fields">
 						<th>해지 처리자</th>
 						
 						<td><div class="input-with-image">
@@ -187,7 +191,7 @@
 						<td></td>
 
 					</tr>
-					<tr>
+					<tr class="termination-fields">
 						<th>상세 사유</th>
 						<td colspan="5">
 							<textarea placeholder="내용을 입력해주세요" style="resize: none" name="spCancelDetailReason">${spotVO.spCancelDetailReason }</textarea>
@@ -204,10 +208,11 @@
 				<thead>
 					<tr>
 					<th>담당자명</th>
-					<td>
-						<input type="text" name="userName" value=${userVO.userName }>
-					</td>
-					<td></td>
+					<td><div class="input-with-image">
+						<input type="text" name="userName" placeholder="담당자명 검색 또는 작성" value="${userVO.userName }"><a href="#" id="open_takeCsName_modal">
+						<input type="button" id="imgBtnTakeCsName"></a>
+						</div></td>
+						<td></td>
 					<th>연락처</th>
 					<td><input type="text" name="userContact" value=${userVO.userContact }></td>
 					<td></td>
@@ -239,7 +244,82 @@
 	<div class="btn_div">
 				<input type="button" id="spotUpdateBtn" value="수정">
 				<input type="button" id="spotUpdateResetBtn" value="취소">
+				<input type="hidden" name="spotNo" value="${spotVO.spotNo }">
 			</div>
+	</form>
+	
+	
+	
+	<!--------------------------------------- 기업 연결 모달창-->
+<div class="modal" id="takeComName_modal">
+    <div class="modal-content">
+        <table>
+            <tr class="bordered-row">
+                <td><input type="text" name="searchComName" size="20" placeholder="기업명"></td>
+                <td><input type="button" id="searchTakeComNameBtn" value="검색"></td>
+            </tr>
+        </table>
+        <div class="list_div_modal">
+            <table class="list_div_tbl_modal" id="takeComName_tbl">
+                <thead>
+                    <tr class="top_bar_of_list_modal">
+                        <th>기업명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- 여기에 기업명을 표시할 행들이 동적으로 추가될 것입니다. -->
+                </tbody>
+            </table>
+        </div>
+        <!-- 페이지 부분 제거 후 JS로 그릴 예정 -->
+        <!-- page -->
+        <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
+            <ul class="page-nation">
+                <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="close_takeComName_modal">닫기</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!--------------------------------------- 담당자명 가져오기 모달창-->
+<div class="modal" id="takeCsName_modal">
+    <div class="modal-content">
+        <table>
+            <tr class="bordered-row">
+                <td><input type="text" name="searchTakeCsName" size="20" placeholder="담당자명"></td>
+                <td><input type="button" id="searchTakeCsNameBtn" value="검색"></td>
+            </tr>
+        </table>
+        <div class="list_div_modal">
+            <table class="list_div_tbl_modal" id="takeCsName_tbl">
+                <thead>
+                    <tr class="top_bar_of_list_modal">
+                        <th>담당자명</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- 여기에 담당자명을 표시할 행들이 동적으로 추가될 것입니다. -->
+                </tbody>
+            </table>
+        </div>
+        <!-- 페이지 부분 제거 후 JS로 그릴 예정 -->
+        <!-- page -->
+        <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
+            <ul class="page-nation">
+                <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="close_takeCsName_modal">닫기</button>
+        </div>
+    </div>
+</div>
+
 	
 	</div>
 	</div>
@@ -249,5 +329,7 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="/resources/js/company/custMgmtPage/spotView.js"></script>
+		<script type="text/javascript"
+		src="/resources/js/company/custMgmtPage/spotViewModal.js"></script>
 </body>
 </html>

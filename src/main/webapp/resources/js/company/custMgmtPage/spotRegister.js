@@ -102,21 +102,40 @@ function updateFileName() {
     }
 }
 
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const fileList = event.target.files;
+    console.log('Selected file:', fileList[0].name);
+
+    // 선택한 파일 정보를 vo 객체에 저장
+    f.spAgreementFile.value = fileList[0].name;
+});
 
 /** 지점 등록 */
 document.getElementById("spotRegisterInsertBtn").addEventListener('click', () => {
+    alert(1);
     
-	spotInsert();
+    // JavaScript를 사용하여 폼 요소에 접근
+    const companyNoInput = document.querySelector('input[name="companyNo"]');
+
+    // 히든 입력란의 값을 가져와서 콘솔에 출력
+    console.log('Company Number:', companyNoInput.value);
+    console.log(f.comName.value);
+    console.log(f.companyNo.value );
+    console.log(f.spAddr.value );
+    console.log(f.spDetailAddr.value );
+    console.log(f.spContact.value );
+    console.log(f.spAgreementFile.value ); // 파일명 출력
+    console.log(f.file.value );
+    console.log(f.spAgreementDate.value );
+    console.log(f.spAgreementTerm.value);
+    console.log(f.spAutoExtension.value );
+    console.log(f.spBdgt.value );
+    console.log(f.spEmpNum.value);
+    console.log(f.spPayMethod.value );
+    console.log(f.userName.value );
+    console.log(f.userContact.value );
+    console.log(f.userEmail.value);
+    
+    f.action='/spotRegisterInsert';
+    f.submit();
 });
-
-function spotInsert(){
-	
-	
-	const spotRegisterForm=document.getElementById("spotRegisterForm");
-	
-	console.log(spotRegisterForm);
-	
-	spotRegisterForm.submit();
-
-	
-}

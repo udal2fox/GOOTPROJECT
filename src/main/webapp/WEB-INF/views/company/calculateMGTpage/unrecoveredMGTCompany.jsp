@@ -134,6 +134,7 @@
 <script>
     let deptNo = <%= session.getAttribute("deptNo") %>;
 </script>
+<script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcDefault.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtCompany.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtComSearch.js"></script> 
 <script type="text/javascript" src="/resources/js/company/calculateMGTpage/ucMgt/UcMgtCompanyDown.js"></script> 

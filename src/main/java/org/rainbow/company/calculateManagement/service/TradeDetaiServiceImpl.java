@@ -12,6 +12,7 @@ import org.rainbow.company.calculateManagement.domain.ucTdDown;
 import org.rainbow.company.calculateManagement.mapper.TradeDetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.log4j.Log4j;
 
@@ -51,9 +52,11 @@ public class TradeDetaiServiceImpl implements TradeDetaiService {
 	public TradeDetailEditVO editTdList(String recNo) {
 		return tMapper.editTdList(recNo);
 	}
-
+	
+	@Transactional
 	@Override
 	public int editTdupdate(TradeDetailEditVO vo) {
+		tMapper.editOrder(vo);
 		return tMapper.editTdupdate(vo);
 	}
 

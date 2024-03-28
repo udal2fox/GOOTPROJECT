@@ -102,13 +102,14 @@
                                 <input type="text" class="form-control border border-dark-subtle" id="sendName" placeholder="기업명 또는 대표자명">
                             </div>
                             <div class="btn-group m-4" role="group" aria-label="Basic radio toggle button group">
-                                <input type="radio" class="btn-check" name="btnradio" id="basic" autocomplete="off" readonly="readonly" checked>
+                                <input type="radio" class="btn-check" name="btnradio" id="basic" value="basic" autocomplete="off" readonly="readonly" checked>
                                 <label class="btn btn-outline-danger" for="basic" style="width: 100px;">기본</label>
-                                <input type="radio" class="btn-check" name="btnradio" id="custom" autocomplete="off">
+                                <input type="radio" class="btn-check" name="btnradio" id="custom" value="custom" autocomplete="off">
                                 <label class="btn btn-outline-danger" for="custom" style="width: 100px;">맞춤</label>
                             </div>
                             <div class="m-3">
                                 <label for="customMessege" class="form-label fw-bold">메세지 편집</label>
+                                <span class="float-end text-danger">Tips! &lt;br&gt;, {발신자명}, {name}, {grade}</span>
                                 <textarea class="form-control border border-dark-subtle" id="customMessege" rows="3"></textarea>
                             </div>
                         </form>
@@ -135,7 +136,7 @@
                         <div id="themePreview" class="rounded-5" style="background-image:; background-size: cover; width: 260px; height: 530px; position: absolute; top: 41px; left: 35px;"></div>
                         <!-- 메세지 미리보기 -->
                         <div id="messegePreview" class="text-wrap" style="width: 200px; height: 250px; position: absolute; top: 200px; left: 70px;">
-                            <span class="text-break" style="color: black;"> 안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.<br> <br> ▶ 선물 선택하러 가기
+                            <span class="text-break" style="color: black;"> 안녕하세요 {name} 님! &lt;br&gt;, &lt;br&gt;, {발신자명} 에서 {name} 님의 &lt;br&gt;, 생일을 축하드립니다.
                             </span>
                         </div>
                     </div>

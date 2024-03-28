@@ -11,12 +11,14 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-         <!-- log4jdbc --> 
-         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-    	 <property name="jdbcUrl" value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false"/>
-         <property name="username" value="root"></property>
-         <property name="password" value="tiger"></property>
-   </bean> 
+		<!-- log4jdbc -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:mysql://35.221.146.138:3306/rainbow?useSSL=false" />
+		<property name="username" value="root"></property>
+		<property name="password" value="tiger"></property>
+	</bean>
 
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
@@ -37,33 +39,68 @@
 	<context:component-scan
 		base-package="org.rainbow.company.employeeSupervisePage.service" />
 
-	<!-- 상품관리  mapper OR service -->
+	<!-- 상품관리 mapper OR service -->
 	<mybatis-spring:scan
 		base-package="org.rainbow.company.ProductManagement.mapper" />
 	<context:component-scan
 		base-package="org.rainbow.company.ProductManagement.service" />
-		
-	<!-- 정산관리 mapper OR service  -->
+
+	<!-- 정산관리 mapper OR service -->
 	<mybatis-spring:scan
 		base-package="org.rainbow.company.calculateManagement.mapper" />
 	<context:component-scan
-		base-package="org.rainbow.company.calculateManagement.service" />	
-		
-	<!-- 매출관리 mapper OR service  -->
+		base-package="org.rainbow.company.calculateManagement.service" />
+
+	<!-- 매출관리 mapper OR service -->
 	<mybatis-spring:scan
 		base-package="org.rainbow.company.salesManagement.mapper" />
 	<context:component-scan
-		base-package="org.rainbow.company.salesManagement.service" />	
-		
+		base-package="org.rainbow.company.salesManagement.service" />
+
 	<!-- @Autowired 사용할 매퍼 서비스 신정우 -->
-	<mybatis-spring:scan base-package="org.rainbow.company.custMgmt.mapper"/>
-	<context:component-scan base-package="org.rainbow.company.custMgmt.service"/>
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.custMgmt.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.custMgmt.service" />
 
 	<!-- userAdmin 관련 mapper OR service -->
 	<mybatis-spring:scan
-			base-package="org.rainbow.userAdminPage.mapper"/>
+		base-package="org.rainbow.userAdminPage.mapper" />
 	<context:component-scan
-			base-package="org.rainbow.userAdminPage.service"/>
+		base-package="org.rainbow.userAdminPage.service" />
+
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="worney87@gmail.com" />
+		<property name="password" value="como bofu rvpp ckon" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="templateResolver"
+		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+		<property name="prefix" value="/resources/mailTemplates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML" />
+		<property name="cacheable" value="true" />
+	</bean>
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+	</bean>
 
 	<!-- 트랜젝션 및 aop 관련 항목들 -->
 	<bean id="transactionManager"
@@ -71,7 +108,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<tx:annotation-driven />
-	<context:component-scan base-package="org.rainbow.*"/>
+	<context:component-scan
+		base-package="org.rainbow.*" />
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
 
 </beans>

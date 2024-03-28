@@ -12,9 +12,7 @@ fetch("/userAdminPage/getCardInfo/" + Okja)
     var messegeContent = data.messegeContent;
 
     // 선택된 테마 클릭
-    var themeLink = document.querySelector(
-      'a[id="'+ selectedTheme + '"]'
-    );
+    var themeLink = document.querySelector('a[id="' + selectedTheme + '"]');
     if (themeLink) {
       themeLink.click();
     } else {
@@ -23,12 +21,12 @@ fetch("/userAdminPage/getCardInfo/" + Okja)
 
     // 발신자명 입력
     var sendNameInput = document.getElementById("sendName");
-    if(sendName === ''){
+    if (sendName === "") {
       sendNameInput.value = "기업명 또는 대표자명";
-    }else{
+    } else {
       sendNameInput.value = sendName;
     }
-    
+
     // 라디오 버튼 체크
     var basicRadio = document.getElementById("basic");
     var customRadio = document.getElementById("custom");
@@ -41,11 +39,22 @@ fetch("/userAdminPage/getCardInfo/" + Okja)
     // 메세지 텍스트 설정
     var customMessegeInput = document.getElementById("customMessege");
     if (messegeContent === "") {
-      customMessegeInput.value = "안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.<br> <br> ▶ 선물 선택하러 가기";
+      customMessegeInput.value =
+        "안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.";
     } else {
       customMessegeInput.value = messegeContent;
-    } 
-    document.querySelector("#messegePreview").innerHTML = customMessegeInput.value
+    }
+    // 만약 basicRadio가 체크된 상태이면 customMessegeInput을 읽기 전용으로 설정
+    if (basicRadio.checked) {
+      customMessegeInput.setAttribute("readonly", "readonly");
+      customMessegeInput.style.background = "lightgray"; // 회색 배경으로 변경
+    } else {
+      customMessegeInput.removeAttribute("readonly");
+      customMessegeInput.style.background = ""; // 배경 스타일 제거
+    }
+
+    document.querySelector("#messegePreview").innerHTML =
+      customMessegeInput.value;
   })
   .catch((error) => console.error("Fetch Error:", error));
 
@@ -119,11 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // '기본' 라디오 버튼 체크 시 이벤트 처리
   basicRadio.addEventListener("change", function () {
-    customMessegeInput.value = "";
+    customMessegeInput.value = "안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.";
     customMessegeInput.setAttribute("readonly", "readonly");
     customMessegeInput.style.background = "lightgray"; // 회색 배경으로 변경
     messegePreview.innerHTML =
-      '<span class="text-break" style="color: black;"> 안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.<br> <br> ▶ 선물 선택하러 가기 </span>';
+      '<span class="text-break" style="color: black;"> 안녕하세요 {name} 님! <br> <br> {발신자명} 에서 {name} 님의 생일을 축하드립니다.</span>';
 
     // '기본' 라디오 버튼이 체크되면 checkedValue를 'basic'으로 설정
     checkedValue = "basic";
@@ -140,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
       selectedTheme: selectedThemeId,
       sendName: sendName,
       checkedValue: checkedValue,
-      messegeContent: messegePreview.textContent.trim(), // 업데이트된 내용으로 설정
+      messegeContent: customMessegeInput.value, // 업데이트된 내용으로 설정
     };
 
     // 데이터를 서버로 전송합니다.

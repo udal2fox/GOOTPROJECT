@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@100;600&display=swap');
+
+    .card {
+      position: absolute;
+      width: 260px;
+      height: 530px;
+      border: 1px solid grey;
+      background-size: cover;
+      background-position: center;
+      align-items: flex-start;
+      font-family: 'Pretendard';
+      /* Pretendard 폰트 적용 */
+    }
+
+    .letter {
+      position: absolute;
+      width: 85%;
+      text-align: center;
+      margin: 30% auto 0;
+      /* 가로 중앙 정렬 */
+    }
+
+    .link {
+      position: absolute;
+      width: 85%;
+      text-align: center;
+      margin: 450px auto 0;
+      /* 가로 중앙 정렬 */
+    }
+
+    .link a {
+      text-decoration: none;
+      color: blue;
+      font-weight: 700;
+    }
+
+    /* 글자 두껍게 설정 */
+    .letter span {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card" th:style="'background-image: url(' + ${theme} + ')'">
+    <div class="letter">
+      <span th:text="${content}"></span>
+    </div>
+    <div class="link">
+      <a href="#">▶ 선물 선택하러 가기</a>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,243 +1,231 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @charset "UTF-8";
 
+/** ------------공통 --*/
+	
+	.notosanskr * { 
+		 font-family: 'Noto Sans KR', sans-serif;
+		}
+	
+	/* 변수 생성 */
+	:root {
+	  
+	  --bg-gray:#EEEEEE; 
+	  --blue:rgb(75, 91, 225);
+	  --basic-radius:3px;
+	  
+	}
 	body{
 		margin : 0;
 		padding : 0;
-		
 	}
-
 	.navBar{
 		position: fixed;
 		width : 100%;
 		top : 0;
-		
+	}
+	.entire{
+		width: 80%;
+	
 	}
 
-/* 변수 생성 */
-:root {
-  
-  --bg-gray:#EEEEEE; 
-  --blue:rgb(75, 91, 225);
-  --basic-radius:3px;
-  
-}
-
-
-.entire{
-	width: 80%;
-	
-
-}
-
-
-   
-/** 타이틀 */
+	/** 타이틀 */
 	.title h3{
 		font-weight : bolder;
-
-	}
-	
-	
-	
-/** ------------기업 관리 (리스트) 페이지 시작--*/
-
-/** 서치바 */
-.searchBar_div {
 		
-    	box-sizing: border-box;
-    	background-color:var(--bg-gray);
-    	padding-bottom:10px;
-	}
-
-/** 서치바 테이블*/
-.searchBar_tbl {
-	table-layout: auto;
-	table-layout: fixed;
-	border: 6px solid var(--bg-gray);
-	width: 100%;
-	
-}
-
-.searchBar_tbl tr th {
-	width:80px;
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
-	font-size: 15px;
-	text-align: center;
-	
-
-}
-
-.searchBar_tbl td{
-	border: 6px solid var(--bg-gray);
-	
-}
-
-
-.checkbox_div {
-	display: flex;
-	justify-content: space-around;
-
-}
-
-.searchBar_tbl input[type="text"], #searchBarBizStatus {
-	
-	width:100%;
-	border: none;
-	
-}
-
-
-
-
-#searchBarSearchBtn {
-	box-sizing: border-box;
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
-	
-	
 	}
 	
+/** ------------공통 끝 --*/	
+	
+/** ------------기업 관리 (companyList.jsp) 페이지 시작--*/
 
-#searchBarResetBtn {
-	box-sizing: border-box;
-	background-color:rgb(255, 255, 255);
-	color:var(--blue);
-	border-color:rgb(255, 255, 255);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
+	.searchBar_div {
+		padding: 20px;
+	    border-radius: 10px;
+	    box-sizing: border-box;
+	    background-color:var(--bg-gray);
+	    padding-bottom:10px;
+		}
+	
+	.searchBar_tbl {
+	    width: 100%;
+	    border-spacing: 0px 10px; /** 테이블 내부 간격 조정 */
 	}
 	
-
-.download_to_excel_btn_div {
+	.searchBar_tbl_title {
+		font-weight: bold;
+		letter-spacing: 1px; /* 텍스트 간격을 조절하는 값 */
+		width:100px;
+		
+	}	
 	
-    box-sizing: border-box;
-	text-align: right;
-	padding: 50px 5px 10px 5px;
-}
+	.searchBar_tbl th, .searchBar_tbl td {
+	  padding: 10px;
+	  
+	   
+	}
 	
-
-#downloadExcelBtn {
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width:140px;
-}
-
-
-.viewAFew_div {
+	.btn {
+	    padding: 6px 12px;
+	    font-size: 14px;
+	    border-radius: 5px;
+	}
 	
+	.searchBar_btns {
+		text-align : right;
+	}
+	
+	#searchBarSearchBtn {
+	    width: 80px; 
+	    margin-top: 10px;
+	    margin-right: 5px; 
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    cursor: pointer;
+	}
+	
+	#searchBarResetBtn:hover {
+	    background-color: #007bff;
+	    color: #fff;
+	}
+	
+	#searchBarResetBtn {
+	    background-color: #fff;
+	    color: #007bff;
+	    border: 1px solid #007bff;
+	    width: 80px;
+	    margin-top: 10px;
+	    margin-right: 5px; 
+	    cursor: pointer;
+	}
+
+	#searchBarSearchBtn:hover {
+		background-color:#fff;
+		color: #007bff;
+		border: 1px solid #007bff;
+	}
+	
+	.checkbox-container input[type="checkbox"] {
+	    margin-right: 5px;
+	}
+	
+	.datePick1, .datePick2 {
+	    width: 120px;
+	    padding: 5px;
+	}
+	
+	.dateBtn {
+	    margin-right: 5px;
+	    padding: 5px 10px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+	}
+
+	.download_to_excel_btn_div {
+	    box-sizing: border-box;
+		text-align: right;
+		padding: 50px 5px 10px 5px;
+	}
+		
+	#downloadExcelBtn {
+		background-color: var(--blue);
+		color: rgb(255, 255, 255);
+		border-color:var(--blue);
+		border-radius: var(--basic-radius);
+		border: 5px 10px 5px 10px;
+		width:140px;
+	}
+	
+	.viewAFew_div {
     box-sizing: border-box;
     text-align:right;
     padding: 0px 5px 10px 5px;
+	}
+
 	
-}
-
-
-
-.list_div {
+	.list_div {
+		box-sizing: border-box;
+		border : 5px solid var(--bg-gray);
+	}
 	
-	box-sizing: border-box;
-	border : 5px solid var(--bg-gray);
-
-}
-
-.list_div_tbl {
-	 
-	border : 5px solid white;
-	table-layout: auto;
-	table-layout: fixed;
-	width:100%;
-}
-
-.list_div_tbl tr th {
-
-	font-size: 15px;
-	text-align: center;
-}
-
-.list_div_tbl td{
-	text-align: center;
+	.list_div_tbl {
+		border : 5px solid white;
+		table-layout: auto;
+		table-layout: fixed;
+		width:100%;
+	}
 	
-}
-
-
-.top_bar_of_list {
-	border : 5px solid white;
+	.list_div_tbl tr th {
+		font-size: 15px;
+		text-align: center;
+	}
 	
-	background-color:var(--bg-gray);
-	font-size: 15px;
-	font-weight : bolder;
-
-}
-
-
-/*페이징 이미지사이즈  */
-		td img {height: 80px; width: 120px;}
+	.list_div_tbl td{
+		text-align: center;
+	}
+	
+	
+	.top_bar_of_list {
+		border : 5px solid white;
+		background-color:var(--bg-gray);
+		font-size: 15px;
+		font-weight : bolder;
+	}
+	
+	
+	/*페이징 이미지사이즈  */
+	td img {height: 80px; width: 120px;}
 		.page-nation li{
-			list-style: none;
-		}
-		
-		.page-wrap{
-			    text-align: center;
-			    font-size: 0;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-		}
-		.page-nation {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-top: 20px;
-		}
-		
-		.page-nation a{
-			display: block;
-			margin: 0 3px;
-			flex: left;
-			border: 1px solid #e6e6e6;
-			width: 28px;
-			height: 28px;
-			line-height: 28px;
-			text-align: center;
-			background-color: #fff;
-			font-size: 13px;
-			color: black;
-			text-decoration: none;
-		}
-		
-		.page-nation a.active{
-			background-color: #0078ff;
-			color: #fff;
-		}
-		.page-nation a:hover{
-			background-color: #0078ff;
-			color: #fff;
-		}
-
-
-.sort-btn
-{
-	background-color: #eaeaea;
-	border-color: white;
-}
-
-
-
-
-
-
-
-
-
+		list-style: none;
+	}
+			
+	.page-wrap{
+		text-align: center;
+		font-size: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.page-nation {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+			
+	.page-nation a{
+		display: block;
+		margin: 0 3px;
+		flex: left;
+		border: 1px solid #e6e6e6;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background-color: #fff;
+		font-size: 13px;
+		color: black;
+		text-decoration: none;
+	}
+	
+	.page-nation a.active{
+		background-color: #0078ff;
+		color: #fff;
+	}
+	
+	.page-nation a:hover{
+		background-color: #0078ff;
+		color: #fff;
+	}
+	
+	.sort-btn{
+		background-color: #eaeaea;
+		border-color: white;
+	}
 
 
 #moveCompanyRegisterBtn {
@@ -252,11 +240,31 @@
 	
 }
 
+#moveCompanyRegisterBtn:hover {
+		background-color:#fff;
+		color: var(--blue);
+		border: 1px solid #007bff;
+	}
 
+input[type="text"],input[type="email"] {
+		border:none;
+		width:100%;
+		border-radius: 10px;
+		padding-left:10px;
+	}
+	
+	textarea{
+		border:none;
+		border-radius: 10px;
+	}
+	
+	select{
+		border:none;
+		border-radius: 10px;
+		text-align: center;
+	}
 
-
-
-/** ------------기업 관리 (리스트) 페이지 끝--*/
+/** ------------기업 관리 (companyList.jsp) 페이지 끝--*/
 
 
 
@@ -271,13 +279,19 @@
 	box-sizing: border-box;
 }
 
-.companyMgmt_title {
-	margin-top:30px;
-	background-color : var(--bg-gray);
-	height: 50px;
-	padding-top:12px;
-
-}
+.subject_title_div {
+		margin-top:30px;
+		margin-bottom :10px;
+		width:120px;
+		box-sizing: border-box;
+		
+		font-weight:bolder;
+		margin-left:0px;
+		font-size : 20px;
+		background-color: var(--bg-gray); 
+		border-radius: 15px;
+		text-align: center;
+	}
 
 .companyMgmt_tbl {
 	width: 100%;
@@ -386,6 +400,13 @@
 	
 }
 
+#companyRegisterInsertBtn:hover {
+		background-color:#fff;
+		color: var(--blue);
+		border: 1px solid #007bff;
+	}
+
+
 
 #companyRegisterResetBtn{
 	background-color:rgb(255, 255, 255);
@@ -396,6 +417,12 @@
 	width: 120px;
 	
 }
+
+#companyRegisterResetBtn:hover {
+	    background-color: var(--blue);
+	    color: #fff;
+	}
+
 
 
 .companyMgmt_tbl input[type="text"],
@@ -409,10 +436,6 @@
 
 .input-with-image {
     position: relative;
-}
-
-.input-with-image input[type="text"] {
-    padding-right: 50px; /* 이미지를 감안하여 오른쪽에 여백을 줍니다. */
 }
 
 .input-with-image input[type="button"],#imgBtnBizLicenseFileUpload {
@@ -434,7 +457,11 @@
 	
 	
 }
-
+#companyUpdateBtn:hover {
+		background-color:#fff;
+		color: #007bff;
+		border: 1px solid #007bff;
+	}
 
 
 #companyUpdateResetBtn{
@@ -446,7 +473,11 @@
 	width: 120px;
 	
 }
-
+#companyUpdateResetBtn:hover {
+		background-color:var(--blue);
+		color: #007bff;
+		border: 1px solid #007bff;
+	}
 
 
 /** ----------기업 등록,기업 수정 페이지 끝---------------*/

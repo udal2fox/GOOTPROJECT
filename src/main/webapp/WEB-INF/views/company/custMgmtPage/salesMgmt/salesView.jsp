@@ -21,13 +21,17 @@
 	<div class="title" align="left">
 		<h3>신규 영업</h3>
 	</div>
-	<h5 class="subject_title" align="left">●상담 신청 내용</h5>
-	<table class="subject_content_tbl">
+	<div align="left">
+	<div class="subject_title_div" style="width:162px;">● 상담 신청 내용
+	</div>
+	</div>
+	<table class="subject_content_tbl" id="consult_tbl">
 	<thead>
 	<tr>
 						<td class="tbl_subtitle">기업명</td>
 						<td>
-							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly>
+							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly 
+							>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">상담 신청일</td>
@@ -39,7 +43,7 @@
 						<td>
 							<input type="text" name="csArea" value="${consultVO.csArea }" readonly>
 						</td>
-						<td rowspan="3"></td>
+						<td></td>
 					</tr>
 	
 	<tr>
@@ -54,8 +58,8 @@
 						</td>
 						
 						<td class="tbl_subtitle">이메일</td>
-						<td>
-							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly>
+						<td colspan="2" >
+							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly style="width:250px;">
 						</td>
 						
 						
@@ -77,7 +81,7 @@
 					<tr>
 						<td class="tbl_subtitle">문의 내용</td>
 						<td colspan="8" id="inquiryDetails">
-						<textarea rows="10"  style="width: 90%; resize: none" readonly>${consultVO.csContent}</textarea>
+						<textarea rows="10"  style="width: 95%; resize: none" readonly>${consultVO.csContent}</textarea>
 						
 						</td>
 
@@ -85,9 +89,11 @@
 
 	</thead>
 	</table>
-	
-	
-	<h5 class="subject_title" align="left">●영업 내용</h5>
+
+	<div align="left">
+	<div class="subject_title_div">● 영업 내용
+	</div>
+	</div>
 	
 	<form method="post">
 	<table class="subject_content_tbl">
@@ -256,7 +262,5 @@
 
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
-
 </body>
 </html>

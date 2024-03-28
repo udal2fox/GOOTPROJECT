@@ -1,25 +1,27 @@
 @charset "UTF-8";
 
 #searchCompany_modal {
-  width: 80%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #searchBizStatus_modal {
-	  width: 80%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	
-	
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
@@ -28,58 +30,50 @@
 
 
 .modal {
-
-
    top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
 .modal-content {
   box-sizing: border-box;
-  background-color: #fefefe;
-
   border: 1px solid #888;
-   width: 100%;
    top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  	
+  
  
 }
-
-.bordered-row {
-        border: 1px solid silver; 
-        padding:0px;
-    }
 
 .modal-top {
 	
 	 box-sizing: border-box;
 	  padding-top:10px;
-	  width: 100%;
+	  padding-bottom:10px;
+	 
+	  
+
+}
+
+
+.modal-bottom {
+	
+	 box-sizing: border-box;
+	  padding-top:10px;
+	  padding-bottom:10px;
+	  text-align:right;
+	  margin-right:10px;
+
 }
 
 .modal-footer {
 	
 	 box-sizing: border-box;
-	 width: 100%;
 	 
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-}
 
 
 
@@ -89,7 +83,8 @@
 	
 	box-sizing: border-box;
 	border : 5px solid #EEEEEE;
-	width:100%;
+
+  margin: 0 auto; /* 수평 가운데 정렬 */
 
 }
 
@@ -120,15 +115,4 @@
 	font-size: 13px;
 	font-weight : bolder;
 
-}
-
-
-
-
-input[type="text"], .button, 
- {
-	border: none;
-	width:100%;
-	padding:0px;
-	
 }

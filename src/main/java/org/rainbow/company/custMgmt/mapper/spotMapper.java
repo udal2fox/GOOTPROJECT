@@ -36,5 +36,8 @@ public interface spotMapper {
 	
 	/** 지점 담당자 정보 수정*/
 	public void userUpdate(Map<String, Object> params);
+	
+	/**담당자 정보 모달창 : 담당자 정보 가져오기 */
+	public userVO getManagerInfo(int spotNo);
 
 }

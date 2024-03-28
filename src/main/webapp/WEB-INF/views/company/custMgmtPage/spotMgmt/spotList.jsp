@@ -21,23 +21,20 @@
 		<h3>지점 관리</h3>
 	</div>
 	<div class="searchBar_div">
-	<form method="post">
 		<table class="searchBar_tbl">
 			<thead>
+				
+				<tr>
+			          <td class="searchBar_tbl_title" style="text-align:left;">키워드</td>
+			          <td style="text-align: left;">
+			             <input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/지점명/담당자/주소" style="text-align: center; width: 300px;">
+			          </td> 
+			          <td></td>
+			          <td></td>
+			       </tr>
 				<tr>
 					<tr>
-					<th>키워드</th>
-					<td>
-					<input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/지점명/담당자/주소" style="text-align: center;">
-					</td>
-					<td rowspan="2"></td>
-					<th rowspan="2"></th>
-					<td rowspan="2"></td>
-					<td rowspan="2"></td>
-			
-				</tr>
-				<tr>
-					<th>이용 상태</th>
+					<td class="searchBar_tbl_title" style="text-align: left;">이용 상태</td>
 				<td>
 					<div class="checkbox_div">
 					<input class="form-check-input" type="checkbox" id="spotList-serviceStatusAll" value="전체" checked>전체
@@ -49,32 +46,32 @@
 				</tr>
 			</thead>
 		</table>
-			<input type="button" id="searchBarSearchBtn" value="검색">
-			<input type="reset"  id="searchBarResetBtn" value="초기화">
-		</form>
+			<div class="searchBar_btns">
+	    		<input type="button" id="searchBarSearchBtn" value="검색">
+	    		<input type="reset" id="searchBarResetBtn" value="초기화">
+   				</div>	
 			</div>
-			<div class="download_to_excel_btn_div">
-				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
-                <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
-                <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
-			</div>
-			<div class="viewAFew_div">
-				<select name="viewAFew" id="selectViewAFew">
-								<option value="10">10</option>
-								<option value="25">25</option>
-								<option value="50">50</option>
-								<option value="75">75</option>
-								<option value="100">100</option>
-							
-				</select>
+			
+		<div class="download_to_excel_btn_div">
+			<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
+            <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
+            <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
+		</div>
+		<div class="viewAFew_div">
+			<select name="viewAFew" id="selectViewAFew" style="border: 1px solid;">
+
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				<option value="75">75</option>
+				<option value="100">100</option>			
+			</select>
 				개씩 보기
-			</div>
+		</div>
 	
 
 	
 	<div class="list_div">
-		
-	 <div>
 	 <form>
       <table class="list_div_tbl" id="spot_tbl">
          <thead>
@@ -93,36 +90,30 @@
             </tr>
          </thead>
          <tbody>
-            <c:forEach var="vo" items="${spotListVO }">
-               <tr class="spotList" data-type="${vo.spStatus}">
-                <td><a href="${vo.companyNo }">${vo.companyNo }</a></td>
-            	<td><a href="${vo.spotNo }">${vo.spotNo }</a></td>
-            	<td>${vo.comName }</td>
-            	<td>${vo.spName }</td>
-            	<td>${vo.spAddr }</td>
-            	<td>${vo.spAgreementDate }</td>
-            	<td>${vo.spStatus }</td>
-            	<td>${vo.spChangeDate }</td>
-            	<td><a href="#" id="open_managerInpo_modal">${vo.userName }</a></td>
-            	<td><a href="#" id="open_empList_modal">보기</a></td>
-        
-               </tr>
-            </c:forEach>
+            <c:forEach var="vo" items="${spotListVO}">
+    <tr class="spotList" data-type="${vo.spStatus}">
+        <td><a href="#" class="companyLink" data-company-no="${vo.companyNo}">${vo.companyNo}</a></td>
+        <td><a href="#" class="spotLink" data-spot-no="${vo.spotNo}">${vo.spotNo}</a></td>
+        <td>${vo.comName}</td>
+        <td>${vo.spName}</td>
+        <td>${vo.spAddr}</td>
+        <td>${vo.spAgreementDate}</td>
+        <td>${vo.spStatus}</td>
+        <td>${vo.spChangeDate}</td>
+        <td><a href="#" data-spot-no="${vo.spotNo}" id="open_managerInpo_modal">${vo.userName}</a></td>
+        <td><a href="#" id="open_empList_modal">보기</a></td>
+    </tr>
+</c:forEach>
          </tbody>
       </table>
       </form>
 </div>
 
-    <!--페이지 부분제거후 js 로 그릴예정 -->
-    <!-- page -->
-    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">	
-    <ul class="page-nation">
-        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
-        
-    </ul>
-</div>
-
-</div>
+  <div id="pagination" class="page-wrap" style="width: 1200;">	
+			<ul class="page-nation">
+			 	<!-- 페이지네이션은 이곳에 동적으로 생성 -->  
+		    </ul>
+	  </div>
 	<div class="btn_div">
 		<input type="button" id="moveSpotRegisterBtn" value="지점 등록">
 	</div>
@@ -221,51 +212,28 @@
       </div>
    </div>	
 	
-	<!--------------------------------------- 담당자 정보 수정-->
-<div class="modal" id="managerInpo_modal">
-    	
-      <div class="modal-content">
-     
+<!--------------------------------------- 담당자 정보 수정-->
+<div class="modal" id="managerInpo_modal"> 	
+    <div class="modal-content">
+        <div class="modal-top">
+            <span class="modal-title">지점 담당자 정보</span>
+        </div>
+        <div class="list_div_modal" id="managerInpo_tbl">
+            <table class="list_div_tbl_modal">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+                
+            </table>
+        </div>
+        <div class="modal-footer">	
+            <button type="button" id="update_managerInpo_modal">수정</button>
+            <button type="button" id="close_managerInpo_modal">취소</button>
+        </div>
+    </div>
+</div>
 
-	<div class="list_div_modal">
-      <table class="list_div_tbl_modal">
-         <thead>
-            <tr>
-               <th>담당자 이름</th>
-            </tr>
-            <tr>
-               <td><input type="text"></td>
-            </tr>
-            <tr>
-               <th>연락처</th>
-            </tr>
-            <tr>
-               <td><input type="text"></td>
-            </tr>
-            <tr>
-               <th>이메일</th>
-            </tr>
-            <tr>
-               <td><input type="text"></td>
-            </tr>
-            <tr>
-               <th>비밀번호</th>
-            </tr>
-            <tr>
-               <td><input type="text"></td>
-            </tr>
-        
-         </thead>
-
-      </table>
-	</div>
-		<div class="modal-footer">	
-            <button type="button" id="close_managerInpo_modal">저장</button>
-			<button type="button"  id="reset_managerInpo_modal">취소</button>
-         </div>
-     
-      </div>
-   </div>	
 	
 	
 	
@@ -277,7 +245,7 @@
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotFilter.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotSearch.js"></script>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmtModal.js"></script>
+<script type="text/javascript" src="/resources/js/company/custMgmtPage/spotMgmt.js"></script>
 </body>
 </html>

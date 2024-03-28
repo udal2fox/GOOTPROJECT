@@ -7,8 +7,6 @@ import org.rainbow.company.employeeSupervisePage.domain.EmployeeExcelDTO;
 import org.rainbow.company.employeeSupervisePage.domain.EmployeeSearchDTO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_EmpVO;
 import org.rainbow.company.employeeSupervisePage.domain.rain_employeeDTO;
-import org.rainbow.domain.Criteria;
-
 
 public interface searchEmployeeService {
 	

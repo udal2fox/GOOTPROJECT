@@ -38,6 +38,12 @@
 		base-package="org.rainbow.company.employeeSupervisePage.mapper" />
 	<context:component-scan
 		base-package="org.rainbow.company.employeeSupervisePage.service" />
+		
+	<!-- 조직도 mapper OR service -->
+	<mybatis-spring:scan
+		base-package="org.rainbow.company.orgChart.mapper" />
+	<context:component-scan
+		base-package="org.rainbow.company.orgChart.service" />
 
 	<!-- 상품관리 mapper OR service -->
 	<mybatis-spring:scan

@@ -349,7 +349,7 @@
 		        let pdv = {
 		            comName: tdList[2].textContent.trim(),
 		            email: email, // 
-		            recSum : tdList[4].textContent.trim()
+		            recSum : tdList[4].textContent.trim().replace(/,/g, '')
 		        };
 
 		        checkedDataList.push(pdv);

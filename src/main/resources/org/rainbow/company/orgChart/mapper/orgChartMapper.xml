@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  					
+<mapper namespace="org.rainbow.company.orgChart.mapper.orgChartMapper">
+	
+	<select id="getList" resultType="org.rainbow.company.orgChart.domain.orgChartDTO">
+		
+		SELECT
+			e.eno, e.deptNo, d.dName, e.eName, e.ePhone, e.email, e.job
+		FROM
+			RAIN_EMP_tbl e
+		JOIN
+			RAIN_DEPT_tbl d
+		ON 
+			e.deptNo = d.deptNo
+	
+	</select>
+	
+</mapper>

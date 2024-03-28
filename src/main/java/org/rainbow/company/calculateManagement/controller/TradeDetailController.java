@@ -194,10 +194,18 @@ public class TradeDetailController {
     	{
 	    	for(TradeDetailListVO em : vo)
 	    	{
-	    		String receiver = "wns1923@naver.com"; // 메일 받을 주소 확인하기 위해 일단고정
+	    		String receiver = "wns1923@naver.com"; 			// 메일 받을 주소 확인하기 위해 일단고정
 	            String title = "미수금 알림입니다.";
 	            String content = "<h2>안녕하세요 rianbow 재무팀입니다.</h2><br>"+em.getComName()+ " 기업의 미수금은  : "+em.getRecSum() + "원 입니다 " + 
 	            " 문의사항이 있으시면 언제든지 연락주세요.\n" + "감사합니다." ;
+//	            String content = "<div style='position: relative;'>" +
+//	            	    "<img width=\"94\" height=\"94\" src=\"https://img.icons8.com/3d-fluency/94/gift.png\" alt=\"gift\"/>" +
+//	            	    "<div style='position: absolute; top: 0; left: 0; width: 100%; text-align: center;'>" +
+//	            	    "<p style='background-color: rgba(255, 255, 255, 0.7); padding: 10px;'>"+
+//	            	    "<Rainbow BirthDay> '" + em.getComName() + "'에서 보낸 '" + em.getRecSum() + "' 의 생일선물이 도착하였습니다.</p>" +
+//	            	    "</div>" +
+//	            	    "</div>";
+
 	            MailSender.sendEmail(receiver, title, content);
 	    	}
 	    	return ResponseEntity.ok("Success");

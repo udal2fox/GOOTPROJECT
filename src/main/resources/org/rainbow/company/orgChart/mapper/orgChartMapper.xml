@@ -4,10 +4,10 @@
   
 <mapper namespace="org.rainbow.company.orgChart.mapper.orgChartMapper">
 	
-	<select id="getChart" resultType="org.rainbow.company.orgChart.domain.orgChartDTO">
+	<select id="getList" resultType="org.rainbow.company.orgChart.domain.orgChartDTO">
 		
 		SELECT
-			e.eno, e.deptNo, e.eName, e.email, e.ePhone, e.job, d.dName
+			e.eno, e.deptNo, d.dName, e.eName, e.ePhone, e.email, e.job
 		FROM
 			RAIN_EMP_tbl e
 		JOIN

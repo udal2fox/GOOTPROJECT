@@ -104,44 +104,74 @@
 				<div id="orgHeader">
 					<ul class="orgHeader">
 						<li id="header">
-						<c:forEach var="vo" items="${chart }">
-						<p>${vo.job == '대표' ? '대표' : ''}</p>
-						<Strong> </Strong>
-						</c:forEach>
+							<c:forEach items="${orgchart}" var="vo">
+        						<c:if test="${vo.job == '대표'}">	
+									<p>${vo.job } </p>
+									<Strong>${vo.EName } </Strong>
+								</c:if>
+							</c:forEach>
 						</li>
 					</ul>
 				</div>
 				<div id="orgTeam">
 					<ul class="team">
 						<li id="reader-Name">
-							<p> 경영 지원본분 </p>
-							<strong>라이츄</strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '팀장' && vo.DName == '재무'}">
+									<p> 경영 지원본분 </p>
+									<strong>${vo.EName }</strong>
+								</c:if>
+							</c:forEach>
 						</li>
 						<li id="team-member">
-							<p> 재무팀 </p>
-							<strong> 피카츄 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '대리' && vo.DName == '재무'}">
+									<p> ${vo.DName }팀 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 						<li id="team-member1">
-							<p> 인사팀 </p>
-							<strong> 피츄 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '대리' && vo.DName == '인사'}">
+									<p> ${vo.DName }팀 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 					</ul>
 					<ul class="team" style="margin-left: 30px;">
 						<li id="reader-Name">
-							<p> 운영본분 </p>
-							<strong> 거북왕 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '팀장' && vo.DName == '인사'}">
+									<p> 운영본분 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 						<li id="team-member">
-							<p> 영업팀 </p>
-							<strong> 어니부기 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '과장' && vo.DName == '영업'}">
+									<p> ${vo.DName }팀 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 						<li id="team-member1">
-							<p> 상품팀 </p>
-							<strong> 꼬부기 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '대리' && vo.DName == '상품'}">
+									<p> ${vo.DName }팀 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 						<li id="team-member1">
-							<p> 마케팅팀 </p>
-							<strong> 이상해씨 </strong>
+							<c:forEach items="${orgchart}" var="vo">
+								<c:if test="${vo.job == '대리' && vo.DName == '영업'}">
+									<p> 마케팅팀 </p>
+									<strong> ${vo.EName } </strong>
+								</c:if>
+							</c:forEach>
 						</li>
 					</ul>
 					<ul class="team">

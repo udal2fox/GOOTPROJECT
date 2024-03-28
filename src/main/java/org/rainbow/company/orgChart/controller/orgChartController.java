@@ -16,18 +16,17 @@ import lombok.extern.log4j.Log4j;
 public class orgChartController {
 	
 	@Autowired
-	orgChartService service;
+	orgChartService orgService;
 	
 	// 조직도 차트 가져오기
 	@GetMapping("/orgchart")
 	public String orgChart(Model model) {
 		
-		
-		  List<orgChartDTO> orgchart = service.getChart(); 
+	  List<orgChartDTO> orgchart = orgService.getList(); 
 		  log.info("orgChart..." + orgchart);
 		  
-		  model.addAttribute("chart", orgchart);
-		 
+		  model.addAttribute("orgchart", orgchart);
+		  log.info("orgchart..." + model);
 		
 		return "/company/orgchart";
 	}

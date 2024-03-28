@@ -1,14 +1,12 @@
 package org.rainbow.company.orgChart.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class orgChartDTO {
 	
 	private int eno;

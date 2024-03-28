@@ -18,8 +18,8 @@ public class orgChartServiceImpl implements orgChartService {
 	
 	// 조직도 차트 가져오기
 	@Override
-	public List<orgChartDTO> getChart() {
-		log.info("getChart...");
-		return mapper.getChart();
+	public List<orgChartDTO> getList() {
+		log.info("get orgChart...");
+		return mapper.getList();
 	}
-}
+}	

@@ -7,5 +7,5 @@ import org.rainbow.company.orgChart.domain.orgChartDTO;
 public interface orgChartMapper {
 	
 	// 조직도 차트 가져오기
-	public List<orgChartDTO> getChart();
+	public List<orgChartDTO> getList();
 }

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/resources/css/company/custMgmtPage/salesMgmt.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <title>newSalesViewDetails.jsp</title>
 </head>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -20,13 +21,17 @@
 	<div class="title" align="left">
 		<h3>신규 영업</h3>
 	</div>
-	<h5 class="subject_title" align="left">●상담 신청 내용</h5>
-	<table class="subject_content_tbl">
+	<div align="left">
+	<div class="subject_title_div" style="width:162px;">● 상담 신청 내용
+	</div>
+	</div>
+	<table class="subject_content_tbl" id="consult_tbl">
 	<thead>
 	<tr>
 						<td class="tbl_subtitle">기업명</td>
 						<td>
-							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly>
+							<input type="text" name="csCompanyName" value="${consultVO.csCompanyName }" readonly 
+							>
 						</td>
 						<td rowspan="3"></td>
 						<td class="tbl_subtitle">상담 신청일</td>
@@ -38,7 +43,7 @@
 						<td>
 							<input type="text" name="csArea" value="${consultVO.csArea }" readonly>
 						</td>
-						<td rowspan="3"></td>
+						<td></td>
 					</tr>
 	
 	<tr>
@@ -53,8 +58,8 @@
 						</td>
 						
 						<td class="tbl_subtitle">이메일</td>
-						<td>
-							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly>
+						<td colspan="2" >
+							<input type="email" name="csEmail" value="${consultVO.csEmail }" readonly style="width:250px;">
 						</td>
 						
 						
@@ -76,7 +81,7 @@
 					<tr>
 						<td class="tbl_subtitle">문의 내용</td>
 						<td colspan="8" id="inquiryDetails">
-						<textarea rows="10"  style="width: 90%; resize: none" readonly>${consultVO.csContent}</textarea>
+						<textarea rows="10"  style="width: 95%; resize: none" readonly>${consultVO.csContent}</textarea>
 						
 						</td>
 
@@ -84,9 +89,11 @@
 
 	</thead>
 	</table>
-	
-	
-	<h5 class="subject_title" align="left">●영업 내용</h5>
+
+	<div align="left">
+	<div class="subject_title_div">● 영업 내용
+	</div>
+	</div>
 	
 	<form method="post">
 	<table class="subject_content_tbl">
@@ -95,7 +102,7 @@
 						<tr>
 						<td class="tbl_subtitle">영업 담당자</td>
 						<td><div class="input-with-image">
-						<input type="text" name="csEname" readonly><a href="#" id="open_searchEname_modal">
+						<input type="text" name="csEname" value="${consultVO.csEname }" readonly><a href="#" id="open_searchEname_modal">
 						<input type="button" id="imgBtnSearchEname"></a>
 						</div></td>
 						<td></td>
@@ -248,14 +255,12 @@
 		<div class="btn_div">
 		<input type="button" class="salesViewBtns" id="saveBtn" value="저장">
 		<input type="hidden" name="consultNo" value="${consultVO.consultNo }">
-		
+		<input type="hidden" name="consultHistoryNo" value="${cshVO.consultHistoryNo }">
 		</div>
 </form>
 	</div>
 
 </div>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/salesView.js"></script>
-<script type="text/javascript" src="/resources/js/company/custMgmtPage/salesMgmt.js"></script>
-
 </body>
 </html>

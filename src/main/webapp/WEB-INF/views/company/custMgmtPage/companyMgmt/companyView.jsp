@@ -34,7 +34,7 @@
 							<tr>
 								<td class="companyMgmt_tbl_title">기업명</td>
 								
-								<td><div class="input-with-image"><input type="text" name="comName"  value="${companyVO.comName }" readonly>
+								<td><div class="input-with-image"><input type="text" name="comName"  value="${companyVO.comName }">
 								<a href="#" id="open_searchCompany_modal"><input
 										type="button" id="imgBtnSearchComName"> </a>
 								</div></td>
@@ -91,7 +91,7 @@
 								        <input type="button" id="imgBtnSearchAddr" onclick="openAddressPopup()">
 								    </div>
 								</td>
-
+							
 
 							</tr>
 							<tr>
@@ -159,36 +159,35 @@
 
 			<!--------------------------------------- 기업명 탐색 버튼 모달창-->
 			<div class="modal" id="searchCompany_modal">
-
-				<div class="modal-content">
-					<div class="modal-top">
-						<table>
-							<tr class="bordered-row">
-								<td><input type="text" name="companyName" size="20" placeholder="기업명"></td>
-								<td><input type="button" id="searchBtn" value="검색"></td>
-							</tr>
-						</table>
-					</div>
-					<div class="list_div_modal">
-						<table class="list_div_tbl_modal" id="searchCompanyModal_tbl">
-							<thead>
-								<tr class="top_bar_of_list_modal">
-									<th>기업명</th>
-								</tr>
-							</thead>
-							<tbody>
+    <div class="modal-content">
+        <div class="modal-top">
+            <table>
+                <tr class="bordered-row">
+                    <td><input type="text" name="companyName" size="20" placeholder="기업명" style="border: 1px solid black;"></td>
+                    <td><input type="button" id="searchBtn" value="검색"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="list_div_modal">
+            <table class="list_div_tbl_modal" id="searchCompanyModal_tbl">
+                <thead>
+                    <tr class="top_bar_of_list_modal">
+                        <td>기업명</td>
+                    </tr>
+                </thead>
+                	<tbody>
 						
 					</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="close_searchCompany_modal">닫기</button>
-					</div>
+            </table>
+        </div>
+    <div class="modal-bottom">
+    	<input type="button" id="close_searchCompany_modal" value="닫기">
 
-				</div>
-			</div>
+    </div>
+    </div>
+</div>
 			
-				<!--------------------------------------- 업종/업태 모달창-->
+					<!--------------------------------------- 업종/업태 모달창-->
 			<div class="modal" id="searchBizStatus_modal">
 
 				<div class="modal-content">
@@ -238,8 +237,8 @@
 						</table>
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="insert_searchBizStatus_modal">확인</button>
-						<button type="button" id="close_searchBizStatus_modal">닫기</button>
+					<input type="button" id="insert_searchBizStatus_modal" value="확인">
+					<input type="button" id="close_searchBizStatus_modal" value="닫기">
 					</div>
 
 				</div>

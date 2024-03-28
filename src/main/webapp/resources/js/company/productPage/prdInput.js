@@ -118,6 +118,61 @@
 	} 
 	
 	
+    // 모달 열기 함수
+    function openModal() {
+        var modal = document.getElementById("searchModal");
+        modal.style.display = "block";
+    }
+
+    // 모달 닫기 함수
+    function closeModal() {
+        var modal = document.getElementById("searchModal");
+        modal.style.display = "none";
+    }
+
+    // 모달 바깥 영역 클릭 시 닫기
+    window.onclick = function(event) {
+        var modal = document.getElementById("searchModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+	
+    
+ // 검색 버튼을 눌렀을 때 실행되는 함수
+    function checkCode() {
+        var codeInput = document.getElementById("keyword");
+        var code = codeInput.value; // 입력한 코드 가져오기
+
+        // fetch API를 사용하여 서버에 요청을 보내어 코드의 가용 여부 확인
+        fetch('/checkCode?code=' + code)
+            .then(function(response) {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(function(data) {
+                // 서버로부터의 응답에 따라 동적으로 결과 처리
+                if (data === "able") {
+                    // 사용 가능한 코드일 때
+                    alert("사용 가능한 코드입니다.");
+                    codeInput.value = code;
+                    document.querySelector('.searchCode').value = code;
+                    closeModal();
+                } else {
+                    // 이미 사용 중인 코드일 때
+                    alert("사용할수 없는 코드입니다.");
+                    codeInput.value = "";
+                }
+            })
+            .catch(function(error) {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+
+	
 	
 	
 	

@@ -1,13 +1,15 @@
-	// 전역 변수 공간
+/** 공통 부분 시작*/
+
+// 전역 변수 공간
 	let amount = 10; // 페이지당 보여줄 아이템 수
 	let pageNum = 1; // 현재 페이지 번호
 	let tds = document.querySelectorAll('.td'); // 전체 상품 리스트
 	let sortDirection = {}; // 정렬
-	//------------
-	
 
 	
+/** 공통 부분 끝*/
 	
+/** 서치바 : 체크박스 시작*/	
 	filter();
 	
 	function filter() {
@@ -90,10 +92,75 @@
 	
 	};
 	
-	// 필터 끝
+/** 서치바 : 체크박스 끝*/
+	
+/** 서치바 : 초기화 버튼 시작*/	
+	
+	//리셋 그냥 새로고침''
+	document.querySelector('#searchBarResetBtn').addEventListener('click', function() {
+		console.log("서치바 초기화");
+	    location.reload();
+	});	
+
+/** 서치바 : 초기화 버튼 끝*/		
 	
 	
-	// 페이징 시작
+	
+	
+/** 소트 버튼 : 정렬 기능 시작*/
+
+
+	//소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
+	document.querySelectorAll('.sort-btn').forEach(button => {
+	    button.addEventListener('click', () => {
+	        const column = button.dataset.column;
+	        sortDirection[column] = !sortDirection[column]; // 정렬 방향을 변경
+
+	        // 정렬 방향에 따라 버튼 모양 변경
+	        button.innerText = sortDirection[column] ? '🔽' : '🔼';
+	        sortTable(column);
+	    });
+	});
+
+
+	function getCellValue(row, column) {
+	    const columnIndex = {
+	    	    "comName": 1,
+	    	    "comBizType": 3,
+	    	    "comArea": 4,
+	    	    "comBizStatus": 7
+	    } [column];
+
+	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
+	    return cell ? cell.textContent.trim() : "";
+	}
+
+	function sortTable(column) {
+		 const tbody = document.querySelector('.list_div_tbl tbody');
+	    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+	    // 정렬 방식에 따라 정렬
+	    rows.sort((a, b) => {
+	        const aValue = getCellValue(a, column);
+	        const bValue = getCellValue(b, column);
+	        if (sortDirection[column]) {
+	            return aValue.localeCompare(bValue);
+	        } else {
+	            return bValue.localeCompare(aValue);
+	        }
+	    });
+
+	    // 정렬된 행을 테이블에 적용
+	    tbody.innerHTML = '';
+	    rows.forEach(row => tbody.appendChild(row));
+	}
+
+	
+/** 소트 버튼 : 정렬 기능 끝*/
+		
+
+/** 페이징 시작*/	
+
 	// 페이지 이동 함수
 	function goToPage(page) {
 	    pageNum = page;
@@ -220,73 +287,13 @@
 	});
 
 	
-	
-	
-	
-	
-	// 페이징 끝
-	
-	
-	//리셋 그냥 새로고침''
-	document.querySelector('#searchBarResetBtn').addEventListener('click', function() {
-		console.log("서치바 초기화");
-	    location.reload();
-	});
-	
-	
-
-	
-	/** -----------------소트 버튼 : 정렬 기능----------------- */
-
-
-	//소트 버튼에 클릭 이벤트를 추가하여 정렬 기능을 구현
-	document.querySelectorAll('.sort-btn').forEach(button => {
-	    button.addEventListener('click', () => {
-	        const column = button.dataset.column;
-	        sortDirection[column] = !sortDirection[column]; // 정렬 방향을 변경
-
-	        // 정렬 방향에 따라 버튼 모양 변경
-	        button.innerText = sortDirection[column] ? '🔽' : '🔼';
-	        sortTable(column);
-	    });
-	});
-
-
-	function getCellValue(row, column) {
-	    const columnIndex = {
-	    	    "comName": 1,
-	    	    "comBizType": 3,
-	    	    "comArea": 4,
-	    	    "comBizStatus": 7
-	    } [column];
-
-	    const cell = row.querySelector(`td:nth-child(${columnIndex + 1})`);
-	    return cell ? cell.textContent.trim() : "";
-	}
-
-	function sortTable(column) {
-		 const tbody = document.querySelector('.list_div_tbl tbody');
-	    const rows = Array.from(tbody.querySelectorAll('tr'));
-
-	    // 정렬 방식에 따라 정렬
-	    rows.sort((a, b) => {
-	        const aValue = getCellValue(a, column);
-	        const bValue = getCellValue(b, column);
-	        if (sortDirection[column]) {
-	            return aValue.localeCompare(bValue);
-	        } else {
-	            return bValue.localeCompare(aValue);
-	        }
-	    });
-
-	    // 정렬된 행을 테이블에 적용
-	    tbody.innerHTML = '';
-	    rows.forEach(row => tbody.appendChild(row));
-	}
+/** 페이징 끝*/		
 
 	
 
-		
+
+	
+
 
 	
 	

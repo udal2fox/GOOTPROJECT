@@ -12,46 +12,54 @@
 
 
 #empInpo_modal{
-  width: 80%;
+ width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);;
 	
 }
 
 #managerInpo_modal{
-  width: 80%;
+  width: 30%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
 #takeComName_modal{
-  width: 80%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
 #takeCsName_modal{
-  width: 80%;
+  width: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   box-sizing: border-box;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-alin:center;
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
@@ -60,24 +68,20 @@
 
 
 .modal {
-
-
    top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
 	
 }
 
 .modal-content {
   box-sizing: border-box;
-  background-color: #fefefe;
-
   border: 1px solid #888;
-   width: 100%;
    top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  	
+  
  
 }
 
@@ -85,28 +89,29 @@
 	
 	 box-sizing: border-box;
 	  padding-top:10px;
-	  width: 100%;
+	  padding-bottom:10px;
+	 
+	  
+
+}
+
+
+.modal-bottom {
+	
+	 box-sizing: border-box;
+	  padding-top:10px;
+	  padding-bottom:10px;
+	  text-align:right;
+	  margin-right:10px;
+
 }
 
 .modal-footer {
 	
 	 box-sizing: border-box;
-	 width: 100%;
 	 
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-}
 
 
 
@@ -116,7 +121,8 @@
 	
 	box-sizing: border-box;
 	border : 5px solid #EEEEEE;
-	width:100%;
+
+  margin: 0 auto; /* 수평 가운데 정렬 */
 
 }
 
@@ -149,63 +155,41 @@
 
 }
 
-
-
-
-input[type="text"], 
-input[type="date"],
-input[type="number"],
-input[type="email"],
-select,
-textarea
- {
-	border: none;
+.list_div_tbl_modal input[type="password"] {
+	border:none;
 	width:100%;
-	
+}
+
+/* 모달 내 페이징 버튼을 가운데 정렬 */
+#pagination {
+    
+    
+
+    box-sizing: border-box;
+   
 }
 
 
-/*페이징 이미지사이즈  */
-		td img {height: 80px; width: 120px;}
-		.page-nation li{
-			list-style: none;
-		}
-		
-		.page-wrap{
-			    text-align: center;
-			    font-size: 0;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-		}
-		.page-nation {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-top: 20px;
-		}
-		
-		.page-nation a{
-			display: block;
-			margin: 0 3px;
-			flex: left;
-			border: 1px solid #e6e6e6;
-			width: 28px;
-			height: 28px;
-			line-height: 28px;
-			text-align: center;
-			background-color: #fff;
-			font-size: 13px;
-			color: black;
-			text-decoration: none;
-		}
-		
-		.page-nation a.active{
-			background-color: #0078ff;
-			color: #fff;
-		}
-		.page-nation a:hover{
-			background-color: #0078ff;
-			color: #fff;
-		}
+.page-nation a {
+    box-sizing: border-box;
+    margin: 0 3px;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: black;
+    text-decoration: none;
+}
 
+.page-nation a.active {
+    background-color: #0078ff;
+    color: #fff;
+}
+
+.page-nation a:hover {
+    background-color: #0078ff;
+    color: #fff;
+}

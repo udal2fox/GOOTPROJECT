@@ -9,7 +9,7 @@
     SELECT cc.comName, cs.spotNo, cs.companyNo, cs.spName, cs.spAddr, cs.spAgreementDate, cs.spStatus, cs.spChangeDate, cu.userName
 	FROM RAIN_cCompany_tbl cc
 	INNER JOIN RAIN_cSpot_tbl cs ON cc.companyNo = cs.companyNo
-	INNER JOIN RAIN_cUser_tbl cu ON cs.spotNo = cu.spotNo;
+	INNER JOIN RAIN_cUser_tbl cu ON cs.spotNo = cu.spotNo
 
    
 </select>
@@ -25,7 +25,7 @@
 		    cs.spName LIKE CONCAT('%', #{keyword}, '%') OR
 		    cs.spAddr LIKE CONCAT('%', #{keyword}, '%') OR
 		    cu.userName LIKE CONCAT('%', #{keyword}, '%')
-		ORDER BY cc.companyNo ASC;
+		ORDER BY cc.companyNo ASC
 			
 	</select>
 	
@@ -44,27 +44,82 @@
 	  	select * from RAIN_cUser_tbl where spotNo=#{spotNo}
 	  </select>
 	  
-	  <!-- 새로운 지점 insert -->
-	  <insert id="spotRegisterInsert" parameterType="org.rainbow.company.custMgmt.domain.spotVO">
-	  INSERT INTO RAIN_cSpot_tbl (companyNo, spName, spAddr, spDetailAddr, spAgreementFile, spContact,
-		spAgreementDate, spAgreementTerm, spAutoExtension, spPayMethod, spEmpNum, spBdgt, spStatus)
-		VALUES (#{companyNo}, #{spName}, #{spAddr}, #{spDetailAddr}, #{spAgreementFile}, #{spContact}, #{spAgreementDate},
-		#{spAgreementTerm}, #{spAutoExtension}, #{spPayMethod}, #{spEmpNum}, #{spBdgt}, '활동');
+	<!-- 새로운 지점 insert -->
+	<insert id="spotRegisterInsert" parameterType="org.rainbow.company.custMgmt.domain.spotAndUserVO">
+	    INSERT INTO RAIN_cSpot_tbl (companyNo, spName, spAddr, spDetailAddr, spAgreementFile, spContact,
+	    spAgreementDate, spAgreementTerm, spAutoExtension, spPayMethod, spEmpNum, spBdgt, spStatus)
+	    VALUES (#{companyNo}, #{spName}, #{spAddr}, #{spDetailAddr}, #{filePath}, #{spContact}, #{spAgreementDate},
+	    #{spAgreementTerm}, #{spAutoExtension}, #{spPayMethod}, #{spEmpNum}, #{spBdgt}, '활동')
+	</insert>
 
-	  </insert>
 
 	<!-- 지점 담당자 정보 저장 -->
-	<insert id="userRegisterInsert" parameterType="org.rainbow.company.custMgmt.domain.userVO">
-	   INSERT INTO RAIN_cUser_tbl (spotNo, companyNo, userName, userEmail, userPw)
-		VALUES (#{spotNo}, #{companyNo}, #{userName}, #{userEmail}, #{userPw});	
+	<insert id="userRegisterInsert" parameterType="java.util.Map">
+    INSERT INTO RAIN_cUser_tbl (spotNo, companyNo, userName, userEmail, userContact, userPw)
+    VALUES (#{spotNo}, #{vo.companyNo}, #{vo.userName}, #{vo.userEmail}, #{vo.userContact}, #{vo.userPw}) 
 	</insert>
+
 	  
 	<!-- 마지막 값 가져오기 -->
 	<select id="getSpotNo" resultType="int">
-		SELECT LAST_INSERT_ID() AS spotNo;
+		SELECT LAST_INSERT_ID() AS spotNo
 
 	</select>
 	
+	<!-- 지점 정보 수정 -->
+<update id="spotUpdate" parameterType="org.rainbow.company.custMgmt.domain.spotAndUserVO">
+    UPDATE RAIN_cSpot_tbl 
+    SET 
+    	companyNo = #{companyNo},
+        spName = #{spName},
+        spAddr = #{spAddr},
+        spDetailAddr = #{spDetailAddr},
+        spContact = #{spContact},
+        spAgreementFile = #{filePath},
+        spAgreementTerm = #{spAgreementTerm},
+        spAutoExtension = #{spAutoExtension},
+        spPayMethod = #{spPayMethod},
+        spEmpNum = #{spEmpNum},
+        spBdgt = #{spBdgt},
+        spStatus = #{spStatus}
+        <!-- spChangeDate 파라미터가 존재하는 경우에만 추가 -->
+        <if test="spChangeDate != null">
+            , spChangeDate = #{spChangeDate}
+        </if>
+        <!-- spCancelEname 파라미터가 존재하는 경우에만 추가 -->
+        <if test="spCancelEname != null">
+            , spCancelEname = #{spCancelEname}
+        </if>
+        <!-- spCancelReason 파라미터가 존재하는 경우에만 추가 -->
+        <if test="spCancelReason != null">
+            , spCancelReason = #{spCancelReason}
+        </if>
+        <!-- spCancelDetailReason 파라미터가 존재하는 경우에만 추가 -->
+        <if test="spCancelDetailReason != null">
+            , spCancelDetailReason = #{spCancelDetailReason}
+        </if>
+    WHERE 
+        spotNo = #{spotNo}
+</update>
+
+		<!-- 지점 담당자 정보 수정 -->
+	<update id="userUpdate" parameterType="java.util.Map">
+    UPDATE RAIN_cUser_tbl
+    SET
+        companyNo = #{vo.companyNo},
+        userName = #{vo.userName},
+        userEmail = #{vo.userEmail},
+        userContact = #{vo.userContact}
+    WHERE
+        spotNo = #{spotNo}
+</update>
+
+
+<!-- 지점 담당자 정보 가져오기-->
+<select id="getManagerInfo" resultType="org.rainbow.company.custMgmt.domain.userVO" parameterType="int">
+    SELECT * from RAIN_cUser_tbl where spotNo = #{spotNo}
+ 
+</select>
 	
 
 </mapper>

@@ -1,10 +1,10 @@
 package org.rainbow.company.custMgmt.controller;
 
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.rainbow.company.custMgmt.domain.consultAndCshVO;
 import org.rainbow.company.custMgmt.domain.consultSearchDTO;
 import org.rainbow.company.custMgmt.domain.consultVO;
 import org.rainbow.company.custMgmt.domain.cshVO;
@@ -31,7 +31,7 @@ public class salesController {
 	@Autowired
 	salesServiceImpl salesService;
 
-	/** 'salesList.jsp' 에서 상담 요청 리스트 가져오기 */
+	/** 'salesList.jsp' : 상담 요청 리스트 가져오기 */
 	@GetMapping(value = "/salesList")
 	public String salesList(Model model) {
 		log.info("salesList_success");
@@ -39,21 +39,20 @@ public class salesController {
 		model.addAttribute("consultVO", salesService.salesList());
 
 		return "/company/custMgmtPage/salesMgmt/salesList";
-
 	}
-	/** 서치바 키워드 및 기간 검색 */
+	
+	/** 'salesList.jsp' : 서치바 키워드 및 기간 검색 */
     @ResponseBody
 	@PostMapping(value = "/searchConsult", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<List<consultVO>> searchConsult(@RequestBody consultSearchDTO csSearchDto)
-	{
+    public ResponseEntity<List<consultVO>> searchConsult(@RequestBody consultSearchDTO csSearchDto){
     	log.info(csSearchDto);
     	List<consultVO> list = salesService.searchConsult(csSearchDto);
 		log.info(list);
 		
-		return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
-				
+		return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);		
 	}	
-
+    
+    /** 'salesView.jsp' : 상담 및 영업 정보 가져오기 */
     @GetMapping("/salesView")
     public String salesView(int consultNo, Model model) {
         log.info("salesView_success" + consultNo);
@@ -68,35 +67,29 @@ public class salesController {
         
         return "/company/custMgmtPage/salesMgmt/salesView";
     }
+    
+	/** 'salesView.jsp' : 영업 내용, 영업 히스토리 저장(수정)하기 */
+    @PostMapping("/saveSales")
+    public String saveSales(consultAndCshVO vo, RedirectAttributes rttr) {
+        log.info("saveSales_success" + vo);
+        
+        // consultHistoryNo가 0이 아니면 수정을 수행
+        if (vo.getConsultHistoryNo() != 0) {
+            salesService.updateSalesAndHistory(vo);
+        } else {
+            // consultHistoryNo가 0이면 저장을 수행
+            salesService.saveSales(vo);
+        }
+        
+        rttr.addFlashAttribute("result","success");
+        
+        return "redirect:/salesList";
+    }
 
-
-	/** 'salesView.jsp' 에서 영업 내용, 영업 히스토리 저장(수정)하기 */
-	@PostMapping("/saveSales")
-	public String saveSales(consultVO vo, cshVO cVO, RedirectAttributes rttr) {
-		log.info("saveSales_success" + vo);
-		Date cshContent1 = cVO.getCshDate2();
-		log.info("영업" + cshContent1);
-		
-		salesService.saveSales(vo, cVO);
-		
-//		if(vo.getCshVOList() != null) {
-//		    vo.getCshVOList().forEach(cshList -> log.info("영업 히스토리 리스트 결과 : " + cshList));
-//		} else {
-//		    log.info("영업 히스토리 리스트가 null입니다.");
-//		}
-		
-		rttr.addFlashAttribute("result","success");
-		
-		return "redirect:/salesList";
-	}
-
-	
-	
-
+    /** 'companyViewView.jsp' : 기업명 찾기 - 기업명 리스트로 가져오기 */
 	@GetMapping(value = "/searchModal", produces = {
 			MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<consultVO>> searchModal() {
-	    log.info("안녕");
 	    log.info("searchCompanyListModal_success");
 	    List<consultVO> list = salesService.searchCompanyListModal();    
 	    log.info("리스트" + list);
@@ -104,6 +97,7 @@ public class salesController {
 	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
 	}
 	
+	/** 'companyView.jsp' : 기업명 찾기 - 기업명 검색 결과 가져오기*/
 	@PostMapping(value = "/searchModalComName", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<consultVO>> searchModalComName(@RequestBody Map<String, String> jsonData) {
 	    log.info("searchModalComName_success");
@@ -119,9 +113,6 @@ public class salesController {
 	    
 	    return new ResponseEntity<List<consultVO>>(list, HttpStatus.OK);
 	}
-	
-
-
 
     
 }

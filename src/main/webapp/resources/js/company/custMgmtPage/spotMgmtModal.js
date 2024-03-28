@@ -1,59 +1,4 @@
 
-
-/** --------------------직원 리스트 모달창 시작------ */
-
-var empListModal = document.getElementById('empList_modal');
-var openEmpListModalBtn = document.getElementById('open_empList_modal');
-var closeEmpListModalBtn = document.getElementById('close_empList_modal');
-
-/**직원 리스트 모달창 열기 */ 
-openEmpListModalBtn.onclick = function() {
-	  empListModal.style.display = 'block';
-	}
-
-/**직원 리스트 모달창 닫기 */ 
-closeEmpListModalBtn.onclick = function() {
-	empListModal.style.display = 'none';
-}
-
-/**직원 리스트 모달창 닫기 (딴 곳 누를 시)*/ 
-window.onclick = function(event) {
-  if (event.target === empListModal) {
-	  empListModal.style.display = 'none';
-  }
-}
-
-/** --------------------직원 리스트 모달창 끝------ */
-
-
-
-
-/** --------------------지점-직원 정보 수정 모달창 시작------ */
-
-var empInpoModal = document.getElementById('empInpo_modal');
-var openEmpInpoModalBtn = document.getElementById('open_empInpo_modal');
-var closeEmpInpoModalBtn = document.getElementById('close_empInpo_modal');
-
-/**지점-직원 정보 수정 모달창 열기 */ 
-openEmpInpoModalBtn.onclick = function() {
-	empInpoModal.style.display = 'block';
-}
-
-/**지점-직원 정보 수정 모달창 닫기 */ 
-closeEmpInpoModalBtn.onclick = function() {
-	empInpoModal.style.display = 'none';
-}
-
-/**지점-직원 정보 수정 모달창 닫기 (딴 곳 누를 시)*/ 
-window.onclick = function(event) {
-  if (event.target === empInpoModal) {
-	  empInpoModal.style.display = 'none';
-  }
-}
-/** --------------------지점-직원 정보 수정 모달창 끝------ */
-
-
-
 /** --------------------담당자 정보 수정 모달창 시작------ */
 
 var managerInpoModal = document.getElementById('managerInpo_modal');
@@ -77,6 +22,66 @@ window.onclick = function(event) {
 	  managerInpoModal.style.display = 'none';
   }
 }
+
+
+
+
+
+//담당자 정보 가져오기
+document.getElementById("open_managerInpo_modal").addEventListener('click', function() {
+    
+    // 모달 열기
+    let modal = document.getElementById('managerInpo_modal');
+    modal.style.display = "block";
+
+    // 클릭된 링크의 href 속성에서 spotNo 값을 가져옴
+    let spotNo = this.getAttribute("data-spot-no");
+    
+    console.log(spotNo);
+
+    // fetch 요청 보내기
+    fetch('/getManagerInfo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ spotNo: spotNo })
+    })
+    .then(response => response.json())
+    .then(json => {
+    	
+    	console.log(json);
+        let msg = '';
+        if (json) {
+            msg = `
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="managerName" value="${json.userName}"></td>
+                </tr>
+                <tr>
+                    <td>연락처</td>
+                    <td><input type="text" name="contact" value="${json.userContact}"></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="text" name="email" value="${json.userEmail}"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="text" name="password" value="${json.userPw}"></td>
+                </tr>
+            `;
+        }
+    
+        const tableBody = document.querySelector('#managerInpo_tbl tbody');
+        tableBody.innerHTML = msg;
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+
+
+
 /** --------------------담당자 정보 수정 모달창 끝------ */
 
 

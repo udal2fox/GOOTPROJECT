@@ -47,7 +47,7 @@ document.getElementById("imgBtnSearchComName").addEventListener('click', functio
         } else {
             msg = `
                 <tr>
-                    <td>기업이 없습니다.</td>
+                    <td>등록 해야 할 기업이 없습니다.</td>
                 </tr>
             `;
         }
@@ -96,7 +96,7 @@ document.getElementById("searchBtn").addEventListener('click', function() {
         } else {
             msg = `
                 <tr>
-                    <td>기업이 없습니다.</td>
+                    <td>검색 결과가 없습니다.</td>
                 </tr>
             `;
         }
@@ -131,6 +131,8 @@ function changeComName(){
 	
 };
 /** --------------------기업명 찾기 모달창 끝------ */
+
+
 
 
 

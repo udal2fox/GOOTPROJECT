@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.rainbow.company.custMgmt.domain.companyVO;
 import org.rainbow.company.custMgmt.domain.consultVO;
+import org.rainbow.company.custMgmt.domain.spotAndUserVO;
 import org.rainbow.company.custMgmt.domain.spotListVO;
 import org.rainbow.company.custMgmt.domain.spotVO;
 import org.rainbow.company.custMgmt.domain.userVO;
@@ -22,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,14 +35,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import lombok.extern.log4j.Log4j;
-
+@CrossOrigin(origins = "<http://localhost:8080>")
 @Log4j
 @Controller
 public class spotController {
 	
 	@Autowired
 	private spotServiceImpl spotService;
-	
 	
 	@Autowired
 	private companyServiceImpl companyService;
@@ -106,7 +107,16 @@ public class spotController {
 		 
 	}
 	
-	
+	/** 담당자 정보 모달창 : 담당자 정보 가져오기*/
+		@PostMapping(value = "/getManagerInfo", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	    public ResponseEntity<userVO> getManagerInfo(@RequestBody Map<String, String> requestBody) {
+	    	 String spotNoStr = requestBody.get("spotNo");
+	    	 int spotNo = Integer.parseInt(spotNoStr);
+	    	    
+	    	    userVO userVO = spotService.getManagerInfo(spotNo);
+	        
+	        return new ResponseEntity<userVO>(userVO, HttpStatus.OK);
+	    }
 	
 	@GetMapping(value = "/takeComNameList", produces = {
 			MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
@@ -175,9 +185,9 @@ public class spotController {
 	}
 	
 
-	/** 지점 등록 하기*/
+	/** 지점 및 지점 담당자 등록 하기*/
 	@PostMapping(value = "/spotRegisterInsert")
-	public String spotRegisterInsert(spotVO vo, userVO userVO, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+	public String spotRegisterInsert(@RequestParam("file") MultipartFile file, spotAndUserVO vo, @RequestParam("companyNo") int companyNo, RedirectAttributes rttr) {
 	    log.info("spotRegisterInsert..." + vo);
 
 	    // 파일 업로드 처리
@@ -205,10 +215,10 @@ public class spotController {
 	    }
 
 	    // 비밀번호를 랜덤하게 생성하여 VO 객체에 설정
-	    userVO.setUserPwRandomly();
+	    vo.setUserPwRandomly();
 
 	    // 지점 정보, 지점 담당자 정보 저장
-	    spotService.spotRegisterInsert(vo, userVO);
+	    spotService.spotRegisterInsert(vo);
 
 	    // 저장 성공 메시지 설정
 	    rttr.addFlashAttribute("message", "지점 등록이 완료되었습니다.");
@@ -216,5 +226,43 @@ public class spotController {
 	    // 등록 후 리다이렉트할 경로 설정 (예시: 지점 목록 페이지)
 	    return "redirect:/spotList";
 	}
+	
+	/** 지점 정보 , 지점 담당자 정보 수정 하기*/
+	@PostMapping(value = "/spotUpdate")
+    public String spotUpdate(@RequestParam("newFile") MultipartFile file, spotAndUserVO vo, RedirectAttributes rttr) {
+		log.info("spotUpdate..." + vo);
+		
+		// 파일 업로드 처리
+        if (!file.isEmpty()) {
+            try {
+                // 파일 업로드 경로 설정
+                String uploadDir = "/uploads/";
+                Path uploadPath = Paths.get(uploadDir);
 
+                // 업로드 디렉토리가 없으면 생성
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // 파일명 중복 방지를 위한 고유한 파일명 생성
+                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(file.getInputStream(), filePath);
+
+                // 업로드된 파일 경로를 VO에 설정
+                vo.setFilePath(filePath.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // 지점 정보, 지점 담당자 정보 수정 (업데이트)
+        spotService.spotUpdate(vo);
+
+        // 저장 성공 메시지 설정
+        rttr.addFlashAttribute("message", "지점 정보가 변경되었습니다.");
+
+        // 등록 후 리다이렉트할 경로 설정 (예시: 지점 목록 페이지)
+        return "redirect:/spotList";
+    }
 }

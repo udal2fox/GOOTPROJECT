@@ -1,11 +1,18 @@
-// form 객체 가져오기
+/** 공통 부분 시작*/
+
+//데이트피커 
+let datePickAll = document.querySelectorAll('input[type="date"]');
+datePickAll.forEach(function(input) {
+	flatpickr(input, {
+		locale: 'ko'
+	});
+});
+
+
+//form 객체 가져오기
 const f = document.forms[0];
 
-
-
-
-
-
+//css 파일 동적으로 바인딩
 const CSS_FILE_PATH = ['/resources/css/company/custMgmtPage/spotMgmt.css','/resources/css/company/custMgmtPage/spotMgmtModal.css' ];
 cssBinding(CSS_FILE_PATH);
 function cssBinding(cssFiles) {
@@ -23,12 +30,13 @@ function cssBinding(cssFiles) {
 	})
 }
 
-let datePickAll = document.querySelectorAll('input[type="date"]');
-datePickAll.forEach(function(input) {
-    flatpickr(input, {
-        locale: 'ko'
-    });
-});
+
+//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
+function backPage() 
+{
+	window.location = document.referrer;
+} 
+/** 공통 부분 끝*/
 
 
 
@@ -55,11 +63,6 @@ function openAddressPopup() {
 
 }
 
-//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
-function backPage() 
-{
-	window.location = document.referrer;
-} 
 
 
 //계약서 파일 업로드 버튼에 파일 업로드 기능 추가
@@ -102,21 +105,40 @@ function updateFileName() {
     }
 }
 
+document.getElementById('fileInput').addEventListener('change', function(event) {
+    const fileList = event.target.files;
+    console.log('Selected file:', fileList[0].name);
+
+    // 선택한 파일 정보를 vo 객체에 저장
+    f.spAgreementFile.value = fileList[0].name;
+});
 
 /** 지점 등록 */
 document.getElementById("spotRegisterInsertBtn").addEventListener('click', () => {
+    alert(1);
     
-	spotInsert();
+    // JavaScript를 사용하여 폼 요소에 접근
+    const companyNoInput = document.querySelector('input[name="companyNo"]');
+
+    // 히든 입력란의 값을 가져와서 콘솔에 출력
+    console.log('Company Number:', companyNoInput.value);
+    console.log(f.comName.value);
+    console.log(f.companyNo.value );
+    console.log(f.spAddr.value );
+    console.log(f.spDetailAddr.value );
+    console.log(f.spContact.value );
+    console.log(f.spAgreementFile.value ); // 파일명 출력
+    console.log(f.file.value );
+    console.log(f.spAgreementDate.value );
+    console.log(f.spAgreementTerm.value);
+    console.log(f.spAutoExtension.value );
+    console.log(f.spBdgt.value );
+    console.log(f.spEmpNum.value);
+    console.log(f.spPayMethod.value );
+    console.log(f.userName.value );
+    console.log(f.userContact.value );
+    console.log(f.userEmail.value);
+    
+    f.action='/spotRegisterInsert';
+    f.submit();
 });
-
-function spotInsert(){
-	
-	
-	const spotRegisterForm=document.getElementById("spotRegisterForm");
-	
-	console.log(spotRegisterForm);
-	
-	spotRegisterForm.submit();
-
-	
-}

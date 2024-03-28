@@ -1,3 +1,14 @@
+/** 공통 부분 시작*/
+
+//데이트피커 
+let datePickAll = document.querySelectorAll('input[type="date"]');
+datePickAll.forEach(function(input) {
+	flatpickr(input, {
+		locale: 'ko'
+	});
+});
+
+//css 파일 동적 바인딩
 const CSS_FILE_PATH = ['/resources/css/company/custMgmtPage/companyMgmt.css','/resources/css/company/custMgmtPage/companyMgmtModal.css' ];
 cssBinding(CSS_FILE_PATH);
 function cssBinding(cssFiles) {
@@ -15,11 +26,52 @@ function cssBinding(cssFiles) {
 	})
 }
 
-
 //form 객체 가져오기 
 const f = document.forms[0];
 
 
+
+
+//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
+function backPage() 
+{
+	window.location = document.referrer;
+} 
+
+
+
+
+
+
+
+/** 공통 부분 끝*/
+
+
+
+/** 도로명 주소 팝업창 (API)   */
+function openAddressPopup() {
+	
+	new daum.Postcode({
+		oncomplete: function(data) {
+			console.log(data);
+		    const comAddrInput = document.querySelector('input[name="comAddr"]');
+		    const comAreaInput = document.querySelector('input[name="comArea"]');
+		    //console.log(comAddrInput);
+
+
+			if(data.userSelectedType==='R') { //R은 도로명 주소 클릭 시 
+				comAddrInput.value = data.roadAddress;
+				
+			}else { //지번 주소 클릭 시
+				comAddrInput.value =data.jibunAddress;
+			}
+			
+			comAreaInput.value = data.sido;
+		}
+	}).open();
+	
+
+}
 
 //사업자 등록증 파일 업로드 버튼에 파일 업로드 기능 추가
 function updateFileName() {
@@ -118,53 +170,6 @@ function searchBizNum(bizNumArray) {
 }
 
 
-
-
-
-
-
-
-
-///** 기업 정보 수정 */
-//document.getElementById("companyUpdateBtn").addEventListener('click', () => {
-//    
-//	//로그인 한 사람의 권한이 영업팀일 경우 수정 권한 있음, 나머지는 수정 권한 없음 (추후)
-//	//console.log(f.comCEO.value);
-//	companyUpdate();
-//});
-
-function companyUpdate(vo,callback){
-
-}
-
-//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
-function backPage() 
-{
-	window.location = document.referrer;
-} 
-
-
-
-
-
-
-//파일 업로드 버튼에 파일 업로드 기능 추가
-//document.getElementById("uploadedFileDownload").addEventListener('click', function() {
-//    // 서버로부터 파일 다운로드 URL을 얻어옵니다.
-//    fetch('/getCompanyLicenseFileURL')
-//        .then(response => response.text())
-//        .then(url => {
-//            // 서버로부터 받은 파일 다운로드 URL을 사용하여 다운로드 링크를 생성합니다.
-//            const downloadLink = document.createElement('a');
-//            downloadLink.href = url; // 서버에서 제공한 파일 다운로드 URL
-//            downloadLink.download = '${companyVO.comBizLicenseFile}'; // 다운로드 시 파일명 설정
-//            downloadLink.click(); // 링크 클릭하여 다운로드 시작
-//        })
-//        .catch(error => console.error('Error:', error));
-//});
-
-
-
 function uploadedFileName(comNo){
 	
 	let jsonData = JSON.stringify(comNo);
@@ -188,6 +193,9 @@ function uploadedFileName(comNo){
     .catch(error => console.error('Error:', error));
 	
 };
+
+
+
 
 //기업 정보 update
 function updateCompanyView(){

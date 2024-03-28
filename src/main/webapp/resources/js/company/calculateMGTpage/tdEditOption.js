@@ -15,6 +15,11 @@
 	let recAddCst = document.getElementById("recAddCst");
 	let recAddCstSup = document.getElementById("recAddCstSup");
 	let recAddCstTax = document.getElementById("recAddCstTax");
+	// 물품 판매가 원가
+	let prdSal = document.getElementById("prdSal");
+	let prdCstPri =  document.getElementById("prdCstPri");
+	let prdMargin =  document.getElementById("prdMargin");
+	
 	
 	let worker = document.getElementById("worker");
 	
@@ -103,6 +108,22 @@
 	recAddCstSup.addEventListener('change', calculateRecAdd);
 	recAddCstTax.addEventListener('change', calculateRecAdd);
 	
+	// 물품 마진율 구하기
+	function prdMaginCal() 
+	{
+		checkNan(prdSal);
+		checkNan(prdCstPri);
+		
+		let prdSalValue = parseInt(prdSal.value);
+		
+		let prdCstPriValue = parseInt(prdCstPri.value);
+		
+		let result =  ((prdSalValue - prdCstPriValue) / prdSalValue).toFixed(2);
+		
+		prdMargin.value = result;
+	}	
+	prdSal.addEventListener('change', prdMaginCal);
+	prdCstPri.addEventListener('change', prdMaginCal);
 	
 	//랜덤한 문자 + 숫자 생성
 	function randomCode(length) 
@@ -233,8 +254,17 @@
 		
 		if (confirm("거래명세서를 편집하시겠습니까?")) {
 	        let data = {
-	        		
-	            recDedName: document.getElementById("recDedName").value,
+	        		ordNo : document.getElementById("ordNo").value,
+        		recPayMth : document.getElementById("recPayMth").value,
+        		recSortation : document.getElementById("recSortation").value,	
+        		prdMajorCtg :  document.getElementById("prdMajorCtg").value,	
+    			prdSubCtg :  document.getElementById("prdSubCtg").value,	
+				prdNo :  document.getElementById("prdNo").value,	
+				prdName :  document.getElementById("prdName").value,	
+				prdSal :  document.getElementById("prdSal").value,	
+				prdCstPri :  document.getElementById("prdCstPri").value,	
+				prdMargin :	 document.getElementById("prdMargin").value,	
+	        	recDedName: document.getElementById("recDedName").value,
 	            recDed: document.getElementById("recDed").value,
 	            recDedSup: document.getElementById("recDedSup").value,
 	            recDedTax: document.getElementById("recDedTax").value,
@@ -255,8 +285,8 @@
 	            recAddPrdCode : dedCode
 	            
 	        };
-
-	        // 여기서 'data' 객체를 사용하여 패치 또는 Ajax 요청을 보낼 수 있습니다.
+	        console.log("폼에서 담은것", data);
+	        
 	        fetch('TdEdit.do', {
 	            method: 'POST',
 	            headers: {
@@ -275,7 +305,6 @@
 	        })
 	        .catch((error) => {
 	            console.error('Error:', error);
-	            // 오류가 발생한 경우 여기에 처리할 내용을 추가할 수 있습니다.
 	        });
 	    }
 	}

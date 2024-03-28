@@ -3,9 +3,7 @@ package org.rainbow.company.ProductManagement.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -102,9 +100,7 @@ public class ProductPageController
     @GetMapping(value = "/moveProductReg")
     public String moveProductReg(Model model) 
     {
-    	List<prdInputVO> codes = pService.getsupsNumber();
     	
-    	model.addAttribute("codes", codes);
     	
     	return "/company/productManagement/productReg";
     }
@@ -113,15 +109,37 @@ public class ProductPageController
     @GetMapping(value = "/moveProductUpdate")
     public String moveProductUpdate(@RequestParam("prdNo") String prdNo, Model model) 
     {
-    	List<prdInputVO> codes = pService.getsupsNumber();
     	prdInputVO pvo = pService.getprdVo(prdNo);
     	
     	model.addAttribute("pvo", pvo);
     	log.info(pvo);
-    	model.addAttribute("codes", codes);
     	
     	return "/company/productManagement/productUpdate";
     }
+    // 코드 유무 확인 
+    @ResponseBody
+    @GetMapping(value = "/checkCode", produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> checkCode(String code) {
+        log.info("입점업체 코드 확인: " + code);
+
+        try {
+            // 코드 확인을 위해 서비스의 메서드를 호출합니다.
+            String result = pService.getsupsNumber(code);
+            log.info(result);
+            // 서비스에서 반환된 결과가 입력한 코드와 일치하는 경우
+            if (result.equals(code)) {
+                // 코드가 존재하는 경우 "able"을 응답으로 보냅니다.
+                return ResponseEntity.ok("able");
+            } else {
+            	return ResponseEntity.ok("NotAble");
+            }
+        } catch (Exception e) {
+            // 예외가 발생한 경우 500 에러를 응답으로 보냅니다.
+            log.error("입점업체 코드 확인 중 오류 발생: " + e.getMessage());
+            return ResponseEntity.ok("NotAble");
+        }
+    }
+
     
     
 	// 상품관리 이동 매핑 끝 --------------------------------------------------------------------------------------

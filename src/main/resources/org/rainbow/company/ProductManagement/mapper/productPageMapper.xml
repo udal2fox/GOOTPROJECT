@@ -109,9 +109,9 @@
 		AND p.prdSt IN ('value1', 'value2', 'value3') 기존코드 
 	-->
 	<!-- supsNo 가졍오기  -->
-	<select id="getsupsNumber" resultType="org.rainbow.company.ProductManagement.domain.prdInputVO">
+	<select id="getsupsNumber" resultType="String" parameterType="String">
 		select DISTINCT supsNo from RAIN_Suppliers_tbl
-		order by supsNo asc
+		where supsNo = #{code}
 	</select>
 		
 	<!-- prdSubCtg 가져오기  -->

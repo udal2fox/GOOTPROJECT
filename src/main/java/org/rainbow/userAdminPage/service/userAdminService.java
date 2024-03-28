@@ -49,4 +49,6 @@ public interface userAdminService {
 	public List<HashMap<String, Object>> getUsageList(int spotNo);
 	
 	public List<HashMap<String, Object>> getDetailUsage(HashMap<String, Object> inputMap);
+	
+	public HashMap<String, String> sendMail(int ordNo);
 }

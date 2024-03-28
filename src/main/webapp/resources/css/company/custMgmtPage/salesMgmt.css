@@ -1,392 +1,366 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @charset "UTF-8";
 
+/** ------------공통 --*/
+	
+	.notosanskr * { 
+		 font-family: 'Noto Sans KR', sans-serif;
+		}
+	
+	/* 변수 생성 */
+	:root {
+	  
+	  --bg-gray:#EEEEEE; 
+	  --blue:rgb(75, 91, 225);
+	  --basic-radius:3px;
+	  
+	}
 	body{
 		margin : 0;
 		padding : 0;
-		
 	}
-
 	.navBar{
 		position: fixed;
 		width : 100%;
 		top : 0;
-		
+	}
+	.entire{
+		width: 80%;
+	
 	}
 
-/* 변수 생성 */
-:root {
-  
-  --bg-gray:#EEEEEE; 
-  --blue:rgb(75, 91, 225);
-  --basic-radius:3px;
-  
-}
-
-
-.entire{
-	width: 80%;
-
-}
-
-
-   
-/** 타이틀 */
-
+	/** 타이틀 */
 	.title h3{
 		font-weight : bolder;
 		
 	}
 	
+/** ------------공통 끝 --*/	
 	
-	
-/** ------------신규 영업 (리스트) 페이지 시작--*/
+/** ------------신규 영업 (salesList.jsp) 페이지 시작--*/
 
-
-
-
-.searchBar_div {
-		
-    	box-sizing: border-box;
-    	background-color:var(--bg-gray);
-    	padding-bottom:10px;
-	}
-
-
-.searchBar_tbl {
-	
-
-	box-sizing: border-box;
-	border-spacing: 0px 30px;
-   	border-collapse: separate; 
-   	width: 100%;
-	
-}
-
-	
-.checkbox-container {
-	box-sizing: border-box;
-    display: flex;
-
-    
-}
-
-.checkbox-container input[type="checkbox"] {
-    margin-right: 10px; 
-}	
-		
-.input-group {
-	box-sizing: border-box;
-		    margin-bottom: 10px;
+	.searchBar_div {
+		padding: 20px;
+	    border-radius: 10px;
+	    box-sizing: border-box;
+	    background-color:var(--bg-gray);
+	    padding-bottom:10px;
 		}
-		
 	
-		
-		
-
-#searchBarSearchBtn {
-	box-sizing: border-box;
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
-	
-	
+	.searchBar_tbl {
+	    width: 100%;
+	    border-spacing: 0px 10px; /** 테이블 내부 간격 조정 */
 	}
 	
-
-#searchBarResetBtn {
-	box-sizing: border-box;
-	background-color:rgb(255, 255, 255);
-	color:var(--blue);
-	border-color:rgb(255, 255, 255);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width: 80px;
+	.searchBar_tbl_title {
+		font-weight: bold;
+		letter-spacing: 1px; /* 텍스트 간격을 조절하는 값 */
+		
+	}	
+	
+	.searchBar_tbl td {
+	    padding: 10px;
 	}
 	
-
-.download_to_excel_btn_div {
+	.btn {
+	    padding: 6px 12px;
+	    font-size: 14px;
+	    border-radius: 5px;
+	}
 	
-    box-sizing: border-box;
-	text-align: right;
-	padding: 50px 5px 10px 5px;
-}
+	.searchBar_btns {
+		text-align : right;
+	}
 	
-
-#downloadExcelBtn {
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
-	width:140px;
-}
-
-
-.viewAFew_div {
+	#searchBarSearchBtn {
+	    width: 80px; 
+	    margin-top: 10px;
+	    margin-right: 5px; 
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    cursor: pointer;
+	}
 	
+	#searchBarResetBtn:hover {
+	    background-color: #007bff;
+	    color: #fff;
+	}
+	
+	#searchBarResetBtn {
+	    background-color: #fff;
+	    color: #007bff;
+	    border: 1px solid #007bff;
+	    width: 80px;
+	    margin-top: 10px;
+	    margin-right: 5px; 
+	    cursor: pointer;
+	}
+
+	#searchBarSearchBtn:hover {
+		background-color:#fff;
+		color: #007bff;
+		border: 1px solid #007bff;
+	}
+	
+	.checkbox-container input[type="checkbox"] {
+	    margin-right: 5px;
+	}
+	
+	.datePick1, .datePick2 {
+	    width: 120px;
+	    padding: 5px;
+	}
+	
+	.dateBtn {
+	    margin-right: 5px;
+	    padding: 5px 10px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+	}
+
+	.download_to_excel_btn_div {
+	    box-sizing: border-box;
+		text-align: right;
+		padding: 50px 5px 10px 5px;
+	}
+		
+	#downloadExcelBtn {
+		background-color: var(--blue);
+		color: rgb(255, 255, 255);
+		border-color:var(--blue);
+		border-radius: var(--basic-radius);
+		border: 5px 10px 5px 10px;
+		width:140px;
+	}
+	
+	.viewAFew_div {
     box-sizing: border-box;
     text-align:right;
     padding: 0px 5px 10px 5px;
+	}
+
 	
-}
-
-
-
-.list_div {
+	.list_div {
+		box-sizing: border-box;
+		border : 5px solid var(--bg-gray);
+	}
 	
-	box-sizing: border-box;
-	border : 5px solid var(--bg-gray);
-
-}
-
-.list_div_tbl {
-	 
-	border : 5px solid white;
-	table-layout: auto;
-	table-layout: fixed;
-	width:100%;
-}
-
-.list_div_tbl tr th {
-
-	font-size: 15px;
-	text-align: center;
-}
-
-.list_div_tbl td{
-	text-align: center;
+	.list_div_tbl {
+		border : 5px solid white;
+		table-layout: auto;
+		table-layout: fixed;
+		width:100%;
+	}
 	
-}
-
-
-.top_bar_of_list {
-	border : 5px solid white;
+	.list_div_tbl tr th {
+		font-size: 15px;
+		text-align: center;
+	}
 	
-	background-color:var(--bg-gray);
-	font-size: 15px;
-	font-weight : bolder;
-
-}
-
-
-/*페이징 이미지사이즈  */
-		td img {height: 80px; width: 120px;}
+	.list_div_tbl td{
+		text-align: center;
+	}
+	
+	
+	.top_bar_of_list {
+		border : 5px solid white;
+		background-color:var(--bg-gray);
+		font-size: 15px;
+		font-weight : bolder;
+	}
+	
+	
+	/*페이징 이미지사이즈  */
+	td img {height: 80px; width: 120px;}
 		.page-nation li{
-			list-style: none;
-		}
-		
-		.page-wrap{
-			    text-align: center;
-			    font-size: 0;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-		}
-		.page-nation {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			margin-top: 20px;
-		}
-		
-		.page-nation a{
-			display: block;
-			margin: 0 3px;
-			flex: left;
-			border: 1px solid #e6e6e6;
-			width: 28px;
-			height: 28px;
-			line-height: 28px;
-			text-align: center;
-			background-color: #fff;
-			font-size: 13px;
-			color: black;
-			text-decoration: none;
-		}
-		
-		.page-nation a.active{
-			background-color: #0078ff;
-			color: #fff;
-		}
-		.page-nation a:hover{
-			background-color: #0078ff;
-			color: #fff;
-		}
+		list-style: none;
+	}
+			
+	.page-wrap{
+		text-align: center;
+		font-size: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.page-nation {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+			
+	.page-nation a{
+		display: block;
+		margin: 0 3px;
+		flex: left;
+		border: 1px solid #e6e6e6;
+		width: 28px;
+		height: 28px;
+		line-height: 28px;
+		text-align: center;
+		background-color: #fff;
+		font-size: 13px;
+		color: black;
+		text-decoration: none;
+	}
+	
+	.page-nation a.active{
+		background-color: #0078ff;
+		color: #fff;
+	}
+	
+	.page-nation a:hover{
+		background-color: #0078ff;
+		color: #fff;
+	}
+	
+	.sort-btn{
+		background-color: #eaeaea;
+		border-color: white;
+	}
 
 
-.sort-btn
-{
-	background-color: #eaeaea;
-	border-color: white;
-}
-
-
-/** ------------신규 영업 (리스트) 페이지 끝--*/
-
-
-
-
+/** ------------신규 영업 (salesList.jsp) 페이지 끝--*/
 
 
 /** ------------신규 영업 (상세보기) 페이지 시작-- */
-
-.subject_title {
 	
-	margin-top:30px;
-	background-color : var(--bg-gray);
-	height: 50px;
-	padding-top:12px;
+	.subject_title_div {
+		margin-top:30px;
+		margin-bottom :10px;
+		width:120px;
+		box-sizing: border-box;
+		text-align: center;
+		font-weight:bolder;
+		margin-left:0px;
+		font-size : 20px;
+		background-color: var(--bg-gray); 
+		border-radius: 15px;
+	}
+
+	.subject_content_tbl {
+		box-sizing: border-box;
+		width: 100%;
+		table-layout: fixed;
+		border: 6px solid var(--bg-gray);
+	}
 	
-}
-
-.subject_content_tbl {
+	#consult_tbl input[type="text"],#consult_tbl input[type="email"], #consult_tbl textarea{
+		text-align: left;
+		padding-left:10px;
 	
-	box-sizing: border-box;
-	width: 100%;
-	table-layout: fixed;
-	border: 6px solid var(--bg-gray);
+	}
+
+	.subject_content_tbl td {
+		background-color: var(--bg-gray);
+		border: 6px solid var(--bg-gray);
+		text-align: left;
+		padding-left :10px;
+	}
 	
-
-}
-.subject_content_tbl tr th {
-	width:120px;
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
-	text-align: center;
-	font-size: 15px;
-}
-.subject_content_tbl td {
+	.tbl_subtitle {
+		width:120px;
+		background-color: var(--bg-gray);
+		border: 6px solid var(--bg-gray);
+		text-align: center;
+		font-weight: bolder;
+	}
 	
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
+	#inquiryDetails {
+		text-align:left;
+	}
 	
-}
-
-
-.tbl_subtitle {
+	#imgBtnSearchEname {
+	    background: url( "/resources/images/ul-search.svg" ) no-repeat;
+	    border: none;
+	    width: 25px;
+	    height: 25px;
+	    cursor: pointer;
+	    background-size: contain;
+	}
 	
-	width:120px;
-	background-color: var(--bg-gray);
-	border: 6px solid var(--bg-gray);
-	text-align: center;
+	input[type="text"],input[type="email"] {
+		border:none;
+		width:100%;
+		text-align: center;
+		border-radius: 10px;
+	}
 	
-	font-weight: bolder;
-}
-
-#inquiryDetails {
-	text-align:left;
-}
-
-
-#imgBtnSearchEname {
-        background: url( "/resources/images/ul-search.svg" ) no-repeat;
-        border: none;
-      	  width: 25px;
-        height: 25px;
-        cursor: pointer;
-        background-size: contain;
-      }
-
-
-
-input[type="text"],input[type="email"],  select {
-	border:none;
-	text-align: center;
-	width:100%;
-}
-
-textarea{
-	border:none;
-
-}
-
-.input-with-image input[type="text"] {
-    padding-right: 50px; 
-}
-
-.input-with-image input[type="button"]{
-    position: absolute;
-    top: 50%;
-    right: 5px; 
-    transform: translateY(-50%);
-}
-
-.space_img_btns {
-	box-sizing: border-box;
-	background-color: var(--bg-gray);
-	padding-left: 1000px;
-
-}
-
-
-
- #imgBtnPlus {
- box-sizing: border-box;
-        background: url( "/resources/images/ul-plus-circle.svg" ) no-repeat;
-        border: none;
-      	width: 30px;
-        height: 30px;
-        cursor: pointer;
-        background-size: contain;
-        margin-right:20px;
-        
-        
-        
-      }
-
-#imgBtnMinus {
-	box-sizing: border-box;
-        background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
-        border: none;
-      	  width: 30px;
-        height: 30px;
-        cursor: pointer;
-        background-size: contain;
-      }
-
-
-
-
-
-.btn_div {
-	width: var(--max-width);
-    box-sizing: border-box;
-	text-align: right;
-	padding-top:50px;
-}
-
-
-
-#saveBtn {
+	textarea{
+		border:none;
+		border-radius: 10px;
+	}
 	
-    box-sizing: border-box;
-	width:120px;
-	background-color: var(--blue);
-	color: rgb(255, 255, 255);
-	border-color:var(--blue);
-	border-radius: var(--basic-radius);
-	border: 5px 10px 5px 10px;
+	select{
+		border:none;
+		border-radius: 10px;
+		text-align: center;
+	}
+
+	.input-with-image input[type="button"]{
+	    position: absolute;
+	    top: 50%;
+	    right: 5px; 
+	    transform: translateY(-50%);
+	}
 	
-}
+	.space_img_btns {
+		box-sizing: border-box;
+		background-color: var(--bg-gray);
+		padding-left: 1000px;
+	}
+	
+	 #imgBtnPlus {
+	 	box-sizing: border-box;
+	    background: url( "/resources/images/ul-plus-circle.svg" ) no-repeat;
+	    border: none;
+	    width: 30px;
+	    height: 30px;
+	    cursor: pointer;
+	    background-size: contain;
+	    margin-right:20px; 
+	 }
+	
+	#imgBtnMinus {
+		box-sizing: border-box;
+	    background: url( "/resources/images/ul-minus-circle.svg" ) no-repeat;
+	    border: none;
+	    width: 30px;
+	    height: 30px;
+	    cursor: pointer;
+	    background-size: contain;
+	}
 
-.input-with-image {
-    position: relative;
-}
+	.btn_div {
+		width: var(--max-width);
+	    box-sizing: border-box;
+		text-align: right;
+		padding-top:50px;
+	}
+	
+	#saveBtn {
+	    box-sizing: border-box;
+		width:120px;
+		background-color: var(--blue);
+		color: rgb(255, 255, 255);
+		border-color:var(--blue);
+		border-radius: var(--basic-radius);
+		border: 5px 10px 5px 10px;
+	}
 
+	#saveBtn:hover {
+		background-color:#fff;
+		color: #007bff;
+		border: 1px solid #007bff;
+	}
+
+	.input-with-image {
+	    position: relative;
+	}
 /** ------------신규 영업 (상세보기) 페이지 끝-- */
-
-
-
-
-
-
-
-
-
-
-
-
 

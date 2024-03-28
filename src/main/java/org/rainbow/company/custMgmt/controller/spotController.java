@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import lombok.extern.log4j.Log4j;
-
+@CrossOrigin(origins = "<http://localhost:8080>")
 @Log4j
 @Controller
 public class spotController {
@@ -106,7 +107,16 @@ public class spotController {
 		 
 	}
 	
-	
+	/** 담당자 정보 모달창 : 담당자 정보 가져오기*/
+		@PostMapping(value = "/getManagerInfo", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	    public ResponseEntity<userVO> getManagerInfo(@RequestBody Map<String, String> requestBody) {
+	    	 String spotNoStr = requestBody.get("spotNo");
+	    	 int spotNo = Integer.parseInt(spotNoStr);
+	    	    
+	    	    userVO userVO = spotService.getManagerInfo(spotNo);
+	        
+	        return new ResponseEntity<userVO>(userVO, HttpStatus.OK);
+	    }
 	
 	@GetMapping(value = "/takeComNameList", produces = {
 			MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})

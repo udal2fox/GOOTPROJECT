@@ -149,5 +149,9 @@ public class spotServiceImpl implements spotService{
 		
 		
 	}
+	public userVO getManagerInfo(int spotNo) {
+		
+		return spotMapper.getManagerInfo(spotNo);
+	}
 
 }

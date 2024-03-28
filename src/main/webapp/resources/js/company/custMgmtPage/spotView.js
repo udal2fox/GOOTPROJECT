@@ -1,8 +1,18 @@
-//form 객체 가져오기 
+/** 공통 부분 시작*/
+
+//데이트피커 
+let datePickAll = document.querySelectorAll('input[type="date"]');
+datePickAll.forEach(function(input) {
+	flatpickr(input, {
+		locale: 'ko'
+	});
+});
+
+
+//form 객체 가져오기
 const f = document.forms[0];
 
-
-
+//css 파일 동적으로 바인딩
 const CSS_FILE_PATH = ['/resources/css/company/custMgmtPage/spotMgmt.css','/resources/css/company/custMgmtPage/spotMgmtModal.css' ];
 cssBinding(CSS_FILE_PATH);
 function cssBinding(cssFiles) {
@@ -19,6 +29,20 @@ function cssBinding(cssFiles) {
 		document.head.appendChild(linkEle);
 	})
 }
+
+//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
+function backPage() 
+{
+	window.history.go(-1); // 뒤로 한 페이지 이동
+} 
+
+
+/** 공통 부분 끝*/
+
+
+
+
+
 
 
 /** 해지 처리자, 해지 사유, 상세 사유   */	
@@ -68,11 +92,7 @@ function openAddressPopup() {
 
 }
 
-//이전페이지 가기 다른페이지에 물려있어서 페이지 이동보단 뒤로가기가 나은듯합니다.
-function backPage() 
-{
-	window.history.go(-1); // 뒤로 한 페이지 이동
-} 
+
 
 
 //계약서 파일 업로드 버튼에 파일 업로드 기능 추가

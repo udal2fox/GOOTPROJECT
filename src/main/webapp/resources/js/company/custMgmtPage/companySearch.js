@@ -1,4 +1,4 @@
-// 서치 기능
+/** 서치바 : 키워드 시작*/	
 
 //키워드와 현재 페이지를 저장하는 전역 변수
 let currentKeyword = '';
@@ -39,7 +39,8 @@ function fetchSearchResults(keyword) {
         .catch(error => console.error('Error:', error));
 }
 
-//체크박스 상태 초기화 함수 이기능을 안걸어두면 체크 박스 꺼져있는데 검색하면 체크박스 무시하고나옴 // 이거 예외처리하면 코드 너무 길어짐;;
+//체크박스 상태 초기화 함수 이기능을 안걸어두면 체크 박스 꺼져있는데 검색하면 체크박스 무시하고나옴 
+// 이거 예외처리하면 코드 너무 길어짐;;
 function resetCheckboxes() {
     // 모든 체크박스를 비활성화
     document.querySelectorAll('.filter-checkbox').forEach(function(checkbox) {
@@ -66,3 +67,4 @@ function getFilteredProducts() {
 
     return filteredProducts;
 }
+/** 서치바 : 키워드 끝*/

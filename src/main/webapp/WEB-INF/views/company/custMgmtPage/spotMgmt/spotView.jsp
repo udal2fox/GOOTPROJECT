@@ -23,7 +23,10 @@
 		
 		<form method="post" enctype="multipart/form-data">
 		<div class="spot_subject_div">
-			<h5 class="spot_subject_title" align="left">●지점 정보</h5>
+			<div align="left">
+						<div class="subject_title_div">●지점 정보
+						</div>
+					</div>
 
 			<table class="spot_subject_tbl">
 				<thead>
@@ -202,7 +205,10 @@
 				</thead>
 				</table>
 	
-				<h5 class="spot_subject_title" align="left">●담당자 정보</h5>
+				<div align="left">
+						<div class="subject_title_div" style="width:140px;">●담당자 정보
+						</div>
+					</div>
 
 			<table class="spot_subject_tbl">
 				<thead>
@@ -243,22 +249,24 @@
 	
 	<div class="btn_div">
 				<input type="button" id="spotUpdateBtn" value="수정">
-				<input type="button" id="spotUpdateResetBtn" value="취소">
+				<input type="button" id="spotUpdateResetBtn" value="취소" onclick="backPage();">
 				<input type="hidden" name="spotNo" value="${spotVO.spotNo }">
 			</div>
 	</form>
 	
 	
 	
-	<!--------------------------------------- 기업 연결 모달창-->
+<!--------------------------------------- 기업 연결 모달창-->
 <div class="modal" id="takeComName_modal">
     <div class="modal-content">
+    <div class="modal-top">
         <table>
             <tr class="bordered-row">
-                <td><input type="text" name="searchComName" size="20" placeholder="기업명"></td>
+                <td><input type="text" name="searchComName" size="20" placeholder="기업명" style="border: 1px solid black;"></td>
                 <td><input type="button" id="searchTakeComNameBtn" value="검색"></td>
             </tr>
         </table>
+        </div>
         <div class="list_div_modal">
             <table class="list_div_tbl_modal" id="takeComName_tbl">
                 <thead>
@@ -267,19 +275,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <!-- 여기에 기업명을 표시할 행들이 동적으로 추가될 것입니다. -->
+               
                 </tbody>
             </table>
-        </div>
         <!-- 페이지 부분 제거 후 JS로 그릴 예정 -->
         <!-- page -->
+        </div>
         <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">
             <ul class="page-nation">
                 <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
             </ul>
         </div>
-        <div class="modal-footer">
-            <button type="button" id="close_takeComName_modal">닫기</button>
+        <div class="modal-bottom">
+       
+        	<input type="button" id="close_takeComName_modal" value="닫기" >
         </div>
     </div>
 </div>
@@ -289,12 +298,14 @@
 <!--------------------------------------- 담당자명 가져오기 모달창-->
 <div class="modal" id="takeCsName_modal">
     <div class="modal-content">
+    <div class="modal-top">
         <table>
             <tr class="bordered-row">
-                <td><input type="text" name="searchTakeCsName" size="20" placeholder="담당자명"></td>
+                <td><input type="text" name="searchTakeCsName" size="20" placeholder="담당자명" style="border: 1px solid black;"></td>
                 <td><input type="button" id="searchTakeCsNameBtn" value="검색"></td>
             </tr>
         </table>
+        </div>
         <div class="list_div_modal">
             <table class="list_div_tbl_modal" id="takeCsName_tbl">
                 <thead>
@@ -303,7 +314,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                <!-- 여기에 담당자명을 표시할 행들이 동적으로 추가될 것입니다. -->
+                
                 </tbody>
             </table>
         </div>
@@ -314,11 +325,12 @@
                 <!-- 페이지네이션은 이곳에 동적으로 생성될 것입니다. -->
             </ul>
         </div>
-        <div class="modal-footer">
-            <button type="button" id="close_takeCsName_modal">닫기</button>
+         <div class="modal-bottom">
+       
+        	<input type="button" id="close_takeCsName_modal" value="닫기">
+        </div>
         </div>
     </div>
-</div>
 
 	
 	</div>

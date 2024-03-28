@@ -27,5 +27,8 @@ public interface spotService {
 	
 	/** 지점 정보 수정*/
 	public void spotUpdate(spotAndUserVO vo);
+	
+	/**담당자 정보 모달창 : 담당자 정보 가져오기 */
+	public userVO getManagerInfo(int spotNo);
 
 }

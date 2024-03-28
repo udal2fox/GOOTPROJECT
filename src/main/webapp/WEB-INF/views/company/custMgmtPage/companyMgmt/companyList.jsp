@@ -16,59 +16,58 @@
 	</div>
 	<div class="container-fluid" align="center" style="padding: 100px;">
 	<div class="entire">
-
-	<div class="title" align="left">
+		<div class="title" align="left">
 		<h3>기업 관리</h3>
-	</div>
+		</div>
 	<div class="searchBar_div">
 		<table class="searchBar_tbl">
 			<thead>
-				<tr>
-					<td></td>
-					<th>키워드</th>
-					<td>
-						<input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/사업자번호/주소/연락처" style="text-align: center;">
-					</td>
-					<td></td>
-					<th>기업 구분</th>
+				  <tr>
+			          <td class="searchBar_tbl_title" style="text-align:left;">키워드</td>
+			          <td style="text-align: left;">
+			             <input type="text" class="searchBarKeyword" id="keyword" name="searchBarKeyword" placeholder="기업명/사업자번호/이메일/연락처" style="text-align: center; width: 300px;">
+			          </td> 
+			          <td></td>
+			          <td></td>
+			       </tr>
+			       <tr>
+					<td class="searchBar_tbl_title" style="text-align: left;">기업 구분</td>
 					<td> 
-					
 					<input class="form-check-input" type="checkbox" id="td-BusinessAll" value="전체" checked>전체
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="td-Business" value="법인" checked>법인   
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="td-Business" value="개인" checked>개인
-					
 					</td>
 					<td></td>
-				</tr>
+			        <td></td>
+			      </tr>
 			</thead>
 		</table>
-			<input type="button" class="companyListBtns" id="searchBarSearchBtn" value="검색">
-			<input type="reset"  id="searchBarResetBtn" value="초기화">
+				<div class="searchBar_btns">
+	    		<input type="button" id="searchBarSearchBtn" value="검색">
+	    		<input type="reset" id="searchBarResetBtn" value="초기화">
+   				</div>	
 			</div>
-			
+
 		
-			<div class="download_to_excel_btn_div">
-				<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
-                <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
-                <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
-			</div>
-			<div class="viewAFew_div">
-				<select name="viewAFew" id="selectViewAFew">
-								<option value="10">10</option>
-								<option value="25">25</option>
-								<option value="50">50</option>
-								<option value="75">75</option>
-								<option value="100">100</option>
-							
-				</select>
+		<div class="download_to_excel_btn_div">
+			<input type="file" class="custom-file-input" id="excelUpload" name="EXCEL" multiple="multiple" style="display: none;">
+            <button type="button" class="btn btn-primary" id="uploadBtn">엑셀 업로드</button>
+            <button type="button" class="btn btn-primary" id="downloadButton">엑셀 다운로드</button>
+		</div>
+		<div class="viewAFew_div">
+			<select name="viewAFew" id="selectViewAFew" style="border: 1px solid;">
+
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+				<option value="75">75</option>
+				<option value="100">100</option>			
+			</select>
 				개씩 보기
-			</div>
-	
+		</div>
 
 	
 	<div class="list_div">
-		
-	 <div>
 	 <form>
       <table class="list_div_tbl" id="company_tbl">
          <thead>
@@ -100,16 +99,13 @@
          </tbody>
       </table>
 </form>
+
 </div>
-</div>
-    <!--페이지 부분제거후 js 로 그릴예정 -->
-    <!-- page -->
-    <div id="pagination" class="page-wrap" align="center" style="width: 1500px;">	
-    <ul class="page-nation">
-        <!-- 페이지네이션은 이곳에 동적으로 생성 -->
-        
-    </ul>
-</div>
+     <div id="pagination" class="page-wrap" style="width: 1200;">	
+			<ul class="page-nation">
+			 	<!-- 페이지네이션은 이곳에 동적으로 생성 -->  
+		    </ul>
+	  </div>
 
 
 
@@ -118,7 +114,7 @@
 		
 	</div>
 </div>
-</div>
+		</div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companyFilter.js"></script>
 <script type="text/javascript" src="/resources/js/company/custMgmtPage/companySearch.js"></script>

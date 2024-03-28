@@ -114,6 +114,12 @@
         spotNo = #{spotNo}
 </update>
 
+
+<!-- 지점 담당자 정보 가져오기-->
+<select id="getManagerInfo" resultType="org.rainbow.company.custMgmt.domain.userVO" parameterType="int">
+    SELECT * from RAIN_cUser_tbl where spotNo = #{spotNo}
+ 
+</select>
 	
 
 </mapper>

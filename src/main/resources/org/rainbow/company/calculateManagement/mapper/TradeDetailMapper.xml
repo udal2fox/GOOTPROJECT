@@ -108,7 +108,7 @@
     <!-- 거래명세 편집 들고갈 정보  -->
     <select id="editTdList" resultType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
     	SELECT e.comName, d.spName, e.comBizType, c.cEmpName, c.cEmpTel, c.cEmpEmail, a.recDate, a.recPayMth, a.recSortation,
-        f.prdMajorCtg, f.prdSubCtg, f.prdNo, f.prdName, f.prdSal, f.prdCstPri, f.prdMargin,
+        f.prdMajorCtg, f.prdSubCtg, f.prdNo, f.prdName, f.prdSal, f.prdCstPri, f.prdMargin, b.ordNo,
         a.recDedName, a.recDedPrdCode, a.recDed, a.recDedSup, a.recDedTax, a.recDedCst, a.recDedCstSup, a.recDedCstTax, a.recDedWorker, a.recDedPrdCode,   
         a.recAddName, a.recAddPrdCode, a.recAdd, a.recAddSup, a.recAddTax, a.recAddCst, a.recAddCstSup, a.recAddCstTax, a.recAddWorker, a.recAddPrdCode      
         FROM RAIN_receipt_tbl a    
@@ -124,6 +124,11 @@
     <update id="editTdupdate" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
     	UPDATE RAIN_receipt_tbl
 		SET 
+			recPayMth = #{recPayMth},
+			recSortation = #{recSortation},
+			recSum = #{prdSal},
+			recSup = #{prdSal},
+
 		    recDedName = #{recDedName},
 		    recDed = #{recDed},
 		    recDedSup = #{recDedSup},
@@ -144,6 +149,18 @@
 		    recAddCstTax = #{recAddCstTax},
 		    recAddPrdCode = #{recAddPrdCode}
 		WHERE recNo = #{recNo}
+    </update>
+    
+    <update id="editOrder" parameterType="org.rainbow.company.calculateManagement.domain.TradeDetailEditVO">
+    	UPDATE RAIN_order_tbl 
+   		set
+   		prdNo = #{prdNo},
+   		count = 1,
+   		totalAmount = #{prdSal},
+   		orderDate = now(),
+   		orderStatus = true,
+   		step = '발송완료'
+   		where ordNo = #{ordNo}
     </update>
     
     <!-- 거래미수 기업 -->

@@ -117,7 +117,8 @@ public class TradeDetailEditVO {
 	
 	//거래명세번호
 	private int recNo;
-			
+	
+	private int ordNo;
 	
 }
 

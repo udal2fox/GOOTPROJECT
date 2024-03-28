@@ -33,6 +33,7 @@ public interface TradeDetailMapper {
 	
 	/** 거래명세 수정 하기 */
 	public int editTdupdate(TradeDetailEditVO vo);
+	public void editOrder(TradeDetailEditVO vo);
 	
 	/// 미수 관리 시작
 	

@@ -29,11 +29,6 @@
 							<td>입점업체코드</td>
 							<td colspan="3">
 								<input type="text" class="form-control searchCode" name="supsNo" onfocus="openModal()">
-								<%-- <select class="form-select" id="supNo" name="supsNo">
-								    <c:forEach var="no" items="${codes}">
-								    	<option value="${no.supsNo }">${no.supsNo}</option>
-								    </c:forEach>
-							    </select> --%>
 						    </td>
 						    <td></td>
 						    <td>원가-세액</td><td colspan="3"><input type="text" class="form-control tax critax" readonly disabled="disabled" name="prdCstTax"></td>
